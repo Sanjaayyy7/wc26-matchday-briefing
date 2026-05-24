@@ -1,0 +1,1 @@
+The model wandered off and produced one long paragraph with no section labels at all but plenty of words to ensure raw rendering kicks in instead of the structured pane, padded out so the fallback length threshold is exceeded comfortably.
