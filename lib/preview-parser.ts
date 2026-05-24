@@ -65,9 +65,10 @@ export function parsePreview(text: string): ParsedPreview {
   const whyText = extract(raw, /\*\*\s*Why[^*]*\*\*[:\s]*/i);
   let why: ParsedPreview["why"] = null;
   if (whyText) {
-    const t = whyText.match(/\*Tactical:\*\s*([^\n]+)/i)?.[1]?.trim();
-    const p = whyText.match(/\*Personnel:\*\s*([^\n]+)/i)?.[1]?.trim();
-    const f = whyText.match(/\*Form\s*\/\s*context:\*\s*([^\n]+)/i)?.[1]?.trim();
+    // Tolerate both italic (`*Tactical:*`) and bold (`**Tactical:**`) labels.
+    const t = whyText.match(/\*{1,2}\s*Tactical:?\s*\*{1,2}\s*([^\n]+)/i)?.[1]?.trim();
+    const p = whyText.match(/\*{1,2}\s*Personnel:?\s*\*{1,2}\s*([^\n]+)/i)?.[1]?.trim();
+    const f = whyText.match(/\*{1,2}\s*Form\s*\/\s*context:?\s*\*{1,2}\s*([^\n]+)/i)?.[1]?.trim();
     if (t && p && f) why = { tactical: t, personnel: p, formContext: f };
   }
 

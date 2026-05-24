@@ -25,10 +25,10 @@ export function streamMessages(args: {
   return new ReadableStream<Uint8Array>({
     async start(controller) {
       try {
+        // Opus 4.7 deprecated `temperature` — must be omitted.
         const stream = getClient().messages.stream({
           model: MODEL,
           max_tokens: maxTokens,
-          temperature: 0.7,
           system,
           messages,
         });
