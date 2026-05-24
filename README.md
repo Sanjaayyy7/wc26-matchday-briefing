@@ -1,36 +1,39 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Matchday Briefing
 
-## Getting Started
+A local Next.js 16 app that wraps the PL Analyst system prompt (one directory up) and delivers a streamed, kitchen-table briefing for every Premier League MD-38 fixture (24 May 2026), with a probability bar, a 6×6 scoreline heatmap, and a threaded follow-up chat that anchors on the original preview.
 
-First, run the development server:
+## Setup
 
 ```bash
+cp .env.example .env.local
+# Paste your Anthropic key into .env.local (must have access to claude-opus-4-7)
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open <http://localhost:3000>.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Tests
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm test
+```
 
-## Learn More
+Unit suites cover the prompt loader, the first-turn template builder, the Output Contract parser (including the degraded-stream fallback), and the joint-Poisson heatmap derivation. There are no UI snapshot tests — the visual layer is verified by walking the dev server in a browser.
 
-To learn more about Next.js, take a look at the following resources:
+## Layout
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- `data/` — `clubs.json` and `fixtures.json`. **Edit these before the demo if 2025/26 promotion/relegation differs from the seed.** The 20-club list and 10 final-day fixtures are best-effort and should be eyeballed by a human who knows the table.
+- `lib/` — server-only prompt loader, fixture template, Anthropic streaming helper, Output Contract parser, heatmap math.
+- `app/api/preview` — streams the first-turn reply.
+- `app/api/follow-up` — streams sub-question replies anchored on the preview + conversation history.
+- `components/` — UI: monogram crests, hero, fixture grid, preview pane, probability bar, scoreline heatmap, follow-up chat, scaffold panel.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+The system prompt itself lives at `../pl-analyst-system-prompt.md` and is read only on the server. It is never sent to the client — verify in DevTools → Network.
 
-## Deploy on Vercel
+## Architecture Notes
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Streaming uses native Web Streams (`ReadableStream`) from the route handler. The client reads via `response.body.getReader()` and re-parses on every chunk so sections light up in order as the model writes them.
+- The follow-up chat is stateless on the server: the client sends the full conversation history (seeded with the initial preview as the first assistant turn) on every request, and persists the thread in `localStorage` keyed by fixture slug.
+- The 6×6 heatmap is computed deterministically client-side via a constrained joint-Poisson grid search over `λ_home, λ_away` — no extra LLM call.
+- If the model's reply doesn't honor the six-section Output Contract, the preview pane degrades to a raw markdown render rather than blanking out.
