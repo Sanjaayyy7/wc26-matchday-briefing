@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { PreviewPane } from "./preview-pane";
+import { BttsCard } from "./btts-card";
 import { FollowUpChat } from "./follow-up-chat";
 import { ScaffoldPanel } from "./scaffold-panel";
 import type { Club } from "@/lib/data";
@@ -24,6 +25,7 @@ export function FixturePane({
         away={away}
         onComplete={setPreviewText}
       />
+      {previewText && <BttsCard slug={slug} previewText={previewText} />}
       {previewText && <FollowUpChat slug={slug} previewText={previewText} />}
       <ScaffoldPanel />
     </>
