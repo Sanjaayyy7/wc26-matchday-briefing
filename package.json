@@ -9,6 +9,8 @@
     "lint": "eslint",
     "test": "vitest run",
     "test:watch": "vitest",
+    "ml:fetch": "tsx scripts/fetch-dataset.mts",
+    "ml:train": "tsx scripts/train-model.mts",
     "pipeline:fetch": "tsx scripts/fetch-kalshi.mts",
     "pipeline:facts": "tsx scripts/build-facts.mts",
     "pipeline:run": "tsx scripts/run-briefing.mts",

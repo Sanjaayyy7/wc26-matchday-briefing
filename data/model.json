@@ -1,0 +1,2373 @@
+{
+ "source": "martj42/international_results (GitHub mirror)",
+ "dataThrough": "2026-06-11",
+ "matches": 49407,
+ "params": {
+  "baseLogGoals": 0.1555725566953247,
+  "eloSlope": 0.8493388472960148,
+  "rho": -0.05
+ },
+ "backtest": {
+  "from": "2024-01-01",
+  "n": 2546,
+  "brier": 0.5093,
+  "uniformBrier": 0.6667,
+  "logLoss": 0.8672
+ },
+ "ratings": {
+  "Scotland": 1845,
+  "England": 2084,
+  "Wales": 1740,
+  "Northern Ireland": 1658,
+  "United States": 1825,
+  "Canada": 1894,
+  "Uruguay": 1970,
+  "Argentina": 2177,
+  "Austria": 1884,
+  "Hungary": 1764,
+  "Czechoslovakia": 1802,
+  "Belgium": 1958,
+  "France": 2125,
+  "Switzerland": 1944,
+  "Guernsey": 1746,
+  "Alderney": 1077,
+  "Jersey": 1805,
+  "Netherlands": 2007,
+  "Guyana": 1502,
+  "Trinidad and Tobago": 1539,
+  "South Africa": 1650,
+  "Germany": 2000,
+  "Sweden": 1766,
+  "Norway": 1968,
+  "Denmark": 1925,
+  "Italy": 1928,
+  "Chile": 1798,
+  "Russia": 1839,
+  "Finland": 1596,
+  "Luxembourg": 1456,
+  "Catalonia": 1653,
+  "Philippines": 1342,
+  "China": 1554,
+  "Brazil": 2064,
+  "Basque Country": 1796,
+  "Japan": 1996,
+  "Paraguay": 1916,
+  "Romania": 1694,
+  "Greece": 1801,
+  "Yugoslavia": 1873,
+  "Spain": 2201,
+  "Egypt": 1799,
+  "Estonia": 1421,
+  "Suriname": 1593,
+  "Provence": 1461,
+  "Costa Rica": 1737,
+  "El Salvador": 1503,
+  "Guatemala": 1642,
+  "Poland": 1770,
+  "Portugal": 2046,
+  "Brittany": 1504,
+  "New Zealand": 1722,
+  "Australia": 1901,
+  "Latvia": 1329,
+  "Galicia": 1527,
+  "Central Spain": 1495,
+  "Mexico": 1974,
+  "Andalusia": 1593,
+  "Asturias": 1521,
+  "Lithuania": 1331,
+  "Turkey": 1961,
+  "Aruba": 1216,
+  "Curaçao": 1607,
+  "Bulgaria": 1534,
+  "Republic of Ireland": 1758,
+  "Haiti": 1711,
+  "Jamaica": 1662,
+  "Kenya": 1472,
+  "Uganda": 1520,
+  "Bolivia": 1715,
+  "Peru": 1768,
+  "Honduras": 1705,
+  "Belarus": 1582,
+  "Ukraine": 1841,
+  "Barbados": 1111,
+  "Nicaragua": 1505,
+  "Cuba": 1438,
+  "Martinique": 1469,
+  "Dominica": 1158,
+  "Silesia": 1507,
+  "Guadeloupe": 1528,
+  "Israel": 1698,
+  "Indonesia": 1504,
+  "French Guiana": 1424,
+  "Saint Lucia": 1206,
+  "Colombia": 2054,
+  "Panama": 1844,
+  "Venezuela": 1814,
+  "Ecuador": 2021,
+  "Saint Kitts and Nevis": 1255,
+  "Grenada": 1288,
+  "India": 1240,
+  "Slovakia": 1720,
+  "Manchukuo": 1430,
+  "Croatia": 1972,
+  "Lebanon": 1446,
+  "Puerto Rico": 1354,
+  "Afghanistan": 1173,
+  "Iran": 1894,
+  "Mongolia": 983,
+  "Tanzania": 1413,
+  "Zimbabwe": 1478,
+  "Zambia": 1551,
+  "Iceland": 1626,
+  "Albania": 1669,
+  "Montenegro": 1515,
+  "Madagascar": 1509,
+  "Mauritius": 1207,
+  "Réunion": 1583,
+  "Zanzibar": 1535,
+  "Djibouti": 1075,
+  "Ethiopia": 1392,
+  "DR Congo": 1757,
+  "South Korea": 1906,
+  "Vietnam": 1473,
+  "Macau": 840,
+  "Dominican Republic": 1475,
+  "Cyprus": 1368,
+  "Sierra Leone": 1470,
+  "Nigeria": 1862,
+  "Syria": 1597,
+  "Serbia": 1795,
+  "Taiwan": 1060,
+  "Ghana": 1628,
+  "Myanmar": 1137,
+  "New Caledonia": 1603,
+  "Vanuatu": 1444,
+  "Fiji": 1426,
+  "Pakistan": 1121,
+  "Sri Lanka": 1013,
+  "German DR": 1730,
+  "Tahiti": 1514,
+  "Gambia": 1539,
+  "Hong Kong": 1316,
+  "Singapore": 1296,
+  "Malaysia": 1486,
+  "Guinea-Bissau": 1367,
+  "Saarland": 1447,
+  "Burundi": 1389,
+  "Cameroon": 1717,
+  "Kernow": 1596,
+  "Cambodia": 1078,
+  "Thailand": 1534,
+  "Vietnam Republic": 1349,
+  "Kyrgyzstan": 1454,
+  "Moldova": 1321,
+  "North Vietnam": 1488,
+  "Togo": 1501,
+  "North Korea": 1498,
+  "Sudan": 1478,
+  "Malta": 1347,
+  "Tunisia": 1746,
+  "Libya": 1529,
+  "Malawi": 1437,
+  "Morocco": 1983,
+  "Benin": 1541,
+  "Cape Verde": 1648,
+  "Ivory Coast": 1808,
+  "Burkina Faso": 1657,
+  "Gabon": 1531,
+  "Congo": 1328,
+  "Mali": 1712,
+  "Central African Republic": 1362,
+  "Iraq": 1736,
+  "Saint Vincent and the Grenadines": 1347,
+  "Senegal": 1909,
+  "Laos": 940,
+  "Mauritania": 1445,
+  "Liberia": 1430,
+  "Chad": 1246,
+  "Niger": 1498,
+  "Guinea": 1579,
+  "Algeria": 1887,
+  "Kuwait": 1474,
+  "Jordan": 1770,
+  "Papua New Guinea": 1457,
+  "Solomon Islands": 1373,
+  "Somalia": 1061,
+  "Saudi Arabia": 1693,
+  "Bermuda": 1337,
+  "Palestine": 1588,
+  "Yemen": 1309,
+  "Bahrain": 1539,
+  "Oman": 1574,
+  "Wallis Islands and Futuna": 1296,
+  "Corsica": 1556,
+  "Western Australia": 1398,
+  "Eswatini": 1316,
+  "Botswana": 1393,
+  "Qatar": 1561,
+  "Lesotho": 1417,
+  "Bahamas": 917,
+  "Brunei": 892,
+  "Cook Islands": 1148,
+  "Yemen DPR": 1357,
+  "United Arab Emirates": 1664,
+  "Faroe Islands": 1440,
+  "Nepal": 1104,
+  "Antigua and Barbuda": 1101,
+  "Bangladesh": 1133,
+  "Seychelles": 1011,
+  "Equatorial Guinea": 1446,
+  "Mozambique": 1497,
+  "Guam": 978,
+  "Angola": 1584,
+  "São Tomé and Príncipe": 1181,
+  "Rwanda": 1446,
+  "Northern Cyprus": 1690,
+  "Armenia": 1426,
+  "Georgia": 1704,
+  "Azerbaijan": 1388,
+  "Kazakhstan": 1504,
+  "Comoros": 1482,
+  "Maldives": 998,
+  "Tonga": 1073,
+  "Kiribati": 1235,
+  "Tuvalu": 1219,
+  "Samoa": 1251,
+  "Greenland": 1465,
+  "Liechtenstein": 973,
+  "Bhutan": 861,
+  "South Yemen": 1468,
+  "Niue": 1427,
+  "American Samoa": 932,
+  "Belize": 1295,
+  "Cayman Islands": 1027,
+  "Anguilla": 895,
+  "British Virgin Islands": 1047,
+  "Palau": 1422,
+  "Sint Maarten": 1306,
+  "Namibia": 1427,
+  "Ynys Môn": 1640,
+  "Shetland": 1503,
+  "Åland Islands": 1473,
+  "Saint Martin": 1322,
+  "San Marino": 906,
+  "Montserrat": 1230,
+  "Slovenia": 1730,
+  "Isle of Wight": 1660,
+  "Turkmenistan": 1390,
+  "Tajikistan": 1436,
+  "Uzbekistan": 1816,
+  "Eritrea": 1198,
+  "Gibraltar": 1136,
+  "Isle of Man": 1709,
+  "North Macedonia": 1647,
+  "Czech Republic": 1778,
+  "Bosnia and Herzegovina": 1648,
+  "Canary Islands": 1515,
+  "Andorra": 1141,
+  "Frøya": 1194,
+  "Hitra": 1343,
+  "United States Virgin Islands": 965,
+  "Northern Mariana Islands": 970,
+  "Turks and Caicos Islands": 976,
+  "Micronesia": 1329,
+  "Gotland": 1444,
+  "Saare County": 1341,
+  "Rhodes": 1592,
+  "Monaco": 1452,
+  "Western Sahara": 1385,
+  "Tibet": 1278,
+  "Orkney": 1397,
+  "Falkland Islands": 1214,
+  "Mayotte": 1455,
+  "Vatican City": 1411,
+  "Timor-Leste": 906,
+  "Sark": 1328,
+  "Sealand": 1484,
+  "Occitania": 1687,
+  "Chechnya": 1451,
+  "Ambazonia": 1392,
+  "Western Isles": 1436,
+  "Kosovo": 1766,
+  "Republic of St. Pauli": 1481,
+  "Găgăuzia": 1430,
+  "Crimea": 1505,
+  "Sápmi": 1487,
+  "Romani people": 1464,
+  "Menorca": 1566,
+  "Iraqi Kurdistan": 1645,
+  "Padania": 1687,
+  "Arameans Suryoye": 1546,
+  "Gozo": 1469,
+  "Two Sicilies": 1405,
+  "Saint Barthélemy": 1413,
+  "Saint Pierre and Miquelon": 1288,
+  "Bonaire": 1113,
+  "Chagos Islands": 1359,
+  "Raetia": 1409,
+  "Cilento": 1491,
+  "Kurdistan": 1579,
+  "Darfur": 1275,
+  "Tamil Eelam": 1588,
+  "South Sudan": 1269,
+  "Abkhazia": 1629,
+  "Artsakh": 1557,
+  "Madrid": 1489,
+  "Quebec": 1531,
+  "Saugeais": 1495,
+  "South Ossetia": 1476,
+  "Ellan Vannin": 1570,
+  "Somaliland": 1478,
+  "Franconia": 1478,
+  "County of Nice": 1591,
+  "Seborga": 1486,
+  "Székely Land": 1495,
+  "Luhansk PR": 1489,
+  "Donetsk PR": 1512,
+  "Felvidék": 1507,
+  "Panjab": 1586,
+  "Western Armenia": 1519,
+  "United Koreans in Japan": 1502,
+  "Kárpátalja": 1608,
+  "Délvidék": 1500,
+  "Barawa": 1358,
+  "Ryūkyū": 1474,
+  "Yorkshire": 1553,
+  "Surrey": 1516,
+  "Cascadia": 1545,
+  "Matabeleland": 1483,
+  "Kabylia": 1457,
+  "Parishes of Jersey": 1514,
+  "Chameria": 1554,
+  "Saint Helena": 1349,
+  "West Papua": 1474,
+  "East Turkestan": 1456,
+  "Elba Island": 1514,
+  "Yoruba Nation": 1484,
+  "Biafra": 1515,
+  "Mapuche": 1508,
+  "Maule Sur": 1528,
+  "Aymara": 1463,
+  "Ticino": 1410,
+  "Hmong": 1462,
+  "Marshall Islands": 1417
+ },
+ "forms": {
+  "Scotland": {
+   "results": "WWLLWLWWWD",
+   "gf": 21,
+   "ga": 10,
+   "lastDate": "2026-06-06"
+  },
+  "England": {
+   "results": "WWLDWWWWWW",
+   "gf": 24,
+   "ga": 2,
+   "lastDate": "2026-06-10"
+  },
+  "Wales": {
+   "results": "LDDDWWLLLW",
+   "gf": 15,
+   "ga": 14,
+   "lastDate": "2026-06-06"
+  },
+  "Northern Ireland": {
+   "results": "LWDLWLLWLW",
+   "gf": 10,
+   "ga": 12,
+   "lastDate": "2026-06-08"
+  },
+  "United States": {
+   "results": "LWLLWWWDWL",
+   "gf": 18,
+   "ga": 17,
+   "lastDate": "2026-06-06"
+  },
+  "Canada": {
+   "results": "DWDDWDDLWW",
+   "gf": 11,
+   "ga": 4,
+   "lastDate": "2026-06-05"
+  },
+  "Uruguay": {
+   "results": "DDLDWWDWWL",
+   "gf": 10,
+   "ga": 9,
+   "lastDate": "2026-03-31"
+  },
+  "Argentina": {
+   "results": "WWWWWWWLWD",
+   "gf": 25,
+   "ga": 3,
+   "lastDate": "2026-06-09"
+  },
+  "Austria": {
+   "results": "WWWDWLWWWW",
+   "gf": 27,
+   "ga": 4,
+   "lastDate": "2026-06-01"
+  },
+  "Hungary": {
+   "results": "WWDWLWDWLD",
+   "gf": 17,
+   "ga": 12,
+   "lastDate": "2026-06-09"
+  },
+  "Czechoslovakia": {
+   "results": "DWDWWDDDWL",
+   "gf": 21,
+   "ga": 9,
+   "lastDate": "1993-11-17"
+  },
+  "Belgium": {
+   "results": "WWDWWDWDWW",
+   "gf": 37,
+   "ga": 6,
+   "lastDate": "2026-06-06"
+  },
+  "France": {
+   "results": "WLWWWWDWWW",
+   "gf": 25,
+   "ga": 9,
+   "lastDate": "2026-06-08"
+  },
+  "Switzerland": {
+   "results": "DWDLDWDWWW",
+   "gf": 22,
+   "ga": 8,
+   "lastDate": "2026-06-06"
+  },
+  "Guernsey": {
+   "results": "WLWWLLWLWW",
+   "gf": 23,
+   "ga": 10,
+   "lastDate": "2023-07-13"
+  },
+  "Alderney": {
+   "results": "LLWLLLLWLL",
+   "gf": 9,
+   "ga": 32,
+   "lastDate": "2022-04-23"
+  },
+  "Jersey": {
+   "results": "LDWWWWWWWW",
+   "gf": 27,
+   "ga": 10,
+   "lastDate": "2025-07-18"
+  },
+  "Netherlands": {
+   "results": "WLDWWDWWWD",
+   "gf": 22,
+   "ga": 8,
+   "lastDate": "2026-06-08"
+  },
+  "Guyana": {
+   "results": "WWWWWLLWWW",
+   "gf": 26,
+   "ga": 12,
+   "lastDate": "2026-03-30"
+  },
+  "Trinidad and Tobago": {
+   "results": "LLDLLDDDWL",
+   "gf": 10,
+   "ga": 23,
+   "lastDate": "2026-06-09"
+  },
+  "South Africa": {
+   "results": "LWDLDLWLWW",
+   "gf": 12,
+   "ga": 12,
+   "lastDate": "2026-06-11"
+  },
+  "Germany": {
+   "results": "WWWWWWWWWL",
+   "gf": 28,
+   "ga": 8,
+   "lastDate": "2026-06-06"
+  },
+  "Sweden": {
+   "results": "DLWWDLLLLD",
+   "gf": 13,
+   "ga": 20,
+   "lastDate": "2026-06-04"
+  },
+  "Norway": {
+   "results": "DWDLWWDWWW",
+   "gf": 31,
+   "ga": 8,
+   "lastDate": "2026-06-07"
+  },
+  "Denmark": {
+   "results": "WDDWLDWWWD",
+   "gf": 24,
+   "ga": 10,
+   "lastDate": "2026-06-07"
+  },
+  "Italy": {
+   "results": "WWDWLWWWWW",
+   "gf": 24,
+   "ga": 10,
+   "lastDate": "2026-06-07"
+  },
+  "Chile": {
+   "results": "WLLWWWWDLL",
+   "gf": 14,
+   "ga": 16,
+   "lastDate": "2026-06-09"
+  },
+  "Russia": {
+   "results": "WWLDWLDWWW",
+   "gf": 19,
+   "ga": 7,
+   "lastDate": "2026-06-09"
+  },
+  "Finland": {
+   "results": "LLDWWLLWLL",
+   "gf": 11,
+   "ga": 17,
+   "lastDate": "2026-06-05"
+  },
+  "Luxembourg": {
+   "results": "WLLLLLLLDL",
+   "gf": 2,
+   "ga": 15,
+   "lastDate": "2026-06-06"
+  },
+  "Catalonia": {
+   "results": "WDLDWDDWWW",
+   "gf": 21,
+   "ga": 11,
+   "lastDate": "2019-03-25"
+  },
+  "Philippines": {
+   "results": "WWWWWDWLWW",
+   "gf": 29,
+   "ga": 11,
+   "lastDate": "2026-06-09"
+  },
+  "China": {
+   "results": "DWLWDWLLLL",
+   "gf": 8,
+   "ga": 12,
+   "lastDate": "2026-06-09"
+  },
+  "Brazil": {
+   "results": "WWWLDWLWLW",
+   "gf": 25,
+   "ga": 11,
+   "lastDate": "2026-06-06"
+  },
+  "Basque Country": {
+   "results": "WDWDWWDWDW",
+   "gf": 22,
+   "ga": 7,
+   "lastDate": "2025-11-15"
+  },
+  "Japan": {
+   "results": "WWWWWWDLDW",
+   "gf": 19,
+   "ga": 6,
+   "lastDate": "2026-05-31"
+  },
+  "Paraguay": {
+   "results": "WLWWLLDWDL",
+   "gf": 12,
+   "ga": 10,
+   "lastDate": "2026-06-05"
+  },
+  "Romania": {
+   "results": "WDLLWLWWDL",
+   "gf": 16,
+   "ga": 15,
+   "lastDate": "2026-06-06"
+  },
+  "Greece": {
+   "results": "LDDLDWLLLW",
+   "gf": 12,
+   "ga": 16,
+   "lastDate": "2026-06-07"
+  },
+  "Yugoslavia": {
+   "results": "LWLWLDWLWD",
+   "gf": 21,
+   "ga": 13,
+   "lastDate": "1992-03-25"
+  },
+  "Spain": {
+   "results": "WDDWDWWWWW",
+   "gf": 28,
+   "ga": 4,
+   "lastDate": "2026-06-08"
+  },
+  "Egypt": {
+   "results": "LWDWDLWWDW",
+   "gf": 13,
+   "ga": 6,
+   "lastDate": "2026-06-06"
+  },
+  "Estonia": {
+   "results": "WWLDWLDLDL",
+   "gf": 10,
+   "ga": 18,
+   "lastDate": "2026-06-09"
+  },
+  "Suriname": {
+   "results": "LLWDDWDDLL",
+   "gf": 13,
+   "ga": 14,
+   "lastDate": "2026-03-26"
+  },
+  "Provence": {
+   "results": "LLWWLLWWLL",
+   "gf": 55,
+   "ga": 20,
+   "lastDate": "2013-06-28"
+  },
+  "Costa Rica": {
+   "results": "LLLDDLWDDD",
+   "gf": 11,
+   "ga": 19,
+   "lastDate": "2026-06-10"
+  },
+  "El Salvador": {
+   "results": "DLWDLLLLLW",
+   "gf": 5,
+   "ga": 14,
+   "lastDate": "2026-06-06"
+  },
+  "Guatemala": {
+   "results": "LLLWLWDDLL",
+   "gf": 10,
+   "ga": 24,
+   "lastDate": "2026-06-07"
+  },
+  "Poland": {
+   "results": "DLLWWDWWWD",
+   "gf": 17,
+   "ga": 13,
+   "lastDate": "2026-06-03"
+  },
+  "Portugal": {
+   "results": "WWWDWLDWWW",
+   "gf": 26,
+   "ga": 9,
+   "lastDate": "2026-06-10"
+  },
+  "Brittany": {
+   "results": "WLWLWDWDDL",
+   "gf": 13,
+   "ga": 14,
+   "lastDate": "2013-05-28"
+  },
+  "New Zealand": {
+   "results": "LLWLLLDLLL",
+   "gf": 7,
+   "ga": 18,
+   "lastDate": "2026-06-06"
+  },
+  "Australia": {
+   "results": "DLWWLLLWWW",
+   "gf": 13,
+   "ga": 10,
+   "lastDate": "2026-06-06"
+  },
+  "Latvia": {
+   "results": "LDLDLDLLDD",
+   "gf": 5,
+   "ga": 14,
+   "lastDate": "2026-06-09"
+  },
+  "Galicia": {
+   "results": "LDLWWDDWLL",
+   "gf": 13,
+   "ga": 21,
+   "lastDate": "2024-05-21"
+  },
+  "Central Spain": {
+   "results": "WL",
+   "gf": 2,
+   "ga": 4,
+   "lastDate": "1923-11-25"
+  },
+  "Mexico": {
+   "results": "WWWWDDWWWL",
+   "gf": 18,
+   "ga": 4,
+   "lastDate": "2026-06-11"
+  },
+  "Andalusia": {
+   "results": "WWWDWWDWWW",
+   "gf": 23,
+   "ga": 9,
+   "lastDate": "2013-06-07"
+  },
+  "Asturias": {
+   "results": "W",
+   "gf": 3,
+   "ga": 1,
+   "lastDate": "1923-02-25"
+  },
+  "Lithuania": {
+   "results": "LDLWLDLLLD",
+   "gf": 7,
+   "ga": 16,
+   "lastDate": "2026-06-09"
+  },
+  "Turkey": {
+   "results": "WWWWDWWWLW",
+   "gf": 25,
+   "ga": 13,
+   "lastDate": "2026-06-06"
+  },
+  "Aruba": {
+   "results": "LWWWDLDWLL",
+   "gf": 15,
+   "ga": 19,
+   "lastDate": "2026-06-06"
+  },
+  "Curaçao": {
+   "results": "WLLLDWDWWD",
+   "gf": 19,
+   "ga": 14,
+   "lastDate": "2026-06-06"
+  },
+  "Bulgaria": {
+   "results": "DLWWWLLLLL",
+   "gf": 16,
+   "ga": 24,
+   "lastDate": "2026-06-05"
+  },
+  "Republic of Ireland": {
+   "results": "DWWDDWWWLL",
+   "gf": 16,
+   "ga": 8,
+   "lastDate": "2026-06-05"
+  },
+  "Haiti": {
+   "results": "LWDLWWLWDD",
+   "gf": 15,
+   "ga": 10,
+   "lastDate": "2026-06-05"
+  },
+  "Jamaica": {
+   "results": "LLWLWWDDWL",
+   "gf": 9,
+   "ga": 8,
+   "lastDate": "2026-06-06"
+  },
+  "Kenya": {
+   "results": "DWDLLWWLWD",
+   "gf": 14,
+   "ga": 17,
+   "lastDate": "2026-06-04"
+  },
+  "Uganda": {
+   "results": "LDLLWLWWWD",
+   "gf": 14,
+   "ga": 15,
+   "lastDate": "2025-12-30"
+  },
+  "Bolivia": {
+   "results": "LLLWWLDLLL",
+   "gf": 7,
+   "ga": 21,
+   "lastDate": "2026-06-10"
+  },
+  "Peru": {
+   "results": "LWDLLDLLLD",
+   "gf": 8,
+   "ga": 17,
+   "lastDate": "2026-06-08"
+  },
+  "Honduras": {
+   "results": "LDDLWDWDLD",
+   "gf": 8,
+   "ga": 8,
+   "lastDate": "2026-06-06"
+  },
+  "Belarus": {
+   "results": "DWWWDDLLLL",
+   "gf": 13,
+   "ga": 21,
+   "lastDate": "2026-06-09"
+  },
+  "Ukraine": {
+   "results": "LWWLWLWWDL",
+   "gf": 15,
+   "ga": 16,
+   "lastDate": "2026-06-07"
+  },
+  "Barbados": {
+   "results": "LLLWLDDDLL",
+   "gf": 12,
+   "ga": 23,
+   "lastDate": "2026-03-29"
+  },
+  "Nicaragua": {
+   "results": "LDLLWLLLDL",
+   "gf": 5,
+   "ga": 22,
+   "lastDate": "2026-06-05"
+  },
+  "Cuba": {
+   "results": "DDWWLLLLWL",
+   "gf": 10,
+   "ga": 19,
+   "lastDate": "2026-03-29"
+  },
+  "Martinique": {
+   "results": "LDDLLLDWDL",
+   "gf": 6,
+   "ga": 12,
+   "lastDate": "2026-03-29"
+  },
+  "Dominica": {
+   "results": "DLLLLWDDDL",
+   "gf": 7,
+   "ga": 18,
+   "lastDate": "2026-03-30"
+  },
+  "Silesia": {
+   "results": "DWDLWWLL",
+   "gf": 24,
+   "ga": 17,
+   "lastDate": "2006-12-09"
+  },
+  "Guadeloupe": {
+   "results": "LLLWWWWDLW",
+   "gf": 15,
+   "ga": 11,
+   "lastDate": "2025-06-24"
+  },
+  "Israel": {
+   "results": "WDWDLLLWWW",
+   "gf": 19,
+   "ga": 17,
+   "lastDate": "2026-06-03"
+  },
+  "Indonesia": {
+   "results": "WWLWLLDWLW",
+   "gf": 17,
+   "ga": 11,
+   "lastDate": "2026-06-09"
+  },
+  "French Guiana": {
+   "results": "DLLLDLWLWW",
+   "gf": 17,
+   "ga": 15,
+   "lastDate": "2024-11-19"
+  },
+  "Saint Lucia": {
+   "results": "LLLWLLLLWW",
+   "gf": 9,
+   "ga": 31,
+   "lastDate": "2026-03-27"
+  },
+  "Colombia": {
+   "results": "WWLLWWDWWW",
+   "gf": 25,
+   "ga": 10,
+   "lastDate": "2026-06-07"
+  },
+  "Panama": {
+   "results": "DWLWDLDWWD",
+   "gf": 18,
+   "ga": 16,
+   "lastDate": "2026-06-06"
+  },
+  "Venezuela": {
+   "results": "WLDWLWLLLL",
+   "gf": 11,
+   "ga": 17,
+   "lastDate": "2026-06-09"
+  },
+  "Ecuador": {
+   "results": "WWDDWDDDWD",
+   "gf": 12,
+   "ga": 5,
+   "lastDate": "2026-06-07"
+  },
+  "Saint Kitts and Nevis": {
+   "results": "WLLDWWLLLW",
+   "gf": 21,
+   "ga": 27,
+   "lastDate": "2026-03-30"
+  },
+  "Grenada": {
+   "results": "LLLLWWWWWL",
+   "gf": 17,
+   "ga": 21,
+   "lastDate": "2026-05-16"
+  },
+  "India": {
+   "results": "DLLLLLDLLD",
+   "gf": 4,
+   "ga": 14,
+   "lastDate": "2026-06-09"
+  },
+  "Slovakia": {
+   "results": "DWWLLWWLWW",
+   "gf": 15,
+   "ga": 15,
+   "lastDate": "2026-06-05"
+  },
+  "Manchukuo": {
+   "results": "LLL",
+   "gf": 0,
+   "ga": 16,
+   "lastDate": "1942-08-09"
+  },
+  "Croatia": {
+   "results": "WLLWWWWDWW",
+   "gf": 19,
+   "ga": 10,
+   "lastDate": "2026-06-07"
+  },
+  "Lebanon": {
+   "results": "LWWWDDDLWW",
+   "gf": 21,
+   "ga": 5,
+   "lastDate": "2025-11-26"
+  },
+  "Puerto Rico": {
+   "results": "LWWLWLDLDL",
+   "gf": 11,
+   "ga": 19,
+   "lastDate": "2026-06-05"
+  },
+  "Afghanistan": {
+   "results": "LLWDDLLLLL",
+   "gf": 4,
+   "ga": 15,
+   "lastDate": "2026-06-10"
+  },
+  "Iran": {
+   "results": "WWWLDDWLWL",
+   "gf": 17,
+   "ga": 6,
+   "lastDate": "2026-06-04"
+  },
+  "Mongolia": {
+   "results": "LLLLWLWLLL",
+   "gf": 5,
+   "ga": 24,
+   "lastDate": "2026-06-05"
+  },
+  "Tanzania": {
+   "results": "WLLDDLLLLL",
+   "gf": 12,
+   "ga": 14,
+   "lastDate": "2026-03-29"
+  },
+  "Zimbabwe": {
+   "results": "WLWLDLWLLD",
+   "gf": 11,
+   "ga": 13,
+   "lastDate": "2026-05-30"
+  },
+  "Zambia": {
+   "results": "LLDDLLLWLL",
+   "gf": 5,
+   "ga": 23,
+   "lastDate": "2026-03-31"
+  },
+  "Iceland": {
+   "results": "LLDDLLWDLL",
+   "gf": 11,
+   "ga": 22,
+   "lastDate": "2026-06-09"
+  },
+  "Albania": {
+   "results": "LLLLLWWWWW",
+   "gf": 9,
+   "ga": 9,
+   "lastDate": "2026-06-06"
+  },
+  "Montenegro": {
+   "results": "DWLWLWWLLL",
+   "gf": 13,
+   "ga": 20,
+   "lastDate": "2026-06-05"
+  },
+  "Madagascar": {
+   "results": "LDWWLWWWLL",
+   "gf": 17,
+   "ga": 19,
+   "lastDate": "2026-06-02"
+  },
+  "Mauritius": {
+   "results": "DLLLDLLLDW",
+   "gf": 6,
+   "ga": 15,
+   "lastDate": "2025-10-13"
+  },
+  "Réunion": {
+   "results": "LWDDDWLWWW",
+   "gf": 16,
+   "ga": 6,
+   "lastDate": "2023-09-02"
+  },
+  "Zanzibar": {
+   "results": "WWLWDWLDWW",
+   "gf": 13,
+   "ga": 8,
+   "lastDate": "2025-01-13"
+  },
+  "Djibouti": {
+   "results": "LLLLLLLDLD",
+   "gf": 5,
+   "ga": 27,
+   "lastDate": "2025-11-26"
+  },
+  "Ethiopia": {
+   "results": "DWLWLLWLWL",
+   "gf": 12,
+   "ga": 14,
+   "lastDate": "2026-06-09"
+  },
+  "DR Congo": {
+   "results": "LDWWLWDWDW",
+   "gf": 11,
+   "ga": 5,
+   "lastDate": "2026-06-09"
+  },
+  "South Korea": {
+   "results": "WWWLLWWWLD",
+   "gf": 15,
+   "ga": 13,
+   "lastDate": "2026-06-11"
+  },
+  "Vietnam": {
+   "results": "WWWWLWWWWW",
+   "gf": 24,
+   "ga": 10,
+   "lastDate": "2026-03-26"
+  },
+  "Macau": {
+   "results": "LLLLLLDLLL",
+   "gf": 3,
+   "ga": 28,
+   "lastDate": "2026-03-29"
+  },
+  "Dominican Republic": {
+   "results": "LDDDWLLDLL",
+   "gf": 10,
+   "ga": 16,
+   "lastDate": "2026-06-03"
+  },
+  "Cyprus": {
+   "results": "WDWLLLWDDL",
+   "gf": 16,
+   "ga": 15,
+   "lastDate": "2026-06-07"
+  },
+  "Sierra Leone": {
+   "results": "LWDWLWDLWL",
+   "gf": 11,
+   "ga": 11,
+   "lastDate": "2026-06-09"
+  },
+  "Nigeria": {
+   "results": "LDWWDWDDWW",
+   "gf": 18,
+   "ga": 7,
+   "lastDate": "2026-06-10"
+  },
+  "Syria": {
+   "results": "LLDDWWWWWD",
+   "gf": 20,
+   "ga": 9,
+   "lastDate": "2026-06-05"
+  },
+  "Serbia": {
+   "results": "LLWLWLWLLW",
+   "gf": 9,
+   "ga": 22,
+   "lastDate": "2026-06-04"
+  },
+  "Taiwan": {
+   "results": "LLLLLLLWWL",
+   "gf": 14,
+   "ga": 29,
+   "lastDate": "2025-11-18"
+  },
+  "Ghana": {
+   "results": "DLLLLLWWWD",
+   "gf": 11,
+   "ga": 14,
+   "lastDate": "2026-06-02"
+  },
+  "Myanmar": {
+   "results": "LWLLDWWLWD",
+   "gf": 16,
+   "ga": 24,
+   "lastDate": "2026-06-09"
+  },
+  "New Caledonia": {
+   "results": "LWLWDWWDWW",
+   "gf": 23,
+   "ga": 10,
+   "lastDate": "2026-03-26"
+  },
+  "Vanuatu": {
+   "results": "WDWWLDLLLW",
+   "gf": 16,
+   "ga": 22,
+   "lastDate": "2026-06-06"
+  },
+  "Fiji": {
+   "results": "LLLLLLWDDD",
+   "gf": 7,
+   "ga": 28,
+   "lastDate": "2026-06-06"
+  },
+  "Pakistan": {
+   "results": "WWWLDDLLLL",
+   "gf": 8,
+   "ga": 15,
+   "lastDate": "2026-06-10"
+  },
+  "Sri Lanka": {
+   "results": "LLWDLWWLWL",
+   "gf": 9,
+   "ga": 15,
+   "lastDate": "2025-11-18"
+  },
+  "German DR": {
+   "results": "WDWWWWLLWW",
+   "gf": 19,
+   "ga": 13,
+   "lastDate": "1990-09-12"
+  },
+  "Tahiti": {
+   "results": "LWWLWLLDWW",
+   "gf": 12,
+   "ga": 14,
+   "lastDate": "2025-03-21"
+  },
+  "Gambia": {
+   "results": "LLDWLWWDWL",
+   "gf": 22,
+   "ga": 16,
+   "lastDate": "2026-05-29"
+  },
+  "Hong Kong": {
+   "results": "LWLDDWWLWD",
+   "gf": 19,
+   "ga": 11,
+   "lastDate": "2026-06-09"
+  },
+  "Singapore": {
+   "results": "LWWLWDDLWW",
+   "gf": 19,
+   "ga": 13,
+   "lastDate": "2026-06-05"
+  },
+  "Malaysia": {
+   "results": "WWWWWWLDWD",
+   "gf": 19,
+   "ga": 6,
+   "lastDate": "2025-11-18"
+  },
+  "Guinea-Bissau": {
+   "results": "DLLLWDLLLL",
+   "gf": 6,
+   "ga": 17,
+   "lastDate": "2026-03-31"
+  },
+  "Saarland": {
+   "results": "LDLLLLDLW",
+   "gf": 10,
+   "ga": 26,
+   "lastDate": "1956-06-06"
+  },
+  "Burundi": {
+   "results": "LLLLLDWWLL",
+   "gf": 6,
+   "ga": 14,
+   "lastDate": "2026-05-26"
+  },
+  "Cameroon": {
+   "results": "WLLWWDWLDW",
+   "gf": 10,
+   "ga": 7,
+   "lastDate": "2026-03-31"
+  },
+  "Kernow": {
+   "results": "WWDWWWWLWD",
+   "gf": 27,
+   "ga": 9,
+   "lastDate": "2023-07-16"
+  },
+  "Cambodia": {
+   "results": "WWDLLLLWLD",
+   "gf": 17,
+   "ga": 15,
+   "lastDate": "2026-06-09"
+  },
+  "Thailand": {
+   "results": "DDWWWWLWLW",
+   "gf": 23,
+   "ga": 9,
+   "lastDate": "2026-06-09"
+  },
+  "Vietnam Republic": {
+   "results": "LLLLLDLWDW",
+   "gf": 10,
+   "ga": 20,
+   "lastDate": "1975-03-23"
+  },
+  "Kyrgyzstan": {
+   "results": "DDLLDDWLLL",
+   "gf": 10,
+   "ga": 17,
+   "lastDate": "2026-06-09"
+  },
+  "Moldova": {
+   "results": "DDLLLLDLLL",
+   "gf": 9,
+   "ga": 32,
+   "lastDate": "2026-06-09"
+  },
+  "North Vietnam": {
+   "results": "WLLDWWLDWD",
+   "gf": 25,
+   "ga": 15,
+   "lastDate": "1970-09-20"
+  },
+  "Togo": {
+   "results": "WDWDDLWLLD",
+   "gf": 12,
+   "ga": 11,
+   "lastDate": "2026-06-09"
+  },
+  "North Korea": {
+   "results": "LDLLDLLLDD",
+   "gf": 10,
+   "ga": 21,
+   "lastDate": "2025-06-10"
+  },
+  "Sudan": {
+   "results": "LLWLLLDWLL",
+   "gf": 5,
+   "ga": 17,
+   "lastDate": "2026-01-03"
+  },
+  "Malta": {
+   "results": "WLLWLLWDLD",
+   "gf": 11,
+   "ga": 23,
+   "lastDate": "2026-06-05"
+  },
+  "Tunisia": {
+   "results": "LLDWDDLWWD",
+   "gf": 13,
+   "ga": 14,
+   "lastDate": "2026-06-06"
+  },
+  "Libya": {
+   "results": "DDDWDDWWLD",
+   "gf": 11,
+   "ga": 9,
+   "lastDate": "2026-03-31"
+  },
+  "Malawi": {
+   "results": "DLLWDLWDWL",
+   "gf": 9,
+   "ga": 9,
+   "lastDate": "2026-06-09"
+  },
+  "Morocco": {
+   "results": "DWWWDWDWWW",
+   "gf": 22,
+   "ga": 3,
+   "lastDate": "2026-06-07"
+  },
+  "Benin": {
+   "results": "LDWWLLWLLL",
+   "gf": 6,
+   "ga": 20,
+   "lastDate": "2026-06-09"
+  },
+  "Cape Verde": {
+   "results": "LWDLDDWDWW",
+   "gf": 16,
+   "ga": 12,
+   "lastDate": "2026-06-06"
+  },
+  "Ivory Coast": {
+   "results": "WWWLWWDWWL",
+   "gf": 19,
+   "ga": 8,
+   "lastDate": "2026-06-04"
+  },
+  "Burkina Faso": {
+   "results": "DLDWLWLWWW",
+   "gf": 18,
+   "ga": 13,
+   "lastDate": "2026-06-09"
+  },
+  "Gabon": {
+   "results": "DLLLLLWWDW",
+   "gf": 18,
+   "ga": 19,
+   "lastDate": "2026-03-30"
+  },
+  "Congo": {
+   "results": "LLDLLDLLWL",
+   "gf": 6,
+   "ga": 23,
+   "lastDate": "2025-10-14"
+  },
+  "Mali": {
+   "results": "LDLDDDDWWW",
+   "gf": 12,
+   "ga": 9,
+   "lastDate": "2026-06-04"
+  },
+  "Central African Republic": {
+   "results": "LDWLLLWDLL",
+   "gf": 7,
+   "ga": 21,
+   "lastDate": "2026-06-09"
+  },
+  "Iraq": {
+   "results": "LDWWLLWWWD",
+   "gf": 11,
+   "ga": 10,
+   "lastDate": "2026-06-09"
+  },
+  "Saint Vincent and the Grenadines": {
+   "results": "WLWLWWLWDW",
+   "gf": 26,
+   "ga": 11,
+   "lastDate": "2026-03-29"
+  },
+  "Senegal": {
+   "results": "DLWWLWWWWD",
+   "gf": 16,
+   "ga": 9,
+   "lastDate": "2026-06-09"
+  },
+  "Laos": {
+   "results": "LLLWLLLDDL",
+   "gf": 11,
+   "ga": 29,
+   "lastDate": "2025-11-19"
+  },
+  "Mauritania": {
+   "results": "WDLLLDLDDW",
+   "gf": 6,
+   "ga": 11,
+   "lastDate": "2026-06-08"
+  },
+  "Liberia": {
+   "results": "WLDLLDWDLW",
+   "gf": 13,
+   "ga": 15,
+   "lastDate": "2026-06-09"
+  },
+  "Chad": {
+   "results": "DLLLLDLDLL",
+   "gf": 8,
+   "ga": 21,
+   "lastDate": "2025-11-17"
+  },
+  "Niger": {
+   "results": "LDLDDLWWWL",
+   "gf": 9,
+   "ga": 13,
+   "lastDate": "2026-06-08"
+  },
+  "Guinea": {
+   "results": "LLDDWDWDWL",
+   "gf": 12,
+   "ga": 9,
+   "lastDate": "2026-06-04"
+  },
+  "Algeria": {
+   "results": "WWDWLWWWWD",
+   "gf": 21,
+   "ga": 4,
+   "lastDate": "2026-06-10"
+  },
+  "Kuwait": {
+   "results": "DLLDWDWLDL",
+   "gf": 15,
+   "ga": 22,
+   "lastDate": "2026-06-05"
+  },
+  "Jordan": {
+   "results": "LLDDLWWWWW",
+   "gf": 17,
+   "ga": 15,
+   "lastDate": "2026-06-07"
+  },
+  "Papua New Guinea": {
+   "results": "DWWWWDLDLW",
+   "gf": 18,
+   "ga": 15,
+   "lastDate": "2025-11-23"
+  },
+  "Solomon Islands": {
+   "results": "LLLLLLWWLL",
+   "gf": 16,
+   "ga": 29,
+   "lastDate": "2026-03-30"
+  },
+  "Somalia": {
+   "results": "DWLLLLLDLL",
+   "gf": 4,
+   "ga": 17,
+   "lastDate": "2025-11-26"
+  },
+  "Saudi Arabia": {
+   "results": "DWLLLLWLWW",
+   "gf": 12,
+   "ga": 13,
+   "lastDate": "2026-06-09"
+  },
+  "Bermuda": {
+   "results": "WLDLLLLLWW",
+   "gf": 14,
+   "ga": 26,
+   "lastDate": "2026-06-06"
+  },
+  "Palestine": {
+   "results": "DDLDDWDLLD",
+   "gf": 5,
+   "ga": 9,
+   "lastDate": "2026-06-09"
+  },
+  "Yemen": {
+   "results": "DWWWDDWLLW",
+   "gf": 28,
+   "ga": 10,
+   "lastDate": "2025-11-26"
+  },
+  "Bahrain": {
+   "results": "LWLLWLLLDL",
+   "gf": 9,
+   "ga": 17,
+   "lastDate": "2026-06-05"
+  },
+  "Oman": {
+   "results": "LWDLDLWLDD",
+   "gf": 7,
+   "ga": 11,
+   "lastDate": "2026-06-05"
+  },
+  "Wallis Islands and Futuna": {
+   "results": "LLLLWLLLLL",
+   "gf": 7,
+   "ga": 58,
+   "lastDate": "1995-08-20"
+  },
+  "Corsica": {
+   "results": "DDWWDWDLW",
+   "gf": 10,
+   "ga": 5,
+   "lastDate": "2017-05-26"
+  },
+  "Western Australia": {
+   "results": "DWLDLWLLWL",
+   "gf": 14,
+   "ga": 17,
+   "lastDate": "1980-11-25"
+  },
+  "Eswatini": {
+   "results": "LDLLDDLDLD",
+   "gf": 7,
+   "ga": 24,
+   "lastDate": "2025-10-13"
+  },
+  "Botswana": {
+   "results": "WLLLLDLLLW",
+   "gf": 6,
+   "ga": 18,
+   "lastDate": "2026-03-31"
+  },
+  "Qatar": {
+   "results": "DLLDLLWDLD",
+   "gf": 7,
+   "ga": 15,
+   "lastDate": "2026-06-06"
+  },
+  "Lesotho": {
+   "results": "DLDWLLLDWL",
+   "gf": 7,
+   "ga": 19,
+   "lastDate": "2026-06-04"
+  },
+  "Bahamas": {
+   "results": "LLLLLLLWLD",
+   "gf": 12,
+   "ga": 39,
+   "lastDate": "2026-03-29"
+  },
+  "Brunei": {
+   "results": "LLLWLLLDLW",
+   "gf": 4,
+   "ga": 24,
+   "lastDate": "2025-11-18"
+  },
+  "Cook Islands": {
+   "results": "LWLLLLWLLL",
+   "gf": 5,
+   "ga": 33,
+   "lastDate": "2024-09-06"
+  },
+  "Yemen DPR": {
+   "results": "WLLLDLLDLD",
+   "gf": 10,
+   "ga": 24,
+   "lastDate": "1989-11-05"
+  },
+  "United Arab Emirates": {
+   "results": "LDWDLLDLWW",
+   "gf": 12,
+   "ga": 14,
+   "lastDate": "2025-12-15"
+  },
+  "Faroe Islands": {
+   "results": "WLWWLWWWLW",
+   "gf": 14,
+   "ga": 8,
+   "lastDate": "2026-06-09"
+  },
+  "Nepal": {
+   "results": "LDLLDLDLWW",
+   "gf": 7,
+   "ga": 11,
+   "lastDate": "2025-11-18"
+  },
+  "Antigua and Barbuda": {
+   "results": "LDLLDLLLLL",
+   "gf": 3,
+   "ga": 22,
+   "lastDate": "2025-11-18"
+  },
+  "Bangladesh": {
+   "results": "WLWDDLDLWD",
+   "gf": 12,
+   "ga": 13,
+   "lastDate": "2026-06-05"
+  },
+  "Seychelles": {
+   "results": "LLLLLLLLLL",
+   "gf": 2,
+   "ga": 53,
+   "lastDate": "2025-10-14"
+  },
+  "Equatorial Guinea": {
+   "results": "LDWLLLLDLL",
+   "gf": 5,
+   "ga": 15,
+   "lastDate": "2026-06-09"
+  },
+  "Mozambique": {
+   "results": "LLLWLDLWLW",
+   "gf": 10,
+   "ga": 15,
+   "lastDate": "2026-06-09"
+  },
+  "Guam": {
+   "results": "LLWLLWLDLL",
+   "gf": 14,
+   "ga": 28,
+   "lastDate": "2026-06-06"
+  },
+  "Angola": {
+   "results": "WDDDLWLDDW",
+   "gf": 14,
+   "ga": 11,
+   "lastDate": "2026-06-09"
+  },
+  "São Tomé and Príncipe": {
+   "results": "WLLLLLLLDD",
+   "gf": 6,
+   "ga": 21,
+   "lastDate": "2025-10-13"
+  },
+  "Rwanda": {
+   "results": "WWLLWLLLDL",
+   "gf": 8,
+   "ga": 12,
+   "lastDate": "2026-03-30"
+  },
+  "Northern Cyprus": {
+   "results": "DWWDWDDWDW",
+   "gf": 28,
+   "ga": 8,
+   "lastDate": "2018-06-09"
+  },
+  "Armenia": {
+   "results": "DDLLLLLWLD",
+   "gf": 8,
+   "ga": 25,
+   "lastDate": "2026-06-09"
+  },
+  "Georgia": {
+   "results": "WDWDLLLLWL",
+   "gf": 14,
+   "ga": 18,
+   "lastDate": "2026-06-05"
+  },
+  "Azerbaijan": {
+   "results": "WLDWLLLLDL",
+   "gf": 12,
+   "ga": 21,
+   "lastDate": "2026-06-09"
+  },
+  "Kazakhstan": {
+   "results": "LDWWLDDWLL",
+   "gf": 11,
+   "ga": 14,
+   "lastDate": "2026-06-09"
+  },
+  "Comoros": {
+   "results": "WLDDDLLLLD",
+   "gf": 8,
+   "ga": 15,
+   "lastDate": "2026-06-09"
+  },
+  "Maldives": {
+   "results": "LLLLLDWLLL",
+   "gf": 6,
+   "ga": 20,
+   "lastDate": "2026-06-01"
+  },
+  "Tonga": {
+   "results": "LWLLWLLLLL",
+   "gf": 12,
+   "ga": 45,
+   "lastDate": "2024-09-09"
+  },
+  "Kiribati": {
+   "results": "LLLLLLLLDL",
+   "gf": 7,
+   "ga": 102,
+   "lastDate": "2011-09-05"
+  },
+  "Tuvalu": {
+   "results": "WWLLLLDLLL",
+   "gf": 13,
+   "ga": 56,
+   "lastDate": "2023-11-30"
+  },
+  "Samoa": {
+   "results": "LLLWWLLLWW",
+   "gf": 12,
+   "ga": 30,
+   "lastDate": "2024-11-18"
+  },
+  "Greenland": {
+   "results": "LLWDLDWDWW",
+   "gf": 14,
+   "ga": 22,
+   "lastDate": "2024-06-01"
+  },
+  "Liechtenstein": {
+   "results": "LLLWLLLLLL",
+   "gf": 3,
+   "ga": 33,
+   "lastDate": "2026-06-07"
+  },
+  "Bhutan": {
+   "results": "LLLLLLDWLL",
+   "gf": 3,
+   "ga": 24,
+   "lastDate": "2026-06-04"
+  },
+  "South Yemen": {
+   "results": "LLL",
+   "gf": 1,
+   "ga": 8,
+   "lastDate": "1982-11-25"
+  },
+  "Niue": {
+   "results": "LL",
+   "gf": 0,
+   "ga": 33,
+   "lastDate": "1983-08-22"
+  },
+  "American Samoa": {
+   "results": "LLLLLLLLLD",
+   "gf": 6,
+   "ga": 66,
+   "lastDate": "2026-03-28"
+  },
+  "Belize": {
+   "results": "LLWWLLLLDW",
+   "gf": 15,
+   "ga": 27,
+   "lastDate": "2026-03-30"
+  },
+  "Cayman Islands": {
+   "results": "LLWDWLLLLL",
+   "gf": 9,
+   "ga": 24,
+   "lastDate": "2026-06-06"
+  },
+  "Anguilla": {
+   "results": "LWLWLLLLLL",
+   "gf": 8,
+   "ga": 28,
+   "lastDate": "2026-03-29"
+  },
+  "British Virgin Islands": {
+   "results": "WLWDWWLLLD",
+   "gf": 17,
+   "ga": 15,
+   "lastDate": "2026-06-06"
+  },
+  "Palau": {
+   "results": "LL",
+   "gf": 4,
+   "ga": 21,
+   "lastDate": "1998-08-01"
+  },
+  "Sint Maarten": {
+   "results": "DWWDWLLWLW",
+   "gf": 13,
+   "ga": 22,
+   "lastDate": "2026-03-30"
+  },
+  "Namibia": {
+   "results": "DLLLLLWLDW",
+   "gf": 7,
+   "ga": 16,
+   "lastDate": "2026-03-28"
+  },
+  "Ynys Môn": {
+   "results": "WWLWWWWWWW",
+   "gf": 21,
+   "ga": 10,
+   "lastDate": "2025-07-17"
+  },
+  "Shetland": {
+   "results": "LDDWWWLLLL",
+   "gf": 18,
+   "ga": 20,
+   "lastDate": "2025-07-17"
+  },
+  "Åland Islands": {
+   "results": "DLLLWWDDDL",
+   "gf": 8,
+   "ga": 14,
+   "lastDate": "2023-07-13"
+  },
+  "Saint Martin": {
+   "results": "WWLWLLWLWL",
+   "gf": 17,
+   "ga": 17,
+   "lastDate": "2026-03-29"
+  },
+  "San Marino": {
+   "results": "LLDLLLLLLL",
+   "gf": 5,
+   "ga": 37,
+   "lastDate": "2026-06-09"
+  },
+  "Montserrat": {
+   "results": "LWLLLWLLLL",
+   "gf": 6,
+   "ga": 20,
+   "lastDate": "2025-06-10"
+  },
+  "Slovenia": {
+   "results": "LDWLDLDDLD",
+   "gf": 8,
+   "ga": 14,
+   "lastDate": "2026-06-07"
+  },
+  "Isle of Wight": {
+   "results": "LWWWLWWDWW",
+   "gf": 19,
+   "ga": 9,
+   "lastDate": "2023-07-13"
+  },
+  "Turkmenistan": {
+   "results": "WWLWWDLWLL",
+   "gf": 16,
+   "ga": 14,
+   "lastDate": "2025-11-18"
+  },
+  "Tajikistan": {
+   "results": "DWWWWDWWLW",
+   "gf": 22,
+   "ga": 11,
+   "lastDate": "2026-06-09"
+  },
+  "Uzbekistan": {
+   "results": "LLDWDDWLWW",
+   "gf": 14,
+   "ga": 9,
+   "lastDate": "2026-06-08"
+  },
+  "Eritrea": {
+   "results": "LLLLLLLLLD",
+   "gf": 4,
+   "ga": 21,
+   "lastDate": "2019-09-10"
+  },
+  "Gibraltar": {
+   "results": "WWWLLLLLLL",
+   "gf": 14,
+   "ga": 19,
+   "lastDate": "2026-06-06"
+  },
+  "Isle of Man": {
+   "results": "WLWWWWLLWW",
+   "gf": 35,
+   "ga": 12,
+   "lastDate": "2025-07-18"
+  },
+  "North Macedonia": {
+   "results": "LDDLLDDDWL",
+   "gf": 8,
+   "ga": 18,
+   "lastDate": "2026-06-01"
+  },
+  "Czech Republic": {
+   "results": "LWWDDWWLDD",
+   "gf": 21,
+   "ga": 11,
+   "lastDate": "2026-06-11"
+  },
+  "Bosnia and Herzegovina": {
+   "results": "DDDDDWWDLW",
+   "gf": 20,
+   "ga": 10,
+   "lastDate": "2026-06-06"
+  },
+  "Canary Islands": {
+   "results": "WLWW",
+   "gf": 11,
+   "ga": 3,
+   "lastDate": "2007-12-29"
+  },
+  "Andorra": {
+   "results": "LWLDLLLLDD",
+   "gf": 5,
+   "ga": 16,
+   "lastDate": "2026-06-07"
+  },
+  "Frøya": {
+   "results": "LLLLWLLLLD",
+   "gf": 13,
+   "ga": 39,
+   "lastDate": "2025-07-17"
+  },
+  "Hitra": {
+   "results": "WWLLLLWDWL",
+   "gf": 23,
+   "ga": 29,
+   "lastDate": "2025-07-17"
+  },
+  "United States Virgin Islands": {
+   "results": "LWWDLLLDDD",
+   "gf": 15,
+   "ga": 20,
+   "lastDate": "2026-03-28"
+  },
+  "Northern Mariana Islands": {
+   "results": "WDLWLLDLLL",
+   "gf": 10,
+   "ga": 44,
+   "lastDate": "2024-04-07"
+  },
+  "Turks and Caicos Islands": {
+   "results": "WDLWLLDDLD",
+   "gf": 9,
+   "ga": 18,
+   "lastDate": "2025-08-16"
+  },
+  "Micronesia": {
+   "results": "LLLLWLL",
+   "gf": 8,
+   "ga": 59,
+   "lastDate": "2003-07-07"
+  },
+  "Gotland": {
+   "results": "LLWWLLLLLW",
+   "gf": 29,
+   "ga": 19,
+   "lastDate": "2017-06-29"
+  },
+  "Saare County": {
+   "results": "WDDLWLLLLW",
+   "gf": 16,
+   "ga": 21,
+   "lastDate": "2017-06-29"
+  },
+  "Rhodes": {
+   "results": "LWWWLWLWWW",
+   "gf": 17,
+   "ga": 9,
+   "lastDate": "2011-06-27"
+  },
+  "Monaco": {
+   "results": "DWLWLLWLLD",
+   "gf": 13,
+   "ga": 29,
+   "lastDate": "2017-04-29"
+  },
+  "Western Sahara": {
+   "results": "LLLWWLLLD",
+   "gf": 16,
+   "ga": 38,
+   "lastDate": "2013-06-28"
+  },
+  "Tibet": {
+   "results": "LLLLDDLLLL",
+   "gf": 16,
+   "ga": 41,
+   "lastDate": "2025-07-03"
+  },
+  "Orkney": {
+   "results": "WLWWLWDLWL",
+   "gf": 19,
+   "ga": 18,
+   "lastDate": "2025-07-17"
+  },
+  "Falkland Islands": {
+   "results": "DLLLLLLLLL",
+   "gf": 7,
+   "ga": 33,
+   "lastDate": "2023-07-13"
+  },
+  "Mayotte": {
+   "results": "DDWLWLWLWW",
+   "gf": 12,
+   "ga": 8,
+   "lastDate": "2023-08-26"
+  },
+  "Vatican City": {
+   "results": "LDDLLLLD",
+   "gf": 6,
+   "ga": 21,
+   "lastDate": "2022-04-22"
+  },
+  "Timor-Leste": {
+   "results": "LLLWLLLLLL",
+   "gf": 6,
+   "ga": 35,
+   "lastDate": "2025-11-18"
+  },
+  "Sark": {
+   "results": "LLLL",
+   "gf": 0,
+   "ga": 70,
+   "lastDate": "2003-07-03"
+  },
+  "Sealand": {
+   "results": "WWDDWDLLWD",
+   "gf": 24,
+   "ga": 25,
+   "lastDate": "2014-08-10"
+  },
+  "Occitania": {
+   "results": "WWDDWDWWWW",
+   "gf": 33,
+   "ga": 6,
+   "lastDate": "2014-12-30"
+  },
+  "Chechnya": {
+   "results": "LDL",
+   "gf": 3,
+   "ga": 29,
+   "lastDate": "2006-02-18"
+  },
+  "Ambazonia": {
+   "results": "LLLLLD",
+   "gf": 3,
+   "ga": 17,
+   "lastDate": "2007-06-07"
+  },
+  "Western Isles": {
+   "results": "DLWWLLWLLL",
+   "gf": 11,
+   "ga": 19,
+   "lastDate": "2025-07-17"
+  },
+  "Kosovo": {
+   "results": "WLLWDWWDWL",
+   "gf": 14,
+   "ga": 11,
+   "lastDate": "2026-06-07"
+  },
+  "Republic of St. Pauli": {
+   "results": "LLWD",
+   "gf": 10,
+   "ga": 5,
+   "lastDate": "2006-06-03"
+  },
+  "Găgăuzia": {
+   "results": "DLL",
+   "gf": 2,
+   "ga": 9,
+   "lastDate": "2006-11-21"
+  },
+  "Crimea": {
+   "results": "LWWWL",
+   "gf": 7,
+   "ga": 11,
+   "lastDate": "2006-11-25"
+  },
+  "Sápmi": {
+   "results": "LWLLLLWWLL",
+   "gf": 11,
+   "ga": 20,
+   "lastDate": "2023-07-16"
+  },
+  "Romani people": {
+   "results": "LLWLLLW",
+   "gf": 13,
+   "ga": 26,
+   "lastDate": "2016-05-16"
+  },
+  "Menorca": {
+   "results": "LLLWLDWDWW",
+   "gf": 18,
+   "ga": 12,
+   "lastDate": "2023-07-13"
+  },
+  "Iraqi Kurdistan": {
+   "results": "DDDWWDDDWL",
+   "gf": 23,
+   "ga": 9,
+   "lastDate": "2016-06-04"
+  },
+  "Padania": {
+   "results": "LWDLWDLWWW",
+   "gf": 25,
+   "ga": 9,
+   "lastDate": "2019-06-08"
+  },
+  "Arameans Suryoye": {
+   "results": "WLDWWLLDWW",
+   "gf": 16,
+   "ga": 12,
+   "lastDate": "2014-06-08"
+  },
+  "Gozo": {
+   "results": "DLDLWWLWWL",
+   "gf": 26,
+   "ga": 14,
+   "lastDate": "2025-07-17"
+  },
+  "Two Sicilies": {
+   "results": "LLLLWL",
+   "gf": 3,
+   "ga": 18,
+   "lastDate": "2023-07-02"
+  },
+  "Saint Barthélemy": {
+   "results": "LWWDLLWWLL",
+   "gf": 25,
+   "ga": 30,
+   "lastDate": "2023-03-10"
+  },
+  "Saint Pierre and Miquelon": {
+   "results": "LLLLLLL",
+   "gf": 2,
+   "ga": 78,
+   "lastDate": "2012-09-28"
+  },
+  "Bonaire": {
+   "results": "LLWLLLLLWL",
+   "gf": 8,
+   "ga": 22,
+   "lastDate": "2026-06-06"
+  },
+  "Chagos Islands": {
+   "results": "LLLLLLWDLL",
+   "gf": 15,
+   "ga": 56,
+   "lastDate": "2019-12-29"
+  },
+  "Raetia": {
+   "results": "WWDDLLDLDL",
+   "gf": 25,
+   "ga": 32,
+   "lastDate": "2023-08-06"
+  },
+  "Cilento": {
+   "results": "L",
+   "gf": 0,
+   "ga": 2,
+   "lastDate": "2011-12-29"
+  },
+  "Kurdistan": {
+   "results": "WWWDW",
+   "gf": 12,
+   "ga": 2,
+   "lastDate": "2013-06-28"
+  },
+  "Darfur": {
+   "results": "LLLLLLL",
+   "gf": 1,
+   "ga": 99,
+   "lastDate": "2014-06-07"
+  },
+  "Tamil Eelam": {
+   "results": "WWWWWWWLWL",
+   "gf": 27,
+   "ga": 13,
+   "lastDate": "2025-07-04"
+  },
+  "South Sudan": {
+   "results": "LDLDLDLLWL",
+   "gf": 6,
+   "ga": 20,
+   "lastDate": "2025-11-25"
+  },
+  "Abkhazia": {
+   "results": "DDDWWWWWDL",
+   "gf": 18,
+   "ga": 7,
+   "lastDate": "2019-06-08"
+  },
+  "Artsakh": {
+   "results": "WWDLWWWLLW",
+   "gf": 31,
+   "ga": 13,
+   "lastDate": "2019-06-08"
+  },
+  "Madrid": {
+   "results": "L",
+   "gf": 1,
+   "ga": 2,
+   "lastDate": "2013-06-07"
+  },
+  "Quebec": {
+   "results": "LWW",
+   "gf": 24,
+   "ga": 2,
+   "lastDate": "2013-06-27"
+  },
+  "Saugeais": {
+   "results": "D",
+   "gf": 1,
+   "ga": 1,
+   "lastDate": "2013-06-29"
+  },
+  "South Ossetia": {
+   "results": "LWWDDWWLLL",
+   "gf": 13,
+   "ga": 22,
+   "lastDate": "2019-12-08"
+  },
+  "Ellan Vannin": {
+   "results": "LWWWDDLWLD",
+   "gf": 16,
+   "ga": 14,
+   "lastDate": "2018-06-03"
+  },
+  "Somaliland": {
+   "results": "LWWLLD",
+   "gf": 14,
+   "ga": 20,
+   "lastDate": "2019-05-04"
+  },
+  "Franconia": {
+   "results": "WLW",
+   "gf": 8,
+   "ga": 11,
+   "lastDate": "2019-06-25"
+  },
+  "County of Nice": {
+   "results": "LWWWDWWWL",
+   "gf": 19,
+   "ga": 13,
+   "lastDate": "2015-06-21"
+  },
+  "Seborga": {
+   "results": "L",
+   "gf": 2,
+   "ga": 3,
+   "lastDate": "2014-08-10"
+  },
+  "Székely Land": {
+   "results": "WWLLDLLDLW",
+   "gf": 21,
+   "ga": 22,
+   "lastDate": "2023-07-02"
+  },
+  "Luhansk PR": {
+   "results": "WLDLWL",
+   "gf": 9,
+   "ga": 12,
+   "lastDate": "2019-12-08"
+  },
+  "Donetsk PR": {
+   "results": "WDDWLL",
+   "gf": 8,
+   "ga": 7,
+   "lastDate": "2017-08-31"
+  },
+  "Felvidék": {
+   "results": "WLLWWDDLLW",
+   "gf": 11,
+   "ga": 16,
+   "lastDate": "2017-06-09"
+  },
+  "Panjab": {
+   "results": "WLDWLDLWLW",
+   "gf": 30,
+   "ga": 14,
+   "lastDate": "2019-12-29"
+  },
+  "Western Armenia": {
+   "results": "LDDWLWLLWW",
+   "gf": 20,
+   "ga": 13,
+   "lastDate": "2019-06-09"
+  },
+  "United Koreans in Japan": {
+   "results": "DLWDDDWDLD",
+   "gf": 19,
+   "ga": 8,
+   "lastDate": "2018-06-09"
+  },
+  "Kárpátalja": {
+   "results": "DWWWWDDWDL",
+   "gf": 24,
+   "ga": 12,
+   "lastDate": "2018-06-09"
+  },
+  "Délvidék": {
+   "results": "LW",
+   "gf": 4,
+   "ga": 3,
+   "lastDate": "2016-08-03"
+  },
+  "Barawa": {
+   "results": "LLLLWLWLLW",
+   "gf": 14,
+   "ga": 38,
+   "lastDate": "2019-05-25"
+  },
+  "Ryūkyū": {
+   "results": "L",
+   "gf": 0,
+   "ga": 9,
+   "lastDate": "2016-11-26"
+  },
+  "Yorkshire": {
+   "results": "WWWLWWD",
+   "gf": 27,
+   "ga": 11,
+   "lastDate": "2019-06-01"
+  },
+  "Surrey": {
+   "results": "W",
+   "gf": 3,
+   "ga": 1,
+   "lastDate": "2018-05-06"
+  },
+  "Cascadia": {
+   "results": "WDWLWWL",
+   "gf": 23,
+   "ga": 14,
+   "lastDate": "2019-05-25"
+  },
+  "Matabeleland": {
+   "results": "LWDWDWLL",
+   "gf": 7,
+   "ga": 14,
+   "lastDate": "2022-05-25"
+  },
+  "Kabylia": {
+   "results": "LWDLDL",
+   "gf": 8,
+   "ga": 15,
+   "lastDate": "2018-06-09"
+  },
+  "Parishes of Jersey": {
+   "results": "WLW",
+   "gf": 11,
+   "ga": 4,
+   "lastDate": "2019-06-02"
+  },
+  "Chameria": {
+   "results": "WLDDWWL",
+   "gf": 14,
+   "ga": 8,
+   "lastDate": "2023-07-01"
+  },
+  "Saint Helena": {
+   "results": "LLLLLLLL",
+   "gf": 6,
+   "ga": 41,
+   "lastDate": "2023-07-13"
+  },
+  "West Papua": {
+   "results": "DL",
+   "gf": 3,
+   "ga": 9,
+   "lastDate": "2022-11-13"
+  },
+  "East Turkestan": {
+   "results": "LWLLW",
+   "gf": 15,
+   "ga": 16,
+   "lastDate": "2025-07-04"
+  },
+  "Elba Island": {
+   "results": "WW",
+   "gf": 9,
+   "ga": 2,
+   "lastDate": "2022-07-16"
+  },
+  "Yoruba Nation": {
+   "results": "LD",
+   "gf": 1,
+   "ga": 2,
+   "lastDate": "2022-05-23"
+  },
+  "Biafra": {
+   "results": "WWL",
+   "gf": 2,
+   "ga": 1,
+   "lastDate": "2022-05-25"
+  },
+  "Mapuche": {
+   "results": "WL",
+   "gf": 3,
+   "ga": 2,
+   "lastDate": "2022-06-18"
+  },
+  "Maule Sur": {
+   "results": "WW",
+   "gf": 2,
+   "ga": 0,
+   "lastDate": "2022-06-19"
+  },
+  "Aymara": {
+   "results": "LL",
+   "gf": 1,
+   "ga": 4,
+   "lastDate": "2022-06-19"
+  },
+  "Ticino": {
+   "results": "LL",
+   "gf": 2,
+   "ga": 13,
+   "lastDate": "2023-08-06"
+  },
+  "Hmong": {
+   "results": "LWL",
+   "gf": 6,
+   "ga": 10,
+   "lastDate": "2023-08-08"
+  },
+  "Marshall Islands": {
+   "results": "LL",
+   "gf": 2,
+   "ga": 7,
+   "lastDate": "2025-08-16"
+  }
+ }
+}
