@@ -1,17 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { NumberTicker } from "./number-ticker";
 import type { Club } from "@/lib/data";
-
-function contrastInk(hex: string): string {
-  if (!hex.startsWith("#")) return "var(--canvas)";
-  const c = hex.replace("#", "");
-  const r = parseInt(c.slice(0, 2), 16);
-  const g = parseInt(c.slice(2, 4), 16);
-  const b = parseInt(c.slice(4, 6), 16);
-  const l = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
-  return l > 0.55 ? "#0a1d3a" : "#f5f5f0";
-}
 
 export function ProbabilityBar({
   probabilities,
@@ -28,36 +19,38 @@ export function ProbabilityBar({
   away: Club;
 }) {
   const segments = [
-    { key: "home", pct: probabilities.home, color: home.primary, label: home.short },
-    { key: "draw", pct: probabilities.draw, color: "#d4af37", label: "DRAW" },
-    { key: "away", pct: probabilities.away, color: away.primary, label: away.short },
+    { key: "home", pct: probabilities.home, fill: "var(--up)", label: home.short },
+    { key: "draw", pct: probabilities.draw, fill: "var(--neutral-fill)", label: "Draw" },
+    { key: "away", pct: probabilities.away, fill: "var(--down)", label: away.short },
   ];
   return (
     <div>
-      {probabilities.confidence && (
-        <div className="mb-3 inline-block rounded-full border border-[var(--hairline)] px-2 py-0.5 font-mono text-[10px] uppercase tracking-[0.18em] text-[var(--ink-muted)]">
-          {probabilities.confidence}
-        </div>
-      )}
-      <div className="flex h-12 w-full overflow-hidden rounded-md border border-[var(--hairline)]">
+      <div className="grid grid-cols-3 gap-4">
+        {segments.map((s) => (
+          <div key={s.key} className="flex flex-col gap-1">
+            <span className="text-label">{s.label}</span>
+            <NumberTicker
+              value={s.pct}
+              suffix="%"
+              className="text-[28px] font-bold tracking-[-0.02em]"
+            />
+          </div>
+        ))}
+      </div>
+      <div className="mt-4 flex h-2 w-full gap-px overflow-hidden rounded-full">
         {segments.map((s) => (
           <motion.div
             key={s.key}
             initial={{ width: 0 }}
             animate={{ width: `${s.pct}%` }}
-            transition={{ duration: 0.7, ease: "easeOut" }}
-            className="flex items-center justify-center font-mono text-xs font-semibold"
-            style={{ background: s.color, color: contrastInk(s.color) }}
-          >
-            {s.pct}%
-          </motion.div>
+            transition={{ type: "spring", stiffness: 80, damping: 24 }}
+            style={{ background: s.fill }}
+          />
         ))}
       </div>
-      <div className="mt-2 flex justify-between font-mono text-[10px] uppercase tracking-[0.18em] text-[var(--ink-muted)]">
-        {segments.map((s) => (
-          <span key={s.key}>{s.label}</span>
-        ))}
-      </div>
+      {probabilities.confidence && (
+        <p className="text-caption mt-3">{probabilities.confidence}</p>
+      )}
     </div>
   );
 }
