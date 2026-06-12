@@ -8,7 +8,12 @@
     "start": "next start",
     "lint": "eslint",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "pipeline:fetch": "tsx scripts/fetch-kalshi.mts",
+    "pipeline:facts": "tsx scripts/build-facts.mts",
+    "pipeline:run": "tsx scripts/run-briefing.mts",
+    "pipeline:calibrate": "tsx scripts/calibrate.mts",
+    "eval:judge": "tsx scripts/llm-judge.mts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.98.0",
@@ -37,6 +42,7 @@
     "eslint-config-next": "16.2.6",
     "jsdom": "^29.1.1",
     "tailwindcss": "^4",
+    "tsx": "^4.22.4",
     "typescript": "^5",
     "vitest": "^4.1.7"
   }
