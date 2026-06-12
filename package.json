@@ -19,7 +19,8 @@
     "pipeline:run": "tsx scripts/run-briefing.mts",
     "pipeline:lock": "tsx scripts/lock-predictions.mts",
     "pipeline:settle": "tsx scripts/settle-predictions.mts",
-    "pipeline:calibrate": "tsx scripts/calibrate.mts"
+    "pipeline:calibrate": "tsx scripts/calibrate.mts",
+    "pipeline:resolutions": "tsx scripts/fetch-resolutions.mts"
   },
   "dependencies": {
     "@base-ui/react": "^1.5.0",

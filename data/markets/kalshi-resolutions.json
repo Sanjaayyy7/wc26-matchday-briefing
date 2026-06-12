@@ -1,0 +1,22 @@
+{
+  "mexico-vs-south-africa": {
+    "ticker": "KXWCGAME-26JUN11MEXRSA",
+    "resolved": {
+      "home": 1,
+      "draw": 0,
+      "away": 0
+    },
+    "settledTime": "2026-06-11T21:08:07.583473Z",
+    "_source": "derived"
+  },
+  "south-korea-vs-czech-republic": {
+    "ticker": "KXWCGAME-26JUN11KORCZE",
+    "resolved": {
+      "home": 1,
+      "draw": 0,
+      "away": 0
+    },
+    "settledTime": "2026-06-12T04:01:28.521157Z",
+    "_source": "derived"
+  }
+}
