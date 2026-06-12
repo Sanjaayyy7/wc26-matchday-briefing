@@ -8,6 +8,7 @@ export function ProbabilityBar({
   probabilities,
   home,
   away,
+  hero = false,
 }: {
   probabilities: {
     home: number;
@@ -17,6 +18,8 @@ export function ProbabilityBar({
   };
   home: Club;
   away: Club;
+  /** Page-hero sizing: the three percentages become the dominant element. */
+  hero?: boolean;
 }) {
   const segments = [
     { key: "home", pct: probabilities.home, fill: "var(--up)", label: home.short },
@@ -32,7 +35,11 @@ export function ProbabilityBar({
             <NumberTicker
               value={s.pct}
               suffix="%"
-              className="text-[28px] font-bold tracking-[-0.02em]"
+              className={
+                hero
+                  ? "text-[clamp(36px,6vw,56px)] font-bold leading-none tracking-[-0.022em]"
+                  : "text-[28px] font-bold tracking-[-0.02em]"
+              }
             />
           </div>
         ))}

@@ -8,7 +8,7 @@ import { ProbabilityBar } from "./probability-bar";
 import { ScorelineHeatmap } from "./scoreline-heatmap";
 import type { Club } from "@/lib/data";
 
-type Status = "idle" | "loading" | "streaming" | "done" | "error";
+type Status = "loading" | "streaming" | "done" | "error";
 
 export function PreviewPane({
   slug,
@@ -22,22 +22,19 @@ export function PreviewPane({
   onComplete: (text: string) => void;
 }) {
   const [text, setText] = useState("");
-  const [status, setStatus] = useState<Status>("idle");
+  const [status, setStatus] = useState<Status>("loading");
   const [slowFirstByte, setSlowFirstByte] = useState(false);
-  const abortRef = useRef<AbortController | null>(null);
   const onCompleteRef = useRef(onComplete);
-  onCompleteRef.current = onComplete;
+  useEffect(() => {
+    onCompleteRef.current = onComplete;
+  }, [onComplete]);
 
   useEffect(() => {
     let cancelled = false;
-    setText("");
-    setStatus("loading");
-    setSlowFirstByte(false);
     const slowTimer = setTimeout(() => {
       if (!cancelled) setSlowFirstByte(true);
     }, 4000);
     const ctl = new AbortController();
-    abortRef.current = ctl;
 
     (async () => {
       try {
@@ -109,9 +106,9 @@ export function PreviewPane({
 
   if (!parsed.ok) {
     return (
-      <article className="prose prose-invert mt-8 max-w-none rounded-2xl border border-[var(--hairline)] bg-[var(--surface)] p-6">
-        <div className="mb-3 inline-block rounded-full border border-[var(--hairline)] px-2 py-0.5 font-mono text-[10px] uppercase tracking-[0.18em] text-[var(--ink-muted)]">
-          {status === "streaming" ? "streaming…" : "raw view (structure not detected)"}
+      <article className="prose prose-invert mt-12 max-w-none rounded-2xl bg-[var(--surface)] p-6 dark:border dark:border-[var(--hairline)]">
+        <div className="text-caption mb-3">
+          {status === "streaming" ? "Streaming…" : "Raw view — structure not detected"}
         </div>
         <ReactMarkdown>{text}</ReactMarkdown>
       </article>
@@ -119,93 +116,97 @@ export function PreviewPane({
   }
 
   return (
-    <div className="mt-8 grid gap-6">
-      {parsed.quickTake && (
-        <Section label="Quick take">
-          <p className="font-display text-2xl leading-snug md:text-3xl">
-            {parsed.quickTake}
-          </p>
-        </Section>
-      )}
-      <div className="grid gap-6 md:grid-cols-2">
-        <Section label="Most likely scoreline">
-          <div
-            className="font-display leading-none"
-            style={{
-              fontSize: "clamp(48px, 8vw, 112px)",
-              fontFeatureSettings: "'tnum'",
-            }}
+    <div className="mt-12 space-y-12">
+      {/* Numbers first: the probability split is the page's hero. */}
+      <Reveal>
+        <h2 className="text-label mb-5">Win probability</h2>
+        <ProbabilityBar
+          probabilities={parsed.probabilities!}
+          home={home}
+          away={away}
+          hero
+        />
+      </Reveal>
+
+      <Reveal>
+        <h2 className="text-label mb-3">Most likely scoreline</h2>
+        <div className="flex items-baseline gap-5">
+          <span
+            className="text-display tabular"
+            style={{ fontSize: "clamp(56px, 9vw, 96px)" }}
           >
             {parsed.scoreline!.home}
-            <span className="text-[var(--ink-muted)]">–</span>
+            <span className="text-[var(--ink-faint)]">–</span>
             {parsed.scoreline!.away}
-          </div>
-          <div className="mt-2 text-sm text-[var(--ink-muted)]">
+          </span>
+          <span className="text-[15px] text-[var(--ink-muted)]">
             {parsed.scoreline!.favored === "home"
               ? `${home.name} edge`
               : parsed.scoreline!.favored === "away"
               ? `${away.name} edge`
               : "Draw"}
-          </div>
-        </Section>
-        <Section label="Win probability">
-          <ProbabilityBar
-            probabilities={parsed.probabilities!}
-            home={home}
-            away={away}
-          />
-        </Section>
-      </div>
-      <Section label="Why">
-        <ul className="grid gap-3">
+          </span>
+        </div>
+      </Reveal>
+
+      {parsed.quickTake && (
+        <Reveal>
+          <h2 className="text-label mb-3">Quick take</h2>
+          <p className="text-title text-2xl leading-snug md:text-[28px]">
+            {parsed.quickTake}
+          </p>
+        </Reveal>
+      )}
+
+      <Reveal>
+        <h2 className="text-label mb-5">Why</h2>
+        <ul className="space-y-5">
           <Bullet tag="Tactical">{parsed.why!.tactical}</Bullet>
           <Bullet tag="Personnel">{parsed.why!.personnel}</Bullet>
-          <Bullet tag="Form / context">{parsed.why!.formContext}</Bullet>
+          <Bullet tag="Form & context">{parsed.why!.formContext}</Bullet>
         </ul>
-      </Section>
+      </Reveal>
+
       {parsed.flipFactor && (
-        <Section label="What would flip it">
-          <p className="leading-relaxed">{parsed.flipFactor}</p>
-        </Section>
+        <Reveal>
+          <div className="rounded-2xl border-l-[3px] border-[var(--accent)] bg-[var(--surface)] p-6 dark:border dark:border-l-[3px] dark:border-[var(--hairline)] dark:border-l-[var(--accent)]">
+            <h2 className="text-label mb-2">What would flip it</h2>
+            <p className="leading-relaxed">{parsed.flipFactor}</p>
+          </div>
+        </Reveal>
       )}
-      <Section label="Scoreline distribution">
+
+      <Reveal>
+        <h2 className="text-label mb-5">Scoreline distribution</h2>
         <ScorelineHeatmap
           probabilities={parsed.probabilities!}
           scoreline={parsed.scoreline!}
           home={home}
           away={away}
         />
-      </Section>
+      </Reveal>
+
       {parsed.uncertainties && parsed.uncertainties.length > 0 && (
-        <Section label="Things I'm not sure about">
-          <ul className="grid gap-2 text-sm text-[var(--ink-muted)]">
+        <Reveal>
+          <h2 className="text-label mb-3">Things I&rsquo;m not sure about</h2>
+          <ul className="space-y-2 text-[15px] text-[var(--ink-muted)]">
             {parsed.uncertainties.map((u, i) => (
-              <li key={i}>· {u}</li>
+              <li key={i}>{u}</li>
             ))}
           </ul>
-        </Section>
+        </Reveal>
       )}
     </div>
   );
 }
 
-function Section({
-  label,
-  children,
-}: {
-  label: string;
-  children: React.ReactNode;
-}) {
+function Reveal({ children }: { children: React.ReactNode }) {
   return (
     <motion.section
       initial={{ opacity: 0, y: 8 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.3 }}
-      className="rounded-2xl border border-[var(--hairline)] bg-[var(--surface)] p-6"
+      transition={{ type: "spring", stiffness: 300, damping: 30 }}
     >
-      <div className="mb-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-[var(--ink-muted)]">
-        {label}
-      </div>
       {children}
     </motion.section>
   );
@@ -219,41 +220,39 @@ function Bullet({
   children: React.ReactNode;
 }) {
   return (
-    <li className="flex flex-col gap-2 sm:flex-row sm:gap-4">
-      <span className="w-32 shrink-0 font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-[var(--gold)]">
-        {tag}
-      </span>
+    <li className="flex flex-col gap-1.5 sm:flex-row sm:gap-6">
+      <span className="text-label w-32 shrink-0 pt-0.5">{tag}</span>
       <span className="leading-relaxed">{children}</span>
     </li>
   );
 }
 
 function Skeleton({ slow }: { slow: boolean }) {
-  const labels = [
-    "Quick take",
-    "Most likely scoreline",
-    "Win probability",
-    "Why",
-    "What would flip it",
-    "Things I'm not sure about",
-  ];
   return (
-    <div className="mt-8 grid gap-4">
-      {labels.map((l) => (
-        <div
-          key={l}
-          className="rounded-2xl border border-[var(--hairline)] bg-[var(--surface)] p-6"
-        >
-          <div className="mb-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-[var(--ink-muted)]">
-            {l}
-          </div>
-          <div className="font-mono text-sm text-[var(--ink-muted)] animate-pulse">
-            ... ... ...
-          </div>
+    <div className="mt-12 space-y-12" aria-busy>
+      <div>
+        <div className="mb-5 h-3 w-28 animate-pulse rounded-full bg-[var(--neutral-fill)]" />
+        <div className="grid grid-cols-3 gap-4">
+          {[0, 1, 2].map((i) => (
+            <div key={i} className="space-y-2">
+              <div className="h-3 w-12 animate-pulse rounded-full bg-[var(--neutral-fill)]" />
+              <div className="h-8 w-20 animate-pulse rounded-lg bg-[var(--neutral-fill)]" />
+            </div>
+          ))}
         </div>
-      ))}
+        <div className="mt-4 h-2 w-full animate-pulse rounded-full bg-[var(--neutral-fill)]" />
+      </div>
+      <div>
+        <div className="mb-3 h-3 w-36 animate-pulse rounded-full bg-[var(--neutral-fill)]" />
+        <div className="h-20 w-44 animate-pulse rounded-2xl bg-[var(--neutral-fill)]" />
+      </div>
+      <div className="space-y-3">
+        <div className="h-3 w-24 animate-pulse rounded-full bg-[var(--neutral-fill)]" />
+        <div className="h-4 w-full animate-pulse rounded-full bg-[var(--neutral-fill)]" />
+        <div className="h-4 w-4/5 animate-pulse rounded-full bg-[var(--neutral-fill)]" />
+      </div>
       {slow && (
-        <p className="text-center text-sm text-[var(--ink-muted)]">
+        <p className="text-caption text-center">
           Claude is thinking — usually 2–3 seconds, occasionally longer.
         </p>
       )}
@@ -264,6 +263,7 @@ function Skeleton({ slow }: { slow: boolean }) {
 function errMessage(status: string): string {
   if (status === "401") return "API key rejected. Check app/.env.local and restart.";
   if (status === "429") return "Rate-limited by Anthropic. Try again shortly.";
+  if (status === "400") return "The API refused the request — check your key's credit balance.";
   return "The stream failed mid-way.";
 }
 
@@ -275,11 +275,14 @@ function ErrorBlock({
   onRetry: () => void;
 }) {
   return (
-    <div className="mt-8 rounded-2xl border border-[var(--crimson)] bg-[var(--surface)] p-6">
-      <p>{message}</p>
+    <div className="mt-12 rounded-2xl bg-[var(--surface)] p-6 dark:border dark:border-[var(--hairline)]">
+      <p className="text-[15px]">
+        <span className="mr-2 inline-block h-2 w-2 rounded-full bg-[var(--down)]" aria-hidden />
+        {message}
+      </p>
       <button
         onClick={onRetry}
-        className="mt-4 rounded-full border border-[var(--gold)] px-4 py-2 text-sm text-[var(--gold)] transition hover:bg-[var(--gold)] hover:text-[var(--canvas)]"
+        className="mt-4 inline-flex h-10 items-center rounded-full bg-[var(--accent)] px-5 text-sm font-medium text-[var(--accent-foreground)] transition-transform duration-300 hover:scale-[1.03]"
       >
         Retry
       </button>

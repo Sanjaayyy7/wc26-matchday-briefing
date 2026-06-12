@@ -3,6 +3,7 @@ import Link from "next/link";
 import { SiteHeader } from "@/components/site-header";
 import { Crest } from "@/components/crest";
 import { FixturePane } from "@/components/fixture-pane";
+import { formatKickoff } from "@/lib/format-kickoff";
 import { clubById, fixtureBySlug, allFixtures } from "@/lib/data";
 
 export function generateStaticParams() {
@@ -24,62 +25,48 @@ export default async function FixturePage({
   return (
     <>
       <SiteHeader />
-      <main className="mx-auto w-full max-w-5xl flex-1 px-6 py-8">
+      <main className="mx-auto w-full max-w-4xl flex-1 px-6 py-10">
         <Link
           href="/"
-          className="font-mono text-[11px] uppercase tracking-[0.18em] text-[var(--ink-muted)] transition hover:text-[var(--gold)]"
+          className="text-label inline-flex h-9 items-center rounded-full px-4 transition-colors duration-300 hover:bg-[var(--neutral-fill)] hover:text-[var(--ink)]"
         >
-          ← Matchday
+          ← All fixtures
         </Link>
 
-        <section className="mt-6 grid items-center gap-6 rounded-3xl border border-[var(--hairline)] bg-[var(--surface)] p-8 md:grid-cols-[1fr_auto_1fr]">
-          <div className="flex items-center justify-center gap-4 md:justify-end">
-            <div className="text-right">
-              <div className="font-display text-2xl">{home.name}</div>
-              <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-[var(--ink-muted)]">
-                {home.lastFiveResults} · {home.goalsForLast5}–
-                {home.goalsAgainstLast5}
-              </div>
+        <section className="mt-10 flex flex-col items-center gap-6 text-center">
+          <span className="text-label">
+            {fixture.group ? `Group ${fixture.group} · ` : ""}
+            {formatKickoff(fixture)} · {fixture.venue}
+          </span>
+          <div className="flex items-center justify-center gap-6 md:gap-10">
+            <div className="flex items-center gap-4">
+              <Crest
+                short={home.short}
+                primary={home.primary}
+                secondary={home.secondary}
+                name={home.name}
+                size={56}
+              />
+              <span className="text-title text-2xl md:text-3xl">{home.name}</span>
             </div>
-            <Crest
-              short={home.short}
-              primary={home.primary}
-              secondary={home.secondary}
-              name={home.name}
-              size={76}
-            />
-          </div>
-          <div
-            className="text-center font-display text-3xl text-[var(--ink-muted)]"
-            aria-hidden
-          >
-            vs
-          </div>
-          <div className="flex items-center justify-center gap-4 md:justify-start">
-            <Crest
-              short={away.short}
-              primary={away.primary}
-              secondary={away.secondary}
-              name={away.name}
-              size={76}
-            />
-            <div>
-              <div className="font-display text-2xl">{away.name}</div>
-              <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-[var(--ink-muted)]">
-                {away.lastFiveResults} · {away.goalsForLast5}–
-                {away.goalsAgainstLast5}
-              </div>
+            <span className="text-lg font-light text-[var(--ink-faint)]" aria-hidden>
+              vs
+            </span>
+            <div className="flex items-center gap-4">
+              <span className="text-title text-2xl md:text-3xl">{away.name}</span>
+              <Crest
+                short={away.short}
+                primary={away.primary}
+                secondary={away.secondary}
+                name={away.name}
+                size={56}
+              />
             </div>
           </div>
+          <p className="max-w-xl text-[15px] text-[var(--ink-muted)]">
+            {fixture.stakes}
+          </p>
         </section>
-
-        <div className="mt-3 flex flex-wrap items-center justify-between gap-2 text-sm text-[var(--ink-muted)]">
-          <span>{fixture.venue}</span>
-          <span className="font-mono">Sun 24 May · 16:00 BST</span>
-        </div>
-        <p className="mt-2 font-display text-lg leading-snug">
-          {fixture.stakes}
-        </p>
 
         <FixturePane slug={fixture.slug} home={home} away={away} />
       </main>
