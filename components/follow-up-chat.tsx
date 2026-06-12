@@ -1,9 +1,26 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
+import { ArrowUp } from "lucide-react";
 
 type Msg = { role: "user" | "assistant"; content: string };
 const storageKey = (slug: string) => `pl-followup:${slug}`;
+
+function loadOrSeed(slug: string, previewText: string): Msg[] {
+  try {
+    const cached = localStorage.getItem(storageKey(slug));
+    if (cached) return JSON.parse(cached);
+  } catch {
+    // localStorage unavailable — seed in memory
+  }
+  const initial: Msg[] = [{ role: "assistant", content: previewText }];
+  try {
+    localStorage.setItem(storageKey(slug), JSON.stringify(initial));
+  } catch {
+    // ignore
+  }
+  return initial;
+}
 
 export function FollowUpChat({
   slug,
@@ -12,31 +29,13 @@ export function FollowUpChat({
   slug: string;
   previewText: string;
 }) {
-  const [history, setHistory] = useState<Msg[]>([]);
+  // Client-only component (mounted after streaming completes), so the lazy
+  // initializer can touch localStorage safely — no seeding effect needed.
+  const [history, setHistory] = useState<Msg[]>(() =>
+    loadOrSeed(slug, previewText),
+  );
   const [question, setQuestion] = useState("");
   const [streaming, setStreaming] = useState(false);
-  const seeded = useRef(false);
-
-  useEffect(() => {
-    if (seeded.current) return;
-    seeded.current = true;
-    try {
-      const cached = localStorage.getItem(storageKey(slug));
-      if (cached) {
-        setHistory(JSON.parse(cached));
-        return;
-      }
-    } catch {
-      // ignore — fall through to seeding
-    }
-    const initial: Msg[] = [{ role: "assistant", content: previewText }];
-    setHistory(initial);
-    try {
-      localStorage.setItem(storageKey(slug), JSON.stringify(initial));
-    } catch {
-      // localStorage unavailable — keep state in memory only
-    }
-  }, [slug, previewText]);
 
   async function ask(e: React.FormEvent) {
     e.preventDefault();
@@ -106,54 +105,51 @@ export function FollowUpChat({
   const visible = history.slice(1);
 
   return (
-    <section className="mt-10">
-      <div className="mb-3 flex items-center justify-between">
-        <h3 className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[var(--ink-muted)]">
-          Follow-ups
-        </h3>
+    <section className="mt-12">
+      <div className="mb-5 flex items-center justify-between">
+        <h2 className="text-label">Follow-ups</h2>
         {visible.length > 0 && (
           <button
             onClick={clearThread}
-            className="font-mono text-[10px] uppercase tracking-[0.18em] text-[var(--ink-muted)] transition hover:text-[var(--crimson)]"
+            className="text-caption transition-colors duration-300 hover:text-[var(--down)]"
           >
-            clear thread
+            Clear thread
           </button>
         )}
       </div>
-      <div className="grid gap-3">
-        {visible.map((m, i) => (
-          <div
-            key={i}
-            className={`rounded-2xl border border-[var(--hairline)] bg-[var(--surface)] p-4 ${
-              m.role === "user"
-                ? "border-l-2 border-l-[var(--cyan)]"
-                : "border-l-2 border-l-[var(--gold)]"
-            }`}
-          >
-            <div className="mb-2 font-mono text-[10px] uppercase tracking-[0.18em] text-[var(--ink-muted)]">
-              {m.role === "user" ? "Son" : "Dad's read"}
+      <div className="space-y-3">
+        {visible.map((m, i) =>
+          m.role === "user" ? (
+            <div key={i} className="flex justify-end">
+              <p className="max-w-[80%] rounded-2xl rounded-br-md bg-[var(--accent)] px-4 py-2.5 text-[15px] leading-relaxed text-[var(--accent-foreground)]">
+                {m.content}
+              </p>
             </div>
-            <p className="whitespace-pre-wrap text-sm leading-relaxed">
-              {m.content || (streaming && i === visible.length - 1 ? "…" : "")}
-            </p>
-          </div>
-        ))}
+          ) : (
+            <div key={i} className="flex">
+              <p className="max-w-[85%] whitespace-pre-wrap rounded-2xl rounded-bl-md bg-[var(--surface)] px-4 py-2.5 text-[15px] leading-relaxed dark:border dark:border-[var(--hairline)]">
+                {m.content || (streaming && i === visible.length - 1 ? "…" : "")}
+              </p>
+            </div>
+          ),
+        )}
       </div>
-      <form onSubmit={ask} className="mt-4 flex gap-2">
+      <form onSubmit={ask} className="mt-5 flex items-center gap-2 rounded-full bg-[var(--surface)] py-1.5 pl-5 pr-1.5 dark:border dark:border-[var(--hairline)]">
         <input
           value={question}
           onChange={(e) => setQuestion(e.target.value)}
           aria-label="Ask a follow-up question"
           placeholder="What about BTTS? Who scores first?"
           disabled={streaming}
-          className="flex-1 rounded-md border border-[var(--hairline)] bg-[var(--surface)] px-4 py-3 text-sm focus:border-[var(--gold)] focus:outline-none"
+          className="h-9 flex-1 bg-transparent text-[15px] outline-none placeholder:text-[var(--ink-faint)]"
         />
         <button
           type="submit"
+          aria-label="Send question"
           disabled={streaming || !question.trim()}
-          className="rounded-md border border-[var(--gold)] px-5 py-3 text-sm text-[var(--gold)] transition hover:bg-[var(--gold)] hover:text-[var(--canvas)] disabled:opacity-50"
+          className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-[var(--accent)] text-[var(--accent-foreground)] transition-transform duration-300 hover:scale-105 disabled:opacity-40"
         >
-          Ask
+          <ArrowUp className="h-4 w-4" />
         </button>
       </form>
     </section>

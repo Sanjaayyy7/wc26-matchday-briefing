@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import ReactMarkdown from "react-markdown";
 import { parseFollowUp, type ParsedFollowUp } from "@/lib/followup-parser";
+import { NumberTicker } from "./number-ticker";
 
 const BTTS_QUESTION =
   "Both teams to score — what's the chance for this fixture? Give me your read.";
@@ -68,7 +69,7 @@ export function BttsCard({
     return (
       <Shell>
         <p className="text-sm text-[var(--ink-muted)]">
-          Couldn't fetch the BTTS read. Refresh to retry.
+          Could not fetch the BTTS read. Refresh to retry.
         </p>
       </Shell>
     );
@@ -97,17 +98,25 @@ export function BttsCard({
     );
   }
 
+  const pctMatch = parsed.number?.match(/(\d+)\s*%/);
+
   return (
     <Shell>
-      <div className="grid gap-4">
-        {parsed.shortAnswer && (
-          <Row tag="Short answer">{parsed.shortAnswer}</Row>
+      <div className="space-y-4">
+        {pctMatch && (
+          <div className="flex items-baseline gap-3">
+            <NumberTicker
+              value={Number(pctMatch[1])}
+              suffix="%"
+              className="text-[34px] font-bold leading-none tracking-[-0.02em]"
+            />
+            <span className="text-caption">{parsed.number}</span>
+          </div>
         )}
+        {parsed.shortAnswer && <Row tag="Short answer">{parsed.shortAnswer}</Row>}
         {parsed.mechanism && <Row tag="Mechanism">{parsed.mechanism}</Row>}
-        {parsed.number && (
-          <Row tag="The number">
-            <span className="font-mono">{parsed.number}</span>
-          </Row>
+        {!pctMatch && parsed.number && (
+          <Row tag="The number">{parsed.number}</Row>
         )}
         {parsed.caveat && <Row tag="Caveat">{parsed.caveat}</Row>}
       </div>
@@ -120,15 +129,13 @@ function Shell({ children }: { children: React.ReactNode }) {
     <motion.section
       initial={{ opacity: 0, y: 8 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.3 }}
-      className="mt-6 rounded-2xl border border-[var(--hairline)] bg-[var(--surface)] p-6"
+      transition={{ type: "spring", stiffness: 300, damping: 30 }}
+      className="mt-12 rounded-2xl bg-[var(--surface)] p-6 dark:border dark:border-[var(--hairline)]"
     >
       <div className="mb-4 flex items-center justify-between">
-        <div className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[var(--ink-muted)]">
-          Both teams to score
-        </div>
-        <span className="rounded-full border border-[var(--hairline)] px-2 py-0.5 font-mono text-[10px] uppercase tracking-[0.18em] text-[var(--gold)]">
-          auto
+        <h2 className="text-label">Both teams to score?</h2>
+        <span className="text-caption rounded-full bg-[var(--neutral-fill)] px-2.5 py-0.5">
+          Auto
         </span>
       </div>
       {children}
@@ -138,11 +145,9 @@ function Shell({ children }: { children: React.ReactNode }) {
 
 function Row({ tag, children }: { tag: string; children: React.ReactNode }) {
   return (
-    <div className="flex flex-col gap-2 sm:flex-row sm:gap-4">
-      <span className="w-32 shrink-0 font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-[var(--gold)]">
-        {tag}
-      </span>
-      <span className="leading-relaxed">{children}</span>
+    <div className="flex flex-col gap-1.5 sm:flex-row sm:gap-6">
+      <span className="text-label w-32 shrink-0 pt-0.5">{tag}</span>
+      <span className="text-[15px] leading-relaxed">{children}</span>
     </div>
   );
 }
@@ -150,8 +155,10 @@ function Row({ tag, children }: { tag: string; children: React.ReactNode }) {
 function Skeleton() {
   return (
     <Shell>
-      <div className="font-mono text-sm text-[var(--ink-muted)] animate-pulse">
-        ... ... ...
+      <div className="space-y-3" aria-busy>
+        <div className="h-8 w-24 animate-pulse rounded-lg bg-[var(--neutral-fill)]" />
+        <div className="h-4 w-full animate-pulse rounded-full bg-[var(--neutral-fill)]" />
+        <div className="h-4 w-3/4 animate-pulse rounded-full bg-[var(--neutral-fill)]" />
       </div>
     </Shell>
   );
