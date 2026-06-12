@@ -1,0 +1,907 @@
+{
+ "entries": [
+  {
+   "slug": "united-states-vs-paraguay",
+   "lockedAt": "2026-06-12T22:50:20.813Z",
+   "split": {
+    "home": 36,
+    "draw": 30,
+    "away": 34
+   },
+   "mostLikely": {
+    "home": 1,
+    "away": 1
+   },
+   "market": {
+    "home": 0.472636815920398,
+    "draw": 0.2935323383084577,
+    "away": 0.2338308457711443
+   },
+   "marketTicker": "KXWCGAME-26JUN12USAPAR"
+  },
+  {
+   "slug": "qatar-vs-switzerland",
+   "lockedAt": "2026-06-12T22:50:20.813Z",
+   "split": {
+    "home": 5,
+    "draw": 13,
+    "away": 82
+   },
+   "mostLikely": {
+    "home": 0,
+    "away": 2
+   }
+  },
+  {
+   "slug": "brazil-vs-morocco",
+   "lockedAt": "2026-06-12T22:50:20.813Z",
+   "split": {
+    "home": 46,
+    "draw": 28,
+    "away": 26
+   },
+   "mostLikely": {
+    "home": 1,
+    "away": 1
+   }
+  },
+  {
+   "slug": "germany-vs-cura-ao",
+   "lockedAt": "2026-06-12T22:50:20.813Z",
+   "split": {
+    "home": 83,
+    "draw": 12,
+    "away": 5
+   },
+   "mostLikely": {
+    "home": 2,
+    "away": 0
+   }
+  },
+  {
+   "slug": "ivory-coast-vs-ecuador",
+   "lockedAt": "2026-06-12T22:50:20.813Z",
+   "split": {
+    "home": 14,
+    "draw": 23,
+    "away": 63
+   },
+   "mostLikely": {
+    "home": 0,
+    "away": 1
+   }
+  },
+  {
+   "slug": "sweden-vs-tunisia",
+   "lockedAt": "2026-06-12T22:50:20.813Z",
+   "split": {
+    "home": 38,
+    "draw": 29,
+    "away": 33
+   },
+   "mostLikely": {
+    "home": 1,
+    "away": 1
+   }
+  },
+  {
+   "slug": "haiti-vs-scotland",
+   "lockedAt": "2026-06-12T22:50:20.813Z",
+   "split": {
+    "home": 21,
+    "draw": 27,
+    "away": 52
+   },
+   "mostLikely": {
+    "home": 0,
+    "away": 1
+   }
+  },
+  {
+   "slug": "australia-vs-turkiye",
+   "lockedAt": "2026-06-12T22:50:20.813Z",
+   "split": {
+    "home": 28,
+    "draw": 29,
+    "away": 43
+   },
+   "mostLikely": {
+    "home": 1,
+    "away": 1
+   }
+  },
+  {
+   "slug": "netherlands-vs-japan",
+   "lockedAt": "2026-06-12T22:50:20.813Z",
+   "split": {
+    "home": 37,
+    "draw": 29,
+    "away": 34
+   },
+   "mostLikely": {
+    "home": 1,
+    "away": 1
+   }
+  },
+  {
+   "slug": "belgium-vs-egypt",
+   "lockedAt": "2026-06-12T22:50:20.813Z",
+   "split": {
+    "home": 56,
+    "draw": 26,
+    "away": 18
+   },
+   "mostLikely": {
+    "home": 1,
+    "away": 0
+   }
+  },
+  {
+   "slug": "iran-vs-new-zealand",
+   "lockedAt": "2026-06-12T22:50:20.813Z",
+   "split": {
+    "home": 58,
+    "draw": 25,
+    "away": 17
+   },
+   "mostLikely": {
+    "home": 1,
+    "away": 0
+   }
+  },
+  {
+   "slug": "spain-vs-cape-verde",
+   "lockedAt": "2026-06-12T22:50:20.813Z",
+   "split": {
+    "home": 94,
+    "draw": 5,
+    "away": 1
+   },
+   "mostLikely": {
+    "home": 3,
+    "away": 0
+   }
+  },
+  {
+   "slug": "saudi-arabia-vs-uruguay",
+   "lockedAt": "2026-06-12T22:50:20.813Z",
+   "split": {
+    "home": 10,
+    "draw": 19,
+    "away": 71
+   },
+   "mostLikely": {
+    "home": 0,
+    "away": 2
+   }
+  },
+  {
+   "slug": "france-vs-senegal",
+   "lockedAt": "2026-06-12T22:50:20.813Z",
+   "split": {
+    "home": 63,
+    "draw": 23,
+    "away": 14
+   },
+   "mostLikely": {
+    "home": 1,
+    "away": 0
+   }
+  },
+  {
+   "slug": "iraq-vs-norway",
+   "lockedAt": "2026-06-12T22:50:20.813Z",
+   "split": {
+    "home": 13,
+    "draw": 22,
+    "away": 65
+   },
+   "mostLikely": {
+    "home": 0,
+    "away": 1
+   }
+  },
+  {
+   "slug": "argentina-vs-algeria",
+   "lockedAt": "2026-06-12T22:50:20.813Z",
+   "split": {
+    "home": 72,
+    "draw": 19,
+    "away": 9
+   },
+   "mostLikely": {
+    "home": 2,
+    "away": 0
+   }
+  },
+  {
+   "slug": "austria-vs-jordan",
+   "lockedAt": "2026-06-12T22:50:20.813Z",
+   "split": {
+    "home": 50,
+    "draw": 27,
+    "away": 23
+   },
+   "mostLikely": {
+    "home": 1,
+    "away": 1
+   }
+  },
+  {
+   "slug": "portugal-vs-dr-congo",
+   "lockedAt": "2026-06-12T22:50:20.813Z",
+   "split": {
+    "home": 72,
+    "draw": 19,
+    "away": 9
+   },
+   "mostLikely": {
+    "home": 2,
+    "away": 0
+   }
+  },
+  {
+   "slug": "uzbekistan-vs-colombia",
+   "lockedAt": "2026-06-12T22:50:20.813Z",
+   "split": {
+    "home": 12,
+    "draw": 22,
+    "away": 66
+   },
+   "mostLikely": {
+    "home": 0,
+    "away": 2
+   }
+  },
+  {
+   "slug": "england-vs-croatia",
+   "lockedAt": "2026-06-12T22:50:20.813Z",
+   "split": {
+    "home": 50,
+    "draw": 27,
+    "away": 23
+   },
+   "mostLikely": {
+    "home": 1,
+    "away": 1
+   }
+  },
+  {
+   "slug": "ghana-vs-panama",
+   "lockedAt": "2026-06-12T22:50:20.813Z",
+   "split": {
+    "home": 14,
+    "draw": 23,
+    "away": 63
+   },
+   "mostLikely": {
+    "home": 0,
+    "away": 1
+   }
+  },
+  {
+   "slug": "czech-republic-vs-south-africa",
+   "lockedAt": "2026-06-12T22:50:20.813Z",
+   "split": {
+    "home": 52,
+    "draw": 27,
+    "away": 21
+   },
+   "mostLikely": {
+    "home": 1,
+    "away": 0
+   }
+  },
+  {
+   "slug": "mexico-vs-south-korea",
+   "lockedAt": "2026-06-12T22:50:20.813Z",
+   "split": {
+    "home": 57,
+    "draw": 25,
+    "away": 18
+   },
+   "mostLikely": {
+    "home": 1,
+    "away": 0
+   }
+  },
+  {
+   "slug": "switzerland-vs-bosnia-herzegovina",
+   "lockedAt": "2026-06-12T22:50:20.813Z",
+   "split": {
+    "home": 73,
+    "draw": 18,
+    "away": 9
+   },
+   "mostLikely": {
+    "home": 2,
+    "away": 0
+   }
+  },
+  {
+   "slug": "canada-vs-qatar",
+   "lockedAt": "2026-06-12T22:50:20.813Z",
+   "split": {
+    "home": 87,
+    "draw": 10,
+    "away": 3
+   },
+   "mostLikely": {
+    "home": 2,
+    "away": 0
+   }
+  },
+  {
+   "slug": "scotland-vs-morocco",
+   "lockedAt": "2026-06-12T22:50:20.813Z",
+   "split": {
+    "home": 20,
+    "draw": 27,
+    "away": 53
+   },
+   "mostLikely": {
+    "home": 0,
+    "away": 1
+   }
+  },
+  {
+   "slug": "brazil-vs-haiti",
+   "lockedAt": "2026-06-12T22:50:20.813Z",
+   "split": {
+    "home": 79,
+    "draw": 15,
+    "away": 6
+   },
+   "mostLikely": {
+    "home": 2,
+    "away": 0
+   }
+  },
+  {
+   "slug": "united-states-vs-australia",
+   "lockedAt": "2026-06-12T22:50:20.813Z",
+   "split": {
+    "home": 38,
+    "draw": 29,
+    "away": 33
+   },
+   "mostLikely": {
+    "home": 1,
+    "away": 1
+   }
+  },
+  {
+   "slug": "turkiye-vs-paraguay",
+   "lockedAt": "2026-06-12T22:50:20.813Z",
+   "split": {
+    "home": 41,
+    "draw": 29,
+    "away": 30
+   },
+   "mostLikely": {
+    "home": 1,
+    "away": 1
+   }
+  },
+  {
+   "slug": "germany-vs-ivory-coast",
+   "lockedAt": "2026-06-12T22:50:20.813Z",
+   "split": {
+    "home": 60,
+    "draw": 24,
+    "away": 16
+   },
+   "mostLikely": {
+    "home": 1,
+    "away": 0
+   }
+  },
+  {
+   "slug": "ecuador-vs-cura-ao",
+   "lockedAt": "2026-06-12T22:50:20.813Z",
+   "split": {
+    "home": 85,
+    "draw": 11,
+    "away": 4
+   },
+   "mostLikely": {
+    "home": 2,
+    "away": 0
+   }
+  },
+  {
+   "slug": "netherlands-vs-sweden",
+   "lockedAt": "2026-06-12T22:50:20.813Z",
+   "split": {
+    "home": 66,
+    "draw": 22,
+    "away": 12
+   },
+   "mostLikely": {
+    "home": 2,
+    "away": 0
+   }
+  },
+  {
+   "slug": "tunisia-vs-japan",
+   "lockedAt": "2026-06-12T22:50:20.813Z",
+   "split": {
+    "home": 11,
+    "draw": 21,
+    "away": 68
+   },
+   "mostLikely": {
+    "home": 0,
+    "away": 2
+   }
+  },
+  {
+   "slug": "belgium-vs-iran",
+   "lockedAt": "2026-06-12T22:50:20.813Z",
+   "split": {
+    "home": 43,
+    "draw": 29,
+    "away": 28
+   },
+   "mostLikely": {
+    "home": 1,
+    "away": 1
+   }
+  },
+  {
+   "slug": "new-zealand-vs-egypt",
+   "lockedAt": "2026-06-12T22:50:20.813Z",
+   "split": {
+    "home": 26,
+    "draw": 29,
+    "away": 45
+   },
+   "mostLikely": {
+    "home": 1,
+    "away": 1
+   }
+  },
+  {
+   "slug": "spain-vs-saudi-arabia",
+   "lockedAt": "2026-06-12T22:50:20.813Z",
+   "split": {
+    "home": 91,
+    "draw": 7,
+    "away": 2
+   },
+   "mostLikely": {
+    "home": 3,
+    "away": 0
+   }
+  },
+  {
+   "slug": "uruguay-vs-cape-verde",
+   "lockedAt": "2026-06-12T22:50:20.813Z",
+   "split": {
+    "home": 76,
+    "draw": 17,
+    "away": 7
+   },
+   "mostLikely": {
+    "home": 2,
+    "away": 0
+   }
+  },
+  {
+   "slug": "france-vs-iraq",
+   "lockedAt": "2026-06-12T22:50:20.813Z",
+   "split": {
+    "home": 83,
+    "draw": 13,
+    "away": 4
+   },
+   "mostLikely": {
+    "home": 2,
+    "away": 0
+   }
+  },
+  {
+   "slug": "norway-vs-senegal",
+   "lockedAt": "2026-06-12T22:50:20.813Z",
+   "split": {
+    "home": 43,
+    "draw": 29,
+    "away": 28
+   },
+   "mostLikely": {
+    "home": 1,
+    "away": 1
+   }
+  },
+  {
+   "slug": "argentina-vs-austria",
+   "lockedAt": "2026-06-12T22:50:20.813Z",
+   "split": {
+    "home": 73,
+    "draw": 18,
+    "away": 9
+   },
+   "mostLikely": {
+    "home": 2,
+    "away": 0
+   }
+  },
+  {
+   "slug": "jordan-vs-algeria",
+   "lockedAt": "2026-06-12T22:50:20.813Z",
+   "split": {
+    "home": 22,
+    "draw": 28,
+    "away": 50
+   },
+   "mostLikely": {
+    "home": 1,
+    "away": 1
+   }
+  },
+  {
+   "slug": "portugal-vs-uzbekistan",
+   "lockedAt": "2026-06-12T22:50:20.813Z",
+   "split": {
+    "home": 65,
+    "draw": 22,
+    "away": 13
+   },
+   "mostLikely": {
+    "home": 1,
+    "away": 0
+   }
+  },
+  {
+   "slug": "colombia-vs-dr-congo",
+   "lockedAt": "2026-06-12T22:50:20.813Z",
+   "split": {
+    "home": 73,
+    "draw": 18,
+    "away": 9
+   },
+   "mostLikely": {
+    "home": 2,
+    "away": 0
+   }
+  },
+  {
+   "slug": "england-vs-ghana",
+   "lockedAt": "2026-06-12T22:50:20.813Z",
+   "split": {
+    "home": 88,
+    "draw": 9,
+    "away": 3
+   },
+   "mostLikely": {
+    "home": 3,
+    "away": 0
+   }
+  },
+  {
+   "slug": "panama-vs-croatia",
+   "lockedAt": "2026-06-12T22:50:20.813Z",
+   "split": {
+    "home": 21,
+    "draw": 27,
+    "away": 52
+   },
+   "mostLikely": {
+    "home": 0,
+    "away": 1
+   }
+  },
+  {
+   "slug": "mexico-vs-czech-republic",
+   "lockedAt": "2026-06-12T22:50:20.813Z",
+   "split": {
+    "home": 73,
+    "draw": 18,
+    "away": 9
+   },
+   "mostLikely": {
+    "home": 2,
+    "away": 0
+   }
+  },
+  {
+   "slug": "south-africa-vs-south-korea",
+   "lockedAt": "2026-06-12T22:50:20.813Z",
+   "split": {
+    "home": 11,
+    "draw": 21,
+    "away": 68
+   },
+   "mostLikely": {
+    "home": 0,
+    "away": 2
+   }
+  },
+  {
+   "slug": "canada-vs-switzerland",
+   "lockedAt": "2026-06-12T22:50:20.813Z",
+   "split": {
+    "home": 42,
+    "draw": 29,
+    "away": 29
+   },
+   "mostLikely": {
+    "home": 1,
+    "away": 1
+   }
+  },
+  {
+   "slug": "bosnia-herzegovina-vs-qatar",
+   "lockedAt": "2026-06-12T22:50:20.813Z",
+   "split": {
+    "home": 46,
+    "draw": 28,
+    "away": 26
+   },
+   "mostLikely": {
+    "home": 1,
+    "away": 1
+   }
+  },
+  {
+   "slug": "scotland-vs-brazil",
+   "lockedAt": "2026-06-12T22:50:20.813Z",
+   "split": {
+    "home": 13,
+    "draw": 23,
+    "away": 64
+   },
+   "mostLikely": {
+    "home": 0,
+    "away": 1
+   }
+  },
+  {
+   "slug": "morocco-vs-haiti",
+   "lockedAt": "2026-06-12T22:50:20.813Z",
+   "split": {
+    "home": 70,
+    "draw": 20,
+    "away": 10
+   },
+   "mostLikely": {
+    "home": 2,
+    "away": 0
+   }
+  },
+  {
+   "slug": "united-states-vs-turkiye",
+   "lockedAt": "2026-06-12T22:50:20.813Z",
+   "split": {
+    "home": 31,
+    "draw": 29,
+    "away": 40
+   },
+   "mostLikely": {
+    "home": 1,
+    "away": 1
+   }
+  },
+  {
+   "slug": "paraguay-vs-australia",
+   "lockedAt": "2026-06-12T22:50:20.813Z",
+   "split": {
+    "home": 37,
+    "draw": 29,
+    "away": 34
+   },
+   "mostLikely": {
+    "home": 1,
+    "away": 1
+   }
+  },
+  {
+   "slug": "cura-ao-vs-ivory-coast",
+   "lockedAt": "2026-06-12T22:50:20.813Z",
+   "split": {
+    "home": 15,
+    "draw": 24,
+    "away": 61
+   },
+   "mostLikely": {
+    "home": 0,
+    "away": 1
+   }
+  },
+  {
+   "slug": "ecuador-vs-germany",
+   "lockedAt": "2026-06-12T22:50:20.813Z",
+   "split": {
+    "home": 38,
+    "draw": 29,
+    "away": 33
+   },
+   "mostLikely": {
+    "home": 1,
+    "away": 1
+   }
+  },
+  {
+   "slug": "japan-vs-sweden",
+   "lockedAt": "2026-06-12T22:50:20.813Z",
+   "split": {
+    "home": 65,
+    "draw": 22,
+    "away": 13
+   },
+   "mostLikely": {
+    "home": 1,
+    "away": 0
+   }
+  },
+  {
+   "slug": "tunisia-vs-netherlands",
+   "lockedAt": "2026-06-12T22:50:20.813Z",
+   "split": {
+    "home": 11,
+    "draw": 20,
+    "away": 69
+   },
+   "mostLikely": {
+    "home": 0,
+    "away": 2
+   }
+  },
+  {
+   "slug": "egypt-vs-iran",
+   "lockedAt": "2026-06-12T22:50:20.813Z",
+   "split": {
+    "home": 25,
+    "draw": 28,
+    "away": 47
+   },
+   "mostLikely": {
+    "home": 1,
+    "away": 1
+   }
+  },
+  {
+   "slug": "new-zealand-vs-belgium",
+   "lockedAt": "2026-06-12T22:50:20.813Z",
+   "split": {
+    "home": 12,
+    "draw": 22,
+    "away": 66
+   },
+   "mostLikely": {
+    "home": 0,
+    "away": 1
+   }
+  },
+  {
+   "slug": "cape-verde-vs-saudi-arabia",
+   "lockedAt": "2026-06-12T22:50:20.813Z",
+   "split": {
+    "home": 30,
+    "draw": 29,
+    "away": 41
+   },
+   "mostLikely": {
+    "home": 1,
+    "away": 1
+   }
+  },
+  {
+   "slug": "uruguay-vs-spain",
+   "lockedAt": "2026-06-12T22:50:20.813Z",
+   "split": {
+    "home": 13,
+    "draw": 22,
+    "away": 65
+   },
+   "mostLikely": {
+    "home": 0,
+    "away": 1
+   }
+  },
+  {
+   "slug": "norway-vs-france",
+   "lockedAt": "2026-06-12T22:50:20.813Z",
+   "split": {
+    "home": 19,
+    "draw": 26,
+    "away": 55
+   },
+   "mostLikely": {
+    "home": 0,
+    "away": 1
+   }
+  },
+  {
+   "slug": "senegal-vs-iraq",
+   "lockedAt": "2026-06-12T22:50:20.813Z",
+   "split": {
+    "home": 58,
+    "draw": 25,
+    "away": 17
+   },
+   "mostLikely": {
+    "home": 1,
+    "away": 0
+   }
+  },
+  {
+   "slug": "algeria-vs-austria",
+   "lockedAt": "2026-06-12T22:50:20.813Z",
+   "split": {
+    "home": 36,
+    "draw": 29,
+    "away": 35
+   },
+   "mostLikely": {
+    "home": 1,
+    "away": 1
+   }
+  },
+  {
+   "slug": "jordan-vs-argentina",
+   "lockedAt": "2026-06-12T22:50:20.813Z",
+   "split": {
+    "home": 4,
+    "draw": 12,
+    "away": 84
+   },
+   "mostLikely": {
+    "home": 0,
+    "away": 2
+   }
+  },
+  {
+   "slug": "colombia-vs-portugal",
+   "lockedAt": "2026-06-12T22:50:20.813Z",
+   "split": {
+    "home": 36,
+    "draw": 30,
+    "away": 34
+   },
+   "mostLikely": {
+    "home": 1,
+    "away": 1
+   }
+  },
+  {
+   "slug": "dr-congo-vs-uzbekistan",
+   "lockedAt": "2026-06-12T22:50:20.813Z",
+   "split": {
+    "home": 28,
+    "draw": 29,
+    "away": 43
+   },
+   "mostLikely": {
+    "home": 1,
+    "away": 1
+   }
+  },
+  {
+   "slug": "panama-vs-england",
+   "lockedAt": "2026-06-12T22:50:20.813Z",
+   "split": {
+    "home": 12,
+    "draw": 22,
+    "away": 66
+   },
+   "mostLikely": {
+    "home": 0,
+    "away": 2
+   }
+  },
+  {
+   "slug": "croatia-vs-ghana",
+   "lockedAt": "2026-06-12T22:50:20.813Z",
+   "split": {
+    "home": 78,
+    "draw": 15,
+    "away": 7
+   },
+   "mostLikely": {
+    "home": 2,
+    "away": 0
+   }
+  }
+ ]
+}
