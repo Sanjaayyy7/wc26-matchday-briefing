@@ -1,0 +1,45 @@
+{
+  "_sources": [
+    "Wikipedia 2026 FIFA World Cup knockout stage (match-number chaining), fetched 2026-06-12",
+    "ESPN R32 schedule (dates/venues + third-place allowed sets), fetched 2026-06-12 — the two sources agree on all 16 R32 qualifier slots"
+  ],
+  "roundOf32": [
+    { "match": 73, "home": { "type": "runnerup", "group": "A" }, "away": { "type": "runnerup", "group": "B" } },
+    { "match": 74, "home": { "type": "winner", "group": "E" }, "away": { "type": "third", "allowed": ["A", "B", "C", "D", "F"] } },
+    { "match": 75, "home": { "type": "winner", "group": "F" }, "away": { "type": "runnerup", "group": "C" } },
+    { "match": 76, "home": { "type": "winner", "group": "C" }, "away": { "type": "runnerup", "group": "F" } },
+    { "match": 77, "home": { "type": "winner", "group": "I" }, "away": { "type": "third", "allowed": ["C", "D", "F", "G", "H"] } },
+    { "match": 78, "home": { "type": "runnerup", "group": "E" }, "away": { "type": "runnerup", "group": "I" } },
+    { "match": 79, "home": { "type": "winner", "group": "A" }, "away": { "type": "third", "allowed": ["C", "E", "F", "H", "I"] } },
+    { "match": 80, "home": { "type": "winner", "group": "L" }, "away": { "type": "third", "allowed": ["E", "H", "I", "J", "K"] } },
+    { "match": 81, "home": { "type": "winner", "group": "D" }, "away": { "type": "third", "allowed": ["B", "E", "F", "I", "J"] } },
+    { "match": 82, "home": { "type": "winner", "group": "G" }, "away": { "type": "third", "allowed": ["A", "E", "H", "I", "J"] } },
+    { "match": 83, "home": { "type": "runnerup", "group": "K" }, "away": { "type": "runnerup", "group": "L" } },
+    { "match": 84, "home": { "type": "winner", "group": "H" }, "away": { "type": "runnerup", "group": "J" } },
+    { "match": 85, "home": { "type": "winner", "group": "B" }, "away": { "type": "third", "allowed": ["E", "F", "G", "I", "J"] } },
+    { "match": 86, "home": { "type": "winner", "group": "J" }, "away": { "type": "runnerup", "group": "H" } },
+    { "match": 87, "home": { "type": "winner", "group": "K" }, "away": { "type": "third", "allowed": ["D", "E", "I", "J", "L"] } },
+    { "match": 88, "home": { "type": "runnerup", "group": "D" }, "away": { "type": "runnerup", "group": "G" } }
+  ],
+  "roundOf16": [
+    { "match": 89, "home": 74, "away": 77 },
+    { "match": 90, "home": 73, "away": 75 },
+    { "match": 91, "home": 76, "away": 78 },
+    { "match": 92, "home": 79, "away": 80 },
+    { "match": 93, "home": 83, "away": 84 },
+    { "match": 94, "home": 81, "away": 82 },
+    { "match": 95, "home": 86, "away": 88 },
+    { "match": 96, "home": 85, "away": 87 }
+  ],
+  "quarterFinals": [
+    { "match": 97, "home": 89, "away": 90 },
+    { "match": 98, "home": 93, "away": 94 },
+    { "match": 99, "home": 91, "away": 92 },
+    { "match": 100, "home": 95, "away": 96 }
+  ],
+  "semiFinals": [
+    { "match": 101, "home": 97, "away": 98 },
+    { "match": 102, "home": 99, "away": 100 }
+  ],
+  "final": { "match": 104, "home": 101, "away": 102 }
+}

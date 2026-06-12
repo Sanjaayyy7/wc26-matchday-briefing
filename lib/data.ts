@@ -14,6 +14,9 @@ export type Club = {
   lastFiveResults: string;
   goalsForLast5: number;
   goalsAgainstLast5: number;
+  group?: string;
+  /** Exact team name as it appears in the results dataset / model. */
+  datasetName?: string;
 };
 
 export type Fixture = {
@@ -32,6 +35,11 @@ export type Fixture = {
   group?: string;
   tzOffsetMinutes?: number;
   tzLabel?: string;
+  /** Kickoff hour not yet verified — render the date only. */
+  timeTBD?: boolean;
+  neutral?: boolean;
+  homeScore?: number;
+  awayScore?: number;
 };
 
 const clubs = clubsJson as Club[];
@@ -54,4 +62,20 @@ export function clubById(id: string): Club {
   const c = clubMap.get(id);
   if (!c) throw new Error(`Unknown club id: ${id}`);
   return c;
+}
+
+export function allClubs(): Club[] {
+  return clubs;
+}
+
+export function fixturesByGroup(group: string): Fixture[] {
+  return fixtures.filter((f) => f.group === group);
+}
+
+export function fixturesForTeam(id: string): Fixture[] {
+  return fixtures.filter((f) => f.homeId === id || f.awayId === id);
+}
+
+export function playedFixtures(): Fixture[] {
+  return fixtures.filter((f) => f.homeScore !== undefined);
 }

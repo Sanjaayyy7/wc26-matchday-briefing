@@ -1,0 +1,130 @@
+[
+ {
+  "id": "r32-m73",
+  "slug": "match-73",
+  "stage": "round-of-32",
+  "match": 73,
+  "homeLabel": "Runner-up Group A",
+  "awayLabel": "Runner-up Group B"
+ },
+ {
+  "id": "r32-m74",
+  "slug": "match-74",
+  "stage": "round-of-32",
+  "match": 74,
+  "homeLabel": "Winner Group E",
+  "awayLabel": "3rd place (A/B/C/D/F)"
+ },
+ {
+  "id": "r32-m75",
+  "slug": "match-75",
+  "stage": "round-of-32",
+  "match": 75,
+  "homeLabel": "Winner Group F",
+  "awayLabel": "Runner-up Group C"
+ },
+ {
+  "id": "r32-m76",
+  "slug": "match-76",
+  "stage": "round-of-32",
+  "match": 76,
+  "homeLabel": "Winner Group C",
+  "awayLabel": "Runner-up Group F"
+ },
+ {
+  "id": "r32-m77",
+  "slug": "match-77",
+  "stage": "round-of-32",
+  "match": 77,
+  "homeLabel": "Winner Group I",
+  "awayLabel": "3rd place (C/D/F/G/H)"
+ },
+ {
+  "id": "r32-m78",
+  "slug": "match-78",
+  "stage": "round-of-32",
+  "match": 78,
+  "homeLabel": "Runner-up Group E",
+  "awayLabel": "Runner-up Group I"
+ },
+ {
+  "id": "r32-m79",
+  "slug": "match-79",
+  "stage": "round-of-32",
+  "match": 79,
+  "homeLabel": "Winner Group A",
+  "awayLabel": "3rd place (C/E/F/H/I)"
+ },
+ {
+  "id": "r32-m80",
+  "slug": "match-80",
+  "stage": "round-of-32",
+  "match": 80,
+  "homeLabel": "Winner Group L",
+  "awayLabel": "3rd place (E/H/I/J/K)"
+ },
+ {
+  "id": "r32-m81",
+  "slug": "match-81",
+  "stage": "round-of-32",
+  "match": 81,
+  "homeLabel": "Winner Group D",
+  "awayLabel": "3rd place (B/E/F/I/J)"
+ },
+ {
+  "id": "r32-m82",
+  "slug": "match-82",
+  "stage": "round-of-32",
+  "match": 82,
+  "homeLabel": "Winner Group G",
+  "awayLabel": "3rd place (A/E/H/I/J)"
+ },
+ {
+  "id": "r32-m83",
+  "slug": "match-83",
+  "stage": "round-of-32",
+  "match": 83,
+  "homeLabel": "Runner-up Group K",
+  "awayLabel": "Runner-up Group L"
+ },
+ {
+  "id": "r32-m84",
+  "slug": "match-84",
+  "stage": "round-of-32",
+  "match": 84,
+  "homeLabel": "Winner Group H",
+  "awayLabel": "Runner-up Group J"
+ },
+ {
+  "id": "r32-m85",
+  "slug": "match-85",
+  "stage": "round-of-32",
+  "match": 85,
+  "homeLabel": "Winner Group B",
+  "awayLabel": "3rd place (E/F/G/I/J)"
+ },
+ {
+  "id": "r32-m86",
+  "slug": "match-86",
+  "stage": "round-of-32",
+  "match": 86,
+  "homeLabel": "Winner Group J",
+  "awayLabel": "Runner-up Group H"
+ },
+ {
+  "id": "r32-m87",
+  "slug": "match-87",
+  "stage": "round-of-32",
+  "match": 87,
+  "homeLabel": "Winner Group K",
+  "awayLabel": "3rd place (D/E/I/J/L)"
+ },
+ {
+  "id": "r32-m88",
+  "slug": "match-88",
+  "stage": "round-of-32",
+  "match": 88,
+  "homeLabel": "Runner-up Group D",
+  "awayLabel": "Runner-up Group G"
+ }
+]

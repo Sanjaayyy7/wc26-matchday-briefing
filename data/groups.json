@@ -1,0 +1,22 @@
+{
+  "_sources": [
+    "Derived: 12 four-team cliques from the 72 WC26 group fixtures in data/raw/results.csv (martj42), 2026-06-12",
+    "Letters G-L: ESPN match schedule (espn.com/soccer/story/_/id/48939282), fetched 2026-06-12 — every 4-team set matched a derived clique exactly",
+    "Letters A-F: Sky Sports day-by-day + Yahoo schedules, fetched 2026-06-11; A confirmed by played fixture Mexico vs South Africa",
+    "REJECTED source: en.wikipedia.org/wiki/2026_FIFA_World_Cup summary fetch returned self-contradictory groups (Spain in 3 groups) and was discarded"
+  ],
+  "groups": {
+    "A": ["Mexico", "South Africa", "South Korea", "Czech Republic"],
+    "B": ["Canada", "Bosnia and Herzegovina", "Qatar", "Switzerland"],
+    "C": ["Brazil", "Morocco", "Haiti", "Scotland"],
+    "D": ["United States", "Paraguay", "Australia", "Turkey"],
+    "E": ["Germany", "Curaçao", "Ecuador", "Ivory Coast"],
+    "F": ["Netherlands", "Japan", "Sweden", "Tunisia"],
+    "G": ["Belgium", "Egypt", "Iran", "New Zealand"],
+    "H": ["Spain", "Cape Verde", "Saudi Arabia", "Uruguay"],
+    "I": ["France", "Senegal", "Iraq", "Norway"],
+    "J": ["Argentina", "Algeria", "Austria", "Jordan"],
+    "K": ["Portugal", "DR Congo", "Uzbekistan", "Colombia"],
+    "L": ["England", "Croatia", "Ghana", "Panama"]
+  }
+}

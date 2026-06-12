@@ -11,6 +11,7 @@
     "test:watch": "vitest",
     "ml:fetch": "tsx scripts/fetch-dataset.mts",
     "ml:train": "tsx scripts/train-model.mts",
+    "ml:schedule": "tsx scripts/build-schedule.mts",
     "pipeline:fetch": "tsx scripts/fetch-kalshi.mts",
     "pipeline:run": "tsx scripts/run-briefing.mts",
     "pipeline:calibrate": "tsx scripts/calibrate.mts"
