@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import ReactMarkdown from "react-markdown";
 import { parseFollowUp, type ParsedFollowUp } from "@/lib/followup-parser";
@@ -9,24 +9,13 @@ import { NumberTicker } from "./number-ticker";
 const BTTS_QUESTION =
   "Both teams to score — what's the chance for this fixture? Give me your read.";
 
-export function BttsCard({
-  slug,
-  previewText,
-}: {
-  slug: string;
-  previewText: string;
-}) {
+export function BttsCard({ slug }: { slug: string }) {
   const [text, setText] = useState("");
   const [status, setStatus] = useState<"loading" | "streaming" | "done" | "error">(
     "loading",
   );
-  const firedRef = useRef<string | null>(null);
-
   useEffect(() => {
-    // Guard against StrictMode double-invoke and re-mounts for the same fixture.
-    if (firedRef.current === slug) return;
-    firedRef.current = slug;
-
+    // Local model call — free and idempotent, so StrictMode re-runs are fine.
     const ctl = new AbortController();
     (async () => {
       try {
@@ -35,11 +24,7 @@ export function BttsCard({
         const res = await fetch("/api/follow-up", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            slug,
-            history: [{ role: "assistant", content: previewText }],
-            question: BTTS_QUESTION,
-          }),
+          body: JSON.stringify({ slug, question: BTTS_QUESTION }),
           signal: ctl.signal,
         });
         if (!res.ok || !res.body) {
@@ -58,11 +43,11 @@ export function BttsCard({
         }
         setStatus("done");
       } catch {
-        setStatus("error");
+        if (!ctl.signal.aborted) setStatus("error");
       }
     })();
     return () => ctl.abort();
-  }, [slug, previewText]);
+  }, [slug]);
 
   if (status === "loading") return <Skeleton />;
   if (status === "error") {

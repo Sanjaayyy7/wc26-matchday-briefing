@@ -25,7 +25,7 @@ export function FixturePane({
         away={away}
         onComplete={setPreviewText}
       />
-      {previewText && <BttsCard slug={slug} previewText={previewText} />}
+      {previewText && <BttsCard slug={slug} />}
       {previewText && <FollowUpChat slug={slug} previewText={previewText} />}
       <ScaffoldPanel />
     </>
