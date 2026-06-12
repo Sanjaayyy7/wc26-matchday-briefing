@@ -3,8 +3,11 @@ import Link from "next/link";
 import { SiteHeader } from "@/components/site-header";
 import { Crest } from "@/components/crest";
 import { FixturePane } from "@/components/fixture-pane";
+import { EloSparkline } from "@/components/elo-sparkline";
+import { H2HPanel, type H2HRecord } from "@/components/h2h-panel";
 import { formatKickoff } from "@/lib/format-kickoff";
 import { clubById, fixtureBySlug, allFixtures } from "@/lib/data";
+import history from "@/data/history.json";
 
 export function generateStaticParams() {
   return allFixtures().map((f) => ({ slug: f.slug }));
@@ -69,6 +72,44 @@ export default async function FixturePage({
         </section>
 
         <FixturePane slug={fixture.slug} home={home} away={away} />
+
+        <section className="mt-16 space-y-12">
+          <div>
+            <h2 className="text-label mb-4">Head to head — full history</h2>
+            <H2HPanel
+              record={
+                ((history as { h2h: Record<string, H2HRecord | null> }).h2h[
+                  fixture.slug
+                ] ?? null)
+              }
+              homeName={home.datasetName ?? home.name}
+              awayName={away.datasetName ?? away.name}
+            />
+          </div>
+          <div>
+            <h2 className="text-label mb-4">Rating trend since 2002</h2>
+            <div className="grid gap-8 sm:grid-cols-2">
+              <EloSparkline
+                points={
+                  (history as {
+                    trajectories: Record<string, Array<{ date: string; elo: number }>>;
+                  }).trajectories[home.datasetName ?? home.name] ?? []
+                }
+                color="var(--up)"
+                label={home.name}
+              />
+              <EloSparkline
+                points={
+                  (history as {
+                    trajectories: Record<string, Array<{ date: string; elo: number }>>;
+                  }).trajectories[away.datasetName ?? away.name] ?? []
+                }
+                color="var(--down)"
+                label={away.name}
+              />
+            </div>
+          </div>
+        </section>
       </main>
     </>
   );
