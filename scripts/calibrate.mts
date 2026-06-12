@@ -4,7 +4,7 @@
 //   npm run pipeline:calibrate -- <fixture-slug> [home-goals-away-goals e.g. 2-0]
 import { readFileSync, writeFileSync, existsSync, appendFileSync } from "node:fs";
 import path from "node:path";
-import { brier, splitDeviation, type Outcome, type Split } from "../lib/calibration";
+import { brier, rps, splitDeviation, type Outcome, type Split } from "../lib/calibration";
 import { parsePreview } from "../lib/preview-parser";
 import { appDir, fixtureBySlugOrDie, outDir } from "./shared.mts";
 
@@ -34,6 +34,8 @@ const dev = splitDeviation(model, market.deVigged);
 let realized: Outcome | null = null;
 let modelBrier = "";
 let marketBrier = "";
+let modelRps = "";
+let marketRps = "";
 const resultArg = process.argv[3];
 if (resultArg) {
   const m = resultArg.match(/^(\d+)-(\d+)$/);
@@ -44,13 +46,15 @@ if (resultArg) {
   const h = Number(m[1]);
   const a = Number(m[2]);
   realized = h > a ? "home" : h < a ? "away" : "draw";
-  modelBrier = brier(model, realized).toFixed(4);
   const marketPct: Split = {
     home: market.deVigged.home * 100,
     draw: market.deVigged.draw * 100,
     away: market.deVigged.away * 100,
   };
+  modelBrier = brier(model, realized).toFixed(4);
   marketBrier = brier(marketPct, realized).toFixed(4);
+  modelRps = rps(model, realized).toFixed(4);
+  marketRps = rps(marketPct, realized).toFixed(4);
 }
 
 const logPath = path.join(appDir, "pipeline-output", "calibration-log.md");
@@ -58,8 +62,8 @@ if (!existsSync(logPath)) {
   writeFileSync(
     logPath,
     "# Calibration log\n\n" +
-      "| When (UTC) | Fixture | Model split H/D/A | Market split H/D/A | Max dev (pts) | Result | Model Brier | Market Brier |\n" +
-      "|---|---|---|---|---|---|---|---|\n",
+      "| When (UTC) | Fixture | Model split H/D/A | Market split H/D/A | Max dev (pts) | Result | Model Brier | Market Brier | Model RPS | Market RPS |\n" +
+      "|---|---|---|---|---|---|---|---|---|---|\n",
   );
 }
 const pct = (x: number) => Math.round(x * 100);
@@ -67,7 +71,7 @@ const row =
   `| ${new Date().toISOString()} | ${slug} ` +
   `| ${model.home}/${model.draw}/${model.away} ` +
   `| ${pct(market.deVigged.home)}/${pct(market.deVigged.draw)}/${pct(market.deVigged.away)} ` +
-  `| ${dev.max.toFixed(1)} | ${resultArg ?? "pending"} | ${modelBrier || "—"} | ${marketBrier || "—"} |\n`;
+  `| ${dev.max.toFixed(1)} | ${resultArg ?? "pending"} | ${modelBrier || "—"} | ${marketBrier || "—"} | ${modelRps || "—"} | ${marketRps || "—"} |\n`;
 appendFileSync(logPath, row);
 
 console.log(`model  H/D/A: ${model.home}/${model.draw}/${model.away}`);

@@ -22,6 +22,67 @@ export function splitDeviation(
   return { home, draw, away, max: Math.max(home, draw, away) };
 }
 
+/**
+ * Ranked probability score for the ordered outcome (home > draw > away):
+ * mean squared difference of cumulative forecast vs cumulative observation.
+ * Lower is better; uniform forecast ≈ 0.278 — the coin-flip reference.
+ */
+export function rps(model: Split, realized: Outcome): number {
+  const forecast = [model.home / 100, model.draw / 100, model.away / 100];
+  const observed = [
+    realized === "home" ? 1 : 0,
+    realized === "draw" ? 1 : 0,
+    realized === "away" ? 1 : 0,
+  ];
+  let cumF = 0;
+  let cumO = 0;
+  let score = 0;
+  for (let i = 0; i < 2; i++) {
+    cumF += forecast[i];
+    cumO += observed[i];
+    score += (cumF - cumO) ** 2;
+  }
+  return score / 2;
+}
+
+export type CalibrationBin = {
+  lo: number;
+  hi: number;
+  count: number;
+  meanPredicted: number;
+  realized: number;
+};
+
+/**
+ * 10-bin reliability table + expected calibration error for binary
+ * (probability, hit) prediction pairs.
+ */
+export function calibrationBins(
+  preds: Array<{ p: number; hit: boolean }>,
+): { bins: CalibrationBin[]; ece: number } {
+  const bins: CalibrationBin[] = Array.from({ length: 10 }, (_, i) => ({
+    lo: i / 10,
+    hi: (i + 1) / 10,
+    count: 0,
+    meanPredicted: 0,
+    realized: 0,
+  }));
+  for (const { p, hit } of preds) {
+    const b = bins[Math.min(9, Math.floor(p * 10))];
+    b.count += 1;
+    b.meanPredicted += p;
+    b.realized += hit ? 1 : 0;
+  }
+  let ece = 0;
+  for (const b of bins) {
+    if (b.count === 0) continue;
+    b.meanPredicted /= b.count;
+    b.realized /= b.count;
+    ece += (b.count / preds.length) * Math.abs(b.meanPredicted - b.realized);
+  }
+  return { bins, ece };
+}
+
 /** Multiclass Brier score for a percentage-point split vs the realized outcome. */
 export function brier(model: Split, realized: Outcome): number {
   const outcomes: Outcome[] = ["home", "draw", "away"];

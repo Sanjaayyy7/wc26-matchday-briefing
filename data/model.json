@@ -12,7 +12,72 @@
   "n": 2546,
   "brier": 0.5093,
   "uniformBrier": 0.6667,
-  "logLoss": 0.8672
+  "rps": 0.1671,
+  "uniformRps": 0.2384,
+  "logLoss": 0.8672,
+  "ece": 0.0195,
+  "calibrationBins": [
+   {
+    "range": "0.0–0.1",
+    "count": 1248,
+    "predicted": 0.048,
+    "realized": 0.058
+   },
+   {
+    "range": "0.1–0.2",
+    "count": 1269,
+    "predicted": 0.151,
+    "realized": 0.161
+   },
+   {
+    "range": "0.2–0.3",
+    "count": 2255,
+    "predicted": 0.261,
+    "realized": 0.282
+   },
+   {
+    "range": "0.3–0.4",
+    "count": 596,
+    "predicted": 0.35,
+    "realized": 0.342
+   },
+   {
+    "range": "0.4–0.5",
+    "count": 527,
+    "predicted": 0.45,
+    "realized": 0.452
+   },
+   {
+    "range": "0.5–0.6",
+    "count": 435,
+    "predicted": 0.55,
+    "realized": 0.483
+   },
+   {
+    "range": "0.6–0.7",
+    "count": 396,
+    "predicted": 0.648,
+    "realized": 0.634
+   },
+   {
+    "range": "0.7–0.8",
+    "count": 345,
+    "predicted": 0.753,
+    "realized": 0.696
+   },
+   {
+    "range": "0.8–0.9",
+    "count": 318,
+    "predicted": 0.85,
+    "realized": 0.821
+   },
+   {
+    "range": "0.9–1.0",
+    "count": 249,
+    "predicted": 0.948,
+    "realized": 0.924
+   }
+  ]
  },
  "ratings": {
   "Scotland": 1845,

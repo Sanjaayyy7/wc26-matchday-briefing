@@ -15,6 +15,7 @@ import {
   summarizeGrid,
   type ModelParams,
 } from "../lib/poisson-model";
+import { rps, calibrationBins, type Split } from "../lib/calibration";
 import { appDir } from "./shared.mts";
 
 type Row = {
@@ -144,6 +145,10 @@ const params: ModelParams = { baseLogGoals, eloSlope, rho };
 let brier = 0;
 let uniformBrier = 0;
 let logLoss = 0;
+let rpsSum = 0;
+let rpsUniform = 0;
+const calPairs: Array<{ p: number; hit: boolean }> = [];
+const UNIFORM: Split = { home: 100 / 3, draw: 100 / 3, away: 100 / 3 };
 for (const { row, eloH, eloA } of backtest) {
   const l = lambdasFromElo(eloH, eloA, row.neutral, params);
   const s = summarizeGrid(scoreGrid(l.home, l.away, rho));
@@ -153,15 +158,29 @@ for (const { row, eloH, eloA } of backtest) {
     const y = k === outcome ? 1 : 0;
     brier += (probs[k] - y) ** 2;
     uniformBrier += (1 / 3 - y) ** 2;
+    calPairs.push({ p: probs[k], hit: y === 1 });
   }
   logLoss += -Math.log(Math.max(probs[outcome], 1e-12));
+  const split: Split = {
+    home: probs.home * 100,
+    draw: probs.draw * 100,
+    away: probs.away * 100,
+  };
+  rpsSum += rps(split, outcome);
+  rpsUniform += rps(UNIFORM, outcome);
 }
 const nB = backtest.length;
+const { ece, bins: reliabilityBins } = calibrationBins(calPairs);
 console.log(
-  `backtest ${BACKTEST_FROM}+: n=${nB}, Brier=${(brier / nB).toFixed(4)} (uniform ${(uniformBrier / nB).toFixed(4)}), logloss=${(logLoss / nB).toFixed(4)}`,
+  `backtest ${BACKTEST_FROM}+: n=${nB}, Brier=${(brier / nB).toFixed(4)} (uniform ${(uniformBrier / nB).toFixed(4)}), ` +
+    `RPS=${(rpsSum / nB).toFixed(4)} (uniform ${(rpsUniform / nB).toFixed(4)}), logloss=${(logLoss / nB).toFixed(4)}, ECE=${(ece * 100).toFixed(2)}%`,
 );
 if (brier / nB >= uniformBrier / nB) {
   console.error("GATE FAILED: model does not beat the uniform baseline");
+  process.exit(2);
+}
+if (ece >= 0.05) {
+  console.error("GATE FAILED: expected calibration error >= 5%");
   process.exit(2);
 }
 
@@ -203,7 +222,18 @@ const model = {
     n: nB,
     brier: Number((brier / nB).toFixed(4)),
     uniformBrier: Number((uniformBrier / nB).toFixed(4)),
+    rps: Number((rpsSum / nB).toFixed(4)),
+    uniformRps: Number((rpsUniform / nB).toFixed(4)),
     logLoss: Number((logLoss / nB).toFixed(4)),
+    ece: Number(ece.toFixed(4)),
+    calibrationBins: reliabilityBins
+      .filter((b) => b.count > 0)
+      .map((b) => ({
+        range: `${b.lo.toFixed(1)}–${b.hi.toFixed(1)}`,
+        count: b.count,
+        predicted: Number(b.meanPredicted.toFixed(3)),
+        realized: Number(b.realized.toFixed(3)),
+      })),
   },
   ratings: Object.fromEntries(
     [...ratings.entries()].map(([t, r]) => [t, Math.round(r)]),
