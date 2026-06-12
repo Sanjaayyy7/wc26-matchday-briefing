@@ -1,6 +1,8 @@
 # Matchday Briefing
 
-A local Next.js 16 app that wraps the PL Analyst system prompt (one directory up) and delivers a streamed, kitchen-table briefing for every Premier League MD-38 fixture (24 May 2026), with a probability bar, a 6×6 scoreline heatmap, and a threaded follow-up chat that anchors on the original preview.
+A local Next.js 16 app that wraps the WC26 Analyst system prompt (one directory up, selectable via `PROMPT_FILE`) and delivers a streamed, kitchen-table briefing for FIFA World Cup 2026 opening-window fixtures, with a probability bar, a 6×6 scoreline heatmap, and a threaded follow-up chat that anchors on the original preview. A script pipeline (`scripts/`) fetches Kalshi market books, gates sourced facts, generates contract-validated briefings, and scores them against the market — see `../automation-blueprint.md`.
+
+Originally built for Premier League MD-38 (the frozen backtest set in `data/backtest/`); re-targeted per `../audit-ledger.md`.
 
 ## Setup
 
