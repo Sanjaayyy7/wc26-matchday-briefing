@@ -7,20 +7,18 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-inter-tight);
-  --font-mono: var(--font-jet-mono);
-  --font-display: var(--font-fraunces);
-  --font-heading: var(--font-fraunces);
+  --font-sans: -apple-system, BlinkMacSystemFont, var(--font-inter), "Segoe UI", Roboto, sans-serif;
 
   --color-canvas: var(--canvas);
   --color-surface: var(--surface);
   --color-elevated: var(--elevated);
   --color-ink: var(--ink);
   --color-ink-muted: var(--ink-muted);
+  --color-ink-faint: var(--ink-faint);
   --color-hairline: var(--hairline);
-  --color-gold: var(--gold);
-  --color-cyan: var(--cyan);
-  --color-crimson: var(--crimson);
+  --color-up: var(--up);
+  --color-down: var(--down);
+  --color-neutral-fill: var(--neutral-fill);
 
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
@@ -52,26 +50,32 @@
   --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
 
-  --radius-sm: calc(var(--radius) * 0.6);
-  --radius-md: calc(var(--radius) * 0.8);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) * 1.4);
-  --radius-2xl: calc(var(--radius) * 1.8);
-  --radius-3xl: calc(var(--radius) * 2.2);
-  --radius-4xl: calc(var(--radius) * 2.6);
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.25rem;
+  --radius-2xl: 1.75rem;
+  --radius-3xl: 2rem;
+  --radius-4xl: 2.5rem;
 }
 
-/* Light canvas (default fallback) */
+/* LIGHT — Apple editorial: warm neutrals, blue accent, space over strokes */
 :root {
-  --canvas: #fafaf7;
+  --canvas: #f5f5f7;
   --surface: #ffffff;
-  --elevated: #f1efe8;
-  --ink: #0a1d3a;
-  --ink-muted: #4a5570;
-  --hairline: rgba(0, 0, 0, 0.06);
-  --gold: #b8860b;
-  --cyan: #0e8c7a;
-  --crimson: #c9343f;
+  --elevated: #fbfbfd;
+  --ink: #1d1d1f;
+  --ink-muted: #86868b;
+  --ink-faint: #a1a1a6;
+  --hairline: rgba(0, 0, 0, 0.08);
+  --tint: #0071e3;
+  --up: #008a05;
+  --down: #d4430f;
+  --neutral-fill: #e8e8ed;
+  --glass: rgba(255, 255, 255, 0.72);
+  --shadow-hover: 0 8px 32px rgba(0, 0, 0, 0.08);
+  --dur: 0.3s;
+  --ease: cubic-bezier(0.4, 0, 0.2, 1);
 
   --background: var(--canvas);
   --foreground: var(--ink);
@@ -79,77 +83,81 @@
   --card-foreground: var(--ink);
   --popover: var(--surface);
   --popover-foreground: var(--ink);
-  --primary: var(--ink);
-  --primary-foreground: var(--canvas);
-  --secondary: var(--elevated);
+  --primary: var(--tint);
+  --primary-foreground: #ffffff;
+  --secondary: var(--neutral-fill);
   --secondary-foreground: var(--ink);
-  --muted: var(--elevated);
+  --muted: var(--neutral-fill);
   --muted-foreground: var(--ink-muted);
-  --accent: var(--gold);
-  --accent-foreground: var(--canvas);
-  --destructive: var(--crimson);
+  --accent: var(--tint);
+  --accent-foreground: #ffffff;
+  --destructive: var(--down);
   --border: var(--hairline);
   --input: var(--hairline);
-  --ring: var(--gold);
-  --chart-1: var(--gold);
-  --chart-2: var(--cyan);
-  --chart-3: #4a5570;
-  --chart-4: #b8860b;
-  --chart-5: #c9343f;
-  --radius: 0.75rem;
+  --ring: var(--tint);
+  --chart-1: var(--up);
+  --chart-2: var(--tint);
+  --chart-3: var(--ink-muted);
+  --chart-4: var(--neutral-fill);
+  --chart-5: var(--down);
+  --radius: 1rem;
   --sidebar: var(--surface);
   --sidebar-foreground: var(--ink);
-  --sidebar-primary: var(--ink);
-  --sidebar-primary-foreground: var(--canvas);
-  --sidebar-accent: var(--elevated);
+  --sidebar-primary: var(--tint);
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: var(--neutral-fill);
   --sidebar-accent-foreground: var(--ink);
   --sidebar-border: var(--hairline);
-  --sidebar-ring: var(--gold);
+  --sidebar-ring: var(--tint);
 }
 
-/* Cinematic dark canvas (default) */
+/* DARK — Robinhood data-room: near-black, Robin Neon, big numbers */
 .dark {
-  --canvas: #05060a;
-  --surface: #0d1020;
-  --elevated: #1a1f3a;
-  --ink: #f5f5f0;
-  --ink-muted: #9ca3b8;
-  --hairline: rgba(255, 255, 255, 0.06);
-  --gold: #d4af37;
-  --cyan: #37e8c2;
-  --crimson: #ef4458;
+  --canvas: #0b0b0c;
+  --surface: #141416;
+  --elevated: #1c1c1e;
+  --ink: #f5f5f7;
+  --ink-muted: #86868b;
+  --ink-faint: #6e6e73;
+  --hairline: rgba(255, 255, 255, 0.08);
+  --tint: #00c805;
+  --up: #00c805;
+  --down: #ff5c39;
+  --neutral-fill: #2c2c2e;
+  --glass: rgba(20, 20, 22, 0.72);
+  --shadow-hover: 0 8px 32px rgba(0, 0, 0, 0.4);
 
   --background: var(--canvas);
   --foreground: var(--ink);
   --card: var(--surface);
   --card-foreground: var(--ink);
-  --popover: var(--surface);
+  --popover: var(--elevated);
   --popover-foreground: var(--ink);
-  --primary: var(--ink);
-  --primary-foreground: var(--canvas);
-  --secondary: var(--elevated);
+  --primary: var(--tint);
+  --primary-foreground: #0b0b0c;
+  --secondary: var(--neutral-fill);
   --secondary-foreground: var(--ink);
-  --muted: var(--elevated);
+  --muted: var(--neutral-fill);
   --muted-foreground: var(--ink-muted);
-  --accent: var(--gold);
-  --accent-foreground: var(--canvas);
-  --destructive: var(--crimson);
+  --accent: var(--tint);
+  --accent-foreground: #0b0b0c;
+  --destructive: var(--down);
   --border: var(--hairline);
   --input: var(--hairline);
-  --ring: var(--gold);
-  --chart-1: var(--gold);
-  --chart-2: var(--cyan);
+  --ring: var(--tint);
+  --chart-1: var(--up);
+  --chart-2: var(--tint);
   --chart-3: var(--ink-muted);
-  --chart-4: #b8860b;
-  --chart-5: var(--crimson);
+  --chart-4: var(--neutral-fill);
+  --chart-5: var(--down);
   --sidebar: var(--surface);
   --sidebar-foreground: var(--ink);
-  --sidebar-primary: var(--gold);
-  --sidebar-primary-foreground: var(--canvas);
-  --sidebar-accent: var(--elevated);
+  --sidebar-primary: var(--tint);
+  --sidebar-primary-foreground: #0b0b0c;
+  --sidebar-accent: var(--neutral-fill);
   --sidebar-accent-foreground: var(--ink);
   --sidebar-border: var(--hairline);
-  --sidebar-ring: var(--gold);
+  --sidebar-ring: var(--tint);
 }
 
 @layer base {
@@ -164,17 +172,41 @@
     color: var(--ink);
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
+    font-size: 17px;
+    line-height: 1.47059;
+    letter-spacing: -0.022px;
   }
   *:focus-visible {
-    outline: 2px solid var(--gold);
+    outline: 2px solid var(--tint);
     outline-offset: 2px;
     border-radius: 4px;
   }
-  /* Stable tabular numerals everywhere scorelines/percentages appear */
-  .font-mono, .font-display { font-feature-settings: "tnum"; }
 }
 
-@keyframes starDrift {
-  from { transform: translateY(0); }
-  to { transform: translateY(-4px); }
+@utility tabular {
+  font-feature-settings: "tnum";
+  font-variant-numeric: tabular-nums;
+}
+
+/* Apple-scale display text: tight negative tracking grows with size */
+@utility text-display {
+  font-weight: 700;
+  letter-spacing: -0.022em;
+  line-height: 1.05;
+}
+@utility text-title {
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.14;
+}
+@utility text-label {
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  color: var(--ink-muted);
+}
+@utility text-caption {
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--ink-muted);
 }
