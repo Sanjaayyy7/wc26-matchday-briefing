@@ -12,13 +12,10 @@
     "ml:fetch": "tsx scripts/fetch-dataset.mts",
     "ml:train": "tsx scripts/train-model.mts",
     "pipeline:fetch": "tsx scripts/fetch-kalshi.mts",
-    "pipeline:facts": "tsx scripts/build-facts.mts",
     "pipeline:run": "tsx scripts/run-briefing.mts",
-    "pipeline:calibrate": "tsx scripts/calibrate.mts",
-    "eval:judge": "tsx scripts/llm-judge.mts"
+    "pipeline:calibrate": "tsx scripts/calibrate.mts"
   },
   "dependencies": {
-    "@anthropic-ai/sdk": "^0.98.0",
     "@base-ui/react": "^1.5.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",

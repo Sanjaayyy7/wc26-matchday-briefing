@@ -1,41 +1,54 @@
 # Matchday Briefing
 
-A local Next.js 16 app that wraps the WC26 Analyst system prompt (one directory up, selectable via `PROMPT_FILE`) and delivers a streamed, kitchen-table briefing for FIFA World Cup 2026 opening-window fixtures, with a probability bar, a 6×6 scoreline heatmap, and a threaded follow-up chat that anchors on the original preview. A script pipeline (`scripts/`) fetches Kalshi market books, gates sourced facts, generates contract-validated briefings, and scores them against the market — see `../automation-blueprint.md`.
+A local Next.js 16 app that turns a trained statistical model into kitchen-table briefings for FIFA World Cup 2026 fixtures — probability split, scoreline heatmap, BTTS read, and a follow-up Q&A, all computed locally. **No API keys, no LLM calls, zero marginal cost.**
 
-Originally built for Premier League MD-38 (the frozen backtest set in `data/backtest/`); re-targeted per `../audit-ledger.md`.
+## How predictions work
+
+- **Ratings:** World Football Elo (eloratings.net method — tournament-weighted K, goal-margin multiplier, home advantage) computed over ~49k internationals (1872 → present) from the [martj42 international results dataset](https://github.com/martj42/international_results).
+- **Goals:** expected goals per side from the Elo gap (binned Poisson-rate regression), scored as a Dixon-Coles-corrected double Poisson grid.
+- **Honesty gate:** training runs an online backtest (2024+, ratings never see the future). Current model: Brier **0.509** vs 0.667 uniform over 2,546 matches. Training aborts if the model stops beating baseline.
+- **Prose:** briefing text is template-generated from model outputs only — no invented injuries, lineups, or tactics; the model says so itself in "Things I'm not sure about".
 
 ## Setup
 
 ```bash
-cp .env.example .env.local
-# Paste your Anthropic key into .env.local (must have access to claude-opus-4-7)
 npm install
-npm run dev
+npm run dev          # model.json ships in the repo — this just works
 ```
 
-Open <http://localhost:3000>.
+Refresh data + retrain (e.g. after each matchday):
+
+```bash
+npm run ml:fetch     # pull latest results.csv (no auth)
+npm run ml:train     # retrain → data/model.json, prints backtest gate
+```
 
 ## Tests
 
 ```bash
-npm test
+npm test             # 106 tests: Elo math, DC grid, predictor, templates vs parsers, calibration math
 ```
 
-Unit suites cover the prompt loader, the first-turn template builder, the Output Contract parser (including the degraded-stream fallback), and the joint-Poisson heatmap derivation. There are no UI snapshot tests — the visual layer is verified by walking the dev server in a browser.
+## Market calibration (Kalshi)
+
+```bash
+npm run pipeline:fetch -- brazil-vs-morocco       # live 3-way book → de-vigged snapshot
+npm run pipeline:run -- brazil-vs-morocco         # model briefing → pipeline-output/
+npm run pipeline:calibrate -- brazil-vs-morocco   # model vs market deviation row
+npm run pipeline:calibrate -- brazil-vs-morocco 2-1   # after FT: Brier for model AND market
+```
+
+The standing benchmark: match or beat the market's Brier score in `pipeline-output/calibration-log.md`.
 
 ## Layout
 
-- `data/` — `clubs.json` and `fixtures.json`. **Edit these before the demo if 2025/26 promotion/relegation differs from the seed.** The 20-club list and 10 final-day fixtures are best-effort and should be eyeballed by a human who knows the table.
-- `lib/` — server-only prompt loader, fixture template, Anthropic streaming helper, Output Contract parser, heatmap math.
-- `app/api/preview` — streams the first-turn reply.
-- `app/api/follow-up` — streams sub-question replies anchored on the preview + conversation history.
-- `components/` — UI: monogram crests, hero, fixture grid, preview pane, probability bar, scoreline heatmap, follow-up chat, scaffold panel.
+- `data/model.json` — trained artifact (ratings, fit params, backtest report)
+- `data/{clubs,fixtures}.json` — WC26 teams + opening fixtures (provenance: `data/README.md`)
+- `lib/` — `elo.ts`, `poisson-model.ts`, `predict.ts`, `briefing-template.ts`, parsers, heatmap math
+- `scripts/` — dataset fetch, training, Kalshi fetch, briefing runner, calibration scorer
+- `app/api/{preview,follow-up}` — deterministic prediction endpoints
+- `../wc-analyst-*.md`, `../pl-analyst-*.md` — the prompt-era documents; the Output Contract they define is still the format contract the templates and parsers share
 
-The system prompt itself lives at `../pl-analyst-system-prompt.md` and is read only on the server. It is never sent to the client — verify in DevTools → Network.
+## History
 
-## Architecture Notes
-
-- Streaming uses native Web Streams (`ReadableStream`) from the route handler. The client reads via `response.body.getReader()` and re-parses on every chunk so sections light up in order as the model writes them.
-- The follow-up chat is stateless on the server: the client sends the full conversation history (seeded with the initial preview as the first assistant turn) on every request, and persists the thread in `localStorage` keyed by fixture slug.
-- The 6×6 heatmap is computed deterministically client-side via a constrained joint-Poisson grid search over `λ_home, λ_away` — no extra LLM call.
-- If the model's reply doesn't honor the six-section Output Contract, the preview pane degrades to a raw markdown render rather than blanking out.
+Originally an LLM app (Anthropic streaming + the WC26 analyst prompt one directory up). Pivoted to pure ML 2026-06-12 — see `../audit-ledger.md` and git history. The Output Contract survived the pivot: same parsers, same UI, different brain.

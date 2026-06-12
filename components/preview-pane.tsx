@@ -76,21 +76,12 @@ export function PreviewPane({
   }, [slug]);
 
   const parsed: ParsedPreview = useMemo(() => parsePreview(text), [text]);
-  const errMatch = text.match(/__ERROR__:([^:\n]+):?/);
 
   if (status === "loading") return <Skeleton slow={slowFirstByte} />;
   if (status === "error") {
     return (
       <ErrorBlock
         message="Network error — could not reach the server."
-        onRetry={() => location.reload()}
-      />
-    );
-  }
-  if (errMatch) {
-    return (
-      <ErrorBlock
-        message={errMessage(errMatch[1])}
         onRetry={() => location.reload()}
       />
     );
@@ -258,13 +249,6 @@ function Skeleton({ slow }: { slow: boolean }) {
       )}
     </div>
   );
-}
-
-function errMessage(status: string): string {
-  if (status === "401") return "API key rejected. Check app/.env.local and restart.";
-  if (status === "429") return "Rate-limited by Anthropic. Try again shortly.";
-  if (status === "400") return "The API refused the request — check your key's credit balance.";
-  return "The stream failed mid-way.";
 }
 
 function ErrorBlock({

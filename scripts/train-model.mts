@@ -8,7 +8,7 @@
 //   npm run ml:fetch && npm run ml:train
 import { readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
-import { updateElo, expectedScore, HOME_ADVANTAGE } from "../lib/elo";
+import { updateElo, HOME_ADVANTAGE } from "../lib/elo";
 import {
   lambdasFromElo,
   scoreGrid,
