@@ -2,11 +2,17 @@ import "server-only";
 import { readFileSync } from "node:fs";
 import path from "node:path";
 
-let cached: string | null = null;
+const cache = new Map<string, string>();
 
 export function getSystemPrompt(): string {
-  if (cached) return cached;
-  const filePath = path.resolve(process.cwd(), "..", "pl-analyst-system-prompt.md");
-  cached = readFileSync(filePath, "utf8");
-  return cached;
+  const filePath = path.resolve(
+    process.cwd(),
+    process.env.PROMPT_FILE ?? "../pl-analyst-system-prompt.md",
+  );
+  let text = cache.get(filePath);
+  if (text === undefined) {
+    text = readFileSync(filePath, "utf8");
+    cache.set(filePath, text);
+  }
+  return text;
 }

@@ -27,6 +27,11 @@ export type Fixture = {
   stakes: string;
   privateNotes: string | null;
   featured?: boolean;
+  // World Cup fields (absent on legacy PL fixtures)
+  stage?: "group" | "round-of-32" | "round-of-16" | "quarter-final" | "semi-final" | "final";
+  group?: string;
+  tzOffsetMinutes?: number;
+  tzLabel?: string;
 };
 
 const clubs = clubsJson as Club[];

@@ -16,4 +16,17 @@ describe("getSystemPrompt", () => {
   it("caches the read (returns identical reference on repeat calls)", () => {
     expect(getSystemPrompt()).toBe(getSystemPrompt());
   });
+
+  it("honors PROMPT_FILE env override (cache keyed by path)", () => {
+    const prev = process.env.PROMPT_FILE;
+    process.env.PROMPT_FILE = "../wc-analyst-system-prompt-v2.md";
+    try {
+      const text = getSystemPrompt();
+      expect(text).toContain("# DATA DISCIPLINE");
+      expect(text).toContain("{MARKET_SNAPSHOT");
+    } finally {
+      if (prev === undefined) delete process.env.PROMPT_FILE;
+      else process.env.PROMPT_FILE = prev;
+    }
+  });
 });
