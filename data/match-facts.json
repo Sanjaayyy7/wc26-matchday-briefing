@@ -1,0 +1,81 @@
+{
+  "_note": "Per-match facts for finished WC26 group fixtures. Keys are fixture slugs from data/fixtures.json. Facts sourced only from live fetches; omitted fields mean no source provided the data. Updated 2026-06-12.",
+  "mexico-vs-south-africa": {
+    "score": { "home": 2, "away": 0 },
+    "scorers": [
+      { "player": "Julián Quiñones", "team": "mex", "minute": 9, "assist": "Erik Lira" },
+      { "player": "Raúl Jiménez", "team": "mex", "minute": 67, "assist": "Roberto Alvarado" }
+    ],
+    "facts": {
+      "possessionHome": 60,
+      "possessionAway": 40,
+      "shotsHome": 16,
+      "shotsAway": 5,
+      "onTargetHome": 4,
+      "onTargetAway": 2,
+      "cards": [
+        { "player": "Teboho Mokoena", "team": "rsa", "type": "yellow", "minute": 17 },
+        { "player": "Brian Gutiérrez", "team": "mex", "type": "yellow", "minute": 23 },
+        { "player": "Sphephelo Sithole", "team": "rsa", "type": "red", "minute": 50, "reason": "serious foul play" },
+        { "player": "Nkosinathi Sibisi", "team": "rsa", "type": "yellow", "minute": 74 },
+        { "player": "Themba Zwane", "team": "rsa", "type": "red", "minute": 84, "reason": "unsporting behaviour" },
+        { "player": "César Montes", "team": "mex", "type": "red", "minute": 92, "reason": "serious foul play" }
+      ]
+    },
+    "btts": false,
+    "totalGoals": 2,
+    "_sources": [
+      "https://www.espn.com/soccer/match/_/gameId/760415/south-africa-mexico",
+      "https://www.foxsports.com/soccer/fifa-world-cup-men-mexico-vs-south-africa-jun-11-2026-game-boxscore-647616",
+      "https://www.espn.com/soccer/story/_/id/49003509/2026-fifa-world-cup-live-updates-mexico-vs-south-africa"
+    ]
+  },
+  "south-korea-vs-czech-republic": {
+    "score": { "home": 2, "away": 1 },
+    "scorers": [
+      { "player": "Ladislav Krejcí", "team": "cze", "minute": 59, "assist": "Vladimír Coufal (long throw)" },
+      { "player": "Hwang In-Beom", "team": "kor", "minute": 67, "assist": "Lee Kang-In" },
+      { "player": "Oh Hyeon-Gyu", "team": "kor", "minute": 80, "assist": "Hwang In-Beom" }
+    ],
+    "facts": {
+      "possessionHome": 62,
+      "possessionAway": 38,
+      "onTargetHome": 6,
+      "onTargetAway": 4
+    },
+    "btts": true,
+    "totalGoals": 3,
+    "_sources": [
+      "https://www.espn.com/soccer/match/_/gameId/760414/czechia-south-korea",
+      "https://www.skysports.com/football/korea-rep-vs-czech-rep/report/549766",
+      "https://theanalyst.com/articles/south-korea-vs-czechia-stats-2026-world-cup-live"
+    ]
+  },
+  "canada-vs-bosnia-herzegovina": {
+    "score": { "home": 1, "away": 1 },
+    "scorers": [
+      { "player": "Jovo Lukić", "team": "bih", "minute": 21, "assist": "Sead Kolašinac (corner delivery via Ivan Bašić)" },
+      { "player": "Cyle Larin", "team": "can", "minute": 78, "assist": "Promise David" }
+    ],
+    "facts": {
+      "possessionHome": 61,
+      "possessionAway": 39,
+      "onTargetHome": 4,
+      "onTargetAway": 3,
+      "cards": [
+        { "player": "Alistair Johnston", "team": "can", "type": "yellow", "minute": 11 },
+        { "player": "Ermedin Demirović", "team": "bih", "type": "yellow", "minute": 45 },
+        { "player": "Jovo Lukić", "team": "bih", "type": "yellow", "minute": 46 },
+        { "player": "Luc De Fougerolles", "team": "can", "type": "yellow", "minute": 53 },
+        { "player": "Nikola Katić", "team": "bih", "type": "yellow", "minute": 93 }
+      ]
+    },
+    "btts": true,
+    "totalGoals": 2,
+    "_sources": [
+      "https://www.espn.com/soccer/match/_/gameId/760416/bosnia-herzegovina-canada",
+      "https://www.foxsports.com/soccer/fifa-world-cup-men-canada-vs-bosnia-and-herzegovina-jun-12-2026-game-boxscore-647618",
+      "https://www.espn.com/soccer/story/_/id/49041213/canada-bosnia-herzegovina-live-world-cup-2026-latest-updates-commentary-score-result"
+    ]
+  }
+}
