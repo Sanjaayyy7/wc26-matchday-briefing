@@ -9,6 +9,7 @@
     "lint": "eslint",
     "test": "vitest run",
     "test:watch": "vitest",
+    "matchday": "tsx scripts/matchday.mts",
     "ml:fetch": "tsx scripts/fetch-dataset.mts",
     "ml:train": "tsx scripts/train-model.mts",
     "ml:schedule": "tsx scripts/build-schedule.mts",
