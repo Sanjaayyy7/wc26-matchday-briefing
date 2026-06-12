@@ -15,14 +15,13 @@ export function Crest({
   size?: number;
   className?: string;
 }) {
-  const fontSize = Math.round(size * 0.36);
+  const fontSize = Math.round(size * 0.3);
   return (
     <div
       role="img"
       aria-label={`${name} crest`}
       className={cn(
-        "grid place-items-center rounded-full font-display font-semibold tracking-tight",
-        "shadow-[inset_0_1px_0_rgba(255,255,255,0.18),0_1px_10px_rgba(0,0,0,0.35)]",
+        "grid place-items-center rounded-full border border-[var(--hairline)] font-semibold tracking-[-0.01em]",
         className,
       )}
       style={{
@@ -30,9 +29,7 @@ export function Crest({
         height: size,
         background: primary,
         color: secondary ?? "#ffffff",
-        border: "1px solid rgba(255,255,255,0.08)",
         fontSize,
-        letterSpacing: "0.02em",
       }}
     >
       {short}

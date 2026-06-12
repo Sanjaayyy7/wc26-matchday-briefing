@@ -10,12 +10,12 @@ export default function HomePage() {
   return (
     <>
       <SiteHeader />
-      <main className="mx-auto w-full max-w-7xl flex-1 px-6 py-10">
+      <main className="mx-auto w-full max-w-6xl flex-1 space-y-16 px-6 py-12 md:py-16">
         {!hasKey && (
-          <div className="mb-8 rounded-2xl border border-[var(--crimson)] bg-[var(--surface)] p-4 text-sm">
-            Missing <code className="font-mono">ANTHROPIC_API_KEY</code>. Add it
-            to <code className="font-mono">app/.env.local</code> and restart{" "}
-            <code className="font-mono">npm run dev</code> to enable briefings.
+          <div className="rounded-2xl bg-[var(--surface)] p-4 text-sm text-[var(--ink-muted)] dark:border dark:border-[var(--hairline)]">
+            Missing <code>ANTHROPIC_API_KEY</code>. Add it to{" "}
+            <code>app/.env.local</code> and restart <code>npm run dev</code> to
+            enable briefings.
           </div>
         )}
         <MatchdayHero
@@ -23,14 +23,9 @@ export default function HomePage() {
           home={clubById(featured.homeId)}
           away={clubById(featured.awayId)}
         />
-        <section className="mt-12">
-          <h2 className="mb-5 text-[11px] font-semibold uppercase tracking-[0.18em] text-[var(--ink-muted)]">
-            The rest of MD-38
-          </h2>
-          <ul
-            role="list"
-            className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3"
-          >
+        <section>
+          <h2 className="text-label mb-6">Opening window · June 11–14</h2>
+          <ul role="list" className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {rest.map((f) => (
               <li key={f.slug}>
                 <FixtureCard

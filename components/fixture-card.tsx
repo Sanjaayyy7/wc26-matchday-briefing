@@ -1,6 +1,21 @@
 import Link from "next/link";
-import { Crest } from "./crest";
+import { formatKickoff } from "@/lib/format-kickoff";
 import type { Club, Fixture } from "@/lib/data";
+
+function TeamRow({ team }: { team: Club }) {
+  return (
+    <div className="flex items-center gap-3">
+      <span
+        className="h-2 w-2 shrink-0 rounded-full"
+        style={{ background: team.primary }}
+        aria-hidden
+      />
+      <span className="text-[17px] font-semibold tracking-[-0.01em]">
+        {team.name}
+      </span>
+    </div>
+  );
+}
 
 export function FixtureCard({
   fixture,
@@ -11,45 +26,19 @@ export function FixtureCard({
   home: Club;
   away: Club;
 }) {
-  const streak = `linear-gradient(90deg, ${home.primary} 0%, ${home.primary} 50%, ${away.primary} 50%, ${away.primary} 100%)`;
   return (
     <Link
       href={`/fixture/${fixture.slug}`}
-      className="group relative flex h-full flex-col gap-4 overflow-hidden rounded-2xl border border-[var(--hairline)] bg-[var(--surface)] p-5 transition hover:-translate-y-0.5 hover:border-[var(--gold)]"
+      className="group flex h-full flex-col gap-5 rounded-2xl bg-[var(--surface)] p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-[var(--shadow-hover)] dark:border dark:border-[var(--hairline)]"
     >
-      <div className="flex items-center justify-between gap-3">
-        <Crest
-          short={home.short}
-          primary={home.primary}
-          secondary={home.secondary}
-          name={home.name}
-          size={44}
-        />
-        <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-[var(--ink-muted)]">
-          Sun 16:00
-        </span>
-        <Crest
-          short={away.short}
-          primary={away.primary}
-          secondary={away.secondary}
-          name={away.name}
-          size={44}
-        />
+      <span className="text-label">
+        {fixture.group ? `Group ${fixture.group}` : fixture.competition}
+      </span>
+      <div className="flex flex-1 flex-col gap-2.5">
+        <TeamRow team={home} />
+        <TeamRow team={away} />
       </div>
-      <div className="flex items-center justify-between font-display text-base">
-        <span>{home.short}</span>
-        <span className="text-[var(--ink-muted)]" aria-hidden>
-          vs
-        </span>
-        <span>{away.short}</span>
-      </div>
-      <p className="line-clamp-2 flex-1 text-sm text-[var(--ink-muted)]">
-        {fixture.stakes}
-      </p>
-      <div
-        className="h-[3px] w-full rounded-full opacity-60 transition group-hover:opacity-100"
-        style={{ background: streak }}
-      />
+      <span className="text-caption tabular">{formatKickoff(fixture)}</span>
     </Link>
   );
 }
