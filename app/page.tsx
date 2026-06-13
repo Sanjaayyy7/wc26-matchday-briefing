@@ -1,79 +1,80 @@
-import Link from "next/link";
 import { SiteHeader } from "@/components/site-header";
-import { MatchdayHero } from "@/components/matchday-hero";
 import { FixtureCard } from "@/components/fixture-card";
-import { allFixtures, allClubs, clubById, featuredFixture } from "@/lib/data";
+import { MatchRow } from "@/components/match-row";
+import { TournamentHero } from "@/components/landing/tournament-hero";
+import { SimulationLeaders } from "@/components/landing/simulation-leaders";
+import { allClubs, clubById, featuredFixture } from "@/lib/data";
+import { allMatchViews, matchViewToRow } from "@/lib/match-view";
 import simulation from "@/data/simulation.json";
-
-function ChampionStrip() {
-  const sim = (simulation as { teams: Record<string, { champion: number }> }).teams;
-  const byDataset = new Map(allClubs().map((c) => [c.datasetName ?? c.name, c]));
-  const top = Object.entries(sim)
-    .sort((a, b) => b[1].champion - a[1].champion)
-    .slice(0, 8);
-  return (
-    <section>
-      <h2 className="text-label mb-4">Who wins the cup — 10,000 simulations</h2>
-      <div className="flex gap-3 overflow-x-auto pb-1">
-        {top.map(([name, o]) => {
-          const club = byDataset.get(name);
-          return (
-            <Link
-              key={name}
-              href={club ? `/team/${club.id}` : "/simulator"}
-              className="flex shrink-0 items-center gap-3 rounded-full bg-[var(--surface)] py-2 pl-2.5 pr-4 transition-colors duration-300 hover:bg-[var(--elevated)] dark:border dark:border-[var(--hairline)]"
-            >
-              <span
-                className="h-2.5 w-2.5 rounded-full"
-                style={{ background: club?.primary ?? "var(--neutral-fill)" }}
-                aria-hidden
-              />
-              <span className="text-[14px] font-medium">{club?.name ?? name}</span>
-              <span className="tabular text-[14px] font-bold text-[var(--up)]">
-                {(o.champion * 100).toFixed(1)}%
-              </span>
-            </Link>
-          );
-        })}
-      </div>
-    </section>
-  );
-}
+import predictions from "@/data/predictions.json";
+import accountability from "@/data/backtest/wc26-accountability.json";
 
 export default function HomePage() {
   const featured = featuredFixture();
-  const upcoming = allFixtures()
-    .filter((f) => f.slug !== featured.slug && f.homeScore === undefined)
-    .slice(0, 9);
+  const views = allMatchViews();
+  const upcoming = views
+    .filter((v) => v.fixture.slug !== featured.slug && (v.status === "locked" || v.status === "upcoming"))
+    .slice(0, 6);
+  const played = views.filter((v) => v.status === "official" || v.status === "informational").slice(0, 4);
+  const clubs = allClubs();
+  const byDataset = new Map(clubs.map((c) => [c.datasetName ?? c.name, c]));
+  const sim = simulation as {
+    teams: Record<string, { champion: number; reachFinal: number }>;
+  };
+  const leaders = Object.entries(sim.teams)
+    .map(([name, o]) => ({ club: byDataset.get(name), champion: o.champion, final: o.reachFinal }))
+    .filter((row): row is { club: ReturnType<typeof allClubs>[number]; champion: number; final: number } => Boolean(row.club))
+    .sort((a, b) => b.champion - a.champion)
+    .slice(0, 6);
+  const leader = leaders[0];
+  const officialCount = (accountability as { official: { aggregates: { n: number } } }).official
+    .aggregates.n;
+  const openLocks = (predictions as { entries: Array<{ result?: string }> }).entries.filter(
+    (entry) => entry.result === undefined,
+  ).length;
+
   return (
     <>
       <SiteHeader />
-      <main className="mx-auto w-full max-w-6xl flex-1 space-y-16 px-6 py-12 md:py-16">
-        <MatchdayHero
+      <main className="mx-auto max-w-6xl px-6 py-12 md:py-16">
+        <div className="space-y-16">
+        <TournamentHero
           fixture={featured}
           home={clubById(featured.homeId)}
           away={clubById(featured.awayId)}
+          officialCount={officialCount}
+          openLocks={openLocks}
+          leader={{ name: leader.club.name, pct: leader.champion * 100 }}
         />
-        <ChampionStrip />
-        <section>
-          <div className="mb-6 flex items-baseline justify-between">
-            <h2 className="text-label">Next up</h2>
-            <Link href="/matches" className="text-caption hover:text-[var(--ink)]">
-              All 72 matches →
-            </Link>
-          </div>
+        <section className="animate-rise">
+          <h2 className="text-label mb-4">Cup Race</h2>
+          <SimulationLeaders leaders={leaders} />
+        </section>
+        {played.length > 0 && (
+          <section className="animate-rise">
+            <h2 className="text-label mb-4">Latest results</h2>
+            <div className="space-y-2">
+              {played.map((view) => (
+                <MatchRow key={view.fixture.slug} m={matchViewToRow(view)} />
+              ))}
+            </div>
+          </section>
+        )}
+        <section className="animate-rise">
+          <h2 className="text-label mb-4">Next up</h2>
           <ul role="list" className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {upcoming.map((f) => (
-              <li key={f.slug}>
+            {upcoming.map((view) => (
+              <li key={view.fixture.slug}>
                 <FixtureCard
-                  fixture={f}
-                  home={clubById(f.homeId)}
-                  away={clubById(f.awayId)}
+                  fixture={view.fixture}
+                  home={view.home}
+                  away={view.away}
                 />
               </li>
             ))}
           </ul>
         </section>
+        </div>
       </main>
     </>
   );
