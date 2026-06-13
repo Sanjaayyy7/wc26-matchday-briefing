@@ -28,6 +28,7 @@ import {
   bttsCalibration,
   scorelineHitRates,
   bootstrapCI,
+  toSplit,
   type BacktestPred,
 } from "../lib/backtest-metrics";
 import { appDir } from "./shared.mts";
@@ -123,8 +124,6 @@ function buildPredictions(rows: Row[], params: ModelParams): BacktestPred[] {
         btts: s.btts,
         over25: s.over25,
         totalGoals: row.hs + row.as,
-        // stash effective Elo diff for favorite-strength segmentation
-        // (not part of BacktestPred's public contract, attached separately below)
       });
     }
 
@@ -180,7 +179,7 @@ function summarizeSegment(preds: BacktestPred[]): SegmentSummary {
   let favoriteCorrect = 0;
 
   for (const p of preds) {
-    const split: Split = { home: p.probs.home * 100, draw: p.probs.draw * 100, away: p.probs.away * 100 };
+    const split: Split = toSplit(p.probs);
     brierVals.push(brier(split, p.outcome));
     rpsVals.push(rps(split, p.outcome));
     uniformBrierVals.push(brier(UNIFORM, p.outcome));

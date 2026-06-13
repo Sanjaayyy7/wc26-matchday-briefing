@@ -31,7 +31,7 @@ export type BacktestPred = {
   totalGoals?: number;
 };
 
-function toSplit(probs: BacktestPred["probs"]): Split {
+export function toSplit(probs: BacktestPred["probs"]): Split {
   return { home: probs.home * 100, draw: probs.draw * 100, away: probs.away * 100 };
 }
 
