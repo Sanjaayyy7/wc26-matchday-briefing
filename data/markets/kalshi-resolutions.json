@@ -1,4 +1,14 @@
 {
+  "united-states-vs-paraguay": {
+    "ticker": "KXWCGAME-26JUN12USAPAR",
+    "resolved": {
+      "home": 1,
+      "draw": 0,
+      "away": 0
+    },
+    "settledTime": "2026-06-13T03:04:24.592403Z",
+    "_source": "ledger"
+  },
   "mexico-vs-south-africa": {
     "ticker": "KXWCGAME-26JUN11MEXRSA",
     "resolved": {
@@ -17,6 +27,16 @@
       "away": 0
     },
     "settledTime": "2026-06-12T04:01:28.521157Z",
+    "_source": "derived"
+  },
+  "canada-vs-bosnia-herzegovina": {
+    "ticker": "KXWCGAME-26JUN12CANBIH",
+    "resolved": {
+      "home": 0,
+      "draw": 1,
+      "away": 0
+    },
+    "settledTime": "2026-06-12T21:00:34.348724Z",
     "_source": "derived"
   }
 }

@@ -3,8 +3,8 @@
 //
 // Handles two sources of event tickers:
 //   1. Ledger entries with explicit `marketTicker` (predictions.json)
-//   2. Played fixtures in fixtures.json (homeScore/awayScore present),
-//      deriving the event ticker via kalshiEventTicker()
+//   2. Fixtures whose kickoff has passed (derived via kalshiEventTicker())
+//      — gated on kickoff date, NOT on dataset score presence
 //
 // Only settled (finalized) events are written to the output file.
 // Idempotent: re-running overwrites deterministically.
@@ -121,10 +121,11 @@ async function fetchMarkets(eventTicker: string): Promise<MarketsResponse> {
 async function main() {
   const allFixtures: FixtureRow[] = fixtures();
 
-  // Played fixtures: have homeScore and awayScore set in fixtures.json
+  // Played fixtures: kickoff date is in the past (dataset score lag must not block resolution fetch)
+  const now = new Date();
   const playedFixtures = allFixtures.filter(
-    (f) => typeof (f as FixtureRow & { homeScore?: number }).homeScore === "number",
-  ) as Array<FixtureRow & { homeScore: number; awayScore: number }>;
+    (f) => new Date(f.kickoffISO) < now,
+  );
 
   // Read predictions ledger (do NOT mutate)
   const ledgerPath = path.join(appDir, "data", "predictions.json");
