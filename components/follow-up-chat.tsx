@@ -121,13 +121,13 @@ export function FollowUpChat({
         {visible.map((m, i) =>
           m.role === "user" ? (
             <div key={i} className="flex justify-end">
-              <p className="max-w-[80%] rounded-2xl rounded-br-md bg-[var(--accent)] px-4 py-2.5 text-[15px] leading-relaxed text-[var(--accent-foreground)]">
+              <p className="max-w-sm rounded-2xl rounded-br-md bg-[var(--accent)] px-4 py-2.5 text-[var(--accent-foreground)] sm:max-w-md">
                 {m.content}
               </p>
             </div>
           ) : (
             <div key={i} className="flex">
-              <p className="max-w-[85%] whitespace-pre-wrap rounded-2xl rounded-bl-md bg-[var(--surface)] px-4 py-2.5 text-[15px] leading-relaxed dark:border dark:border-[var(--hairline)]">
+              <p className="max-w-sm whitespace-pre-wrap rounded-2xl rounded-bl-md bg-[var(--surface)] px-4 py-2.5 dark:border dark:border-[var(--hairline)] sm:max-w-md">
                 {m.content || (streaming && i === visible.length - 1 ? "…" : "")}
               </p>
             </div>
@@ -141,7 +141,7 @@ export function FollowUpChat({
           aria-label="Ask a follow-up question"
           placeholder="What about BTTS? Who scores first?"
           disabled={streaming}
-          className="h-9 flex-1 bg-transparent text-[15px] outline-none placeholder:text-[var(--ink-faint)]"
+          className="h-9 flex-1 bg-transparent outline-none placeholder:text-[var(--ink-faint)]"
         />
         <button
           type="submit"

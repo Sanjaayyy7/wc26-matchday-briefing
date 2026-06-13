@@ -130,7 +130,7 @@ export function PreviewPane({
             <span className="text-[var(--ink-faint)]">–</span>
             {parsed.scoreline!.away}
           </span>
-          <span className="text-[15px] text-[var(--ink-muted)]">
+          <span className="text-caption">
             {parsed.scoreline!.favored === "home"
               ? `${home.name} edge`
               : parsed.scoreline!.favored === "away"
@@ -143,7 +143,7 @@ export function PreviewPane({
       {parsed.quickTake && (
         <Reveal>
           <h2 className="text-label mb-3">Quick take</h2>
-          <p className="text-title text-2xl leading-snug md:text-[28px]">
+          <p className="text-title text-2xl leading-snug md:text-3xl">
             {parsed.quickTake}
           </p>
         </Reveal>
@@ -180,7 +180,7 @@ export function PreviewPane({
       {parsed.uncertainties && parsed.uncertainties.length > 0 && (
         <Reveal>
           <h2 className="text-label mb-3">Things I&rsquo;m not sure about</h2>
-          <ul className="space-y-2 text-[15px] text-[var(--ink-muted)]">
+          <ul className="space-y-2 text-[var(--ink-muted)]">
             {parsed.uncertainties.map((u, i) => (
               <li key={i}>{u}</li>
             ))}
@@ -194,9 +194,9 @@ export function PreviewPane({
 function Reveal({ children }: { children: React.ReactNode }) {
   return (
     <motion.section
-      initial={{ opacity: 0, y: 8 }}
+      initial={{ opacity: 0, y: 4 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ type: "spring", stiffness: 300, damping: 30 }}
+      transition={{ duration: 0.3 }}
     >
       {children}
     </motion.section>
@@ -260,13 +260,13 @@ function ErrorBlock({
 }) {
   return (
     <div className="mt-12 rounded-2xl bg-[var(--surface)] p-6 dark:border dark:border-[var(--hairline)]">
-      <p className="text-[15px]">
+      <p>
         <span className="mr-2 inline-block h-2 w-2 rounded-full bg-[var(--down)]" aria-hidden />
         {message}
       </p>
       <button
         onClick={onRetry}
-        className="mt-4 inline-flex h-10 items-center rounded-full bg-[var(--accent)] px-5 text-sm font-medium text-[var(--accent-foreground)] transition-transform duration-300 hover:scale-[1.03]"
+        className="mt-4 inline-flex h-10 items-center rounded-full bg-[var(--accent)] px-5 font-medium text-[var(--accent-foreground)] transition-transform duration-300 hover:scale-105"
       >
         Retry
       </button>

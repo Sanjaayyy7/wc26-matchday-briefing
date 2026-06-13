@@ -28,7 +28,7 @@ export function Crest({
         width: size,
         height: size,
         background: primary,
-        color: secondary ?? "#ffffff",
+        color: secondary ?? "var(--canvas)",
         fontSize,
       }}
     >

@@ -20,7 +20,7 @@ export function ScaffoldPanel() {
       </summary>
       <ol className="mt-5 grid gap-3 sm:grid-cols-2">
         {STEPS.map((s, i) => (
-          <li key={i} className="flex gap-3 text-[15px]">
+          <li key={i} className="flex gap-3">
             <span className="text-caption tabular pt-0.5">
               {String(i + 1).padStart(2, "0")}
             </span>

@@ -2,9 +2,8 @@ import { SiteHeader } from "@/components/site-header";
 import { fixtureBySlug, clubById } from "@/lib/data";
 import type { LockedEntry } from "@/lib/predictions-ledger";
 import type { AccountabilityOutput, OfficialRow } from "@/lib/accountability";
-import { verdictVar } from "@/lib/kit-color";
-import { verdictDisplay } from "@/lib/verdict-display";
 import { NumberTicker } from "@/components/number-ticker";
+import { VerdictChip } from "@/components/verdict-chip";
 import predictionsJson from "@/data/predictions.json";
 import accountabilityJson from "@/data/backtest/wc26-accountability.json";
 import model from "@/data/model.json";
@@ -66,22 +65,6 @@ function LockedSplit({ locked }: { locked: { home: number; draw: number; away: n
   );
 }
 
-function VerdictChip({ verdict }: { verdict: OfficialRow["verdict"] }) {
-  const { label, icon } = verdictDisplay(verdict);
-  const color = verdictVar(verdict);
-  return (
-    <span
-      className="text-label inline-flex items-center gap-1 rounded-sm px-2 py-0.5"
-      style={{
-        color,
-        background: `color-mix(in oklab, ${color} 16%, var(--surface))`,
-      }}
-    >
-      {icon} {label}
-    </span>
-  );
-}
-
 export default function RecordPage() {
   const entries = (predictionsJson as { entries: LockedEntry[] }).entries;
   const open = entries.filter((e) => e.result === undefined);
@@ -98,7 +81,7 @@ export default function RecordPage() {
       <main className="mx-auto w-full max-w-6xl flex-1 space-y-16 px-6 py-12 md:py-16">
         <section className="animate-rise">
           <h1 className="text-title text-3xl">Prediction vs reality</h1>
-          <p className="mt-3 max-w-2xl text-[17px] text-[var(--ink-muted)]">
+          <p className="mt-3 max-w-2xl text-[var(--ink-muted)]">
             Every call is locked before kickoff and never edited. Only locked
             calls are graded against the model — matches played before a call
             was locked are shown for completeness but never scored
@@ -111,13 +94,14 @@ export default function RecordPage() {
 
         <section className="animate-rise" style={{ animationDelay: "0.06s" }}>
           <h2 className="text-label mb-4">At a glance</h2>
-          <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
+          <div className="grid gap-4 sm:grid-cols-3">
             <MetricCard
               label="Correct picks"
               value={
                 agg.n ? (
                   <span>
-                    {Math.round(agg.accuracy! * agg.n)}/{agg.n}
+                    <NumberTicker value={Math.round(agg.accuracy! * agg.n)} />
+                    /<NumberTicker value={agg.n} />
                   </span>
                 ) : (
                   <Dash />
@@ -127,12 +111,24 @@ export default function RecordPage() {
             />
             <MetricCard
               label="Avg Brier"
-              value={agg.meanBrier !== null ? <span>{agg.meanBrier.toFixed(3)}</span> : <Dash />}
+              value={
+                agg.meanBrier !== null ? (
+                  <NumberTicker value={agg.meanBrier} decimals={3} />
+                ) : (
+                  <Dash />
+                )
+              }
               sub={`n=${agg.n} · uniform baseline ${UNIFORM_BRIER}`}
             />
             <MetricCard
               label="Avg RPS"
-              value={agg.meanRps !== null ? <span>{agg.meanRps.toFixed(3)}</span> : <Dash />}
+              value={
+                agg.meanRps !== null ? (
+                  <NumberTicker value={agg.meanRps} decimals={3} />
+                ) : (
+                  <Dash />
+                )
+              }
               sub={`n=${agg.n} · coin-flip ≈ ${COIN_FLIP_RPS}`}
             />
             <MetricCard
@@ -140,7 +136,8 @@ export default function RecordPage() {
               value={
                 agg.vsKalshi.n > 0 ? (
                   <span>
-                    {agg.vsKalshi.modelBrier!.toFixed(3)} / {agg.vsKalshi.marketBrier!.toFixed(3)}
+                    <NumberTicker value={agg.vsKalshi.modelBrier!} decimals={3} /> /{" "}
+                    <NumberTicker value={agg.vsKalshi.marketBrier!} decimals={3} />
                   </span>
                 ) : (
                   <Dash />
@@ -154,7 +151,16 @@ export default function RecordPage() {
             />
             <MetricCard
               label="Model vs Polymarket"
-              value={agg.vsPolymarket.n > 0 ? <span>{agg.vsPolymarket.modelBrier!.toFixed(3)} / {agg.vsPolymarket.marketBrier!.toFixed(3)}</span> : <Dash />}
+              value={
+                agg.vsPolymarket.n > 0 ? (
+                  <span>
+                    <NumberTicker value={agg.vsPolymarket.modelBrier!} decimals={3} /> /{" "}
+                    <NumberTicker value={agg.vsPolymarket.marketBrier!} decimals={3} />
+                  </span>
+                ) : (
+                  <Dash />
+                )
+              }
               sub={
                 agg.vsPolymarket.n > 0
                   ? `ours / market's Brier, n=${agg.vsPolymarket.n}`
@@ -168,7 +174,11 @@ export default function RecordPage() {
             />
             <MetricCard
               label="Backtest (2024+)"
-              value={<span>{bt.rps.toFixed(3)} RPS</span>}
+              value={
+                <span>
+                  <NumberTicker value={bt.rps} decimals={3} /> RPS
+                </span>
+              }
               sub={`n=${bt.n} · Brier ${bt.brier.toFixed(3)} · ECE ${(bt.ece * 100).toFixed(1)}%`}
             />
           </div>
@@ -177,49 +187,60 @@ export default function RecordPage() {
         {official.rows.length > 0 && (
           <section className="animate-rise" style={{ animationDelay: "0.12s" }}>
             <h2 className="text-label mb-4">Settled calls</h2>
-            <div className="space-y-3 overflow-x-auto">
+            <div className="space-y-3">
               {official.rows.map((row) => {
                 const pm = (row as OfficialRow & { polymarket?: { brier: number; rps: number } })
                   .polymarket;
                 return (
                   <div
                     key={row.slug}
-                    className="grid min-w-[640px] grid-cols-[1.4fr_1fr_0.8fr_0.9fr_0.7fr_0.7fr_0.7fr] items-center gap-4 rounded-xl bg-[var(--surface)] px-4 py-4 dark:border dark:border-[var(--hairline)] sm:min-w-0"
+                    className="grid gap-4 rounded-xl bg-[var(--surface)] px-4 py-4 dark:border dark:border-[var(--hairline)] lg:grid-cols-[1.4fr_0.8fr_0.7fr_0.7fr_0.7fr_0.7fr]"
                   >
                     <div>
-                      <p className="text-title text-[17px] truncate">{matchLabel(row.slug)}</p>
+                      <p className="text-title truncate">{matchLabel(row.slug)}</p>
                       <p className="text-caption mt-1">Locked split</p>
                       <LockedSplit locked={row.locked} />
                     </div>
-                    <div>
+                    <div className="flex items-center justify-between gap-4 lg:block">
                       <p className="text-caption">Actual</p>
                       <p className="text-display tabular text-2xl">{row.actual}</p>
                     </div>
-                    <div>
+                    <div className="flex items-center justify-between gap-4 lg:block">
+                      <p className="text-caption lg:hidden">Verdict</p>
                       <VerdictChip verdict={row.verdict} />
                     </div>
-                    <div>
+                    <div className="flex items-center justify-between gap-4 lg:block">
                       <p className="text-caption">Brier</p>
-                      <p className="tabular text-[15px] font-medium">{row.grades.modelBrier.toFixed(3)}</p>
+                      <NumberTicker value={row.grades.modelBrier} decimals={3} className="text-title" />
                     </div>
-                    <div>
+                    <div className="flex items-center justify-between gap-4 lg:block">
                       <p className="text-caption">BTTS</p>
-                      <p className="tabular text-[15px] font-medium">
-                        {row.grades.bttsBrier !== undefined ? row.grades.bttsBrier.toFixed(3) : "—"}
+                      <p className="text-title tabular">
+                        {row.grades.bttsBrier !== undefined ? (
+                          <NumberTicker value={row.grades.bttsBrier} decimals={3} />
+                        ) : (
+                          "—"
+                        )}
                         {row.grades.bttsDerivedPostHoc && (
                           <span className="text-caption ml-1">(post-hoc)</span>
                         )}
                       </p>
                     </div>
-                    <div>
+                    <div className="flex items-center justify-between gap-4 lg:block">
                       <p className="text-caption">Kalshi</p>
-                      <p className="tabular text-[15px] font-medium">
-                        {row.kalshi ? row.kalshi.brier.toFixed(3) : "—"}
+                      <p className="text-title tabular">
+                        {row.kalshi ? (
+                          <NumberTicker value={row.kalshi.brier} decimals={3} />
+                        ) : (
+                          "—"
+                        )}
                       </p>
                     </div>
-                    <div>
+                    <div className="flex items-center justify-between gap-4 lg:block">
                       <p className="text-caption">Polymarket</p>
-                      <p className="tabular text-[15px] font-medium">{pm ? pm.brier.toFixed(3) : "—"}</p>
+                      <p className="text-title tabular">
+                        {pm ? <NumberTicker value={pm.brier} decimals={3} /> : "—"}
+                      </p>
                     </div>
                   </div>
                 );
@@ -240,10 +261,10 @@ export default function RecordPage() {
               {informational.rows.map((row) => (
                 <div
                   key={row.slug}
-                  className="rounded-xl bg-[var(--canvas)] px-4 py-3 dark:border dark:border-[var(--hairline)]"
+                  className="rounded-xl bg-[var(--surface)] px-4 py-3 dark:border dark:border-[var(--hairline)]"
                 >
                   <div className="flex flex-wrap items-center justify-between gap-2">
-                    <span className="text-[15px] font-medium truncate">{matchLabel(row.slug)}</span>
+                    <span className="text-title truncate">{matchLabel(row.slug)}</span>
                     <span className="text-display tabular text-xl">{row.actual}</span>
                   </div>
                   <p className="text-caption mt-2 tabular">
@@ -266,7 +287,7 @@ export default function RecordPage() {
                 key={e.slug}
                 className="grid grid-cols-[1fr_auto] items-center gap-4 rounded-xl bg-[var(--surface)] px-4 py-3 dark:border dark:border-[var(--hairline)]"
               >
-                <span className="truncate text-[15px]">{matchLabel(e.slug)}</span>
+                <span className="text-title truncate">{matchLabel(e.slug)}</span>
                 <span className="text-caption tabular">
                   <span className="text-[var(--up)]">{e.split.home}</span> /{" "}
                   {e.split.draw} / <span className="text-[var(--down)]">{e.split.away}</span>

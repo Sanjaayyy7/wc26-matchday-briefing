@@ -1,7 +1,6 @@
 "use client";
 
 import { useMemo } from "react";
-import { motion } from "framer-motion";
 import { deriveHeatmap } from "@/lib/derive-heatmap";
 import type { Club } from "@/lib/data";
 
@@ -62,19 +61,16 @@ function Row({
         const intensity = max > 0 ? Math.min(1, p / max) : 0;
         const isMode = h === mode.home && a === mode.away;
         return (
-          <motion.div
+          <div
             key={a}
-            initial={{ opacity: 0, scale: 0.92 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: (h * 6 + a) * 0.012, duration: 0.25 }}
-            className="tabular grid aspect-square place-items-center rounded-lg text-[11px]"
+            className="text-caption tabular grid aspect-square place-items-center rounded-lg border border-transparent"
             style={
               isMode
                 ? {
                     background: "var(--up)",
                     color: "var(--canvas)",
                     fontWeight: 700,
-                    boxShadow: "inset 0 0 0 2px var(--canvas)",
+                    borderColor: "var(--canvas)",
                   }
                 : {
                     background: `color-mix(in oklab, var(--elevated) ${
@@ -87,7 +83,7 @@ function Row({
             title={`${h}-${a}: ${(p * 100).toFixed(1)}%`}
           >
             {(p * 100).toFixed(0)}
-          </motion.div>
+          </div>
         );
       })}
     </>

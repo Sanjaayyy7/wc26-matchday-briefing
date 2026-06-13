@@ -53,7 +53,7 @@ export function BttsCard({ slug }: { slug: string }) {
   if (status === "error") {
     return (
       <Shell>
-        <p className="text-sm text-[var(--ink-muted)]">
+        <p className="text-caption">
           Could not fetch the BTTS read. Refresh to retry.
         </p>
       </Shell>
@@ -64,7 +64,7 @@ export function BttsCard({ slug }: { slug: string }) {
   if (errMatch) {
     return (
       <Shell>
-        <p className="text-sm text-[var(--ink-muted)]">
+        <p className="text-caption">
           BTTS read failed: status {errMatch[1]}.
         </p>
       </Shell>
@@ -93,7 +93,7 @@ export function BttsCard({ slug }: { slug: string }) {
             <NumberTicker
               value={Number(pctMatch[1])}
               suffix="%"
-              className="text-[34px] font-bold leading-none tracking-[-0.02em]"
+              className="text-display text-3xl"
             />
             <span className="text-caption">{parsed.number}</span>
           </div>
@@ -112,9 +112,9 @@ export function BttsCard({ slug }: { slug: string }) {
 function Shell({ children }: { children: React.ReactNode }) {
   return (
     <motion.section
-      initial={{ opacity: 0, y: 8 }}
+      initial={{ opacity: 0, y: 4 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ type: "spring", stiffness: 300, damping: 30 }}
+      transition={{ duration: 0.3 }}
       className="mt-12 rounded-2xl bg-[var(--surface)] p-6 dark:border dark:border-[var(--hairline)]"
     >
       <div className="mb-4 flex items-center justify-between">
@@ -132,7 +132,7 @@ function Row({ tag, children }: { tag: string; children: React.ReactNode }) {
   return (
     <div className="flex flex-col gap-1.5 sm:flex-row sm:gap-6">
       <span className="text-label w-32 shrink-0 pt-0.5">{tag}</span>
-      <span className="text-[15px] leading-relaxed">{children}</span>
+      <span>{children}</span>
     </div>
   );
 }

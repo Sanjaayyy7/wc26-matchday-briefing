@@ -1,3 +1,5 @@
+import { NumberTicker } from "./number-ticker";
+
 export type H2HRecord = {
   teamA: string;
   teamB: string;
@@ -21,7 +23,7 @@ export function H2HPanel({
 }) {
   if (!record) {
     return (
-      <p className="text-[15px] text-[var(--ink-muted)]">
+      <p className="text-[var(--ink-muted)]">
         These two have never met in the dataset (1872 → today). First time for
         everything.
       </p>
@@ -37,17 +39,15 @@ export function H2HPanel({
     <div className="space-y-3">
       <div className="grid grid-cols-3 text-center">
         <div>
-          <div className="tabular text-[24px] font-bold">{homeWins}</div>
+          <NumberTicker value={homeWins} className="text-display text-2xl" />
           <div className="text-caption">{homeName} wins</div>
         </div>
         <div>
-          <div className="tabular text-[24px] font-bold text-[var(--ink-muted)]">
-            {record.draws}
-          </div>
+          <NumberTicker value={record.draws} className="text-display text-2xl text-[var(--ink-muted)]" />
           <div className="text-caption">draws</div>
         </div>
         <div>
-          <div className="tabular text-[24px] font-bold">{awayWins}</div>
+          <NumberTicker value={awayWins} className="text-display text-2xl" />
           <div className="text-caption">{awayName} wins</div>
         </div>
       </div>

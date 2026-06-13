@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Crest } from "./crest";
 import { formatKickoff } from "@/lib/format-kickoff";
 import type { Club, Fixture } from "@/lib/data";
+import { kitPairWashStyle } from "@/lib/kit-color";
 
 export function MatchdayHero({
   fixture,
@@ -13,7 +14,10 @@ export function MatchdayHero({
   away: Club;
 }) {
   return (
-    <section className="rounded-3xl bg-[var(--surface)] px-6 py-16 dark:border dark:border-[var(--hairline)] md:py-20">
+    <section
+      className="rounded-3xl px-6 py-16 dark:border dark:border-[var(--hairline)] md:py-20"
+      style={kitPairWashStyle(home.primary, away.primary)}
+    >
       <div className="mx-auto flex max-w-3xl flex-col items-center gap-8 text-center">
         <span className="text-label">
           Featured{fixture.group ? ` · Group ${fixture.group}` : ""} ·{" "}
@@ -30,10 +34,7 @@ export function MatchdayHero({
             />
             <span className="text-display text-3xl md:text-5xl">{home.name}</span>
           </div>
-          <span
-            className="text-2xl font-light text-[var(--ink-faint)] md:text-3xl"
-            aria-hidden
-          >
+          <span className="text-title text-[var(--ink-faint)]" aria-hidden>
             vs
           </span>
           <div className="flex flex-col items-center gap-4">
@@ -47,12 +48,12 @@ export function MatchdayHero({
             <span className="text-display text-3xl md:text-5xl">{away.name}</span>
           </div>
         </div>
-        <p className="max-w-xl text-[17px] leading-relaxed text-[var(--ink-muted)]">
+        <p className="max-w-xl text-[var(--ink-muted)]">
           {fixture.stakes} {fixture.venue}.
         </p>
         <Link
           href={`/fixture/${fixture.slug}`}
-          className="inline-flex h-11 items-center rounded-full bg-[var(--accent)] px-6 text-[15px] font-medium text-[var(--accent-foreground)] transition-transform duration-300 hover:scale-[1.03]"
+          className="inline-flex h-11 items-center rounded-full bg-[var(--accent)] px-6 font-medium text-[var(--accent-foreground)] transition-transform duration-300 hover:scale-105"
         >
           Read the briefing
         </Link>

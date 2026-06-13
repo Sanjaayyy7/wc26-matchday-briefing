@@ -40,7 +40,6 @@ describe("stageVar", () => {
   });
 
   it("falls back gracefully for an unknown stage", () => {
-    // @ts-expect-error - testing unknown/undefined input handling
     expect(stageVar("not-a-stage")).toBe("var(--stage-group)");
     expect(stageVar(undefined)).toBe("var(--stage-group)");
   });

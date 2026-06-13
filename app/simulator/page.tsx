@@ -46,24 +46,32 @@ export default function SimulatorPage() {
   return (
     <>
       <SiteHeader />
-      <main className="mx-auto w-full max-w-5xl flex-1 space-y-8 px-6 py-12">
-        <div>
+      <main className="mx-auto w-full max-w-6xl overflow-x-hidden px-6 py-12 md:py-16">
+        <div className="min-w-0 space-y-16">
+        <section className="animate-rise min-w-0">
           <h1 className="text-title text-2xl">Tournament simulator</h1>
-          <p className="mt-2 max-w-2xl text-[15px] text-[var(--ink-muted)]">
+          <p className="mt-2 max-w-2xl text-[var(--ink-muted)]">
             {sim.runMeta.runs.toLocaleString()} full tournaments sampled from the
             Elo + Dixon-Coles model: every unplayed match drawn from its score
             grid, FIFA group tiebreakers, the verified round-of-32 bracket, and
             extra-time/penalty resolution for drawn knockouts.{" "}
             {sim.runMeta.playedLocked} real results locked in.
           </p>
+        </section>
+        <section className="animate-rise">
+          <h2 className="text-label mb-4">Tournament odds</h2>
+          <OddsTable rows={rows} />
+        </section>
+        <section className="animate-rise">
+          <h2 className="text-label mb-4">Run metadata</h2>
+          <p className="text-caption max-w-2xl">
+            Run seed {sim.runMeta.seed} · data through {sim.runMeta.dataThrough} ·
+            generated {sim.runMeta.generatedAt.slice(0, 16).replace("T", " ")} UTC.{" "}
+            {sim.runMeta.knockoutVenueNote} Re-run with{" "}
+            <code>npm run ml:simulate -- 50000</code>.
+          </p>
+        </section>
         </div>
-        <OddsTable rows={rows} />
-        <p className="text-caption max-w-2xl">
-          Run seed {sim.runMeta.seed} · data through {sim.runMeta.dataThrough} ·
-          generated {sim.runMeta.generatedAt.slice(0, 16).replace("T", " ")} UTC.{" "}
-          {sim.runMeta.knockoutVenueNote} Re-run with{" "}
-          <code>npm run ml:simulate -- 50000</code>.
-        </p>
       </main>
     </>
   );

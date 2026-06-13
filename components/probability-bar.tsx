@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { NumberTicker } from "./number-ticker";
 import type { Club } from "@/lib/data";
+import { kitAccent } from "@/lib/kit-color";
 
 export function ProbabilityBar({
   probabilities,
@@ -22,9 +23,9 @@ export function ProbabilityBar({
   hero?: boolean;
 }) {
   const segments = [
-    { key: "home", pct: probabilities.home, fill: "var(--up)", label: home.short },
+    { key: "home", pct: probabilities.home, fill: kitAccent(home.primary, "up"), label: home.short },
     { key: "draw", pct: probabilities.draw, fill: "var(--neutral-fill)", label: "Draw" },
-    { key: "away", pct: probabilities.away, fill: "var(--down)", label: away.short },
+    { key: "away", pct: probabilities.away, fill: kitAccent(away.primary, "down"), label: away.short },
   ];
   return (
     <div>
@@ -38,7 +39,7 @@ export function ProbabilityBar({
               className={
                 hero
                   ? "text-[clamp(36px,6vw,56px)] font-bold leading-none tracking-[-0.022em]"
-                  : "text-[28px] font-bold tracking-[-0.02em]"
+                  : "text-display text-2xl"
               }
             />
           </div>

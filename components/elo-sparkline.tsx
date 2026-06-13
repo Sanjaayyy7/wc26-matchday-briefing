@@ -41,7 +41,7 @@ export function EloSparkline({
           fill={color}
         />
       </svg>
-      <span className="tabular text-[13px] font-semibold">{last.elo}</span>
+      <span className="text-label tabular">{last.elo}</span>
     </div>
   );
 }

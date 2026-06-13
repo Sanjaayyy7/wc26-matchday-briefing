@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import Link from "next/link";
+import { kitAccent } from "@/lib/kit-color";
 
 export type OddsRow = {
   id: string;
@@ -38,8 +39,8 @@ export function OddsTable({ rows }: { rows: OddsRow[] }) {
     x >= 0.995 ? "100%" : x < 0.001 ? "<0.1%" : `${(x * 100).toFixed(1)}%`;
 
   return (
-    <div className="overflow-x-auto rounded-2xl bg-[var(--surface)] dark:border dark:border-[var(--hairline)]">
-      <table className="w-full min-w-[40rem] text-[14px]">
+    <div className="min-w-0 max-w-full overflow-x-auto rounded-2xl bg-[var(--surface)] dark:border dark:border-[var(--hairline)]">
+      <table className="w-full min-w-160">
         <thead>
           <tr className="text-caption border-b border-[var(--hairline)] text-left">
             <th className="px-4 py-3 font-normal">#</th>
@@ -68,7 +69,7 @@ export function OddsTable({ rows }: { rows: OddsRow[] }) {
                 <Link href={`/team/${r.id}`} className="flex items-center gap-2 hover:underline">
                   <span
                     className="h-2 w-2 rounded-full"
-                    style={{ background: r.color }}
+                    style={{ background: kitAccent(r.color, "up") }}
                     aria-hidden
                   />
                   <span className="font-medium">{r.name}</span>

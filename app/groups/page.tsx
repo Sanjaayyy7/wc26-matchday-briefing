@@ -1,7 +1,9 @@
 import { SiteHeader } from "@/components/site-header";
 import Link from "next/link";
+import { NumberTicker } from "@/components/number-ticker";
 import { allClubs, fixturesByGroup, type Club } from "@/lib/data";
 import { groupStandings } from "@/lib/standings";
+import { kitAccent } from "@/lib/kit-color";
 import simulation from "@/data/simulation.json";
 
 export const metadata = { title: "Groups — Matchday Briefing" };
@@ -19,7 +21,7 @@ function GroupCard({ letter, clubs }: { letter: string; clubs: Club[] }) {
   return (
     <section className="rounded-2xl bg-[var(--surface)] p-5 dark:border dark:border-[var(--hairline)]">
       <h2 className="text-label mb-4">Group {letter}</h2>
-      <table className="w-full text-[14px]">
+      <table className="w-full">
         <thead>
           <tr className="text-caption text-left">
             <th className="pb-2 font-normal">Team</th>
@@ -45,7 +47,7 @@ function GroupCard({ letter, clubs }: { letter: string; clubs: Club[] }) {
                   >
                     <span
                       className="h-2 w-2 rounded-full"
-                      style={{ background: club.primary }}
+                      style={{ background: kitAccent(club.primary, "up") }}
                       aria-hidden
                     />
                     {club.name}
@@ -56,8 +58,12 @@ function GroupCard({ letter, clubs }: { letter: string; clubs: Club[] }) {
                   {r.gf - r.ga > 0 ? `+${r.gf - r.ga}` : r.gf - r.ga}
                 </td>
                 <td className="tabular py-1.5 text-center font-semibold">{r.pts}</td>
-                <td className="tabular py-1.5 text-right">
-                  {adv !== undefined ? `${Math.round(adv * 100)}%` : "—"}
+                <td className="py-1.5 text-right">
+                  {adv !== undefined ? (
+                    <NumberTicker value={adv * 100} suffix="%" />
+                  ) : (
+                    "—"
+                  )}
                 </td>
               </tr>
             );
@@ -73,19 +79,24 @@ export default function GroupsPage() {
   return (
     <>
       <SiteHeader />
-      <main className="mx-auto w-full max-w-6xl flex-1 space-y-10 px-6 py-12">
-        <div>
+      <main className="mx-auto max-w-6xl px-6 py-12 md:py-16">
+        <div className="space-y-16">
+        <section className="animate-rise">
           <h1 className="text-title text-2xl">Groups</h1>
           <p className="text-caption mt-1">
             Live standings (FIFA tiebreak order) · advance probability from{" "}
             {(simulation as { runMeta: { runs: number } }).runMeta.runs.toLocaleString()}{" "}
             simulated tournaments
           </p>
-        </div>
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {GROUPS.map((g) => (
-            <GroupCard key={g} letter={g} clubs={clubs} />
-          ))}
+        </section>
+        <section className="animate-rise">
+          <h2 className="text-label mb-4">Group Standings</h2>
+          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+            {GROUPS.map((g) => (
+              <GroupCard key={g} letter={g} clubs={clubs} />
+            ))}
+          </div>
+        </section>
         </div>
       </main>
     </>

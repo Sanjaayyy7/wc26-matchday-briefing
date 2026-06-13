@@ -52,7 +52,7 @@ export default async function TeamPage({
       <NumberTicker
         value={value * 100}
         suffix="%"
-        className="text-[28px] font-bold tracking-[-0.02em]"
+        className="text-display text-2xl"
       />
     </div>
   );
@@ -60,43 +60,45 @@ export default async function TeamPage({
   return (
     <>
       <SiteHeader />
-      <main className="mx-auto w-full max-w-3xl flex-1 space-y-12 px-6 py-12">
-        <section className="flex items-center gap-5">
-          <Crest
-            short={club.short}
-            primary={club.primary}
-            secondary={club.secondary}
-            name={club.name}
-            size={72}
-          />
-          <div>
-            <h1 className="text-title text-3xl">{club.name}</h1>
-            <p className="text-caption mt-1">
-              Group {club.group} · Elo {rating} (world #{rank})
-            </p>
-          </div>
-        </section>
+      <main className="mx-auto max-w-6xl px-6 py-12 md:py-16">
+        <div className="space-y-16">
+          <section className="animate-rise flex items-center gap-5">
+            <Crest
+              short={club.short}
+              primary={club.primary}
+              secondary={club.secondary}
+              name={club.name}
+              size={72}
+            />
+            <div>
+              <h1 className="text-title text-3xl">{club.name}</h1>
+              <p className="text-caption mt-1">
+                Group {club.group} · Elo <span className="tabular">{rating}</span> (world #
+                <span className="tabular">{rank}</span>)
+              </p>
+            </div>
+          </section>
 
-        {odds && (
-          <section>
+          {odds && (
+          <section className="animate-rise">
             <h2 className="text-label mb-5">Tournament odds — 10,000 simulations</h2>
-            <div className="grid grid-cols-2 gap-6 sm:grid-cols-4">
+            <div className="grid gap-6 sm:grid-cols-4">
               {stat("Advance group", odds.advanceGroup)}
               {stat("Quarter-final", odds.reachQF)}
               {stat("Final", odds.reachFinal)}
               {stat("Champion", odds.champion)}
             </div>
           </section>
-        )}
+          )}
 
-        {form && (
-          <section>
+          {form && (
+          <section className="animate-rise">
             <h2 className="text-label mb-3">Last 10 internationals (recent first)</h2>
             <div className="flex items-center gap-1.5">
               {form.results.split("").map((r, i) => (
                 <span
                   key={i}
-                  className="tabular grid h-7 w-7 place-items-center rounded-lg text-[12px] font-semibold"
+                  className="text-caption tabular grid h-7 w-7 place-items-center rounded-lg font-semibold"
                   style={{
                     background:
                       r === "W"
@@ -115,9 +117,9 @@ export default async function TeamPage({
               </span>
             </div>
           </section>
-        )}
+          )}
 
-        <section>
+          <section className="animate-rise">
           <h2 className="text-label mb-4">Group {club.group} schedule</h2>
           <div className="space-y-2">
             {rows.map((m) => (
@@ -125,6 +127,7 @@ export default async function TeamPage({
             ))}
           </div>
         </section>
+        </div>
       </main>
     </>
   );
