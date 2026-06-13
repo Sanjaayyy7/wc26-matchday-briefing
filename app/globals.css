@@ -20,6 +20,17 @@
   --color-down: var(--down);
   --color-neutral-fill: var(--neutral-fill);
 
+  --color-stage-group: var(--stage-group);
+  --color-stage-r32: var(--stage-r32);
+  --color-stage-r16: var(--stage-r16);
+  --color-stage-qf: var(--stage-qf);
+  --color-stage-sf: var(--stage-sf);
+  --color-stage-final: var(--stage-final);
+
+  --color-verdict-hit: var(--verdict-hit);
+  --color-verdict-close: var(--verdict-close);
+  --color-verdict-miss: var(--verdict-miss);
+
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -77,6 +88,19 @@
   --dur: 0.3s;
   --ease: cubic-bezier(0.4, 0, 0.2, 1);
 
+  /* Stage ramp (§2.3) — light hexes, ~10% darker than dark-mode column */
+  --stage-group: #7c7c81;
+  --stage-r32: #0968cc;
+  --stage-r16: #4a48c4;
+  --stage-qf: #a347d6;
+  --stage-sf: #e08a00;
+  --stage-final: #d4b300;
+
+  /* Verdict ramp (§2.4) */
+  --verdict-hit: var(--up);
+  --verdict-close: var(--stage-sf);
+  --verdict-miss: var(--down);
+
   --background: var(--canvas);
   --foreground: var(--ink);
   --card: var(--surface);
@@ -126,6 +150,19 @@
   --neutral-fill: #2c2c2e;
   --glass: rgba(20, 20, 22, 0.72);
   --shadow-hover: 0 8px 32px rgba(0, 0, 0, 0.4);
+
+  /* Stage ramp (§2.3) — dark hexes */
+  --stage-group: #8e8e93;
+  --stage-r32: #0a84ff;
+  --stage-r16: #5e5ce6;
+  --stage-qf: #bf5af2;
+  --stage-sf: #ff9f0a;
+  --stage-final: #ffd60a;
+
+  /* Verdict ramp (§2.4) */
+  --verdict-hit: var(--up);
+  --verdict-close: var(--stage-sf);
+  --verdict-miss: var(--down);
 
   --background: var(--canvas);
   --foreground: var(--ink);
@@ -209,4 +246,33 @@
   font-size: 12px;
   font-weight: 400;
   color: var(--ink-muted);
+}
+
+/* Kit wash (§2.2) — `--kit` is set inline per-component via style. */
+@utility kit-wash {
+  background: color-mix(in oklab, var(--kit, var(--neutral-fill)) var(--kit-wash, 12%), var(--canvas));
+}
+.dark {
+  --kit-wash: 18%;
+}
+
+/* Entrance choreography (§7.1) */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@utility animate-rise {
+  animation: rise var(--dur) var(--ease) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-rise {
+    animation: none;
+  }
 }
