@@ -4,7 +4,7 @@
 //   npm run pipeline:settle
 import { readFileSync, writeFileSync, existsSync } from "node:fs";
 import path from "node:path";
-import { settle, type LockedEntry } from "../lib/predictions-ledger";
+import { settle, type LockedEntry, type PolymarketEntry } from "../lib/predictions-ledger";
 import { predictFixture } from "../lib/predict";
 import { appDir, fixtures, teams } from "./shared.mts";
 
@@ -27,8 +27,8 @@ const polymarketRaw = existsSync(polymarketPath)
   ? JSON.parse(readFileSync(polymarketPath, "utf8"))
   : {};
 // Strip top-level metadata keys (starting with "_") to get slug-keyed entries.
-const polymarketData: Record<string, { probs: { home: number; draw: number; away: number }; resolved: { home: number; draw: number; away: number } | null }> = Object.fromEntries(
-  Object.entries(polymarketRaw).filter(([k]) => !k.startsWith("_")) as Array<[string, { probs: { home: number; draw: number; away: number }; resolved: { home: number; draw: number; away: number } | null }]>,
+const polymarketData: Record<string, PolymarketEntry> = Object.fromEntries(
+  Object.entries(polymarketRaw).filter(([k]) => !k.startsWith("_")),
 );
 
 // Build slug → fixture row map for grid recomputation.

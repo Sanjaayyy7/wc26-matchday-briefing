@@ -1,7 +1,7 @@
 // The accountability ledger: predictions are locked before kickoff and never
 // modified afterwards; settling only ever ADDS result fields. No retroactive
 // predictions, ever.
-import { brier, rps, type Outcome, type Split } from "./calibration";
+import { brier, rps, type Outcome, type Prob, type Split } from "./calibration";
 import { summarizeGrid, topKScorelines } from "./poisson-model";
 
 export type LockedEntry = {
@@ -31,10 +31,10 @@ export type LockedEntry = {
   ou25?: { prob: number; actual: boolean; brier: number; derivedPostHoc: true };
   // Market comparison (populated from injected data):
   markets?: {
-    kalshi?: { probs: Split; brier: number; rps: number };
-    polymarket?: { probs: Split; brier?: number; rps?: number };
+    kalshi?: { probs: Prob; brier: number; rps: number };
+    polymarket?: { probs: Prob; brier?: number; rps?: number };
   };
-  /** Cross-check: which outcome each market resolved to, vs our model outcome. */
+  /** Cross-check: which outcome each market resolved to vs the actual result. */
   resolutionCheck?: {
     kalshi?: Outcome;
     polymarket?: Outcome;
@@ -43,7 +43,7 @@ export type LockedEntry = {
 };
 
 /** Polymarket entry shape (subset of what fetch-polymarket.mts stores). */
-type PolymarketEntry = {
+export type PolymarketEntry = {
   probs: { home: number; draw: number; away: number };
   resolved: { home: number; draw: number; away: number } | null;
 };
@@ -73,11 +73,16 @@ function resolvedToOutcome(
   return undefined;
 }
 
+/** Any probability leg at or above this indicates a post-settlement degenerate price. */
+const DEGENERATE_PRICE_THRESHOLD = 0.95;
+/** Floor for log-loss probability to avoid -Infinity on a 0-prob realized outcome. */
+const MIN_LOG_PROB = 1e-9;
+
 /** True when all three probabilities are below the degenerate threshold (0.95).
  *  Post-settlement Polymarket prices collapse to ~0.999/0.001/0.001, which are
  *  NOT valid pre-kickoff forecasts and must not be scored. */
 function isNonDegenerate(probs: { home: number; draw: number; away: number }): boolean {
-  return probs.home < 0.95 && probs.draw < 0.95 && probs.away < 0.95;
+  return probs.home < DEGENERATE_PRICE_THRESHOLD && probs.draw < DEGENERATE_PRICE_THRESHOLD && probs.away < DEGENERATE_PRICE_THRESHOLD;
 }
 
 export function lockNew(
@@ -141,7 +146,7 @@ export function settle(
     };
 
     // --- logLoss ---
-    const pRealized = Math.max(e.split[realized] / 100, 1e-9);
+    const pRealized = Math.max(e.split[realized] / 100, MIN_LOG_PROB);
     settled.logLoss = -Math.log(pRealized);
 
     // --- scorelineHit (no grid needed) ---
@@ -231,7 +236,7 @@ export function settle(
     const polymarketOutcome = resolvedToOutcome(pm?.resolved);
 
     if (kalshiOutcome !== undefined || polymarketOutcome !== undefined) {
-      // agreesWithResult: every market that resolved agrees with the model outcome
+      // agreesWithResult: every market that resolved matches the actual result
       const marketOutcomes = [kalshiOutcome, polymarketOutcome].filter(
         (o): o is Outcome => o !== undefined,
       );

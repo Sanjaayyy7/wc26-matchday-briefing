@@ -1,5 +1,7 @@
 export type Outcome = "home" | "draw" | "away";
 export type Split = Record<Outcome, number>;
+/** Probabilities in the range 0..1 (not percentage points). */
+export type Prob = Record<Outcome, number>;
 
 /** Normalize raw 3-way market prices (mid, 0..1 each) into a 100% book. */
 export function deVig(raw: Split): Split {
