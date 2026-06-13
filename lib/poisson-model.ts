@@ -114,6 +114,25 @@ export function summarizeGrid(grid: number[][]): GridSummary {
 }
 
 /**
+ * Returns the k most probable (home, away) scoreline cells from the grid,
+ * sorted by probability descending. Cells with p=0 are excluded.
+ * Result length is min(k, number of non-zero cells).
+ */
+export function topKScorelines(
+  grid: number[][],
+  k: number,
+): Array<{ home: number; away: number; p: number }> {
+  const cells: Array<{ home: number; away: number; p: number }> = [];
+  grid.forEach((row, h) =>
+    row.forEach((p, a) => {
+      if (p > 0) cells.push({ home: h, away: a, p });
+    }),
+  );
+  cells.sort((a, b) => b.p - a.p);
+  return cells.slice(0, k);
+}
+
+/**
  * Knockout advancement: 90-minute win plus the drawn share resolved by
  * extra time / penalties, approximated as a gentler logistic of the Elo gap
  * (pens compress skill differences toward a coin flip).

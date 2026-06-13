@@ -17,7 +17,52 @@
     "draw": 0.2935323383084577,
     "away": 0.2338308457711443
    },
-   "marketTicker": "KXWCGAME-26JUN12USAPAR"
+   "marketTicker": "KXWCGAME-26JUN12USAPAR",
+   "result": "4-1",
+   "realized": "home",
+   "correctPick": true,
+   "modelBrier": 0.6152000000000001,
+   "modelRps": 0.26260000000000006,
+   "logLoss": 1.0216512475319814,
+   "scorelineHit": false,
+   "marketBrier": 0.4189500259894558,
+   "marketRps": 0.16639439617831242,
+   "markets": {
+    "kalshi": {
+     "probs": {
+      "home": 0.472636815920398,
+      "draw": 0.2935323383084577,
+      "away": 0.2338308457711443
+     },
+     "brier": 0.4189500259894558,
+     "rps": 0.16639439617831242
+    },
+    "polymarket": {
+     "probs": {
+      "home": 0.9980019980019981,
+      "draw": 0.0009990009990009992,
+      "away": 0.0009990009990009992
+     }
+    }
+   },
+   "top3ScorelineHit": false,
+   "btts": {
+    "prob": 0.48140544549154385,
+    "actual": true,
+    "brier": 0.2689403119658241,
+    "derivedPostHoc": true
+   },
+   "ou25": {
+    "prob": 0.4137650028099395,
+    "actual": true,
+    "brier": 0.3436714719304302,
+    "derivedPostHoc": true
+   },
+   "resolutionCheck": {
+    "kalshi": "home",
+    "polymarket": "home",
+    "agreesWithResult": true
+   }
   },
   {
    "slug": "qatar-vs-switzerland",

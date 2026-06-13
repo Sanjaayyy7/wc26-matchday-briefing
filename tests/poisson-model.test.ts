@@ -3,6 +3,7 @@ import {
   lambdasFromElo,
   scoreGrid,
   summarizeGrid,
+  topKScorelines,
   advancementProb,
   DEFAULT_PARAMS,
 } from "@/lib/poisson-model";
@@ -62,6 +63,54 @@ describe("summarizeGrid", () => {
       }),
     );
     expect(s.mostLikely).toEqual({ home: best.h, away: best.a });
+  });
+});
+
+describe("topKScorelines", () => {
+  // Tiny hand-computable 3×3 grid (rows=home goals, cols=away goals).
+  // Values deliberately non-uniform so topK order is unambiguous.
+  // Grid: home=0,away=0 → 0.4; home=1,away=0 → 0.3; home=2,away=1 → 0.2; home=0,away=1 → 0.1
+  // All others 0.  Total = 1.0 (normalized).
+  const testGrid: number[][] = [
+    [0.4, 0.1, 0],
+    [0.3, 0, 0],
+    [0, 0.2, 0],
+  ];
+
+  it("returns the k most probable cells in descending order", () => {
+    const top3 = topKScorelines(testGrid, 3);
+    expect(top3).toHaveLength(3);
+    expect(top3[0]).toEqual({ home: 0, away: 0, p: 0.4 });
+    expect(top3[1]).toEqual({ home: 1, away: 0, p: 0.3 });
+    expect(top3[2]).toEqual({ home: 2, away: 1, p: 0.2 });
+  });
+
+  it("k=1 returns only the single argmax", () => {
+    const top1 = topKScorelines(testGrid, 1);
+    expect(top1).toHaveLength(1);
+    expect(top1[0]).toEqual({ home: 0, away: 0, p: 0.4 });
+  });
+
+  it("k larger than non-zero cells caps at number of non-zero cells", () => {
+    const topAll = topKScorelines(testGrid, 20);
+    // 4 non-zero cells in testGrid
+    expect(topAll.length).toBe(4);
+    // All in descending order
+    for (let i = 1; i < topAll.length; i++) {
+      expect(topAll[i - 1].p).toBeGreaterThanOrEqual(topAll[i].p);
+    }
+  });
+
+  it("works correctly on a real scoreGrid", () => {
+    const realGrid = scoreGrid(1.8, 0.9, DEFAULT_PARAMS.rho);
+    const top3 = topKScorelines(realGrid, 3);
+    expect(top3).toHaveLength(3);
+    expect(top3[0].p).toBeGreaterThanOrEqual(top3[1].p);
+    expect(top3[1].p).toBeGreaterThanOrEqual(top3[2].p);
+    // The argmax of summarizeGrid should be the #1 scoreline
+    const s = summarizeGrid(realGrid);
+    expect(top3[0].home).toBe(s.mostLikely.home);
+    expect(top3[0].away).toBe(s.mostLikely.away);
   });
 });
 

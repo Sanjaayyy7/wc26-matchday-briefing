@@ -52,7 +52,9 @@
   "group": "B",
   "tzOffsetMinutes": -240,
   "tzLabel": "EDT",
-  "neutral": false
+  "neutral": false,
+  "homeScore": 1,
+  "awayScore": 1
  },
  {
   "id": "usa-par-gd",
@@ -69,7 +71,9 @@
   "group": "D",
   "tzOffsetMinutes": -420,
   "tzLabel": "PDT",
-  "neutral": false
+  "neutral": false,
+  "homeScore": 4,
+  "awayScore": 1
  },
  {
   "id": "qat-sui-gb",
