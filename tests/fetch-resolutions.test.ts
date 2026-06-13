@@ -1,7 +1,7 @@
 import { describe, it, expect } from "vitest";
 import { readFileSync } from "node:fs";
 import path from "node:path";
-import { parseKalshiResolution } from "@/scripts/fetch-resolutions.mts";
+import { parseKalshiResolution } from "@/lib/kalshi";
 
 const fx = (name: string) =>
   JSON.parse(
