@@ -1,0 +1,90 @@
+{
+  "generatedAt": "2026-06-13T16:13:29.210Z",
+  "official": {
+    "rows": [
+      {
+        "slug": "united-states-vs-paraguay",
+        "locked": {
+          "home": 36,
+          "draw": 30,
+          "away": 34
+        },
+        "actual": "4-1",
+        "grades": {
+          "modelBrier": 0.6152000000000001,
+          "modelRps": 0.26260000000000006,
+          "scorelineHit": false,
+          "top3ScorelineHit": false,
+          "correctPick": true,
+          "bttsBrier": 0.2689403119658241,
+          "bttsDerivdedPostHoc": true
+        },
+        "verdict": "hit",
+        "kalshi": {
+          "brier": 0.4189500259894558,
+          "rps": 0.16639439617831242
+        }
+      }
+    ],
+    "aggregates": {
+      "n": 1,
+      "accuracy": 1,
+      "meanBrier": 0.6152000000000001,
+      "meanRps": 0.26260000000000006,
+      "bttsAccuracy": 0,
+      "scorelineHitRate": 0,
+      "top3Rate": 0,
+      "vsKalshi": {
+        "n": 1,
+        "modelBrier": 0.6152000000000001,
+        "marketBrier": 0.4189500259894558,
+        "edge": -0.19624997401054428
+      },
+      "vsPolymarket": {
+        "n": 0,
+        "modelBrier": null,
+        "marketBrier": null,
+        "edge": null
+      }
+    }
+  },
+  "informational": {
+    "rows": [
+      {
+        "slug": "mexico-vs-south-africa",
+        "actual": "2-0",
+        "btts": false,
+        "totalGoals": 2,
+        "kalshiResolution": "home",
+        "polymarketResolution": "home",
+        "note": "No locked prediction (played before lock window) — shown for completeness, NOT scored against the model."
+      },
+      {
+        "slug": "south-korea-vs-czech-republic",
+        "actual": "2-1",
+        "btts": true,
+        "totalGoals": 3,
+        "kalshiResolution": "home",
+        "polymarketResolution": "home",
+        "note": "No locked prediction (played before lock window) — shown for completeness, NOT scored against the model."
+      },
+      {
+        "slug": "canada-vs-bosnia-herzegovina",
+        "actual": "1-1",
+        "btts": true,
+        "totalGoals": 2,
+        "kalshiResolution": "draw",
+        "polymarketResolution": "draw",
+        "note": "No locked prediction (played before lock window) — shown for completeness, NOT scored against the model."
+      }
+    ]
+  },
+  "caveats": [
+    "Official graded record contains n=1 match(es). This is a very small sample — do not over-read the aggregate numbers.",
+    "BTTS and over/under probabilities are derived post-hoc from the same model that generated the 1X2 split; they are NOT separately validated predictions.",
+    "No pre-kickoff Polymarket books exist for played matches — vsPolymarket comparisons are deferred to the Phase C backtest.",
+    "Kalshi market Brier shown is computed from the pre-kickoff locked book; market edge from a single match is noise.",
+    "Informational matches (played before lock window) have no model grades. Assigning grades retroactively would be in-sample and dishonest. The honest out-of-sample model assessment is in the Phase C backtest.",
+    "All scoreline metrics (scorelineHit, top3ScorelineHit) come from the settlement script and are computed against the Poisson model's top predicted scoreline, not a separate forecast."
+  ]
+}
