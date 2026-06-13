@@ -23,7 +23,8 @@
     "pipeline:calibrate": "tsx scripts/calibrate.mts",
     "pipeline:resolutions": "tsx scripts/fetch-resolutions.mts",
     "pipeline:polymarket": "tsx scripts/fetch-polymarket.mts",
-    "report:accountability": "tsx scripts/build-accountability.mts"
+    "report:accountability": "tsx scripts/build-accountability.mts",
+    "design:inspect": "tsx scripts/design-inspector.mts"
   },
   "dependencies": {
     "@base-ui/react": "^1.5.0",
