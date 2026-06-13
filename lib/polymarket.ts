@@ -162,7 +162,8 @@ export function parsePolymarketMatch(
 
   if (isResolved) {
     // Winning market has yes-price ≈ 1 (Polymarket settles to 0.999/0.001)
-    const isWin = (p: number): 0 | 1 => (p >= 0.9 ? 1 : 0);
+    const WIN_PRICE_THRESHOLD = 0.9; // settlement price is ~0.999; 0.9 safely clears pre-match highs
+    const isWin = (p: number): 0 | 1 => (p >= WIN_PRICE_THRESHOLD ? 1 : 0);
     base.resolved = {
       home: isWin(hp),
       draw: isWin(dp),

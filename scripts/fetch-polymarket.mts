@@ -15,7 +15,7 @@ import { writeFileSync, mkdirSync } from "node:fs";
 import path from "node:path";
 import { pathToFileURL } from "node:url";
 import { appDir, fixtures, type FixtureRow } from "./shared.mts";
-import { parsePolymarketMatch } from "../lib/polymarket.ts";
+import { parsePolymarketMatch, type ProbSplit, type ResolvedSplit } from "../lib/polymarket.ts";
 
 const GAMMA_API = "https://gamma-api.polymarket.com";
 
@@ -114,32 +114,13 @@ function toPolySlug(f: FixtureRow): string {
   return `fifwc-${homeCode}-${awayCode}-${date}`;
 }
 
-/**
- * Given a fixture and the Polymarket event slug, determine which home/away
- * Polymarket codes correspond to our fixture's homeId/awayId.
- *
- * When the override reverses the order (e.g. "fifwc-cze-mex" for mex-home
- * fixture), we swap the poly codes so the parser assigns probs correctly.
- */
 function polyCodesForFixture(
   f: FixtureRow,
-  polySlug: string,
 ): { homePolyCode: string; awayPolyCode: string } {
-  const defaultHomeCode = POLY_CODE[f.homeId] ?? f.homeId;
-  const defaultAwayCode = POLY_CODE[f.awayId] ?? f.awayId;
-
-  // Detect reversal: if the polySlug starts with the away code (after "fifwc-")
-  // then Polymarket's event has home/away swapped relative to our fixture.
-  const prefix = polySlug.replace(/^fifwc-/, "").split("-");
-  const firstCode = prefix[0];
-
-  if (firstCode === defaultAwayCode && firstCode !== defaultHomeCode) {
-    // Reversed: Polymarket home = our away, Polymarket away = our home.
-    // We want our fixture's home probs, so swap.
-    return { homePolyCode: defaultHomeCode, awayPolyCode: defaultAwayCode };
-  }
-
-  return { homePolyCode: defaultHomeCode, awayPolyCode: defaultAwayCode };
+  return {
+    homePolyCode: POLY_CODE[f.homeId] ?? f.homeId,
+    awayPolyCode: POLY_CODE[f.awayId] ?? f.awayId,
+  };
 }
 
 async function fetchEvent(slug: string): Promise<Record<string, unknown> | null> {
@@ -162,9 +143,6 @@ async function fetchEvent(slug: string): Promise<Record<string, unknown> | null>
 // ---------------------------------------------------------------------------
 // Output types
 // ---------------------------------------------------------------------------
-type ProbSplit = { home: number; draw: number; away: number };
-type ResolvedSplit = { home: 0 | 1; draw: 0 | 1; away: 0 | 1 };
-
 type MatchEntry = {
   polymarketSlug: string;
   negRiskMarketID: string | null;
@@ -203,7 +181,7 @@ async function main() {
       continue;
     }
 
-    const { homePolyCode, awayPolyCode } = polyCodesForFixture(fixture, polySlug);
+    const { homePolyCode, awayPolyCode } = polyCodesForFixture(fixture);
     const result = parsePolymarketMatch(
       eventData,
       fixture.homeId,
