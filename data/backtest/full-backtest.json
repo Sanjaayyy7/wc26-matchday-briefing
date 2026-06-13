@@ -1,0 +1,624 @@
+{
+ "generatedAt": "2026-06-13T16:41:19.610Z",
+ "dataThrough": "2026-06-12",
+ "analysisFrom": "2022-01-01",
+ "overall": {
+  "n": 4572,
+  "brier": 0.5152,
+  "brierCI": {
+   "mean": 0.5152,
+   "lo": 0.5023,
+   "hi": 0.5282
+  },
+  "rps": 0.1718,
+  "rpsCI": {
+   "mean": 0.1718,
+   "lo": 0.167,
+   "hi": 0.1768
+  },
+  "logLoss": 0.8767,
+  "ece": 0.017,
+  "calibration": {
+   "bins": [
+    {
+     "lo": 0,
+     "hi": 0.1,
+     "count": 2134,
+     "meanPredicted": 0.04795696123340346,
+     "realized": 0.06513589503280225
+    },
+    {
+     "lo": 0.1,
+     "hi": 0.2,
+     "count": 2282,
+     "meanPredicted": 0.15198733168222578,
+     "realized": 0.15994741454864153
+    },
+    {
+     "lo": 0.2,
+     "hi": 0.3,
+     "count": 4149,
+     "meanPredicted": 0.26082518417287504,
+     "realized": 0.27355989395034946
+    },
+    {
+     "lo": 0.3,
+     "hi": 0.4,
+     "count": 1073,
+     "meanPredicted": 0.3493483767454161,
+     "realized": 0.34762348555452005
+    },
+    {
+     "lo": 0.4,
+     "hi": 0.5,
+     "count": 981,
+     "meanPredicted": 0.4498629120381336,
+     "realized": 0.45871559633027525
+    },
+    {
+     "lo": 0.5,
+     "hi": 0.6,
+     "count": 814,
+     "meanPredicted": 0.5495956996903502,
+     "realized": 0.5098280098280098
+    },
+    {
+     "lo": 0.6,
+     "hi": 0.7,
+     "count": 708,
+     "meanPredicted": 0.6483662716536387,
+     "realized": 0.615819209039548
+    },
+    {
+     "lo": 0.7,
+     "hi": 0.8,
+     "count": 630,
+     "meanPredicted": 0.749874294125395,
+     "realized": 0.7031746031746032
+    },
+    {
+     "lo": 0.8,
+     "hi": 0.9,
+     "count": 515,
+     "meanPredicted": 0.8493658237086774,
+     "realized": 0.8135922330097087
+    },
+    {
+     "lo": 0.9,
+     "hi": 1,
+     "count": 430,
+     "meanPredicted": 0.9493867798857927,
+     "realized": 0.9232558139534883
+    }
+   ],
+   "ece": 0.01696493846404355
+  }
+ },
+ "baselines": {
+  "uniform": {
+   "brier": 0.6667,
+   "brierCI": {
+    "mean": 0.6667,
+    "lo": 0.6667,
+    "hi": 0.6667
+   }
+  },
+  "alwaysFavorite": {
+   "accuracy": 0.6013,
+   "note": "Favorite = model's own top-probability outcome (proxy for Elo favorite); a true market baseline does not exist for pre-2026 history."
+  },
+  "market": {
+   "note": "No historical market-odds snapshots exist for this dataset; only WC26 matches have Kalshi/Polymarket data (see accountability-report.md)."
+  }
+ },
+ "segments": {
+  "byYear": {
+   "2022": {
+    "n": 970,
+    "brier": 0.5374,
+    "brierCI": {
+     "mean": 0.5374,
+     "lo": 0.5122,
+     "hi": 0.5614
+    },
+    "rps": 0.1831,
+    "rpsCI": {
+     "mean": 0.1831,
+     "lo": 0.1731,
+     "hi": 0.1931
+    },
+    "logLoss": 0.9145,
+    "uniformBrier": 0.6667,
+    "alwaysFavoriteAccuracy": 0.5804
+   },
+   "2023": {
+    "n": 1054,
+    "brier": 0.5082,
+    "brierCI": {
+     "mean": 0.5082,
+     "lo": 0.4807,
+     "hi": 0.5375
+    },
+    "rps": 0.1724,
+    "rpsCI": {
+     "mean": 0.1724,
+     "lo": 0.1622,
+     "hi": 0.1834
+    },
+    "logLoss": 0.8637,
+    "uniformBrier": 0.6667,
+    "alwaysFavoriteAccuracy": 0.6157
+   },
+   "2024": {
+    "n": 1231,
+    "brier": 0.5319,
+    "brierCI": {
+     "mean": 0.5319,
+     "lo": 0.5065,
+     "hi": 0.5579
+    },
+    "rps": 0.1742,
+    "rpsCI": {
+     "mean": 0.1742,
+     "lo": 0.1648,
+     "hi": 0.1838
+    },
+    "logLoss": 0.9049,
+    "uniformBrier": 0.6667,
+    "alwaysFavoriteAccuracy": 0.589
+   },
+   "2025": {
+    "n": 1002,
+    "brier": 0.4789,
+    "brierCI": {
+     "mean": 0.4789,
+     "lo": 0.4531,
+     "hi": 0.5074
+    },
+    "rps": 0.1575,
+    "rpsCI": {
+     "mean": 0.1575,
+     "lo": 0.1479,
+     "hi": 0.1673
+    },
+    "logLoss": 0.8157,
+    "uniformBrier": 0.6667,
+    "alwaysFavoriteAccuracy": 0.6248
+   },
+   "2026": {
+    "n": 315,
+    "brier": 0.5212,
+    "brierCI": {
+     "mean": 0.5212,
+     "lo": 0.4754,
+     "hi": 0.5667
+    },
+    "rps": 0.1709,
+    "rpsCI": {
+     "mean": 0.1709,
+     "lo": 0.1544,
+     "hi": 0.1881
+    },
+    "logLoss": 0.8878,
+    "uniformBrier": 0.6667,
+    "alwaysFavoriteAccuracy": 0.5905
+   }
+  },
+  "byTournamentType": {
+   "World Cup": {
+    "n": 68,
+    "brier": 0.625,
+    "brierCI": {
+     "mean": 0.625,
+     "lo": 0.5276,
+     "hi": 0.7191
+    },
+    "rps": 0.2248,
+    "rpsCI": {
+     "mean": 0.2248,
+     "lo": 0.1805,
+     "hi": 0.2701
+    },
+    "logLoss": 1.0779,
+    "uniformBrier": 0.6667,
+    "alwaysFavoriteAccuracy": 0.5441
+   },
+   "Qualifiers": {
+    "n": 1683,
+    "brier": 0.4684,
+    "brierCI": {
+     "mean": 0.4684,
+     "lo": 0.4466,
+     "hi": 0.4901
+    },
+    "rps": 0.1536,
+    "rpsCI": {
+     "mean": 0.1536,
+     "lo": 0.146,
+     "hi": 0.1612
+    },
+    "logLoss": 0.798,
+    "uniformBrier": 0.6667,
+    "alwaysFavoriteAccuracy": 0.6405
+   },
+   "Friendlies": {
+    "n": 1273,
+    "brier": 0.5322,
+    "brierCI": {
+     "mean": 0.5322,
+     "lo": 0.5085,
+     "hi": 0.5551
+    },
+    "rps": 0.1744,
+    "rpsCI": {
+     "mean": 0.1744,
+     "lo": 0.1657,
+     "hi": 0.1833
+    },
+    "logLoss": 0.9054,
+    "uniformBrier": 0.6667,
+    "alwaysFavoriteAccuracy": 0.5821
+   },
+   "Other": {
+    "n": 1548,
+    "brier": 0.5473,
+    "brierCI": {
+     "mean": 0.5473,
+     "lo": 0.5266,
+     "hi": 0.5662
+    },
+    "rps": 0.1871,
+    "rpsCI": {
+     "mean": 0.1871,
+     "lo": 0.179,
+     "hi": 0.1951
+    },
+    "logLoss": 0.9299,
+    "uniformBrier": 0.6667,
+    "alwaysFavoriteAccuracy": 0.5769
+   }
+  },
+  "byFavoriteStrength": {
+   "toss-up (<40%)": {
+    "n": 494,
+    "brier": 0.6625,
+    "brierCI": {
+     "mean": 0.6625,
+     "lo": 0.656,
+     "hi": 0.6691
+    },
+    "rps": 0.228,
+    "rpsCI": {
+     "mean": 0.228,
+     "lo": 0.2218,
+     "hi": 0.2341
+    },
+    "logLoss": 1.0925,
+    "uniformBrier": 0.6667,
+    "alwaysFavoriteAccuracy": 0.3826
+   },
+   "slight (40-50%)": {
+    "n": 981,
+    "brier": 0.6429,
+    "brierCI": {
+     "mean": 0.6429,
+     "lo": 0.6316,
+     "hi": 0.6551
+    },
+    "rps": 0.2241,
+    "rpsCI": {
+     "mean": 0.2241,
+     "lo": 0.2184,
+     "hi": 0.2299
+    },
+    "logLoss": 1.0649,
+    "uniformBrier": 0.6667,
+    "alwaysFavoriteAccuracy": 0.4587
+   },
+   "moderate (50-60%)": {
+    "n": 814,
+    "brier": 0.6147,
+    "brierCI": {
+     "mean": 0.6147,
+     "lo": 0.5935,
+     "hi": 0.6374
+    },
+    "rps": 0.2009,
+    "rpsCI": {
+     "mean": 0.2009,
+     "lo": 0.1922,
+     "hi": 0.2101
+    },
+    "logLoss": 1.0213,
+    "uniformBrier": 0.6667,
+    "alwaysFavoriteAccuracy": 0.5098
+   },
+   "strong (60-75%)": {
+    "n": 1027,
+    "brier": 0.525,
+    "brierCI": {
+     "mean": 0.525,
+     "lo": 0.4954,
+     "hi": 0.552
+    },
+    "rps": 0.1699,
+    "rpsCI": {
+     "mean": 0.1699,
+     "lo": 0.1592,
+     "hi": 0.1801
+    },
+    "logLoss": 0.8914,
+    "uniformBrier": 0.6667,
+    "alwaysFavoriteAccuracy": 0.6339
+   },
+   "heavy (75%+)": {
+    "n": 1256,
+    "brier": 0.2851,
+    "brierCI": {
+     "mean": 0.2851,
+     "lo": 0.2551,
+     "hi": 0.3163
+    },
+    "rps": 0.0915,
+    "rpsCI": {
+     "mean": 0.0915,
+     "lo": 0.0815,
+     "hi": 0.1023
+    },
+    "logLoss": 0.5391,
+    "uniformBrier": 0.6667,
+    "alwaysFavoriteAccuracy": 0.8312
+   }
+  },
+  "byConfidenceDecile": [
+   {
+    "decile": 0,
+    "count": 0,
+    "brier": 0,
+    "accuracy": 0
+   },
+   {
+    "decile": 1,
+    "count": 0,
+    "brier": 0,
+    "accuracy": 0
+   },
+   {
+    "decile": 2,
+    "count": 0,
+    "brier": 0,
+    "accuracy": 0
+   },
+   {
+    "decile": 3,
+    "count": 494,
+    "brier": 0.6625381835838889,
+    "accuracy": 0.3825910931174089
+   },
+   {
+    "decile": 4,
+    "count": 981,
+    "brier": 0.6429167478042459,
+    "accuracy": 0.45871559633027525
+   },
+   {
+    "decile": 5,
+    "count": 814,
+    "brier": 0.6147289123059848,
+    "accuracy": 0.5098280098280098
+   },
+   {
+    "decile": 6,
+    "count": 708,
+    "brier": 0.5403844181104367,
+    "accuracy": 0.615819209039548
+   },
+   {
+    "decile": 7,
+    "count": 630,
+    "brier": 0.45927731217537937,
+    "accuracy": 0.7031746031746032
+   },
+   {
+    "decile": 8,
+    "count": 515,
+    "brier": 0.3174708140033308,
+    "accuracy": 0.8135922330097087
+   },
+   {
+    "decile": 9,
+    "count": 430,
+    "brier": 0.1437118463151716,
+    "accuracy": 0.9232558139534883
+   }
+  ]
+ },
+ "btts": {
+  "calibration": {
+   "bins": [
+    {
+     "lo": 0,
+     "hi": 0.1,
+     "count": 1,
+     "meanPredicted": 0.09869283433030324,
+     "realized": 0
+    },
+    {
+     "lo": 0.1,
+     "hi": 0.2,
+     "count": 45,
+     "meanPredicted": 0.16085942373744405,
+     "realized": 0.1111111111111111
+    },
+    {
+     "lo": 0.2,
+     "hi": 0.3,
+     "count": 229,
+     "meanPredicted": 0.26691215501350435,
+     "realized": 0.2183406113537118
+    },
+    {
+     "lo": 0.3,
+     "hi": 0.4,
+     "count": 826,
+     "meanPredicted": 0.3598381193797298,
+     "realized": 0.3728813559322034
+    },
+    {
+     "lo": 0.4,
+     "hi": 0.5,
+     "count": 3471,
+     "meanPredicted": 0.45783962766558617,
+     "realized": 0.46787669259579373
+    },
+    {
+     "lo": 0.5,
+     "hi": 0.6,
+     "count": 0,
+     "meanPredicted": 0,
+     "realized": 0
+    },
+    {
+     "lo": 0.6,
+     "hi": 0.7,
+     "count": 0,
+     "meanPredicted": 0,
+     "realized": 0
+    },
+    {
+     "lo": 0.7,
+     "hi": 0.8,
+     "count": 0,
+     "meanPredicted": 0,
+     "realized": 0
+    },
+    {
+     "lo": 0.8,
+     "hi": 0.9,
+     "count": 0,
+     "meanPredicted": 0,
+     "realized": 0
+    },
+    {
+     "lo": 0.9,
+     "hi": 1,
+     "count": 0,
+     "meanPredicted": 0,
+     "realized": 0
+    }
+   ],
+   "ece": 0.012920519721282022
+  },
+  "accuracy": 0.5653980752405949,
+  "n": 4572
+ },
+ "ou25": {
+  "calibration": {
+   "bins": [
+    {
+     "lo": 0,
+     "hi": 0.1,
+     "count": 0,
+     "meanPredicted": 0,
+     "realized": 0
+    },
+    {
+     "lo": 0.1,
+     "hi": 0.2,
+     "count": 0,
+     "meanPredicted": 0,
+     "realized": 0
+    },
+    {
+     "lo": 0.2,
+     "hi": 0.3,
+     "count": 0,
+     "meanPredicted": 0,
+     "realized": 0
+    },
+    {
+     "lo": 0.3,
+     "hi": 0.4,
+     "count": 0,
+     "meanPredicted": 0,
+     "realized": 0
+    },
+    {
+     "lo": 0.4,
+     "hi": 0.5,
+     "count": 2840,
+     "meanPredicted": 0.439242501418195,
+     "realized": 0.4387323943661972
+    },
+    {
+     "lo": 0.5,
+     "hi": 0.6,
+     "count": 850,
+     "meanPredicted": 0.5445407766265228,
+     "realized": 0.5329411764705883
+    },
+    {
+     "lo": 0.6,
+     "hi": 0.7,
+     "count": 419,
+     "meanPredicted": 0.6450792200653782,
+     "realized": 0.568019093078759
+    },
+    {
+     "lo": 0.7,
+     "hi": 0.8,
+     "count": 248,
+     "meanPredicted": 0.7445949678607222,
+     "realized": 0.6169354838709677
+    },
+    {
+     "lo": 0.8,
+     "hi": 0.9,
+     "count": 143,
+     "meanPredicted": 0.8409438738941094,
+     "realized": 0.7132867132867133
+    },
+    {
+     "lo": 0.9,
+     "hi": 1,
+     "count": 72,
+     "meanPredicted": 0.9538384471017631,
+     "realized": 0.8333333333333334
+    }
+   ],
+   "ece": 0.022350711188813467
+  },
+  "accuracy": 0.5687,
+  "n": 4572
+ },
+ "scoreline": {
+  "n": 4572,
+  "top1": 0.1283902012248469,
+  "top3": 0.3611111111111111,
+  "top5": 0.5349956255468067
+ },
+ "wc26": {
+  "n": 4,
+  "brier": 0.6078,
+  "brierCI": {
+   "mean": 0.6078,
+   "lo": 0.1819,
+   "hi": 1.1147
+  },
+  "rps": 0.1915,
+  "rpsCI": {
+   "mean": 0.1915,
+   "lo": 0.0751,
+   "hi": 0.2856
+  },
+  "note": "Tiny n — World Cup is in progress; do not over-interpret."
+ },
+ "reconciliation": {
+  "slice2024Brier": 0.5097,
+  "slice2024N": 2548,
+  "modelJsonBrier": 0.5097,
+  "modelJsonN": 2548,
+  "delta": 0,
+  "deltaOK": true
+ }
+}

@@ -15,6 +15,7 @@
     "ml:schedule": "tsx scripts/build-schedule.mts",
     "ml:simulate": "tsx scripts/run-simulator.mts",
     "ml:history": "tsx scripts/build-history.mts",
+    "ml:backtest": "tsx scripts/run-backtest.mts",
     "pipeline:fetch": "tsx scripts/fetch-kalshi.mts",
     "pipeline:run": "tsx scripts/run-briefing.mts",
     "pipeline:lock": "tsx scripts/lock-predictions.mts",
