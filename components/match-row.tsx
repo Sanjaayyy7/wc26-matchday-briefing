@@ -1,24 +1,14 @@
 import Link from "next/link";
+import { kitAccent } from "@/lib/kit-color";
+import { StageChip } from "./stage-chip";
+import { VerdictChip } from "./verdict-chip";
+import type { MatchRowData } from "@/lib/match-view";
 
-export type MatchRowData = {
-  slug: string;
-  dateLabel: string;
-  group: string;
-  stage: string;
-  homeName: string;
-  awayName: string;
-  homeColor: string;
-  awayColor: string;
-  score?: string;
-  split?: { home: number; draw: number; away: number };
-  pick?: { label: string; pct: number; correct?: boolean };
-};
-
-function Dot({ color }: { color: string }) {
+function Dot({ color, fallback }: { color: string; fallback: "up" | "down" }) {
   return (
     <span
       className="h-2 w-2 shrink-0 rounded-full"
-      style={{ background: color }}
+      style={{ background: kitAccent(color, fallback) }}
       aria-hidden
     />
   );
@@ -28,38 +18,31 @@ export function MatchRow({ m }: { m: MatchRowData }) {
   return (
     <Link
       href={`/fixture/${m.slug}`}
-      className="grid grid-cols-[5.5rem_1fr_auto] items-center gap-4 rounded-xl bg-[var(--surface)] px-4 py-3 transition-colors duration-300 hover:bg-[var(--elevated)] dark:border dark:border-[var(--hairline)]"
+      className="grid gap-4 rounded-xl bg-[var(--surface)] px-4 py-3 transition-colors duration-300 hover:bg-[var(--elevated)] dark:border dark:border-[var(--hairline)] sm:grid-cols-[6rem_1fr_auto] sm:items-center"
     >
-      <div className="flex flex-col">
+      <div className="flex items-center gap-2 sm:flex-col sm:items-start">
         <span className="text-caption tabular">{m.dateLabel}</span>
-        <span className="text-caption">Group {m.group}</span>
+        <StageChip stage={m.stage} />
       </div>
       <div className="flex min-w-0 flex-col gap-1">
-        <span className="flex items-center gap-2 truncate text-[15px] font-medium">
-          <Dot color={m.homeColor} /> {m.homeName}
+        <span className="text-title flex items-center gap-2 truncate">
+          <Dot color={m.homeColor} fallback="up" /> {m.homeName}
         </span>
-        <span className="flex items-center gap-2 truncate text-[15px] font-medium">
-          <Dot color={m.awayColor} /> {m.awayName}
+        <span className="text-title flex items-center gap-2 truncate">
+          <Dot color={m.awayColor} fallback="down" /> {m.awayName}
         </span>
       </div>
-      <div className="flex flex-col items-end gap-1">
+      <div className="flex flex-wrap items-center gap-2 sm:flex-col sm:items-end sm:gap-1">
         {m.score ? (
           <>
-            <span className="tabular text-[17px] font-bold">{m.score}</span>
-            {m.pick && (
-              <span
-                className={`text-caption tabular ${
-                  m.pick.correct === undefined
-                    ? ""
-                    : m.pick.correct
-                      ? "text-[var(--up)]"
-                      : "text-[var(--down)]"
-                }`}
-              >
-                picked {m.pick.label} {m.pick.pct}%{" "}
-                {m.pick.correct === undefined ? "" : m.pick.correct ? "✓" : "✗"}
+            <span className="text-display tabular text-2xl">{m.score}</span>
+            {m.verdict && <VerdictChip verdict={m.verdict} />}
+            {m.grade && (
+              <span className="text-caption tabular">
+                Brier {m.grade.brier.toFixed(3)} · RPS {m.grade.rps.toFixed(3)}
               </span>
             )}
+            {m.note && <span className="text-caption">{m.note}</span>}
           </>
         ) : m.split ? (
           <span className="text-caption tabular">

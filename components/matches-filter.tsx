@@ -1,7 +1,8 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { MatchRow, type MatchRowData } from "./match-row";
+import { MatchRow } from "./match-row";
+import type { MatchRowData } from "@/lib/match-view";
 
 const GROUPS = "ABCDEFGHIJKL".split("");
 
@@ -27,7 +28,7 @@ export function MatchesFilter({ rows }: { rows: MatchRowData[] }) {
   );
 
   const chip = (active: boolean) =>
-    `h-8 shrink-0 rounded-full px-3 text-[13px] font-medium transition-colors duration-300 ${
+    `text-label h-8 shrink-0 rounded-full px-3 transition-colors duration-300 ${
       active
         ? "bg-[var(--accent)] text-[var(--accent-foreground)]"
         : "bg-[var(--neutral-fill)] text-[var(--ink-muted)] hover:text-[var(--ink)]"
@@ -42,7 +43,7 @@ export function MatchesFilter({ rows }: { rows: MatchRowData[] }) {
           </button>
         ))}
         <span className="mx-1 h-5 w-px bg-[var(--hairline)]" aria-hidden />
-        <div className="flex gap-2 overflow-x-auto">
+        <div className="flex min-w-0 max-w-full gap-2 overflow-x-auto">
           <button className={chip(group === "all")} onClick={() => setGroup("all")}>
             All groups
           </button>
@@ -57,7 +58,7 @@ export function MatchesFilter({ rows }: { rows: MatchRowData[] }) {
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Search team"
           aria-label="Search team"
-          className="h-8 min-w-32 flex-1 rounded-full bg-[var(--neutral-fill)] px-3 text-[13px] outline-none placeholder:text-[var(--ink-faint)] sm:max-w-48"
+          className="text-label h-8 min-w-0 flex-1 rounded-full bg-[var(--neutral-fill)] px-3 outline-none placeholder:text-[var(--ink-faint)] sm:max-w-48"
         />
       </div>
       <p className="text-caption tabular">{filtered.length} matches</p>

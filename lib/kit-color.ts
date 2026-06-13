@@ -102,6 +102,15 @@ export function kitWashStyle(kitHex: string): CSSProperties {
   return { "--kit": kitHex } as CSSProperties;
 }
 
+export function kitPairWashStyle(homeHex: string, awayHex: string): CSSProperties {
+  return {
+    "--kit-home": homeHex,
+    "--kit-away": awayHex,
+    background:
+      "linear-gradient(135deg, color-mix(in oklab, var(--kit-home) var(--kit-wash, 12%), var(--canvas)), color-mix(in oklab, var(--kit-away) var(--kit-wash, 12%), var(--canvas)))",
+  } as CSSProperties;
+}
+
 // ---------------------------------------------------------------------------
 // stageVar — §2.3
 // ---------------------------------------------------------------------------

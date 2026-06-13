@@ -7,15 +7,17 @@ import { motion, useReducedMotion, useSpring, useTransform } from "framer-motion
 export function NumberTicker({
   value,
   suffix = "",
+  decimals = 0,
   className,
 }: {
   value: number;
   suffix?: string;
+  decimals?: number;
   className?: string;
 }) {
   const reduceMotion = useReducedMotion();
   const spring = useSpring(0, { stiffness: 80, damping: 24 });
-  const display = useTransform(spring, (v) => `${Math.round(v)}${suffix}`);
+  const display = useTransform(spring, (v) => `${v.toFixed(decimals)}${suffix}`);
 
   useEffect(() => {
     spring.set(value);
@@ -24,7 +26,7 @@ export function NumberTicker({
   if (reduceMotion) {
     return (
       <span className={`tabular ${className ?? ""}`}>
-        {Math.round(value)}
+        {value.toFixed(decimals)}
         {suffix}
       </span>
     );
