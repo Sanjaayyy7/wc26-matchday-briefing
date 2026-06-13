@@ -13,6 +13,7 @@
 
 import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
 import path from "node:path";
+import { pathToFileURL } from "node:url";
 import { appDir, fixtures, kalshiEventTicker, type FixtureRow } from "./shared.mts";
 
 const API = "https://api.elections.kalshi.com/trade-api/v2";
@@ -157,10 +158,8 @@ async function main() {
       console.warn(`[resolutions] No fixture found for ledger slug: ${slug} — skipping`);
       continue;
     }
-    if (!seen.has(slug)) {
-      seen.add(slug);
-      candidates.push({ slug, fixture, eventTicker: ticker, source: "ledger" });
-    }
+    seen.add(slug);
+    candidates.push({ slug, fixture, eventTicker: ticker, source: "ledger" });
   }
 
   // Source 2: played fixtures without an explicit ledger ticker — derive ticker
@@ -231,7 +230,12 @@ async function main() {
   console.log(`[resolutions] wrote ${outPath}`);
 }
 
-main().catch((err) => {
-  console.error("[resolutions] Fatal error:", err);
-  process.exit(1);
-});
+const isMain =
+  import.meta.url === pathToFileURL(process.argv[1]).href;
+
+if (isMain) {
+  main().catch((err) => {
+    console.error("[resolutions] Fatal error:", err);
+    process.exit(1);
+  });
+}
