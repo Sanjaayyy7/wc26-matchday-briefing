@@ -67,7 +67,7 @@ function renderOfficialTable(rows: OfficialRow[]): string {
     const modelCall = `${r.locked.home}/${r.locked.draw}/${r.locked.away}`;
     const bttsMark =
       r.grades.bttsBrier !== undefined
-        ? num(r.grades.bttsBrier, 4) + (r.grades.bttsDerivdedPostHoc ? " †" : "")
+        ? num(r.grades.bttsBrier, 4) + (r.grades.bttsDerivedPostHoc ? " †" : "")
         : "—";
     const kalshiBrier = r.kalshi ? num(r.kalshi.brier, 4) : "—";
     return `| ${r.slug} | ${modelCall} | ${r.actual} | ${bttsMark} | ${num(r.grades.modelBrier, 4)} | ${kalshiBrier} | ${verdictEmoji(r.verdict)} ${r.verdict} |`;

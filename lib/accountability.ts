@@ -110,7 +110,7 @@ export type OfficialRow = {
     top3ScorelineHit: boolean;
     correctPick: boolean;
     bttsBrier?: number;
-    bttsDerivdedPostHoc?: boolean;
+    bttsDerivedPostHoc?: boolean;
   };
   verdict: Verdict;
   kalshi?: {
@@ -253,7 +253,7 @@ export function buildAccountability(
         ...(entry.btts !== undefined
           ? {
               bttsBrier: entry.btts.brier,
-              bttsDerivdedPostHoc: entry.btts.derivedPostHoc,
+              bttsDerivedPostHoc: entry.btts.derivedPostHoc,
             }
           : {}),
       },
@@ -285,8 +285,8 @@ export function buildAccountability(
       ? settledEntries.reduce((sum, e) => sum + (e.modelRps ?? 0), 0) / n
       : null;
 
-  // BTTS accuracy — only entries where btts.actual is defined and btts is not derivedPostHoc
-  // (task says to flag derivedPostHoc; we still compute but label it)
+  // BTTS accuracy covers all entries with btts.actual defined, including derivedPostHoc ones —
+  // honesty disclosure is in the caveats array.
   const bttsEntries = settledEntries.filter((e) => e.btts?.actual !== undefined);
   const bttsCorrect = bttsEntries.filter((e) => {
     if (!e.btts) return false;

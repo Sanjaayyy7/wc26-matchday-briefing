@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-13T16:13:29.210Z",
+  "generatedAt": "2026-06-13T16:33:18.727Z",
   "official": {
     "rows": [
       {
@@ -17,7 +17,7 @@
           "top3ScorelineHit": false,
           "correctPick": true,
           "bttsBrier": 0.2689403119658241,
-          "bttsDerivdedPostHoc": true
+          "bttsDerivedPostHoc": true
         },
         "verdict": "hit",
         "kalshi": {

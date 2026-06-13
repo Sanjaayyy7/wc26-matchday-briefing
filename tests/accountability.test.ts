@@ -86,7 +86,7 @@ describe("buildAccountability — official locked record", () => {
   it("official row picks up precomputed modelBrier", () => {
     const row = result.official.rows[0];
     expect(row.slug).toBe("united-states-vs-paraguay");
-    expect(row.grades?.modelBrier).toBeCloseTo(0.6152, 4);
+    expect(row.grades.modelBrier).toBeCloseTo(0.6152, 4);
   });
 
   it("official row has correct actual score from result field", () => {
@@ -129,7 +129,12 @@ describe("buildAccountability — informational rows", () => {
 
   it("informational row has no grades (no model prediction)", () => {
     const row = result.informational.rows.find((r) => r.slug === "mexico-vs-south-africa");
-    expect(row?.grades).toBeUndefined();
+    expect(row).toBeDefined();
+    const keys = Object.keys(row!);
+    expect(keys).not.toContain("grades");
+    expect(keys).not.toContain("modelBrier");
+    expect(keys).not.toContain("modelRps");
+    expect(keys).not.toContain("verdict");
   });
 
   it("informational row shows the actual score", () => {
