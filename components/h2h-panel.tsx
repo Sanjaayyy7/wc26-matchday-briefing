@@ -51,7 +51,7 @@ export function H2HPanel({
           <div className="text-caption">{awayName} wins</div>
         </div>
       </div>
-      <div className="flex h-2 w-full gap-px overflow-hidden rounded-full">
+      <div className="flex h-2 w-full gap-px overflow-hidden">
         <div style={{ width: seg(homeWins), background: "var(--up)" }} />
         <div style={{ width: seg(record.draws), background: "var(--neutral-fill)" }} />
         <div style={{ width: seg(awayWins), background: "var(--down)" }} />

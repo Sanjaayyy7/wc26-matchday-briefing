@@ -63,7 +63,7 @@ function Row({
         return (
           <div
             key={a}
-            className="text-caption tabular grid aspect-square place-items-center rounded-lg border border-transparent"
+            className="text-caption tabular grid aspect-square place-items-center border border-transparent"
             style={
               isMode
                 ? {

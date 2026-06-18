@@ -1,4 +1,5 @@
-import { SiteHeader } from "@/components/site-header";
+import { AppChrome } from "@/components/app-chrome";
+import { CanvasSection, DataPlane, RouteStack, SignalLine } from "@/components/cinematic";
 import { fixtureBySlug, clubById } from "@/lib/data";
 import type { LockedEntry } from "@/lib/predictions-ledger";
 import type { AccountabilityOutput, OfficialRow } from "@/lib/accountability";
@@ -25,7 +26,7 @@ function matchLabel(slug: string): string {
   return `${teamLabel(slug, "home")} vs ${teamLabel(slug, "away")}`;
 }
 
-function MetricCard({
+function LedgerMetric({
   label,
   value,
   sub,
@@ -35,7 +36,7 @@ function MetricCard({
   sub?: string;
 }) {
   return (
-    <div className="rounded-2xl bg-[var(--surface)] p-5 dark:border dark:border-[var(--hairline)]">
+    <div className="border-b border-[var(--line)] pb-5 last:border-0">
       <span className="text-label">{label}</span>
       <div className="mt-2 text-3xl text-display tabular">{value}</div>
       {sub && <p className="text-caption mt-1">{sub}</p>}
@@ -76,246 +77,260 @@ export default function RecordPage() {
     .backtest;
 
   return (
-    <>
-      <SiteHeader />
-      <main className="mx-auto w-full max-w-6xl flex-1 space-y-16 px-6 py-12 md:py-16">
-        <section className="animate-rise">
-          <h1 className="text-title text-3xl">Prediction vs reality</h1>
-          <p className="mt-3 max-w-2xl text-[var(--ink-muted)]">
-            Every call is locked before kickoff and never edited. Only locked
-            calls are graded against the model — matches played before a call
-            was locked are shown for completeness but never scored
-            retroactively. The official sample is currently{" "}
-            <strong className="text-[var(--ink)]">n = {agg.n}</strong> — far
-            too small to read as a track record. Treat every aggregate below
-            as a single data point, not a trend.
-          </p>
-        </section>
+    <AppChrome
+      route="record"
+      title="Accountability Ledger"
+      rail={
+        <SignalLine
+          signals={[
+            { label: "Official n", value: agg.n, tone: agg.n < 10 ? "warn" : "neutral", detail: "graded sample" },
+            { label: "Open locks", value: open.length, detail: "frozen calls" },
+            { label: "Backtest RPS", value: bt.rps, decimals: 3, detail: `${bt.n} matches` },
+          ]}
+        />
+      }
+    >
+      <RouteStack className="w-full">
+        <CanvasSection eyebrow="Sample warning" title="Locked before kickoff. Scored after the whistle.">
+          <DataPlane>
+            <p className="max-w-4xl text-title text-2xl leading-tight md:text-4xl">
+              Every call is locked before kickoff and never edited. Only locked
+              calls are graded against the model; matches played before a call
+              was locked are shown for completeness but never scored
+              retroactively. The official sample is currently{" "}
+              <strong className="text-[var(--ink)]">n = {agg.n}</strong> — far
+              too small to read as a track record.
+            </p>
+          </DataPlane>
+        </CanvasSection>
 
-        <section className="animate-rise" style={{ animationDelay: "0.06s" }}>
-          <h2 className="text-label mb-4">At a glance</h2>
-          <div className="grid gap-4 sm:grid-cols-3">
-            <MetricCard
-              label="Correct picks"
-              value={
-                agg.n ? (
+        <CanvasSection eyebrow="At a glance" title="Model accountability, not marketing stats.">
+          <DataPlane>
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              <LedgerMetric
+                label="Correct picks"
+                value={
+                  agg.n ? (
+                    <span>
+                      <NumberTicker value={Math.round(agg.accuracy! * agg.n)} />
+                      /<NumberTicker value={agg.n} />
+                    </span>
+                  ) : (
+                    <Dash />
+                  )
+                }
+                sub={agg.n ? `n=${agg.n} · ${Math.round(agg.accuracy! * 100)}% hit rate` : "no calls settled yet"}
+              />
+              <LedgerMetric
+                label="Avg Brier"
+                value={
+                  agg.meanBrier !== null ? (
+                    <NumberTicker value={agg.meanBrier} decimals={3} />
+                  ) : (
+                    <Dash />
+                  )
+                }
+                sub={`n=${agg.n} · uniform baseline ${UNIFORM_BRIER}`}
+              />
+              <LedgerMetric
+                label="Avg RPS"
+                value={
+                  agg.meanRps !== null ? (
+                    <NumberTicker value={agg.meanRps} decimals={3} />
+                  ) : (
+                    <Dash />
+                  )
+                }
+                sub={`n=${agg.n} · coin-flip ≈ ${COIN_FLIP_RPS}`}
+              />
+              <LedgerMetric
+                label="Model vs Kalshi"
+                value={
+                  agg.vsKalshi.n > 0 ? (
+                    <span>
+                      <NumberTicker value={agg.vsKalshi.modelBrier!} decimals={3} /> /{" "}
+                      <NumberTicker value={agg.vsKalshi.marketBrier!} decimals={3} />
+                    </span>
+                  ) : (
+                    <Dash />
+                  )
+                }
+                sub={
+                  agg.vsKalshi.n > 0
+                    ? `ours / market's Brier, n=${agg.vsKalshi.n} · edge ${agg.vsKalshi.edge!.toFixed(3)} (${agg.vsKalshi.edge! < 0 ? "market sharper" : "model sharper"})`
+                    : "needs settled calls with a Kalshi snapshot"
+                }
+              />
+              <LedgerMetric
+                label="Model vs Polymarket"
+                value={
+                  agg.vsPolymarket.n > 0 ? (
+                    <span>
+                      <NumberTicker value={agg.vsPolymarket.modelBrier!} decimals={3} /> /{" "}
+                      <NumberTicker value={agg.vsPolymarket.marketBrier!} decimals={3} />
+                    </span>
+                  ) : (
+                    <Dash />
+                  )
+                }
+                sub={
+                  agg.vsPolymarket.n > 0
+                    ? `ours / market's Brier, n=${agg.vsPolymarket.n}`
+                    : "no pre-kickoff Polymarket books yet (n=0)"
+                }
+              />
+              <LedgerMetric
+                label="Open locks"
+                value={<NumberTicker value={open.length} />}
+                sub="probabilities frozen pre-kickoff"
+              />
+              <LedgerMetric
+                label="Backtest (2024+)"
+                value={
                   <span>
-                    <NumberTicker value={Math.round(agg.accuracy! * agg.n)} />
-                    /<NumberTicker value={agg.n} />
+                    <NumberTicker value={bt.rps} decimals={3} /> RPS
                   </span>
-                ) : (
-                  <Dash />
-                )
-              }
-              sub={agg.n ? `n=${agg.n} · ${Math.round(agg.accuracy! * 100)}% hit rate` : "no calls settled yet"}
-            />
-            <MetricCard
-              label="Avg Brier"
-              value={
-                agg.meanBrier !== null ? (
-                  <NumberTicker value={agg.meanBrier} decimals={3} />
-                ) : (
-                  <Dash />
-                )
-              }
-              sub={`n=${agg.n} · uniform baseline ${UNIFORM_BRIER}`}
-            />
-            <MetricCard
-              label="Avg RPS"
-              value={
-                agg.meanRps !== null ? (
-                  <NumberTicker value={agg.meanRps} decimals={3} />
-                ) : (
-                  <Dash />
-                )
-              }
-              sub={`n=${agg.n} · coin-flip ≈ ${COIN_FLIP_RPS}`}
-            />
-            <MetricCard
-              label="Model vs Kalshi"
-              value={
-                agg.vsKalshi.n > 0 ? (
-                  <span>
-                    <NumberTicker value={agg.vsKalshi.modelBrier!} decimals={3} /> /{" "}
-                    <NumberTicker value={agg.vsKalshi.marketBrier!} decimals={3} />
-                  </span>
-                ) : (
-                  <Dash />
-                )
-              }
-              sub={
-                agg.vsKalshi.n > 0
-                  ? `ours / market's Brier, n=${agg.vsKalshi.n} · edge ${agg.vsKalshi.edge!.toFixed(3)} (${agg.vsKalshi.edge! < 0 ? "market sharper" : "model sharper"})`
-                  : "needs settled calls with a Kalshi snapshot"
-              }
-            />
-            <MetricCard
-              label="Model vs Polymarket"
-              value={
-                agg.vsPolymarket.n > 0 ? (
-                  <span>
-                    <NumberTicker value={agg.vsPolymarket.modelBrier!} decimals={3} /> /{" "}
-                    <NumberTicker value={agg.vsPolymarket.marketBrier!} decimals={3} />
-                  </span>
-                ) : (
-                  <Dash />
-                )
-              }
-              sub={
-                agg.vsPolymarket.n > 0
-                  ? `ours / market's Brier, n=${agg.vsPolymarket.n}`
-                  : "no pre-kickoff Polymarket books yet (n=0)"
-              }
-            />
-            <MetricCard
-              label="Open locks"
-              value={<NumberTicker value={open.length} />}
-              sub="probabilities frozen pre-kickoff"
-            />
-            <MetricCard
-              label="Backtest (2024+)"
-              value={
-                <span>
-                  <NumberTicker value={bt.rps} decimals={3} /> RPS
-                </span>
-              }
-              sub={`n=${bt.n} · Brier ${bt.brier.toFixed(3)} · ECE ${(bt.ece * 100).toFixed(1)}%`}
-            />
-          </div>
-        </section>
+                }
+                sub={`n=${bt.n} · Brier ${bt.brier.toFixed(3)} · ECE ${(bt.ece * 100).toFixed(1)}%`}
+              />
+            </div>
+          </DataPlane>
+        </CanvasSection>
 
         {official.rows.length > 0 && (
-          <section className="animate-rise" style={{ animationDelay: "0.12s" }}>
-            <h2 className="text-label mb-4">Settled calls</h2>
-            <div className="space-y-3">
-              {official.rows.map((row) => {
-                const pm = (row as OfficialRow & { polymarket?: { brier: number; rps: number } })
-                  .polymarket;
-                return (
-                  <div
-                    key={row.slug}
-                    className="grid gap-4 rounded-xl bg-[var(--surface)] px-4 py-4 dark:border dark:border-[var(--hairline)] lg:grid-cols-[1.4fr_0.8fr_0.7fr_0.7fr_0.7fr_0.7fr]"
-                  >
-                    <div>
-                      <p className="text-title truncate">{matchLabel(row.slug)}</p>
-                      <p className="text-caption mt-1">Locked split</p>
-                      <LockedSplit locked={row.locked} />
+          <CanvasSection eyebrow="Settled calls" title="Official rows, grades, and market comparison.">
+            <DataPlane>
+              <div>
+                {official.rows.map((row) => {
+                  const pm = (row as OfficialRow & { polymarket?: { brier: number; rps: number } })
+                    .polymarket;
+                  return (
+                    <div
+                      key={row.slug}
+                      className="grid gap-5 border-b border-[var(--line)] py-5 last:border-0 lg:grid-cols-[1.35fr_0.6fr_0.6fr_0.62fr_0.62fr_0.62fr_0.7fr]"
+                    >
+                      <div>
+                        <p className="text-title truncate">{matchLabel(row.slug)}</p>
+                        <p className="text-caption mt-1">Locked split</p>
+                        <LockedSplit locked={row.locked} />
+                      </div>
+                      <div className="flex items-center justify-between gap-4 lg:block">
+                        <p className="text-caption">Actual</p>
+                        <p className="text-display tabular text-2xl">{row.actual}</p>
+                      </div>
+                      <div className="flex items-center justify-between gap-4 lg:block">
+                        <p className="text-caption lg:hidden">Verdict</p>
+                        <VerdictChip verdict={row.verdict} />
+                      </div>
+                      <div className="flex items-center justify-between gap-4 lg:block">
+                        <p className="text-caption">Brier</p>
+                        <NumberTicker value={row.grades.modelBrier} decimals={3} className="text-title" />
+                      </div>
+                      <div className="flex items-center justify-between gap-4 lg:block">
+                        <p className="text-caption">BTTS</p>
+                        <p className="text-title tabular">
+                          {row.grades.bttsBrier !== undefined ? (
+                            <NumberTicker value={row.grades.bttsBrier} decimals={3} />
+                          ) : (
+                            "—"
+                          )}
+                          {row.grades.bttsDerivedPostHoc && (
+                            <span className="text-caption ml-1">(post-hoc)</span>
+                          )}
+                        </p>
+                      </div>
+                      <div className="flex items-center justify-between gap-4 lg:block">
+                        <p className="text-caption">Kalshi</p>
+                        <p className="text-title tabular">
+                          {row.kalshi ? (
+                            <NumberTicker value={row.kalshi.brier} decimals={3} />
+                          ) : (
+                            "—"
+                          )}
+                        </p>
+                      </div>
+                      <div className="flex items-center justify-between gap-4 lg:block">
+                        <p className="text-caption">Polymarket</p>
+                        <p className="text-title tabular">
+                          {pm ? <NumberTicker value={pm.brier} decimals={3} /> : "—"}
+                        </p>
+                      </div>
                     </div>
-                    <div className="flex items-center justify-between gap-4 lg:block">
-                      <p className="text-caption">Actual</p>
-                      <p className="text-display tabular text-2xl">{row.actual}</p>
-                    </div>
-                    <div className="flex items-center justify-between gap-4 lg:block">
-                      <p className="text-caption lg:hidden">Verdict</p>
-                      <VerdictChip verdict={row.verdict} />
-                    </div>
-                    <div className="flex items-center justify-between gap-4 lg:block">
-                      <p className="text-caption">Brier</p>
-                      <NumberTicker value={row.grades.modelBrier} decimals={3} className="text-title" />
-                    </div>
-                    <div className="flex items-center justify-between gap-4 lg:block">
-                      <p className="text-caption">BTTS</p>
-                      <p className="text-title tabular">
-                        {row.grades.bttsBrier !== undefined ? (
-                          <NumberTicker value={row.grades.bttsBrier} decimals={3} />
-                        ) : (
-                          "—"
-                        )}
-                        {row.grades.bttsDerivedPostHoc && (
-                          <span className="text-caption ml-1">(post-hoc)</span>
-                        )}
-                      </p>
-                    </div>
-                    <div className="flex items-center justify-between gap-4 lg:block">
-                      <p className="text-caption">Kalshi</p>
-                      <p className="text-title tabular">
-                        {row.kalshi ? (
-                          <NumberTicker value={row.kalshi.brier} decimals={3} />
-                        ) : (
-                          "—"
-                        )}
-                      </p>
-                    </div>
-                    <div className="flex items-center justify-between gap-4 lg:block">
-                      <p className="text-caption">Polymarket</p>
-                      <p className="text-title tabular">
-                        {pm ? <NumberTicker value={pm.brier} decimals={3} /> : "—"}
-                      </p>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          </section>
+                  );
+                })}
+              </div>
+            </DataPlane>
+          </CanvasSection>
         )}
 
         {informational.rows.length > 0 && (
-          <section className="animate-rise" style={{ animationDelay: "0.18s" }}>
-            <h2 className="text-label mb-4">Informational — played before lock</h2>
-            <p className="text-caption mb-4 max-w-2xl">
-              These matches were played before a prediction was locked. They are
-              NOT scored against the model — shown only for completeness and to
-              show how the markets resolved.
-            </p>
-            <div className="space-y-2">
-              {informational.rows.map((row) => (
-                <div
-                  key={row.slug}
-                  className="rounded-xl bg-[var(--surface)] px-4 py-3 dark:border dark:border-[var(--hairline)]"
-                >
-                  <div className="flex flex-wrap items-center justify-between gap-2">
-                    <span className="text-title truncate">{matchLabel(row.slug)}</span>
-                    <span className="text-display tabular text-xl">{row.actual}</span>
+          <CanvasSection
+            eyebrow="Informational"
+            title="Played before lock, never scored retroactively."
+          >
+            <DataPlane>
+              <div>
+                {informational.rows.map((row) => (
+                  <div
+                    key={row.slug}
+                    className="border-b border-[var(--line)] py-4 last:border-0"
+                  >
+                    <div className="flex flex-wrap items-center justify-between gap-3">
+                      <span className="text-title truncate">{matchLabel(row.slug)}</span>
+                      <span className="text-display tabular text-xl">{row.actual}</span>
+                    </div>
+                    <p className="text-caption mt-2 tabular">
+                      BTTS: {row.btts ? "yes" : "no"} · Total goals: {row.totalGoals ?? "—"} · Kalshi
+                      resolved: {row.kalshiResolution ?? "—"} · Polymarket resolved:{" "}
+                      {row.polymarketResolution ?? "—"}
+                    </p>
+                    <p className="text-caption mt-1 italic">{row.note}</p>
                   </div>
-                  <p className="text-caption mt-2 tabular">
-                    BTTS: {row.btts ? "yes" : "no"} · Total goals: {row.totalGoals ?? "—"} · Kalshi
-                    resolved: {row.kalshiResolution ?? "—"} · Polymarket resolved:{" "}
-                    {row.polymarketResolution ?? "—"}
-                  </p>
-                  <p className="text-caption mt-1 italic">{row.note}</p>
-                </div>
-              ))}
-            </div>
-          </section>
+                ))}
+              </div>
+            </DataPlane>
+          </CanvasSection>
         )}
 
-        <section className="animate-rise" style={{ animationDelay: "0.24s" }}>
-          <h2 className="text-label mb-4">Open calls ({open.length})</h2>
-          <div className="space-y-2">
-            {open.slice(0, 20).map((e) => (
-              <div
-                key={e.slug}
-                className="grid grid-cols-[1fr_auto] items-center gap-4 rounded-xl bg-[var(--surface)] px-4 py-3 dark:border dark:border-[var(--hairline)]"
-              >
-                <span className="text-title truncate">{matchLabel(e.slug)}</span>
-                <span className="text-caption tabular">
-                  <span className="text-[var(--up)]">{e.split.home}</span> /{" "}
-                  {e.split.draw} / <span className="text-[var(--down)]">{e.split.away}</span>
-                  {e.market ? " · market locked" : ""}
-                </span>
-              </div>
-            ))}
-            {open.length > 20 && (
-              <p className="text-caption">…and {open.length - 20} more, all locked.</p>
-            )}
-          </div>
-        </section>
+        <CanvasSection eyebrow={`Open calls (${open.length})`} title="Frozen probabilities waiting for results.">
+          <DataPlane>
+            <div>
+              {open.slice(0, 20).map((e) => (
+                <div
+                  key={e.slug}
+                  className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-4 border-b border-[var(--line)] py-4 last:border-0"
+                >
+                  <span className="text-title truncate">{matchLabel(e.slug)}</span>
+                  <span className="text-caption tabular">
+                    <span className="text-[var(--up)]">{e.split.home}</span> /{" "}
+                    {e.split.draw} / <span className="text-[var(--down)]">{e.split.away}</span>
+                    {e.market ? " · market locked" : ""}
+                  </span>
+                </div>
+              ))}
+              {open.length > 20 && (
+                <p className="text-caption pt-4">…and {open.length - 20} more, all locked.</p>
+              )}
+            </div>
+          </DataPlane>
+        </CanvasSection>
 
-        <section>
-          <h2 className="text-label mb-4">Caveats</h2>
-          <ul className="text-caption max-w-2xl list-disc space-y-1 pl-5">
-            {caveats.map((c, i) => (
-              <li key={i}>{c}</li>
-            ))}
-          </ul>
-          <p className="text-caption mt-4">
-            Methodology: Elo + Dixon-Coles, trained on ~49k internationals — see the
-            project README and audit ledger. RPS = ranked probability score over
-            the ordered win/draw/loss outcome. Backtest figures are from
-            data/model.json (2024+ holdout).
-          </p>
-        </section>
-      </main>
-    </>
+        <CanvasSection eyebrow="Caveats" title="What this ledger can and cannot claim.">
+          <DataPlane>
+            <ul className="text-caption max-w-2xl list-disc space-y-1 pl-5">
+              {caveats.map((c, i) => (
+                <li key={i}>{c}</li>
+              ))}
+            </ul>
+            <p className="text-caption mt-4 max-w-3xl">
+              Methodology: Elo + Dixon-Coles, trained on ~49k internationals — see the
+              project README and audit ledger. RPS = ranked probability score over
+              the ordered win/draw/loss outcome. Backtest figures are from
+              data/model.json (2024+ holdout).
+            </p>
+          </DataPlane>
+        </CanvasSection>
+      </RouteStack>
+    </AppChrome>
   );
 }

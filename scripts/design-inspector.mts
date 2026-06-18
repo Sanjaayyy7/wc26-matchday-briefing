@@ -15,11 +15,15 @@ const FIRST_PARTY_DIRS = ["app", "components", "lib"] as const;
 const PAGE_RE = /app(?:\/.+)?\/page\.tsx$/;
 const RAW_HEX_RE = /#[0-9a-fA-F]{3,8}\b/;
 const ARBITRARY_RE =
-  /\b(?:text|min-w|max-w|w|h|p|m|mt|mb|ml|mr|mx|my|gap|top|right|bottom|left|rounded|border)-\[(?!clamp\()[^\]]*(?:px|rem|%|calc|vh|vw)[^\]]*\]/;
+  /\b(?:text|p|m|mt|mb|ml|mr|mx|my|gap|rounded|border)-\[(?!clamp\()[^\]]*(?:px|rem|%|calc|vh|vw)[^\]]*\]/;
 const BAD_DURATION_RE = /\bduration-(?!300\b)\d+\b|duration:\s*(?!0\.3)\d*\.?\d+/;
 const BAD_MOTION_RE = /y:\s*8|stiffness:\s*300|damping:\s*30/;
 const BAD_ELEVATION_RE = /\bboxShadow\b|\bbg-(?:white|black|gray|slate|zinc)-?\b|(?<!hover:)\bshadow-(?!\[var\(--shadow-hover\)\])/;
 const NUMERIC_TEXT_RE = /\b(?:score|pct|prob|rating|elo|brier|rps|count|total|goals|locks|odds)\b/i;
+const ROUTE_BOX_RE = /<CommandPanel\b|<CinematicSection\b|<MarketTape\b|<FixtureSurface\b|<MatchMarketRow\b|rounded-(?:2xl|3xl)|bg-\[var\(--surface\)\]|MetricCard|FixtureCard|GroupCard/;
+const OLD_PRIMARY_PRIMITIVE_RE = /export function CommandPanel|export function CinematicSection|export function MarketTape|export function FixtureSurface|export function MatchMarketRow|export function DataRail/;
+const AD_HOC_ROUTE_SPACE_RE = /className=["'][^"']*\bspace-y-16\b|style=\{\{\s*animationDelay:/;
+const BACKGROUND_LINE_RE = /field-mesh|stadium-frame|hero-field|repeating-linear-gradient/;
 
 function walk(dir: string, files: string[] = []): string[] {
   for (const entry of readdirSync(dir)) {
@@ -128,8 +132,17 @@ export function inspectProject(root = ROOT): DesignViolation[] {
       });
     }
 
+    if (BACKGROUND_LINE_RE.test(text)) {
+      violations.push({
+        file: rel,
+        line: lineNumber(text, text.search(BACKGROUND_LINE_RE)),
+        rule: "no-background-lines",
+        message: "Do not use visible background grids, field meshes, stadium rails, or repeating line gradients.",
+      });
+    }
+
     if (PAGE_RE.test(rel)) {
-      for (const required of ["<SiteHeader", "max-w-6xl", "px-6", "space-y-16"]) {
+      for (const required of ["<AppChrome", "<RouteStack"]) {
         if (!text.includes(required)) {
           violations.push({
             file: rel,
@@ -139,14 +152,91 @@ export function inspectProject(root = ROOT): DesignViolation[] {
           });
         }
       }
+      if (!text.includes("<CanvasSection")) {
+        violations.push({
+          file: rel,
+          line: 1,
+          rule: "section-system",
+          message: "Route pages must use CanvasSection for primary section rhythm.",
+        });
+      }
+      if (AD_HOC_ROUTE_SPACE_RE.test(text)) {
+        violations.push({
+          file: rel,
+          line: lineNumber(text, text.search(AD_HOC_ROUTE_SPACE_RE)),
+          rule: "route-rhythm",
+          message: "Route pages must use RouteStack and shared section rhythm instead of ad hoc spacing or delayed sections.",
+        });
+      }
+      if (text.includes("<SiteHeader")) {
+        violations.push({
+          file: rel,
+          line: 1,
+          rule: "page-shell",
+          message: "Pages must use AppChrome; SiteHeader is no longer the primary shell.",
+        });
+      }
+      if (ROUTE_BOX_RE.test(text)) {
+        violations.push({
+          file: rel,
+          line: lineNumber(text, text.search(ROUTE_BOX_RE)),
+          rule: "no-box-layout",
+          message: "Primary route layout must use canvas primitives and line/data planes, not rounded containers or retired panel primitives.",
+        });
+      }
       const sectionCount = (text.match(/<section\b/g) ?? []).length;
-      const labelCount = (text.match(/<h2 className="text-label/g) ?? []).length;
+      const labelCount =
+        (text.match(/<h2 className="text-label/g) ?? []).length +
+        (text.match(/<CanvasSection\b/g) ?? []).length;
       if (sectionCount > 1 && labelCount < sectionCount - 1) {
         violations.push({
           file: rel,
           line: 1,
           rule: "section-labels",
           message: "Top-level sections after the hero need text-label headings.",
+        });
+      }
+    }
+
+    if (rel === "components/cinematic.tsx" && OLD_PRIMARY_PRIMITIVE_RE.test(text)) {
+      violations.push({
+        file: rel,
+        line: lineNumber(text, text.search(OLD_PRIMARY_PRIMITIVE_RE)),
+        rule: "no-box-primitives",
+        message: "Retired boxed primitives must not be exported from the primary cinematic system.",
+      });
+    }
+
+    if (rel === "components/cinematic.tsx") {
+      for (const required of ["route-stack", "route-section", "section-heading", "data-plane"]) {
+        if (!text.includes(required)) {
+          violations.push({
+            file: rel,
+            line: 1,
+            rule: "layout-primitives",
+            message: `Primary cinematic layout is missing the ${required} hook.`,
+          });
+        }
+      }
+    }
+
+    if (rel === "components/app-chrome.tsx" && !text.includes("function MobileTabBar")) {
+      violations.push({
+        file: rel,
+        line: 1,
+        rule: "mobile-nav",
+        message: "AppChrome must include the mobile bottom tab bar.",
+      });
+    }
+
+    if (rel === "app/groups/page.tsx") {
+      const dataPlaneCount = (text.match(/<DataPlane\b/g) ?? []).length;
+      if (dataPlaneCount !== 1) {
+        violations.push({
+          file: rel,
+          line: 1,
+          rule: "groups-board",
+          message: "Groups must render as one continuous executive standings board, not one DataPlane per group.",
         });
       }
     }

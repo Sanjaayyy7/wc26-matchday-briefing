@@ -15,7 +15,7 @@ export function MatchdayHero({
 }) {
   return (
     <section
-      className="rounded-3xl px-6 py-16 dark:border dark:border-[var(--hairline)] md:py-20"
+      className="-mx-6 px-6 py-16 md:py-20"
       style={kitPairWashStyle(home.primary, away.primary)}
     >
       <div className="mx-auto flex max-w-3xl flex-col items-center gap-8 text-center">
@@ -53,7 +53,7 @@ export function MatchdayHero({
         </p>
         <Link
           href={`/fixture/${fixture.slug}`}
-          className="inline-flex h-11 items-center rounded-full bg-[var(--accent)] px-6 font-medium text-[var(--accent-foreground)] transition-transform duration-300 hover:scale-105"
+          className="inline-flex h-11 items-center border-b border-[var(--accent)] font-medium text-[var(--accent)] transition-colors duration-300 hover:text-[var(--ink)]"
         >
           Read the briefing
         </Link>

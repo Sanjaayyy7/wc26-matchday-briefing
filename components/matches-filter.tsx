@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { MatchRow } from "./match-row";
+import { MatchMarketLine } from "./cinematic";
 import type { MatchRowData } from "@/lib/match-view";
 
 const GROUPS = "ABCDEFGHIJKL".split("");
@@ -28,10 +28,10 @@ export function MatchesFilter({ rows }: { rows: MatchRowData[] }) {
   );
 
   const chip = (active: boolean) =>
-    `text-label h-8 shrink-0 rounded-full px-3 transition-colors duration-300 ${
+    `text-label h-8 shrink-0 border-b px-1 transition-colors duration-300 ${
       active
-        ? "bg-[var(--accent)] text-[var(--accent-foreground)]"
-        : "bg-[var(--neutral-fill)] text-[var(--ink-muted)] hover:text-[var(--ink)]"
+        ? "border-[var(--ink)] text-[var(--ink)]"
+        : "border-transparent text-[var(--ink-muted)] hover:border-[var(--line)] hover:text-[var(--ink)]"
     }`;
 
   return (
@@ -58,13 +58,13 @@ export function MatchesFilter({ rows }: { rows: MatchRowData[] }) {
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Search team"
           aria-label="Search team"
-          className="text-label h-8 min-w-0 flex-1 rounded-full bg-[var(--neutral-fill)] px-3 outline-none placeholder:text-[var(--ink-faint)] sm:max-w-48"
+          className="text-label h-8 min-w-0 flex-1 border-b border-[var(--line)] bg-transparent px-1 outline-none placeholder:text-[var(--ink-faint)] sm:max-w-48"
         />
       </div>
       <p className="text-caption tabular">{filtered.length} matches</p>
-      <div className="space-y-2">
+      <div>
         {filtered.map((m) => (
-          <MatchRow key={m.slug} m={m} />
+          <MatchMarketLine key={m.slug} row={m} />
         ))}
       </div>
     </div>

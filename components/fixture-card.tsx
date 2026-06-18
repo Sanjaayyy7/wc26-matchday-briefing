@@ -28,7 +28,7 @@ export function FixtureCard({
   return (
     <Link
       href={`/fixture/${fixture.slug}`}
-      className="group flex h-full flex-col gap-5 rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-[var(--shadow-hover)] dark:border dark:border-[var(--hairline)]"
+      className="group flex h-full flex-col gap-5 border-y border-[var(--line)] py-6 transition-colors duration-300 hover:bg-[var(--panel)]"
       style={kitPairWashStyle(home.primary, away.primary)}
     >
       <span className="text-label">

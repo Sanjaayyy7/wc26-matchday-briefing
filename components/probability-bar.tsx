@@ -38,21 +38,23 @@ export function ProbabilityBar({
               suffix="%"
               className={
                 hero
-                  ? "text-[clamp(36px,6vw,56px)] font-bold leading-none tracking-[-0.022em]"
+                  ? "text-display text-5xl md:text-6xl"
                   : "text-display text-2xl"
               }
             />
           </div>
         ))}
       </div>
-      <div className="mt-4 flex h-2 w-full gap-px overflow-hidden rounded-full">
+      <div className="mt-4 flex h-2 w-full gap-px overflow-hidden">
         {segments.map((s) => (
           <motion.div
             key={s.key}
             initial={{ width: 0 }}
             animate={{ width: `${s.pct}%` }}
             transition={{ type: "spring", stiffness: 80, damping: 24 }}
-            style={{ background: s.fill }}
+            style={{
+              background: `linear-gradient(90deg, color-mix(in oklab, ${s.fill} 52%, var(--ink)), ${s.fill})`,
+            }}
           />
         ))}
       </div>

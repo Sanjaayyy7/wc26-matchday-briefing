@@ -1,4 +1,5 @@
-import { SiteHeader } from "@/components/site-header";
+import { AppChrome } from "@/components/app-chrome";
+import { CanvasSection, DataPlane, RouteStack, SignalLine } from "@/components/cinematic";
 import { MatchesFilter } from "@/components/matches-filter";
 import { allMatchRows } from "@/lib/match-rows";
 import knockouts from "@/data/knockouts.json";
@@ -7,29 +8,38 @@ export const metadata = { title: "Matches — Matchday Briefing" };
 
 export default function MatchesPage() {
   const rows = allMatchRows();
+  const played = rows.filter((row) => row.score).length;
+  const locked = rows.filter((row) => row.split && !row.score).length;
+  const upcoming = rows.length - played;
   return (
-    <>
-      <SiteHeader />
-      <main className="mx-auto w-full max-w-6xl overflow-x-hidden px-6 py-12 md:py-16">
-        <div className="min-w-0 space-y-16">
-        <section className="animate-rise">
-          <h1 className="text-title text-2xl">All matches</h1>
-          <p className="text-caption mt-1">
-            {rows.length} group-stage fixtures · settled results, locked calls, and upcoming model splits
-          </p>
-        </section>
-        <section className="animate-rise">
-          <h2 className="text-label mb-4">Fixture list</h2>
+    <AppChrome
+      route="matches"
+      title="Fixture Board"
+      rail={
+        <SignalLine
+          signals={[
+            { label: "Fixtures", value: rows.length, detail: "group-stage board" },
+            { label: "Played", value: played, tone: "up", detail: "resolved" },
+            { label: "Open locks", value: locked, tone: "warn", detail: "pre-kickoff" },
+            { label: "Upcoming", value: upcoming, detail: "queued" },
+          ]}
+        />
+      }
+    >
+      <RouteStack className="min-w-0">
+        <CanvasSection eyebrow="Terminal" title="Status lanes, probabilities, verdicts.">
+          <DataPlane>
           <MatchesFilter rows={rows} />
-        </section>
-        <section className="animate-rise">
-          <h2 className="text-label mb-4">Round of 32 — slots set after the groups</h2>
+          </DataPlane>
+        </CanvasSection>
+        <CanvasSection eyebrow="Knockout shell" title="Round of 32 slots set after the groups.">
+          <DataPlane>
           <div className="space-y-2">
             {(knockouts as Array<{ match: number; homeLabel: string; awayLabel: string }>).map(
               (k) => (
                 <div
                   key={k.match}
-                  className="grid grid-cols-[5.5rem_1fr] items-center gap-4 rounded-xl bg-[var(--surface)] px-4 py-3 opacity-70 dark:border dark:border-[var(--hairline)]"
+                  className="grid grid-cols-[5.5rem_1fr] items-center gap-4 border-b border-[var(--line)] py-3 opacity-70 last:border-0"
                 >
                   <span className="text-caption tabular">Match {k.match}</span>
                   <span className="text-caption">
@@ -39,9 +49,9 @@ export default function MatchesPage() {
               ),
             )}
           </div>
-        </section>
-        </div>
-      </main>
-    </>
+          </DataPlane>
+        </CanvasSection>
+      </RouteStack>
+    </AppChrome>
   );
 }

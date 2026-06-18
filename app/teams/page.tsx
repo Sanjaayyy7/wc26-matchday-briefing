@@ -1,6 +1,7 @@
-import { SiteHeader } from "@/components/site-header";
+import { AppChrome } from "@/components/app-chrome";
 import Link from "next/link";
 import { Crest } from "@/components/crest";
+import { CanvasSection, DataPlane, RouteStack, SignalLine } from "@/components/cinematic";
 import { NumberTicker } from "@/components/number-ticker";
 import { allClubs } from "@/lib/data";
 import model from "@/data/model.json";
@@ -17,24 +18,30 @@ export default function TeamsPage() {
     return rb - ra;
   });
   return (
-    <>
-      <SiteHeader />
-      <main className="mx-auto max-w-6xl px-6 py-12 md:py-16">
-        <div className="space-y-16">
-        <section className="animate-rise">
-          <h1 className="text-title text-2xl">Teams</h1>
-          <p className="text-caption mt-1">All 48, ordered by Elo rating</p>
-        </section>
-        <section className="animate-rise">
-          <h2 className="text-label mb-4">Power rating table</h2>
-          <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+    <AppChrome
+      route="teams"
+      title="Team Dossiers"
+      rail={
+        <SignalLine
+          signals={[
+            { label: "Teams", value: clubs.length, detail: "qualified field" },
+            { label: "Top Elo", value: ratings[clubs[0].datasetName ?? clubs[0].name] ?? 0, tone: "up", detail: clubs[0].name },
+            { label: "Champion max", value: (sim[clubs[0].datasetName ?? clubs[0].name]?.champion ?? 0) * 100, suffix: "%", decimals: 1, detail: "current leader" },
+          ]}
+        />
+      }
+    >
+      <RouteStack>
+        <CanvasSection eyebrow="Power rating table" title="All 48 dossiers, ranked by Elo.">
+          <DataPlane>
+          <ul className="divide-y divide-[var(--line)]">
             {clubs.map((c, i) => {
               const key = c.datasetName ?? c.name;
               return (
                 <li key={c.id}>
                   <Link
                     href={`/team/${c.id}`}
-                    className="flex items-center gap-4 rounded-2xl bg-[var(--surface)] p-4 transition-colors duration-300 hover:bg-[var(--elevated)] dark:border dark:border-[var(--hairline)]"
+                    className="grid grid-cols-[2rem_auto_1fr_auto] items-center gap-4 py-4 transition-colors duration-300 hover:bg-[var(--panel)]"
                   >
                     <span className="text-caption tabular w-6">{i + 1}</span>
                     <Crest
@@ -63,9 +70,9 @@ export default function TeamsPage() {
               );
             })}
           </ul>
-        </section>
-        </div>
-      </main>
-    </>
+          </DataPlane>
+        </CanvasSection>
+      </RouteStack>
+    </AppChrome>
   );
 }

@@ -38,9 +38,12 @@ export function MatchResultPanel({ view }: { view: MatchView }) {
 
   return (
     <section
-      className="rounded-3xl p-6 dark:border dark:border-[var(--hairline)]"
+      className="relative -mx-6 px-6 py-10"
       style={kitPairWashStyle(view.home.primary, view.away.primary)}
     >
+      <div className="chroma-rule absolute left-6 top-0 h-px w-64" />
+      <div className="absolute bottom-0 left-0 h-px w-1/2" style={{ background: "var(--kit-home)" }} />
+      <div className="absolute bottom-0 right-0 h-px w-1/2" style={{ background: "var(--kit-away)" }} />
       <div className="grid gap-8 lg:grid-cols-[1.2fr_1fr] lg:items-start">
         <div>
           <h2 className="text-label mb-4">
@@ -59,7 +62,7 @@ export function MatchResultPanel({ view }: { view: MatchView }) {
             {view.status === "official" ? (
               <VerdictChip verdict={view.verdict} />
             ) : (
-              <span className="text-label rounded-sm bg-[var(--neutral-fill)] px-2 py-0.5">
+              <span className="text-label border-b border-[var(--line)] px-1 py-0.5">
                 Not graded
               </span>
             )}

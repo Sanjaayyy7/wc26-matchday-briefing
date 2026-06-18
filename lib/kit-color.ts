@@ -91,12 +91,13 @@ export function kitAccent(kitHex: string, fallback: "up" | "down"): string {
 }
 
 /**
- * Optional helper for the kit-wash inline-style pattern (§2.2):
+ * Optional helper for the kit-marker inline-style pattern (§2.2):
  *
  *   <div style={kitWashStyle(club.primary)} className="kit-wash">
  *
- * Sets the `--kit` custom property consumed by the `.kit-wash` utility's
- * `color-mix(in oklab, var(--kit, var(--neutral-fill)) ..., var(--canvas))`.
+ * Sets the `--kit` custom property consumed by no-box route accents. The
+ * current command-center contract keeps primary backgrounds black, so this
+ * helper never paints a large colored wash by itself.
  */
 export function kitWashStyle(kitHex: string): CSSProperties {
   return { "--kit": kitHex } as CSSProperties;
@@ -106,8 +107,7 @@ export function kitPairWashStyle(homeHex: string, awayHex: string): CSSPropertie
   return {
     "--kit-home": homeHex,
     "--kit-away": awayHex,
-    background:
-      "linear-gradient(135deg, color-mix(in oklab, var(--kit-home) var(--kit-wash, 12%), var(--canvas)), color-mix(in oklab, var(--kit-away) var(--kit-wash, 12%), var(--canvas)))",
+    background: "linear-gradient(180deg, var(--void), var(--canvas) 52%, var(--void))",
   } as CSSProperties;
 }
 

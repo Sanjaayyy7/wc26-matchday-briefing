@@ -11,7 +11,7 @@ const STEPS = [
 
 export function ScaffoldPanel() {
   return (
-    <details className="group mt-12 rounded-2xl bg-[var(--surface)] p-6 dark:border dark:border-[var(--hairline)]">
+    <details className="group mt-12 border-y border-[var(--line)] py-6">
       <summary className="text-label flex cursor-pointer list-none items-center justify-between">
         How this briefing was assembled
         <span className="transition-transform duration-300 group-open:rotate-180" aria-hidden>

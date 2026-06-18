@@ -97,7 +97,7 @@ export function PreviewPane({
 
   if (!parsed.ok) {
     return (
-      <article className="prose prose-invert mt-12 max-w-none rounded-2xl bg-[var(--surface)] p-6 dark:border dark:border-[var(--hairline)]">
+      <article className="prose prose-invert mt-12 max-w-none border-y border-[var(--line)] py-6">
         <div className="text-caption mb-3">
           {status === "streaming" ? "Streaming…" : "Raw view — structure not detected"}
         </div>
@@ -160,7 +160,7 @@ export function PreviewPane({
 
       {parsed.flipFactor && (
         <Reveal>
-          <div className="rounded-2xl border-l-[3px] border-[var(--accent)] bg-[var(--surface)] p-6 dark:border dark:border-l-[3px] dark:border-[var(--hairline)] dark:border-l-[var(--accent)]">
+          <div className="border-l-[3px] border-[var(--accent)] py-3 pl-6">
             <h2 className="text-label mb-2">What would flip it</h2>
             <p className="leading-relaxed">{parsed.flipFactor}</p>
           </div>
@@ -222,25 +222,25 @@ function Skeleton({ slow }: { slow: boolean }) {
   return (
     <div className="mt-12 space-y-12" aria-busy>
       <div>
-        <div className="mb-5 h-3 w-28 animate-pulse rounded-full bg-[var(--neutral-fill)]" />
+        <div className="mb-5 h-px w-28 animate-pulse bg-[var(--neutral-fill)]" />
         <div className="grid grid-cols-3 gap-4">
           {[0, 1, 2].map((i) => (
             <div key={i} className="space-y-2">
-              <div className="h-3 w-12 animate-pulse rounded-full bg-[var(--neutral-fill)]" />
-              <div className="h-8 w-20 animate-pulse rounded-lg bg-[var(--neutral-fill)]" />
+              <div className="h-px w-12 animate-pulse bg-[var(--neutral-fill)]" />
+              <div className="h-8 w-20 animate-pulse border-b border-[var(--neutral-fill)]" />
             </div>
           ))}
         </div>
-        <div className="mt-4 h-2 w-full animate-pulse rounded-full bg-[var(--neutral-fill)]" />
+        <div className="mt-4 h-px w-full animate-pulse bg-[var(--neutral-fill)]" />
       </div>
       <div>
-        <div className="mb-3 h-3 w-36 animate-pulse rounded-full bg-[var(--neutral-fill)]" />
-        <div className="h-20 w-44 animate-pulse rounded-2xl bg-[var(--neutral-fill)]" />
+        <div className="mb-3 h-px w-36 animate-pulse bg-[var(--neutral-fill)]" />
+        <div className="h-20 w-44 animate-pulse border-b border-[var(--neutral-fill)]" />
       </div>
       <div className="space-y-3">
-        <div className="h-3 w-24 animate-pulse rounded-full bg-[var(--neutral-fill)]" />
-        <div className="h-4 w-full animate-pulse rounded-full bg-[var(--neutral-fill)]" />
-        <div className="h-4 w-4/5 animate-pulse rounded-full bg-[var(--neutral-fill)]" />
+        <div className="h-px w-24 animate-pulse bg-[var(--neutral-fill)]" />
+        <div className="h-4 w-full animate-pulse border-b border-[var(--neutral-fill)]" />
+        <div className="h-4 w-4/5 animate-pulse border-b border-[var(--neutral-fill)]" />
       </div>
       {slow && (
         <p className="text-caption text-center">
@@ -259,14 +259,14 @@ function ErrorBlock({
   onRetry: () => void;
 }) {
   return (
-    <div className="mt-12 rounded-2xl bg-[var(--surface)] p-6 dark:border dark:border-[var(--hairline)]">
+    <div className="mt-12 border-y border-[var(--line)] py-6">
       <p>
         <span className="mr-2 inline-block h-2 w-2 rounded-full bg-[var(--down)]" aria-hidden />
         {message}
       </p>
       <button
         onClick={onRetry}
-        className="mt-4 inline-flex h-10 items-center rounded-full bg-[var(--accent)] px-5 font-medium text-[var(--accent-foreground)] transition-transform duration-300 hover:scale-105"
+        className="mt-4 inline-flex h-10 items-center border-b border-[var(--accent)] font-medium text-[var(--accent)] transition-colors duration-300 hover:text-[var(--ink)]"
       >
         Retry
       </button>

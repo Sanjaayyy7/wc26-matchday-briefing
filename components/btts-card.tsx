@@ -115,11 +115,11 @@ function Shell({ children }: { children: React.ReactNode }) {
       initial={{ opacity: 0, y: 4 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3 }}
-      className="mt-12 rounded-2xl bg-[var(--surface)] p-6 dark:border dark:border-[var(--hairline)]"
+      className="mt-12 border-y border-[var(--line)] py-6"
     >
       <div className="mb-4 flex items-center justify-between">
         <h2 className="text-label">Both teams to score?</h2>
-        <span className="text-caption rounded-full bg-[var(--neutral-fill)] px-2.5 py-0.5">
+        <span className="text-caption border-b border-[var(--line)] px-1 py-0.5">
           Auto
         </span>
       </div>
@@ -141,9 +141,9 @@ function Skeleton() {
   return (
     <Shell>
       <div className="space-y-3" aria-busy>
-        <div className="h-8 w-24 animate-pulse rounded-lg bg-[var(--neutral-fill)]" />
-        <div className="h-4 w-full animate-pulse rounded-full bg-[var(--neutral-fill)]" />
-        <div className="h-4 w-3/4 animate-pulse rounded-full bg-[var(--neutral-fill)]" />
+        <div className="h-8 w-24 animate-pulse border-b border-[var(--neutral-fill)]" />
+        <div className="h-4 w-full animate-pulse border-b border-[var(--neutral-fill)]" />
+        <div className="h-4 w-3/4 animate-pulse border-b border-[var(--neutral-fill)]" />
       </div>
     </Shell>
   );

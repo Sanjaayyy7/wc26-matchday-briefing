@@ -7,7 +7,7 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: -apple-system, BlinkMacSystemFont, var(--font-inter), "Segoe UI", Roboto, sans-serif;
+  --font-sans: var(--font-inter), Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 
   --color-canvas: var(--canvas);
   --color-surface: var(--surface);
@@ -19,6 +19,11 @@
   --color-up: var(--up);
   --color-down: var(--down);
   --color-neutral-fill: var(--neutral-fill);
+  --color-void: var(--void);
+  --color-panel: var(--panel);
+  --color-panel-strong: var(--panel-strong);
+  --color-rail: var(--rail);
+  --color-line: var(--line);
 
   --color-stage-group: var(--stage-group);
   --color-stage-r32: var(--stage-r32);
@@ -70,31 +75,44 @@
   --radius-4xl: 2.5rem;
 }
 
-/* LIGHT — Apple editorial: warm neutrals, blue accent, space over strokes */
+/* Codex-black foundation: both themes keep the product on a jet canvas. */
 :root {
-  --canvas: #f5f5f7;
-  --surface: #ffffff;
-  --elevated: #fbfbfd;
-  --ink: #1d1d1f;
-  --ink-muted: #86868b;
-  --ink-faint: #a1a1a6;
-  --hairline: rgba(0, 0, 0, 0.08);
-  --tint: #0071e3;
-  --up: #008a05;
-  --down: #d4430f;
-  --neutral-fill: #e8e8ed;
-  --glass: rgba(255, 255, 255, 0.72);
-  --shadow-hover: 0 8px 32px rgba(0, 0, 0, 0.08);
+  --void: #000000;
+  --canvas: #050505;
+  --surface: rgba(255, 255, 255, 0.035);
+  --panel: rgba(255, 255, 255, 0.045);
+  --panel-strong: rgba(255, 255, 255, 0.08);
+  --rail: rgba(0, 0, 0, 0.82);
+  --elevated: rgba(255, 255, 255, 0.075);
+  --ink: #f4f4ef;
+  --ink-muted: #a2a29b;
+  --ink-faint: #666660;
+  --hairline: rgba(255, 255, 255, 0.08);
+  --line: rgba(255, 255, 255, 0.12);
+  --tint: #f4f4ef;
+  --up: #7cffb2;
+  --down: #ff674d;
+  --neutral-fill: rgba(255, 255, 255, 0.12);
+  --glass: rgba(0, 0, 0, 0.78);
+  --shadow-hover: 0 32px 120px rgba(0, 0, 0, 0.82);
+  --glow: 0 0 120px rgba(255, 255, 255, 0.08);
   --dur: 0.3s;
   --ease: cubic-bezier(0.4, 0, 0.2, 1);
 
-  /* Stage ramp (§2.3) — light hexes, ~10% darker than dark-mode column */
-  --stage-group: #7c7c81;
-  --stage-r32: #0968cc;
-  --stage-r16: #4a48c4;
-  --stage-qf: #a347d6;
-  --stage-sf: #e08a00;
-  --stage-final: #d4b300;
+  /* Stage ramp (§2.3) */
+  --stage-group: #8e8e93;
+  --stage-r32: #8ab4ff;
+  --stage-r16: #aaa7ff;
+  --stage-qf: #d7a5ff;
+  --stage-sf: #ffc46b;
+  --stage-final: #ffe680;
+  --signal-1: #8ab4ff;
+  --signal-2: #7cffb2;
+  --signal-3: #ffe680;
+  --signal-4: #ff8a70;
+  --signal-5: #d7a5ff;
+  --signal-6: #8ff4ff;
+  --signal-7: #f4f4ef;
 
   /* Verdict ramp (§2.4) */
   --verdict-hit: var(--up);
@@ -108,13 +126,13 @@
   --popover: var(--surface);
   --popover-foreground: var(--ink);
   --primary: var(--tint);
-  --primary-foreground: #ffffff;
+  --primary-foreground: #000000;
   --secondary: var(--neutral-fill);
   --secondary-foreground: var(--ink);
   --muted: var(--neutral-fill);
   --muted-foreground: var(--ink-muted);
   --accent: var(--tint);
-  --accent-foreground: #ffffff;
+  --accent-foreground: #000000;
   --destructive: var(--down);
   --border: var(--hairline);
   --input: var(--hairline);
@@ -128,36 +146,49 @@
   --sidebar: var(--surface);
   --sidebar-foreground: var(--ink);
   --sidebar-primary: var(--tint);
-  --sidebar-primary-foreground: #ffffff;
+  --sidebar-primary-foreground: #000000;
   --sidebar-accent: var(--neutral-fill);
   --sidebar-accent-foreground: var(--ink);
   --sidebar-border: var(--hairline);
   --sidebar-ring: var(--tint);
 }
 
-/* DARK — Robinhood data-room: near-black, Robin Neon, big numbers */
+/* DARK mirrors :root so theme toggles never leave the Codex-black canvas. */
 .dark {
-  --canvas: #0b0b0c;
-  --surface: #141416;
-  --elevated: #1c1c1e;
-  --ink: #f5f5f7;
-  --ink-muted: #86868b;
-  --ink-faint: #6e6e73;
+  --void: #000000;
+  --canvas: #050505;
+  --surface: rgba(255, 255, 255, 0.035);
+  --panel: rgba(255, 255, 255, 0.045);
+  --panel-strong: rgba(255, 255, 255, 0.08);
+  --rail: rgba(0, 0, 0, 0.82);
+  --elevated: rgba(255, 255, 255, 0.075);
+  --ink: #f4f4ef;
+  --ink-muted: #a2a29b;
+  --ink-faint: #666660;
   --hairline: rgba(255, 255, 255, 0.08);
-  --tint: #00c805;
-  --up: #00c805;
-  --down: #ff5c39;
-  --neutral-fill: #2c2c2e;
-  --glass: rgba(20, 20, 22, 0.72);
-  --shadow-hover: 0 8px 32px rgba(0, 0, 0, 0.4);
+  --line: rgba(255, 255, 255, 0.12);
+  --tint: #f4f4ef;
+  --up: #7cffb2;
+  --down: #ff674d;
+  --neutral-fill: rgba(255, 255, 255, 0.12);
+  --glass: rgba(0, 0, 0, 0.78);
+  --shadow-hover: 0 32px 120px rgba(0, 0, 0, 0.82);
+  --glow: 0 0 120px rgba(255, 255, 255, 0.08);
 
   /* Stage ramp (§2.3) — dark hexes */
   --stage-group: #8e8e93;
-  --stage-r32: #0a84ff;
-  --stage-r16: #5e5ce6;
-  --stage-qf: #bf5af2;
-  --stage-sf: #ff9f0a;
-  --stage-final: #ffd60a;
+  --stage-r32: #8ab4ff;
+  --stage-r16: #aaa7ff;
+  --stage-qf: #d7a5ff;
+  --stage-sf: #ffc46b;
+  --stage-final: #ffe680;
+  --signal-1: #8ab4ff;
+  --signal-2: #7cffb2;
+  --signal-3: #ffe680;
+  --signal-4: #ff8a70;
+  --signal-5: #d7a5ff;
+  --signal-6: #8ff4ff;
+  --signal-7: #f4f4ef;
 
   /* Verdict ramp (§2.4) */
   --verdict-hit: var(--up);
@@ -205,13 +236,17 @@
     font-family: var(--font-sans);
   }
   body {
-    background: var(--canvas);
+    background:
+      linear-gradient(180deg, color-mix(in oklab, var(--ink) 4%, transparent), transparent 18rem),
+      linear-gradient(110deg, color-mix(in oklab, var(--stage-r32) 5%, transparent), transparent 42rem),
+      linear-gradient(250deg, color-mix(in oklab, var(--stage-final) 4%, transparent), transparent 40rem),
+      linear-gradient(180deg, var(--void), var(--canvas) 36rem, var(--void));
     color: var(--ink);
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
-    font-size: 17px;
-    line-height: 1.47059;
-    letter-spacing: -0.022px;
+    font-size: 16px;
+    line-height: 1.5;
+    letter-spacing: 0;
   }
   *:focus-visible {
     outline: 2px solid var(--tint);
@@ -225,21 +260,27 @@
   font-variant-numeric: tabular-nums;
 }
 
-/* Apple-scale display text: tight negative tracking grows with size */
+/* Codex-style type: confident scale, exact spacing, tabular data. */
 @utility text-display {
-  font-weight: 700;
-  letter-spacing: -0.022em;
-  line-height: 1.05;
+  font-weight: 650;
+  letter-spacing: 0;
+  line-height: 1.02;
+}
+@utility text-hero {
+  font-size: 56px;
+  font-weight: 650;
+  letter-spacing: 0;
+  line-height: 0.94;
 }
 @utility text-title {
   font-weight: 600;
-  letter-spacing: -0.01em;
-  line-height: 1.14;
+  letter-spacing: 0;
+  line-height: 1.18;
 }
 @utility text-label {
   font-size: 13px;
   font-weight: 500;
-  letter-spacing: 0.01em;
+  letter-spacing: 0;
   color: var(--ink-muted);
 }
 @utility text-caption {
@@ -250,10 +291,10 @@
 
 /* Kit wash (§2.2) — `--kit` is set inline per-component via style. */
 @utility kit-wash {
-  background: color-mix(in oklab, var(--kit, var(--neutral-fill)) var(--kit-wash, 12%), var(--canvas));
+  background: var(--void);
 }
 .dark {
-  --kit-wash: 18%;
+  --kit-wash: 0%;
 }
 
 /* Entrance choreography (§7.1) */
@@ -269,6 +310,130 @@
 }
 @utility animate-rise {
   animation: rise var(--dur) var(--ease) both;
+}
+
+@layer components {
+  .route-stack {
+    counter-reset: route-section;
+  }
+
+  .route-section {
+    counter-increment: route-section;
+  }
+
+  .route-section > .section-heading::after {
+    content: counter(route-section, decimal-leading-zero);
+    position: absolute;
+    right: 0;
+    top: 2rem;
+    color: var(--ink-faint);
+    font-size: 12px;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .data-plane {
+    background:
+      linear-gradient(90deg, color-mix(in oklab, var(--ink) 3%, transparent), transparent 24rem),
+      transparent;
+  }
+}
+
+@utility cinematic-panel {
+  background: transparent;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  box-shadow: none;
+  backdrop-filter: none;
+}
+
+@utility app-stage {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+@utility velvet-depth {
+  background:
+    linear-gradient(180deg, color-mix(in oklab, var(--ink) 7%, transparent), transparent 24rem),
+    linear-gradient(115deg, color-mix(in oklab, var(--signal-1) 8%, transparent), transparent 48%),
+    linear-gradient(245deg, color-mix(in oklab, var(--signal-3) 6%, transparent), transparent 46%),
+    linear-gradient(180deg, var(--void), var(--canvas) 52%, var(--void));
+}
+
+@utility cinema-vignette {
+  background:
+    linear-gradient(90deg, rgba(0, 0, 0, 0.58), transparent 22%, transparent 78%, rgba(0, 0, 0, 0.58)),
+    linear-gradient(180deg, rgba(0, 0, 0, 0.1), transparent 34%, rgba(0, 0, 0, 0.52));
+}
+
+@utility hero-atmosphere {
+  background:
+    linear-gradient(110deg, color-mix(in oklab, var(--kit-home, var(--stage-r32)) 10%, transparent), transparent 42%),
+    linear-gradient(250deg, color-mix(in oklab, var(--kit-away, var(--stage-final)) 10%, transparent), transparent 42%),
+    linear-gradient(180deg, color-mix(in oklab, var(--ink) 6%, transparent), transparent 48%);
+}
+
+@utility premium-sweep {
+  background:
+    linear-gradient(100deg, transparent, color-mix(in oklab, var(--signal-1) 9%, transparent), transparent 36%),
+    linear-gradient(260deg, transparent, color-mix(in oklab, var(--signal-5) 7%, transparent), transparent 38%),
+    linear-gradient(180deg, transparent, color-mix(in oklab, var(--ink) 4%, transparent), transparent);
+}
+
+@utility chroma-rule {
+  background: linear-gradient(
+    90deg,
+    var(--signal-1),
+    var(--signal-2) 18%,
+    var(--signal-3) 36%,
+    var(--signal-4) 54%,
+    var(--signal-5) 72%,
+    var(--signal-6)
+  );
+  box-shadow:
+    0 0 22px color-mix(in oklab, var(--signal-1) 16%, transparent),
+    0 0 28px color-mix(in oklab, var(--signal-5) 12%, transparent);
+}
+
+@utility chroma-text {
+  background: linear-gradient(
+    90deg,
+    var(--signal-1),
+    var(--signal-2) 24%,
+    var(--signal-3) 48%,
+    var(--signal-5) 76%,
+    var(--signal-6)
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+@utility signal-sheen {
+  background:
+    linear-gradient(115deg, color-mix(in oklab, var(--signal-1) 8%, transparent), transparent 34%),
+    linear-gradient(245deg, color-mix(in oklab, var(--signal-5) 7%, transparent), transparent 38%),
+    linear-gradient(180deg, color-mix(in oklab, var(--ink) 3%, transparent), transparent);
+}
+
+@utility glass-rail {
+  background: color-mix(in oklab, var(--void) 84%, transparent);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  backdrop-filter: blur(18px) saturate(120%);
+}
+
+@utility scanline {
+  background-image: linear-gradient(to bottom, transparent, transparent 11px, rgba(255, 255, 255, 0.022) 12px);
+  background-size: 100% 12px;
+}
+
+@media (min-width: 768px) {
+  .text-hero {
+    font-size: 104px;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

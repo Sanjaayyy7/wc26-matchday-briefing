@@ -1,4 +1,5 @@
 import { cn } from "@/lib/utils";
+import { flagForShort } from "@/lib/flags";
 
 export function Crest({
   short,
@@ -15,24 +16,35 @@ export function Crest({
   size?: number;
   className?: string;
 }) {
-  const fontSize = Math.round(size * 0.3);
+  const flag = flagForShort(short);
+  const fontSize = Math.round(size * (flag ? 0.58 : 0.3));
   return (
     <div
       role="img"
-      aria-label={`${name} crest`}
+      aria-label={`${name} national flag`}
       className={cn(
-        "grid place-items-center rounded-full border border-[var(--hairline)] font-semibold tracking-[-0.01em]",
+        "grid place-items-center overflow-hidden rounded-full border border-[var(--hairline)] bg-[var(--canvas)] font-semibold",
         className,
       )}
       style={{
         width: size,
         height: size,
-        background: primary,
-        color: secondary ?? "var(--canvas)",
+        color: flag ? undefined : secondary ?? "var(--canvas)",
         fontSize,
       }}
     >
-      {short}
+      {flag ? (
+        <span aria-hidden className="leading-none">
+          {flag}
+        </span>
+      ) : (
+        <span
+          className="grid h-full w-full place-items-center"
+          style={{ background: primary }}
+        >
+          {short}
+        </span>
+      )}
     </div>
   );
 }

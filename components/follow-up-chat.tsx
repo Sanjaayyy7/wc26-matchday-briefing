@@ -121,20 +121,20 @@ export function FollowUpChat({
         {visible.map((m, i) =>
           m.role === "user" ? (
             <div key={i} className="flex justify-end">
-              <p className="max-w-sm rounded-2xl rounded-br-md bg-[var(--accent)] px-4 py-2.5 text-[var(--accent-foreground)] sm:max-w-md">
+              <p className="max-w-sm border-r-2 border-[var(--accent)] py-2.5 pr-4 text-[var(--ink)] sm:max-w-md">
                 {m.content}
               </p>
             </div>
           ) : (
             <div key={i} className="flex">
-              <p className="max-w-sm whitespace-pre-wrap rounded-2xl rounded-bl-md bg-[var(--surface)] px-4 py-2.5 dark:border dark:border-[var(--hairline)] sm:max-w-md">
+              <p className="max-w-sm whitespace-pre-wrap border-l-2 border-[var(--line)] py-2.5 pl-4 sm:max-w-md">
                 {m.content || (streaming && i === visible.length - 1 ? "…" : "")}
               </p>
             </div>
           ),
         )}
       </div>
-      <form onSubmit={ask} className="mt-5 flex items-center gap-2 rounded-full bg-[var(--surface)] py-1.5 pl-5 pr-1.5 dark:border dark:border-[var(--hairline)]">
+      <form onSubmit={ask} className="mt-5 flex items-center gap-2 border-y border-[var(--line)] py-1.5">
         <input
           value={question}
           onChange={(e) => setQuestion(e.target.value)}
@@ -147,7 +147,7 @@ export function FollowUpChat({
           type="submit"
           aria-label="Send question"
           disabled={streaming || !question.trim()}
-          className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-[var(--accent)] text-[var(--accent-foreground)] transition-transform duration-300 hover:scale-105 disabled:opacity-40"
+          className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-[var(--accent)] text-[var(--accent)] transition-transform duration-300 hover:scale-105 disabled:opacity-40"
         >
           <ArrowUp className="h-4 w-4" />
         </button>
