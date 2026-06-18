@@ -16,6 +16,8 @@ const NAV = [
   { label: "Teams", href: "/teams", icon: Users },
   { label: "Record", href: "/record", icon: ShieldCheck },
   { label: "Simulator", href: "/simulator", icon: BarChart3 },
+  { label: "Players", href: "/players", icon: Trophy },
+  { label: "Sentiment", href: "/sentiment", icon: Activity },
 ] as const;
 
 export function AppChrome({

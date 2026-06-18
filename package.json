@@ -16,6 +16,8 @@
     "ml:simulate": "tsx scripts/run-simulator.mts",
     "ml:history": "tsx scripts/build-history.mts",
     "ml:backtest": "tsx scripts/run-backtest.mts",
+    "ml:eval": "tsx scripts/eval-model.mts",
+    "ml:cycle": "npm run ml:fetch && npm run ml:train && npm run ml:eval && npm run ml:backtest",
     "pipeline:fetch": "tsx scripts/fetch-kalshi.mts",
     "pipeline:run": "tsx scripts/run-briefing.mts",
     "pipeline:lock": "tsx scripts/lock-predictions.mts",
@@ -24,7 +26,11 @@
     "pipeline:resolutions": "tsx scripts/fetch-resolutions.mts",
     "pipeline:polymarket": "tsx scripts/fetch-polymarket.mts",
     "report:accountability": "tsx scripts/build-accountability.mts",
-    "design:inspect": "tsx scripts/design-inspector.mts"
+    "design:inspect": "tsx scripts/design-inspector.mts",
+    "players:fetch": "tsx scripts/fetch-players.mts",
+    "players:build": "tsx scripts/build-player-stats.mts",
+    "sentiment:fetch": "tsx scripts/fetch-posts.mts",
+    "sentiment:score": "tsx scripts/score-sentiment.mts"
   },
   "dependencies": {
     "@base-ui/react": "^1.5.0",
