@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-19T07:19:46.816Z",
+  "generatedAt": "2026-06-19T07:20:37.623Z",
   "official": {
     "rows": [
       {
@@ -426,7 +426,69 @@
         "marketBrier": null,
         "edge": null
       }
-    }
+    },
+    "calibrationBins": [
+      {
+        "midpoint": 0.05,
+        "predicted": 0.056666666666666664,
+        "observed": 0.16666666666666666,
+        "n": 6
+      },
+      {
+        "midpoint": 0.15,
+        "predicted": 0.14923076923076922,
+        "observed": 0.38461538461538464,
+        "n": 13
+      },
+      {
+        "midpoint": 0.25,
+        "predicted": 0.25315789473684214,
+        "observed": 0.2631578947368421,
+        "n": 19
+      },
+      {
+        "midpoint": 0.35,
+        "predicted": 0.3457142857142857,
+        "observed": 0.2857142857142857,
+        "n": 7
+      },
+      {
+        "midpoint": 0.45,
+        "predicted": 0.445,
+        "observed": 0,
+        "n": 2
+      },
+      {
+        "midpoint": 0.55,
+        "predicted": 0.532,
+        "observed": 0.6,
+        "n": 5
+      },
+      {
+        "midpoint": 0.65,
+        "predicted": 0.64,
+        "observed": 0.6,
+        "n": 5
+      },
+      {
+        "midpoint": 0.75,
+        "predicted": 0.7166666666666667,
+        "observed": 0.3333333333333333,
+        "n": 3
+      },
+      {
+        "midpoint": 0.85,
+        "predicted": 0.825,
+        "observed": 0.5,
+        "n": 2
+      },
+      {
+        "midpoint": 0.95,
+        "predicted": 0.94,
+        "observed": 0,
+        "n": 1
+      }
+    ]
   },
   "informational": {
     "rows": [

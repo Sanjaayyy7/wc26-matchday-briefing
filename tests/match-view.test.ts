@@ -29,11 +29,13 @@ describe("match-view display shaping", () => {
     }
   });
 
-  it("projects Qatar-Switzerland as a locked future match", () => {
+  it("projects Qatar-Switzerland as an official graded result (settled 1-1)", () => {
     const view = matchViewBySlug("qatar-vs-switzerland");
-    expect(view?.status).toBe("locked");
-    if (view?.status !== "locked") throw new Error("expected locked view");
-    expect(view.lock.split.home + view.lock.split.draw + view.lock.split.away).toBe(100);
+    expect(view?.status).toBe("official");
+    if (view?.status !== "official") throw new Error("expected official view");
+    expect(view.score).toBe("1-1");
+    expect(["hit", "close", "miss"]).toContain(view.verdict);
+    expect(view.official.grades.modelBrier).toBeGreaterThan(0);
   });
 
   it("falls back to upcoming when a fixture has no lock or result artifacts", () => {

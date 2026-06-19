@@ -136,6 +136,13 @@ export type VsMarket = {
   edge: number | null; // marketBrier − modelBrier; positive = model better
 };
 
+export type CalibrationBin = {
+  midpoint: number;  // center of probability bucket (e.g. 0.05 for [0, 0.10))
+  predicted: number; // mean predicted probability in this bin
+  observed: number;  // fraction of events that actually occurred
+  n: number;         // number of (outcome, prediction) pairs in this bin
+};
+
 export type Aggregates = {
   n: number;
   accuracy: number | null;
@@ -153,6 +160,7 @@ export type AccountabilityOutput = {
   official: {
     rows: OfficialRow[];
     aggregates: Aggregates;
+    calibrationBins: CalibrationBin[];
   };
   informational: {
     rows: InformationalRow[];
@@ -205,6 +213,46 @@ function classifyVerdict(entry: LockedEntry): Verdict {
   }
 
   return "miss";
+}
+
+// ---------------------------------------------------------------------------
+// Calibration bins
+// ---------------------------------------------------------------------------
+
+/** Pool all 3 outcome probabilities across settled entries into 10 bins.
+ *  Each settled match contributes 3 (predicted, realized) pairs — one per outcome. */
+function computeCalibrationBins(entries: LockedEntry[]): CalibrationBin[] {
+  const NUM_BINS = 10;
+  const bins = Array.from({ length: NUM_BINS }, (_, i) => ({
+    midpoint: (i + 0.5) / NUM_BINS,
+    sumPredicted: 0,
+    sumObserved: 0,
+    n: 0,
+  }));
+
+  for (const e of entries) {
+    if (!e.split || !e.realized) continue;
+    const outcomes: Array<{ outcome: "home" | "draw" | "away"; prob: number }> = [
+      { outcome: "home", prob: e.split.home / 100 },
+      { outcome: "draw", prob: e.split.draw / 100 },
+      { outcome: "away", prob: e.split.away / 100 },
+    ];
+    for (const o of outcomes) {
+      const binIdx = Math.min(Math.floor(o.prob * NUM_BINS), NUM_BINS - 1);
+      bins[binIdx].sumPredicted += o.prob;
+      bins[binIdx].sumObserved += o.outcome === e.realized ? 1 : 0;
+      bins[binIdx].n += 1;
+    }
+  }
+
+  return bins
+    .filter((b) => b.n > 0)
+    .map((b) => ({
+      midpoint: b.midpoint,
+      predicted: b.sumPredicted / b.n,
+      observed: b.sumObserved / b.n,
+      n: b.n,
+    }));
 }
 
 // ---------------------------------------------------------------------------
@@ -396,9 +444,11 @@ export function buildAccountability(
     "All scoreline metrics (scorelineHit, top3ScorelineHit) come from the settlement script and are computed against the Poisson model's top predicted scoreline, not a separate forecast.",
   ];
 
+  const calibrationBins = computeCalibrationBins(settledEntries);
+
   return {
     generatedAt,
-    official: { rows: officialRows, aggregates },
+    official: { rows: officialRows, aggregates, calibrationBins },
     informational: { rows: informationalRows },
     caveats,
   };
