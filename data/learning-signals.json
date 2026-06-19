@@ -1,0 +1,26 @@
+{
+  "signals": [
+    {
+      "id": "LSig-001",
+      "status": "monitoring",
+      "category": "calibration",
+      "title": "Draw Probability Systematic Underestimation",
+      "issueDate": "2026-06-19",
+      "issue": "Model assigns mean draw probability of 22.7% across all group-stage fixtures. Observed WC26 draw rate is 38.1% (8 of 21 settled matches). Gap: +15.4 percentage points. All 8 draws scored as MISS or SURPRISE grade. Model never identified a draw as the most likely outcome.",
+      "evidence": "8/21 settled matches ended in draws (38.1%). Mean predicted draw prob: 22.7%. 4 of 6 strong favorites (≥70% win probability) drew instead of winning. Worst case: Spain vs Cape Verde — model assigned 94% Spain win, result was 0-0 draw (Brier: 1.786). Root causes: (1) Dixon-Coles rho under-tuned for WC tournament conditions, (2) Platt calibration trained on general international data with lower draw rate (~24-26%), (3) Elo ratings overweight talent vs WC tactical context.",
+      "action": "Evaluated 8 challenger model configurations: rho inflation (×1.5, ×3), draw prior inflation (+30%, +50%, +70%), Elo cap at 400 points, and combinations. Statistical significance framework built using paired Brier differences, bootstrap confidence intervals (B=10,000), and power analysis.",
+      "result": "Best challenger (Rho×3 + Draw Prior +30% + Elo Cap 400pt) achieves mean Brier improvement of 0.034 (4.9%). Draw Brier improves from 1.069 to 0.870 (−19%). Mean predicted draw% increases from 23.6% to 31.1%, reducing the gap from +15.4pp to +7.0pp. However, challenger regresses on home-win and away-win outcomes (mean −0.062 and −0.087 Brier respectively).",
+      "promotionDecision": "DENIED",
+      "promotionRationale": "Paired one-sided t-test: t=1.037, p=0.156 (threshold: p<0.05). 95% bootstrap CI: [−0.024, +0.100] — includes zero. Minimum sample required for 80% power: n=245 matches. Current settled sample: n=21. Effect size likely inflated by elevated WC draw rate; if draw rate normalizes to 26%, required n exceeds 100,000.",
+      "revisitDate": "2026-06-26",
+      "revisitTrigger": "After Matchday 12 (estimated +15 more settled predictions, total n~36)",
+      "promotionRequiredN": 245,
+      "currentN": 21,
+      "drawGapObserved": 15.4,
+      "drawGapChallenger": 7.0
+    }
+  ],
+  "governanceVersion": "v1.0.0",
+  "champion": "v1.0.0-platt",
+  "lastAuditDate": "2026-06-19"
+}

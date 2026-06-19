@@ -289,6 +289,24 @@
   color: var(--ink-muted);
 }
 
+/* Sub-caption sizes for dense command/data UIs (§8 terminal panels) */
+@utility text-slight {
+  font-size: 11px;
+  font-weight: 400;
+}
+@utility text-fine {
+  font-size: 10px;
+  font-weight: 400;
+}
+@utility text-tiny {
+  font-size: 9px;
+  font-weight: 400;
+}
+@utility text-micro {
+  font-size: 8px;
+  font-weight: 400;
+}
+
 /* Kit wash (§2.2) — `--kit` is set inline per-component via style. */
 @utility kit-wash {
   background: var(--void);

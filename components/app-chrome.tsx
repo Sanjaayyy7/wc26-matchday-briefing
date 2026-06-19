@@ -26,12 +26,15 @@ export function AppChrome({
   eyebrow = "World Cup 2026",
   title,
   rail,
+  fullBleed = false,
 }: {
   children: React.ReactNode;
   route: string;
   eyebrow?: string;
   title?: string;
   rail?: React.ReactNode;
+  /** Skip the padded max-width main wrapper — for full-bleed / terminal pages. */
+  fullBleed?: boolean;
 }) {
   return (
     <div className="relative min-h-screen pb-24 md:pb-0">
@@ -93,7 +96,11 @@ export function AppChrome({
         </div>
       )}
 
-      <main className="mx-auto max-w-7xl px-6 py-10 md:py-14">{children}</main>
+      {fullBleed ? (
+        <main>{children}</main>
+      ) : (
+        <main className="mx-auto max-w-7xl px-6 py-10 md:py-14">{children}</main>
+      )}
       <MobileTabBar route={route} />
     </div>
   );

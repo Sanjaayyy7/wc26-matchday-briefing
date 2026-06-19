@@ -13,6 +13,8 @@ const ROOT = join(fileURLToPath(new URL(".", import.meta.url)), "..");
 
 const FIRST_PARTY_DIRS = ["app", "components", "lib"] as const;
 const PAGE_RE = /app(?:\/.+)?\/page\.tsx$/;
+// Pages that use an alternative full-screen shell (CommandShell etc.) and are exempt from page-shell checks
+const PAGE_SHELL_EXEMPT = new Set(["app/command/page.tsx"]);
 const RAW_HEX_RE = /#[0-9a-fA-F]{3,8}\b/;
 const ARBITRARY_RE =
   /\b(?:text|p|m|mt|mb|ml|mr|mx|my|gap|rounded|border)-\[(?!clamp\()[^\]]*(?:px|rem|%|calc|vh|vw)[^\]]*\]/;
@@ -141,7 +143,7 @@ export function inspectProject(root = ROOT): DesignViolation[] {
       });
     }
 
-    if (PAGE_RE.test(rel)) {
+    if (PAGE_RE.test(rel) && !PAGE_SHELL_EXEMPT.has(rel)) {
       for (const required of ["<AppChrome", "<RouteStack"]) {
         if (!text.includes(required)) {
           violations.push({
