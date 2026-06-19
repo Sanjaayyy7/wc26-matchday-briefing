@@ -1,0 +1,794 @@
+[
+  {
+    "id": "arg-messi",
+    "name": "Lionel Messi",
+    "teamId": "arg",
+    "position": "FW",
+    "_prov": {
+      "source": "seed:wc26-known-roster",
+      "confidence": 0.3,
+      "verificationDate": "2026-06-19",
+      "originType": "seeded"
+    }
+  },
+  {
+    "id": "arg-dybala",
+    "name": "Paulo Dybala",
+    "teamId": "arg",
+    "position": "FW",
+    "_prov": {
+      "source": "seed:wc26-known-roster",
+      "confidence": 0.3,
+      "verificationDate": "2026-06-19",
+      "originType": "seeded"
+    }
+  },
+  {
+    "id": "arg-lautaro",
+    "name": "Lautaro Martínez",
+    "teamId": "arg",
+    "position": "FW",
+    "_prov": {
+      "source": "seed:wc26-known-roster",
+      "confidence": 0.3,
+      "verificationDate": "2026-06-19",
+      "originType": "seeded"
+    }
+  },
+  {
+    "id": "arg-de-paul",
+    "name": "Rodrigo De Paul",
+    "teamId": "arg",
+    "position": "MF",
+    "_prov": {
+      "source": "seed:wc26-known-roster",
+      "confidence": 0.3,
+      "verificationDate": "2026-06-19",
+      "originType": "seeded"
+    }
+  },
+  {
+    "id": "arg-fernandez",
+    "name": "Enzo Fernández",
+    "teamId": "arg",
+    "position": "MF",
+    "_prov": {
+      "source": "seed:wc26-known-roster",
+      "confidence": 0.3,
+      "verificationDate": "2026-06-19",
+      "originType": "seeded"
+    }
+  },
+  {
+    "id": "arg-molina",
+    "name": "Nahuel Molina",
+    "teamId": "arg",
+    "position": "DF",
+    "_prov": {
+      "source": "seed:wc26-known-roster",
+      "confidence": 0.3,
+      "verificationDate": "2026-06-19",
+      "originType": "seeded"
+    }
+  },
+  {
+    "id": "arg-romero",
+    "name": "Cristian Romero",
+    "teamId": "arg",
+    "position": "DF",
+    "_prov": {
+      "source": "seed:wc26-known-roster",
+      "confidence": 0.3,
+      "verificationDate": "2026-06-19",
+      "originType": "seeded"
+    }
+  },
+  {
+    "id": "arg-martinez",
+    "name": "Emiliano Martínez",
+    "teamId": "arg",
+    "position": "GK",
+    "_prov": {
+      "source": "seed:wc26-known-roster",
+      "confidence": 0.3,
+      "verificationDate": "2026-06-19",
+      "originType": "seeded"
+    }
+  },
+  {
+    "id": "bra-vinicius",
+    "name": "Vinícius Jr.",
+    "teamId": "bra",
+    "position": "FW",
+    "_prov": {
+      "source": "seed:wc26-known-roster",
+      "confidence": 0.3,
+      "verificationDate": "2026-06-19",
+      "originType": "seeded"
+    }
+  },
+  {
+    "id": "bra-rodrygo",
+    "name": "Rodrygo",
+    "teamId": "bra",
+    "position": "FW",
+    "_prov": {
+      "source": "seed:wc26-known-roster",
+      "confidence": 0.3,
+      "verificationDate": "2026-06-19",
+      "originType": "seeded"
+    }
+  },
+  {
+    "id": "bra-neymar",
+    "name": "Neymar Jr.",
+    "teamId": "bra",
+    "position": "FW",
+    "_prov": {
+      "source": "seed:wc26-known-roster",
+      "confidence": 0.3,
+      "verificationDate": "2026-06-19",
+      "originType": "seeded"
+    }
+  },
+  {
+    "id": "bra-casemiro",
+    "name": "Casemiro",
+    "teamId": "bra",
+    "position": "MF",
+    "_prov": {
+      "source": "seed:wc26-known-roster",
+      "confidence": 0.3,
+      "verificationDate": "2026-06-19",
+      "originType": "seeded"
+    }
+  },
+  {
+    "id": "bra-thiago-silva",
+    "name": "Thiago Silva",
+    "teamId": "bra",
+    "position": "DF",
+    "_prov": {
+      "source": "seed:wc26-known-roster",
+      "confidence": 0.3,
+      "verificationDate": "2026-06-19",
+      "originType": "seeded"
+    }
+  },
+  {
+    "id": "bra-marquinhos",
+    "name": "Marquinhos",
+    "teamId": "bra",
+    "position": "DF",
+    "_prov": {
+      "source": "seed:wc26-known-roster",
+      "confidence": 0.3,
+      "verificationDate": "2026-06-19",
+      "originType": "seeded"
+    }
+  },
+  {
+    "id": "bra-alisson",
+    "name": "Alisson",
+    "teamId": "bra",
+    "position": "GK",
+    "_prov": {
+      "source": "seed:wc26-known-roster",
+      "confidence": 0.3,
+      "verificationDate": "2026-06-19",
+      "originType": "seeded"
+    }
+  },
+  {
+    "id": "fra-mbappe",
+    "name": "Kylian Mbappé",
+    "teamId": "fra",
+    "position": "FW",
+    "_prov": {
+      "source": "seed:wc26-known-roster",
+      "confidence": 0.3,
+      "verificationDate": "2026-06-19",
+      "originType": "seeded"
+    }
+  },
+  {
+    "id": "fra-dembele",
+    "name": "Ousmane Dembélé",
+    "teamId": "fra",
+    "position": "FW",
+    "_prov": {
+      "source": "seed:wc26-known-roster",
+      "confidence": 0.3,
+      "verificationDate": "2026-06-19",
+      "originType": "seeded"
+    }
+  },
+  {
+    "id": "fra-griezmann",
+    "name": "Antoine Griezmann",
+    "teamId": "fra",
+    "position": "FW",
+    "_prov": {
+      "source": "seed:wc26-known-roster",
+      "confidence": 0.3,
+      "verificationDate": "2026-06-19",
+      "originType": "seeded"
+    }
+  },
+  {
+    "id": "fra-tchouameni",
+    "name": "Aurélien Tchouaméni",
+    "teamId": "fra",
+    "position": "MF",
+    "_prov": {
+      "source": "seed:wc26-known-roster",
+      "confidence": 0.3,
+      "verificationDate": "2026-06-19",
+      "originType": "seeded"
+    }
+  },
+  {
+    "id": "fra-rabiot",
+    "name": "Adrien Rabiot",
+    "teamId": "fra",
+    "position": "MF",
+    "_prov": {
+      "source": "seed:wc26-known-roster",
+      "confidence": 0.3,
+      "verificationDate": "2026-06-19",
+      "originType": "seeded"
+    }
+  },
+  {
+    "id": "fra-varane",
+    "name": "Raphaël Varane",
+    "teamId": "fra",
+    "position": "DF",
+    "_prov": {
+      "source": "seed:wc26-known-roster",
+      "confidence": 0.3,
+      "verificationDate": "2026-06-19",
+      "originType": "seeded"
+    }
+  },
+  {
+    "id": "fra-upamecano",
+    "name": "Dayot Upamecano",
+    "teamId": "fra",
+    "position": "DF",
+    "_prov": {
+      "source": "seed:wc26-known-roster",
+      "confidence": 0.3,
+      "verificationDate": "2026-06-19",
+      "originType": "seeded"
+    }
+  },
+  {
+    "id": "eng-saka",
+    "name": "Bukayo Saka",
+    "teamId": "eng",
+    "position": "FW",
+    "_prov": {
+      "source": "seed:wc26-known-roster",
+      "confidence": 0.3,
+      "verificationDate": "2026-06-19",
+      "originType": "seeded"
+    }
+  },
+  {
+    "id": "eng-bellingham",
+    "name": "Jude Bellingham",
+    "teamId": "eng",
+    "position": "MF",
+    "_prov": {
+      "source": "seed:wc26-known-roster",
+      "confidence": 0.3,
+      "verificationDate": "2026-06-19",
+      "originType": "seeded"
+    }
+  },
+  {
+    "id": "eng-kane",
+    "name": "Harry Kane",
+    "teamId": "eng",
+    "position": "FW",
+    "_prov": {
+      "source": "seed:wc26-known-roster",
+      "confidence": 0.3,
+      "verificationDate": "2026-06-19",
+      "originType": "seeded"
+    }
+  },
+  {
+    "id": "eng-rice",
+    "name": "Declan Rice",
+    "teamId": "eng",
+    "position": "MF",
+    "_prov": {
+      "source": "seed:wc26-known-roster",
+      "confidence": 0.3,
+      "verificationDate": "2026-06-19",
+      "originType": "seeded"
+    }
+  },
+  {
+    "id": "eng-trippier",
+    "name": "Kieran Trippier",
+    "teamId": "eng",
+    "position": "DF",
+    "_prov": {
+      "source": "seed:wc26-known-roster",
+      "confidence": 0.3,
+      "verificationDate": "2026-06-19",
+      "originType": "seeded"
+    }
+  },
+  {
+    "id": "esp-yamal",
+    "name": "Lamine Yamal",
+    "teamId": "esp",
+    "position": "FW",
+    "_prov": {
+      "source": "seed:wc26-known-roster",
+      "confidence": 0.3,
+      "verificationDate": "2026-06-19",
+      "originType": "seeded"
+    }
+  },
+  {
+    "id": "esp-morata",
+    "name": "Álvaro Morata",
+    "teamId": "esp",
+    "position": "FW",
+    "_prov": {
+      "source": "seed:wc26-known-roster",
+      "confidence": 0.3,
+      "verificationDate": "2026-06-19",
+      "originType": "seeded"
+    }
+  },
+  {
+    "id": "esp-pedri",
+    "name": "Pedri",
+    "teamId": "esp",
+    "position": "MF",
+    "_prov": {
+      "source": "seed:wc26-known-roster",
+      "confidence": 0.3,
+      "verificationDate": "2026-06-19",
+      "originType": "seeded"
+    }
+  },
+  {
+    "id": "esp-gavi",
+    "name": "Gavi",
+    "teamId": "esp",
+    "position": "MF",
+    "_prov": {
+      "source": "seed:wc26-known-roster",
+      "confidence": 0.3,
+      "verificationDate": "2026-06-19",
+      "originType": "seeded"
+    }
+  },
+  {
+    "id": "esp-rodri",
+    "name": "Rodri",
+    "teamId": "esp",
+    "position": "MF",
+    "_prov": {
+      "source": "seed:wc26-known-roster",
+      "confidence": 0.3,
+      "verificationDate": "2026-06-19",
+      "originType": "seeded"
+    }
+  },
+  {
+    "id": "esp-carvajal",
+    "name": "Dani Carvajal",
+    "teamId": "esp",
+    "position": "DF",
+    "_prov": {
+      "source": "seed:wc26-known-roster",
+      "confidence": 0.3,
+      "verificationDate": "2026-06-19",
+      "originType": "seeded"
+    }
+  },
+  {
+    "id": "mex-quinones",
+    "name": "Julián Quiñones",
+    "teamId": "mex",
+    "position": "FW",
+    "_prov": {
+      "source": "seed:wc26-known-roster",
+      "confidence": 0.3,
+      "verificationDate": "2026-06-19",
+      "originType": "seeded"
+    }
+  },
+  {
+    "id": "mex-jimenez",
+    "name": "Raúl Jiménez",
+    "teamId": "mex",
+    "position": "FW",
+    "_prov": {
+      "source": "seed:wc26-known-roster",
+      "confidence": 0.3,
+      "verificationDate": "2026-06-19",
+      "originType": "seeded"
+    }
+  },
+  {
+    "id": "mex-lira",
+    "name": "Erik Lira",
+    "teamId": "mex",
+    "position": "MF",
+    "_prov": {
+      "source": "seed:wc26-known-roster",
+      "confidence": 0.3,
+      "verificationDate": "2026-06-19",
+      "originType": "seeded"
+    }
+  },
+  {
+    "id": "mex-alvarado",
+    "name": "Roberto Alvarado",
+    "teamId": "mex",
+    "position": "MF",
+    "_prov": {
+      "source": "seed:wc26-known-roster",
+      "confidence": 0.3,
+      "verificationDate": "2026-06-19",
+      "originType": "seeded"
+    }
+  },
+  {
+    "id": "mex-montes",
+    "name": "César Montes",
+    "teamId": "mex",
+    "position": "DF",
+    "_prov": {
+      "source": "seed:wc26-known-roster",
+      "confidence": 0.3,
+      "verificationDate": "2026-06-19",
+      "originType": "seeded"
+    }
+  },
+  {
+    "id": "mex-ochoa",
+    "name": "Guillermo Ochoa",
+    "teamId": "mex",
+    "position": "GK",
+    "_prov": {
+      "source": "seed:wc26-known-roster",
+      "confidence": 0.3,
+      "verificationDate": "2026-06-19",
+      "originType": "seeded"
+    }
+  },
+  {
+    "id": "kor-hwang-hee-chan",
+    "name": "Hwang Hee-Chan",
+    "teamId": "kor",
+    "position": "FW",
+    "_prov": {
+      "source": "seed:wc26-known-roster",
+      "confidence": 0.3,
+      "verificationDate": "2026-06-19",
+      "originType": "seeded"
+    }
+  },
+  {
+    "id": "kor-hwang-in-beom",
+    "name": "Hwang In-Beom",
+    "teamId": "kor",
+    "position": "MF",
+    "_prov": {
+      "source": "seed:wc26-known-roster",
+      "confidence": 0.3,
+      "verificationDate": "2026-06-19",
+      "originType": "seeded"
+    }
+  },
+  {
+    "id": "kor-lee-kang-in",
+    "name": "Lee Kang-In",
+    "teamId": "kor",
+    "position": "MF",
+    "_prov": {
+      "source": "seed:wc26-known-roster",
+      "confidence": 0.3,
+      "verificationDate": "2026-06-19",
+      "originType": "seeded"
+    }
+  },
+  {
+    "id": "kor-oh-hyeon-gyu",
+    "name": "Oh Hyeon-Gyu",
+    "teamId": "kor",
+    "position": "FW",
+    "_prov": {
+      "source": "seed:wc26-known-roster",
+      "confidence": 0.3,
+      "verificationDate": "2026-06-19",
+      "originType": "seeded"
+    }
+  },
+  {
+    "id": "kor-kim-min-jae",
+    "name": "Kim Min-Jae",
+    "teamId": "kor",
+    "position": "DF",
+    "_prov": {
+      "source": "seed:wc26-known-roster",
+      "confidence": 0.3,
+      "verificationDate": "2026-06-19",
+      "originType": "seeded"
+    }
+  },
+  {
+    "id": "can-larin",
+    "name": "Cyle Larin",
+    "teamId": "can",
+    "position": "FW",
+    "_prov": {
+      "source": "seed:wc26-known-roster",
+      "confidence": 0.3,
+      "verificationDate": "2026-06-19",
+      "originType": "seeded"
+    }
+  },
+  {
+    "id": "can-david",
+    "name": "Jonathan David",
+    "teamId": "can",
+    "position": "FW",
+    "_prov": {
+      "source": "seed:wc26-known-roster",
+      "confidence": 0.3,
+      "verificationDate": "2026-06-19",
+      "originType": "seeded"
+    }
+  },
+  {
+    "id": "can-david-promise",
+    "name": "Promise David",
+    "teamId": "can",
+    "position": "MF",
+    "_prov": {
+      "source": "seed:wc26-known-roster",
+      "confidence": 0.3,
+      "verificationDate": "2026-06-19",
+      "originType": "seeded"
+    }
+  },
+  {
+    "id": "can-buchanan",
+    "name": "Tajon Buchanan",
+    "teamId": "can",
+    "position": "FW",
+    "_prov": {
+      "source": "seed:wc26-known-roster",
+      "confidence": 0.3,
+      "verificationDate": "2026-06-19",
+      "originType": "seeded"
+    }
+  },
+  {
+    "id": "can-johnston",
+    "name": "Alistair Johnston",
+    "teamId": "can",
+    "position": "DF",
+    "_prov": {
+      "source": "seed:wc26-known-roster",
+      "confidence": 0.3,
+      "verificationDate": "2026-06-19",
+      "originType": "seeded"
+    }
+  },
+  {
+    "id": "bih-dzeko",
+    "name": "Edin Džeko",
+    "teamId": "bih",
+    "position": "FW",
+    "_prov": {
+      "source": "seed:wc26-known-roster",
+      "confidence": 0.3,
+      "verificationDate": "2026-06-19",
+      "originType": "seeded"
+    }
+  },
+  {
+    "id": "bih-demirovic",
+    "name": "Ermedin Demirović",
+    "teamId": "bih",
+    "position": "FW",
+    "_prov": {
+      "source": "seed:wc26-known-roster",
+      "confidence": 0.3,
+      "verificationDate": "2026-06-19",
+      "originType": "seeded"
+    }
+  },
+  {
+    "id": "bih-lukic",
+    "name": "Jovo Lukić",
+    "teamId": "bih",
+    "position": "MF",
+    "_prov": {
+      "source": "seed:wc26-known-roster",
+      "confidence": 0.3,
+      "verificationDate": "2026-06-19",
+      "originType": "seeded"
+    }
+  },
+  {
+    "id": "bih-kolasinac",
+    "name": "Sead Kolašinac",
+    "teamId": "bih",
+    "position": "DF",
+    "_prov": {
+      "source": "seed:wc26-known-roster",
+      "confidence": 0.3,
+      "verificationDate": "2026-06-19",
+      "originType": "seeded"
+    }
+  },
+  {
+    "id": "cze-schick",
+    "name": "Patrik Schick",
+    "teamId": "cze",
+    "position": "FW",
+    "_prov": {
+      "source": "seed:wc26-known-roster",
+      "confidence": 0.3,
+      "verificationDate": "2026-06-19",
+      "originType": "seeded"
+    }
+  },
+  {
+    "id": "cze-krejci",
+    "name": "Ladislav Krejcí",
+    "teamId": "cze",
+    "position": "DF",
+    "_prov": {
+      "source": "seed:wc26-known-roster",
+      "confidence": 0.3,
+      "verificationDate": "2026-06-19",
+      "originType": "seeded"
+    }
+  },
+  {
+    "id": "cze-coufal",
+    "name": "Vladimír Coufal",
+    "teamId": "cze",
+    "position": "DF",
+    "_prov": {
+      "source": "seed:wc26-known-roster",
+      "confidence": 0.3,
+      "verificationDate": "2026-06-19",
+      "originType": "seeded"
+    }
+  },
+  {
+    "id": "rsa-mokoena",
+    "name": "Teboho Mokoena",
+    "teamId": "rsa",
+    "position": "MF",
+    "_prov": {
+      "source": "seed:wc26-known-roster",
+      "confidence": 0.3,
+      "verificationDate": "2026-06-19",
+      "originType": "seeded"
+    }
+  },
+  {
+    "id": "rsa-zwane",
+    "name": "Themba Zwane",
+    "teamId": "rsa",
+    "position": "MF",
+    "_prov": {
+      "source": "seed:wc26-known-roster",
+      "confidence": 0.3,
+      "verificationDate": "2026-06-19",
+      "originType": "seeded"
+    }
+  },
+  {
+    "id": "rsa-sithole",
+    "name": "Sphephelo Sithole",
+    "teamId": "rsa",
+    "position": "DF",
+    "_prov": {
+      "source": "seed:wc26-known-roster",
+      "confidence": 0.3,
+      "verificationDate": "2026-06-19",
+      "originType": "seeded"
+    }
+  },
+  {
+    "id": "ger-musiala",
+    "name": "Jamal Musiala",
+    "teamId": "ger",
+    "position": "MF",
+    "_prov": {
+      "source": "seed:wc26-known-roster",
+      "confidence": 0.3,
+      "verificationDate": "2026-06-19",
+      "originType": "seeded"
+    }
+  },
+  {
+    "id": "ger-havertz",
+    "name": "Kai Havertz",
+    "teamId": "ger",
+    "position": "MF",
+    "_prov": {
+      "source": "seed:wc26-known-roster",
+      "confidence": 0.3,
+      "verificationDate": "2026-06-19",
+      "originType": "seeded"
+    }
+  },
+  {
+    "id": "ger-wirtz",
+    "name": "Florian Wirtz",
+    "teamId": "ger",
+    "position": "MF",
+    "_prov": {
+      "source": "seed:wc26-known-roster",
+      "confidence": 0.3,
+      "verificationDate": "2026-06-19",
+      "originType": "seeded"
+    }
+  },
+  {
+    "id": "ger-ter-stegen",
+    "name": "Marc-André ter Stegen",
+    "teamId": "ger",
+    "position": "GK",
+    "_prov": {
+      "source": "seed:wc26-known-roster",
+      "confidence": 0.3,
+      "verificationDate": "2026-06-19",
+      "originType": "seeded"
+    }
+  },
+  {
+    "id": "por-ronaldo",
+    "name": "Cristiano Ronaldo",
+    "teamId": "por",
+    "position": "FW",
+    "_prov": {
+      "source": "seed:wc26-known-roster",
+      "confidence": 0.3,
+      "verificationDate": "2026-06-19",
+      "originType": "seeded"
+    }
+  },
+  {
+    "id": "por-felix",
+    "name": "João Félix",
+    "teamId": "por",
+    "position": "FW",
+    "_prov": {
+      "source": "seed:wc26-known-roster",
+      "confidence": 0.3,
+      "verificationDate": "2026-06-19",
+      "originType": "seeded"
+    }
+  },
+  {
+    "id": "por-vitinha",
+    "name": "Vitinha",
+    "teamId": "por",
+    "position": "MF",
+    "_prov": {
+      "source": "seed:wc26-known-roster",
+      "confidence": 0.3,
+      "verificationDate": "2026-06-19",
+      "originType": "seeded"
+    }
+  }
+]

@@ -1,0 +1,403 @@
+{
+  "seed": 20260618,
+  "k": 4,
+  "features": [
+    "goals",
+    "assists",
+    "shots",
+    "keyPasses",
+    "minutes"
+  ],
+  "silhouetteScores": {
+    "3": 0.9785725217822261,
+    "4": 1,
+    "5": 1,
+    "6": 1
+  },
+  "centroids": [
+    [
+      -0.3444474819135857,
+      -0.34444748191358576,
+      0,
+      0,
+      -0.34444748191358576
+    ],
+    [
+      2.903200204700223,
+      -0.3444474819135859,
+      0,
+      0,
+      2.903200204700225
+    ],
+    [
+      -0.3444474819135858,
+      2.9032002047002234,
+      0,
+      0,
+      -0.34444748191358604
+    ],
+    [
+      2.903200204700223,
+      2.9032002047002234,
+      0,
+      0,
+      2.903200204700225
+    ]
+  ],
+  "assignments": [
+    {
+      "playerId": "arg-messi",
+      "cluster": 0,
+      "distance": 0
+    },
+    {
+      "playerId": "arg-dybala",
+      "cluster": 0,
+      "distance": 0
+    },
+    {
+      "playerId": "arg-lautaro",
+      "cluster": 0,
+      "distance": 0
+    },
+    {
+      "playerId": "arg-de-paul",
+      "cluster": 0,
+      "distance": 0
+    },
+    {
+      "playerId": "arg-fernandez",
+      "cluster": 0,
+      "distance": 0
+    },
+    {
+      "playerId": "arg-molina",
+      "cluster": 0,
+      "distance": 0
+    },
+    {
+      "playerId": "arg-romero",
+      "cluster": 0,
+      "distance": 0
+    },
+    {
+      "playerId": "arg-martinez",
+      "cluster": 0,
+      "distance": 0
+    },
+    {
+      "playerId": "bra-vinicius",
+      "cluster": 0,
+      "distance": 0
+    },
+    {
+      "playerId": "bra-rodrygo",
+      "cluster": 0,
+      "distance": 0
+    },
+    {
+      "playerId": "bra-neymar",
+      "cluster": 0,
+      "distance": 0
+    },
+    {
+      "playerId": "bra-casemiro",
+      "cluster": 0,
+      "distance": 0
+    },
+    {
+      "playerId": "bra-thiago-silva",
+      "cluster": 0,
+      "distance": 0
+    },
+    {
+      "playerId": "bra-marquinhos",
+      "cluster": 0,
+      "distance": 0
+    },
+    {
+      "playerId": "bra-alisson",
+      "cluster": 0,
+      "distance": 0
+    },
+    {
+      "playerId": "fra-mbappe",
+      "cluster": 0,
+      "distance": 0
+    },
+    {
+      "playerId": "fra-dembele",
+      "cluster": 0,
+      "distance": 0
+    },
+    {
+      "playerId": "fra-griezmann",
+      "cluster": 0,
+      "distance": 0
+    },
+    {
+      "playerId": "fra-tchouameni",
+      "cluster": 0,
+      "distance": 0
+    },
+    {
+      "playerId": "fra-rabiot",
+      "cluster": 0,
+      "distance": 0
+    },
+    {
+      "playerId": "fra-varane",
+      "cluster": 0,
+      "distance": 0
+    },
+    {
+      "playerId": "fra-upamecano",
+      "cluster": 0,
+      "distance": 0
+    },
+    {
+      "playerId": "eng-saka",
+      "cluster": 0,
+      "distance": 0
+    },
+    {
+      "playerId": "eng-bellingham",
+      "cluster": 0,
+      "distance": 0
+    },
+    {
+      "playerId": "eng-kane",
+      "cluster": 0,
+      "distance": 0
+    },
+    {
+      "playerId": "eng-rice",
+      "cluster": 0,
+      "distance": 0
+    },
+    {
+      "playerId": "eng-trippier",
+      "cluster": 0,
+      "distance": 0
+    },
+    {
+      "playerId": "esp-yamal",
+      "cluster": 0,
+      "distance": 0
+    },
+    {
+      "playerId": "esp-morata",
+      "cluster": 0,
+      "distance": 0
+    },
+    {
+      "playerId": "esp-pedri",
+      "cluster": 0,
+      "distance": 0
+    },
+    {
+      "playerId": "esp-gavi",
+      "cluster": 0,
+      "distance": 0
+    },
+    {
+      "playerId": "esp-rodri",
+      "cluster": 0,
+      "distance": 0
+    },
+    {
+      "playerId": "esp-carvajal",
+      "cluster": 0,
+      "distance": 0
+    },
+    {
+      "playerId": "mex-quinones",
+      "cluster": 1,
+      "distance": 0
+    },
+    {
+      "playerId": "mex-jimenez",
+      "cluster": 1,
+      "distance": 0
+    },
+    {
+      "playerId": "mex-lira",
+      "cluster": 2,
+      "distance": 0
+    },
+    {
+      "playerId": "mex-alvarado",
+      "cluster": 2,
+      "distance": 0
+    },
+    {
+      "playerId": "mex-montes",
+      "cluster": 0,
+      "distance": 0
+    },
+    {
+      "playerId": "mex-ochoa",
+      "cluster": 0,
+      "distance": 0
+    },
+    {
+      "playerId": "kor-hwang-hee-chan",
+      "cluster": 0,
+      "distance": 0
+    },
+    {
+      "playerId": "kor-hwang-in-beom",
+      "cluster": 3,
+      "distance": 0
+    },
+    {
+      "playerId": "kor-lee-kang-in",
+      "cluster": 2,
+      "distance": 0
+    },
+    {
+      "playerId": "kor-oh-hyeon-gyu",
+      "cluster": 1,
+      "distance": 0
+    },
+    {
+      "playerId": "kor-kim-min-jae",
+      "cluster": 0,
+      "distance": 0
+    },
+    {
+      "playerId": "can-larin",
+      "cluster": 1,
+      "distance": 0
+    },
+    {
+      "playerId": "can-david",
+      "cluster": 0,
+      "distance": 0
+    },
+    {
+      "playerId": "can-david-promise",
+      "cluster": 2,
+      "distance": 0
+    },
+    {
+      "playerId": "can-buchanan",
+      "cluster": 0,
+      "distance": 0
+    },
+    {
+      "playerId": "can-johnston",
+      "cluster": 0,
+      "distance": 0
+    },
+    {
+      "playerId": "bih-dzeko",
+      "cluster": 0,
+      "distance": 0
+    },
+    {
+      "playerId": "bih-demirovic",
+      "cluster": 0,
+      "distance": 0
+    },
+    {
+      "playerId": "bih-lukic",
+      "cluster": 1,
+      "distance": 0
+    },
+    {
+      "playerId": "bih-kolasinac",
+      "cluster": 2,
+      "distance": 0
+    },
+    {
+      "playerId": "cze-schick",
+      "cluster": 0,
+      "distance": 0
+    },
+    {
+      "playerId": "cze-krejci",
+      "cluster": 1,
+      "distance": 0
+    },
+    {
+      "playerId": "cze-coufal",
+      "cluster": 2,
+      "distance": 0
+    },
+    {
+      "playerId": "rsa-mokoena",
+      "cluster": 0,
+      "distance": 0
+    },
+    {
+      "playerId": "rsa-zwane",
+      "cluster": 0,
+      "distance": 0
+    },
+    {
+      "playerId": "rsa-sithole",
+      "cluster": 0,
+      "distance": 0
+    },
+    {
+      "playerId": "ger-musiala",
+      "cluster": 0,
+      "distance": 0
+    },
+    {
+      "playerId": "ger-havertz",
+      "cluster": 0,
+      "distance": 0
+    },
+    {
+      "playerId": "ger-wirtz",
+      "cluster": 0,
+      "distance": 0
+    },
+    {
+      "playerId": "ger-ter-stegen",
+      "cluster": 0,
+      "distance": 0
+    },
+    {
+      "playerId": "por-ronaldo",
+      "cluster": 0,
+      "distance": 0
+    },
+    {
+      "playerId": "por-felix",
+      "cluster": 0,
+      "distance": 0
+    },
+    {
+      "playerId": "por-vitinha",
+      "cluster": 0,
+      "distance": 0
+    }
+  ],
+  "clusterLabels": [
+    {
+      "cluster": 0,
+      "label": "Utility"
+    },
+    {
+      "cluster": 1,
+      "label": "Scorer"
+    },
+    {
+      "cluster": 2,
+      "label": "Creator"
+    },
+    {
+      "cluster": 3,
+      "label": "Scorer"
+    }
+  ],
+  "_prov": {
+    "source": "derived:player-stats.json+kmeans(seed=20260618,k=4)",
+    "confidence": 0.75,
+    "verificationDate": "2026-06-19",
+    "originType": "derived"
+  }
+}

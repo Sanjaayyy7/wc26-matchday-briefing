@@ -1,0 +1,1190 @@
+[
+  {
+    "id": "arg-messi",
+    "name": "Lionel Messi",
+    "teamId": "arg",
+    "position": "FW",
+    "goals": 0,
+    "assists": 0,
+    "shots": 0,
+    "keyPasses": 0,
+    "minutes": 0,
+    "appearances": 0,
+    "_prov": {
+      "source": "seed:wc26-known-roster",
+      "confidence": 0.3,
+      "verificationDate": "2026-06-19",
+      "originType": "seeded"
+    }
+  },
+  {
+    "id": "arg-dybala",
+    "name": "Paulo Dybala",
+    "teamId": "arg",
+    "position": "FW",
+    "goals": 0,
+    "assists": 0,
+    "shots": 0,
+    "keyPasses": 0,
+    "minutes": 0,
+    "appearances": 0,
+    "_prov": {
+      "source": "seed:wc26-known-roster",
+      "confidence": 0.3,
+      "verificationDate": "2026-06-19",
+      "originType": "seeded"
+    }
+  },
+  {
+    "id": "arg-lautaro",
+    "name": "Lautaro Martínez",
+    "teamId": "arg",
+    "position": "FW",
+    "goals": 0,
+    "assists": 0,
+    "shots": 0,
+    "keyPasses": 0,
+    "minutes": 0,
+    "appearances": 0,
+    "_prov": {
+      "source": "seed:wc26-known-roster",
+      "confidence": 0.3,
+      "verificationDate": "2026-06-19",
+      "originType": "seeded"
+    }
+  },
+  {
+    "id": "arg-de-paul",
+    "name": "Rodrigo De Paul",
+    "teamId": "arg",
+    "position": "MF",
+    "goals": 0,
+    "assists": 0,
+    "shots": 0,
+    "keyPasses": 0,
+    "minutes": 0,
+    "appearances": 0,
+    "_prov": {
+      "source": "seed:wc26-known-roster",
+      "confidence": 0.3,
+      "verificationDate": "2026-06-19",
+      "originType": "seeded"
+    }
+  },
+  {
+    "id": "arg-fernandez",
+    "name": "Enzo Fernández",
+    "teamId": "arg",
+    "position": "MF",
+    "goals": 0,
+    "assists": 0,
+    "shots": 0,
+    "keyPasses": 0,
+    "minutes": 0,
+    "appearances": 0,
+    "_prov": {
+      "source": "seed:wc26-known-roster",
+      "confidence": 0.3,
+      "verificationDate": "2026-06-19",
+      "originType": "seeded"
+    }
+  },
+  {
+    "id": "arg-molina",
+    "name": "Nahuel Molina",
+    "teamId": "arg",
+    "position": "DF",
+    "goals": 0,
+    "assists": 0,
+    "shots": 0,
+    "keyPasses": 0,
+    "minutes": 0,
+    "appearances": 0,
+    "_prov": {
+      "source": "seed:wc26-known-roster",
+      "confidence": 0.3,
+      "verificationDate": "2026-06-19",
+      "originType": "seeded"
+    }
+  },
+  {
+    "id": "arg-romero",
+    "name": "Cristian Romero",
+    "teamId": "arg",
+    "position": "DF",
+    "goals": 0,
+    "assists": 0,
+    "shots": 0,
+    "keyPasses": 0,
+    "minutes": 0,
+    "appearances": 0,
+    "_prov": {
+      "source": "seed:wc26-known-roster",
+      "confidence": 0.3,
+      "verificationDate": "2026-06-19",
+      "originType": "seeded"
+    }
+  },
+  {
+    "id": "arg-martinez",
+    "name": "Emiliano Martínez",
+    "teamId": "arg",
+    "position": "GK",
+    "goals": 0,
+    "assists": 0,
+    "shots": 0,
+    "keyPasses": 0,
+    "minutes": 0,
+    "appearances": 0,
+    "_prov": {
+      "source": "seed:wc26-known-roster",
+      "confidence": 0.3,
+      "verificationDate": "2026-06-19",
+      "originType": "seeded"
+    }
+  },
+  {
+    "id": "bra-vinicius",
+    "name": "Vinícius Jr.",
+    "teamId": "bra",
+    "position": "FW",
+    "goals": 0,
+    "assists": 0,
+    "shots": 0,
+    "keyPasses": 0,
+    "minutes": 0,
+    "appearances": 0,
+    "_prov": {
+      "source": "seed:wc26-known-roster",
+      "confidence": 0.3,
+      "verificationDate": "2026-06-19",
+      "originType": "seeded"
+    }
+  },
+  {
+    "id": "bra-rodrygo",
+    "name": "Rodrygo",
+    "teamId": "bra",
+    "position": "FW",
+    "goals": 0,
+    "assists": 0,
+    "shots": 0,
+    "keyPasses": 0,
+    "minutes": 0,
+    "appearances": 0,
+    "_prov": {
+      "source": "seed:wc26-known-roster",
+      "confidence": 0.3,
+      "verificationDate": "2026-06-19",
+      "originType": "seeded"
+    }
+  },
+  {
+    "id": "bra-neymar",
+    "name": "Neymar Jr.",
+    "teamId": "bra",
+    "position": "FW",
+    "goals": 0,
+    "assists": 0,
+    "shots": 0,
+    "keyPasses": 0,
+    "minutes": 0,
+    "appearances": 0,
+    "_prov": {
+      "source": "seed:wc26-known-roster",
+      "confidence": 0.3,
+      "verificationDate": "2026-06-19",
+      "originType": "seeded"
+    }
+  },
+  {
+    "id": "bra-casemiro",
+    "name": "Casemiro",
+    "teamId": "bra",
+    "position": "MF",
+    "goals": 0,
+    "assists": 0,
+    "shots": 0,
+    "keyPasses": 0,
+    "minutes": 0,
+    "appearances": 0,
+    "_prov": {
+      "source": "seed:wc26-known-roster",
+      "confidence": 0.3,
+      "verificationDate": "2026-06-19",
+      "originType": "seeded"
+    }
+  },
+  {
+    "id": "bra-thiago-silva",
+    "name": "Thiago Silva",
+    "teamId": "bra",
+    "position": "DF",
+    "goals": 0,
+    "assists": 0,
+    "shots": 0,
+    "keyPasses": 0,
+    "minutes": 0,
+    "appearances": 0,
+    "_prov": {
+      "source": "seed:wc26-known-roster",
+      "confidence": 0.3,
+      "verificationDate": "2026-06-19",
+      "originType": "seeded"
+    }
+  },
+  {
+    "id": "bra-marquinhos",
+    "name": "Marquinhos",
+    "teamId": "bra",
+    "position": "DF",
+    "goals": 0,
+    "assists": 0,
+    "shots": 0,
+    "keyPasses": 0,
+    "minutes": 0,
+    "appearances": 0,
+    "_prov": {
+      "source": "seed:wc26-known-roster",
+      "confidence": 0.3,
+      "verificationDate": "2026-06-19",
+      "originType": "seeded"
+    }
+  },
+  {
+    "id": "bra-alisson",
+    "name": "Alisson",
+    "teamId": "bra",
+    "position": "GK",
+    "goals": 0,
+    "assists": 0,
+    "shots": 0,
+    "keyPasses": 0,
+    "minutes": 0,
+    "appearances": 0,
+    "_prov": {
+      "source": "seed:wc26-known-roster",
+      "confidence": 0.3,
+      "verificationDate": "2026-06-19",
+      "originType": "seeded"
+    }
+  },
+  {
+    "id": "fra-mbappe",
+    "name": "Kylian Mbappé",
+    "teamId": "fra",
+    "position": "FW",
+    "goals": 0,
+    "assists": 0,
+    "shots": 0,
+    "keyPasses": 0,
+    "minutes": 0,
+    "appearances": 0,
+    "_prov": {
+      "source": "seed:wc26-known-roster",
+      "confidence": 0.3,
+      "verificationDate": "2026-06-19",
+      "originType": "seeded"
+    }
+  },
+  {
+    "id": "fra-dembele",
+    "name": "Ousmane Dembélé",
+    "teamId": "fra",
+    "position": "FW",
+    "goals": 0,
+    "assists": 0,
+    "shots": 0,
+    "keyPasses": 0,
+    "minutes": 0,
+    "appearances": 0,
+    "_prov": {
+      "source": "seed:wc26-known-roster",
+      "confidence": 0.3,
+      "verificationDate": "2026-06-19",
+      "originType": "seeded"
+    }
+  },
+  {
+    "id": "fra-griezmann",
+    "name": "Antoine Griezmann",
+    "teamId": "fra",
+    "position": "FW",
+    "goals": 0,
+    "assists": 0,
+    "shots": 0,
+    "keyPasses": 0,
+    "minutes": 0,
+    "appearances": 0,
+    "_prov": {
+      "source": "seed:wc26-known-roster",
+      "confidence": 0.3,
+      "verificationDate": "2026-06-19",
+      "originType": "seeded"
+    }
+  },
+  {
+    "id": "fra-tchouameni",
+    "name": "Aurélien Tchouaméni",
+    "teamId": "fra",
+    "position": "MF",
+    "goals": 0,
+    "assists": 0,
+    "shots": 0,
+    "keyPasses": 0,
+    "minutes": 0,
+    "appearances": 0,
+    "_prov": {
+      "source": "seed:wc26-known-roster",
+      "confidence": 0.3,
+      "verificationDate": "2026-06-19",
+      "originType": "seeded"
+    }
+  },
+  {
+    "id": "fra-rabiot",
+    "name": "Adrien Rabiot",
+    "teamId": "fra",
+    "position": "MF",
+    "goals": 0,
+    "assists": 0,
+    "shots": 0,
+    "keyPasses": 0,
+    "minutes": 0,
+    "appearances": 0,
+    "_prov": {
+      "source": "seed:wc26-known-roster",
+      "confidence": 0.3,
+      "verificationDate": "2026-06-19",
+      "originType": "seeded"
+    }
+  },
+  {
+    "id": "fra-varane",
+    "name": "Raphaël Varane",
+    "teamId": "fra",
+    "position": "DF",
+    "goals": 0,
+    "assists": 0,
+    "shots": 0,
+    "keyPasses": 0,
+    "minutes": 0,
+    "appearances": 0,
+    "_prov": {
+      "source": "seed:wc26-known-roster",
+      "confidence": 0.3,
+      "verificationDate": "2026-06-19",
+      "originType": "seeded"
+    }
+  },
+  {
+    "id": "fra-upamecano",
+    "name": "Dayot Upamecano",
+    "teamId": "fra",
+    "position": "DF",
+    "goals": 0,
+    "assists": 0,
+    "shots": 0,
+    "keyPasses": 0,
+    "minutes": 0,
+    "appearances": 0,
+    "_prov": {
+      "source": "seed:wc26-known-roster",
+      "confidence": 0.3,
+      "verificationDate": "2026-06-19",
+      "originType": "seeded"
+    }
+  },
+  {
+    "id": "eng-saka",
+    "name": "Bukayo Saka",
+    "teamId": "eng",
+    "position": "FW",
+    "goals": 0,
+    "assists": 0,
+    "shots": 0,
+    "keyPasses": 0,
+    "minutes": 0,
+    "appearances": 0,
+    "_prov": {
+      "source": "seed:wc26-known-roster",
+      "confidence": 0.3,
+      "verificationDate": "2026-06-19",
+      "originType": "seeded"
+    }
+  },
+  {
+    "id": "eng-bellingham",
+    "name": "Jude Bellingham",
+    "teamId": "eng",
+    "position": "MF",
+    "goals": 0,
+    "assists": 0,
+    "shots": 0,
+    "keyPasses": 0,
+    "minutes": 0,
+    "appearances": 0,
+    "_prov": {
+      "source": "seed:wc26-known-roster",
+      "confidence": 0.3,
+      "verificationDate": "2026-06-19",
+      "originType": "seeded"
+    }
+  },
+  {
+    "id": "eng-kane",
+    "name": "Harry Kane",
+    "teamId": "eng",
+    "position": "FW",
+    "goals": 0,
+    "assists": 0,
+    "shots": 0,
+    "keyPasses": 0,
+    "minutes": 0,
+    "appearances": 0,
+    "_prov": {
+      "source": "seed:wc26-known-roster",
+      "confidence": 0.3,
+      "verificationDate": "2026-06-19",
+      "originType": "seeded"
+    }
+  },
+  {
+    "id": "eng-rice",
+    "name": "Declan Rice",
+    "teamId": "eng",
+    "position": "MF",
+    "goals": 0,
+    "assists": 0,
+    "shots": 0,
+    "keyPasses": 0,
+    "minutes": 0,
+    "appearances": 0,
+    "_prov": {
+      "source": "seed:wc26-known-roster",
+      "confidence": 0.3,
+      "verificationDate": "2026-06-19",
+      "originType": "seeded"
+    }
+  },
+  {
+    "id": "eng-trippier",
+    "name": "Kieran Trippier",
+    "teamId": "eng",
+    "position": "DF",
+    "goals": 0,
+    "assists": 0,
+    "shots": 0,
+    "keyPasses": 0,
+    "minutes": 0,
+    "appearances": 0,
+    "_prov": {
+      "source": "seed:wc26-known-roster",
+      "confidence": 0.3,
+      "verificationDate": "2026-06-19",
+      "originType": "seeded"
+    }
+  },
+  {
+    "id": "esp-yamal",
+    "name": "Lamine Yamal",
+    "teamId": "esp",
+    "position": "FW",
+    "goals": 0,
+    "assists": 0,
+    "shots": 0,
+    "keyPasses": 0,
+    "minutes": 0,
+    "appearances": 0,
+    "_prov": {
+      "source": "seed:wc26-known-roster",
+      "confidence": 0.3,
+      "verificationDate": "2026-06-19",
+      "originType": "seeded"
+    }
+  },
+  {
+    "id": "esp-morata",
+    "name": "Álvaro Morata",
+    "teamId": "esp",
+    "position": "FW",
+    "goals": 0,
+    "assists": 0,
+    "shots": 0,
+    "keyPasses": 0,
+    "minutes": 0,
+    "appearances": 0,
+    "_prov": {
+      "source": "seed:wc26-known-roster",
+      "confidence": 0.3,
+      "verificationDate": "2026-06-19",
+      "originType": "seeded"
+    }
+  },
+  {
+    "id": "esp-pedri",
+    "name": "Pedri",
+    "teamId": "esp",
+    "position": "MF",
+    "goals": 0,
+    "assists": 0,
+    "shots": 0,
+    "keyPasses": 0,
+    "minutes": 0,
+    "appearances": 0,
+    "_prov": {
+      "source": "seed:wc26-known-roster",
+      "confidence": 0.3,
+      "verificationDate": "2026-06-19",
+      "originType": "seeded"
+    }
+  },
+  {
+    "id": "esp-gavi",
+    "name": "Gavi",
+    "teamId": "esp",
+    "position": "MF",
+    "goals": 0,
+    "assists": 0,
+    "shots": 0,
+    "keyPasses": 0,
+    "minutes": 0,
+    "appearances": 0,
+    "_prov": {
+      "source": "seed:wc26-known-roster",
+      "confidence": 0.3,
+      "verificationDate": "2026-06-19",
+      "originType": "seeded"
+    }
+  },
+  {
+    "id": "esp-rodri",
+    "name": "Rodri",
+    "teamId": "esp",
+    "position": "MF",
+    "goals": 0,
+    "assists": 0,
+    "shots": 0,
+    "keyPasses": 0,
+    "minutes": 0,
+    "appearances": 0,
+    "_prov": {
+      "source": "seed:wc26-known-roster",
+      "confidence": 0.3,
+      "verificationDate": "2026-06-19",
+      "originType": "seeded"
+    }
+  },
+  {
+    "id": "esp-carvajal",
+    "name": "Dani Carvajal",
+    "teamId": "esp",
+    "position": "DF",
+    "goals": 0,
+    "assists": 0,
+    "shots": 0,
+    "keyPasses": 0,
+    "minutes": 0,
+    "appearances": 0,
+    "_prov": {
+      "source": "seed:wc26-known-roster",
+      "confidence": 0.3,
+      "verificationDate": "2026-06-19",
+      "originType": "seeded"
+    }
+  },
+  {
+    "id": "mex-quinones",
+    "name": "Julián Quiñones",
+    "teamId": "mex",
+    "position": "FW",
+    "goals": 1,
+    "assists": 0,
+    "shots": 0,
+    "keyPasses": 0,
+    "minutes": 70,
+    "appearances": 1,
+    "_prov": {
+      "source": "https://www.espn.com/soccer/match/_/gameId/760415/south-africa-mexico",
+      "confidence": 0.75,
+      "verificationDate": "2026-06-19",
+      "originType": "derived"
+    }
+  },
+  {
+    "id": "mex-jimenez",
+    "name": "Raúl Jiménez",
+    "teamId": "mex",
+    "position": "FW",
+    "goals": 1,
+    "assists": 0,
+    "shots": 0,
+    "keyPasses": 0,
+    "minutes": 70,
+    "appearances": 1,
+    "_prov": {
+      "source": "https://www.espn.com/soccer/match/_/gameId/760415/south-africa-mexico",
+      "confidence": 0.75,
+      "verificationDate": "2026-06-19",
+      "originType": "derived"
+    }
+  },
+  {
+    "id": "mex-lira",
+    "name": "Erik Lira",
+    "teamId": "mex",
+    "position": "MF",
+    "goals": 0,
+    "assists": 1,
+    "shots": 0,
+    "keyPasses": 0,
+    "minutes": 0,
+    "appearances": 0,
+    "_prov": {
+      "source": "seed:wc26-known-roster",
+      "confidence": 0.3,
+      "verificationDate": "2026-06-19",
+      "originType": "seeded"
+    }
+  },
+  {
+    "id": "mex-alvarado",
+    "name": "Roberto Alvarado",
+    "teamId": "mex",
+    "position": "MF",
+    "goals": 0,
+    "assists": 1,
+    "shots": 0,
+    "keyPasses": 0,
+    "minutes": 0,
+    "appearances": 0,
+    "_prov": {
+      "source": "seed:wc26-known-roster",
+      "confidence": 0.3,
+      "verificationDate": "2026-06-19",
+      "originType": "seeded"
+    }
+  },
+  {
+    "id": "mex-montes",
+    "name": "César Montes",
+    "teamId": "mex",
+    "position": "DF",
+    "goals": 0,
+    "assists": 0,
+    "shots": 0,
+    "keyPasses": 0,
+    "minutes": 0,
+    "appearances": 0,
+    "_prov": {
+      "source": "seed:wc26-known-roster",
+      "confidence": 0.3,
+      "verificationDate": "2026-06-19",
+      "originType": "seeded"
+    }
+  },
+  {
+    "id": "mex-ochoa",
+    "name": "Guillermo Ochoa",
+    "teamId": "mex",
+    "position": "GK",
+    "goals": 0,
+    "assists": 0,
+    "shots": 0,
+    "keyPasses": 0,
+    "minutes": 0,
+    "appearances": 0,
+    "_prov": {
+      "source": "seed:wc26-known-roster",
+      "confidence": 0.3,
+      "verificationDate": "2026-06-19",
+      "originType": "seeded"
+    }
+  },
+  {
+    "id": "kor-hwang-hee-chan",
+    "name": "Hwang Hee-Chan",
+    "teamId": "kor",
+    "position": "FW",
+    "goals": 0,
+    "assists": 0,
+    "shots": 0,
+    "keyPasses": 0,
+    "minutes": 0,
+    "appearances": 0,
+    "_prov": {
+      "source": "seed:wc26-known-roster",
+      "confidence": 0.3,
+      "verificationDate": "2026-06-19",
+      "originType": "seeded"
+    }
+  },
+  {
+    "id": "kor-hwang-in-beom",
+    "name": "Hwang In-Beom",
+    "teamId": "kor",
+    "position": "MF",
+    "goals": 1,
+    "assists": 1,
+    "shots": 0,
+    "keyPasses": 0,
+    "minutes": 70,
+    "appearances": 1,
+    "_prov": {
+      "source": "https://www.espn.com/soccer/match/_/gameId/760414/czechia-south-korea",
+      "confidence": 0.75,
+      "verificationDate": "2026-06-19",
+      "originType": "derived"
+    }
+  },
+  {
+    "id": "kor-lee-kang-in",
+    "name": "Lee Kang-In",
+    "teamId": "kor",
+    "position": "MF",
+    "goals": 0,
+    "assists": 1,
+    "shots": 0,
+    "keyPasses": 0,
+    "minutes": 0,
+    "appearances": 0,
+    "_prov": {
+      "source": "seed:wc26-known-roster",
+      "confidence": 0.3,
+      "verificationDate": "2026-06-19",
+      "originType": "seeded"
+    }
+  },
+  {
+    "id": "kor-oh-hyeon-gyu",
+    "name": "Oh Hyeon-Gyu",
+    "teamId": "kor",
+    "position": "FW",
+    "goals": 1,
+    "assists": 0,
+    "shots": 0,
+    "keyPasses": 0,
+    "minutes": 70,
+    "appearances": 1,
+    "_prov": {
+      "source": "https://www.espn.com/soccer/match/_/gameId/760414/czechia-south-korea",
+      "confidence": 0.75,
+      "verificationDate": "2026-06-19",
+      "originType": "derived"
+    }
+  },
+  {
+    "id": "kor-kim-min-jae",
+    "name": "Kim Min-Jae",
+    "teamId": "kor",
+    "position": "DF",
+    "goals": 0,
+    "assists": 0,
+    "shots": 0,
+    "keyPasses": 0,
+    "minutes": 0,
+    "appearances": 0,
+    "_prov": {
+      "source": "seed:wc26-known-roster",
+      "confidence": 0.3,
+      "verificationDate": "2026-06-19",
+      "originType": "seeded"
+    }
+  },
+  {
+    "id": "can-larin",
+    "name": "Cyle Larin",
+    "teamId": "can",
+    "position": "FW",
+    "goals": 1,
+    "assists": 0,
+    "shots": 0,
+    "keyPasses": 0,
+    "minutes": 70,
+    "appearances": 1,
+    "_prov": {
+      "source": "https://www.espn.com/soccer/match/_/gameId/760416/bosnia-herzegovina-canada",
+      "confidence": 0.75,
+      "verificationDate": "2026-06-19",
+      "originType": "derived"
+    }
+  },
+  {
+    "id": "can-david",
+    "name": "Jonathan David",
+    "teamId": "can",
+    "position": "FW",
+    "goals": 0,
+    "assists": 0,
+    "shots": 0,
+    "keyPasses": 0,
+    "minutes": 0,
+    "appearances": 0,
+    "_prov": {
+      "source": "seed:wc26-known-roster",
+      "confidence": 0.3,
+      "verificationDate": "2026-06-19",
+      "originType": "seeded"
+    }
+  },
+  {
+    "id": "can-david-promise",
+    "name": "Promise David",
+    "teamId": "can",
+    "position": "MF",
+    "goals": 0,
+    "assists": 1,
+    "shots": 0,
+    "keyPasses": 0,
+    "minutes": 0,
+    "appearances": 0,
+    "_prov": {
+      "source": "seed:wc26-known-roster",
+      "confidence": 0.3,
+      "verificationDate": "2026-06-19",
+      "originType": "seeded"
+    }
+  },
+  {
+    "id": "can-buchanan",
+    "name": "Tajon Buchanan",
+    "teamId": "can",
+    "position": "FW",
+    "goals": 0,
+    "assists": 0,
+    "shots": 0,
+    "keyPasses": 0,
+    "minutes": 0,
+    "appearances": 0,
+    "_prov": {
+      "source": "seed:wc26-known-roster",
+      "confidence": 0.3,
+      "verificationDate": "2026-06-19",
+      "originType": "seeded"
+    }
+  },
+  {
+    "id": "can-johnston",
+    "name": "Alistair Johnston",
+    "teamId": "can",
+    "position": "DF",
+    "goals": 0,
+    "assists": 0,
+    "shots": 0,
+    "keyPasses": 0,
+    "minutes": 0,
+    "appearances": 0,
+    "_prov": {
+      "source": "seed:wc26-known-roster",
+      "confidence": 0.3,
+      "verificationDate": "2026-06-19",
+      "originType": "seeded"
+    }
+  },
+  {
+    "id": "bih-dzeko",
+    "name": "Edin Džeko",
+    "teamId": "bih",
+    "position": "FW",
+    "goals": 0,
+    "assists": 0,
+    "shots": 0,
+    "keyPasses": 0,
+    "minutes": 0,
+    "appearances": 0,
+    "_prov": {
+      "source": "seed:wc26-known-roster",
+      "confidence": 0.3,
+      "verificationDate": "2026-06-19",
+      "originType": "seeded"
+    }
+  },
+  {
+    "id": "bih-demirovic",
+    "name": "Ermedin Demirović",
+    "teamId": "bih",
+    "position": "FW",
+    "goals": 0,
+    "assists": 0,
+    "shots": 0,
+    "keyPasses": 0,
+    "minutes": 0,
+    "appearances": 0,
+    "_prov": {
+      "source": "seed:wc26-known-roster",
+      "confidence": 0.3,
+      "verificationDate": "2026-06-19",
+      "originType": "seeded"
+    }
+  },
+  {
+    "id": "bih-lukic",
+    "name": "Jovo Lukić",
+    "teamId": "bih",
+    "position": "MF",
+    "goals": 1,
+    "assists": 0,
+    "shots": 0,
+    "keyPasses": 0,
+    "minutes": 70,
+    "appearances": 1,
+    "_prov": {
+      "source": "https://www.espn.com/soccer/match/_/gameId/760416/bosnia-herzegovina-canada",
+      "confidence": 0.75,
+      "verificationDate": "2026-06-19",
+      "originType": "derived"
+    }
+  },
+  {
+    "id": "bih-kolasinac",
+    "name": "Sead Kolašinac",
+    "teamId": "bih",
+    "position": "DF",
+    "goals": 0,
+    "assists": 1,
+    "shots": 0,
+    "keyPasses": 0,
+    "minutes": 0,
+    "appearances": 0,
+    "_prov": {
+      "source": "seed:wc26-known-roster",
+      "confidence": 0.3,
+      "verificationDate": "2026-06-19",
+      "originType": "seeded"
+    }
+  },
+  {
+    "id": "cze-schick",
+    "name": "Patrik Schick",
+    "teamId": "cze",
+    "position": "FW",
+    "goals": 0,
+    "assists": 0,
+    "shots": 0,
+    "keyPasses": 0,
+    "minutes": 0,
+    "appearances": 0,
+    "_prov": {
+      "source": "seed:wc26-known-roster",
+      "confidence": 0.3,
+      "verificationDate": "2026-06-19",
+      "originType": "seeded"
+    }
+  },
+  {
+    "id": "cze-krejci",
+    "name": "Ladislav Krejcí",
+    "teamId": "cze",
+    "position": "DF",
+    "goals": 1,
+    "assists": 0,
+    "shots": 0,
+    "keyPasses": 0,
+    "minutes": 70,
+    "appearances": 1,
+    "_prov": {
+      "source": "https://www.espn.com/soccer/match/_/gameId/760414/czechia-south-korea",
+      "confidence": 0.75,
+      "verificationDate": "2026-06-19",
+      "originType": "derived"
+    }
+  },
+  {
+    "id": "cze-coufal",
+    "name": "Vladimír Coufal",
+    "teamId": "cze",
+    "position": "DF",
+    "goals": 0,
+    "assists": 1,
+    "shots": 0,
+    "keyPasses": 0,
+    "minutes": 0,
+    "appearances": 0,
+    "_prov": {
+      "source": "seed:wc26-known-roster",
+      "confidence": 0.3,
+      "verificationDate": "2026-06-19",
+      "originType": "seeded"
+    }
+  },
+  {
+    "id": "rsa-mokoena",
+    "name": "Teboho Mokoena",
+    "teamId": "rsa",
+    "position": "MF",
+    "goals": 0,
+    "assists": 0,
+    "shots": 0,
+    "keyPasses": 0,
+    "minutes": 0,
+    "appearances": 0,
+    "_prov": {
+      "source": "seed:wc26-known-roster",
+      "confidence": 0.3,
+      "verificationDate": "2026-06-19",
+      "originType": "seeded"
+    }
+  },
+  {
+    "id": "rsa-zwane",
+    "name": "Themba Zwane",
+    "teamId": "rsa",
+    "position": "MF",
+    "goals": 0,
+    "assists": 0,
+    "shots": 0,
+    "keyPasses": 0,
+    "minutes": 0,
+    "appearances": 0,
+    "_prov": {
+      "source": "seed:wc26-known-roster",
+      "confidence": 0.3,
+      "verificationDate": "2026-06-19",
+      "originType": "seeded"
+    }
+  },
+  {
+    "id": "rsa-sithole",
+    "name": "Sphephelo Sithole",
+    "teamId": "rsa",
+    "position": "DF",
+    "goals": 0,
+    "assists": 0,
+    "shots": 0,
+    "keyPasses": 0,
+    "minutes": 0,
+    "appearances": 0,
+    "_prov": {
+      "source": "seed:wc26-known-roster",
+      "confidence": 0.3,
+      "verificationDate": "2026-06-19",
+      "originType": "seeded"
+    }
+  },
+  {
+    "id": "ger-musiala",
+    "name": "Jamal Musiala",
+    "teamId": "ger",
+    "position": "MF",
+    "goals": 0,
+    "assists": 0,
+    "shots": 0,
+    "keyPasses": 0,
+    "minutes": 0,
+    "appearances": 0,
+    "_prov": {
+      "source": "seed:wc26-known-roster",
+      "confidence": 0.3,
+      "verificationDate": "2026-06-19",
+      "originType": "seeded"
+    }
+  },
+  {
+    "id": "ger-havertz",
+    "name": "Kai Havertz",
+    "teamId": "ger",
+    "position": "MF",
+    "goals": 0,
+    "assists": 0,
+    "shots": 0,
+    "keyPasses": 0,
+    "minutes": 0,
+    "appearances": 0,
+    "_prov": {
+      "source": "seed:wc26-known-roster",
+      "confidence": 0.3,
+      "verificationDate": "2026-06-19",
+      "originType": "seeded"
+    }
+  },
+  {
+    "id": "ger-wirtz",
+    "name": "Florian Wirtz",
+    "teamId": "ger",
+    "position": "MF",
+    "goals": 0,
+    "assists": 0,
+    "shots": 0,
+    "keyPasses": 0,
+    "minutes": 0,
+    "appearances": 0,
+    "_prov": {
+      "source": "seed:wc26-known-roster",
+      "confidence": 0.3,
+      "verificationDate": "2026-06-19",
+      "originType": "seeded"
+    }
+  },
+  {
+    "id": "ger-ter-stegen",
+    "name": "Marc-André ter Stegen",
+    "teamId": "ger",
+    "position": "GK",
+    "goals": 0,
+    "assists": 0,
+    "shots": 0,
+    "keyPasses": 0,
+    "minutes": 0,
+    "appearances": 0,
+    "_prov": {
+      "source": "seed:wc26-known-roster",
+      "confidence": 0.3,
+      "verificationDate": "2026-06-19",
+      "originType": "seeded"
+    }
+  },
+  {
+    "id": "por-ronaldo",
+    "name": "Cristiano Ronaldo",
+    "teamId": "por",
+    "position": "FW",
+    "goals": 0,
+    "assists": 0,
+    "shots": 0,
+    "keyPasses": 0,
+    "minutes": 0,
+    "appearances": 0,
+    "_prov": {
+      "source": "seed:wc26-known-roster",
+      "confidence": 0.3,
+      "verificationDate": "2026-06-19",
+      "originType": "seeded"
+    }
+  },
+  {
+    "id": "por-felix",
+    "name": "João Félix",
+    "teamId": "por",
+    "position": "FW",
+    "goals": 0,
+    "assists": 0,
+    "shots": 0,
+    "keyPasses": 0,
+    "minutes": 0,
+    "appearances": 0,
+    "_prov": {
+      "source": "seed:wc26-known-roster",
+      "confidence": 0.3,
+      "verificationDate": "2026-06-19",
+      "originType": "seeded"
+    }
+  },
+  {
+    "id": "por-vitinha",
+    "name": "Vitinha",
+    "teamId": "por",
+    "position": "MF",
+    "goals": 0,
+    "assists": 0,
+    "shots": 0,
+    "keyPasses": 0,
+    "minutes": 0,
+    "appearances": 0,
+    "_prov": {
+      "source": "seed:wc26-known-roster",
+      "confidence": 0.3,
+      "verificationDate": "2026-06-19",
+      "originType": "seeded"
+    }
+  }
+]
