@@ -1,0 +1,770 @@
+{
+  "fixture": "mexico-vs-south-africa",
+  "model": "Xenova/twitter-roberta-base-sentiment-latest",
+  "source": "sample",
+  "generatedAt": "2026-06-19T02:22:50.022Z",
+  "timeline": [
+    {
+      "minuteBucket": 0,
+      "posPct": 0.6666666666666666,
+      "negPct": 0,
+      "neuPct": 0.3333333333333333,
+      "n": 3
+    },
+    {
+      "minuteBucket": 5,
+      "posPct": 0.75,
+      "negPct": 0,
+      "neuPct": 0.25,
+      "n": 4
+    },
+    {
+      "minuteBucket": 10,
+      "posPct": 0,
+      "negPct": 0.75,
+      "neuPct": 0.25,
+      "n": 4
+    },
+    {
+      "minuteBucket": 15,
+      "posPct": 0.5,
+      "negPct": 0.5,
+      "neuPct": 0,
+      "n": 4
+    },
+    {
+      "minuteBucket": 20,
+      "posPct": 0.3333333333333333,
+      "negPct": 0,
+      "neuPct": 0.6666666666666666,
+      "n": 3
+    },
+    {
+      "minuteBucket": 25,
+      "posPct": 1,
+      "negPct": 0,
+      "neuPct": 0,
+      "n": 2
+    },
+    {
+      "minuteBucket": 30,
+      "posPct": 1,
+      "negPct": 0,
+      "neuPct": 0,
+      "n": 1
+    },
+    {
+      "minuteBucket": 35,
+      "posPct": 1,
+      "negPct": 0,
+      "neuPct": 0,
+      "n": 2
+    },
+    {
+      "minuteBucket": 40,
+      "posPct": 0.5,
+      "negPct": 0,
+      "neuPct": 0.5,
+      "n": 2
+    },
+    {
+      "minuteBucket": 45,
+      "posPct": 0.6666666666666666,
+      "negPct": 0,
+      "neuPct": 0.3333333333333333,
+      "n": 3
+    },
+    {
+      "minuteBucket": 50,
+      "posPct": 0,
+      "negPct": 0.4,
+      "neuPct": 0.6,
+      "n": 5
+    },
+    {
+      "minuteBucket": 55,
+      "posPct": 0.5,
+      "negPct": 0,
+      "neuPct": 0.5,
+      "n": 2
+    },
+    {
+      "minuteBucket": 60,
+      "posPct": 0,
+      "negPct": 0,
+      "neuPct": 1,
+      "n": 3
+    },
+    {
+      "minuteBucket": 65,
+      "posPct": 0.25,
+      "negPct": 0.75,
+      "neuPct": 0,
+      "n": 4
+    },
+    {
+      "minuteBucket": 70,
+      "posPct": 0.5,
+      "negPct": 0.25,
+      "neuPct": 0.25,
+      "n": 4
+    },
+    {
+      "minuteBucket": 75,
+      "posPct": 0.5,
+      "negPct": 0,
+      "neuPct": 0.5,
+      "n": 2
+    },
+    {
+      "minuteBucket": 80,
+      "posPct": 0,
+      "negPct": 0.3333333333333333,
+      "neuPct": 0.6666666666666666,
+      "n": 3
+    },
+    {
+      "minuteBucket": 85,
+      "posPct": 0.3333333333333333,
+      "negPct": 0.6666666666666666,
+      "neuPct": 0,
+      "n": 3
+    },
+    {
+      "minuteBucket": 90,
+      "posPct": 0.4,
+      "negPct": 0.4,
+      "neuPct": 0.2,
+      "n": 5
+    },
+    {
+      "minuteBucket": 95,
+      "posPct": 0,
+      "negPct": 1,
+      "neuPct": 0,
+      "n": 1
+    }
+  ],
+  "events": [
+    {
+      "minute": 9,
+      "type": "goal",
+      "label": "Julián Quiñones (mex)"
+    },
+    {
+      "minute": 17,
+      "type": "yellow",
+      "label": "Teboho Mokoena (rsa)"
+    },
+    {
+      "minute": 23,
+      "type": "yellow",
+      "label": "Brian Gutiérrez (mex)"
+    },
+    {
+      "minute": 50,
+      "type": "red",
+      "label": "Sphephelo Sithole (rsa)"
+    },
+    {
+      "minute": 67,
+      "type": "goal",
+      "label": "Raúl Jiménez (mex)"
+    },
+    {
+      "minute": 74,
+      "type": "yellow",
+      "label": "Nkosinathi Sibisi (rsa)"
+    },
+    {
+      "minute": 84,
+      "type": "red",
+      "label": "Themba Zwane (rsa)"
+    },
+    {
+      "minute": 92,
+      "type": "red",
+      "label": "César Montes (mex)"
+    }
+  ],
+  "shifts": [
+    {
+      "event": {
+        "minute": 9,
+        "type": "goal",
+        "label": "Julián Quiñones (mex)"
+      },
+      "before": 0.6666666666666666,
+      "after": -0.2222222222222222,
+      "delta": -0.8888888888888888,
+      "nBefore": 6,
+      "nAfter": 9
+    },
+    {
+      "event": {
+        "minute": 17,
+        "type": "yellow",
+        "label": "Teboho Mokoena (rsa)"
+      },
+      "before": 0.1111111111111111,
+      "after": 0,
+      "delta": -0.1111111111111111,
+      "nBefore": 9,
+      "nAfter": 6
+    },
+    {
+      "event": {
+        "minute": 23,
+        "type": "yellow",
+        "label": "Brian Gutiérrez (mex)"
+      },
+      "before": 0,
+      "after": 0.6666666666666666,
+      "delta": 0.6666666666666666,
+      "nBefore": 7,
+      "nAfter": 3
+    },
+    {
+      "event": {
+        "minute": 50,
+        "type": "red",
+        "label": "Sphephelo Sithole (rsa)"
+      },
+      "before": 0.6,
+      "after": -0.14285714285714285,
+      "delta": -0.7428571428571429,
+      "nBefore": 5,
+      "nAfter": 7
+    },
+    {
+      "event": {
+        "minute": 67,
+        "type": "goal",
+        "label": "Raúl Jiménez (mex)"
+      },
+      "before": 0,
+      "after": 0.125,
+      "delta": 0.125,
+      "nBefore": 5,
+      "nAfter": 8
+    },
+    {
+      "event": {
+        "minute": 74,
+        "type": "yellow",
+        "label": "Nkosinathi Sibisi (rsa)"
+      },
+      "before": 0,
+      "after": 0,
+      "delta": 0,
+      "nBefore": 8,
+      "nAfter": 5
+    },
+    {
+      "event": {
+        "minute": 84,
+        "type": "red",
+        "label": "Themba Zwane (rsa)"
+      },
+      "before": 0,
+      "after": -0.375,
+      "delta": -0.375,
+      "nBefore": 5,
+      "nAfter": 8
+    },
+    {
+      "event": {
+        "minute": 92,
+        "type": "red",
+        "label": "César Montes (mex)"
+      },
+      "before": -0.5714285714285714,
+      "after": 0.25,
+      "delta": 0.8214285714285714,
+      "nBefore": 7,
+      "nAfter": 4
+    }
+  ],
+  "posts": [
+    {
+      "id": "s001",
+      "ts": 120000,
+      "minute": 2,
+      "text": "Kick off! Mexico vs South Africa at AT&T Stadium, let's go 🇲🇽",
+      "label": "POS",
+      "score": 0.7311462759971619
+    },
+    {
+      "id": "s002",
+      "ts": 180000,
+      "minute": 3,
+      "text": "South Africa looking organized in the early press",
+      "label": "NEU",
+      "score": 0.8159440159797668
+    },
+    {
+      "id": "s003",
+      "ts": 300000,
+      "minute": 5,
+      "text": "Both teams finding their feet, neutral start",
+      "label": "POS",
+      "score": 0.6567045450210571
+    },
+    {
+      "id": "s004",
+      "ts": 420000,
+      "minute": 7,
+      "text": "Mexico building nicely through midfield, Lira pulling the strings",
+      "label": "POS",
+      "score": 0.7473911046981812
+    },
+    {
+      "id": "s005",
+      "ts": 480000,
+      "minute": 8,
+      "text": "Quinones making a real threat out wide, dangerous",
+      "label": "NEU",
+      "score": 0.6242469549179077
+    },
+    {
+      "id": "s006",
+      "ts": 540000,
+      "minute": 9,
+      "text": "GOOOAL! Quinones puts Mexico ahead! What a finish from Erik Lira's pass!",
+      "label": "POS",
+      "score": 0.9674004912376404
+    },
+    {
+      "id": "s007",
+      "ts": 600000,
+      "minute": 10,
+      "text": "Mexico score early! South Africa stunned. This is already going wrong for Bafana",
+      "label": "NEG",
+      "score": 0.7629472017288208
+    },
+    {
+      "id": "s008",
+      "ts": 660000,
+      "minute": 11,
+      "text": "Not a great start for South Africa. They need to regroup quickly",
+      "label": "NEG",
+      "score": 0.845700740814209
+    },
+    {
+      "id": "s009",
+      "ts": 720000,
+      "minute": 12,
+      "text": "Mexico on top, South Africa struggling to get out of their half",
+      "label": "NEU",
+      "score": 0.8523625135421753
+    },
+    {
+      "id": "s010",
+      "ts": 840000,
+      "minute": 14,
+      "text": "Bafana need to respond, this early goal could be costly",
+      "label": "NEG",
+      "score": 0.5172869563102722
+    },
+    {
+      "id": "s011",
+      "ts": 960000,
+      "minute": 16,
+      "text": "South Africa creating some positive moments now, Mokoena running hard",
+      "label": "POS",
+      "score": 0.9452998042106628
+    },
+    {
+      "id": "s012",
+      "ts": 1020000,
+      "minute": 17,
+      "text": "Yellow card for Mokoena, silly foul in a dangerous position",
+      "label": "NEG",
+      "score": 0.7815613746643066
+    },
+    {
+      "id": "s013",
+      "ts": 1080000,
+      "minute": 18,
+      "text": "SA giving away too many fouls, Mexico on free kick",
+      "label": "NEG",
+      "score": 0.5702869296073914
+    },
+    {
+      "id": "s014",
+      "ts": 1200000,
+      "minute": 20,
+      "text": "Good defensive block by South Africa, holding firm at 1-0",
+      "label": "POS",
+      "score": 0.7687941789627075
+    },
+    {
+      "id": "s015",
+      "ts": 1320000,
+      "minute": 22,
+      "text": "Mexico maintaining control, South Africa trying to find their rhythm",
+      "label": "NEU",
+      "score": 0.837138831615448
+    },
+    {
+      "id": "s016",
+      "ts": 1380000,
+      "minute": 23,
+      "text": "Yellow for Gutierrez too, both teams getting physical now",
+      "label": "NEU",
+      "score": 0.8025498986244202
+    },
+    {
+      "id": "s017",
+      "ts": 1500000,
+      "minute": 25,
+      "text": "South Africa showing fight in midfield, Zwane looking lively",
+      "label": "POS",
+      "score": 0.7176103591918945
+    },
+    {
+      "id": "s018",
+      "ts": 1680000,
+      "minute": 28,
+      "text": "Decent chance for Bafana, headed over. Encouraging signs",
+      "label": "POS",
+      "score": 0.8775877952575684
+    },
+    {
+      "id": "s019",
+      "ts": 1980000,
+      "minute": 33,
+      "text": "Game is settling, Mexico happy to hold the lead and counter",
+      "label": "POS",
+      "score": 0.6337514519691467
+    },
+    {
+      "id": "s020",
+      "ts": 2160000,
+      "minute": 36,
+      "text": "South Africa pushing forward, this is an open game now",
+      "label": "POS",
+      "score": 0.7011976838111877
+    },
+    {
+      "id": "s021",
+      "ts": 2400000,
+      "minute": 40,
+      "text": "Half time approaching, Mexico lead 1-0. South Africa need to be better second half",
+      "label": "NEU",
+      "score": 0.7403924465179443
+    },
+    {
+      "id": "s022",
+      "ts": 2520000,
+      "minute": 42,
+      "text": "Alvarado almost doubled for Mexico! Great save from the keeper",
+      "label": "POS",
+      "score": 0.9194658994674683
+    },
+    {
+      "id": "s023",
+      "ts": 2700000,
+      "minute": 45,
+      "text": "Half time: Mexico 1-0 South Africa. Comfortable for El Tri so far",
+      "label": "POS",
+      "score": 0.6653061509132385
+    },
+    {
+      "id": "s024",
+      "ts": 2820000,
+      "minute": 47,
+      "text": "Second half underway, South Africa looking for the equalizer",
+      "label": "NEU",
+      "score": 0.8531605005264282
+    },
+    {
+      "id": "s025",
+      "ts": 2880000,
+      "minute": 48,
+      "text": "Better start from Bafana, Sithole winning the ball in midfield",
+      "label": "POS",
+      "score": 0.8892053365707397
+    },
+    {
+      "id": "s026",
+      "ts": 3000000,
+      "minute": 50,
+      "text": "RED CARD! Sithole off for a reckless challenge. South Africa down to 10 men!",
+      "label": "NEU",
+      "score": 0.5472610592842102
+    },
+    {
+      "id": "s027",
+      "ts": 3060000,
+      "minute": 51,
+      "text": "Terrible decision from Sithole. South Africa's hopes just took a massive blow",
+      "label": "NEG",
+      "score": 0.9306290745735168
+    },
+    {
+      "id": "s028",
+      "ts": 3120000,
+      "minute": 52,
+      "text": "This is a disaster for South Africa. Playing 40 mins with 10 men at this level is brutal",
+      "label": "NEG",
+      "score": 0.929021954536438
+    },
+    {
+      "id": "s029",
+      "ts": 3180000,
+      "minute": 53,
+      "text": "Mexico smelling blood now, will pour forward against 10-man South Africa",
+      "label": "NEU",
+      "score": 0.6764823794364929
+    },
+    {
+      "id": "s030",
+      "ts": 3240000,
+      "minute": 54,
+      "text": "South Africa digging deep, organized defensively despite the red card",
+      "label": "NEU",
+      "score": 0.7095949649810791
+    },
+    {
+      "id": "s031",
+      "ts": 3360000,
+      "minute": 56,
+      "text": "Mexico probing but Bafana defending in numbers, hard to break down",
+      "label": "NEU",
+      "score": 0.7598320841789246
+    },
+    {
+      "id": "s032",
+      "ts": 3480000,
+      "minute": 58,
+      "text": "Mexico patient in possession, South Africa compact. Solid defensive effort so far",
+      "label": "POS",
+      "score": 0.8730373978614807
+    },
+    {
+      "id": "s033",
+      "ts": 3600000,
+      "minute": 60,
+      "text": "An hour gone. South Africa hanging on with 10, goal still needed to stay alive",
+      "label": "NEU",
+      "score": 0.773910641670227
+    },
+    {
+      "id": "s034",
+      "ts": 3720000,
+      "minute": 62,
+      "text": "Mexico finding space on the flanks, South Africa's legs starting to go",
+      "label": "NEU",
+      "score": 0.8737747669219971
+    },
+    {
+      "id": "s035",
+      "ts": 3840000,
+      "minute": 64,
+      "text": "Almost a second for Mexico! Alvarado's shot deflected wide",
+      "label": "NEU",
+      "score": 0.7534701824188232
+    },
+    {
+      "id": "s036",
+      "ts": 3960000,
+      "minute": 66,
+      "text": "South Africa tiring, Mexico turning the screw",
+      "label": "NEG",
+      "score": 0.7959221005439758
+    },
+    {
+      "id": "s037",
+      "ts": 4020000,
+      "minute": 67,
+      "text": "GOAL! Raul Jimenez makes it 2-0! Alvarado's assist, composed finish. Game over for Bafana",
+      "label": "POS",
+      "score": 0.9173020124435425
+    },
+    {
+      "id": "s038",
+      "ts": 4080000,
+      "minute": 68,
+      "text": "That's it. South Africa are done. 2-0 down, a man short, can't see them coming back",
+      "label": "NEG",
+      "score": 0.7515564560890198
+    },
+    {
+      "id": "s039",
+      "ts": 4140000,
+      "minute": 69,
+      "text": "South Africa's tournament hopes are fading fast. Heartbreaking",
+      "label": "NEG",
+      "score": 0.9005966186523438
+    },
+    {
+      "id": "s040",
+      "ts": 4200000,
+      "minute": 70,
+      "text": "Mexico cruising now, brilliant performance against a depleted South Africa",
+      "label": "POS",
+      "score": 0.943852961063385
+    },
+    {
+      "id": "s041",
+      "ts": 4260000,
+      "minute": 71,
+      "text": "El Tri fans celebrating, this looks very comfortable",
+      "label": "POS",
+      "score": 0.9619351625442505
+    },
+    {
+      "id": "s042",
+      "ts": 4380000,
+      "minute": 73,
+      "text": "South Africa desperate for a consolation, Zwane trying his best",
+      "label": "NEU",
+      "score": 0.5691680908203125
+    },
+    {
+      "id": "s043",
+      "ts": 4440000,
+      "minute": 74,
+      "text": "Another yellow for Bafana — Sibisi booked. SA falling apart",
+      "label": "NEG",
+      "score": 0.8041549324989319
+    },
+    {
+      "id": "s044",
+      "ts": 4500000,
+      "minute": 75,
+      "text": "Mexico comfortable, game's done. Managing the clock perfectly",
+      "label": "POS",
+      "score": 0.7306649684906006
+    },
+    {
+      "id": "s045",
+      "ts": 4620000,
+      "minute": 77,
+      "text": "Still 2-0. South Africa have nothing to lose but also very little left in the tank",
+      "label": "NEU",
+      "score": 0.63496994972229
+    },
+    {
+      "id": "s046",
+      "ts": 4800000,
+      "minute": 80,
+      "text": "80 mins: Mexico just holding on to the ball, South Africa chasing shadows",
+      "label": "NEU",
+      "score": 0.9092254042625427
+    },
+    {
+      "id": "s047",
+      "ts": 4980000,
+      "minute": 83,
+      "text": "SA pushing forward desperately, leaving gaps at the back",
+      "label": "NEU",
+      "score": 0.5624614953994751
+    },
+    {
+      "id": "s048",
+      "ts": 5040000,
+      "minute": 84,
+      "text": "RED CARD #2! Zwane off for South Africa! Down to 9 men! Total collapse",
+      "label": "NEG",
+      "score": 0.7445684671401978
+    },
+    {
+      "id": "s049",
+      "ts": 5100000,
+      "minute": 85,
+      "text": "South Africa with 9 men in an 88th minute World Cup game. A disaster of a night",
+      "label": "NEG",
+      "score": 0.8748064041137695
+    },
+    {
+      "id": "s050",
+      "ts": 5160000,
+      "minute": 86,
+      "text": "Absolutely shambolic defending and discipline from Bafana. Embarrassing",
+      "label": "NEG",
+      "score": 0.9372448325157166
+    },
+    {
+      "id": "s051",
+      "ts": 5280000,
+      "minute": 88,
+      "text": "Mexico fans streaming out early to celebrate, the job is well and truly done",
+      "label": "POS",
+      "score": 0.9606549143791199
+    },
+    {
+      "id": "s052",
+      "ts": 5400000,
+      "minute": 90,
+      "text": "5 minutes of added time. South Africa's misery will last a bit longer",
+      "label": "NEG",
+      "score": 0.8351752758026123
+    },
+    {
+      "id": "s053",
+      "ts": 5460000,
+      "minute": 91,
+      "text": "Montes completely out of control, going to get a card",
+      "label": "NEG",
+      "score": 0.7892072796821594
+    },
+    {
+      "id": "s054",
+      "ts": 5520000,
+      "minute": 92,
+      "text": "RED for Montes! Mexico also reduced, but doesn't matter. 2-0 standing",
+      "label": "NEU",
+      "score": 0.76188725233078
+    },
+    {
+      "id": "s055",
+      "ts": 5580000,
+      "minute": 93,
+      "text": "Full time: Mexico 2-0 South Africa. Convincing win for El Tri. Three reds, one yellow each",
+      "label": "POS",
+      "score": 0.752095103263855
+    },
+    {
+      "id": "s056",
+      "ts": 5640000,
+      "minute": 94,
+      "text": "Great result for Mexico. Jimenez and Quinones doing the business",
+      "label": "POS",
+      "score": 0.9804663062095642
+    },
+    {
+      "id": "s057",
+      "ts": 5700000,
+      "minute": 95,
+      "text": "South Africa exit the World Cup. Hugely disappointing campaign, marred by red cards",
+      "label": "NEG",
+      "score": 0.9415925741195679
+    },
+    {
+      "id": "s058",
+      "ts": 180000,
+      "minute": 3,
+      "text": "Excited for this WC26 clash between Mexico and South Africa!",
+      "label": "POS",
+      "score": 0.9861418008804321
+    },
+    {
+      "id": "s059",
+      "ts": 900000,
+      "minute": 15,
+      "text": "Mexico fully in control after that early Quinones goal. Great atmosphere in Arlington",
+      "label": "POS",
+      "score": 0.9673610329627991
+    },
+    {
+      "id": "s060",
+      "ts": 2280000,
+      "minute": 38,
+      "text": "Decent first half but needs more goals. South Africa have to respond",
+      "label": "POS",
+      "score": 0.5487132668495178
+    }
+  ]
+}

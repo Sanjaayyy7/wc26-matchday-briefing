@@ -43,3 +43,6 @@ next-env.d.ts
 # pipeline artifacts
 /pipeline-output/
 data/raw/
+
+# huggingface model cache (downloaded by score-sentiment.mts)
+.cache/huggingface/
