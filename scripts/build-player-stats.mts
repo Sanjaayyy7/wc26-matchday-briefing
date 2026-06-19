@@ -138,7 +138,7 @@ async function main() {
               position: "FW",
               _prov: {
                 source: sources[0] ?? "seed:match-facts",
-                confidence: 0.7,
+                confidence: sources.length > 0 ? 0.7 : 0.3,
                 verificationDate: TODAY,
                 originType: sources.length > 0 ? "derived" : "seeded",
               },

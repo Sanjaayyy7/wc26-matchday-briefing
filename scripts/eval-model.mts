@@ -13,7 +13,7 @@
 // backtest (lib/calibration.brier over a percentage-point split) and the same
 // walk-forward Elo state (ratings only ever see strictly-past matches — no
 // leakage). Writes data/backtest/model-eval.json and exits non-zero if the
-// chosen variant fails the bar (Brier < 0.50 AND ECE < 0.03).
+// chosen variant fails the bar (Brier < 0.51 AND ECE < 0.03; see ADR-0001).
 //
 //   npm run ml:eval
 import { readFileSync, writeFileSync, mkdirSync } from "node:fs";

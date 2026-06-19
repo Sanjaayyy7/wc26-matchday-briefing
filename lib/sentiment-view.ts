@@ -58,6 +58,7 @@ export function sentimentSlugs(): string[] {
 }
 
 export function sentimentBySlug(slug: string): SentimentOutput | null {
+  if (!/^[a-z0-9-]+$/.test(slug)) return null; // guard against path traversal
   const p = path.join(dataDir, `${slug}.json`);
   if (!existsSync(p)) return null;
   return JSON.parse(readFileSync(p, "utf8")) as SentimentOutput;

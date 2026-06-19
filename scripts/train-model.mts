@@ -212,8 +212,8 @@ if (brier / nB >= uniformBrier / nB) {
   console.error("GATE FAILED: model does not beat the uniform baseline");
   process.exit(2);
 }
-if (ece >= 0.05) {
-  console.error("GATE FAILED: expected calibration error >= 5%");
+if (ece >= 0.03) {
+  console.error("GATE FAILED: expected calibration error >= 3%");
   process.exit(2);
 }
 // Evidence-based Brier gate (ADR-0001): ~0.508 is the realistic 3-way football
