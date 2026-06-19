@@ -7,6 +7,7 @@ import {
   type GridSummary,
   type ModelParams,
 } from "./poisson-model";
+import { applyPlatt } from "./model-experiments";
 
 const ALIASES: Record<string, string> = {
   "Türkiye": "Turkey",
@@ -25,6 +26,11 @@ export function resolveTeamName(appName: string): string {
     throw new Error(`team not in model: ${appName} (resolved: ${name})`);
   }
   return name;
+}
+
+function normalizeSplit(s: { home: number; draw: number; away: number }) {
+  const z = s.home + s.draw + s.away;
+  return { home: s.home / z, draw: s.draw / z, away: s.away / z };
 }
 
 export function roundTo100(probs: number[]): number[] {
@@ -81,7 +87,15 @@ export function predictFixture(args: {
   const lambdas = lambdasFromElo(eloHome, eloAway, args.neutral, params);
   const grid = scoreGrid(lambdas.home, lambdas.away, params.rho);
   const summary = summarizeGrid(grid);
-  const [home, draw, away] = roundTo100([summary.home, summary.draw, summary.away]);
+  const cal = (model as { calibration?: { a: number; b: number } }).calibration;
+  const calibrated = cal
+    ? normalizeSplit({
+        home: applyPlatt(summary.home, cal.a, cal.b),
+        draw: applyPlatt(summary.draw, cal.a, cal.b),
+        away: applyPlatt(summary.away, cal.a, cal.b),
+      })
+    : { home: summary.home, draw: summary.draw, away: summary.away };
+  const [home, draw, away] = roundTo100([calibrated.home, calibrated.draw, calibrated.away]);
   const split = { home, draw, away };
 
   const prediction: Prediction = {

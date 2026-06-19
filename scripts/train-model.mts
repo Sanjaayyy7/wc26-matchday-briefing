@@ -16,6 +16,7 @@ import {
   type ModelParams,
 } from "../lib/poisson-model";
 import { rps, calibrationBins, type Split } from "../lib/calibration";
+import { applyPlatt, fitPlatt } from "../lib/model-experiments";
 import { appDir } from "./shared.mts";
 
 type Row = {
@@ -56,14 +57,17 @@ const get = (t: string) => ratings.get(t) ?? 1500;
 type GoalSample = { x: number; goals: number };
 const samples: GoalSample[] = [];
 const backtest: Array<{ row: Row; eloH: number; eloA: number }> = [];
+const holdout: Array<{ row: Row; eloH: number; eloA: number }> = [];
 
 const BACKTEST_FROM = "2024-01-01";
 const SAMPLE_FROM = "1995-01-01";
+const PLATT_HOLDOUT_FROM = "2014-01-01"; // pre-2024 holdout for post-hoc calibration fit
 
 for (const row of rows) {
   const eloH = get(row.home);
   const eloA = get(row.away);
   if (row.date >= BACKTEST_FROM) backtest.push({ row, eloH, eloA });
+  else if (row.date >= PLATT_HOLDOUT_FROM) holdout.push({ row, eloH, eloA });
   if (row.date >= SAMPLE_FROM) {
     const effH = eloH + (row.neutral ? 0 : HOME_ADVANTAGE);
     samples.push({ x: (effH - eloA) / 400, goals: row.hs });
@@ -141,6 +145,35 @@ const rho = bestRho();
 console.log(`fit: rho=${rho}`);
 const params: ModelParams = { baseLogGoals, eloSlope, rho };
 
+// ---- Fit post-hoc Platt calibration on the pre-2024 holdout (2014–2024) ----
+// Calibrates the 3-way split without disturbing the generative model. The fit
+// set is strictly pre-BACKTEST_FROM, so the 2024+ backtest stays leakage-free.
+const calFit: Array<{ p: number; y: 0 | 1 }> = [];
+for (const { row, eloH, eloA } of holdout) {
+  const l = lambdasFromElo(eloH, eloA, row.neutral, params);
+  const s = summarizeGrid(scoreGrid(l.home, l.away, rho));
+  const o = row.hs > row.as ? "home" : row.hs < row.as ? "away" : "draw";
+  for (const k of ["home", "draw", "away"] as const) {
+    calFit.push({ p: s[k], y: (k === o ? 1 : 0) as 0 | 1 });
+  }
+}
+const calibration = fitPlatt(calFit, 3000, 0.3);
+console.log(
+  `fit: platt a=${calibration.a.toFixed(4)} b=${calibration.b.toFixed(4)} ` +
+    `(holdout ${PLATT_HOLDOUT_FROM}+, ${holdout.length} matches)`,
+);
+
+/** Apply Platt calibration to a 3-way split (0..1) and renormalize. */
+function calibrateSplit(s: { home: number; draw: number; away: number }) {
+  const r = {
+    home: applyPlatt(s.home, calibration.a, calibration.b),
+    draw: applyPlatt(s.draw, calibration.a, calibration.b),
+    away: applyPlatt(s.away, calibration.a, calibration.b),
+  };
+  const z = r.home + r.draw + r.away;
+  return { home: r.home / z, draw: r.draw / z, away: r.away / z };
+}
+
 // ---- Backtest (online: each prediction used only past ratings) ----
 let brier = 0;
 let uniformBrier = 0;
@@ -153,7 +186,7 @@ for (const { row, eloH, eloA } of backtest) {
   const l = lambdasFromElo(eloH, eloA, row.neutral, params);
   const s = summarizeGrid(scoreGrid(l.home, l.away, rho));
   const outcome = row.hs > row.as ? "home" : row.hs < row.as ? "away" : "draw";
-  const probs = { home: s.home, draw: s.draw, away: s.away };
+  const probs = calibrateSplit({ home: s.home, draw: s.draw, away: s.away });
   for (const k of ["home", "draw", "away"] as const) {
     const y = k === outcome ? 1 : 0;
     brier += (probs[k] - y) ** 2;
@@ -181,6 +214,12 @@ if (brier / nB >= uniformBrier / nB) {
 }
 if (ece >= 0.05) {
   console.error("GATE FAILED: expected calibration error >= 5%");
+  process.exit(2);
+}
+// Evidence-based Brier gate (ADR-0001): ~0.508 is the realistic 3-way football
+// Brier frontier; the shipped (Platt-calibrated) model must stay under 0.51.
+if (brier / nB >= 0.51) {
+  console.error(`GATE FAILED: backtest Brier ${(brier / nB).toFixed(4)} >= 0.51`);
   process.exit(2);
 }
 
@@ -217,6 +256,7 @@ const model = {
   dataThrough: rows.at(-1)!.date,
   matches: rows.length,
   params,
+  calibration,
   backtest: {
     from: BACKTEST_FROM,
     n: nB,

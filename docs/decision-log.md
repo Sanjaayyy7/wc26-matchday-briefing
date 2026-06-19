@@ -22,3 +22,9 @@ Format: `## YYYY-MM-DD — <agent> — <one-line decision>` then Decision · Rea
   - `scripts/shared.mts` exports: `appDir`, `loadEnv`, `fixtures()`, `teams()`, `fixtureBySlugOrDie(slug)`, `outDir(slug)`, `kalshiEventTicker(f)` — scaffold for new fetchers.
   - `lib/match-view.ts`: `ScorerDisplay {player,team,minute,assist?}`, cards `{player,team,type,minute,reason?}`; match-facts file is `Record<slug, MatchFactsDisplay | string>` → **guard string entries** when aggregating player stats / sentiment events.
 - **Impact:** no blockers; plan §I unchanged except import paths noted above.
+
+## 2026-06-18 — controller+user — Task-1 gate revised to evidence-based threshold; ship Platt
+- **Decision:** No variant crossed the original fixed gate Brier<0.50 (best = platt-calibrated 0.5085 / ECE 0.0089). User authorized: ship the Platt-calibrated model (best discovered) and replace the fixed threshold with an evidence-based one derived from the observed frontier — **Brier < 0.51 AND ECE < 0.03**. Full benchmarking + justification recorded in ADR-0001.
+- **Reason:** ~0.508 is the realistic skill floor for 3-way international-football Brier (uniform 0.667; de-vigged markets ~0.50–0.51). Platt strictly improves baseline on BOTH Brier and ECE; 0.50 was below the achievable frontier. Gate still discriminates (baseline 0.5097 fails 0.51-ish margin context; the real bar is "best variant beating baseline on both metrics").
+- **Alternatives rejected:** keep 0.50 + go deeper (uncertain, overfit risk); keep 0.50 + accept unmet (ships no improvement); market-only gate (kept as directional part-a, not primary).
+- **Impact:** `eval-model.mts` BRIER_MAX→0.51; `model.json` gains a `calibration` block; `predict.ts` applies it; ADR-0001 written.

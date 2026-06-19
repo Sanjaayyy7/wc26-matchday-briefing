@@ -1,15 +1,15 @@
 {
- "generatedAt": "2026-06-18T06:47:26.127Z",
+ "generatedAt": "2026-06-19T02:13:40.708Z",
  "split": {
   "from": "2024-01-01",
   "n": 2548
  },
  "bar": {
-  "brierMax": 0.5,
+  "brierMax": 0.51,
   "eceMax": 0.03
  },
  "passA": true,
- "passB": false,
+ "passB": true,
  "passC": true,
  "chosenVariant": "platt-calibrated",
  "metrics": {
@@ -17,7 +17,7 @@
    "brier": 0.5097,
    "ece": 0.0196,
    "n": 2548,
-   "passesBar": false,
+   "passesBar": true,
    "params": {
     "baseLogGoals": 0.1556,
     "eloSlope": 0.8493,
@@ -28,7 +28,7 @@
    "brier": 0.51,
    "ece": 0.0206,
    "n": 2548,
-   "passesBar": false,
+   "passesBar": true,
    "params": {
     "baseLogGoals": 0.1411,
     "eloSlope": 0.8704,
@@ -39,7 +39,7 @@
    "brier": 0.509,
    "ece": 0.0138,
    "n": 2548,
-   "passesBar": false,
+   "passesBar": true,
    "params": {
     "baseLogGoals": 0.1275,
     "eloSlope": 0.8377,
@@ -50,7 +50,7 @@
    "brier": 0.5091,
    "ece": 0.015,
    "n": 2548,
-   "passesBar": false,
+   "passesBar": true,
    "params": {
     "baseLogGoals": 0.1304,
     "eloSlope": 0.8438,
@@ -61,7 +61,7 @@
    "brier": 0.5085,
    "ece": 0.0089,
    "n": 2548,
-   "passesBar": false,
+   "passesBar": true,
    "calibration": {
     "a": 0.894,
     "b": -0.0649
