@@ -15,6 +15,8 @@ import { MatchDetail } from "./match-detail";
 import { ModelEvolution } from "./model-evolution";
 import { ChampionshipProjection as ChampionProjectionPanel } from "./championship-projection";
 import { LearningSignals } from "./learning-signals";
+import { ReliabilityTimeline } from "./reliability-timeline";
+import type { ReliabilityTick } from "@/lib/command-data";
 
 export type OperationalPrediction = {
   slug: string;
@@ -55,6 +57,7 @@ type Props = {
   nextClosing: string;
   clubMap: Map<string, ClubInfo>;
   learningSignals?: LearningSignal[];
+  reliabilityTicks?: ReliabilityTick[];
 };
 
 const NAV_TABS = [
@@ -95,6 +98,7 @@ export function CommandShell({
   nextClosing,
   clubMap,
   learningSignals = [],
+  reliabilityTicks = [],
 }: Props) {
   const [selectedSlug, setSelectedSlug] = useState(defaultSlug);
 
@@ -156,7 +160,7 @@ export function CommandShell({
         </div>
         <div className="flex items-center gap-1.5 px-4 border-r border-[var(--hairline)] text-[var(--ink-faint)]">
           <span>ECE</span>
-          <span className={`font-semibold tabular-nums ${textCls}`}>{(systemHealth.ece * 100).toFixed(1)}%</span>
+          <span className={`font-semibold data-mono ${textCls}`}>{(systemHealth.ece * 100).toFixed(1)}%</span>
         </div>
         <div className="flex items-center gap-1.5 px-4 text-[var(--ink-faint)]">
           <span>Next:</span>
@@ -210,7 +214,7 @@ export function CommandShell({
             ].map(({ key, val }) => (
               <div key={key} className="flex justify-between items-center py-1 border-b border-[rgba(255,255,255,0.025)] last:border-0">
                 <span className="text-slight text-[var(--ink-faint)]">{key}</span>
-                <span className={`text-slight font-semibold tabular-nums ${metricColor(key, systemHealth.status)}`}>{val}</span>
+                <span className={`text-slight font-semibold data-mono ${metricColor(key, systemHealth.status)}`}>{val}</span>
               </div>
             ))}
             {systemHealth.status === "BREACH" && (
@@ -222,6 +226,13 @@ export function CommandShell({
           <ChampionProjectionPanel projections={championshipProjections} />
         </div>
       </div>
+
+      {/* Reliability Timeline — full width strip below 3-col grid */}
+      {reliabilityTicks.length > 0 && (
+        <div className="flex-shrink-0">
+          <ReliabilityTimeline ticks={reliabilityTicks} />
+        </div>
+      )}
 
       {/* Learning Signals — full width below 3-col grid */}
       {learningSignals.length > 0 && (

@@ -26,11 +26,11 @@ export function ChampionshipProjection({ projections }: { projections: ChampionP
                 }}
               />
             </div>
-            <span className="text-fine font-semibold tabular-nums text-[var(--ink-muted)] text-right w-9 flex-shrink-0">
+            <span className="text-fine font-semibold data-mono text-[var(--ink-muted)] text-right w-9 flex-shrink-0">
               {(p.probability * 100).toFixed(1)}%
             </span>
             {p.delta !== undefined && Math.abs(p.delta) >= 0.001 && (
-              <span className={`text-micro tabular-nums w-7 text-right flex-shrink-0 ${p.delta > 0 ? "text-[var(--up)]" : "text-[var(--down)]"}`}>
+              <span className={`text-micro data-mono w-7 text-right flex-shrink-0 ${p.delta > 0 ? "text-[var(--up)]" : "text-[var(--down)]"}`}>
                 {p.delta > 0 ? "+" : ""}{(p.delta * 100).toFixed(1)}
               </span>
             )}
