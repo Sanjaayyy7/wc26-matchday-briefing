@@ -15,7 +15,7 @@
  *   npm run players:fetch
  */
 
-import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
+import { readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { pathToFileURL } from "node:url";
 import { appDir } from "./shared.mts";

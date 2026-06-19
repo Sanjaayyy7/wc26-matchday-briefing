@@ -2,7 +2,7 @@
   "fixture": "mexico-vs-south-africa",
   "model": "Xenova/twitter-roberta-base-sentiment-latest",
   "source": "sample",
-  "generatedAt": "2026-06-19T02:22:50.022Z",
+  "generatedAt": "2026-06-19T02:29:25.374Z",
   "timeline": [
     {
       "minuteBucket": 0,

@@ -189,7 +189,7 @@ async function main() {
   console.log(`[build-player-stats] Processed ${fixturesProcessed} fixtures, skipped ${fixturesSkipped} string entries.`);
 
   // Estimate minutes from appearances
-  for (const [id, acc] of statMap.entries()) {
+  for (const acc of statMap.values()) {
     if (acc.appearances > 0 && acc.minutes === 0) {
       acc.minutes = estimateMinutes(acc.appearances);
     }
@@ -292,7 +292,7 @@ async function main() {
   function labelCluster(centroid: number[]): string {
     // centroid is in standardized space; use original feature ranking
     // We know: [goals, assists, shots, keyPasses, n90]
-    const [g, a, s, kp, _n90] = centroid;
+    const [g, a, s, kp] = centroid;
     if (g > 0.5) return "Scorer";
     if (a > 0.5) return "Creator";
     if (s > 0.3) return "Shooter";

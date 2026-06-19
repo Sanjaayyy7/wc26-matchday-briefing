@@ -13,7 +13,7 @@ if (!slug) {
   process.exit(1);
 }
 
-const fixture = fixtureBySlugOrDie(slug);
+fixtureBySlugOrDie(slug); // validates the slug (throws if unknown)
 const dir = outDir(slug);
 const postsPath = path.join(dir, "posts.json");
 const samplePath = path.join(appDir, "data", "posts-sample.json");
@@ -93,7 +93,7 @@ function lexiconScore(text: string): ScoredPost["label"] {
 }
 
 type ScoredPostFull = ScoredPost & { id: string; text: string; score?: number; };
-let scoredPosts: ScoredPostFull[] = [];
+const scoredPosts: ScoredPostFull[] = [];
 let modelUsed = "lexicon-fallback";
 
 try {
