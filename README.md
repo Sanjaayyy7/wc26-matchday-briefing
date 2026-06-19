@@ -3,7 +3,7 @@
 A continuously improving, auditable forecasting platform for the 2026 FIFA World Cup.
 Predictions are locked before kickoff, scored after the whistle, and permanently recorded.
 
-**[Live Demo →](#)**
+**[Live Demo →](https://app-three-rho-97.vercel.app)**
 
 ---
 
