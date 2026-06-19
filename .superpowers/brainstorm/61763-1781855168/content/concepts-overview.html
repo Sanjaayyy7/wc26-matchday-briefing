@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WC26 — 4 Design Concepts</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: #0a0a0a;
+  color: #e8e8e8;
+  font-family: -apple-system, BlinkMacSystemFont, 'Inter', sans-serif;
+  font-size: 14px;
+}
+.page-header {
+  padding: 36px 48px 28px;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+.page-header h1 { font-size: 11px; font-weight: 500; color: rgba(255,255,255,0.3); letter-spacing: 0.12em; text-transform: uppercase; }
+.page-header p { font-size: 24px; font-weight: 600; color: #f4f4f0; margin-top: 6px; letter-spacing: -0.02em; }
+.page-header-note { font-size: 12px; color: rgba(255,255,255,0.25); text-align: right; line-height: 1.6; }
+
+.concept-section {
+  border-bottom: 2px solid rgba(255,255,255,0.06);
+  cursor: pointer;
+  transition: background 0.12s;
+  position: relative;
+}
+.concept-section:hover { background: rgba(255,255,255,0.012); }
+.concept-section.selected { outline: 2px solid #7cffb2; outline-offset: -2px; }
+.concept-section.selected::before {
+  content: '✓ SELECTED';
+  position: absolute;
+  top: 20px; right: 24px;
+  font-size: 10px; font-weight: 700; letter-spacing: 0.1em;
+  color: #7cffb2; z-index: 10;
+}
+
+.concept-meta {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 20px 32px;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  background: rgba(0,0,0,0.3);
+}
+.concept-tag {
+  width: 32px; height: 32px;
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 5px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px; font-weight: 700; color: #fff;
+  flex-shrink: 0;
+}
+.concept-name { font-size: 15px; font-weight: 600; color: #fff; }
+.concept-desc { font-size: 12px; color: rgba(255,255,255,0.35); margin-top: 2px; }
+.concept-philosophy {
+  margin-left: auto;
+  font-size: 11px;
+  color: rgba(255,255,255,0.2);
+  font-style: italic;
+  text-align: right;
+  max-width: 240px;
+}
+
+.mockup {
+  height: 520px;
+  overflow: hidden;
+  position: relative;
+}
+
+/* ==============================
+   CONCEPT A — BLOOMBERG × KALSHI
+   Dense terminal. Orange accent. Monospace data.
+   ============================== */
+.bb { background: #020202; font-family: 'Courier New', 'Lucida Console', monospace; height: 100%; display: flex; flex-direction: column; }
+.bb-topbar { background: #000; border-bottom: 1px solid #111; height: 30px; display: flex; align-items: center; padding: 0 12px; gap: 0; flex-shrink: 0; }
+.bb-logo { font-size: 12px; font-weight: 700; color: #F5A623; padding-right: 18px; border-right: 1px solid #1a1a1a; letter-spacing: 0.08em; }
+.bb-tab { font-size: 10px; color: rgba(255,255,255,0.25); padding: 0 14px; height: 30px; display: flex; align-items: center; border-right: 1px solid #111; letter-spacing: 0.05em; }
+.bb-tab.a { color: #F5A623; background: rgba(245,166,35,0.05); }
+.bb-ticker { background: #070707; border-bottom: 1px solid #111; height: 20px; display: flex; align-items: center; overflow: hidden; padding: 0 10px; gap: 0; flex-shrink: 0; }
+.bb-tick { font-size: 9px; color: rgba(255,255,255,0.2); padding: 0 14px; border-right: 1px solid #111; white-space: nowrap; }
+.bb-tick .v { color: #00D764; }
+.bb-tick .r { color: #FF3B3B; }
+.bb-tick .o { color: #F5A623; }
+.bb-body { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1px; background: #111; flex: 1; overflow: hidden; }
+.bb-pane { background: #020202; padding: 10px 12px; overflow: hidden; }
+.bb-ph { font-size: 9px; color: #F5A623; letter-spacing: 0.08em; text-transform: uppercase; border-bottom: 1px solid #111; padding-bottom: 6px; margin-bottom: 9px; }
+.bb-kv { margin-bottom: 10px; }
+.bb-k { font-size: 8px; color: rgba(255,255,255,0.2); letter-spacing: 0.06em; text-transform: uppercase; }
+.bb-v { font-size: 26px; font-weight: 700; color: #F5A623; line-height: 1; font-variant-numeric: tabular-nums; }
+.bb-v.g { color: #00D764; }
+.bb-v.r { color: #FF3B3B; }
+.bb-v.sm { font-size: 13px; color: #F5A623; }
+.bb-sub { font-size: 8px; color: rgba(255,255,255,0.18); margin-top: 1px; }
+.bb-row { display: flex; justify-content: space-between; align-items: center; padding: 3px 0; border-bottom: 1px solid rgba(255,255,255,0.03); font-size: 10px; }
+.bb-row .n { color: rgba(255,255,255,0.4); }
+.bb-row .u { color: #00D764; }
+.bb-row .d { color: #FF3B3B; }
+.bb-row .w { color: #F5A623; }
+.bb-row .m { font-family: 'Courier New', monospace; color: rgba(255,255,255,0.35); }
+
+/* ==============================
+   CONCEPT B — ROBINHOOD × LINEAR
+   Spacious. Purple accent. Large numbers.
+   ============================== */
+.rh { background: #000; font-family: -apple-system, BlinkMacSystemFont, 'Inter', sans-serif; height: 100%; display: flex; flex-direction: column; overflow: hidden; }
+.rh-nav { display: flex; align-items: center; justify-content: space-between; padding: 0 36px; height: 52px; border-bottom: 1px solid rgba(255,255,255,0.055); flex-shrink: 0; }
+.rh-logo { font-size: 16px; font-weight: 700; color: #fff; letter-spacing: -0.03em; }
+.rh-logo em { color: #6C5CE7; font-style: normal; }
+.rh-links { display: flex; gap: 32px; }
+.rh-link { font-size: 13px; color: rgba(255,255,255,0.3); }
+.rh-link.a { color: #fff; font-weight: 500; }
+.rh-cta { background: rgba(108,92,231,0.9); color: #fff; font-size: 12px; font-weight: 600; padding: 7px 16px; border-radius: 7px; }
+.rh-hero { padding: 40px 36px 24px; flex-shrink: 0; }
+.rh-eyebrow { font-size: 11px; font-weight: 500; color: rgba(255,255,255,0.3); letter-spacing: 0.08em; text-transform: uppercase; }
+.rh-big { font-size: 60px; font-weight: 700; letter-spacing: -0.04em; line-height: 1; margin-top: 6px; color: #fff; font-variant-numeric: tabular-nums; }
+.rh-big em { color: #00B894; font-style: normal; }
+.rh-sub { font-size: 13px; color: rgba(255,255,255,0.3); margin-top: 8px; }
+.rh-metrics { display: grid; grid-template-columns: repeat(4,1fr); gap: 1px; background: rgba(255,255,255,0.05); margin: 0 36px; border-radius: 10px; overflow: hidden; flex-shrink: 0; }
+.rh-m { background: rgba(255,255,255,0.025); padding: 14px 18px; }
+.rh-ml { font-size: 11px; color: rgba(255,255,255,0.3); }
+.rh-mv { font-size: 22px; font-weight: 600; color: #fff; letter-spacing: -0.02em; margin-top: 4px; font-variant-numeric: tabular-nums; }
+.rh-mv.g { color: #00B894; }
+.rh-mv.w { color: #FDCB6E; }
+.rh-feed { padding: 22px 36px; overflow: hidden; }
+.rh-fl { font-size: 11px; font-weight: 500; color: rgba(255,255,255,0.25); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 12px; }
+.rh-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.04); }
+.rh-teams { font-size: 14px; font-weight: 500; color: #fff; }
+.rh-when { font-size: 11px; color: rgba(255,255,255,0.25); margin-top: 2px; }
+.rh-right { display: flex; align-items: center; gap: 12px; }
+.rh-score { font-size: 14px; font-weight: 600; font-variant-numeric: tabular-nums; color: rgba(255,255,255,0.7); }
+.rh-badge { font-size: 10px; font-weight: 600; padding: 3px 8px; border-radius: 5px; letter-spacing: 0.04em; text-transform: uppercase; }
+.hit { background: rgba(0,184,148,0.12); color: #00B894; }
+.close { background: rgba(253,203,110,0.12); color: #FDCB6E; }
+.miss { background: rgba(255,118,118,0.12); color: #FF7675; }
+
+/* ==============================
+   CONCEPT C — FORMULA 1 MISSION CONTROL
+   All caps. Red accent. Live telemetry bars.
+   ============================== */
+.f1 { background: #020202; font-family: 'Arial Narrow', 'Roboto Condensed', Arial, sans-serif; height: 100%; display: flex; flex-direction: column; overflow: hidden; }
+.f1-nav { background: #C00; height: 34px; display: flex; align-items: center; justify-content: space-between; padding: 0 16px; flex-shrink: 0; }
+.f1-logo { font-size: 13px; font-weight: 900; color: #fff; letter-spacing: 0.08em; text-transform: uppercase; }
+.f1-navs { display: flex; }
+.f1-nl { font-size: 10px; font-weight: 700; color: rgba(255,255,255,0.55); padding: 0 12px; border-right: 1px solid rgba(255,255,255,0.2); letter-spacing: 0.06em; text-transform: uppercase; }
+.f1-nl.a { color: #fff; }
+.f1-status { background: #0d0d0d; border-bottom: 1px solid #151515; height: 26px; display: flex; align-items: center; padding: 0 16px; gap: 0; flex-shrink: 0; }
+.f1-si { font-size: 9px; font-weight: 700; color: rgba(255,255,255,0.25); padding: 0 14px; border-right: 1px solid #151515; letter-spacing: 0.05em; text-transform: uppercase; font-variant-numeric: tabular-nums; }
+.f1-si .v { color: #fff; }
+.f1-si .g { color: #00FF87; }
+.f1-si .r { color: #C00; }
+.f1-si .w { color: #FFB800; }
+.f1-body { display: grid; grid-template-columns: 1fr 160px; flex: 1; overflow: hidden; gap: 1px; background: #111; }
+.f1-left { background: #020202; padding: 12px 16px; overflow: hidden; }
+.f1-right { background: #020202; padding: 12px; border-left: 1px solid #151515; overflow: hidden; }
+.f1-sh { display: flex; align-items: center; gap: 7px; margin-bottom: 8px; }
+.f1-dot { width: 7px; height: 7px; border-radius: 50%; background: #C00; flex-shrink: 0; }
+.f1-st { font-size: 9px; font-weight: 700; color: rgba(255,255,255,0.3); letter-spacing: 0.1em; text-transform: uppercase; }
+.f1-primary { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
+.f1-big { font-size: 58px; font-weight: 900; color: #00FF87; line-height: 1; font-variant-numeric: tabular-nums; }
+.f1-big-label { font-size: 9px; font-weight: 700; color: rgba(255,255,255,0.2); text-transform: uppercase; letter-spacing: 0.1em; margin-top: 3px; }
+.f1-status-word { font-size: 36px; font-weight: 900; color: #fff; line-height: 1; }
+.f1-trow { display: grid; grid-template-columns: 5fr 1fr 1fr 1fr; gap: 6px; padding: 4px 0; border-bottom: 1px solid rgba(255,255,255,0.035); align-items: center; }
+.f1-tn { font-size: 10px; font-weight: 700; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 0.02em; }
+.f1-bar { height: 2px; background: rgba(255,255,255,0.07); border-radius: 1px; margin-top: 3px; }
+.f1-bf { height: 100%; border-radius: 1px; }
+.f1-tv { font-size: 10px; font-weight: 700; text-align: right; font-variant-numeric: tabular-nums; }
+.f1-rk { font-size: 9px; font-weight: 700; color: rgba(255,255,255,0.2); text-transform: uppercase; margin-bottom: 6px; letter-spacing: 0.06em; }
+.f1-rs { margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid #151515; }
+.f1-rv { font-size: 20px; font-weight: 900; color: #fff; font-variant-numeric: tabular-nums; line-height: 1.1; }
+
+/* ==============================
+   CONCEPT D — PALANTIR FOC
+   Navy-dark. Blue accent. Intelligence cards. 3-column ops layout.
+   ============================== */
+.pal { background: #07090F; font-family: -apple-system, BlinkMacSystemFont, 'Inter', sans-serif; height: 100%; display: flex; flex-direction: column; overflow: hidden; }
+.pal-nav { display: flex; align-items: center; justify-content: space-between; padding: 0 18px; height: 42px; background: #0A0E1A; border-bottom: 1px solid rgba(74,144,217,0.14); flex-shrink: 0; }
+.pal-logo { font-size: 11px; font-weight: 600; color: #4A90D9; letter-spacing: 0.12em; text-transform: uppercase; }
+.pal-navs { display: flex; }
+.pal-nl { font-size: 11px; color: rgba(255,255,255,0.25); padding: 0 14px; border-right: 1px solid rgba(255,255,255,0.05); }
+.pal-nl.a { color: #4A90D9; }
+.pal-status { font-size: 10px; color: rgba(82,217,164,0.75); display: flex; align-items: center; gap: 5px; }
+.pal-dot { width: 5px; height: 5px; border-radius: 50%; background: #52D9A4; box-shadow: 0 0 5px rgba(82,217,164,0.6); }
+.pal-body { display: grid; grid-template-columns: 200px 1fr 168px; flex: 1; overflow: hidden; }
+.pal-side { background: #0A0E1A; border-right: 1px solid rgba(74,144,217,0.1); padding: 14px 12px; overflow: hidden; }
+.pal-center { background: #07090F; padding: 14px 18px; overflow: hidden; }
+.pal-rail { background: #0A0E1A; border-left: 1px solid rgba(74,144,217,0.1); padding: 14px 12px; overflow: hidden; }
+.pal-sh { font-size: 9px; font-weight: 600; color: rgba(74,144,217,0.5); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 8px; padding-bottom: 6px; border-bottom: 1px solid rgba(74,144,217,0.08); }
+.pal-row { display: flex; justify-content: space-between; align-items: center; padding: 4px 0; border-bottom: 1px solid rgba(255,255,255,0.025); }
+.pal-rl { font-size: 11px; color: rgba(255,255,255,0.4); }
+.pal-rv { font-size: 11px; font-weight: 600; font-variant-numeric: tabular-nums; }
+.pal-rv.g { color: #52D9A4; }
+.pal-rv.b { color: #4A90D9; }
+.pal-rv.w { color: #F5A623; }
+.pal-section { margin-bottom: 18px; }
+.pal-ch { display: flex; align-items: baseline; gap: 10px; margin-bottom: 12px; padding-bottom: 10px; border-bottom: 1px solid rgba(74,144,217,0.08); }
+.pal-ct { font-size: 13px; font-weight: 600; color: #fff; }
+.pal-cs { font-size: 11px; color: rgba(255,255,255,0.2); }
+.pal-card { background: rgba(74,144,217,0.04); border: 1px solid rgba(74,144,217,0.1); border-radius: 5px; padding: 10px 12px; margin-bottom: 7px; }
+.pal-ctype { font-size: 9px; font-weight: 600; color: rgba(74,144,217,0.55); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 5px; }
+.pal-ctxt { font-size: 11px; color: rgba(255,255,255,0.6); line-height: 1.5; }
+.pal-ctxt strong { color: #fff; }
+.pal-ctxt .m { color: #52D9A4; font-variant-numeric: tabular-nums; }
+.pal-bar-row { margin-bottom: 9px; }
+.pal-bar-labels { display: flex; justify-content: space-between; font-size: 10px; color: rgba(255,255,255,0.35); margin-bottom: 3px; }
+.pal-bar-track { height: 3px; background: rgba(255,255,255,0.05); border-radius: 2px; }
+.pal-bar-fill { height: 100%; background: linear-gradient(90deg, #4A90D9, #52D9A4); border-radius: 2px; }
+
+/* Page controls */
+.page-footer { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(5,5,5,0.96); border-top: 1px solid rgba(255,255,255,0.07); padding: 14px 48px; display: flex; justify-content: space-between; align-items: center; backdrop-filter: blur(16px); z-index: 100; }
+.footer-hint { font-size: 12px; color: rgba(255,255,255,0.25); }
+.footer-chips { display: flex; gap: 10px; }
+.chip { font-size: 11px; font-weight: 500; padding: 6px 14px; border: 1px solid rgba(255,255,255,0.1); border-radius: 6px; color: rgba(255,255,255,0.35); cursor: pointer; transition: all 0.12s; }
+.chip:hover { border-color: rgba(255,255,255,0.25); color: #fff; }
+.chip.selected { border-color: #7cffb2; color: #7cffb2; }
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <div>
+    <h1>WC26 Forecasting Intelligence Platform · Design Exploration</h1>
+    <p>4 competing institutional identities</p>
+  </div>
+  <div class="page-header-note">
+    Same data. Same functionality.<br>
+    Different institutional language. Click a concept to select.
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     CONCEPT A — BLOOMBERG × KALSHI
+     ═══════════════════════════════════════════════════════════════ -->
+<div class="concept-section" id="ca" data-choice="bloomberg" onclick="pick(this)">
+  <div class="concept-meta">
+    <div class="concept-tag" style="border-color:rgba(245,166,35,0.4);color:#F5A623">A</div>
+    <div>
+      <div class="concept-name">Bloomberg × Kalshi — Professional Terminal</div>
+      <div class="concept-desc">Dense data surface · Monospace · Orange signal · Maximum information density · Trading desk energy</div>
+    </div>
+    <div class="concept-philosophy">"This feels like a real forecasting desk, not a website."</div>
+  </div>
+  <div class="mockup">
+    <div class="bb">
+      <div class="bb-topbar">
+        <span class="bb-logo">WC26</span>
+        <span class="bb-tab a">OVERVIEW</span>
+        <span class="bb-tab">MARKETS</span>
+        <span class="bb-tab">RECORD</span>
+        <span class="bb-tab">TEAMS</span>
+        <span class="bb-tab">RESEARCH</span>
+        <span class="bb-tab">SIM</span>
+      </div>
+      <div class="bb-ticker">
+        <span class="bb-tick">BRIER <span class="v">0.7213</span></span>
+        <span class="bb-tick">BASELINE <span class="r">0.6667</span></span>
+        <span class="bb-tick">ACC <span class="v">47.6%</span></span>
+        <span class="bb-tick">ECE <span class="v">2.1%</span></span>
+        <span class="bb-tick">OPEN LOCKS <span class="o">51</span></span>
+        <span class="bb-tick">SETTLED <span class="v">21</span></span>
+        <span class="bb-tick">CHAMPION <span class="v">BRA 18.2%</span></span>
+        <span class="bb-tick">MODEL <span class="v">v1.0.0-PLATT · ACTIVE</span></span>
+      </div>
+      <div class="bb-body">
+        <!-- Panel 1: Performance -->
+        <div class="bb-pane">
+          <div class="bb-ph">FORECAST PERFORMANCE</div>
+          <div class="bb-kv">
+            <div class="bb-k">LIVE BRIER SCORE</div>
+            <div class="bb-v">0.7213</div>
+            <div class="bb-sub">BASELINE 0.6667 · SAMPLE WARNING N=21</div>
+          </div>
+          <div class="bb-kv">
+            <div class="bb-k">CORRECT PICKS</div>
+            <div class="bb-v g">10/21</div>
+            <div class="bb-sub">47.6% HIT RATE · SMALL SAMPLE</div>
+          </div>
+          <div class="bb-kv">
+            <div class="bb-k">CALIBRATION (ECE)</div>
+            <div class="bb-v g">2.1%</div>
+            <div class="bb-sub">TARGET &lt;3.0% · STATUS: NOMINAL</div>
+          </div>
+          <div class="bb-kv">
+            <div class="bb-k">LOG-LOSS</div>
+            <div class="bb-v" style="font-size:20px">0.9430</div>
+            <div class="bb-sub">RANDOM BASELINE ≈ 1.099</div>
+          </div>
+          <div class="bb-kv">
+            <div class="bb-k">ACTIVE MODEL</div>
+            <div class="bb-v sm">CHAMPION v1.0.0-PLATT</div>
+            <div class="bb-sub">TRAINED 2026-06-12 · ELO+DIXON-COLES+PLATT</div>
+          </div>
+        </div>
+        <!-- Panel 2: Settlements -->
+        <div class="bb-pane">
+          <div class="bb-ph">SETTLEMENT LEDGER</div>
+          <div class="bb-row" style="font-size:8px;color:rgba(255,255,255,0.15);padding-bottom:5px;margin-bottom:3px;border-bottom:1px solid #1a1a1a">
+            <span>FIXTURE</span><span>RESULT</span><span>VERDICT</span><span>BRIER</span>
+          </div>
+          <div class="bb-row"><span class="n">BRA vs MEX</span><span class="m">2–0</span><span class="u">HIT</span><span class="m">0.440</span></div>
+          <div class="bb-row"><span class="n">ARG vs CAN</span><span class="m">3–0</span><span class="u">HIT</span><span class="m">0.482</span></div>
+          <div class="bb-row"><span class="n">USA vs PAR</span><span class="m">4–1</span><span class="u">HIT</span><span class="m">0.615</span></div>
+          <div class="bb-row"><span class="n">QAT vs SUI</span><span class="m">1–1</span><span class="w">CLOSE</span><span class="m">0.722</span></div>
+          <div class="bb-row"><span class="n">ENG vs SRB</span><span class="m">0–0</span><span class="d">MISS</span><span class="m">0.941</span></div>
+          <div class="bb-row"><span class="n">FRA vs AUS</span><span class="m">3–0</span><span class="u">HIT</span><span class="m">0.451</span></div>
+          <div class="bb-row"><span class="n">GER vs SCO</span><span class="m">2–1</span><span class="u">HIT</span><span class="m">0.539</span></div>
+          <div class="bb-row"><span class="n">ESP vs CRO</span><span class="m">1–2</span><span class="d">MISS</span><span class="m">0.883</span></div>
+          <div class="bb-row"><span class="n">POR vs IRE</span><span class="m">2–0</span><span class="u">HIT</span><span class="m">0.511</span></div>
+          <div class="bb-row" style="margin-top:8px;font-size:8px;color:rgba(255,255,255,0.12)">21 SETTLED · VIEW FULL LEDGER →</div>
+        </div>
+        <!-- Panel 3: Simulator -->
+        <div class="bb-pane">
+          <div class="bb-ph">CHAMPION SIMULATOR</div>
+          <div class="bb-row"><span class="n">1. BRAZIL</span><span class="u">18.2%</span></div>
+          <div class="bb-row"><span class="n">2. FRANCE</span><span class="u">14.7%</span></div>
+          <div class="bb-row"><span class="n">3. ENGLAND</span><span class="u">12.3%</span></div>
+          <div class="bb-row"><span class="n">4. ARGENTINA</span><span class="u">11.6%</span></div>
+          <div class="bb-row"><span class="n">5. GERMANY</span><span class="m">9.4%</span></div>
+          <div class="bb-row"><span class="n">6. SPAIN</span><span class="m">8.1%</span></div>
+          <div class="bb-row"><span class="n">7. PORTUGAL</span><span class="m">6.9%</span></div>
+          <div class="bb-row"><span class="n">8. NETHERLANDS</span><span class="m">5.2%</span></div>
+          <div style="margin-top:10px;padding-top:8px;border-top:1px solid #111">
+            <div class="bb-k">NEXT HIGH-RISK LOCK</div>
+            <div class="bb-v sm" style="margin-top:4px">BRA vs ARG · GROUP D</div>
+            <div class="bb-sub">EXPIRES 2026-06-22 17:00 UTC</div>
+            <div class="bb-sub" style="margin-top:6px;color:rgba(255,165,0,0.4)">⚠ 51 OPEN LOCKS EXPIRE MATCHDAY 7</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     CONCEPT B — ROBINHOOD × LINEAR
+     ═══════════════════════════════════════════════════════════════ -->
+<div class="concept-section" id="cb" data-choice="robinhood" onclick="pick(this)">
+  <div class="concept-meta">
+    <div class="concept-tag" style="border-color:rgba(108,92,231,0.5);color:#6C5CE7">B</div>
+    <div>
+      <div class="concept-name">Robinhood × Linear — Premium Clarity</div>
+      <div class="concept-desc">Spacious · Large hero numbers · Purple accent · Consumer premium · Confidence-forward · Zero noise</div>
+    </div>
+    <div class="concept-philosophy">"Clean. Confident. Something I'd actually want to use."</div>
+  </div>
+  <div class="mockup">
+    <div class="rh">
+      <div class="rh-nav">
+        <span class="rh-logo">WC<em>26</em></span>
+        <div class="rh-links">
+          <span class="rh-link a">Overview</span>
+          <span class="rh-link">Forecasts</span>
+          <span class="rh-link">Record</span>
+          <span class="rh-link">Research</span>
+          <span class="rh-link">Simulator</span>
+        </div>
+        <span class="rh-cta">Model Registry →</span>
+      </div>
+      <div class="rh-hero">
+        <div class="rh-eyebrow">Forecast performance · Matchday 6 · Live tournament</div>
+        <div class="rh-big"><em>10</em>/21 correct picks</div>
+        <div class="rh-sub">47.6% accuracy · Brier 0.721 · ECE 2.1% · n=21 settled matches · Sample too small to conclude</div>
+      </div>
+      <div class="rh-metrics">
+        <div class="rh-m">
+          <div class="rh-ml">Brier score</div>
+          <div class="rh-mv">0.721</div>
+        </div>
+        <div class="rh-m">
+          <div class="rh-ml">RPS</div>
+          <div class="rh-mv g">0.220</div>
+        </div>
+        <div class="rh-m">
+          <div class="rh-ml">Calibration (ECE)</div>
+          <div class="rh-mv g">2.1%</div>
+        </div>
+        <div class="rh-m">
+          <div class="rh-ml">Open locks</div>
+          <div class="rh-mv w">51</div>
+        </div>
+      </div>
+      <div class="rh-feed">
+        <div class="rh-fl">Recent settlements</div>
+        <div class="rh-row">
+          <div><div class="rh-teams">Brazil vs Mexico</div><div class="rh-when">Group D · Jun 17 · Model: 64% home</div></div>
+          <div class="rh-right"><span class="rh-score">2–0</span><span class="rh-badge hit">Hit</span></div>
+        </div>
+        <div class="rh-row">
+          <div><div class="rh-teams">Qatar vs Switzerland</div><div class="rh-when">Group A · Jun 14 · Model: 38% home</div></div>
+          <div class="rh-right"><span class="rh-score">1–1</span><span class="rh-badge close">Close</span></div>
+        </div>
+        <div class="rh-row">
+          <div><div class="rh-teams">USA vs Paraguay</div><div class="rh-when">Group C · Jun 12 · Model: 61% home</div></div>
+          <div class="rh-right"><span class="rh-score">4–1</span><span class="rh-badge hit">Hit</span></div>
+        </div>
+        <div class="rh-row">
+          <div><div class="rh-teams">England vs Serbia</div><div class="rh-when">Group B · Jun 13 · Model: 72% home</div></div>
+          <div class="rh-right"><span class="rh-score">0–0</span><span class="rh-badge miss">Miss</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     CONCEPT C — FORMULA 1 MISSION CONTROL
+     ═══════════════════════════════════════════════════════════════ -->
+<div class="concept-section" id="cc" data-choice="f1" onclick="pick(this)">
+  <div class="concept-meta">
+    <div class="concept-tag" style="border-color:rgba(204,0,0,0.5);color:#E10600">C</div>
+    <div>
+      <div class="concept-name">Formula 1 Mission Control — Live Telemetry</div>
+      <div class="concept-desc">Red accent · Condensed all-caps · Live bar graphs · Sector scores · Race operations urgency</div>
+    </div>
+    <div class="concept-philosophy">"This feels alive. Like watching the model think in real time."</div>
+  </div>
+  <div class="mockup">
+    <div class="f1">
+      <div class="f1-nav">
+        <span class="f1-logo">WC26 · FORECAST OPERATIONS</span>
+        <div class="f1-navs">
+          <span class="f1-nl a">COMMAND</span>
+          <span class="f1-nl">MARKETS</span>
+          <span class="f1-nl">RECORD</span>
+          <span class="f1-nl">RESEARCH</span>
+          <span class="f1-nl">SIMULATE</span>
+        </div>
+      </div>
+      <div class="f1-status">
+        <span class="f1-si">STATUS <span class="v g">LIVE</span></span>
+        <span class="f1-si">MATCHDAY <span class="v">6</span></span>
+        <span class="f1-si">SETTLED <span class="v">21</span></span>
+        <span class="f1-si">OPEN LOCKS <span class="v r">51</span></span>
+        <span class="f1-si">BRIER <span class="v">0.7213</span></span>
+        <span class="f1-si">ECE <span class="v g">2.1%</span></span>
+        <span class="f1-si">MODEL <span class="v g">NOMINAL</span></span>
+      </div>
+      <div class="f1-body">
+        <div class="f1-left">
+          <div class="f1-primary">
+            <div>
+              <div class="f1-sh"><div class="f1-dot"></div><div class="f1-st">PRIMARY METRIC</div></div>
+              <div class="f1-big">47.6<span style="font-size:26px">%</span></div>
+              <div class="f1-big-label">Forecast accuracy · 10/21 correct picks</div>
+            </div>
+            <div>
+              <div class="f1-sh"><div class="f1-dot" style="background:#00FF87"></div><div class="f1-st">CALIBRATION STATUS</div></div>
+              <div class="f1-status-word" style="color:#00FF87">NOMINAL</div>
+              <div class="f1-big-label" style="margin-top:6px">ECE 2.1% · Target &lt;3.0% · Model trustworthy</div>
+              <div style="margin-top:12px">
+                <div class="f1-big-label" style="margin-bottom:4px">BRIER TRAJECTORY</div>
+                <div style="display:flex;align-items:flex-end;gap:3px;height:28px">
+                  <div style="width:10px;background:rgba(255,255,255,0.1);height:60%"></div>
+                  <div style="width:10px;background:rgba(255,255,255,0.1);height:80%"></div>
+                  <div style="width:10px;background:#F5A623;height:90%"></div>
+                  <div style="width:10px;background:#F5A623;height:75%"></div>
+                  <div style="width:10px;background:#00FF87;height:50%"></div>
+                  <div style="width:10px;background:#00FF87;height:65%"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="f1-sh"><div class="f1-dot" style="background:#4A90D9"></div><div class="f1-st">SETTLEMENT TELEMETRY</div></div>
+          <div class="f1-trow" style="font-size:8px;color:rgba(255,255,255,0.18);padding-bottom:4px;border-bottom:1px solid #1a1a1a">
+            <span>FIXTURE</span><span style="text-align:right">BRIER</span><span style="text-align:right">RPS</span><span style="text-align:right">VERDICT</span>
+          </div>
+          <div class="f1-trow">
+            <div><div class="f1-tn">Brazil vs Mexico</div><div class="f1-bar"><div class="f1-bf" style="width:44%;background:#00FF87"></div></div></div>
+            <span class="f1-tv" style="color:#00FF87">0.440</span>
+            <span class="f1-tv" style="color:rgba(255,255,255,0.3)">0.181</span>
+            <span class="f1-tv" style="color:#00FF87;font-size:8px">HIT ▲</span>
+          </div>
+          <div class="f1-trow">
+            <div><div class="f1-tn">Qatar vs Switzerland</div><div class="f1-bar"><div class="f1-bf" style="width:72%;background:#FFB800"></div></div></div>
+            <span class="f1-tv" style="color:#FFB800">0.722</span>
+            <span class="f1-tv" style="color:rgba(255,255,255,0.3)">0.241</span>
+            <span class="f1-tv" style="color:#FFB800;font-size:8px">CLOSE ~</span>
+          </div>
+          <div class="f1-trow">
+            <div><div class="f1-tn">USA vs Paraguay</div><div class="f1-bar"><div class="f1-bf" style="width:62%;background:#FFB800"></div></div></div>
+            <span class="f1-tv" style="color:#FFB800">0.615</span>
+            <span class="f1-tv" style="color:rgba(255,255,255,0.3)">0.263</span>
+            <span class="f1-tv" style="color:#00FF87;font-size:8px">HIT ▲</span>
+          </div>
+          <div class="f1-trow">
+            <div><div class="f1-tn">England vs Serbia</div><div class="f1-bar"><div class="f1-bf" style="width:94%;background:#E10600"></div></div></div>
+            <span class="f1-tv" style="color:#E10600">0.941</span>
+            <span class="f1-tv" style="color:rgba(255,255,255,0.3)">0.380</span>
+            <span class="f1-tv" style="color:#E10600;font-size:8px">MISS ▼</span>
+          </div>
+          <div class="f1-trow">
+            <div><div class="f1-tn">France vs Australia</div><div class="f1-bar"><div class="f1-bf" style="width:45%;background:#00FF87"></div></div></div>
+            <span class="f1-tv" style="color:#00FF87">0.451</span>
+            <span class="f1-tv" style="color:rgba(255,255,255,0.3)">0.192</span>
+            <span class="f1-tv" style="color:#00FF87;font-size:8px">HIT ▲</span>
+          </div>
+        </div>
+        <div class="f1-right">
+          <div class="f1-rs"><div class="f1-rk">Brier (live)</div><div class="f1-rv">0.721</div></div>
+          <div class="f1-rs"><div class="f1-rk">Baseline</div><div class="f1-rv" style="color:#E10600">0.667</div></div>
+          <div class="f1-rs"><div class="f1-rk">Log-loss</div><div class="f1-rv">0.943</div></div>
+          <div class="f1-rs"><div class="f1-rk">Open locks</div><div class="f1-rv" style="color:#FFB800">51</div></div>
+          <div class="f1-rs"><div class="f1-rk">Model</div><div class="f1-rv" style="font-size:14px;color:#00FF87">CHAMPION</div><div style="font-size:9px;color:rgba(255,255,255,0.2);margin-top:1px">v1.0.0-platt</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     CONCEPT D — PALANTIR FORECAST OPERATIONS CENTER
+     ═══════════════════════════════════════════════════════════════ -->
+<div class="concept-section" id="cd" data-choice="palantir" onclick="pick(this)">
+  <div class="concept-meta">
+    <div class="concept-tag" style="border-color:rgba(74,144,217,0.5);color:#4A90D9">D</div>
+    <div>
+      <div class="concept-name">Palantir Forecast Operations Center — Intelligence Infrastructure</div>
+      <div class="concept-desc">Navy dark · Intelligence blue · 3-column ops layout · Intelligence cards · Confidence profile rail</div>
+    </div>
+    <div class="concept-philosophy">"This feels like a genuine forecasting institution, not a product."</div>
+  </div>
+  <div class="mockup">
+    <div class="pal">
+      <div class="pal-nav">
+        <span class="pal-logo">WC26 · Forecast Intelligence</span>
+        <div class="pal-navs">
+          <span class="pal-nl a">Briefing</span>
+          <span class="pal-nl">Ledger</span>
+          <span class="pal-nl">Research</span>
+          <span class="pal-nl">Operations</span>
+          <span class="pal-nl">Simulator</span>
+        </div>
+        <div class="pal-status"><div class="pal-dot"></div>Model nominal · v1.0.0-platt</div>
+      </div>
+      <div class="pal-body">
+        <!-- Left sidebar -->
+        <div class="pal-side">
+          <div class="pal-section">
+            <div class="pal-sh">Model Health</div>
+            <div class="pal-row"><span class="pal-rl">Status</span><span class="pal-rv g">NOMINAL</span></div>
+            <div class="pal-row"><span class="pal-rl">Brier (live)</span><span class="pal-rv b">0.7213</span></div>
+            <div class="pal-row"><span class="pal-rl">ECE</span><span class="pal-rv g">2.1%</span></div>
+            <div class="pal-row"><span class="pal-rl">Log-loss</span><span class="pal-rv b">0.943</span></div>
+            <div class="pal-row"><span class="pal-rl">RPS</span><span class="pal-rv b">0.220</span></div>
+            <div class="pal-row"><span class="pal-rl">Version</span><span class="pal-rv" style="color:rgba(255,255,255,0.4);font-size:10px">v1.0.0-platt</span></div>
+          </div>
+          <div class="pal-section">
+            <div class="pal-sh">Forecast Record</div>
+            <div class="pal-row"><span class="pal-rl">Settled</span><span class="pal-rv b">21</span></div>
+            <div class="pal-row"><span class="pal-rl">Correct</span><span class="pal-rv g">10/21</span></div>
+            <div class="pal-row"><span class="pal-rl">Open locks</span><span class="pal-rv w">51</span></div>
+            <div class="pal-row"><span class="pal-rl">Accuracy</span><span class="pal-rv b">47.6%</span></div>
+          </div>
+          <div class="pal-section">
+            <div class="pal-sh">Tournament Leaders</div>
+            <div class="pal-row"><span class="pal-rl">Brazil</span><span class="pal-rv g">18.2%</span></div>
+            <div class="pal-row"><span class="pal-rl">France</span><span class="pal-rv b">14.7%</span></div>
+            <div class="pal-row"><span class="pal-rl">England</span><span class="pal-rv b">12.3%</span></div>
+            <div class="pal-row"><span class="pal-rl">Argentina</span><span class="pal-rv b">11.6%</span></div>
+          </div>
+        </div>
+        <!-- Center: Intelligence briefing -->
+        <div class="pal-center">
+          <div class="pal-ch">
+            <span class="pal-ct">Executive Intelligence Briefing</span>
+            <span class="pal-cs">Matchday 6 · 21 settled predictions · 2026-06-19</span>
+          </div>
+          <div class="pal-card">
+            <div class="pal-ctype">Performance Assessment</div>
+            <div class="pal-ctxt">Model generating <span class="m">10/21 (47.6%)</span> correct directional forecasts on live data. Brier <span class="m">0.721</span> reflects well-calibrated uncertainty. <strong>n=21 is insufficient for statistical conclusions</strong> — directionally consistent with holdout.</div>
+          </div>
+          <div class="pal-card">
+            <div class="pal-ctype">Calibration Signal</div>
+            <div class="pal-ctxt">ECE reading <span class="m">2.1%</span> against threshold <span class="m">3.0%</span>. Reliability diagram shows probability bins aligning with observed frequencies. <strong>Model is not overconfident.</strong> Confidence intervals are trustworthy at current sample size.</div>
+          </div>
+          <div class="pal-card">
+            <div class="pal-ctype">Notable Variance · Largest Miss</div>
+            <div class="pal-ctxt"><strong>England vs Serbia</strong> — model assigned <span class="m">72%</span> home win probability, result was <span class="m">0–0 draw</span>. Brier contribution <span class="m">0.941</span>. Surprise index: <strong>high</strong>. Investigating draw underestimation in strong-home-favorite scenarios.</div>
+          </div>
+          <div class="pal-card">
+            <div class="pal-ctype">Operational Flag</div>
+            <div class="pal-ctxt"><span class="m" style="color:#F5A623">⚠ 51 prediction locks</span> expire before Matchday 7. Settlement pipeline must run before next matchday. No challenger model pending promotion. Champion v1.0.0-platt remains the operational model.</div>
+          </div>
+        </div>
+        <!-- Right rail: Confidence profile -->
+        <div class="pal-rail">
+          <div class="pal-sh">Champion Confidence</div>
+          <div class="pal-bar-row">
+            <div class="pal-bar-labels"><span>Brazil</span><span style="color:#52D9A4">18.2%</span></div>
+            <div class="pal-bar-track"><div class="pal-bar-fill" style="width:91%"></div></div>
+          </div>
+          <div class="pal-bar-row">
+            <div class="pal-bar-labels"><span>France</span><span style="color:#4A90D9">14.7%</span></div>
+            <div class="pal-bar-track"><div class="pal-bar-fill" style="width:74%"></div></div>
+          </div>
+          <div class="pal-bar-row">
+            <div class="pal-bar-labels"><span>England</span><span style="color:#4A90D9">12.3%</span></div>
+            <div class="pal-bar-track"><div class="pal-bar-fill" style="width:62%"></div></div>
+          </div>
+          <div class="pal-bar-row">
+            <div class="pal-bar-labels"><span>Argentina</span><span style="color:#4A90D9">11.6%</span></div>
+            <div class="pal-bar-track"><div class="pal-bar-fill" style="width:58%"></div></div>
+          </div>
+          <div class="pal-bar-row">
+            <div class="pal-bar-labels"><span>Germany</span><span style="color:#4A90D9">9.4%</span></div>
+            <div class="pal-bar-track"><div class="pal-bar-fill" style="width:47%"></div></div>
+          </div>
+          <div class="pal-bar-row">
+            <div class="pal-bar-labels"><span>Spain</span><span style="color:#4A90D9">8.1%</span></div>
+            <div class="pal-bar-track"><div class="pal-bar-fill" style="width:41%"></div></div>
+          </div>
+          <div style="margin-top:14px;padding-top:12px;border-top:1px solid rgba(74,144,217,0.08)">
+            <div class="pal-sh" style="margin-bottom:8px">Risk Flags</div>
+            <div style="font-size:10px;color:rgba(245,163,35,0.8);margin-bottom:5px;line-height:1.4">⚠ 51 locks expire before matchday 7</div>
+            <div style="font-size:10px;color:rgba(255,255,255,0.25);line-height:1.4">No challenger pending promotion</div>
+            <div style="font-size:10px;color:rgba(82,217,164,0.6);margin-top:5px;line-height:1.4">✓ ECE within tolerance</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div style="height:70px"></div>
+
+<div class="page-footer">
+  <span class="footer-hint">Click any concept above to select · Multiple selections allowed · Tell me your preference in the terminal</span>
+  <div class="footer-chips">
+    <div class="chip" id="chip-a" onclick="chipPick('a','bloomberg')">A — Bloomberg × Kalshi</div>
+    <div class="chip" id="chip-b" onclick="chipPick('b','robinhood')">B — Robinhood × Linear</div>
+    <div class="chip" id="chip-c" onclick="chipPick('c','f1')">C — Formula 1</div>
+    <div class="chip" id="chip-d" onclick="chipPick('d','palantir')">D — Palantir FOC</div>
+  </div>
+</div>
+
+<script>
+function pick(el) {
+  el.classList.toggle('selected');
+  const choice = el.dataset.choice;
+  const chip = { bloomberg:'chip-a', robinhood:'chip-b', f1:'chip-c', palantir:'chip-d' }[choice];
+  if (chip) document.getElementById(chip).classList.toggle('selected', el.classList.contains('selected'));
+  if (window.toggleSelect) window.toggleSelect(el);
+}
+function chipPick(letter, choice) {
+  const section = document.getElementById('c'+letter);
+  if (section) pick(section);
+}
+</script>
+</body>
+</html>

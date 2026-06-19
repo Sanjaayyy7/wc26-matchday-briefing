@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { AppChrome } from "@/components/app-chrome";
+import { WCS26Shell } from "@/components/wc26-shell";
 import { Crest } from "@/components/crest";
 import { CanvasSection, DataPlane, MatchMarketLine, RouteStack } from "@/components/cinematic";
 import { allClubs, clubById, fixturesForTeam } from "@/lib/data";
@@ -59,7 +59,7 @@ export default async function TeamPage({
   );
 
   return (
-    <AppChrome route="teams">
+    <WCS26Shell route="teams">
       <RouteStack>
         <section className="animate-rise relative -mx-6 grid min-h-120 gap-10 overflow-hidden px-6 py-16 md:grid-cols-[auto_1fr] md:items-end md:py-24" style={kitPairWashStyle(club.primary, club.secondary)}>
           <div className="chroma-rule absolute left-6 top-0 h-px w-64 md:w-96" />
@@ -163,6 +163,6 @@ export default async function TeamPage({
           </DataPlane>
         </CanvasSection>
       </RouteStack>
-    </AppChrome>
+    </WCS26Shell>
   );
 }

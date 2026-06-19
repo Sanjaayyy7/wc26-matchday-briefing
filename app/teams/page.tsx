@@ -1,4 +1,4 @@
-import { AppChrome } from "@/components/app-chrome";
+import { WCS26Shell } from "@/components/wc26-shell";
 import Link from "next/link";
 import { Crest } from "@/components/crest";
 import { CanvasSection, DataPlane, RouteStack, SignalLine } from "@/components/cinematic";
@@ -18,7 +18,7 @@ export default function TeamsPage() {
     return rb - ra;
   });
   return (
-    <AppChrome
+    <WCS26Shell
       route="teams"
       title="Team Dossiers"
       rail={
@@ -73,6 +73,6 @@ export default function TeamsPage() {
           </DataPlane>
         </CanvasSection>
       </RouteStack>
-    </AppChrome>
+    </WCS26Shell>
   );
 }

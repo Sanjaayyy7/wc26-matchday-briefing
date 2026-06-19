@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { AppChrome } from "@/components/app-chrome";
+import { WCS26Shell } from "@/components/wc26-shell";
 import { CanvasSection, DataPlane, RouteStack, SignalLine } from "@/components/cinematic";
 import { sentimentBySlug, biggestSwing, labelCounts } from "@/lib/sentiment-view";
 import { SentimentTimeline } from "@/components/sentiment-timeline";
@@ -22,7 +22,7 @@ export default async function SentimentSlugPage({ params }: { params: Promise<{ 
   const title = slug.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
 
   return (
-    <AppChrome
+    <WCS26Shell
       route="sentiment"
       title={title}
       rail={
@@ -101,6 +101,6 @@ export default async function SentimentSlugPage({ params }: { params: Promise<{ 
           </DataPlane>
         </CanvasSection>
       </RouteStack>
-    </AppChrome>
+    </WCS26Shell>
   );
 }

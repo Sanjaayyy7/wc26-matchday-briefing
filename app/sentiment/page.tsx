@@ -1,4 +1,4 @@
-import { AppChrome } from "@/components/app-chrome";
+import { WCS26Shell } from "@/components/wc26-shell";
 import { CanvasSection, DataPlane, RouteStack, SignalLine } from "@/components/cinematic";
 import { sentimentSlugs, sentimentBySlug, biggestSwing, labelCounts, type SentimentOutput, type SentimentShift } from "@/lib/sentiment-view";
 import Link from "next/link";
@@ -31,7 +31,7 @@ export default function SentimentPage() {
   const modelName = summaries[0]?.data.model ?? "none";
 
   return (
-    <AppChrome
+    <WCS26Shell
       route="sentiment"
       title="Sentiment Analysis"
       rail={
@@ -112,6 +112,6 @@ export default function SentimentPage() {
           );
         })}
       </RouteStack>
-    </AppChrome>
+    </WCS26Shell>
   );
 }

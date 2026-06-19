@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { AppChrome } from "@/components/app-chrome";
+import { WCS26Shell } from "@/components/wc26-shell";
 import { CanvasSection, DataPlane, MetricRun, RouteStack, SignalLine } from "@/components/cinematic";
 import { NumberTicker } from "@/components/number-ticker";
 import { allPlayerRows, playerById } from "@/lib/player-view";
@@ -35,7 +35,7 @@ export default async function PlayerPage({
   const assistsPer90 = (player.assists * per90).toFixed(2);
 
   return (
-    <AppChrome route="players">
+    <WCS26Shell route="players">
       <RouteStack>
         {/* Hero */}
         <section
@@ -156,6 +156,6 @@ export default async function PlayerPage({
           </DataPlane>
         </CanvasSection>
       </RouteStack>
-    </AppChrome>
+    </WCS26Shell>
   );
 }
