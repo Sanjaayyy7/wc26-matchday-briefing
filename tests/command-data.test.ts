@@ -1,6 +1,55 @@
 // tests/command-data.test.ts
 import { describe, it, expect } from "vitest";
-import { forecastGrade, compressGrid, buildChampionshipProjections } from "../lib/command-data";
+import { forecastGrade, compressGrid, buildChampionshipProjections, parseSettledScoreline, buildReliabilityTicks } from "../lib/command-data";
+
+describe("parseSettledScoreline", () => {
+  it("parses a normal scoreline to row/col", () => {
+    expect(parseSettledScoreline("4-1")).toEqual({ home: 4, away: 1 });
+  });
+  it("clamps home goals >= 6 into the 5+ bucket", () => {
+    expect(parseSettledScoreline("6-2")).toEqual({ home: 5, away: 2 });
+  });
+  it("clamps away goals >= 6 into the 5+ bucket", () => {
+    expect(parseSettledScoreline("2-7")).toEqual({ home: 2, away: 5 });
+  });
+  it("returns undefined for missing input", () => {
+    expect(parseSettledScoreline(undefined)).toBeUndefined();
+  });
+  it("returns undefined for malformed input", () => {
+    expect(parseSettledScoreline("abc")).toBeUndefined();
+  });
+});
+
+describe("buildReliabilityTicks", () => {
+  const base = (over: Record<string, unknown>) => ({
+    slug: "a-vs-b", lockedAt: "2026-06-10T00:00:00Z", split: { home: 40, draw: 30, away: 30 },
+    ...over,
+  });
+
+  it("includes only settled entries, sorted by lockedAt ascending", () => {
+    const ticks = buildReliabilityTicks([
+      base({ lockedAt: "2026-06-12T00:00:00Z", result: "1-0", correctPick: true, modelBrier: 0.2, scorelineHit: true }),
+      base({ lockedAt: "2026-06-10T00:00:00Z", result: "2-1", correctPick: false, modelBrier: 0.8, scorelineHit: false }),
+      base({ result: undefined }),
+    ] as never);
+    expect(ticks.map((t) => t.lockedAt)).toEqual(["2026-06-10T00:00:00Z", "2026-06-12T00:00:00Z"]);
+  });
+
+  it("maps outcome categories", () => {
+    const ticks = buildReliabilityTicks([
+      base({ result: "1-0", correctPick: true, modelBrier: 0.2, scorelineHit: true }),
+      base({ result: "1-0", correctPick: true, modelBrier: 0.4, scorelineHit: false }),
+      base({ result: "0-2", correctPick: false, modelBrier: 0.9, scorelineHit: false }),
+    ] as never);
+    expect(ticks.map((t) => t.outcome)).toEqual(["hit", "correct", "miss"]);
+  });
+
+  it("limits to the last N", () => {
+    const many = Array.from({ length: 60 }, (_, i) =>
+      base({ lockedAt: `2026-04-${String((i % 28) + 1).padStart(2, "0")}T00:00:00Z`, result: "1-0", correctPick: true, modelBrier: 0.3 }));
+    expect(buildReliabilityTicks(many as never, 50)).toHaveLength(50);
+  });
+});
 
 describe("forecastGrade", () => {
   it("returns 'sharp' for Brier < 0.35", () => {

@@ -13,6 +13,59 @@ export function forecastGrade(brier: number): ForecastGrade {
   return "surprise";
 }
 
+// ─── Settled Scoreline → display cell ─────────────────────────────────────────
+const DISPLAY_MAX = 5; // index 5 == the "5+" overflow bucket
+
+export function parseSettledScoreline(
+  result: string | undefined
+): { home: number; away: number } | undefined {
+  if (!result) return undefined;
+  const m = /^(\d+)\s*-\s*(\d+)$/.exec(result.trim());
+  if (!m) return undefined;
+  return {
+    home: Math.min(parseInt(m[1], 10), DISPLAY_MAX),
+    away: Math.min(parseInt(m[2], 10), DISPLAY_MAX),
+  };
+}
+
+// ─── Reliability Timeline ─────────────────────────────────────────────────────
+export type ReliabilityTick = {
+  slug: string;
+  lockedAt: string;
+  result: string;
+  brier: number;
+  grade: ForecastGrade;
+  outcome: "hit" | "correct" | "miss" | "neutral";
+};
+
+export function buildReliabilityTicks(
+  entries: LockedEntry[],
+  limit = 50
+): ReliabilityTick[] {
+  return entries
+    .filter((e) => e.result !== undefined && e.modelBrier !== undefined)
+    .sort((a, b) => new Date(a.lockedAt).getTime() - new Date(b.lockedAt).getTime())
+    .slice(-limit)
+    .map((e) => {
+      const brier = e.modelBrier!;
+      const outcome: ReliabilityTick["outcome"] = e.scorelineHit
+        ? "hit"
+        : e.correctPick === true
+          ? "correct"
+          : e.correctPick === false
+            ? "miss"
+            : "neutral";
+      return {
+        slug: e.slug,
+        lockedAt: e.lockedAt,
+        result: e.result!,
+        brier,
+        grade: forecastGrade(brier),
+        outcome,
+      };
+    });
+}
+
 // ─── Score Probability Surface ────────────────────────────────────────────────
 
 export function compressGrid(grid: number[][]): number[][] {
