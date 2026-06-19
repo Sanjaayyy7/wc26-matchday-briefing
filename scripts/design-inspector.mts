@@ -144,15 +144,22 @@ export function inspectProject(root = ROOT): DesignViolation[] {
     }
 
     if (PAGE_RE.test(rel) && !PAGE_SHELL_EXEMPT.has(rel)) {
-      for (const required of ["<AppChrome", "<RouteStack"]) {
-        if (!text.includes(required)) {
-          violations.push({
-            file: rel,
-            line: 1,
-            rule: "page-shell",
-            message: `Page shell is missing ${required}.`,
-          });
-        }
+      if (!text.includes("<RouteStack")) {
+        violations.push({
+          file: rel,
+          line: 1,
+          rule: "page-shell",
+          message: "Page shell is missing <RouteStack.",
+        });
+      }
+      // Transition: accept either the legacy AppChrome or the unified WCS26Shell.
+      if (!text.includes("<AppChrome") && !text.includes("<WCS26Shell")) {
+        violations.push({
+          file: rel,
+          line: 1,
+          rule: "page-shell",
+          message: "Page must use AppChrome or WCS26Shell as its shell.",
+        });
       }
       if (!text.includes("<CanvasSection")) {
         violations.push({
