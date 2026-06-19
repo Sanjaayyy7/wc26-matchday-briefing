@@ -1,4 +1,4 @@
-import { AppChrome } from "@/components/app-chrome";
+import { WCS26Shell } from "@/components/wc26-shell";
 import { RouteStack, CanvasSection, DataPlane, SignalLine } from "@/components/cinematic";
 import { allMatchViews } from "@/lib/match-view";
 import { fixtureBySlug, clubById } from "@/lib/data";
@@ -182,7 +182,7 @@ export default function HomePage() {
   const activeSignals = learningSignals.filter((s) => s.status === "monitoring" || s.status === "action_required");
 
   return (
-    <AppChrome route="home">
+    <WCS26Shell route="home">
       <RouteStack>
 
         {/* ── EXECUTIVE BRIEFING HEADER ── */}
@@ -406,6 +406,6 @@ export default function HomePage() {
         </CanvasSection>
 
       </RouteStack>
-    </AppChrome>
+    </WCS26Shell>
   );
 }

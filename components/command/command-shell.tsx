@@ -16,6 +16,7 @@ import { ModelEvolution } from "./model-evolution";
 import { ChampionshipProjection as ChampionProjectionPanel } from "./championship-projection";
 import { LearningSignals } from "./learning-signals";
 import { ReliabilityTimeline } from "./reliability-timeline";
+import { WC26ShellHeader } from "@/components/wc26-shell-header";
 import type { ReliabilityTick } from "@/lib/command-data";
 
 export type OperationalPrediction = {
@@ -59,15 +60,6 @@ type Props = {
   learningSignals?: LearningSignal[];
   reliabilityTicks?: ReliabilityTick[];
 };
-
-const NAV_TABS = [
-  { label: "Overview", href: "/" },
-  { label: "Command", href: "/command" },
-  { label: "Forecasts", href: "/matches" },
-  { label: "Record", href: "/record" },
-  { label: "Teams", href: "/teams" },
-  { label: "Simulate", href: "/simulator" },
-];
 
 function statusDot(status: SystemHealth["status"]) {
   if (status === "NOMINAL") return "var(--up)";
@@ -116,58 +108,19 @@ export function CommandShell({
 
   return (
     <>
-      {/* Nav */}
-      <nav className="flex-shrink-0 border-b border-[var(--line)] bg-[var(--canvas)]/95">
-        <div className="flex h-12 items-center px-6 gap-0">
-          <div className="flex-shrink-0 text-label font-bold tracking-tight pr-5 border-r border-[var(--line)]">
-            WC<span className="text-[var(--up)]">26</span>
-          </div>
-          <div className="flex flex-1">
-            {NAV_TABS.map((tab) => (
-              <a
-                key={tab.href}
-                href={tab.href}
-                className={[
-                  "flex h-12 items-center px-4 text-xs font-medium border-r border-[var(--hairline)] transition-colors",
-                  tab.href === "/command"
-                    ? "text-[var(--ink)] border-b-2 border-b-[var(--up)]"
-                    : "text-[var(--ink-faint)] hover:text-[var(--ink-muted)]",
-                ].join(" ")}
-              >
-                {tab.label}
-              </a>
-            ))}
-          </div>
-          <div className="flex items-center gap-2 pl-4 border-l border-[var(--hairline)] text-slight">
-            <span className="inline-block h-1.5 w-1.5 rounded-full" style={{ backgroundColor: dotColor }} />
-            <span className={`font-semibold ${textCls}`}>{systemHealth.status}</span>
-            <span className="text-[var(--ink-faint)]">
-              · {systemHealth.graded} graded · v1.0.0-platt
-            </span>
-          </div>
-        </div>
-      </nav>
-
-      {/* Status rail — 3 items */}
-      <div className="flex-shrink-0 flex h-8 items-center border-b border-[var(--hairline)] bg-[var(--canvas)] px-6 gap-0 text-fine">
-        <div className="flex items-center gap-1.5 pr-4 border-r border-[var(--hairline)] text-[var(--ink-faint)]">
-          <span>{systemHealth.graded} of {systemHealth.total}</span>
-          <span className="font-semibold text-[var(--ink-muted)]">graded</span>
-        </div>
-        <div className="flex items-center gap-1.5 px-4 border-r border-[var(--hairline)] text-[var(--ink-faint)]">
-          <span>Calibration</span>
-          <span className={`font-semibold ${textCls}`}>{systemHealth.status}</span>
-        </div>
-        <div className="flex items-center gap-1.5 px-4 border-r border-[var(--hairline)] text-[var(--ink-faint)]">
-          <span>ECE</span>
-          <span className={`font-semibold data-mono ${textCls}`}>{(systemHealth.ece * 100).toFixed(1)}%</span>
-        </div>
-        <div className="flex items-center gap-1.5 px-4 text-[var(--ink-faint)]">
-          <span>Next:</span>
-          <span className="font-semibold text-[var(--warn)]">{nextClosing}</span>
-        </div>
-        <div className="ml-auto text-[var(--ink-faint)]">{matchdayLabel}</div>
-      </div>
+      <WC26ShellHeader
+        route="command"
+        systemHealth={systemHealth}
+        extra={
+          <>
+            <div className="flex items-center gap-1.5 px-4 border-l border-[var(--hairline)] text-[var(--ink-faint)]">
+              <span>Next:</span>
+              <span className="font-semibold text-[var(--warn)]">{nextClosing}</span>
+            </div>
+            <div className="ml-auto text-[var(--ink-faint)]">{matchdayLabel}</div>
+          </>
+        }
+      />
 
       {/* 3-column body */}
       <div
