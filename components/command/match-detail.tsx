@@ -1,6 +1,7 @@
 "use client";
 
 import type { Dispatch, CommandFixture } from "@/lib/command-data";
+import { parseSettledScoreline } from "@/lib/command-data";
 import type { Prediction } from "@/lib/predict";
 import { ScoreProbabilitySurface } from "./score-probability-surface";
 import { ForecastDrivers } from "./forecast-drivers";
@@ -124,6 +125,9 @@ export function MatchDetail({ fixture, prediction, dispatch, homeClub, awayClub,
           grid={prediction.grid}
           homeTeam={fixture.homeTeam}
           awayTeam={fixture.awayTeam}
+          lambdas={prediction.lambdas}
+          elo={prediction.elo}
+          settledScoreline={!fixture.isOperational ? parseSettledScoreline(fixture.result) : undefined}
           lockExpiresISO={fixture.isOperational ? fixture.kickoffISO : undefined}
         />
       </div>

@@ -13,6 +13,7 @@ import {
   buildDispatch,
   buildEvolutionLog,
   buildSystemHealth,
+  buildReliabilityTicks,
   hoursUntil,
   type CommandFixture,
   type DispatchInput,
@@ -72,7 +73,8 @@ export default function CommandPage() {
   // ── 3. Compute predictions for operational locks ─────────────────────────
   const operationalPredictions: OperationalPrediction[] = [];
   for (const cf of commandFixtures) {
-    if (!cf.isOperational) continue;
+    // Compute grids for settled fixtures too, so their Score Probability Surface
+    // (and settlement flash) can render. Name kept for prop compatibility.
     const fixture = fixtureBySlug(cf.slug);
     if (!fixture) continue;
     try {
@@ -174,8 +176,12 @@ export default function CommandPage() {
 
   const learningSignals = (learningSignalsData as { signals: unknown[] }).signals;
 
+  // ── 12. Reliability timeline ticks (settled ledger entries) ──────────────
+  const reliabilityTicks = buildReliabilityTicks(predictions, 50);
+
   return (
     <CommandShell
+      reliabilityTicks={reliabilityTicks}
       fixtures={commandFixtures}
       operationalPredictions={operationalPredictions}
       defaultSlug={defaultSlug}

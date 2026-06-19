@@ -1,11 +1,15 @@
 "use client";
 
+import { useState } from "react";
 import { compressGrid, topScorelines } from "@/lib/command-data";
 
 type Props = {
   grid: number[][];
   homeTeam: string;
   awayTeam: string;
+  lambdas: { home: number; away: number };
+  elo: { home: number; away: number };
+  settledScoreline?: { home: number; away: number };
   lockExpiresISO?: string;
 };
 
@@ -36,16 +40,21 @@ function cellBg(type: "home" | "draw" | "away", prob: number): string {
   return `${CELL_BASE[type]}${alpha})`;
 }
 
-export function ScoreProbabilitySurface({ grid, homeTeam, awayTeam, lockExpiresISO }: Props) {
+export function ScoreProbabilitySurface({ grid, homeTeam, awayTeam, lambdas, elo, settledScoreline, lockExpiresISO }: Props) {
   const grid6 = compressGrid(grid);
   const topK = topScorelines(grid6, 6);
   const bestCell = topK[0];
+
+  const [hoverCell, setHoverCell] = useState<{ r: number; c: number } | null>(null);
+  const [selectedCell, setSelectedCell] = useState<{ r: number; c: number } | null>(null);
+  const [now] = useState(() => Date.now());
+  const eloGap = Math.round(elo.home - elo.away);
 
   const colLabels = ["0", "1", "2", "3", "4", "5+"];
   const rowLabels = ["0", "1", "2", "3", "4", "5+"];
 
   const hoursLeft = lockExpiresISO
-    ? Math.max(0, (new Date(lockExpiresISO).getTime() - Date.now()) / 3_600_000)
+    ? Math.max(0, (new Date(lockExpiresISO).getTime() - now) / 3_600_000)
     : undefined;
   const lockDisplay = hoursLeft !== undefined
     ? hoursLeft < 1
@@ -82,18 +91,31 @@ export function ScoreProbabilitySurface({ grid, homeTeam, awayTeam, lockExpiresI
             {row.map((prob, c) => {
               const type = cellType(r, c);
               const isBest = bestCell && r === bestCell.home && c === bestCell.away;
+              const isSettled = settledScoreline && r === settledScoreline.home && c === settledScoreline.away;
+              const isHover = hoverCell?.r === r && hoverCell?.c === c;
+              const settleColor = type === "home" ? "var(--up)" : type === "away" ? "var(--down)" : "var(--ink-muted)";
               return (
-                <div
+                <button
                   key={c}
-                  className="flex-1 h-6 flex items-center justify-center rounded-sm text-tiny font-semibold tabular-nums"
+                  type="button"
+                  onMouseEnter={() => setHoverCell({ r, c })}
+                  onMouseLeave={() => setHoverCell(null)}
+                  onClick={() => setSelectedCell((s) => (s?.r === r && s?.c === c ? null : { r, c }))}
+                  className={[
+                    "flex-1 aspect-square min-h-11 flex items-center justify-center rounded-sm",
+                    "text-sm font-semibold data-mono transition-transform duration-300",
+                    isSettled ? "settle-cell" : "",
+                  ].join(" ")}
                   style={{
                     background: cellBg(type, prob),
-                    color: CELL_TEXT[type],
-                    outline: isBest ? "1px solid rgba(255,255,255,0.22)" : undefined,
+                    color: isSettled ? settleColor : CELL_TEXT[type],
+                    outline: isBest && !isSettled ? "1px solid rgba(255,255,255,0.22)" : isSettled ? `1px solid ${settleColor}` : undefined,
+                    transform: isHover ? "scale(1.02)" : undefined,
+                    zIndex: isHover ? 2 : undefined,
                   }}
                 >
                   {isBest ? <strong>{pctStr(prob)}</strong> : pctStr(prob)}
-                </div>
+                </button>
               );
             })}
           </div>
@@ -103,6 +125,25 @@ export function ScoreProbabilitySurface({ grid, homeTeam, awayTeam, lockExpiresI
       <div className="text-micro text-[var(--ink-faint)] mt-1 mb-2 tracking-wide">
         ↑ {homeTeam} goals
       </div>
+
+      {/* Hover/click readout — real model drivers, no fabricated values */}
+      {(hoverCell || selectedCell) && (() => {
+        const cell = hoverCell ?? selectedCell!;
+        const prob = grid6[cell.r][cell.c];
+        const label = cell.r === cell.c
+          ? `${cell.r}–${cell.c}`
+          : cell.r > cell.c
+            ? `${homeTeam} ${cell.r}–${cell.c}`
+            : `${awayTeam} ${cell.c}–${cell.r}`;
+        return (
+          <div className="mb-2.5 px-3 py-2 rounded border border-[var(--hairline)] bg-[var(--surface)] flex flex-wrap items-center gap-x-4 gap-y-1">
+            <span className="text-slight font-semibold text-[var(--ink)]">{label}</span>
+            <span className="text-fine text-[var(--ink-faint)]">P <span className="data-mono tabular text-[var(--ink-muted)]">{pctStr(prob)}</span></span>
+            <span className="text-fine text-[var(--ink-faint)]">xG <span className="data-mono tabular text-[var(--ink-muted)]">{lambdas.home.toFixed(2)}–{lambdas.away.toFixed(2)}</span></span>
+            <span className="text-fine text-[var(--ink-faint)]">Elo gap <span className="data-mono tabular text-[var(--ink-muted)]">{eloGap > 0 ? "+" : ""}{eloGap}</span></span>
+          </div>
+        );
+      })()}
 
       {/* Legend */}
       <div className="flex items-center gap-3 mb-2.5">
