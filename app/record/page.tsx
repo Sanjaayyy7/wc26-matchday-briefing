@@ -5,6 +5,7 @@ import type { LockedEntry } from "@/lib/predictions-ledger";
 import type { AccountabilityOutput, OfficialRow } from "@/lib/accountability";
 import { NumberTicker } from "@/components/number-ticker";
 import { VerdictChip } from "@/components/verdict-chip";
+import { CalibrationChart } from "@/components/calibration-chart";
 import predictionsJson from "@/data/predictions.json";
 import accountabilityJson from "@/data/backtest/wc26-accountability.json";
 import model from "@/data/model.json";
@@ -69,9 +70,26 @@ function LockedSplit({ locked }: { locked: { home: number; draw: number; away: n
 export default function RecordPage() {
   const entries = (predictionsJson as { entries: LockedEntry[] }).entries;
   const open = entries.filter((e) => e.result === undefined);
+  const settledEntries = entries.filter((e) => e.logLoss !== undefined);
+  const meanLogLoss =
+    settledEntries.length > 0
+      ? settledEntries.reduce((s, e) => s + e.logLoss!, 0) / settledEntries.length
+      : null;
 
   const { official, informational, caveats } = accountability;
   const agg = official.aggregates;
+
+  const calibrationBins = official.calibrationBins ?? [];
+  const ece =
+    calibrationBins.length > 0
+      ? (() => {
+          const total = calibrationBins.reduce((s, b) => s + b.n, 0);
+          return calibrationBins.reduce(
+            (s, b) => s + (b.n / total) * Math.abs(b.predicted - b.observed),
+            0,
+          );
+        })()
+      : null;
 
   const bt = (model as { backtest: { n: number; brier: number; rps: number; ece: number } })
     .backtest;
@@ -142,6 +160,30 @@ export default function RecordPage() {
                   )
                 }
                 sub={`n=${agg.n} · coin-flip ≈ ${COIN_FLIP_RPS}`}
+              />
+              <LedgerMetric
+                label="Avg Log-loss"
+                value={
+                  meanLogLoss !== null ? (
+                    <NumberTicker value={meanLogLoss} decimals={3} />
+                  ) : (
+                    <Dash />
+                  )
+                }
+                sub={`n=${settledEntries.length} · lower better · random ≈ 1.099`}
+              />
+              <LedgerMetric
+                label="ECE (live)"
+                value={
+                  ece !== null ? (
+                    <span>
+                      <NumberTicker value={ece * 100} decimals={1} />%
+                    </span>
+                  ) : (
+                    <Dash />
+                  )
+                }
+                sub={`expected calibration error · target < 3% · ${calibrationBins.length} bins`}
               />
               <LedgerMetric
                 label="Model vs Kalshi"
@@ -262,6 +304,73 @@ export default function RecordPage() {
             </DataPlane>
           </CanvasSection>
         )}
+
+        {calibrationBins.length >= 2 && (
+          <CanvasSection
+            eyebrow="Calibration"
+            title="Reliability diagram — predicted probability vs observed frequency."
+          >
+            <DataPlane>
+              <p className="text-caption max-w-2xl mb-4">
+                Points on the diagonal = perfectly calibrated. Above diagonal = underconfident.
+                Below = overconfident. Bubble size proportional to sample count in each bin.
+                n={agg.n} settled matches × 3 outcomes = {agg.n * 3} calibration points across{" "}
+                {calibrationBins.length} non-empty bins.
+              </p>
+              <CalibrationChart bins={calibrationBins} />
+            </DataPlane>
+          </CanvasSection>
+        )}
+
+        {official.rows.length >= 3 && (() => {
+          type TeamStats = { hits: number; total: number; brierSum: number };
+          const teamStats = new Map<string, TeamStats>();
+          for (const row of official.rows) {
+            const f = fixtureBySlug(row.slug);
+            if (!f) continue;
+            const homeLabel = clubById(f.homeId).short;
+            const awayLabel = clubById(f.awayId).short;
+            for (const label of [homeLabel, awayLabel]) {
+              const prev = teamStats.get(label) ?? { hits: 0, total: 0, brierSum: 0 };
+              teamStats.set(label, {
+                hits: prev.hits + (row.grades.correctPick ? 1 : 0),
+                total: prev.total + 1,
+                brierSum: prev.brierSum + row.grades.modelBrier,
+              });
+            }
+          }
+          const teamRows = [...teamStats.entries()]
+            .filter(([, s]) => s.total >= 2)
+            .map(([team, s]) => ({ team, ...s, avgBrier: s.brierSum / s.total }))
+            .sort((a, b) => b.avgBrier - a.avgBrier)
+            .slice(0, 10);
+          if (teamRows.length === 0) return null;
+          return (
+            <CanvasSection eyebrow="Team breakdown" title="Per-team forecasting performance.">
+              <DataPlane>
+                <div>
+                  {teamRows.map((r) => (
+                    <div
+                      key={r.team}
+                      className="grid grid-cols-[1fr_auto_auto] gap-4 border-b border-[var(--line)] py-3 last:border-0"
+                    >
+                      <span className="text-title">{r.team}</span>
+                      <span className="text-caption tabular text-right">
+                        {r.hits}/{r.total} picks
+                      </span>
+                      <span className="text-caption tabular text-right">
+                        Brier {r.avgBrier.toFixed(3)}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+                <p className="text-caption mt-3">
+                  Sorted by avg Brier (highest = hardest to forecast). n ≥ 2 appearances only.
+                </p>
+              </DataPlane>
+            </CanvasSection>
+          );
+        })()}
 
         {informational.rows.length > 0 && (
           <CanvasSection
