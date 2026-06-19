@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Concept E — WC26 Forecasting OS</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ─── TOKEN SYSTEM (mirrors existing codebase) ─── */
+:root {
+  --void: #000;
+  --canvas: #050505;
+  --surface: rgba(255,255,255,0.035);
+  --panel: rgba(255,255,255,0.045);
+  --line: rgba(255,255,255,0.1);
+  --hairline: rgba(255,255,255,0.07);
+  --ink: #f4f4ef;
+  --ink-muted: #a2a29b;
+  --ink-faint: #55554f;
+  --up: #7cffb2;
+  --down: #ff674d;
+  --warn: #ffc46b;
+  --blue: #4A90D9;
+  --dur: 0.28s;
+  --ease: cubic-bezier(0.4,0,0.2,1);
+}
+
+body {
+  background: var(--canvas);
+  color: var(--ink);
+  font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'SF Pro Text', sans-serif;
+  font-size: 15px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─── CHROMA RULE (existing) ─── */
+.chroma {
+  height: 1px;
+  background: linear-gradient(90deg, #8ab4ff, #7cffb2 18%, #ffe680 36%, #ff8a70 54%, #d7a5ff 72%, #8ff4ff 90%);
+  opacity: 0.7;
+}
+
+/* ─── LAYOUT ─── */
+.page { max-width: 1200px; margin: 0 auto; }
+
+/* ─── NAV ─── */
+.nav {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(5,5,5,0.92);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--line);
+}
+.nav-inner {
+  display: flex; align-items: center;
+  padding: 0 48px;
+  height: 52px;
+  gap: 0;
+}
+.nav-logo {
+  font-size: 14px; font-weight: 700;
+  color: var(--ink);
+  letter-spacing: -0.02em;
+  padding-right: 36px;
+  border-right: 1px solid var(--line);
+  margin-right: 0;
+  flex-shrink: 0;
+}
+.nav-logo em { color: var(--up); font-style: normal; }
+.nav-links {
+  display: flex; flex: 1;
+}
+.nav-link {
+  padding: 0 20px;
+  height: 52px;
+  display: flex; flex-direction: column; justify-content: center;
+  border-right: 1px solid var(--hairline);
+  text-decoration: none;
+  transition: background var(--dur) var(--ease);
+  cursor: pointer;
+}
+.nav-link:hover { background: var(--surface); }
+.nav-link.active { background: var(--surface); }
+.nav-link-primary {
+  font-size: 13px; font-weight: 500; color: var(--ink);
+  line-height: 1;
+}
+.nav-link.active .nav-link-primary { color: var(--ink); }
+.nav-link:not(.active) .nav-link-primary { color: var(--ink-muted); }
+.nav-link-sub {
+  font-size: 10px; color: var(--ink-faint);
+  margin-top: 2px; line-height: 1;
+}
+.nav-status {
+  margin-left: auto;
+  display: flex; align-items: center; gap: 6px;
+  font-size: 11px; color: var(--ink-faint);
+  padding-left: 20px;
+  border-left: 1px solid var(--hairline);
+}
+.status-dot {
+  width: 5px; height: 5px; border-radius: 50%;
+  background: var(--up);
+  box-shadow: 0 0 6px rgba(124,255,178,0.5);
+}
+
+/* ─── STATUS RAIL (F1 operational visibility) ─── */
+.status-rail {
+  border-bottom: 1px solid var(--hairline);
+  display: flex; align-items: center;
+  padding: 0 48px;
+  height: 36px;
+  gap: 0;
+  background: var(--void);
+  overflow: hidden;
+}
+.rail-item {
+  font-size: 11px; font-weight: 500;
+  color: var(--ink-faint);
+  padding: 0 18px;
+  border-right: 1px solid var(--hairline);
+  display: flex; align-items: center; gap: 6px;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.01em;
+}
+.rail-item:first-child { padding-left: 0; }
+.rail-val { color: var(--ink-muted); font-weight: 600; }
+.rail-val.up { color: var(--up); }
+.rail-val.warn { color: var(--warn); }
+.rail-val.down { color: var(--down); }
+.rail-divider { flex: 1; }
+
+/* ─── HOMEPAGE LAYOUT ─── */
+.home-grid {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 0;
+  min-height: calc(100vh - 88px);
+  border-bottom: 1px solid var(--line);
+}
+.home-main { border-right: 1px solid var(--line); padding: 48px 48px 48px 48px; }
+.home-rail { padding: 32px 28px; }
+
+/* ─── PRIMARY METRIC (Robinhood hero clarity) ─── */
+.primary-metric { margin-bottom: 40px; }
+.eyebrow {
+  font-size: 11px; font-weight: 500; color: var(--ink-faint);
+  letter-spacing: 0.1em; text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.hero-number {
+  font-size: 80px; font-weight: 700;
+  letter-spacing: -0.04em; line-height: 1;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink);
+}
+.hero-number em { color: var(--up); font-style: normal; }
+.hero-sub {
+  font-size: 13px; color: var(--ink-faint);
+  margin-top: 10px; line-height: 1.5;
+}
+.hero-warning {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-size: 11px; color: var(--warn);
+  margin-top: 6px;
+}
+
+/* ─── INTELLIGENCE CARDS (Palantir analytical depth) ─── */
+.intel-section { margin-bottom: 40px; }
+.intel-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--line); border: 1px solid var(--line); }
+.intel-card {
+  background: var(--canvas);
+  padding: 18px 20px;
+  position: relative;
+  transition: background var(--dur) var(--ease);
+}
+.intel-card:hover { background: var(--surface); }
+.intel-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, var(--chroma-start, var(--up)), transparent 60%);
+  opacity: 0.4;
+}
+.intel-card:nth-child(1) { --chroma-start: var(--up); }
+.intel-card:nth-child(2) { --chroma-start: #4A90D9; }
+.intel-card:nth-child(3) { --chroma-start: var(--warn); }
+.intel-card:nth-child(4) { --chroma-start: var(--down); }
+.intel-type {
+  font-size: 9px; font-weight: 600;
+  color: var(--ink-faint);
+  letter-spacing: 0.12em; text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.intel-body {
+  font-size: 13px; font-weight: 400;
+  color: rgba(244,244,239,0.65);
+  line-height: 1.6;
+}
+.intel-body strong { color: var(--ink); font-weight: 500; }
+.intel-body .metric { color: var(--up); font-variant-numeric: tabular-nums; }
+.intel-body .warn-metric { color: var(--warn); font-variant-numeric: tabular-nums; }
+.intel-body .down-metric { color: var(--down); font-variant-numeric: tabular-nums; }
+
+/* ─── SECTION HEADING ─── */
+.section-head {
+  position: relative;
+  border-top: 1px solid var(--line);
+  padding-top: 20px;
+  margin-bottom: 20px;
+}
+.section-head .chroma { position: absolute; top: -1px; left: 0; width: 80px; }
+.section-title {
+  font-size: 11px; font-weight: 500; color: var(--ink-faint);
+  letter-spacing: 0.1em; text-transform: uppercase;
+  margin-bottom: 0;
+}
+
+/* ─── SETTLEMENT FEED (F1 telemetry bars + Robinhood clarity) ─── */
+.settlement-row {
+  display: grid;
+  grid-template-columns: 1fr 80px 80px 60px;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--hairline);
+  align-items: center;
+  transition: background var(--dur) var(--ease);
+  position: relative;
+}
+.settlement-row:hover { background: var(--surface); margin: 0 -20px; padding-left: 20px; padding-right: 20px; }
+.settlement-row:last-child { border-bottom: none; }
+.match-name { font-size: 14px; font-weight: 500; color: var(--ink); }
+.match-context { font-size: 11px; color: var(--ink-faint); margin-top: 2px; }
+.match-split {
+  font-size: 11px; font-variant-numeric: tabular-nums;
+  color: var(--ink-faint);
+}
+.split-up { color: var(--up); }
+.split-dn { color: var(--down); }
+.brier-col { }
+.brier-val {
+  font-size: 13px; font-weight: 600; font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+.brier-bar {
+  height: 2px; margin-top: 3px;
+  background: var(--hairline); border-radius: 1px;
+}
+.brier-fill { height: 100%; border-radius: 1px; }
+.verdict-col { display: flex; justify-content: flex-end; }
+.verdict-chip {
+  font-size: 10px; font-weight: 600; padding: 3px 9px;
+  border-radius: 4px; letter-spacing: 0.04em; text-transform: uppercase;
+}
+.v-hit { background: rgba(124,255,178,0.1); color: var(--up); }
+.v-close { background: rgba(255,196,107,0.1); color: var(--warn); }
+.v-miss { background: rgba(255,103,77,0.1); color: var(--down); }
+
+/* ─── UPCOMING LOCKS ─── */
+.lock-row {
+  display: grid; grid-template-columns: 1fr auto;
+  gap: 12px; padding: 11px 0;
+  border-bottom: 1px solid var(--hairline);
+  align-items: center;
+}
+.lock-row:last-child { border-bottom: none; }
+.lock-name { font-size: 14px; font-weight: 500; color: var(--ink); }
+.lock-when { font-size: 11px; color: var(--ink-faint); margin-top: 2px; }
+.lock-probs {
+  font-size: 12px; font-variant-numeric: tabular-nums;
+  text-align: right; color: var(--ink-muted);
+}
+
+/* ─── RIGHT RAIL ─── */
+.rail-section { margin-bottom: 28px; }
+.rail-label {
+  font-size: 9px; font-weight: 600; color: var(--ink-faint);
+  letter-spacing: 0.12em; text-transform: uppercase;
+  margin-bottom: 10px; padding-bottom: 7px;
+  border-bottom: 1px solid var(--hairline);
+}
+.metric-row {
+  display: flex; justify-content: space-between; align-items: baseline;
+  padding: 4px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.025);
+}
+.metric-row:last-child { border-bottom: none; }
+.metric-key { font-size: 12px; color: var(--ink-faint); }
+.metric-val {
+  font-size: 12px; font-weight: 600; font-variant-numeric: tabular-nums;
+}
+.metric-val.up { color: var(--up); }
+.metric-val.blue { color: #4A90D9; }
+.metric-val.warn { color: var(--warn); }
+.metric-val.neutral { color: var(--ink-muted); }
+.champion-bar {
+  display: flex; align-items: center; gap: 8px;
+  padding: 5px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.025);
+}
+.champion-bar:last-child { border-bottom: none; }
+.champion-name { font-size: 11px; color: var(--ink-faint); min-width: 70px; }
+.champion-track {
+  flex: 1; height: 3px; background: var(--hairline); border-radius: 2px;
+}
+.champion-fill {
+  height: 100%; border-radius: 2px;
+  background: linear-gradient(90deg, #4A90D9, var(--up));
+}
+.champion-pct {
+  font-size: 11px; font-weight: 600; font-variant-numeric: tabular-nums;
+  color: var(--ink-muted); min-width: 36px; text-align: right;
+}
+
+/* ─── RECORD PAGE PREVIEW ─── */
+.record-hero {
+  padding: 48px 48px 40px;
+  border-bottom: 1px solid var(--line);
+}
+.record-metrics {
+  display: grid; grid-template-columns: repeat(5, 1fr);
+  gap: 1px; background: var(--line);
+  border: 1px solid var(--line);
+  margin-top: 32px;
+}
+.record-metric {
+  background: var(--canvas);
+  padding: 16px 20px;
+}
+.record-metric-label { font-size: 11px; color: var(--ink-faint); margin-bottom: 5px; }
+.record-metric-val {
+  font-size: 22px; font-weight: 650;
+  font-variant-numeric: tabular-nums; color: var(--ink);
+  letter-spacing: -0.02em;
+}
+.record-metric-val.up { color: var(--up); }
+.record-metric-val.warn { color: var(--warn); }
+.record-metric-sub { font-size: 10px; color: var(--ink-faint); margin-top: 3px; }
+
+/* ─── MATCHES PAGE PREVIEW ─── */
+.matches-table-header {
+  display: grid;
+  grid-template-columns: 1fr 100px 80px 80px 80px;
+  gap: 12px; padding: 8px 24px;
+  border-bottom: 1px solid var(--line);
+  font-size: 10px; font-weight: 500; color: var(--ink-faint);
+  letter-spacing: 0.06em; text-transform: uppercase;
+  background: var(--void);
+}
+.match-table-row {
+  display: grid;
+  grid-template-columns: 1fr 100px 80px 80px 80px;
+  gap: 12px; padding: 12px 24px;
+  border-bottom: 1px solid var(--hairline);
+  align-items: center;
+  transition: background var(--dur);
+  cursor: pointer;
+}
+.match-table-row:hover { background: var(--surface); }
+.match-table-row.settled { opacity: 0.7; }
+.fixture-name { font-size: 14px; font-weight: 500; color: var(--ink); }
+.fixture-meta { font-size: 11px; color: var(--ink-faint); margin-top: 2px; }
+.stage-chip {
+  display: inline-block; font-size: 9px; font-weight: 600;
+  padding: 2px 6px; border-radius: 3px;
+  letter-spacing: 0.05em; text-transform: uppercase;
+  margin-top: 2px;
+}
+.stage-group { background: rgba(142,142,147,0.12); color: #8e8e93; }
+.lock-chip {
+  font-size: 10px; font-weight: 500; padding: 3px 8px;
+  border-radius: 4px;
+}
+.locked { background: rgba(74,144,217,0.1); color: #4A90D9; }
+.upcoming { background: rgba(255,255,255,0.05); color: var(--ink-faint); }
+.prob-display { font-size: 12px; font-variant-numeric: tabular-nums; color: var(--ink-muted); }
+.prob-display .h { color: var(--up); }
+.prob-display .a { color: var(--down); }
+.score-display { font-size: 14px; font-weight: 600; font-variant-numeric: tabular-nums; color: var(--ink); }
+
+/* ─── PAGE TABS ─── */
+.tabs {
+  display: flex; border-bottom: 1px solid var(--line);
+  padding: 0 48px;
+}
+.tab {
+  font-size: 13px; font-weight: 500;
+  padding: 14px 0; margin-right: 28px;
+  color: var(--ink-faint);
+  border-bottom: 2px solid transparent;
+  cursor: pointer; transition: all var(--dur);
+}
+.tab.active { color: var(--ink); border-bottom-color: var(--ink); }
+.tab:hover:not(.active) { color: var(--ink-muted); }
+
+/* ─── PAGE SELECTOR ─── */
+.page-selector {
+  position: fixed; bottom: 0; left: 0; right: 0;
+  background: rgba(5,5,5,0.96); border-top: 1px solid var(--line);
+  padding: 14px 48px; display: flex; justify-content: space-between; align-items: center;
+  backdrop-filter: blur(20px); z-index: 200;
+}
+.ps-label { font-size: 12px; color: var(--ink-faint); }
+.ps-tabs { display: flex; gap: 8px; }
+.ps-tab {
+  font-size: 11px; font-weight: 500; padding: 6px 14px;
+  border: 1px solid var(--line); border-radius: 6px;
+  color: var(--ink-faint); cursor: pointer; transition: all var(--dur);
+}
+.ps-tab:hover { border-color: rgba(255,255,255,0.25); color: var(--ink); }
+.ps-tab.active { border-color: var(--up); color: var(--up); }
+
+/* animate */
+@keyframes rise { from { opacity:0; transform: translateY(8px); } to { opacity:1; transform: none; } }
+.rise { animation: rise 0.28s cubic-bezier(0.4,0,0.2,1) both; }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════
+     CONCEPT E  HOMEPAGE
+     ═══════════════════════════════════════════ -->
+<div id="home-page">
+
+<!-- Navigation: lifecycle-labeled, not just page labels -->
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="nav-logo">WC<em>26</em></div>
+    <div class="nav-links">
+      <div class="nav-link active">
+        <span class="nav-link-primary">Overview</span>
+        <span class="nav-link-sub">Executive briefing</span>
+      </div>
+      <div class="nav-link" onclick="showPage('matches')">
+        <span class="nav-link-primary">Forecasts</span>
+        <span class="nav-link-sub">Locked predictions</span>
+      </div>
+      <div class="nav-link" onclick="showPage('record')">
+        <span class="nav-link-primary">Record</span>
+        <span class="nav-link-sub">Accountability ledger</span>
+      </div>
+      <div class="nav-link">
+        <span class="nav-link-primary">Teams</span>
+        <span class="nav-link-sub">Model inputs</span>
+      </div>
+      <div class="nav-link">
+        <span class="nav-link-primary">Simulator</span>
+        <span class="nav-link-sub">Path simulation</span>
+      </div>
+    </div>
+    <div class="nav-status">
+      <div class="status-dot"></div>
+      v1.0.0-platt · nominal
+    </div>
+  </div>
+</nav>
+
+<!-- Status rail: F1 operational visibility, Linear restraint -->
+<div class="status-rail">
+  <div class="rail-item">MODEL <span class="rail-val up">NOMINAL</span></div>
+  <div class="rail-item">BRIER <span class="rail-val">0.721</span></div>
+  <div class="rail-item">ECE <span class="rail-val up">2.1%</span></div>
+  <div class="rail-item">ACCURACY <span class="rail-val">47.6%</span></div>
+  <div class="rail-item">SETTLED <span class="rail-val">21</span></div>
+  <div class="rail-item">OPEN LOCKS <span class="rail-val warn">51</span></div>
+  <div class="rail-item">CHAMPION <span class="rail-val up">BRA 18.2%</span></div>
+  <div class="rail-divider"></div>
+  <div class="rail-item">Matchday 6 · Jun 19, 2026</div>
+</div>
+
+<div class="chroma"></div>
+
+<div class="home-grid">
+
+  <!-- Main column -->
+  <div class="home-main rise">
+
+    <!-- Primary metric: Robinhood hero clarity -->
+    <div class="primary-metric">
+      <div class="eyebrow">Forecast performance · Live tournament</div>
+      <div class="hero-number"><em>10</em>/21 correct picks</div>
+      <div class="hero-sub">Brier 0.721 · RPS 0.220 · Log-loss 0.943 · ECE 2.1%</div>
+      <div class="hero-warning">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1L11 10H1L6 1Z" stroke="currentColor" stroke-width="1.2" fill="none"/><line x1="6" y1="5" x2="6" y2="7.5" stroke="currentColor" stroke-width="1.2"/><circle cx="6" cy="9" r="0.5" fill="currentColor"/></svg>
+        n=21 — sample too small to draw conclusions. Track record builds as the tournament progresses.
+      </div>
+    </div>
+
+    <!-- Intelligence cards: Palantir depth, Robinhood prose clarity -->
+    <div class="intel-section">
+      <div class="section-head">
+        <div class="chroma"></div>
+        <div class="section-title">Intelligence briefing</div>
+      </div>
+      <div class="intel-grid">
+        <div class="intel-card">
+          <div class="intel-type">Performance Assessment</div>
+          <div class="intel-body">Model generating <span class="metric">10/21 (47.6%)</span> correct directional forecasts on live data. Brier <span class="metric">0.721</span> on <strong>n=21</strong> — directionally consistent with 2024+ holdout but too small for statistical confidence. Trend is stable across matchdays 4–6.</div>
+        </div>
+        <div class="intel-card">
+          <div class="intel-type">Calibration Signal</div>
+          <div class="intel-body">ECE reading <span class="metric">2.1%</span> against threshold <span class="metric">3.0%</span>. Probability bins align with observed frequencies. <strong>Model is not overconfident.</strong> Confidence intervals are trustworthy at current sample size.</div>
+        </div>
+        <div class="intel-card">
+          <div class="intel-type">Notable Variance · Largest Miss</div>
+          <div class="intel-body"><strong>England vs Serbia</strong> — assigned <span class="metric">72%</span> home win probability, result was <span class="down-metric">0–0 draw</span>. Brier contribution <span class="down-metric">0.941</span>. Investigating draw underestimation in strong-home-favorite group stage scenarios.</div>
+        </div>
+        <div class="intel-card">
+          <div class="intel-type">Operational Status</div>
+          <div class="intel-body"><span class="warn-metric">51 prediction locks</span> expire before Matchday 7. Settlement pipeline required before next matchday. Champion <strong>v1.0.0-platt</strong> remains operational. No challenger pending promotion.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Settlement feed: F1 telemetry bars, Robinhood row clarity -->
+    <div class="settlement-section">
+      <div class="section-head">
+        <div class="chroma"></div>
+        <div class="section-title">Recent settlements</div>
+      </div>
+
+      <div class="settlement-row">
+        <div>
+          <div class="match-name">Brazil vs Mexico</div>
+          <div class="match-context">Group D · Jun 17 · Model: <span class="split-up">64%</span> home / 23% draw / <span class="split-dn">13%</span> away</div>
+        </div>
+        <div style="font-size:16px;font-weight:600;font-variant-numeric:tabular-nums;text-align:right;">2–0</div>
+        <div class="brier-col">
+          <div class="brier-val" style="color:var(--up)">0.440</div>
+          <div class="brier-bar"><div class="brier-fill" style="width:44%;background:var(--up)"></div></div>
+        </div>
+        <div class="verdict-col"><span class="verdict-chip v-hit">Hit</span></div>
+      </div>
+
+      <div class="settlement-row">
+        <div>
+          <div class="match-name">Qatar vs Switzerland</div>
+          <div class="match-context">Group A · Jun 14 · Model: <span class="split-up">38%</span> home / 31% draw / <span class="split-dn">31%</span> away</div>
+        </div>
+        <div style="font-size:16px;font-weight:600;font-variant-numeric:tabular-nums;text-align:right;">1–1</div>
+        <div class="brier-col">
+          <div class="brier-val" style="color:var(--warn)">0.722</div>
+          <div class="brier-bar"><div class="brier-fill" style="width:72%;background:var(--warn)"></div></div>
+        </div>
+        <div class="verdict-col"><span class="verdict-chip v-close">Close</span></div>
+      </div>
+
+      <div class="settlement-row">
+        <div>
+          <div class="match-name">USA vs Paraguay</div>
+          <div class="match-context">Group C · Jun 12 · Model: <span class="split-up">61%</span> home / 22% draw / <span class="split-dn">17%</span> away</div>
+        </div>
+        <div style="font-size:16px;font-weight:600;font-variant-numeric:tabular-nums;text-align:right;">4–1</div>
+        <div class="brier-col">
+          <div class="brier-val" style="color:var(--warn)">0.615</div>
+          <div class="brier-bar"><div class="brier-fill" style="width:62%;background:var(--warn)"></div></div>
+        </div>
+        <div class="verdict-col"><span class="verdict-chip v-hit">Hit</span></div>
+      </div>
+
+      <div class="settlement-row">
+        <div>
+          <div class="match-name">England vs Serbia</div>
+          <div class="match-context">Group B · Jun 13 · Model: <span class="split-up">72%</span> home / 18% draw / <span class="split-dn">10%</span> away</div>
+        </div>
+        <div style="font-size:16px;font-weight:600;font-variant-numeric:tabular-nums;text-align:right;">0–0</div>
+        <div class="brier-col">
+          <div class="brier-val" style="color:var(--down)">0.941</div>
+          <div class="brier-bar"><div class="brier-fill" style="width:94%;background:var(--down)"></div></div>
+        </div>
+        <div class="verdict-col"><span class="verdict-chip v-miss">Miss</span></div>
+      </div>
+
+    </div>
+
+    <!-- Upcoming locks -->
+    <div style="margin-top:32px">
+      <div class="section-head">
+        <div class="chroma"></div>
+        <div class="section-title">Next locks</div>
+      </div>
+      <div class="lock-row">
+        <div>
+          <div class="lock-name">Brazil vs Argentina</div>
+          <div class="lock-when">Group D · Jun 22 · Lock expires 17:00 UTC</div>
+        </div>
+        <div class="lock-probs"><span style="color:var(--up)">58</span> / 22 / <span style="color:var(--down)">20</span></div>
+      </div>
+      <div class="lock-row">
+        <div>
+          <div class="lock-name">France vs Germany</div>
+          <div class="lock-when">Group F · Jun 23 · Lock expires 14:00 UTC</div>
+        </div>
+        <div class="lock-probs"><span style="color:var(--up)">44</span> / 27 / <span style="color:var(--down)">29</span></div>
+      </div>
+      <div class="lock-row">
+        <div>
+          <div class="lock-name">Spain vs Portugal</div>
+          <div class="lock-when">Group E · Jun 23 · Lock expires 17:00 UTC</div>
+        </div>
+        <div class="lock-probs"><span style="color:var(--up)">41</span> / 29 / <span style="color:var(--down)">30</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Right rail: model health + champion odds -->
+  <div class="home-rail rise">
+    <div class="rail-section">
+      <div class="rail-label">Model health</div>
+      <div class="metric-row"><span class="metric-key">Status</span><span class="metric-val up">Nominal</span></div>
+      <div class="metric-row"><span class="metric-key">Version</span><span class="metric-val neutral">v1.0.0-platt</span></div>
+      <div class="metric-row"><span class="metric-key">Brier (live)</span><span class="metric-val neutral">0.7213</span></div>
+      <div class="metric-row"><span class="metric-key">Baseline</span><span class="metric-val warn">0.6667</span></div>
+      <div class="metric-row"><span class="metric-key">RPS</span><span class="metric-val blue">0.2205</span></div>
+      <div class="metric-row"><span class="metric-key">Log-loss</span><span class="metric-val neutral">0.9430</span></div>
+      <div class="metric-row"><span class="metric-key">ECE (live)</span><span class="metric-val up">2.1%</span></div>
+      <div class="metric-row"><span class="metric-key">Holdout (2024+)</span><span class="metric-val blue">0.5085</span></div>
+    </div>
+
+    <div class="rail-section">
+      <div class="rail-label">Champion probability</div>
+      <div class="champion-bar">
+        <div class="champion-name">Brazil</div>
+        <div class="champion-track"><div class="champion-fill" style="width:91%"></div></div>
+        <div class="champion-pct">18.2%</div>
+      </div>
+      <div class="champion-bar">
+        <div class="champion-name">France</div>
+        <div class="champion-track"><div class="champion-fill" style="width:74%"></div></div>
+        <div class="champion-pct">14.7%</div>
+      </div>
+      <div class="champion-bar">
+        <div class="champion-name">England</div>
+        <div class="champion-track"><div class="champion-fill" style="width:62%"></div></div>
+        <div class="champion-pct">12.3%</div>
+      </div>
+      <div class="champion-bar">
+        <div class="champion-name">Argentina</div>
+        <div class="champion-track"><div class="champion-fill" style="width:58%"></div></div>
+        <div class="champion-pct">11.6%</div>
+      </div>
+      <div class="champion-bar">
+        <div class="champion-name">Germany</div>
+        <div class="champion-track"><div class="champion-fill" style="width:47%"></div></div>
+        <div class="champion-pct">9.4%</div>
+      </div>
+      <div class="champion-bar">
+        <div class="champion-name">Spain</div>
+        <div class="champion-track"><div class="champion-fill" style="width:41%"></div></div>
+        <div class="champion-pct">8.1%</div>
+      </div>
+      <div class="champion-bar">
+        <div class="champion-name">Portugal</div>
+        <div class="champion-track"><div class="champion-fill" style="width:35%"></div></div>
+        <div class="champion-pct">6.9%</div>
+      </div>
+    </div>
+
+    <div class="rail-section">
+      <div class="rail-label">Forecast record</div>
+      <div class="metric-row"><span class="metric-key">Settled</span><span class="metric-val blue">21</span></div>
+      <div class="metric-row"><span class="metric-key">Correct picks</span><span class="metric-val up">10</span></div>
+      <div class="metric-row"><span class="metric-key">Open locks</span><span class="metric-val warn">51</span></div>
+      <div class="metric-row"><span class="metric-key">Hits</span><span class="metric-val up">10</span></div>
+      <div class="metric-row"><span class="metric-key">Close</span><span class="metric-val warn">4</span></div>
+      <div class="metric-row"><span class="metric-key">Misses</span><span class="metric-val down">7</span></div>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<!-- ═══════════════════════════════════════════
+     CONCEPT E  /RECORD PAGE
+     ═══════════════════════════════════════════ -->
+<div id="record-page" style="display:none">
+
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="nav-logo">WC<em>26</em></div>
+    <div class="nav-links">
+      <div class="nav-link" onclick="showPage('home')">
+        <span class="nav-link-primary">Overview</span>
+        <span class="nav-link-sub">Executive briefing</span>
+      </div>
+      <div class="nav-link" onclick="showPage('matches')">
+        <span class="nav-link-primary">Forecasts</span>
+        <span class="nav-link-sub">Locked predictions</span>
+      </div>
+      <div class="nav-link active">
+        <span class="nav-link-primary">Record</span>
+        <span class="nav-link-sub">Accountability ledger</span>
+      </div>
+    </div>
+    <div class="nav-status"><div class="status-dot"></div>v1.0.0-platt · nominal</div>
+  </div>
+</nav>
+<div class="status-rail">
+  <div class="rail-item">BRIER <span class="rail-val">0.721</span></div>
+  <div class="rail-item">ECE <span class="rail-val up">2.1%</span></div>
+  <div class="rail-item">LOG-LOSS <span class="rail-val">0.943</span></div>
+  <div class="rail-item">ACCURACY <span class="rail-val">47.6%</span></div>
+  <div class="rail-item">n= <span class="rail-val warn">21 (small)</span></div>
+  <div class="rail-divider"></div>
+  <div class="rail-item">MODEL <span class="rail-val up">NOMINAL</span></div>
+</div>
+<div class="chroma"></div>
+
+<div class="record-hero">
+  <div class="eyebrow">Accountability ledger · Locked before kickoff, graded after the whistle</div>
+  <div class="hero-number" style="font-size:64px"><em>10</em>/21 correct picks</div>
+  <div class="hero-sub">Brier 0.721 · RPS 0.220 · Log-loss 0.943 · ECE 2.1% · n=21 · <span style="color:var(--warn)">Sample too small for conclusions</span></div>
+
+  <div class="record-metrics">
+    <div class="record-metric">
+      <div class="record-metric-label">Brier score (live)</div>
+      <div class="record-metric-val">0.721</div>
+      <div class="record-metric-sub">Baseline 0.667 · lower better</div>
+    </div>
+    <div class="record-metric">
+      <div class="record-metric-label">RPS</div>
+      <div class="record-metric-val up">0.220</div>
+      <div class="record-metric-sub">Coin-flip ≈ 0.278</div>
+    </div>
+    <div class="record-metric">
+      <div class="record-metric-label">Log-loss</div>
+      <div class="record-metric-val">0.943</div>
+      <div class="record-metric-sub">Random ≈ 1.099</div>
+    </div>
+    <div class="record-metric">
+      <div class="record-metric-label">ECE (live)</div>
+      <div class="record-metric-val up">2.1%</div>
+      <div class="record-metric-sub">Target &lt;3.0% · Nominal</div>
+    </div>
+    <div class="record-metric">
+      <div class="record-metric-label">vs Kalshi</div>
+      <div class="record-metric-val warn">−0.196</div>
+      <div class="record-metric-sub">Market sharper · n=1</div>
+    </div>
+  </div>
+</div>
+
+<div style="padding:0 48px;margin:32px 0">
+  <div class="section-head"><div class="chroma"></div><div class="section-title">Intelligence briefing</div></div>
+  <div class="intel-grid">
+    <div class="intel-card">
+      <div class="intel-type">Performance Assessment</div>
+      <div class="intel-body">Official graded record: <span class="metric">21 matches, 10 correct picks (47.6%)</span>. Mean Brier <span class="metric">0.721</span> vs uniform baseline <span class="warn-metric">0.667</span>. Current Brier exceeds baseline — model has not demonstrated improvement over a coin-flip on directional picks at this sample size.</div>
+    </div>
+    <div class="intel-card">
+      <div class="intel-type">Calibration Signal</div>
+      <div class="intel-body">ECE <span class="metric">2.1%</span> against <span class="metric">3.0%</span> gate. <strong>Model is well-calibrated.</strong> When the model says 70% home win, roughly 70% of similarly-predicted home matches have resolved as home wins. Reliability diagram confirms alignment across 6 of 10 probability bins.</div>
+    </div>
+    <div class="intel-card">
+      <div class="intel-type">Largest Miss · England vs Serbia</div>
+      <div class="intel-body">Model assigned <span class="metric">72%</span> home probability. Result: <span class="down-metric">0–0 draw</span>. Brier contribution <span class="down-metric">0.941</span> — worst in the settled record. Draw probability assigned only <span class="metric">18%</span>. Pattern under review: strong-home-favorite draw underestimation.</div>
+    </div>
+    <div class="intel-card">
+      <div class="intel-type">Market Comparison · Kalshi</div>
+      <div class="intel-body">One match with pre-kickoff Kalshi data available. Model Brier <span class="warn-metric">0.819</span> vs Kalshi <span class="metric">0.623</span>. Edge <span class="down-metric">−0.196</span> in Kalshi's favor. <strong>n=1 is noise, not signal.</strong> Meaningful comparison requires 10+ matched pairs.</div>
+    </div>
+  </div>
+</div>
+
+<div style="padding:0 48px;margin-bottom:32px">
+  <div class="section-head"><div class="chroma"></div><div class="section-title">Settlement record · 21 official graded calls</div></div>
+  <div class="matches-table-header">
+    <span>Fixture</span><span style="text-align:right">Result</span><span style="text-align:right">Brier</span><span style="text-align:right">RPS</span><span style="text-align:right">Verdict</span>
+  </div>
+  <div class="match-table-row">
+    <div><div class="fixture-name">Brazil vs Mexico</div><div class="fixture-meta">Group D · Jun 17 · Home 64 / Draw 23 / Away 13</div></div>
+    <div class="score-display" style="text-align:right">2–0</div>
+    <div class="prob-display" style="text-align:right;color:var(--up)">0.440</div>
+    <div class="prob-display" style="text-align:right">0.181</div>
+    <div style="text-align:right"><span class="verdict-chip v-hit">Hit</span></div>
+  </div>
+  <div class="match-table-row">
+    <div><div class="fixture-name">England vs Serbia</div><div class="fixture-meta">Group B · Jun 13 · Home 72 / Draw 18 / Away 10</div></div>
+    <div class="score-display" style="text-align:right">0–0</div>
+    <div class="prob-display" style="text-align:right;color:var(--down)">0.941</div>
+    <div class="prob-display" style="text-align:right">0.380</div>
+    <div style="text-align:right"><span class="verdict-chip v-miss">Miss</span></div>
+  </div>
+  <div class="match-table-row">
+    <div><div class="fixture-name">Qatar vs Switzerland</div><div class="fixture-meta">Group A · Jun 14 · Home 38 / Draw 31 / Away 31</div></div>
+    <div class="score-display" style="text-align:right">1–1</div>
+    <div class="prob-display" style="text-align:right;color:var(--warn)">0.722</div>
+    <div class="prob-display" style="text-align:right">0.241</div>
+    <div style="text-align:right"><span class="verdict-chip v-close">Close</span></div>
+  </div>
+  <div class="match-table-row">
+    <div><div class="fixture-name">USA vs Paraguay</div><div class="fixture-meta">Group C · Jun 12 · Home 61 / Draw 22 / Away 17</div></div>
+    <div class="score-display" style="text-align:right">4–1</div>
+    <div class="prob-display" style="text-align:right;color:var(--warn)">0.615</div>
+    <div class="prob-display" style="text-align:right">0.263</div>
+    <div style="text-align:right"><span class="verdict-chip v-hit">Hit</span></div>
+  </div>
+</div>
+
+</div>
+
+<!-- ═══════════════════════════════════════════
+     CONCEPT E  /MATCHES PAGE
+     ═══════════════════════════════════════════ -->
+<div id="matches-page" style="display:none">
+
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="nav-logo">WC<em>26</em></div>
+    <div class="nav-links">
+      <div class="nav-link" onclick="showPage('home')">
+        <span class="nav-link-primary">Overview</span>
+        <span class="nav-link-sub">Executive briefing</span>
+      </div>
+      <div class="nav-link active">
+        <span class="nav-link-primary">Forecasts</span>
+        <span class="nav-link-sub">Locked predictions</span>
+      </div>
+      <div class="nav-link" onclick="showPage('record')">
+        <span class="nav-link-primary">Record</span>
+        <span class="nav-link-sub">Accountability ledger</span>
+      </div>
+    </div>
+    <div class="nav-status"><div class="status-dot"></div>51 locks active</div>
+  </div>
+</nav>
+<div class="status-rail">
+  <div class="rail-item">TOTAL <span class="rail-val">72</span></div>
+  <div class="rail-item">SETTLED <span class="rail-val up">21</span></div>
+  <div class="rail-item">LOCKED <span class="rail-val warn">51</span></div>
+  <div class="rail-item">INFORMATIONAL <span class="rail-val">3</span></div>
+  <div class="rail-divider"></div>
+  <div class="rail-item">All predictions locked pre-kickoff · Never edited after lock</div>
+</div>
+<div class="chroma"></div>
+
+<div class="tabs">
+  <div class="tab active">All matches</div>
+  <div class="tab">Settled</div>
+  <div class="tab">Locked</div>
+  <div class="tab">Upcoming</div>
+</div>
+
+<div class="matches-table-header" style="margin-top:0">
+  <span>Fixture</span>
+  <span style="text-align:right">Result / Status</span>
+  <span style="text-align:right">Home / Draw / Away</span>
+  <span style="text-align:right">Brier</span>
+  <span style="text-align:right">Verdict</span>
+</div>
+
+<div class="match-table-row settled">
+  <div>
+    <div class="fixture-name">Brazil vs Mexico</div>
+    <div class="fixture-meta">Group D · Jun 17, 2026 · Estadio Azteca</div>
+    <div><span class="stage-chip stage-group">Group stage</span></div>
+  </div>
+  <div class="score-display" style="text-align:right">2–0</div>
+  <div class="prob-display" style="text-align:right"><span class="h">64</span> / 23 / <span class="a">13</span></div>
+  <div class="prob-display" style="text-align:right;color:var(--up)">0.440</div>
+  <div style="text-align:right"><span class="verdict-chip v-hit">Hit</span></div>
+</div>
+
+<div class="match-table-row settled">
+  <div>
+    <div class="fixture-name">England vs Serbia</div>
+    <div class="fixture-meta">Group B · Jun 13, 2026 · AT&T Stadium</div>
+    <div><span class="stage-chip stage-group">Group stage</span></div>
+  </div>
+  <div class="score-display" style="text-align:right">0–0</div>
+  <div class="prob-display" style="text-align:right"><span class="h">72</span> / 18 / <span class="a">10</span></div>
+  <div class="prob-display" style="text-align:right;color:var(--down)">0.941</div>
+  <div style="text-align:right"><span class="verdict-chip v-miss">Miss</span></div>
+</div>
+
+<div class="match-table-row">
+  <div>
+    <div class="fixture-name">Brazil vs Argentina</div>
+    <div class="fixture-meta">Group D · Jun 22, 2026 · MetLife Stadium · Lock expires 17:00 UTC</div>
+    <div><span class="stage-chip stage-group">Group stage</span></div>
+  </div>
+  <div style="text-align:right"><span class="lock-chip locked">Locked</span></div>
+  <div class="prob-display" style="text-align:right"><span class="h">58</span> / 22 / <span class="a">20</span></div>
+  <div class="prob-display" style="text-align:right;color:var(--ink-faint)">—</div>
+  <div style="text-align:right"></div>
+</div>
+
+<div class="match-table-row">
+  <div>
+    <div class="fixture-name">France vs Germany</div>
+    <div class="fixture-meta">Group F · Jun 23, 2026 · Levi's Stadium · Lock expires 14:00 UTC</div>
+    <div><span class="stage-chip stage-group">Group stage</span></div>
+  </div>
+  <div style="text-align:right"><span class="lock-chip locked">Locked</span></div>
+  <div class="prob-display" style="text-align:right"><span class="h">44</span> / 27 / <span class="a">29</span></div>
+  <div class="prob-display" style="text-align:right;color:var(--ink-faint)">—</div>
+  <div style="text-align:right"></div>
+</div>
+
+<div class="match-table-row">
+  <div>
+    <div class="fixture-name">Spain vs Portugal</div>
+    <div class="fixture-meta">Group E · Jun 23, 2026 · SoFi Stadium · Lock expires 17:00 UTC</div>
+    <div><span class="stage-chip stage-group">Group stage</span></div>
+  </div>
+  <div style="text-align:right"><span class="lock-chip upcoming">Upcoming</span></div>
+  <div class="prob-display" style="text-align:right"><span class="h">41</span> / 29 / <span class="a">30</span></div>
+  <div class="prob-display" style="text-align:right;color:var(--ink-faint)">—</div>
+  <div style="text-align:right"></div>
+</div>
+
+</div>
+
+<!-- Page selector -->
+<div class="page-selector">
+  <span class="ps-label">Viewing Concept E — Click to preview each page</span>
+  <div class="ps-tabs">
+    <div class="ps-tab active" id="tab-home" onclick="showPage('home')">Homepage</div>
+    <div class="ps-tab" id="tab-record" onclick="showPage('record')">/record</div>
+    <div class="ps-tab" id="tab-matches" onclick="showPage('matches')">/matches</div>
+  </div>
+</div>
+
+<div style="height:60px"></div>
+
+<script>
+function showPage(page) {
+  document.getElementById('home-page').style.display = 'none';
+  document.getElementById('record-page').style.display = 'none';
+  document.getElementById('matches-page').style.display = 'none';
+  document.getElementById(page + '-page').style.display = 'block';
+  document.querySelectorAll('.ps-tab').forEach(t => t.classList.remove('active'));
+  const tab = document.getElementById('tab-' + page);
+  if (tab) tab.classList.add('active');
+  window.scrollTo(0, 0);
+}
+</script>
+</body>
+</html>

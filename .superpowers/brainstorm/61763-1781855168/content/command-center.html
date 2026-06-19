@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WC26 — Forecast Command Center</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --void: #000;
+  --canvas: #050505;
+  --surface: rgba(255,255,255,0.03);
+  --line: rgba(255,255,255,0.08);
+  --hairline: rgba(255,255,255,0.05);
+  --ink: #f4f4ef;
+  --ink-muted: #a2a29b;
+  --ink-faint: #4a4a45;
+  --up: #7cffb2;
+  --down: #ff674d;
+  --warn: #ffc46b;
+  --blue: #4A90D9;
+  --purple: #b89aff;
+}
+
+html, body { height: 100%; overflow: hidden; }
+body {
+  background: var(--canvas);
+  color: var(--ink);
+  font-family: -apple-system, BlinkMacSystemFont, 'Inter', system-ui, sans-serif;
+  font-size: 13px; line-height: 1.4;
+  -webkit-font-smoothing: antialiased;
+  display: flex; flex-direction: column;
+}
+
+/* ─── LEVEL 1: Understand system health in 5 seconds ─── */
+
+.nav {
+  background: rgba(5,5,5,0.98);
+  border-bottom: 1px solid var(--line);
+  flex-shrink: 0;
+}
+.nav-inner {
+  display: flex; align-items: center;
+  padding: 0 24px; height: 48px;
+  gap: 0;
+}
+.nav-logo {
+  font-size: 13px; font-weight: 700; letter-spacing: -0.02em;
+  padding-right: 20px; border-right: 1px solid var(--line);
+  flex-shrink: 0;
+}
+.nav-logo em { color: var(--up); font-style: normal; }
+.nav-tabs { display: flex; flex: 1; }
+.nav-tab {
+  padding: 0 16px; height: 48px;
+  display: flex; align-items: center;
+  font-size: 12px; font-weight: 500;
+  color: var(--ink-faint);
+  border-right: 1px solid var(--hairline);
+  cursor: pointer; transition: color 0.15s;
+  letter-spacing: 0.01em;
+}
+.nav-tab:hover { color: var(--ink-muted); }
+.nav-tab.active { color: var(--ink); }
+/* active tab indicator — bottom border only */
+.nav-tab.active { border-bottom: 1px solid var(--up); margin-bottom: -1px; }
+
+/* System health — right side of nav. ONE signal. */
+.nav-health {
+  margin-left: auto;
+  display: flex; align-items: center; gap: 8px;
+  padding-left: 20px; border-left: 1px solid var(--hairline);
+  font-size: 11px;
+}
+.health-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--up);
+  box-shadow: 0 0 6px rgba(124,255,178,0.5);
+}
+.health-label { color: var(--up); font-weight: 600; letter-spacing: 0.02em; }
+.health-sub { color: var(--ink-faint); margin-left: 2px; }
+
+/* Minimal rail — 3 items max */
+.rail {
+  height: 30px;
+  display: flex; align-items: center;
+  padding: 0 24px;
+  background: var(--void);
+  border-bottom: 1px solid var(--hairline);
+  flex-shrink: 0;
+  gap: 0;
+}
+.ri {
+  font-size: 10px; color: var(--ink-faint);
+  padding: 0 16px; border-right: 1px solid var(--hairline);
+  display: flex; align-items: center; gap: 5px;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.ri:first-child { padding-left: 0; }
+.rv { color: var(--ink-muted); font-weight: 600; }
+.rv.up { color: var(--up); }
+.rv.warn { color: var(--warn); }
+.rfill { flex: 1; }
+.ri-date { font-size: 10px; color: var(--ink-faint); margin-left: auto; }
+
+/* ─── BODY: 3 columns ─── */
+.body {
+  flex: 1;
+  display: grid;
+  /* Left narrower, center gets more room, right lean */
+  grid-template-columns: 224px 1fr 256px;
+  overflow: hidden; min-height: 0;
+}
+
+/* ─── LEFT: Forecasts ─── */
+.left {
+  border-right: 1px solid var(--line);
+  display: flex; flex-direction: column;
+  overflow: hidden;
+}
+.left-head {
+  padding: 12px 16px 10px;
+  border-bottom: 1px solid var(--hairline);
+  display: flex; align-items: baseline; justify-content: space-between;
+  flex-shrink: 0;
+}
+.left-title { font-size: 11px; font-weight: 600; color: var(--ink); }
+.left-count { font-size: 10px; color: var(--ink-faint); font-variant-numeric: tabular-nums; }
+.fixture-list { flex: 1; overflow-y: auto; }
+
+/* Phase divider — minimal */
+.phase-div {
+  padding: 8px 16px 4px;
+  font-size: 9px; font-weight: 600; color: var(--ink-faint);
+  letter-spacing: 0.08em; text-transform: uppercase;
+}
+
+/* Fixture row — scannable, not dense */
+.fix {
+  display: flex; align-items: center;
+  padding: 7px 16px;
+  border-bottom: 1px solid var(--hairline);
+  cursor: pointer; transition: background 0.12s;
+  gap: 8px;
+}
+.fix:hover { background: var(--surface); }
+.fix.selected { background: rgba(124,255,178,0.04); }
+.fix-matchup {
+  flex: 1;
+  display: flex; flex-direction: column; gap: 2px;
+}
+.fix-teams-line {
+  font-size: 12px; color: var(--ink-muted);
+}
+.fix-teams-line .home { color: var(--ink); font-weight: 500; }
+.fix-teams-line .sep { color: var(--ink-faint); margin: 0 3px; font-size: 10px; }
+.fix-sub { font-size: 10px; color: var(--ink-faint); }
+/* Grade / lock badge */
+.fix-badge {
+  font-size: 8px; font-weight: 700; padding: 2px 6px; border-radius: 2px;
+  text-transform: uppercase; letter-spacing: 0.04em; flex-shrink: 0;
+  white-space: nowrap;
+}
+.b-sharp { background: rgba(124,255,178,0.1); color: var(--up); }
+.b-solid { background: rgba(74,144,217,0.1); color: var(--blue); }
+.b-close { background: rgba(255,196,107,0.1); color: var(--warn); }
+.b-miss { background: rgba(255,103,77,0.1); color: var(--down); }
+.b-surprise { background: rgba(255,103,77,0.15); color: var(--down); border: 1px solid rgba(255,103,77,0.25); }
+.b-lock { background: rgba(255,255,255,0.05); color: var(--ink-faint); }
+.fix-score { font-size: 11px; font-weight: 600; font-variant-numeric: tabular-nums; flex-shrink: 0; min-width: 24px; text-align: right; }
+
+/* ─── CENTER ─── */
+.center { overflow-y: auto; display: flex; flex-direction: column; }
+
+/* ─── LEVEL 2: Understand today's forecast in 15 seconds ─── */
+
+/* Intelligence Dispatch — editorial card, not a banner */
+.dispatch {
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--hairline);
+  background: var(--void);
+  flex-shrink: 0;
+}
+.dispatch-dateline {
+  font-size: 9px; font-weight: 600; color: var(--ink-faint);
+  letter-spacing: 0.1em; text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.dispatch-headline {
+  font-size: 15px; font-weight: 600; color: var(--ink);
+  letter-spacing: -0.01em; line-height: 1.35;
+  margin-bottom: 8px;
+}
+.dispatch-body {
+  font-size: 12px; color: var(--ink-muted); line-height: 1.6;
+  max-width: 560px;
+}
+.dispatch-body .dn { color: var(--down); }
+.dispatch-body .up { color: var(--up); }
+/* Dispatch signal row */
+.dispatch-signals {
+  display: flex; gap: 16px; margin-top: 12px;
+}
+.ds-item {
+  display: flex; align-items: center; gap: 5px;
+  font-size: 11px; color: var(--ink-faint);
+}
+.ds-item .val { font-weight: 600; color: var(--ink-muted); }
+.ds-item .val.up { color: var(--up); }
+.ds-item .val.warn { color: var(--warn); }
+
+/* Featured match */
+.match-card {
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--hairline);
+  flex-shrink: 0;
+}
+.match-context {
+  font-size: 10px; color: var(--ink-faint);
+  margin-bottom: 10px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.match-lock-badge {
+  display: flex; align-items: center; gap: 5px;
+  font-size: 10px; color: var(--warn); font-weight: 500;
+}
+.match-heading {
+  font-size: 22px; font-weight: 700; letter-spacing: -0.02em;
+  margin-bottom: 4px;
+}
+.match-heading .home { color: var(--ink); }
+.match-heading .sep { color: var(--ink-faint); font-size: 14px; font-weight: 400; margin: 0 6px; }
+.match-heading .away { color: var(--ink-muted); }
+.match-venue { font-size: 11px; color: var(--ink-faint); margin-bottom: 16px; }
+
+/* 3-way probability — more breathing room */
+.prob { display: flex; gap: 2px; margin-bottom: 0; }
+.prob-col {
+  flex: 1; padding: 10px 12px 10px;
+  border: 1px solid var(--hairline); background: var(--surface);
+  position: relative;
+}
+.prob-col:first-child { border-radius: 4px 0 0 4px; }
+.prob-col:last-child { border-radius: 0 4px 4px 0; }
+.prob-col.win {
+  background: rgba(124,255,178,0.04);
+  border-color: rgba(124,255,178,0.15);
+}
+.prob-outcome { font-size: 9px; color: var(--ink-faint); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 5px; }
+.prob-pct { font-size: 24px; font-weight: 700; font-variant-numeric: tabular-nums; letter-spacing: -0.02em; }
+.prob-col.win .prob-pct { color: var(--up); }
+.prob-col:not(.win) .prob-pct { color: var(--ink-muted); }
+.prob-bar { position: absolute; bottom: 0; left: 0; right: 0; height: 2px; border-radius: 0 0 3px 3px; }
+
+/* ─── LEVEL 3: Intelligence depth in 60 seconds ─── */
+
+/* Forecast Drivers — 3 key signals, not 6 */
+.drivers {
+  padding: 16px 24px;
+  border-bottom: 1px solid var(--hairline);
+  flex-shrink: 0;
+}
+.section-label {
+  font-size: 9px; font-weight: 600; color: var(--ink-faint);
+  letter-spacing: 0.1em; text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.driver-row {
+  display: flex; gap: 2px;
+}
+.driver {
+  flex: 1; padding: 8px 10px;
+  background: var(--surface); border: 1px solid var(--hairline);
+}
+.driver:first-child { border-radius: 3px 0 0 3px; }
+.driver:last-child { border-radius: 0 3px 3px 0; }
+.d-key { font-size: 9px; color: var(--ink-faint); margin-bottom: 3px; }
+.d-val { font-size: 12px; font-weight: 500; color: var(--ink-muted); }
+.d-edge { font-size: 10px; font-weight: 600; display: block; margin-top: 1px; }
+.d-edge.up { color: var(--up); }
+.d-edge.warn { color: var(--warn); }
+.d-edge.neutral { color: var(--ink-faint); }
+.driver-more {
+  padding-top: 8px;
+  font-size: 10px; color: var(--ink-faint); cursor: pointer;
+}
+.driver-more:hover { color: var(--ink-muted); }
+.driver-more-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin-top: 6px;
+}
+.dm-cell {
+  padding: 6px 8px; background: var(--surface); border: 1px solid var(--hairline);
+}
+.dm-cell:nth-child(1) { border-radius: 3px 0 0 0; }
+.dm-cell:nth-child(2) { border-radius: 0 3px 0 0; }
+.dm-cell:nth-child(3) { border-radius: 0 0 0 3px; }
+.dm-cell:nth-child(4) { border-radius: 0 0 3px 0; }
+.dm-key { font-size: 9px; color: var(--ink-faint); margin-bottom: 2px; }
+.dm-val { font-size: 11px; color: var(--ink-muted); font-variant-numeric: tabular-nums; }
+.dm-val .edge { font-size: 10px; font-weight: 600; }
+
+/* Score Probability Surface */
+.score-surface {
+  padding: 16px 24px;
+  border-bottom: 1px solid var(--hairline);
+  flex-shrink: 0;
+}
+.surface-header {
+  display: flex; align-items: baseline; justify-content: space-between;
+  margin-bottom: 10px;
+}
+.surface-title { font-size: 11px; font-weight: 600; color: var(--ink-muted); }
+.surface-model { font-size: 10px; color: var(--ink-faint); }
+
+/* Grid — more space per cell */
+.sg-axis-top { display: flex; padding-left: 24px; margin-bottom: 2px; }
+.sg-axis-item { flex: 1; text-align: center; font-size: 9px; color: var(--ink-faint); }
+.sg-row { display: flex; align-items: center; margin-bottom: 2px; }
+.sg-side { width: 24px; flex-shrink: 0; font-size: 9px; color: var(--ink-faint);
+  text-align: right; padding-right: 4px; }
+.sg-cells { display: flex; flex: 1; gap: 2px; }
+.sg-cell {
+  flex: 1; height: 26px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 9px; font-weight: 600; border-radius: 2px;
+  font-variant-numeric: tabular-nums;
+  transition: opacity 0.1s; cursor: default;
+}
+.sg-cell:hover { opacity: 0.75; }
+.sg-h { background: rgba(124,255,178,var(--a,.08)); color: rgba(124,255,178,.85); }
+.sg-d { background: rgba(255,255,255,var(--a,.06)); color: rgba(244,244,239,.55); }
+.sg-a { background: rgba(255,103,77,var(--a,.08)); color: rgba(255,103,77,.8); }
+.sg-best { outline: 1px solid rgba(255,255,255,.2); z-index: 1; }
+
+.sg-legend {
+  display: flex; align-items: center; gap: 12px; margin-top: 6px;
+}
+.sg-leg { display: flex; align-items: center; gap: 4px; font-size: 10px; color: var(--ink-faint); }
+.sg-swatch { width: 10px; height: 10px; border-radius: 1px; }
+
+/* Top scores */
+.top-scores {
+  margin-top: 10px; display: flex; gap: 4px; flex-wrap: wrap;
+}
+.ts {
+  padding: 3px 9px; border: 1px solid var(--hairline); border-radius: 20px;
+  font-size: 11px; font-variant-numeric: tabular-nums;
+  display: flex; align-items: center; gap: 4px;
+}
+.ts.best { border-color: rgba(124,255,178,.25); background: rgba(124,255,178,.04); }
+.ts-s { font-weight: 600; }
+.ts.best .ts-s { color: var(--up); }
+.ts:not(.best) .ts-s { color: var(--ink-muted); }
+.ts-p { color: var(--ink-faint); }
+
+/* Lock countdown — minimal */
+.lock-row {
+  margin-top: 12px; display: flex; align-items: center; justify-content: space-between;
+  padding: 9px 12px;
+  border: 1px solid rgba(255,196,107,.2);
+  background: rgba(255,196,107,.025);
+  border-radius: 4px;
+}
+.lock-label { font-size: 11px; color: var(--warn); }
+.lock-sub { font-size: 10px; color: var(--ink-faint); }
+.lock-time { font-size: 14px; font-weight: 700; color: var(--warn); font-variant-numeric: tabular-nums; letter-spacing: 0.04em; }
+
+/* ─── LEVEL 4: Model behavior in 5 minutes ─── */
+
+/* Model Evolution */
+.evolution {
+  padding: 20px 24px;
+  flex-shrink: 0;
+}
+.evolution-entries { display: flex; flex-direction: column; gap: 1px; }
+.evo-entry {
+  padding: 10px 12px;
+  border-left: 2px solid var(--hairline);
+  background: rgba(255,255,255,0.015);
+  cursor: pointer; transition: background 0.12s;
+}
+.evo-entry:hover { background: rgba(255,255,255,0.025); }
+.evo-entry.flag { border-left-color: var(--down); }
+.evo-entry.update { border-left-color: var(--warn); }
+.evo-entry.confirm { border-left-color: var(--up); }
+.evo-meta { display: flex; align-items: center; gap: 8px; margin-bottom: 5px; }
+.evo-date { font-size: 10px; color: var(--ink-faint); }
+.evo-tag {
+  font-size: 9px; font-weight: 600; padding: 1px 5px; border-radius: 2px;
+  text-transform: uppercase; letter-spacing: 0.04em;
+}
+.evo-tag.flag { background: rgba(255,103,77,.12); color: var(--down); }
+.evo-tag.update { background: rgba(255,196,107,.1); color: var(--warn); }
+.evo-tag.confirm { background: rgba(124,255,178,.1); color: var(--up); }
+.evo-body { font-size: 12px; color: var(--ink-faint); line-height: 1.6; }
+.evo-body strong { color: var(--ink-muted); font-weight: 500; }
+.evo-body .dn { color: var(--down); }
+.evo-body .up { color: var(--up); }
+/* Forecast autopsy — inline after Surprise entries */
+.autopsy {
+  margin-top: 8px; padding: 8px 10px;
+  background: rgba(255,103,77,.04);
+  border-top: 1px solid rgba(255,103,77,.1);
+  border-radius: 2px;
+  font-size: 11px; color: var(--ink-faint); line-height: 1.55;
+}
+.autopsy-label { font-size: 9px; font-weight: 600; color: var(--down); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 4px; }
+.autopsy-row { display: flex; justify-content: space-between; margin-bottom: 2px; }
+.ar-key { color: var(--ink-faint); }
+.ar-val { color: var(--ink-muted); font-weight: 500; font-variant-numeric: tabular-nums; }
+.ar-val.dn { color: var(--down); }
+.autopsy-note { font-size: 10px; color: var(--ink-faint); margin-top: 5px; padding-top: 5px; border-top: 1px solid rgba(255,255,255,.04); }
+.autopsy-note em { color: var(--warn); font-style: normal; }
+.evo-status { font-size: 10px; color: var(--ink-faint); margin-top: 6px; display: flex; align-items: center; gap: 5px; }
+.evo-dot { width: 4px; height: 4px; border-radius: 50%; flex-shrink: 0; }
+
+/* ─── RIGHT: Championship projection ─── */
+.right {
+  border-left: 1px solid var(--line);
+  overflow-y: auto; display: flex; flex-direction: column;
+}
+.right-section { padding: 14px 16px; border-bottom: 1px solid var(--hairline); flex-shrink: 0; }
+.rs-label { font-size: 9px; font-weight: 600; color: var(--ink-faint);
+  letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 10px; }
+
+/* System health — condensed */
+.health-block { }
+.hb-status { font-size: 13px; font-weight: 600; color: var(--up); margin-bottom: 8px;
+  display: flex; align-items: center; gap: 6px; }
+.hb-row { display: flex; justify-content: space-between; align-items: center;
+  padding: 3px 0; border-bottom: 1px solid rgba(255,255,255,.025); }
+.hb-row:last-child { border-bottom: none; }
+.hb-key { font-size: 11px; color: var(--ink-faint); }
+.hb-val { font-size: 11px; font-weight: 600; font-variant-numeric: tabular-nums; }
+
+/* Grade tally — inline, not a chart */
+.grade-tally { display: flex; gap: 2px; }
+.gt-item {
+  flex: 1; padding: 6px 4px; text-align: center;
+  background: var(--surface); border: 1px solid var(--hairline);
+}
+.gt-item:first-child { border-radius: 3px 0 0 3px; }
+.gt-item:last-child { border-radius: 0 3px 3px 0; }
+.gt-n { font-size: 14px; font-weight: 700; font-variant-numeric: tabular-nums; }
+.gt-label { font-size: 8px; text-transform: uppercase; letter-spacing: 0.04em; margin-top: 2px; color: var(--ink-faint); }
+
+/* Championship projection — cleaner */
+.proj-row { display: flex; align-items: center; gap: 6px; padding: 5px 0;
+  border-bottom: 1px solid rgba(255,255,255,.03); }
+.proj-row:last-child { border-bottom: none; }
+.pr-rank { font-size: 10px; color: var(--ink-faint); min-width: 10px; }
+.pr-name { font-size: 12px; flex: 1; }
+.pr-name.top { color: var(--ink); font-weight: 500; }
+.pr-name:not(.top) { color: var(--ink-muted); }
+.pr-pct { font-size: 12px; font-weight: 600; font-variant-numeric: tabular-nums; color: var(--ink-muted); min-width: 36px; text-align: right; }
+.pr-delta { font-size: 10px; font-variant-numeric: tabular-nums; min-width: 26px; text-align: right; }
+.pr-bar-wrap { width: 36px; }
+.pr-bar { height: 2px; background: var(--hairline); border-radius: 1px; overflow: hidden; }
+.pr-fill { height: 100%; border-radius: 1px; background: linear-gradient(90deg, var(--blue), var(--up)); }
+
+/* Match result insight — right rail context for selected match */
+.match-insight { padding: 12px; background: rgba(255,255,255,.02); border-radius: 3px; }
+.mi-team { font-size: 11px; color: var(--ink); font-weight: 500; margin-bottom: 4px; }
+.mi-row { display: flex; justify-content: space-between;
+  font-size: 11px; padding: 2px 0; border-bottom: 1px solid rgba(255,255,255,.025); }
+.mi-row:last-child { border-bottom: none; }
+.mi-key { color: var(--ink-faint); }
+.mi-val { color: var(--ink-muted); font-weight: 500; font-variant-numeric: tabular-nums; }
+
+@keyframes rise { from { opacity:0; transform:translateY(4px); } to { opacity:1; transform:none; } }
+.body { animation: rise 0.2s cubic-bezier(.4,0,.2,1) both; }
+</style>
+</head>
+<body>
+
+<!-- ─── LEVEL 1: System health in 5 seconds ─── -->
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="nav-logo">WC<em>26</em></div>
+    <div class="nav-tabs">
+      <div class="nav-tab">Overview</div>
+      <div class="nav-tab active">Command</div>
+      <div class="nav-tab">Forecasts</div>
+      <div class="nav-tab">Record</div>
+      <div class="nav-tab">Teams</div>
+      <div class="nav-tab">Simulate</div>
+    </div>
+    <div class="nav-health">
+      <div class="health-dot"></div>
+      <span class="health-label">NOMINAL</span>
+      <span class="health-sub">· 21 graded · v1.0.0-platt</span>
+    </div>
+  </div>
+</nav>
+
+<!-- Minimal rail — 3 items -->
+<div class="rail">
+  <div class="ri">21 of 72 <span class="rv">graded</span></div>
+  <div class="ri">Calibration <span class="rv up">NOMINAL</span></div>
+  <div class="ri">Next: Germany–Spain <span class="rv warn">closes in 18h</span></div>
+  <div class="rfill"></div>
+  <div class="ri-date">Jun 19, 2026 · Matchday 6</div>
+</div>
+
+<div class="body">
+
+  <!-- ─── LEFT: Forecast Record ─── -->
+  <div class="left">
+    <div class="left-head">
+      <span class="left-title">Forecast Record</span>
+      <span class="left-count">72 locks</span>
+    </div>
+    <div class="fixture-list">
+
+      <div class="phase-div">Group Stage · Settled</div>
+
+      <div class="fix">
+        <div class="fix-matchup">
+          <div class="fix-teams-line"><span class="home">Qatar</span><span class="sep">vs</span>Ecuador</div>
+          <div class="fix-sub">Group A · Jun 11</div>
+        </div>
+        <div class="fix-score" style="color:var(--up)">2–0</div>
+        <div class="fix-badge b-sharp">Sharp</div>
+      </div>
+
+      <div class="fix">
+        <div class="fix-matchup">
+          <div class="fix-teams-line"><span class="home">Senegal</span><span class="sep">vs</span>Netherlands</div>
+          <div class="fix-sub">Group A · Jun 12</div>
+        </div>
+        <div class="fix-score" style="color:var(--up)">0–2</div>
+        <div class="fix-badge b-solid">Solid</div>
+      </div>
+
+      <div class="fix">
+        <div class="fix-matchup">
+          <div class="fix-teams-line"><span class="home">England</span><span class="sep">vs</span>Serbia</div>
+          <div class="fix-sub">Group B · Jun 14</div>
+        </div>
+        <div class="fix-score" style="color:var(--down)">0–0</div>
+        <div class="fix-badge b-surprise">Surprise</div>
+      </div>
+
+      <div class="fix">
+        <div class="fix-matchup">
+          <div class="fix-teams-line"><span class="home">USA</span><span class="sep">vs</span>Paraguay</div>
+          <div class="fix-sub">Group B · Jun 14</div>
+        </div>
+        <div class="fix-score" style="color:var(--up)">4–1</div>
+        <div class="fix-badge b-solid">Solid</div>
+      </div>
+
+      <div class="fix">
+        <div class="fix-matchup">
+          <div class="fix-teams-line"><span class="home">France</span><span class="sep">vs</span>Australia</div>
+          <div class="fix-sub">Group B · Jun 15</div>
+        </div>
+        <div class="fix-score" style="color:var(--up)">3–0</div>
+        <div class="fix-badge b-sharp">Sharp</div>
+      </div>
+
+      <div class="fix">
+        <div class="fix-matchup">
+          <div class="fix-teams-line"><span class="home">Germany</span><span class="sep">vs</span>Scotland</div>
+          <div class="fix-sub">Group C · Jun 16</div>
+        </div>
+        <div class="fix-score" style="color:var(--up)">2–1</div>
+        <div class="fix-badge b-solid">Solid</div>
+      </div>
+
+      <div class="fix">
+        <div class="fix-matchup">
+          <div class="fix-teams-line"><span class="home">Spain</span><span class="sep">vs</span>Croatia</div>
+          <div class="fix-sub">Group C · Jun 16</div>
+        </div>
+        <div class="fix-score" style="color:var(--down)">1–2</div>
+        <div class="fix-badge b-miss">Miss</div>
+      </div>
+
+      <div class="fix">
+        <div class="fix-matchup">
+          <div class="fix-teams-line"><span class="home">Brazil</span><span class="sep">vs</span>Mexico</div>
+          <div class="fix-sub">Group D · Jun 17</div>
+        </div>
+        <div class="fix-score" style="color:var(--up)">2–0</div>
+        <div class="fix-badge b-sharp">Sharp</div>
+      </div>
+
+      <div class="phase-div" style="margin-top:4px">Group Stage · Operational</div>
+
+      <div class="fix selected">
+        <div class="fix-matchup">
+          <div class="fix-teams-line"><span class="home">Brazil</span><span class="sep">vs</span>Argentina</div>
+          <div class="fix-sub">Group D · Jun 22 · 72h left</div>
+        </div>
+        <div class="fix-badge b-lock">Locked</div>
+      </div>
+
+      <div class="fix">
+        <div class="fix-matchup">
+          <div class="fix-teams-line"><span class="home">Germany</span><span class="sep">vs</span>Spain</div>
+          <div class="fix-sub">Group C · Jun 23 · 18h left</div>
+        </div>
+        <div class="fix-badge b-lock">Locked</div>
+      </div>
+
+      <div class="fix">
+        <div class="fix-matchup">
+          <div class="fix-teams-line"><span class="home">Argentina</span><span class="sep">vs</span>Mexico</div>
+          <div class="fix-sub">Group D · Jun 24 · 4d left</div>
+        </div>
+        <div class="fix-badge b-lock">Locked</div>
+      </div>
+
+      <div class="fix" style="cursor:default;opacity:0.5">
+        <div class="fix-matchup">
+          <div class="fix-teams-line" style="color:var(--ink-faint)">+ 48 more operational locks</div>
+          <div class="fix-sub">Groups E – P</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ─── CENTER ─── -->
+  <div class="center">
+
+    <!-- ─── LEVEL 2: Today's forecast in 15 seconds ─── -->
+
+    <!-- Intelligence Dispatch — editorial card -->
+    <div class="dispatch">
+      <div class="dispatch-dateline">Intelligence Dispatch · Jun 19, 2026</div>
+      <div class="dispatch-headline">Brazil leads the tournament. The model identified a blind spot last night.</div>
+      <div class="dispatch-body">
+        After England–Serbia settled <span class="dn">0–0</span>, the model flagged a pattern: draw probability is consistently underweighted when a top-5 Elo team opens as a strong group-stage favorite. <span class="up">Brazil's Championship Projection climbed to 18.2%</span> after their clean sheet against Mexico — but the same pattern is now active in their forecast against Argentina.
+      </div>
+      <div class="dispatch-signals">
+        <div class="ds-item">3 locks closing today <span class="val warn">·</span></div>
+        <div class="ds-item">Pattern under monitoring <span class="val warn">1 active</span></div>
+        <div class="ds-item">Sharp or Solid <span class="val up">47.6%</span> of settled</div>
+      </div>
+    </div>
+
+    <!-- Featured match: Brazil vs Argentina -->
+    <div class="match-card">
+      <div class="match-context">
+        <span>Group D · Jun 22 · MetLife Stadium · Elo+Dixon-Coles+Platt</span>
+        <div class="match-lock-badge">
+          <svg width="8" height="8" viewBox="0 0 8 8" fill="none"><rect x="2" y="3.5" width="4" height="3.5" rx="0.5" stroke="currentColor" stroke-width="1"/><path d="M3 3.5V2.5a1 1 0 012 0V3.5" stroke="currentColor" stroke-width="1"/></svg>
+          Closes Jun 22 · 72h 14m
+        </div>
+      </div>
+
+      <div class="match-heading">
+        <span class="home">Brazil</span><span class="sep">vs</span><span class="away">Argentina</span>
+      </div>
+      <div class="match-venue">Group D · Brazil favored at neutral venue</div>
+
+      <div class="prob">
+        <div class="prob-col win">
+          <div class="prob-outcome">Brazil win</div>
+          <div class="prob-pct">58%</div>
+          <div class="prob-bar" style="background:var(--up);opacity:0.4;width:58%"></div>
+        </div>
+        <div class="prob-col">
+          <div class="prob-outcome">Draw</div>
+          <div class="prob-pct">22%</div>
+          <div class="prob-bar" style="background:var(--ink-faint);width:22%"></div>
+        </div>
+        <div class="prob-col">
+          <div class="prob-outcome">Argentina win</div>
+          <div class="prob-pct">20%</div>
+          <div class="prob-bar" style="background:var(--down);opacity:0.5;width:20%"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── LEVEL 3: Intelligence depth in 60 seconds ─── -->
+
+    <!-- Forecast Drivers — 3 primary, expandable -->
+    <div class="drivers">
+      <div class="section-label">Forecast drivers</div>
+      <div class="driver-row">
+        <div class="driver">
+          <div class="d-key">Elo advantage</div>
+          <div class="d-val">BRA 2084 vs ARG 2071</div>
+          <span class="d-edge up">+13 pts → Brazil favored ↑</span>
+        </div>
+        <div class="driver">
+          <div class="d-key">Expected goals (λ)</div>
+          <div class="d-val">Brazil 1.84 · Argentina 1.71</div>
+          <span class="d-edge up">+0.13 edge → Brazil ↑</span>
+        </div>
+        <div class="driver">
+          <div class="d-key">Market signal</div>
+          <div class="d-val">Kalshi 55% · Model 58%</div>
+          <span class="d-edge warn">+3pp model above market ↑</span>
+        </div>
+      </div>
+      <!-- Secondary drivers — expanded -->
+      <div class="driver-more-grid" style="margin-top:2px">
+        <div class="dm-cell"><div class="dm-key">Venue</div><div class="dm-val">Neutral · <span class="edge neutral" style="color:var(--ink-faint)">no home adj.</span></div></div>
+        <div class="dm-cell"><div class="dm-key">Form (last 5)</div><div class="dm-val">BRA 4W1D · ARG 3W1D1L <span class="edge" style="color:var(--up)">↑</span></div></div>
+        <div class="dm-cell"><div class="dm-key">H2H (last 20)</div><div class="dm-val">38% BRA · 29% D · 33% ARG</div></div>
+        <div class="dm-cell"><div class="dm-key">Pattern flag</div><div class="dm-val" style="color:var(--warn)">Draw may be underweighted</div></div>
+      </div>
+    </div>
+
+    <!-- Score Probability Surface -->
+    <div class="score-surface">
+      <div class="surface-header">
+        <span class="surface-title">Score probability surface</span>
+        <span class="surface-model">Dixon-Coles Poisson · full model output</span>
+      </div>
+
+      <div class="sg-axis-top">
+        <div class="sg-axis-item" style="flex:0 0 24px;text-align:right;padding-right:4px;font-size:8px">↓BRA</div>
+        <div class="sg-axis-item">0</div><div class="sg-axis-item">1</div><div class="sg-axis-item">2</div>
+        <div class="sg-axis-item">3</div><div class="sg-axis-item">4</div><div class="sg-axis-item">5+</div>
+      </div>
+      <div style="font-size:8px;color:var(--ink-faint);padding-left:24px;margin-bottom:3px;letter-spacing:.04em">ARG goals →</div>
+
+      <div class="sg-row"><div class="sg-side">0</div><div class="sg-cells"><div class="sg-cell sg-d" style="--a:.18">3%</div><div class="sg-cell sg-a" style="--a:.14">2%</div><div class="sg-cell sg-a" style="--a:.08">1%</div><div class="sg-cell sg-a" style="--a:.04">—</div><div class="sg-cell sg-a" style="--a:.02">—</div><div class="sg-cell sg-a" style="--a:.01">—</div></div></div>
+      <div class="sg-row"><div class="sg-side">1</div><div class="sg-cells"><div class="sg-cell sg-h" style="--a:.22">5%</div><div class="sg-cell sg-d" style="--a:.28">7%</div><div class="sg-cell sg-a" style="--a:.18">4%</div><div class="sg-cell sg-a" style="--a:.08">2%</div><div class="sg-cell sg-a" style="--a:.04">1%</div><div class="sg-cell sg-a" style="--a:.02">—</div></div></div>
+      <div class="sg-row"><div class="sg-side">2</div><div class="sg-cells"><div class="sg-cell sg-h" style="--a:.32">8%</div><div class="sg-cell sg-h sg-best" style="--a:.56"><strong>13%</strong></div><div class="sg-cell sg-d" style="--a:.36">8%</div><div class="sg-cell sg-a" style="--a:.16">3%</div><div class="sg-cell sg-a" style="--a:.07">1%</div><div class="sg-cell sg-a" style="--a:.03">—</div></div></div>
+      <div class="sg-row"><div class="sg-side">3</div><div class="sg-cells"><div class="sg-cell sg-h" style="--a:.25">6%</div><div class="sg-cell sg-h" style="--a:.38">9%</div><div class="sg-cell sg-h" style="--a:.28">7%</div><div class="sg-cell sg-d" style="--a:.18">4%</div><div class="sg-cell sg-a" style="--a:.08">2%</div><div class="sg-cell sg-a" style="--a:.03">—</div></div></div>
+      <div class="sg-row"><div class="sg-side">4</div><div class="sg-cells"><div class="sg-cell sg-h" style="--a:.12">3%</div><div class="sg-cell sg-h" style="--a:.18">4%</div><div class="sg-cell sg-h" style="--a:.14">3%</div><div class="sg-cell sg-h" style="--a:.09">2%</div><div class="sg-cell sg-d" style="--a:.05">1%</div><div class="sg-cell sg-a" style="--a:.02">—</div></div></div>
+      <div class="sg-row"><div class="sg-side">5+</div><div class="sg-cells"><div class="sg-cell sg-h" style="--a:.05">1%</div><div class="sg-cell sg-h" style="--a:.08">2%</div><div class="sg-cell sg-h" style="--a:.06">1%</div><div class="sg-cell sg-h" style="--a:.04">1%</div><div class="sg-cell sg-h" style="--a:.02">—</div><div class="sg-cell sg-d" style="--a:.01">—</div></div></div>
+
+      <div class="sg-legend">
+        <div class="sg-leg"><div class="sg-swatch" style="background:rgba(124,255,178,.25)"></div>Brazil win</div>
+        <div class="sg-leg"><div class="sg-swatch" style="background:rgba(255,255,255,.18)"></div>Draw</div>
+        <div class="sg-leg"><div class="sg-swatch" style="background:rgba(255,103,77,.25)"></div>Argentina win</div>
+        <div class="sg-leg" style="margin-left:auto"><div class="sg-swatch" style="outline:1px solid rgba(255,255,255,.22);background:transparent"></div>Most likely</div>
+      </div>
+
+      <div class="top-scores">
+        <div class="ts best"><span class="ts-s">BRA 2–1</span><span class="ts-p">13%</span></div>
+        <div class="ts"><span class="ts-s">BRA 3–1</span><span class="ts-p">9%</span></div>
+        <div class="ts"><span class="ts-s">BRA 2–0</span><span class="ts-p">8%</span></div>
+        <div class="ts"><span class="ts-s">1–1</span><span class="ts-p">8%</span></div>
+        <div class="ts"><span class="ts-s">BRA 1–0</span><span class="ts-p">5%</span></div>
+        <div class="ts" style="opacity:.4"><span class="ts-s">+23 more</span></div>
+      </div>
+
+      <div class="lock-row">
+        <div>
+          <div class="lock-label">Prediction lock expires</div>
+          <div class="lock-sub">Jun 22, 2026 · 17:00 UTC · Group D</div>
+        </div>
+        <div class="lock-time">72h 14m</div>
+      </div>
+    </div>
+
+    <!-- ─── LEVEL 4: Model behavior in 5 minutes ─── -->
+
+    <!-- Model Evolution + Forecast Autopsy -->
+    <div class="evolution">
+      <div class="section-label" style="margin-bottom:12px">Model evolution</div>
+      <div class="evolution-entries">
+
+        <!-- Surprise + Forecast Autopsy -->
+        <div class="evo-entry flag">
+          <div class="evo-meta">
+            <span class="evo-date">Jun 18 · Matchday 5</span>
+            <span class="evo-tag flag">Surprise observed</span>
+          </div>
+          <div class="evo-body">
+            <strong>England vs Serbia</strong> settled <span class="dn">0–0</span>. Model gave England <span class="dn">72% win probability</span>, draw only 18%. Worst Brier of the tournament so far: 0.941.
+          </div>
+          <!-- Forecast Autopsy inline -->
+          <div class="autopsy">
+            <div class="autopsy-label">Forecast autopsy</div>
+            <div class="autopsy-row"><span class="ar-key">Locked probability</span><span class="ar-val">England 72% · Draw 18% · Serbia 10%</span></div>
+            <div class="autopsy-row"><span class="ar-key">Result</span><span class="ar-val dn">0–0 Draw · Brier 0.941 · Surprise</span></div>
+            <div class="autopsy-row"><span class="ar-key">Draw frequency, comparable fixtures</span><span class="ar-val dn">28% observed vs 18% model (n=47)</span></div>
+            <div class="autopsy-note"><em>Pattern:</em> Top-5 Elo team as strong neutral-venue group-stage favorite → draw underweighted by ~10pp. Monitoring 3 upcoming locks: Germany–Spain, Brazil–Argentina, France–Netherlands.</div>
+          </div>
+          <div class="evo-status"><div class="evo-dot" style="background:var(--warn)"></div><span style="color:var(--warn)">3 locks under monitoring</span></div>
+        </div>
+
+        <div class="evo-entry update">
+          <div class="evo-meta">
+            <span class="evo-date">Jun 15 · Matchday 4</span>
+            <span class="evo-tag update">Calibration updated</span>
+          </div>
+          <div class="evo-body">
+            ECE improved <strong>2.8% → 2.4%</strong> after Matchday 4 settlement. Slight overconfidence in the 65–75% range corrected. Calibration updated — no version change.
+          </div>
+          <div class="evo-status"><div class="evo-dot" style="background:var(--blue)"></div><span style="color:var(--blue)">Logged · v1.0.0-platt unchanged</span></div>
+        </div>
+
+        <div class="evo-entry confirm">
+          <div class="evo-meta">
+            <span class="evo-date">Jun 13 · Matchday 3</span>
+            <span class="evo-tag confirm">Pattern confirmed</span>
+          </div>
+          <div class="evo-body">
+            Brazil vs Mexico settled <span class="up">2–0</span>. Brier 0.440 → <span class="up">Sharp grade.</span> Hypothesis confirmed: Elo advantage ≥50 pts at neutral venue maps reliably to 60–67% win probability. Applied to λ weighting in all high-Elo-gap fixtures.
+          </div>
+          <div class="evo-status"><div class="evo-dot" style="background:var(--up)"></div><span style="color:var(--up)">Active in Brazil–Argentina prediction</span></div>
+        </div>
+
+      </div>
+    </div>
+
+  </div><!-- /center -->
+
+  <!-- ─── RIGHT ─── -->
+  <div class="right">
+
+    <!-- Forecast health — condensed -->
+    <div class="right-section">
+      <div class="rs-label">System health</div>
+      <div class="health-block">
+        <div class="hb-status"><div class="health-dot"></div>NOMINAL calibration</div>
+        <div class="hb-row"><span class="hb-key">Brier score</span><span class="hb-val" style="color:var(--ink-muted)">0.721</span></div>
+        <div class="hb-row"><span class="hb-key">Reliability index (ECE)</span><span class="hb-val" style="color:var(--up)">2.1%</span></div>
+        <div class="hb-row"><span class="hb-key">RPS</span><span class="hb-val" style="color:var(--blue)">0.220</span></div>
+      </div>
+    </div>
+
+    <!-- Grade tally — replace chart with inline count -->
+    <div class="right-section">
+      <div class="rs-label">Grade distribution · n=21</div>
+      <div class="grade-tally">
+        <div class="gt-item"><div class="gt-n" style="color:var(--up)">6</div><div class="gt-label" style="color:var(--up)">Sharp</div></div>
+        <div class="gt-item"><div class="gt-n" style="color:var(--blue)">4</div><div class="gt-label" style="color:var(--blue)">Solid</div></div>
+        <div class="gt-item"><div class="gt-n" style="color:var(--warn)">5</div><div class="gt-label" style="color:var(--warn)">Close</div></div>
+        <div class="gt-item"><div class="gt-n" style="color:var(--down)">5</div><div class="gt-label" style="color:var(--down)">Miss</div></div>
+        <div class="gt-item"><div class="gt-n" style="color:var(--down);font-weight:700">1</div><div class="gt-label" style="color:var(--down)">Surp.</div></div>
+      </div>
+      <div style="margin-top:8px;font-size:10px;color:var(--ink-faint)">47.6% Sharp or Solid · 1 Surprise under autopsy</div>
+    </div>
+
+    <!-- Match context for right rail — Brazil + Argentina info -->
+    <div class="right-section">
+      <div class="rs-label">Selected match context</div>
+      <div class="match-insight">
+        <div class="mi-team">Brazil</div>
+        <div class="mi-row"><span class="mi-key">Elo rating</span><span class="mi-val">2084</span></div>
+        <div class="mi-row"><span class="mi-key">Form (last 5)</span><span class="mi-val" style="color:var(--up)">4W 1D</span></div>
+        <div class="mi-row"><span class="mi-key">Projected goals</span><span class="mi-val">1.84</span></div>
+      </div>
+      <div class="match-insight" style="margin-top:2px">
+        <div class="mi-team">Argentina</div>
+        <div class="mi-row"><span class="mi-key">Elo rating</span><span class="mi-val">2071</span></div>
+        <div class="mi-row"><span class="mi-key">Form (last 5)</span><span class="mi-val" style="color:var(--warn)">3W 1D 1L</span></div>
+        <div class="mi-row"><span class="mi-key">Projected goals</span><span class="mi-val">1.71</span></div>
+      </div>
+    </div>
+
+    <!-- Championship projection -->
+    <div class="right-section">
+      <div class="rs-label">Championship projection · 10k simulations</div>
+      <div class="proj-row"><span class="pr-rank">1</span><span class="pr-name top">Brazil</span><div class="pr-bar-wrap"><div class="pr-bar"><div class="pr-fill" style="width:91%"></div></div></div><span class="pr-pct">18.2%</span><span class="pr-delta" style="color:var(--up)">+1.4</span></div>
+      <div class="proj-row"><span class="pr-rank">2</span><span class="pr-name">France</span><div class="pr-bar-wrap"><div class="pr-bar"><div class="pr-fill" style="width:74%"></div></div></div><span class="pr-pct">14.7%</span><span class="pr-delta" style="color:var(--ink-faint)">—</span></div>
+      <div class="proj-row"><span class="pr-rank">3</span><span class="pr-name">England</span><div class="pr-bar-wrap"><div class="pr-bar"><div class="pr-fill" style="width:62%"></div></div></div><span class="pr-pct">12.3%</span><span class="pr-delta" style="color:var(--down)">−0.8</span></div>
+      <div class="proj-row"><span class="pr-rank">4</span><span class="pr-name">Argentina</span><div class="pr-bar-wrap"><div class="pr-bar"><div class="pr-fill" style="width:58%"></div></div></div><span class="pr-pct">11.6%</span><span class="pr-delta" style="color:var(--ink-faint)">—</span></div>
+      <div class="proj-row"><span class="pr-rank">5</span><span class="pr-name">Germany</span><div class="pr-bar-wrap"><div class="pr-bar"><div class="pr-fill" style="width:47%"></div></div></div><span class="pr-pct">9.4%</span><span class="pr-delta" style="color:var(--up)">+0.3</span></div>
+      <div class="proj-row"><span class="pr-rank">6</span><span class="pr-name">Spain</span><div class="pr-bar-wrap"><div class="pr-bar"><div class="pr-fill" style="width:41%"></div></div></div><span class="pr-pct">8.1%</span><span class="pr-delta" style="color:var(--down)">−0.5</span></div>
+      <div style="margin-top:8px;font-size:10px;color:var(--ink-faint)">Δ vs Matchday 5 · updated after each settlement</div>
+    </div>
+
+  </div><!-- /right -->
+
+</div>
+</body>
+</html>

@@ -152,13 +152,12 @@ export function inspectProject(root = ROOT): DesignViolation[] {
           message: "Page shell is missing <RouteStack.",
         });
       }
-      // Transition: accept either the legacy AppChrome or the unified WCS26Shell.
-      if (!text.includes("<AppChrome") && !text.includes("<WCS26Shell")) {
+      if (!text.includes("<WCS26Shell")) {
         violations.push({
           file: rel,
           line: 1,
           rule: "page-shell",
-          message: "Page must use AppChrome or WCS26Shell as its shell.",
+          message: "Page must use WCS26Shell as its shell.",
         });
       }
       if (!text.includes("<CanvasSection")) {
@@ -182,7 +181,7 @@ export function inspectProject(root = ROOT): DesignViolation[] {
           file: rel,
           line: 1,
           rule: "page-shell",
-          message: "Pages must use AppChrome; SiteHeader is no longer the primary shell.",
+          message: "Pages must use WCS26Shell; SiteHeader is no longer the primary shell.",
         });
       }
       if (ROUTE_BOX_RE.test(text)) {
@@ -229,14 +228,6 @@ export function inspectProject(root = ROOT): DesignViolation[] {
       }
     }
 
-    if (rel === "components/app-chrome.tsx" && !text.includes("function MobileTabBar")) {
-      violations.push({
-        file: rel,
-        line: 1,
-        rule: "mobile-nav",
-        message: "AppChrome must include the mobile bottom tab bar.",
-      });
-    }
 
     if (rel === "app/groups/page.tsx") {
       const dataPlaneCount = (text.match(/<DataPlane\b/g) ?? []).length;
