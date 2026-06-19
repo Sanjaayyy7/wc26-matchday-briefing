@@ -1,4 +1,4 @@
-import { AppChrome } from "@/components/app-chrome";
+import { WCS26Shell } from "@/components/wc26-shell";
 import { CanvasSection, DataPlane, RouteStack, SignalLine } from "@/components/cinematic";
 import { MatchesFilter } from "@/components/matches-filter";
 import { allMatchRows } from "@/lib/match-rows";
@@ -12,7 +12,7 @@ export default function MatchesPage() {
   const locked = rows.filter((row) => row.split && !row.score).length;
   const upcoming = rows.length - played;
   return (
-    <AppChrome
+    <WCS26Shell
       route="matches"
       title="Fixture Board"
       rail={
@@ -52,6 +52,6 @@ export default function MatchesPage() {
           </DataPlane>
         </CanvasSection>
       </RouteStack>
-    </AppChrome>
+    </WCS26Shell>
   );
 }
