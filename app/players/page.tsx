@@ -1,4 +1,4 @@
-import { AppChrome } from "@/components/app-chrome";
+import { WCS26Shell } from "@/components/wc26-shell";
 import { CanvasSection, DataPlane, RouteStack, SignalLine } from "@/components/cinematic";
 import { PlayerLeaderboard } from "@/components/player-leaderboard";
 import { StyleClusterPlot } from "@/components/style-cluster-plot";
@@ -15,7 +15,7 @@ export default function PlayersPage() {
   const seededCount = players.filter((p) => p.isSeeded).length;
 
   return (
-    <AppChrome
+    <WCS26Shell
       route="players"
       title="Player Dossiers"
       rail={
@@ -47,6 +47,6 @@ export default function PlayersPage() {
           </DataPlane>
         </CanvasSection>
       </RouteStack>
-    </AppChrome>
+    </WCS26Shell>
   );
 }

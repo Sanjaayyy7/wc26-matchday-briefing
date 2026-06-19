@@ -1,4 +1,4 @@
-import { AppChrome } from "@/components/app-chrome";
+import { WCS26Shell } from "@/components/wc26-shell";
 import { CanvasSection, DataPlane, RouteStack, SignalLine } from "@/components/cinematic";
 import { fixtureBySlug, clubById } from "@/lib/data";
 import type { LockedEntry } from "@/lib/predictions-ledger";
@@ -95,7 +95,7 @@ export default function RecordPage() {
     .backtest;
 
   return (
-    <AppChrome
+    <WCS26Shell
       route="record"
       title="Accountability Ledger"
       rail={
@@ -440,6 +440,6 @@ export default function RecordPage() {
           </DataPlane>
         </CanvasSection>
       </RouteStack>
-    </AppChrome>
+    </WCS26Shell>
   );
 }

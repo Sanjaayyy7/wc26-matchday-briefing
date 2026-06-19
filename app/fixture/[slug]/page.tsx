@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { AppChrome } from "@/components/app-chrome";
+import { WCS26Shell } from "@/components/wc26-shell";
 import { CanvasSection, DataPlane, HeroScene, RouteStack } from "@/components/cinematic";
 import { FixturePane } from "@/components/fixture-pane";
 import { EloSparkline } from "@/components/elo-sparkline";
@@ -29,7 +29,7 @@ export default async function FixturePage({
   const view = matchViewBySlug(fixture.slug);
 
   return (
-    <AppChrome route="matches">
+    <WCS26Shell route="matches">
       <RouteStack>
         <Link
           href="/matches"
@@ -88,6 +88,6 @@ export default async function FixturePage({
           </DataPlane>
         </CanvasSection>
       </RouteStack>
-    </AppChrome>
+    </WCS26Shell>
   );
 }

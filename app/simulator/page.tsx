@@ -1,4 +1,4 @@
-import { AppChrome } from "@/components/app-chrome";
+import { WCS26Shell } from "@/components/wc26-shell";
 import { CanvasSection, DataPlane, RouteStack, SignalLine } from "@/components/cinematic";
 import { OddsTable, type OddsRow } from "@/components/odds-table";
 import { allClubs } from "@/lib/data";
@@ -47,7 +47,7 @@ export default function SimulatorPage() {
   const leaders = [...rows].sort((a, b) => b.champion - a.champion).slice(0, 5);
 
   return (
-    <AppChrome
+    <WCS26Shell
       route="simulator"
       title="Futures Board"
       rail={
@@ -115,6 +115,6 @@ export default function SimulatorPage() {
           </DataPlane>
         </CanvasSection>
       </RouteStack>
-    </AppChrome>
+    </WCS26Shell>
   );
 }

@@ -1,4 +1,4 @@
-import { AppChrome } from "@/components/app-chrome";
+import { WCS26Shell } from "@/components/wc26-shell";
 import { CanvasSection, DataPlane, RouteStack, SignalLine } from "@/components/cinematic";
 import Link from "next/link";
 import type { CSSProperties } from "react";
@@ -161,7 +161,7 @@ export default function GroupsPage() {
   const clubs = allClubs();
   const runs = (simulation as { runMeta: { runs: number } }).runMeta.runs;
   return (
-    <AppChrome
+    <WCS26Shell
       route="groups"
       title="Group Tables"
       rail={
@@ -179,6 +179,6 @@ export default function GroupsPage() {
           <GroupsBoard clubs={clubs} />
         </CanvasSection>
       </RouteStack>
-    </AppChrome>
+    </WCS26Shell>
   );
 }
