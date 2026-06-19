@@ -8,5 +8,6 @@ Nygard-format ADRs for heavyweight WC26 choices (plan §L). Lightweight decision
 | [0002](0002-player-clustering.md) | k-means++ (k=4) on 5-feature WC26 player stats | accepted | 2026-06-18 |
 | [0003](0003-sentiment-transformers-swap.md) | Use @huggingface/transformers (not deprecated @xenova/transformers) | accepted | 2026-06-18 |
 | [0004](0004-sentiment-config.md) | Sentiment model id, 5-min bucket size, 10-min shift window | accepted | 2026-06-18 |
+| [0005](0005-model-versioning.md) | Model Versioning & Champion-Challenger Governance | accepted | 2026-06-19 |
 
 Mandatory ADRs for this effort: Task-1 chosen model variant + params; K-Means k + feature set; sentiment model id + bucket size + shift window; the `@huggingface/transformers` library swap.

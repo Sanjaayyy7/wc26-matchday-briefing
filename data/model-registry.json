@@ -1,0 +1,39 @@
+{
+  "_schema": "model-registry/v1",
+  "_description": "Champion-Challenger governance. A Challenger may only replace Champion when ALL promotion criteria are satisfied.",
+  "promotionCriteria": {
+    "brierImproves": true,
+    "calibrationImproveOrStable": true,
+    "walkForwardImproves": true,
+    "noFeatureLeakage": true,
+    "noOverfitting": true,
+    "resultsReproducible": true
+  },
+  "versions": [
+    {
+      "versionId": "v1.0.0-platt",
+      "status": "champion",
+      "trainedAt": "2026-06-12T00:00:00.000Z",
+      "datasetVersion": "martj42@2026-06-12",
+      "modelType": "elo+dixon-coles+platt",
+      "calibrationMethod": "platt",
+      "parameters": {
+        "kBase": 20,
+        "kTournamentMultiplier": 1.5,
+        "kFinalMultiplier": 2.0,
+        "goalMarginMultiplier": 0.25,
+        "homeAdvantage": 100
+      },
+      "metrics": {
+        "brier": 0.5085,
+        "rps": 0.1671,
+        "logLoss": 0.8672,
+        "ece": 0.0195,
+        "n": 2546,
+        "holdout": "2024+"
+      },
+      "promotionDecision": "initial-champion",
+      "promotionRationale": "Best model in ADR-0001 evaluation. Meets evidence-based gate (Brier < 0.51, ECE < 0.03). No alternatives exceeded this threshold."
+    }
+  ]
+}
