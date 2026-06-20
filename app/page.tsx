@@ -181,7 +181,7 @@ export default function HomePage() {
         <CanvasSection eyebrow="Overview" title="Forecast performance">
           <div className="grid animate-rise gap-12 lg:grid-cols-[2fr_320px]">
             {/* ── MAIN COLUMN ── */}
-            <div className="flex flex-col gap-12">
+            <div className="flex flex-col gap-16">
               {/* PrimaryMetric */}
               <div className="flex flex-col gap-2">
                 <span className="text-micro uppercase tracking-widest text-[var(--ink-faint)]">
@@ -191,7 +191,7 @@ export default function HomePage() {
                   {correct}/{agg.n} correct picks
                 </div>
                 <div className="text-caption data-mono tabular text-[var(--ink-muted)]">
-                  Brier {brierStr} · ECE {eceStr} · top-outcome accuracy {accuracyStr}
+                  Brier {brierStr} · {accuracyStr} top-outcome accuracy
                 </div>
                 {agg.n < 30 && (
                   <div className="text-caption text-[var(--warn)]">
@@ -310,7 +310,7 @@ export default function HomePage() {
                       >
                         {c.name}
                       </Link>
-                      <span className="block h-0.5 w-16 rounded-full bg-[var(--hairline)] overflow-hidden">
+                      <span className="block h-1 w-20 rounded-full bg-[var(--hairline)] overflow-hidden">
                         <span
                           className="block h-full rounded-full"
                           style={{ width: `${(c.pct / topChampionPct) * 100}%`, background: "var(--up)" }}
