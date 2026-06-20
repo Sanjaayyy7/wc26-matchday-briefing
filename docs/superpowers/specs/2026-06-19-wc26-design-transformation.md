@@ -759,11 +759,13 @@ The existing codebase already has strong foundations:
 1. **`app/page.tsx`** (Homepage) — full rewrite of content structure per this spec
 2. **`app/record/page.tsx`** (/record) — significant expansion per this spec (already partially done in prior session)
 3. **`app/matches/page.tsx`** (/matches) — layout and component update per this spec
-4. **`components/app-chrome.tsx`** (Nav) — add lifecycle sub-labels to nav links; add mobile tab bar
-5. **`components/status-rail.tsx`** (new) — F1 operational layer, shared across all pages
+4. **`components/wc26-shell-header.tsx`** (Nav — replaces the deleted `app-chrome.tsx`) — add lifecycle sub-labels to nav links. _Mobile tab bar dropped during shell unification; mobile nav deferred, not added here._
+5. **StatusRail** — **already shipped** inside `components/wc26-shell-header.tsx` (shell unification: graded / Calibration / ECE rail). Enhance in place per the F1 operational layer; **do not create a duplicate `status-rail.tsx`.**
 6. **`components/intelligence-card.tsx`** (new) — analytical prose card framework
 7. **`components/settlement-row.tsx`** (new or refactor) — inline Brier bar + verdict chip
 8. **CSS additions** — spacing tokens if not already in globals.css; tabular-nums enforcement
+
+> **Reconciliation note (2026-06-19, post shell-unification + hybrid-direction decision):** Build direction is **hybrid premium-within-system** — keep the institutional/anti-glass rules (§ line 36) and the design-inspector constraints (no arbitrary px, no raw gradients, `data-mono`/`tabular` on numerics, `duration-300`/`var(--dur)` motion). Achieve "premium" through density, hierarchy, and motion-as-state only — no glow/blur/decorative-gradient. House tokens (`--up`/`--down`/`--canvas`) are kept, not retuned.
 
 ### What does NOT change
 
