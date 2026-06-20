@@ -1,0 +1,83 @@
+name: WC26 Matchday Update
+
+# Daily zero-touch pipeline: refresh the public dataset, settle locked
+# predictions, retrain + gate the model, lock new predictions, simulate,
+# enrich (resolutions/players/sentiment), rebuild the accountability report,
+# verify, then commit the refreshed data/ back to main. Vercel is git-connected,
+# so the push auto-deploys production. Nothing here runs until this workflow is
+# on the default branch; activation is the merge of this PR.
+#
+# Secrets: none required. The dataset source is a public GitHub CSV and the
+# commit/push uses the built-in GITHUB_TOKEN. Enrichment steps that depend on
+# external sources are best-effort (continue-on-error) so a flaky/unavailable
+# source degrades gracefully instead of failing the run.
+
+on:
+  schedule:
+    - cron: "0 9 * * *" # daily at 09:00 UTC
+  workflow_dispatch: {} # manual "Run workflow" button for testing
+
+# Never let two matchday runs overlap (they both mutate data/).
+concurrency:
+  group: matchday
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  matchday:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+
+      - run: npm ci
+
+      # ── Core pipeline (public dataset, no secrets) ──
+      # matchday.mts = fetch-dataset -> build-schedule -> settle-predictions ->
+      # train-model (gated; aborts on degradation) -> lock-predictions -> run-simulator
+      - name: Run matchday pipeline
+        run: npm run matchday
+
+      # ── Enrichment (external sources; best-effort) ──
+      - name: Market resolutions
+        run: npm run pipeline:resolutions && npm run pipeline:polymarket
+        continue-on-error: true
+
+      - name: Player stats + clustering
+        run: npm run players:fetch && npm run players:build
+        continue-on-error: true
+
+      - name: Sentiment
+        run: npm run sentiment:fetch && npm run sentiment:score
+        continue-on-error: true
+
+      # ── Accountability report (reads resolutions; runs after enrichment) ──
+      - name: Accountability report
+        run: npm run report:accountability
+
+      # ── Quality gates: never ship broken data or a broken build ──
+      - name: Verify (tests · design inspector · build)
+        run: |
+          npm run test
+          npm run design:inspect
+          npm run build
+
+      # ── Commit refreshed data only if it changed → Vercel auto-deploys ──
+      - name: Commit refreshed data
+        run: |
+          git config user.name "wc26-matchday-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add data/
+          if git diff --cached --quiet; then
+            echo "No data changes — nothing to commit."
+          else
+            git commit -m "chore(data): automated matchday update $(date -u +%Y-%m-%d)"
+            git push
+          fi
