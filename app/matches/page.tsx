@@ -16,7 +16,7 @@ export default function MatchesPage() {
   return (
     <WCS26Shell
       route="matches"
-      title="Locked Predictions"
+      title="Fixture Board"
       rail={
         <div className="flex flex-col gap-3">
           <SignalLine
