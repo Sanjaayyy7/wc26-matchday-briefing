@@ -193,22 +193,32 @@ function parseScore(result: string): { home: number; away: number } | null {
   return { home: parseInt(m[1], 10), away: parseInt(m[2], 10) };
 }
 
+// An outcome the model rated below this probability is never "close" — a 2nd-place
+// finish or a near scoreline does not rescue a call the model rated unlikely
+// (e.g. a 5%-rated draw is a miss, not "close").
+const CLOSE_MIN_PROB = 20;
+
 function classifyVerdict(entry: LockedEntry): Verdict {
   if (entry.correctPick) return "hit";
 
-  // Check 2nd-most-likely bucket
-  if (entry.realized && secondMostLikely(entry.split) === entry.realized) {
-    return "close";
-  }
+  // Precondition for any "close": the model must have given the realized outcome
+  // a meaningful probability. Otherwise the forecast was confidently wrong.
+  const realizedProb = entry.realized ? entry.split[entry.realized] : 0;
+  if (realizedProb >= CLOSE_MIN_PROB) {
+    // Realized outcome was the 2nd-most-likely bucket.
+    if (entry.realized && secondMostLikely(entry.split) === entry.realized) {
+      return "close";
+    }
 
-  // Check scoreline closeness: |mostLikely.home − actual.home| ≤ 1 AND
-  //                             |mostLikely.away − actual.away| ≤ 1
-  if (entry.result) {
-    const actual = parseScore(entry.result);
-    if (actual) {
-      const diffH = Math.abs(entry.mostLikely.home - actual.home);
-      const diffA = Math.abs(entry.mostLikely.away - actual.away);
-      if (diffH <= 1 && diffA <= 1) return "close";
+    // Scoreline closeness: |mostLikely.home − actual.home| ≤ 1 AND
+    //                       |mostLikely.away − actual.away| ≤ 1
+    if (entry.result) {
+      const actual = parseScore(entry.result);
+      if (actual) {
+        const diffH = Math.abs(entry.mostLikely.home - actual.home);
+        const diffA = Math.abs(entry.mostLikely.away - actual.away);
+        if (diffH <= 1 && diffA <= 1) return "close";
+      }
     }
   }
 

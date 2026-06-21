@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-21T22:44:25.113Z",
+  "generatedAt": "2026-06-21T23:37:17.773Z",
   "official": {
     "rows": [
       {
@@ -42,7 +42,7 @@
           "bttsBrier": 0.38662375474603883,
           "bttsDerivedPostHoc": true
         },
-        "verdict": "close"
+        "verdict": "miss"
       },
       {
         "slug": "brazil-vs-morocco",
@@ -99,7 +99,7 @@
           "bttsBrier": 0.19894504366329538,
           "bttsDerivedPostHoc": true
         },
-        "verdict": "close"
+        "verdict": "miss"
       },
       {
         "slug": "sweden-vs-tunisia",
@@ -232,7 +232,7 @@
           "bttsBrier": 0.08831327975791782,
           "bttsDerivedPostHoc": true
         },
-        "verdict": "close"
+        "verdict": "miss"
       },
       {
         "slug": "saudi-arabia-vs-uruguay",
@@ -251,7 +251,7 @@
           "bttsBrier": 0.33240514988389125,
           "bttsDerivedPostHoc": true
         },
-        "verdict": "close"
+        "verdict": "miss"
       },
       {
         "slug": "france-vs-senegal",
@@ -346,7 +346,7 @@
           "bttsBrier": 0.3378401964778548,
           "bttsDerivedPostHoc": true
         },
-        "verdict": "close"
+        "verdict": "miss"
       },
       {
         "slug": "uzbekistan-vs-colombia",
@@ -403,7 +403,7 @@
           "bttsBrier": 0.19809260965958725,
           "bttsDerivedPostHoc": true
         },
-        "verdict": "close"
+        "verdict": "miss"
       },
       {
         "slug": "czech-republic-vs-south-africa",
@@ -593,7 +593,7 @@
           "bttsBrier": 0.1323323433702871,
           "bttsDerivedPostHoc": true
         },
-        "verdict": "close"
+        "verdict": "miss"
       },
       {
         "slug": "netherlands-vs-sweden",
