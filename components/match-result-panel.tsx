@@ -1,7 +1,9 @@
+import Link from "next/link";
 import { NumberTicker } from "./number-ticker";
 import { VerdictChip } from "./verdict-chip";
 import { kitPairWashStyle } from "@/lib/kit-color";
 import type { MatchView } from "@/lib/match-view";
+import { buildAutopsy } from "@/lib/match-autopsy";
 
 function Stat({
   label,
@@ -35,6 +37,14 @@ export function MatchResultPanel({ view }: { view: MatchView }) {
   const scoreParts = view.score.split("-");
   const homeScore = Number(scoreParts[0]);
   const awayScore = Number(scoreParts[1]);
+
+  const official = view.status === "official" ? view.official : null;
+  const autopsy =
+    official && Number.isFinite(homeScore) && Number.isFinite(awayScore)
+      ? buildAutopsy(official.locked, homeScore, awayScore)
+      : null;
+  const outcomeName = (o: "home" | "draw" | "away") =>
+    o === "home" ? `${view.home.short} win` : o === "away" ? `${view.away.short} win` : "a draw";
 
   return (
     <section
@@ -97,6 +107,44 @@ export function MatchResultPanel({ view }: { view: MatchView }) {
           </div>
         )}
       </div>
+
+      {autopsy && official ? (
+        <div className="mt-8 flex flex-col gap-3 border-t border-[var(--hairline)] pt-6">
+          <h3 className="text-label">Forecast autopsy</h3>
+          <p className="max-w-2xl text-[var(--ink-muted)]">
+            The model&rsquo;s strongest call was{" "}
+            <span className="text-[var(--ink)]">{outcomeName(autopsy.topLabel)}</span> at{" "}
+            <span className="data-mono tabular">{autopsy.topPct}%</span>. The match ended {view.score} —{" "}
+            {outcomeName(autopsy.realized)} — which the model rated{" "}
+            <span className="data-mono tabular">{autopsy.actualPct}%</span>.
+          </p>
+          <div className="flex h-2 w-full max-w-md overflow-hidden rounded-sm">
+            <div style={{ width: `${official.locked.home}%`, background: "var(--kit-home)" }} />
+            <div style={{ width: `${official.locked.draw}%`, background: "var(--ink-faint)" }} />
+            <div style={{ width: `${official.locked.away}%`, background: "var(--kit-away)" }} />
+          </div>
+          <div className="flex max-w-md justify-between text-fine text-[var(--ink-faint)]">
+            <span className={autopsy.realized === "home" ? "text-[var(--ink)]" : undefined}>
+              {view.home.short} <span className="data-mono tabular">{official.locked.home}%</span>
+            </span>
+            <span className={autopsy.realized === "draw" ? "text-[var(--ink)]" : undefined}>
+              Draw <span className="data-mono tabular">{official.locked.draw}%</span>
+            </span>
+            <span className={autopsy.realized === "away" ? "text-[var(--ink)]" : undefined}>
+              {view.away.short} <span className="data-mono tabular">{official.locked.away}%</span>
+            </span>
+          </div>
+          {autopsy.drawUnderrated ? (
+            <p className="text-fine text-[var(--warn)]">
+              A draw the model rated below the field — this pattern feeds the active calibration
+              investigation.{" "}
+              <Link href="/command" className="underline underline-offset-2">
+                LSig-001 →
+              </Link>
+            </p>
+          ) : null}
+        </div>
+      ) : null}
 
       {(facts?.scorers?.length || detailFacts) && (
         <div className="mt-8 grid gap-6 lg:grid-cols-2">

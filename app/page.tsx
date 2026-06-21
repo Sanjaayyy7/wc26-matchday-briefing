@@ -7,7 +7,6 @@ import { CalibrationDiagram } from "@/components/calibration-diagram";
 import { allMatchViews } from "@/lib/match-view";
 import { selectUpcomingLocks } from "@/lib/upcoming-locks";
 import { fixtureBySlug, clubById, allClubs } from "@/lib/data";
-import type { Verdict } from "@/lib/kit-color";
 import type { AccountabilityOutput } from "@/lib/accountability";
 import type { LockedEntry } from "@/lib/predictions-ledger";
 import accountabilityJson from "@/data/backtest/wc26-accountability.json";
@@ -30,10 +29,6 @@ function gradeFrom(brier: number): "SURPRISE" | "MISS" | "CLOSE" | "SOLID" | "SH
 }
 
 /** Three-state verdict for the shared SettlementRow / VerdictChip primitives. */
-function verdictFromBrier(b: number): Verdict {
-  return b < 0.55 ? "hit" : b < 0.75 ? "close" : "miss";
-}
-
 function LockRow({
   label,
   kickoff,
@@ -129,6 +124,11 @@ export default function HomePage() {
   );
 
   // ── Settlement feed (newest-first, 4) → shared SettlementRow shape ──
+  // Verdict is the canonical, rank-based official verdict (classifyVerdict),
+  // matching /record and /fixture — never a divergent local Brier mapping.
+  const verdictBySlug = new Map(
+    accountability.official.rows.map((r) => [r.slug, r.verdict] as const),
+  );
   const settlementFeed = [...settled]
     .sort((a, b) => new Date(b.lockedAt).getTime() - new Date(a.lockedAt).getTime())
     .slice(0, 4)
@@ -146,7 +146,7 @@ export default function HomePage() {
         context: `${stage} · ${date} · ${e.split.home} / ${e.split.draw} / ${e.split.away}`,
         score: e.result!,
         brier: e.modelBrier!,
-        verdict: verdictFromBrier(e.modelBrier!),
+        verdict: verdictBySlug.get(e.slug) ?? "miss",
       };
     });
 
