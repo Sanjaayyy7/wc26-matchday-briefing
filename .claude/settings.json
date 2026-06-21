@@ -1,0 +1,14 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "printf '%s\\n' 'WC26 EXECUTION CONTRACT (docs/WC26-EXECUTION-CONTRACT.md) — run: npm run inspect:execution before commits.' '- Skills: brainstorming -> writing-plans -> executing-plans -> TDD -> verification -> finishing-branch.' '- Gates before commit: build . vitest . design-inspector . eslint. Never git add -A; never implement on main.' '- Never ml:fetch/matchday to refresh results (wipes seeded data); settle from sourced finals only.' '- Never fabricate results/metrics; predictions immutable; single-source numbers; BREACH shown honestly.' || true"
+          }
+        ]
+      }
+    ]
+  }
+}

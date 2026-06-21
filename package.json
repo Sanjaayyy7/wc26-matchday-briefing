@@ -27,6 +27,7 @@
     "pipeline:polymarket": "tsx scripts/fetch-polymarket.mts",
     "report:accountability": "tsx scripts/build-accountability.mts",
     "design:inspect": "tsx scripts/design-inspector.mts",
+    "inspect:execution": "tsx scripts/execution-inspector.mts",
     "players:fetch": "tsx scripts/fetch-players.mts",
     "players:build": "tsx scripts/build-player-stats.mts",
     "sentiment:fetch": "tsx scripts/fetch-posts.mts",
