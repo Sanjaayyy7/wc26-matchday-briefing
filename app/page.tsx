@@ -4,6 +4,7 @@ import { RouteStack, CanvasSection } from "@/components/cinematic";
 import { IntelligenceCard } from "@/components/intelligence-card";
 import { SettlementRow } from "@/components/settlement-row";
 import { allMatchViews } from "@/lib/match-view";
+import { selectUpcomingLocks } from "@/lib/upcoming-locks";
 import { fixtureBySlug, clubById, allClubs } from "@/lib/data";
 import type { Verdict } from "@/lib/kit-color";
 import type { AccountabilityOutput } from "@/lib/accountability";
@@ -164,10 +165,8 @@ export default function HomePage() {
     });
   const topChampionPct = champions[0]?.pct ?? 1;
 
-  // ── Upcoming locks (next 3) ──
-  const upcomingLocks = views
-    .filter((v) => v.status === "locked" || v.status === "upcoming")
-    .slice(0, 3);
+  // ── Upcoming locks (next 3, future kickoffs only — no stale past matches) ──
+  const upcomingLocks = selectUpcomingLocks(views, new Date(), 3);
 
   // Pre-stringified numerics keep numeric formatting off JSX call sites.
   const brierStr = brier.toFixed(3);
@@ -257,9 +256,9 @@ export default function HomePage() {
               </div>
 
               {/* UpcomingLocks */}
-              {upcomingLocks.length > 0 && (
-                <div className="flex flex-col gap-3">
-                  <h2 className="text-label">Next locks</h2>
+              <div className="flex flex-col gap-3">
+                <h2 className="text-label">Next locks</h2>
+                {upcomingLocks.length > 0 ? (
                   <div>
                     {upcomingLocks.map((v) => {
                       const home = clubById(v.fixture.homeId).short;
@@ -282,8 +281,12 @@ export default function HomePage() {
                       );
                     })}
                   </div>
-                </div>
-              )}
+                ) : (
+                  <p className="text-fine text-[var(--ink-faint)]">
+                    No upcoming locks — awaiting next matchday.
+                  </p>
+                )}
+              </div>
             </div>
 
             {/* ── RAIL ── */}

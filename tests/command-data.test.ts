@@ -1,6 +1,6 @@
 // tests/command-data.test.ts
 import { describe, it, expect } from "vitest";
-import { forecastGrade, compressGrid, buildChampionshipProjections, parseSettledScoreline, buildReliabilityTicks } from "../lib/command-data";
+import { forecastGrade, compressGrid, buildChampionshipProjections, parseSettledScoreline, buildReliabilityTicks, buildEvolutionLog } from "../lib/command-data";
 
 describe("parseSettledScoreline", () => {
   it("parses a normal scoreline to row/col", () => {
@@ -115,5 +115,38 @@ describe("buildChampionshipProjections", () => {
     const previous = { Brazil: { champion: 0.168, reachFinal: 0.36 } } as Record<string, { champion: number; reachFinal: number }>;
     const result = buildChampionshipProjections(current, 1, previous);
     expect(result[0].delta).toBeCloseTo(0.014, 2);
+  });
+});
+
+describe("buildEvolutionLog calibration entry (truth-derived)", () => {
+  const id = (s: string) => s;
+  const calib = (ece: number) =>
+    buildEvolutionLog([], id, id, ece).find((e) => e.id === "calibration-md");
+
+  it("BREACH (ece 13.5%): states OUTSIDE the gate, never claims it is holding / within / no change", () => {
+    const e = calib(0.135);
+    expect(e).toBeDefined();
+    expect(e!.body).toMatch(/OUTSIDE/);
+    expect(e!.body).toMatch(/BREACH/);
+    expect(e!.body).toMatch(/13\.5%/);
+    expect(e!.body).toMatch(/LSig-001/);
+    expect(e!.body).not.toMatch(/within the 3% gate/i);
+    expect(e!.body).not.toMatch(/is holding/i);
+    expect(e!.body).not.toMatch(/no version change required/i);
+    expect(e!.statusColor).not.toBe("blue");
+  });
+
+  it("NOMINAL (ece 2%): may state within the gate and stays calm (blue)", () => {
+    const e = calib(0.02);
+    expect(e).toBeDefined();
+    expect(e!.body).toMatch(/within the 3%/i);
+    expect(e!.statusColor).toBe("blue");
+  });
+
+  it("WARNING (ece 4%): flags above the gate and is not blue", () => {
+    const e = calib(0.04);
+    expect(e).toBeDefined();
+    expect(e!.body).toMatch(/above the 3%/i);
+    expect(e!.statusColor).toBe("warn");
   });
 });
