@@ -471,7 +471,9 @@
     "group": "A",
     "tzOffsetMinutes": -240,
     "tzLabel": "EDT",
-    "neutral": true
+    "neutral": true,
+    "homeScore": 1,
+    "awayScore": 1
   },
   {
     "id": "mex-kor-ga",
@@ -488,7 +490,9 @@
     "group": "A",
     "tzOffsetMinutes": -360,
     "tzLabel": "CST",
-    "neutral": false
+    "neutral": false,
+    "homeScore": 1,
+    "awayScore": 0
   },
   {
     "id": "sui-bih-gb",
@@ -505,7 +509,9 @@
     "group": "B",
     "tzOffsetMinutes": -420,
     "tzLabel": "PDT",
-    "neutral": true
+    "neutral": true,
+    "homeScore": 4,
+    "awayScore": 1
   },
   {
     "id": "can-qat-gb",
@@ -522,7 +528,9 @@
     "group": "B",
     "tzOffsetMinutes": -420,
     "tzLabel": "PDT",
-    "neutral": false
+    "neutral": false,
+    "homeScore": 6,
+    "awayScore": 0
   },
   {
     "id": "sco-mar-gc",
@@ -539,7 +547,9 @@
     "group": "C",
     "tzOffsetMinutes": -240,
     "tzLabel": "EDT",
-    "neutral": true
+    "neutral": true,
+    "homeScore": 0,
+    "awayScore": 1
   },
   {
     "id": "bra-hai-gc",
@@ -556,7 +566,9 @@
     "group": "C",
     "tzOffsetMinutes": -240,
     "tzLabel": "EDT",
-    "neutral": true
+    "neutral": true,
+    "homeScore": 3,
+    "awayScore": 0
   },
   {
     "id": "usa-aus-gd",
@@ -573,7 +585,9 @@
     "group": "D",
     "tzOffsetMinutes": -420,
     "tzLabel": "PDT",
-    "neutral": false
+    "neutral": false,
+    "homeScore": 2,
+    "awayScore": 0
   },
   {
     "id": "tur-par-gd",
@@ -590,7 +604,9 @@
     "group": "D",
     "tzOffsetMinutes": -420,
     "tzLabel": "PDT",
-    "neutral": true
+    "neutral": true,
+    "homeScore": 0,
+    "awayScore": 1
   },
   {
     "id": "ger-civ-ge",
@@ -607,7 +623,9 @@
     "group": "E",
     "tzOffsetMinutes": -240,
     "tzLabel": "EDT",
-    "neutral": true
+    "neutral": true,
+    "homeScore": 2,
+    "awayScore": 1
   },
   {
     "id": "ecu-cur-ge",
@@ -624,7 +642,9 @@
     "group": "E",
     "tzOffsetMinutes": -300,
     "tzLabel": "CDT",
-    "neutral": true
+    "neutral": true,
+    "homeScore": 0,
+    "awayScore": 0
   },
   {
     "id": "ned-swe-gf",
@@ -641,7 +661,9 @@
     "group": "F",
     "tzOffsetMinutes": -300,
     "tzLabel": "CDT",
-    "neutral": true
+    "neutral": true,
+    "homeScore": 5,
+    "awayScore": 1
   },
   {
     "id": "tun-jpn-gf",
@@ -658,7 +680,9 @@
     "group": "F",
     "tzOffsetMinutes": -360,
     "tzLabel": "CST",
-    "neutral": true
+    "neutral": true,
+    "homeScore": 0,
+    "awayScore": 4
   },
   {
     "id": "bel-irn-gg",
@@ -675,7 +699,9 @@
     "group": "G",
     "tzOffsetMinutes": -420,
     "tzLabel": "PDT",
-    "neutral": true
+    "neutral": true,
+    "homeScore": 0,
+    "awayScore": 0
   },
   {
     "id": "nzl-egy-gg",
@@ -709,7 +735,9 @@
     "group": "H",
     "tzOffsetMinutes": -240,
     "tzLabel": "EDT",
-    "neutral": true
+    "neutral": true,
+    "homeScore": 4,
+    "awayScore": 0
   },
   {
     "id": "uru-cpv-gh",
