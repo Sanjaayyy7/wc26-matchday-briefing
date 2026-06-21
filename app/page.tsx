@@ -3,6 +3,7 @@ import { WCS26Shell } from "@/components/wc26-shell";
 import { RouteStack, CanvasSection } from "@/components/cinematic";
 import { IntelligenceCard } from "@/components/intelligence-card";
 import { SettlementRow } from "@/components/settlement-row";
+import { CalibrationDiagram } from "@/components/calibration-diagram";
 import { allMatchViews } from "@/lib/match-view";
 import { selectUpcomingLocks } from "@/lib/upcoming-locks";
 import { fixtureBySlug, clubById, allClubs } from "@/lib/data";
@@ -197,6 +198,20 @@ export default function HomePage() {
                     △ n={agg.n} — sample below 30; figures are provisional, not conclusive.
                   </div>
                 )}
+              </div>
+
+              {/* Signature artifact — calibration reliability diagram */}
+              <div className="flex flex-col gap-3">
+                <h2 className="text-label">Calibration — the model, audited</h2>
+                <p className="text-caption max-w-md text-[var(--ink-muted)]">
+                  Every locked forecast, graded after the whistle. Each dot is a probability band:
+                  on the dashed line means stated odds matched reality. Distance from it is the
+                  miscalibration we publish rather than hide.
+                </p>
+                <CalibrationDiagram
+                  bins={accountability.official.calibrationBins ?? []}
+                  caption={`${agg.n} graded · ECE ${eceStr} vs 3.0% target`}
+                />
               </div>
 
               {/* IntelligenceSection — 2×2 analytical briefing */}
