@@ -10,6 +10,7 @@ export const WC26_NAV: NavItem[] = [
   { label: "Record", href: "/record", routeKey: "record" },
   { label: "Teams", href: "/teams", routeKey: "teams" },
   { label: "Simulate", href: "/simulator", routeKey: "simulator" },
+  { label: "Methodology", href: "/methodology", routeKey: "methodology" },
 ];
 
 function statusDot(status: SystemHealth["status"]) {
