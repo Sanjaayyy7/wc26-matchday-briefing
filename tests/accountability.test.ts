@@ -208,6 +208,32 @@ describe("verdict classification", () => {
     const result = buildAccountability({ entries: [closeScoreline] }, {}, {}, {});
     expect(result.official.rows[0].verdict).toBe("close");
   });
+
+  it("verdict=miss when realized was 2nd-most-likely but rated below the close threshold (<20%)", () => {
+    // split: home=94, draw=5, away=1 → realized draw is the 2nd bucket but only 5%
+    const lowProb2nd = makeEntry({
+      correctPick: false,
+      realized: "draw",
+      split: { home: 94, draw: 5, away: 1 },
+      mostLikely: { home: 3, away: 0 },
+      result: "0-0",
+    });
+    const result = buildAccountability({ entries: [lowProb2nd] }, {}, {}, {});
+    expect(result.official.rows[0].verdict).toBe("miss");
+  });
+
+  it("verdict=miss when scoreline is within 1 goal but the realized outcome was low probability (<20%)", () => {
+    // split: home=80, draw=14, away=6; mostLikely 1-0, actual 0-0 (scoreline within 1) but draw only 14%
+    const lowProbScoreline = makeEntry({
+      correctPick: false,
+      realized: "draw",
+      split: { home: 80, draw: 14, away: 6 },
+      mostLikely: { home: 1, away: 0 },
+      result: "0-0",
+    });
+    const result = buildAccountability({ entries: [lowProbScoreline] }, {}, {}, {});
+    expect(result.official.rows[0].verdict).toBe("miss");
+  });
 });
 
 describe("buildAccountability — caveats present", () => {
