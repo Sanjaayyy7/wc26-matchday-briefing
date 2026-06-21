@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { WCS26Shell } from "@/components/wc26-shell";
 import { CanvasSection, DataPlane, RouteStack, SignalLine } from "@/components/cinematic";
 import { fixtureBySlug, clubById } from "@/lib/data";
@@ -174,6 +175,13 @@ export default function RecordPage() {
               <LedgerMetric label="ECE (live)" value={ece !== null ? <span><NumberTicker value={ece * 100} decimals={1} />%</span> : <Dash />} sub="Target < 3.0%" />
               <LedgerMetric label="vs Kalshi (edge)" value={kalshiEdgeStr} sub={kalshiSubStr} />
             </div>
+
+            <Link
+              href="/methodology"
+              className="mt-8 inline-block text-caption text-[var(--ink-faint)] underline underline-offset-2 transition-colors duration-300 hover:text-[var(--ink)]"
+            >
+              Methodology & operating procedures →
+            </Link>
           </DataPlane>
         </CanvasSection>
 
