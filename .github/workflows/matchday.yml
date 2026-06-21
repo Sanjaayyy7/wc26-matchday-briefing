@@ -24,6 +24,7 @@ concurrency:
 
 permissions:
   contents: write
+  pull-requests: write
 
 jobs:
   matchday:
@@ -69,15 +70,20 @@ jobs:
           npm run design:inspect
           npm run build
 
-      # ── Commit refreshed data only if it changed → Vercel auto-deploys ──
-      - name: Commit refreshed data
-        run: |
-          git config user.name "wc26-matchday-bot"
-          git config user.email "actions@users.noreply.github.com"
-          git add data/
-          if git diff --cached --quiet; then
-            echo "No data changes — nothing to commit."
-          else
-            git commit -m "chore(data): automated matchday update $(date -u +%Y-%m-%d)"
-            git push
-          fi
+      # ── Open a reviewable PR with the refreshed data (human-in-the-loop) ──
+      # Accountability ledger: model retraining + data are never auto-shipped.
+      # A human reviews the data diff and merges; the merge (push to main) is
+      # what triggers Vercel's production deploy. The action no-ops when data
+      # is unchanged, and updates the same PR on subsequent runs.
+      - name: Open data-refresh PR
+        uses: peter-evans/create-pull-request@v6
+        with:
+          add-paths: data/**
+          branch: automation/matchday-update
+          delete-branch: true
+          commit-message: "chore(data): automated matchday update"
+          title: "chore(data): automated matchday update"
+          body: |
+            Automated daily matchday refresh (settle → gated retrain → lock → simulate → enrich → accountability).
+
+            **Review the `data/` diff before merging** — merging pushes to `main`, which deploys to production via Vercel. Check the accountability report (Brier/ECE) and that the model-degradation gate passed in the workflow logs.
