@@ -212,6 +212,12 @@ export default function HomePage() {
                   bins={accountability.official.calibrationBins ?? []}
                   caption={`${agg.n} graded · ECE ${eceStr} vs 3.0% target`}
                 />
+                <Link
+                  href="/methodology"
+                  className="text-caption text-[var(--ink-faint)] underline underline-offset-2 transition-colors duration-300 hover:text-[var(--ink)]"
+                >
+                  How we grade ourselves →
+                </Link>
               </div>
 
               {/* IntelligenceSection — 2×2 analytical briefing */}
