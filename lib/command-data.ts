@@ -275,13 +275,34 @@ export function buildEvolutionLog(
 
   if (ece > 0) {
     const ecePct = (ece * 100).toFixed(1);
+    // Verdict must track the same gate thresholds as buildSystemHealth — never
+    // hardcode an optimistic message while System Health reports BREACH.
+    const calibStatus = ece < 0.03 ? "NOMINAL" : ece < 0.05 ? "WARNING" : "BREACH";
+    const calib =
+      calibStatus === "NOMINAL"
+        ? {
+            body: `ECE at ${ecePct}% — within the 3% calibration gate. Platt scaling is holding. No version change required.`,
+            statusLine: "Logged · v1.0.0-platt unchanged",
+            statusColor: "blue" as const,
+          }
+        : calibStatus === "WARNING"
+          ? {
+              body: `ECE at ${ecePct}% — above the 3% calibration gate but below the 5% breach line. Platt scaling under strain; monitoring before any version change.`,
+              statusLine: "Watch · v1.0.0-platt unchanged",
+              statusColor: "warn" as const,
+            }
+          : {
+              body: `ECE at ${ecePct}% — OUTSIDE the 3% calibration gate (BREACH). Platt scaling is insufficient at this sample. Active investigation: LSig-001 (draw underestimation). v1.0.0-platt held pending challenger evidence.`,
+              statusLine: "BREACH · v1.0.0-platt held pending challenger",
+              statusColor: "warn" as const,
+            };
     result.push({
       id: "calibration-md",
       type: "calibration",
       date: new Date().toISOString(),
-      body: `ECE at ${ecePct}% — within the 3% gate. Platt scaling is holding. No version change required.`,
-      statusLine: "Logged · v1.0.0-platt unchanged",
-      statusColor: "blue",
+      body: calib.body,
+      statusLine: calib.statusLine,
+      statusColor: calib.statusColor,
     });
   }
 
