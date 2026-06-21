@@ -1,9 +1,13 @@
-"use client";
-
-import { useEffect } from "react";
-import { motion, useReducedMotion, useSpring, useTransform } from "framer-motion";
-
-/** Robinhood-style odometer: the number rolls to its target on mount/change. */
+/**
+ * Renders a formatted numeric value, server-side and statically.
+ *
+ * Previously this rolled up from 0 via a framer-motion spring, which meant the
+ * server-rendered / no-JS / first-paint HTML showed "0" until hydration — bad
+ * for SEO and credibility, and it misreads as broken data (a "0/0 correct
+ * picks" hero before JS loads). The count-up communicated no state, so per the
+ * institutional design ethos it is dropped in favour of the real value on first
+ * paint. API is unchanged so every call site keeps working.
+ */
 export function NumberTicker({
   value,
   suffix = "",
@@ -15,21 +19,10 @@ export function NumberTicker({
   decimals?: number;
   className?: string;
 }) {
-  const reduceMotion = useReducedMotion();
-  const spring = useSpring(0, { stiffness: 80, damping: 24 });
-  const display = useTransform(spring, (v) => `${v.toFixed(decimals)}${suffix}`);
-
-  useEffect(() => {
-    spring.set(value);
-  }, [value, spring]);
-
-  if (reduceMotion) {
-    return (
-      <span className={`tabular ${className ?? ""}`}>
-        {value.toFixed(decimals)}
-        {suffix}
-      </span>
-    );
-  }
-  return <motion.span className={`tabular ${className ?? ""}`}>{display}</motion.span>;
+  return (
+    <span className={`tabular ${className ?? ""}`}>
+      {value.toFixed(decimals)}
+      {suffix}
+    </span>
+  );
 }
