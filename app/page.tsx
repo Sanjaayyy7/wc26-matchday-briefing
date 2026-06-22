@@ -5,6 +5,7 @@ import { IntelligenceCard } from "@/components/intelligence-card";
 import { SettlementRow } from "@/components/settlement-row";
 import { CalibrationDiagram } from "@/components/calibration-diagram";
 import { ForecastPulse } from "@/components/forecast-pulse";
+import { MatchdayToday, type TodaysMatch } from "@/components/matchday-today";
 import { allMatchViews } from "@/lib/match-view";
 import { selectUpcomingLocks } from "@/lib/upcoming-locks";
 import { fixtureBySlug, clubById, allClubs } from "@/lib/data";
@@ -183,6 +184,33 @@ export default function HomePage() {
       })
     : "";
 
+  // ── Today's locked slate (by ET date) with the model's pre-kickoff read ──
+  const todayET = new Date().toLocaleDateString("en-US", { timeZone: "America/New_York" });
+  const todaysMatches: TodaysMatch[] = views
+    .filter((v) => v.status === "locked")
+    .filter(
+      (v) =>
+        new Date(v.fixture.kickoffISO).toLocaleDateString("en-US", {
+          timeZone: "America/New_York",
+        }) === todayET,
+    )
+    .map((v) => {
+      const entry = entries.find((e) => e.slug === v.fixture.slug);
+      return {
+        slug: v.fixture.slug,
+        home: clubById(v.fixture.homeId).short,
+        away: clubById(v.fixture.awayId).short,
+        koET:
+          new Date(v.fixture.kickoffISO).toLocaleTimeString("en-US", {
+            hour: "numeric",
+            minute: "2-digit",
+            timeZone: "America/New_York",
+          }) + " ET",
+        split: entry?.split ?? { home: 0, draw: 0, away: 0 },
+      };
+    })
+    .filter((m) => m.split.home + m.split.draw + m.split.away > 0);
+
   // Pre-stringified numerics keep numeric formatting off JSX call sites.
   const brierStr = brier.toFixed(3);
   const eceStr = ece !== null ? `${(ece * 100).toFixed(1)}%` : "—";
@@ -227,6 +255,18 @@ export default function HomePage() {
             </div>
           </div>
         </section>
+
+        {todaysMatches.length > 0 && (
+          <CanvasSection eyebrow="Matchday" title="Today's slate">
+            <div className="flex flex-col gap-6">
+              <p className="text-caption max-w-md text-[var(--ink-muted)]">
+                Locked before kickoff — the model&apos;s pre-match read. Graded at full-time, never
+                edited after lock.
+              </p>
+              <MatchdayToday matches={todaysMatches} />
+            </div>
+          </CanvasSection>
+        )}
 
         <CanvasSection eyebrow="Live ledger" title="The Reckoning">
           <div className="grid animate-rise gap-12 lg:grid-cols-[2fr_320px]">
