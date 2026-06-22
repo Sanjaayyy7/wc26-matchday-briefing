@@ -5,8 +5,11 @@ export type NavItem = { label: string; href: string; routeKey: string };
 
 export const WC26_NAV: NavItem[] = [
   { label: "Ledger", href: "/", routeKey: "home" },
-  { label: "Matches", href: "/matches", routeKey: "matches" },
+  { label: "Forecasts", href: "/matches", routeKey: "matches" },
+  { label: "Command", href: "/command", routeKey: "command" },
   { label: "Record", href: "/record", routeKey: "record" },
+  { label: "Teams", href: "/teams", routeKey: "teams" },
+  { label: "Simulate", href: "/simulator", routeKey: "simulator" },
   { label: "Methodology", href: "/methodology", routeKey: "methodology" },
 ];
 

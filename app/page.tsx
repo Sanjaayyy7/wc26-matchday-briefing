@@ -187,7 +187,7 @@ export default function HomePage() {
   // ── Today's locked slate (by ET date) with the model's pre-kickoff read ──
   const todayET = new Date().toLocaleDateString("en-US", { timeZone: "America/New_York" });
   const todaysMatches: TodaysMatch[] = views
-    .filter((v) => v.status === "locked")
+    .filter((v) => !verdictBySlug.has(v.fixture.slug))
     .filter(
       (v) =>
         new Date(v.fixture.kickoffISO).toLocaleDateString("en-US", {

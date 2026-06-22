@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { readFileSync } from "node:fs";
+import { readFileSync, existsSync } from "node:fs";
 import path from "node:path";
 import { parsePreview } from "@/lib/preview-parser";
 import { parseFollowUp } from "@/lib/followup-parser";
@@ -7,15 +7,18 @@ import { parseFollowUp } from "@/lib/followup-parser";
 // Structural eval (audit-ledger L-04, L-05, L-13, L-15): the v2 prompt suite
 // must stay byte-compatible with the app's Output Contract parsers.
 
-const readmeDir = path.resolve(__dirname, "..", "..");
-const v2Prompt = readFileSync(
-  path.join(readmeDir, "wc-analyst-system-prompt-v2.md"),
-  "utf8",
+// The v2 prompt assets live at the workspace root in local dev (README/), but
+// are not part of the deployed app repo. Resolve from either location and skip
+// the suite gracefully when absent (e.g. CI) instead of crashing the run.
+const PROMPT_FILE = "wc-analyst-system-prompt-v2.md";
+const EXAMPLE_FILE = "wc-analyst-worked-example-v2.md";
+const promptDir = [path.resolve(__dirname, "..", ".."), path.resolve(__dirname, "..")].find((dir) =>
+  existsSync(path.join(dir, PROMPT_FILE)),
 );
-const v2Example = readFileSync(
-  path.join(readmeDir, "wc-analyst-worked-example-v2.md"),
-  "utf8",
-);
+const present = promptDir !== undefined;
+const v2Prompt = present ? readFileSync(path.join(promptDir!, PROMPT_FILE), "utf8") : "";
+const v2Example = present ? readFileSync(path.join(promptDir!, EXAMPLE_FILE), "utf8") : "";
+const d = present ? describe : describe.skip;
 
 /** Pull a blockquoted model reply out of the worked-example markdown. */
 function extractReply(source: string, afterHeading: string): string {
@@ -35,7 +38,7 @@ function extractReply(source: string, afterHeading: string): string {
   return lines.join("\n");
 }
 
-describe("v2 system prompt - parser contract tokens", () => {
+d("v2 system prompt - parser contract tokens", () => {
   const headings = [
     "**Quick take",
     "**Most likely scoreline:**",
@@ -84,7 +87,7 @@ describe("v2 system prompt - parser contract tokens", () => {
   });
 });
 
-describe("v2 worked example - turn 1 parses under the app parser", () => {
+d("v2 worked example - turn 1 parses under the app parser", () => {
   const turn1 = extractReply(v2Example, "## Turn 1 — Model reply");
   const result = parsePreview(turn1);
 
@@ -122,7 +125,7 @@ describe("v2 worked example - turn 1 parses under the app parser", () => {
   });
 });
 
-describe("v2 worked example - knockout append stays parser-safe (L-04/L-22)", () => {
+d("v2 worked example - knockout append stays parser-safe (L-04/L-22)", () => {
   const turn1 = extractReply(v2Example, "## Turn 1 — Model reply");
   const withAdvancement =
     turn1 +
@@ -140,7 +143,7 @@ describe("v2 worked example - knockout append stays parser-safe (L-04/L-22)", ()
   });
 });
 
-describe("v2 worked example - turn 2 parses under the follow-up parser", () => {
+d("v2 worked example - turn 2 parses under the follow-up parser", () => {
   const turn2 = extractReply(v2Example, "## Turn 2 — Model reply");
   const result = parseFollowUp(turn2);
 
