@@ -120,6 +120,7 @@
   --signal-7: #f4f4ef;
 
   /* Verdict ramp (§2.4) */
+  --verdict-nailed: var(--signal-6);
   --verdict-hit: var(--up);
   --verdict-close: var(--stage-sf);
   --verdict-miss: var(--down);
@@ -198,6 +199,7 @@
   --signal-7: #f4f4ef;
 
   /* Verdict ramp (§2.4) */
+  --verdict-nailed: var(--signal-6);
   --verdict-hit: var(--up);
   --verdict-close: var(--stage-sf);
   --verdict-miss: var(--down);
@@ -347,6 +349,22 @@
 }
 @utility animate-rise {
   animation: rise var(--dur) var(--ease) both;
+}
+
+/* Forecast Pulse: the hero line draws itself on load. */
+@keyframes pulse-draw {
+  from {
+    stroke-dashoffset: 1;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  #forecast-pulse-path {
+    animation: none !important;
+    stroke-dashoffset: 0 !important;
+  }
 }
 
 @keyframes settle-flash {

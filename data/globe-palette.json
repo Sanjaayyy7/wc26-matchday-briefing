@@ -1,0 +1,11 @@
+{
+  "hit": "#7cffb2",
+  "close": "#ffc46b",
+  "miss": "#ff674d",
+  "locked": "#f4f4ef",
+  "white": "#ffffff",
+  "sphere": "#0a0c10",
+  "grid": "#ffffff",
+  "atmosphere": "#5b8bd0",
+  "specular": "#3a4a6a"
+}

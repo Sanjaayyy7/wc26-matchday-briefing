@@ -4,6 +4,8 @@ import { RouteStack, CanvasSection } from "@/components/cinematic";
 import { IntelligenceCard } from "@/components/intelligence-card";
 import { SettlementRow } from "@/components/settlement-row";
 import { CalibrationDiagram } from "@/components/calibration-diagram";
+import { ForecastPulse } from "@/components/forecast-pulse";
+import { MatchdayToday, type TodaysMatch } from "@/components/matchday-today";
 import { allMatchViews } from "@/lib/match-view";
 import { selectUpcomingLocks } from "@/lib/upcoming-locks";
 import { fixtureBySlug, clubById, allClubs } from "@/lib/data";
@@ -140,6 +142,10 @@ export default function HomePage() {
       const date = f
         ? new Date(f.kickoffISO).toLocaleDateString("en-US", { month: "short", day: "numeric" })
         : "—";
+      // What the model called pre-kickoff: money-line pick + most-likely scoreline.
+      const favPct = Math.max(e.split.home, e.split.draw, e.split.away);
+      const favLabel =
+        e.split.home === favPct ? home : e.split.away === favPct ? away : "Draw";
       return {
         slug: e.slug,
         matchName: `${home} vs ${away}`,
@@ -147,6 +153,7 @@ export default function HomePage() {
         score: e.result!,
         brier: e.modelBrier!,
         verdict: verdictBySlug.get(e.slug) ?? "miss",
+        predicted: { call: `${favLabel} ${favPct}%`, scoreline: `${e.mostLikely.home}-${e.mostLikely.away}` },
       };
     });
 
@@ -169,6 +176,46 @@ export default function HomePage() {
   // ── Upcoming locks (next 3, future kickoffs only — no stale past matches) ──
   const upcomingLocks = selectUpcomingLocks(views, new Date(), 3);
 
+  const nextLock = upcomingLocks[0];
+  const nextHome = nextLock ? clubById(nextLock.fixture.homeId).short : "";
+  const nextAway = nextLock ? clubById(nextLock.fixture.awayId).short : "";
+  const nextKick = nextLock
+    ? new Date(nextLock.fixture.kickoffISO).toLocaleDateString("en-US", {
+        month: "short",
+        day: "numeric",
+        hour: "numeric",
+        minute: "2-digit",
+        timeZone: "America/New_York",
+      })
+    : "";
+
+  // ── Today's locked slate (by ET date) with the model's pre-kickoff read ──
+  const todayET = new Date().toLocaleDateString("en-US", { timeZone: "America/New_York" });
+  const todaysMatches: TodaysMatch[] = views
+    .filter((v) => !verdictBySlug.has(v.fixture.slug))
+    .filter(
+      (v) =>
+        new Date(v.fixture.kickoffISO).toLocaleDateString("en-US", {
+          timeZone: "America/New_York",
+        }) === todayET,
+    )
+    .map((v) => {
+      const entry = entries.find((e) => e.slug === v.fixture.slug);
+      return {
+        slug: v.fixture.slug,
+        home: clubById(v.fixture.homeId).short,
+        away: clubById(v.fixture.awayId).short,
+        koET:
+          new Date(v.fixture.kickoffISO).toLocaleTimeString("en-US", {
+            hour: "numeric",
+            minute: "2-digit",
+            timeZone: "America/New_York",
+          }) + " ET",
+        split: entry?.split ?? { home: 0, draw: 0, away: 0 },
+      };
+    })
+    .filter((m) => m.split.home + m.split.draw + m.split.away > 0);
+
   // Pre-stringified numerics keep numeric formatting off JSX call sites.
   const brierStr = brier.toFixed(3);
   const eceStr = ece !== null ? `${(ece * 100).toFixed(1)}%` : "—";
@@ -178,35 +225,63 @@ export default function HomePage() {
   return (
     <WCS26Shell route="home">
       <RouteStack>
-        <CanvasSection eyebrow="Overview" title="Forecast performance">
+        {/* ── SCOREBOARD HERO — the score, with the forecast pulse ── */}
+        <section className="route-section animate-rise relative border-t border-[var(--line)] pt-8">
+          <div className="chroma-rule absolute left-0 top-0 h-px w-36" />
+          <div className="grid items-center gap-12 py-10 lg:min-h-[60vh] lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)]">
+            <div className="relative z-10 max-w-2xl">
+            <span className="text-micro uppercase tracking-widest text-[var(--ink-faint)]">
+              Live tournament · 48 nations · one ledger
+            </span>
+            <div className="text-hero data-mono tabular mt-5">
+              {correct}/{agg.n} <span className="text-[var(--ink-muted)]">correct picks</span>
+            </div>
+            <div className="text-title data-mono tabular mt-4 text-[var(--ink-muted)]">
+              Brier {brierStr} · {accuracyStr} accuracy
+            </div>
+            <p className="text-body mt-6 max-w-md">
+              Locked before kickoff. Graded in public. A public record of what one model believed —
+              Elo · Dixon-Coles · Platt — and what actually happened.
+            </p>
+            {nextLock && (
+              <div className="mt-9 inline-flex flex-wrap items-center gap-4 border-t border-[var(--hairline)] pt-5 md:ml-16">
+                <span className="text-micro uppercase tracking-widest text-[var(--ink-faint)]">
+                  Next · locked
+                </span>
+                <span className="text-label text-[var(--ink)]">
+                  {nextHome} vs {nextAway}
+                </span>
+                <span className="text-slight data-mono text-[var(--ink-muted)]">{nextKick}</span>
+              </div>
+            )}
+            </div>
+            <div className="relative z-10 hidden lg:block">
+              <ForecastPulse />
+            </div>
+          </div>
+        </section>
+
+        {todaysMatches.length > 0 && (
+          <CanvasSection eyebrow="Matchday" title="Today's slate">
+            <div className="flex flex-col gap-6">
+              <p className="text-caption max-w-md text-[var(--ink-muted)]">
+                Locked before kickoff — the model&apos;s pre-match read. Graded at full-time, never
+                edited after lock.
+              </p>
+              <MatchdayToday matches={todaysMatches} />
+            </div>
+          </CanvasSection>
+        )}
+
+        <CanvasSection eyebrow="Live ledger" title="The Reckoning">
           <div className="grid animate-rise gap-12 lg:grid-cols-[2fr_320px]">
             {/* ── MAIN COLUMN ── */}
             <div className="flex flex-col gap-16">
-              {/* PrimaryMetric */}
-              <div className="flex flex-col gap-2">
-                <span className="text-micro uppercase tracking-widest text-[var(--ink-faint)]">
-                  Live tournament · Official ledger
-                </span>
-                <div className="text-hero data-mono tabular">
-                  {correct}/{agg.n} correct picks
-                </div>
-                <div className="text-caption data-mono tabular text-[var(--ink-muted)]">
-                  Brier {brierStr} · {accuracyStr} top-outcome accuracy
-                </div>
-                {agg.n < 30 && (
-                  <div className="text-caption text-[var(--warn)]">
-                    △ n={agg.n} — sample below 30; figures are provisional, not conclusive.
-                  </div>
-                )}
-              </div>
-
               {/* Signature artifact — calibration reliability diagram */}
               <div className="flex flex-col gap-3">
                 <h2 className="text-label">Calibration — the model, audited</h2>
                 <p className="text-caption max-w-md text-[var(--ink-muted)]">
-                  Every locked forecast, graded after the whistle. Each dot is a probability band:
-                  on the dashed line means stated odds matched reality. Distance from it is the
-                  miscalibration we publish rather than hide.
+                  On the diagonal = calibrated. Off it = miscalibrated. We publish both.
                 </p>
                 <CalibrationDiagram
                   bins={accountability.official.calibrationBins ?? []}
@@ -270,6 +345,7 @@ export default function HomePage() {
                         score={s.score}
                         brier={s.brier}
                         verdict={s.verdict}
+                        predicted={s.predicted}
                       />
                     </Link>
                   ))}
@@ -322,28 +398,24 @@ export default function HomePage() {
               </RailSection>
 
               <RailSection title="Championship probability">
-                <div>
+                <div className="flex flex-col gap-3.5">
                   {champions.map((c) => (
-                    <div
-                      key={c.name}
-                      className="flex items-center gap-2 py-1.5 border-b border-[var(--hairline)] last:border-0"
-                    >
-                      <Link
-                        href={`/team/${c.id}`}
-                        className="text-caption text-[var(--ink)] flex-1 truncate transition-colors duration-300 hover:text-[var(--up)]"
-                      >
-                        {c.name}
-                      </Link>
-                      <span className="block h-1 w-20 rounded-full bg-[var(--hairline)] overflow-hidden">
+                    <Link key={c.name} href={`/team/${c.id}`} className="group block">
+                      <div className="flex items-baseline justify-between gap-2">
+                        <span className="text-caption truncate text-[var(--ink)] transition-colors duration-300 group-hover:text-[var(--up)]">
+                          {c.name}
+                        </span>
+                        <span className="text-mono data-mono tabular text-[var(--ink-muted)]">
+                          {`${c.pct.toFixed(1)}%`}
+                        </span>
+                      </div>
+                      <span className="mt-1.5 block h-1.5 w-full overflow-hidden bg-[var(--hairline)]">
                         <span
-                          className="block h-full rounded-full"
+                          className="block h-full"
                           style={{ width: `${(c.pct / topChampionPct) * 100}%`, background: "var(--up)" }}
                         />
                       </span>
-                      <span className="text-mono data-mono tabular text-[var(--ink-muted)] w-12 text-right">
-                        {`${c.pct.toFixed(1)}%`}
-                      </span>
-                    </div>
+                    </Link>
                   ))}
                 </div>
               </RailSection>
