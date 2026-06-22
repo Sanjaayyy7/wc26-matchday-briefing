@@ -76,6 +76,11 @@ fidelity, choreographed motion, and the confidence to leave space empty.
 
 ## 4. Patch roadmap (build order)
 
+> Status (2026-06-22): **P1–P5 shipped & merged** (PRs #21–#30). Remaining: P6, P7,
+> plus a queued premium styled hover **card** for the pulse (split geometry to a
+> JSON-free module first, then a client chart). Settle tonight's Group I/J finals
+> when FIFA posts them, via the safe path.
+
 | # | Patch | Why it's first |
 |---|-------|----------------|
 | P1 | Type-scale consolidation (5 steps) + retire rainbow accent → one accent | foundation; touches every page |
