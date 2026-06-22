@@ -79,46 +79,47 @@
   --radius-4xl: 2.5rem;
 }
 
-/* Codex-black foundation: both themes keep the product on a jet canvas. */
+/* Light theme = warm editorial "paper" (the annual-report side). The terminal
+   black lives in `.dark` below; the toggle flips between the two. */
 :root {
-  --void: #000000;
-  --canvas: #050505;
-  --surface: rgba(255, 255, 255, 0.035);
-  --panel: rgba(255, 255, 255, 0.045);
-  --panel-strong: rgba(255, 255, 255, 0.08);
-  --rail: rgba(0, 0, 0, 0.82);
-  --elevated: rgba(255, 255, 255, 0.075);
-  --ink: #f4f4ef;
-  --ink-muted: #a2a29b;
-  --ink-faint: #666660;
-  --hairline: rgba(255, 255, 255, 0.08);
-  --line: rgba(255, 255, 255, 0.12);
-  --tint: #f4f4ef;
-  --up: #7cffb2;
-  --down: #ff674d;
-  --warn: #fbbf24;
-  --warn-2: #fb923c;
-  --neutral-fill: rgba(255, 255, 255, 0.12);
-  --glass: rgba(0, 0, 0, 0.78);
-  --shadow-hover: 0 32px 120px rgba(0, 0, 0, 0.82);
-  --glow: 0 0 120px rgba(255, 255, 255, 0.08);
+  --void: #ffffff;
+  --canvas: #f5f4ef;
+  --surface: rgba(16, 16, 12, 0.035);
+  --panel: rgba(16, 16, 12, 0.05);
+  --panel-strong: rgba(16, 16, 12, 0.09);
+  --rail: rgba(255, 255, 255, 0.85);
+  --elevated: rgba(16, 16, 12, 0.06);
+  --ink: #14150f;
+  --ink-muted: #5c5d54;
+  --ink-faint: #9a9a8d;
+  --hairline: rgba(16, 16, 12, 0.12);
+  --line: rgba(16, 16, 12, 0.16);
+  --tint: #14150f;
+  --up: #1f9d57;
+  --down: #d23a26;
+  --warn: #b27708;
+  --warn-2: #bd6a16;
+  --neutral-fill: rgba(16, 16, 12, 0.1);
+  --glass: rgba(255, 255, 255, 0.82);
+  --shadow-hover: 0 24px 90px rgba(16, 16, 12, 0.16);
+  --glow: 0 0 100px rgba(16, 16, 12, 0.05);
   --dur: 0.3s;
   --ease: cubic-bezier(0.4, 0, 0.2, 1);
 
-  /* Stage ramp (§2.3) */
-  --stage-group: #8e8e93;
-  --stage-r32: #8ab4ff;
-  --stage-r16: #aaa7ff;
-  --stage-qf: #d7a5ff;
-  --stage-sf: #ffc46b;
-  --stage-final: #ffe680;
-  --signal-1: #8ab4ff;
-  --signal-2: #7cffb2;
-  --signal-3: #ffe680;
-  --signal-4: #ff8a70;
-  --signal-5: #d7a5ff;
-  --signal-6: #8ff4ff;
-  --signal-7: #f4f4ef;
+  /* Stage ramp — darkened for the light canvas */
+  --stage-group: #6b6b66;
+  --stage-r32: #3b6cff;
+  --stage-r16: #6a4bff;
+  --stage-qf: #9b4bff;
+  --stage-sf: #b9770a;
+  --stage-final: #a8780c;
+  --signal-1: #3b6cff;
+  --signal-2: #1f9d57;
+  --signal-3: #b9770a;
+  --signal-4: #d2402a;
+  --signal-5: #7c3aed;
+  --signal-6: #0a8aa0;
+  --signal-7: #14150f;
 
   /* Verdict ramp (§2.4) */
   --verdict-nailed: var(--signal-6);
@@ -130,16 +131,16 @@
   --foreground: var(--ink);
   --card: var(--surface);
   --card-foreground: var(--ink);
-  --popover: var(--surface);
+  --popover: var(--void);
   --popover-foreground: var(--ink);
   --primary: var(--tint);
-  --primary-foreground: #000000;
+  --primary-foreground: #ffffff;
   --secondary: var(--neutral-fill);
   --secondary-foreground: var(--ink);
   --muted: var(--neutral-fill);
   --muted-foreground: var(--ink-muted);
   --accent: var(--tint);
-  --accent-foreground: #000000;
+  --accent-foreground: #ffffff;
   --destructive: var(--down);
   --border: var(--hairline);
   --input: var(--hairline);
@@ -153,7 +154,7 @@
   --sidebar: var(--surface);
   --sidebar-foreground: var(--ink);
   --sidebar-primary: var(--tint);
-  --sidebar-primary-foreground: #000000;
+  --sidebar-primary-foreground: #ffffff;
   --sidebar-accent: var(--neutral-fill);
   --sidebar-accent-foreground: var(--ink);
   --sidebar-border: var(--hairline);
