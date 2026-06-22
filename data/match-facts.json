@@ -1,10 +1,23 @@
 {
-  "_note": "Per-match facts for finished WC26 group fixtures. Keys are fixture slugs from data/fixtures.json. Facts sourced only from live fetches; omitted fields mean no source provided the data. Updated 2026-06-12.",
+  "_note": "Per-match facts for finished WC26 group fixtures. Keys are fixture slugs from data/fixtures.json. Facts sourced only from live fetches; omitted fields mean no source provided the data. Updated 2026-06-21.",
   "mexico-vs-south-africa": {
-    "score": { "home": 2, "away": 0 },
+    "score": {
+      "home": 2,
+      "away": 0
+    },
     "scorers": [
-      { "player": "Julián Quiñones", "team": "mex", "minute": 9, "assist": "Erik Lira" },
-      { "player": "Raúl Jiménez", "team": "mex", "minute": 67, "assist": "Roberto Alvarado" }
+      {
+        "player": "Julián Quiñones",
+        "team": "mex",
+        "minute": 9,
+        "assist": "Erik Lira"
+      },
+      {
+        "player": "Raúl Jiménez",
+        "team": "mex",
+        "minute": 67,
+        "assist": "Roberto Alvarado"
+      }
     ],
     "facts": {
       "possessionHome": 60,
@@ -14,12 +27,45 @@
       "onTargetHome": 4,
       "onTargetAway": 2,
       "cards": [
-        { "player": "Teboho Mokoena", "team": "rsa", "type": "yellow", "minute": 17 },
-        { "player": "Brian Gutiérrez", "team": "mex", "type": "yellow", "minute": 23 },
-        { "player": "Sphephelo Sithole", "team": "rsa", "type": "red", "minute": 50, "reason": "serious foul play" },
-        { "player": "Nkosinathi Sibisi", "team": "rsa", "type": "yellow", "minute": 74 },
-        { "player": "Themba Zwane", "team": "rsa", "type": "red", "minute": 84, "reason": "unsporting behaviour" },
-        { "player": "César Montes", "team": "mex", "type": "red", "minute": 92, "reason": "serious foul play" }
+        {
+          "player": "Teboho Mokoena",
+          "team": "rsa",
+          "type": "yellow",
+          "minute": 17
+        },
+        {
+          "player": "Brian Gutiérrez",
+          "team": "mex",
+          "type": "yellow",
+          "minute": 23
+        },
+        {
+          "player": "Sphephelo Sithole",
+          "team": "rsa",
+          "type": "red",
+          "minute": 50,
+          "reason": "serious foul play"
+        },
+        {
+          "player": "Nkosinathi Sibisi",
+          "team": "rsa",
+          "type": "yellow",
+          "minute": 74
+        },
+        {
+          "player": "Themba Zwane",
+          "team": "rsa",
+          "type": "red",
+          "minute": 84,
+          "reason": "unsporting behaviour"
+        },
+        {
+          "player": "César Montes",
+          "team": "mex",
+          "type": "red",
+          "minute": 92,
+          "reason": "serious foul play"
+        }
       ]
     },
     "btts": false,
@@ -31,11 +77,29 @@
     ]
   },
   "south-korea-vs-czech-republic": {
-    "score": { "home": 2, "away": 1 },
+    "score": {
+      "home": 2,
+      "away": 1
+    },
     "scorers": [
-      { "player": "Ladislav Krejcí", "team": "cze", "minute": 59, "assist": "Vladimír Coufal (long throw)" },
-      { "player": "Hwang In-Beom", "team": "kor", "minute": 67, "assist": "Lee Kang-In" },
-      { "player": "Oh Hyeon-Gyu", "team": "kor", "minute": 80, "assist": "Hwang In-Beom" }
+      {
+        "player": "Ladislav Krejcí",
+        "team": "cze",
+        "minute": 59,
+        "assist": "Vladimír Coufal (long throw)"
+      },
+      {
+        "player": "Hwang In-Beom",
+        "team": "kor",
+        "minute": 67,
+        "assist": "Lee Kang-In"
+      },
+      {
+        "player": "Oh Hyeon-Gyu",
+        "team": "kor",
+        "minute": 80,
+        "assist": "Hwang In-Beom"
+      }
     ],
     "facts": {
       "possessionHome": 62,
@@ -52,10 +116,23 @@
     ]
   },
   "canada-vs-bosnia-herzegovina": {
-    "score": { "home": 1, "away": 1 },
+    "score": {
+      "home": 1,
+      "away": 1
+    },
     "scorers": [
-      { "player": "Jovo Lukić", "team": "bih", "minute": 21, "assist": "Sead Kolašinac (corner delivery via Ivan Bašić)" },
-      { "player": "Cyle Larin", "team": "can", "minute": 78, "assist": "Promise David" }
+      {
+        "player": "Jovo Lukić",
+        "team": "bih",
+        "minute": 21,
+        "assist": "Sead Kolašinac (corner delivery via Ivan Bašić)"
+      },
+      {
+        "player": "Cyle Larin",
+        "team": "can",
+        "minute": 78,
+        "assist": "Promise David"
+      }
     ],
     "facts": {
       "possessionHome": 61,
@@ -63,11 +140,36 @@
       "onTargetHome": 4,
       "onTargetAway": 3,
       "cards": [
-        { "player": "Alistair Johnston", "team": "can", "type": "yellow", "minute": 11 },
-        { "player": "Ermedin Demirović", "team": "bih", "type": "yellow", "minute": 45 },
-        { "player": "Jovo Lukić", "team": "bih", "type": "yellow", "minute": 46 },
-        { "player": "Luc De Fougerolles", "team": "can", "type": "yellow", "minute": 53 },
-        { "player": "Nikola Katić", "team": "bih", "type": "yellow", "minute": 93 }
+        {
+          "player": "Alistair Johnston",
+          "team": "can",
+          "type": "yellow",
+          "minute": 11
+        },
+        {
+          "player": "Ermedin Demirović",
+          "team": "bih",
+          "type": "yellow",
+          "minute": 45
+        },
+        {
+          "player": "Jovo Lukić",
+          "team": "bih",
+          "type": "yellow",
+          "minute": 46
+        },
+        {
+          "player": "Luc De Fougerolles",
+          "team": "can",
+          "type": "yellow",
+          "minute": 53
+        },
+        {
+          "player": "Nikola Katić",
+          "team": "bih",
+          "type": "yellow",
+          "minute": 93
+        }
       ]
     },
     "btts": true,
@@ -76,6 +178,220 @@
       "https://www.espn.com/soccer/match/_/gameId/760416/bosnia-herzegovina-canada",
       "https://www.foxsports.com/soccer/fifa-world-cup-men-canada-vs-bosnia-and-herzegovina-jun-12-2026-game-boxscore-647618",
       "https://www.espn.com/soccer/story/_/id/49041213/canada-bosnia-herzegovina-live-world-cup-2026-latest-updates-commentary-score-result"
+    ]
+  },
+  "spain-vs-saudi-arabia": {
+    "score": {
+      "home": 4,
+      "away": 0
+    },
+    "scorers": [
+      {
+        "player": "Lamine Yamal",
+        "team": "esp",
+        "minute": 10,
+        "assist": "Mikel Oyarzabal"
+      },
+      {
+        "player": "Mikel Oyarzabal",
+        "team": "esp",
+        "minute": 21,
+        "assist": "Dani Olmo"
+      },
+      {
+        "player": "Mikel Oyarzabal",
+        "team": "esp",
+        "minute": 24
+      },
+      {
+        "player": "Hassan Al-Tambakti (OG)",
+        "team": "ksa",
+        "minute": 49
+      }
+    ],
+    "facts": {
+      "possessionHome": 67,
+      "possessionAway": 33,
+      "shotsHome": 19,
+      "shotsAway": 5,
+      "onTargetHome": 8,
+      "onTargetAway": 1
+    },
+    "btts": false,
+    "totalGoals": 4,
+    "_sources": [
+      "https://www.espn.com/soccer/match/_/gameId/760453/saudi-arabia-spain",
+      "https://www.fifa.com/en/match-centre/match/17/285023/289273/400021483"
+    ]
+  },
+  "netherlands-vs-sweden": {
+    "score": {
+      "home": 5,
+      "away": 1
+    },
+    "scorers": [
+      {
+        "player": "Brian Brobbey",
+        "team": "ned",
+        "minute": 5
+      },
+      {
+        "player": "Brian Brobbey",
+        "team": "ned",
+        "minute": 17
+      },
+      {
+        "player": "Cody Gakpo",
+        "team": "ned",
+        "minute": 47
+      },
+      {
+        "player": "Cody Gakpo",
+        "team": "ned",
+        "minute": 54
+      },
+      {
+        "player": "Anthony Elanga",
+        "team": "swe",
+        "minute": 59
+      },
+      {
+        "player": "Crysencio Summerville",
+        "team": "ned",
+        "minute": 89
+      }
+    ],
+    "facts": {
+      "shotsHome": 10,
+      "shotsAway": 16,
+      "onTargetHome": 7,
+      "onTargetAway": 8
+    },
+    "btts": true,
+    "totalGoals": 6,
+    "_sources": [
+      "https://www.espn.com/soccer/match/_/gameId/760447/sweden-netherlands",
+      "https://www.skysports.com/football/netherlands-vs-sweden/549800"
+    ]
+  },
+  "tunisia-vs-japan": {
+    "score": {
+      "home": 0,
+      "away": 4
+    },
+    "scorers": [
+      {
+        "player": "Daichi Kamada",
+        "team": "jpn",
+        "minute": 4
+      },
+      {
+        "player": "Ayase Ueda",
+        "team": "jpn",
+        "minute": 31
+      },
+      {
+        "player": "Junya Ito",
+        "team": "jpn",
+        "minute": 69
+      },
+      {
+        "player": "Ayase Ueda",
+        "team": "jpn",
+        "minute": 83
+      }
+    ],
+    "facts": {
+      "shotsHome": 2,
+      "shotsAway": 11,
+      "onTargetAway": 5
+    },
+    "btts": false,
+    "totalGoals": 4,
+    "_sources": [
+      "https://www.espn.com/soccer/match/_/gameId/760449/japan-tunisia",
+      "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/tunisia-japan-match-report-highlights"
+    ]
+  },
+  "germany-vs-ivory-coast": {
+    "score": {
+      "home": 2,
+      "away": 1
+    },
+    "scorers": [
+      {
+        "player": "Franck Kessié",
+        "team": "civ",
+        "minute": 30
+      },
+      {
+        "player": "Deniz Undav",
+        "team": "ger",
+        "minute": 68,
+        "assist": "Nadiem Amiri"
+      },
+      {
+        "player": "Deniz Undav",
+        "team": "ger",
+        "minute": 94,
+        "assist": "Felix Nmecha"
+      }
+    ],
+    "btts": true,
+    "totalGoals": 3,
+    "_sources": [
+      "https://www.espn.com/soccer/match/_/gameId/760448/ivory-coast-germany",
+      "https://www.skysports.com/football/germany-vs-ivory-coast/549798"
+    ]
+  },
+  "canada-vs-qatar": {
+    "score": {
+      "home": 6,
+      "away": 0
+    },
+    "scorers": [
+      {
+        "player": "Cyle Larin",
+        "team": "can",
+        "minute": 16
+      },
+      {
+        "player": "Jonathan David",
+        "team": "can",
+        "minute": 29
+      },
+      {
+        "player": "Jonathan David",
+        "team": "can",
+        "minute": 45
+      },
+      {
+        "player": "Saliba",
+        "team": "can",
+        "minute": 64
+      },
+      {
+        "player": "Manai (OG)",
+        "team": "qat",
+        "minute": 75
+      },
+      {
+        "player": "Jonathan David",
+        "team": "can",
+        "minute": 90
+      }
+    ],
+    "facts": {
+      "shotsHome": 33,
+      "shotsAway": 2,
+      "onTargetHome": 11,
+      "onTargetAway": 0
+    },
+    "btts": false,
+    "totalGoals": 6,
+    "_sources": [
+      "https://www.fifa.com/en/match-centre/match/17/285023/289273/400021450",
+      "https://www.ctvnews.ca/vancouver/article/fifa-world-cup-jonathan-david-hat-trick-brings-score-to-6-0-for-canada-follow-live-updates-here/"
     ]
   }
 }
