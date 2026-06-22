@@ -376,6 +376,16 @@
   }
 }
 
+/* Forecast Pulse nodes: hover ring for the per-call detail. */
+.pulse-node {
+  cursor: pointer;
+  transition: stroke 0.2s var(--ease);
+}
+.pulse-node:hover {
+  stroke: var(--ink);
+  stroke-width: 2;
+}
+
 /* Forecast Pulse: the hero line draws itself on load. */
 @keyframes pulse-draw {
   from {
