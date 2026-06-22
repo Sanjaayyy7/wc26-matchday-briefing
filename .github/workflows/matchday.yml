@@ -13,9 +13,13 @@ name: WC26 Matchday Update
 # source degrades gracefully instead of failing the run.
 
 on:
-  schedule:
-    - cron: "0 9 * * *" # daily at 09:00 UTC
-  workflow_dispatch: {} # manual "Run workflow" button for testing
+  # Daily cron intentionally disabled. The public results mirror has no
+  # in-tournament WC26 finals yet, so an automated `ml:fetch` would overwrite the
+  # manually-seeded scores and un-settle the ledger. Run this manually only, when
+  # a trustworthy dataset is available. Settle real finals via the safe path:
+  #   edit data/raw/results.csv -> fetch-match-results -> pipeline:settle ->
+  #   report:accountability  (never a blind re-fetch).
+  workflow_dispatch: {} # manual "Run workflow" button only
 
 # Never let two matchday runs overlap (they both mutate data/).
 concurrency:
