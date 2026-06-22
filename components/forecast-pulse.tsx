@@ -109,7 +109,17 @@ export function ForecastPulse() {
 
         {/* node per call, coloured by verdict */}
         {coords.map((c) => (
-          <circle key={c.slug} cx={c.x} cy={c.y} r={2.4} fill={COLOR[c.verdict]} fillOpacity={0.95} />
+          <circle
+            key={c.slug}
+            cx={c.x}
+            cy={c.y}
+            r={2.4}
+            fill={COLOR[c.verdict]}
+            fillOpacity={0.95}
+            className="pulse-node"
+          >
+            <title>{`${c.label} · Brier ${c.brier.toFixed(2)} · ${c.verdict.toUpperCase()}`}</title>
+          </circle>
         ))}
 
         {/* leading call: a steady dot with an expanding pulse ring */}

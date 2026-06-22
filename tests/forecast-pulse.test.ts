@@ -47,6 +47,10 @@ describe("buildPulsePoints", () => {
   it("is ordered chronologically by index", () => {
     points.forEach((p, i) => expect(p.i).toBe(i));
   });
+
+  it("labels each call with a short matchup", () => {
+    for (const p of points) expect(p.label).toMatch(/.+–.+/);
+  });
 });
 
 describe("pulsePath", () => {

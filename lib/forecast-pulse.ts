@@ -5,6 +5,7 @@
  * renders server-side (no chart lib, no blank first paint).
  */
 
+import clubsJson from "@/data/clubs.json";
 import fixturesJson from "@/data/fixtures.json";
 import predictionsJson from "@/data/predictions.json";
 import accountabilityJson from "@/data/backtest/wc26-accountability.json";
@@ -16,6 +17,8 @@ export type PulsePoint = {
   brier: number;
   verdict: PulseVerdict;
   slug: string;
+  /** Short matchup label, e.g. "ESP–CPV", for the hover detail. */
+  label: string;
 };
 
 /** Brier of the uniform 1/3-1/3-1/3 baseline — the "chance" line. */
@@ -41,6 +44,10 @@ export function pulseY(brier: number, height: number, pad = 0): number {
 export function buildPulsePoints(): PulsePoint[] {
   const verdictBySlug = new Map(rows.map((r) => [r.slug, r.verdict] as const));
   const kickoffBySlug = new Map(fixtures.map((f) => [f.slug, f.kickoffISO] as const));
+  const fixtureBySlug = new Map(fixtures.map((f) => [f.slug, f] as const));
+  const shortById = new Map(
+    (clubsJson as { id: string; short: string }[]).map((c) => [c.id, c.short] as const),
+  );
 
   return entries
     .filter((e) => e.modelBrier !== undefined && verdictBySlug.has(e.slug))
@@ -49,12 +56,19 @@ export function buildPulsePoints(): PulsePoint[] {
         new Date(kickoffBySlug.get(a.slug) ?? 0).getTime() -
         new Date(kickoffBySlug.get(b.slug) ?? 0).getTime(),
     )
-    .map((e, i) => ({
-      i,
-      brier: e.modelBrier!,
-      verdict: verdictBySlug.get(e.slug)!,
-      slug: e.slug,
-    }));
+    .map((e, i) => {
+      const f = fixtureBySlug.get(e.slug);
+      const label = f
+        ? `${shortById.get(f.homeId) ?? "?"}–${shortById.get(f.awayId) ?? "?"}`
+        : e.slug;
+      return {
+        i,
+        brier: e.modelBrier!,
+        verdict: verdictBySlug.get(e.slug)!,
+        slug: e.slug,
+        label,
+      };
+    });
 }
 
 /**
