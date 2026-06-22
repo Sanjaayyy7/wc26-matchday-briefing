@@ -227,9 +227,18 @@ export default function HomePage() {
     <WCS26Shell route="home">
       <RouteStack>
         {/* ── SCOREBOARD HERO — the score, with the forecast pulse ── */}
-        <section className="route-section animate-rise relative border-t border-[var(--line)] pt-8">
+        <section className="route-section animate-rise relative overflow-hidden border-t border-[var(--line)] pt-8">
           <div className="chroma-rule absolute left-0 top-0 h-px w-36" />
-          <div className="grid items-center gap-12 py-10 lg:min-h-[60vh] lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)]">
+          {/* one restrained light source for depth (constitution: light as material) */}
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-0"
+            style={{
+              background:
+                "radial-gradient(58% 56% at 74% 42%, color-mix(in oklab, var(--up) 6%, transparent), transparent 62%), radial-gradient(46% 52% at 8% 24%, color-mix(in oklab, var(--ink) 4%, transparent), transparent 58%)",
+            }}
+          />
+          <div className="relative z-10 grid items-center gap-12 py-16 lg:min-h-[72vh] lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)]">
             <div className="relative z-10 max-w-2xl">
             <span className="text-micro uppercase tracking-widest text-[var(--ink-faint)]">
               Live tournament · 48 nations · one ledger

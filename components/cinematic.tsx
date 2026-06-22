@@ -38,7 +38,7 @@ export function RouteStack({
   children: React.ReactNode;
   className?: string;
 }) {
-  return <div className={`route-stack space-y-20 md:space-y-24 ${className}`}>{children}</div>;
+  return <div className={`route-stack space-y-28 md:space-y-40 ${className}`}>{children}</div>;
 }
 
 export function CanvasSection({
