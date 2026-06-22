@@ -4,12 +4,9 @@ import type { SystemHealth } from "@/lib/command-data";
 export type NavItem = { label: string; href: string; routeKey: string };
 
 export const WC26_NAV: NavItem[] = [
-  { label: "Overview", href: "/", routeKey: "home" },
-  { label: "Command", href: "/command", routeKey: "command" },
-  { label: "Forecasts", href: "/matches", routeKey: "matches" },
+  { label: "Ledger", href: "/", routeKey: "home" },
+  { label: "Matches", href: "/matches", routeKey: "matches" },
   { label: "Record", href: "/record", routeKey: "record" },
-  { label: "Teams", href: "/teams", routeKey: "teams" },
-  { label: "Simulate", href: "/simulator", routeKey: "simulator" },
   { label: "Methodology", href: "/methodology", routeKey: "methodology" },
 ];
 
@@ -66,7 +63,7 @@ export function WC26ShellHeader({
           <div className="flex items-center gap-2 pl-4 border-l border-[var(--hairline)] text-slight">
             <span className="inline-block h-1.5 w-1.5 rounded-full" style={{ backgroundColor: dotColor }} />
             <span className={`font-semibold ${textCls}`}>{systemHealth.status}</span>
-            <span className="text-[var(--ink-faint)]">· {systemHealth.graded} graded · v1.0.0-platt</span>
+            <span className="text-[var(--ink-faint)]">· {systemHealth.graded} graded · 48 nations</span>
           </div>
         </div>
       </nav>

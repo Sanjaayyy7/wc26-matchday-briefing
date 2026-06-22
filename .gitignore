@@ -46,3 +46,7 @@ data/raw/
 
 # huggingface model cache (downloaded by score-sentiment.mts)
 .cache/huggingface/
+
+# brainstorming visual companion
+.superpowers/
+.firecrawl/
