@@ -233,10 +233,10 @@ export default function HomePage() {
             <span className="text-micro uppercase tracking-widest text-[var(--ink-faint)]">
               Live tournament · 48 nations · one ledger
             </span>
-            <div className="text-hero data-mono tabular mt-5">
+            <div className="text-hero tabular mt-5">
               {correct}/{agg.n} <span className="text-[var(--ink-muted)]">correct picks</span>
             </div>
-            <div className="text-title data-mono tabular mt-4 text-[var(--ink-muted)]">
+            <div className="text-title tabular mt-4 text-[var(--ink-muted)]">
               Brier {brierStr} · {accuracyStr} accuracy
             </div>
             <p className="text-body mt-6 max-w-md">

@@ -57,15 +57,32 @@ export function buildPulsePoints(): PulsePoint[] {
     }));
 }
 
-/** Build an SVG path string through the points across a w×h box (with padding). */
+/**
+ * Build a smooth SVG path through the points across a w×h box (with padding),
+ * using a Catmull-Rom → cubic-Bézier conversion so the trace reads as a clean,
+ * premium curve rather than a jagged polyline.
+ */
 export function pulsePath(points: PulsePoint[], w: number, h: number, pad = 0): string {
   if (points.length === 0) return "";
   const step = points.length > 1 ? (w - pad * 2) / (points.length - 1) : 0;
-  return points
-    .map((p, idx) => {
-      const x = pad + idx * step;
-      const y = pulseY(p.brier, h, pad);
-      return `${idx === 0 ? "M" : "L"} ${x.toFixed(2)},${y.toFixed(2)}`;
-    })
-    .join(" ");
+  const pts = points.map((p, idx) => ({
+    x: pad + idx * step,
+    y: pulseY(p.brier, h, pad),
+  }));
+  if (pts.length === 1) return `M ${pts[0].x.toFixed(2)},${pts[0].y.toFixed(2)}`;
+
+  const f = (n: number) => n.toFixed(2);
+  let d = `M ${f(pts[0].x)},${f(pts[0].y)}`;
+  for (let i = 0; i < pts.length - 1; i++) {
+    const p0 = pts[i - 1] ?? pts[i];
+    const p1 = pts[i];
+    const p2 = pts[i + 1];
+    const p3 = pts[i + 2] ?? p2;
+    const cp1x = p1.x + (p2.x - p0.x) / 6;
+    const cp1y = p1.y + (p2.y - p0.y) / 6;
+    const cp2x = p2.x - (p3.x - p1.x) / 6;
+    const cp2y = p2.y - (p3.y - p1.y) / 6;
+    d += ` C ${f(cp1x)},${f(cp1y)} ${f(cp2x)},${f(cp2y)} ${f(p2.x)},${f(p2.y)}`;
+  }
+  return d;
 }

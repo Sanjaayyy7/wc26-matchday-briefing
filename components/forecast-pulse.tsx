@@ -47,6 +47,10 @@ export function ForecastPulse() {
       <span className="text-micro uppercase tracking-widest text-[var(--ink-faint)]">
         Forecast pulse · {points.length} graded calls
       </span>
+      <p className="text-caption max-w-sm text-[var(--ink-muted)]">
+        Every graded call, in order. The trace rises toward SHARP on accurate calls and
+        sinks below the chance line toward MISS — the model&apos;s accuracy rhythm at a glance.
+      </p>
       <svg
         viewBox={`0 0 ${W} ${H}`}
         className="w-full"
