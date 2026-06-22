@@ -50,10 +50,10 @@ describe("buildPulsePoints", () => {
 });
 
 describe("pulsePath", () => {
-  it("starts with a move command and spans the width", () => {
+  it("starts with a move command and draws a smooth curve", () => {
     const path = pulsePath(buildPulsePoints(), 680, 360, 24);
     expect(path.startsWith("M ")).toBe(true);
-    expect(path).toContain("L ");
+    expect(path).toContain("C ");
   });
 
   it("returns empty for no points", () => {
