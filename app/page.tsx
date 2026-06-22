@@ -6,6 +6,7 @@ import { SettlementRow } from "@/components/settlement-row";
 import { CalibrationDiagram } from "@/components/calibration-diagram";
 import { ForecastPulse } from "@/components/forecast-pulse";
 import { MatchdayToday, type TodaysMatch } from "@/components/matchday-today";
+import { Reveal } from "@/components/reveal";
 import { allMatchViews } from "@/lib/match-view";
 import { selectUpcomingLocks } from "@/lib/upcoming-locks";
 import { fixtureBySlug, clubById, allClubs } from "@/lib/data";
@@ -262,6 +263,7 @@ export default function HomePage() {
         </section>
 
         {todaysMatches.length > 0 && (
+          <Reveal>
           <CanvasSection eyebrow="Matchday" title="Today's slate">
             <div className="flex flex-col gap-6">
               <p className="text-caption max-w-md text-[var(--ink-muted)]">
@@ -271,8 +273,10 @@ export default function HomePage() {
               <MatchdayToday matches={todaysMatches} />
             </div>
           </CanvasSection>
+          </Reveal>
         )}
 
+        <Reveal>
         <CanvasSection eyebrow="Live ledger" title="The Reckoning">
           <div className="grid animate-rise gap-12 lg:grid-cols-[2fr_320px]">
             {/* ── MAIN COLUMN ── */}
@@ -431,6 +435,7 @@ export default function HomePage() {
             </aside>
           </div>
         </CanvasSection>
+        </Reveal>
       </RouteStack>
     </WCS26Shell>
   );
