@@ -120,6 +120,7 @@
   --signal-7: #f4f4ef;
 
   /* Verdict ramp (§2.4) */
+  --verdict-nailed: var(--signal-6);
   --verdict-hit: var(--up);
   --verdict-close: var(--stage-sf);
   --verdict-miss: var(--down);
@@ -198,6 +199,7 @@
   --signal-7: #f4f4ef;
 
   /* Verdict ramp (§2.4) */
+  --verdict-nailed: var(--signal-6);
   --verdict-hit: var(--up);
   --verdict-close: var(--stage-sf);
   --verdict-miss: var(--down);

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-22T16:04:14.243Z",
+  "generatedAt": "2026-06-22T16:31:08.911Z",
   "official": {
     "rows": [
       {
@@ -61,7 +61,7 @@
           "bttsBrier": 0.27442650880721964,
           "bttsDerivedPostHoc": true
         },
-        "verdict": "close"
+        "verdict": "nailed"
       },
       {
         "slug": "germany-vs-cura-ao",
@@ -137,7 +137,7 @@
           "bttsBrier": 0.2181288797157714,
           "bttsDerivedPostHoc": true
         },
-        "verdict": "hit"
+        "verdict": "nailed"
       },
       {
         "slug": "australia-vs-turkiye",
@@ -441,7 +441,7 @@
           "bttsBrier": 0.21070781388580656,
           "bttsDerivedPostHoc": true
         },
-        "verdict": "hit"
+        "verdict": "nailed"
       },
       {
         "slug": "switzerland-vs-bosnia-herzegovina",
@@ -498,7 +498,7 @@
           "bttsBrier": 0.21732871665008624,
           "bttsDerivedPostHoc": true
         },
-        "verdict": "hit"
+        "verdict": "nailed"
       },
       {
         "slug": "brazil-vs-haiti",

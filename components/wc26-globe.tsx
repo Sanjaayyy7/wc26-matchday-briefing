@@ -19,12 +19,14 @@ const AXIAL_TILT = 0.41; // 23.5° in radians
 // Hex literals live in data/globe-palette.json (three.js needs literal colors,
 // not CSS vars); they mirror the --up / --stage-sf / --down / --ink tokens.
 const VERDICT_COLOR: Record<GlobeVerdict, string> = {
+  nailed: palette.white,
   hit: palette.hit,
   close: palette.close,
   miss: palette.miss,
   locked: palette.locked,
 };
 const VERDICT_LABEL: Record<GlobeVerdict, string> = {
+  nailed: "NAILED",
   hit: "HIT",
   close: "CLOSE",
   miss: "MISS",
@@ -42,14 +44,15 @@ const STAR_PROPS = { radius: 60, depth: 28, count: 700, factor: 2, speed: 0 } as
  * material, plus an additive atmosphere rim halo.
  */
 function Earth() {
-  const [day, norm] = useTexture([
-    "/textures/earth_bluemarble.jpg",
-    "/textures/earth_normal_2048.jpg",
-  ]);
-  useMemo(() => {
-    day.colorSpace = THREE.SRGBColorSpace;
-    day.anisotropy = 8;
-  }, [day]);
+  const [day, norm] = useTexture(
+    ["/textures/earth_bluemarble.jpg", "/textures/earth_normal_2048.jpg"],
+    (loaded) => {
+      // Configure at load time (drei builds the texture here, so mutating is safe).
+      const tex = Array.isArray(loaded) ? loaded[0] : loaded;
+      tex.colorSpace = THREE.SRGBColorSpace;
+      tex.anisotropy = 8;
+    },
+  );
   const normalScale = useMemo(() => new THREE.Vector2(0.6, 0.6), []);
 
   return (

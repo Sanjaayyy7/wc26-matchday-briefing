@@ -18,6 +18,7 @@ const H = 380;
 const PAD = 30;
 
 const COLOR: Record<PulseVerdict, string> = {
+  nailed: "var(--verdict-nailed)",
   hit: "var(--up)",
   close: "var(--stage-sf)",
   miss: "var(--down)",

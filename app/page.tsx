@@ -142,6 +142,10 @@ export default function HomePage() {
       const date = f
         ? new Date(f.kickoffISO).toLocaleDateString("en-US", { month: "short", day: "numeric" })
         : "—";
+      // What the model called pre-kickoff: money-line pick + most-likely scoreline.
+      const favPct = Math.max(e.split.home, e.split.draw, e.split.away);
+      const favLabel =
+        e.split.home === favPct ? home : e.split.away === favPct ? away : "Draw";
       return {
         slug: e.slug,
         matchName: `${home} vs ${away}`,
@@ -149,6 +153,7 @@ export default function HomePage() {
         score: e.result!,
         brier: e.modelBrier!,
         verdict: verdictBySlug.get(e.slug) ?? "miss",
+        predicted: { call: `${favLabel} ${favPct}%`, scoreline: `${e.mostLikely.home}-${e.mostLikely.away}` },
       };
     });
 
@@ -340,6 +345,7 @@ export default function HomePage() {
                         score={s.score}
                         brier={s.brier}
                         verdict={s.verdict}
+                        predicted={s.predicted}
                       />
                     </Link>
                   ))}

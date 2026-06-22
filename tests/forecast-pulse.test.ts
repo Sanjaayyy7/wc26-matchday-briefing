@@ -37,7 +37,7 @@ describe("buildPulsePoints", () => {
   });
 
   it("uses only known verdicts and finite Briers", () => {
-    const allowed = new Set(["hit", "close", "miss"]);
+    const allowed = new Set(["nailed", "hit", "close", "miss"]);
     for (const p of points) {
       expect(allowed.has(p.verdict)).toBe(true);
       expect(Number.isFinite(p.brier)).toBe(true);

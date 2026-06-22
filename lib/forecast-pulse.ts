@@ -9,7 +9,7 @@ import fixturesJson from "@/data/fixtures.json";
 import predictionsJson from "@/data/predictions.json";
 import accountabilityJson from "@/data/backtest/wc26-accountability.json";
 
-export type PulseVerdict = "hit" | "close" | "miss";
+export type PulseVerdict = "nailed" | "hit" | "close" | "miss";
 
 export type PulsePoint = {
   i: number;

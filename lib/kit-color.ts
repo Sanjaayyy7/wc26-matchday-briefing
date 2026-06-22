@@ -144,9 +144,10 @@ export function stageVar(stage: Fixture["stage"] | string | undefined): string {
 // verdictVar — §2.4
 // ---------------------------------------------------------------------------
 
-export type Verdict = "hit" | "close" | "miss";
+export type Verdict = "nailed" | "hit" | "close" | "miss";
 
 const VERDICT_VAR: Record<Verdict, string> = {
+  nailed: "var(--verdict-nailed)",
   hit: "var(--verdict-hit)",
   close: "var(--verdict-close)",
   miss: "var(--verdict-miss)",

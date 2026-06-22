@@ -12,7 +12,7 @@ import fixturesJson from "@/data/fixtures.json";
 import predictionsJson from "@/data/predictions.json";
 import accountabilityJson from "@/data/backtest/wc26-accountability.json";
 
-export type GlobeVerdict = "hit" | "close" | "miss" | "locked";
+export type GlobeVerdict = "nailed" | "hit" | "close" | "miss" | "locked";
 
 export type GlobeNation = {
   id: string;

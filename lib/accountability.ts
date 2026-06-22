@@ -10,12 +10,16 @@
  *   2. Informational: matches played before the lock window — shown only for
  *      completeness with actual results and market resolutions. No model grades.
  *
- * Verdict definition:
- *   - "hit"   → correctPick is true (model's top bucket matched realized outcome)
- *   - "close" → correctPick is false AND (realized outcome is the model's
- *               2nd-most-likely bucket OR the scoreline is within 1 goal on both
- *               home and away components vs mostLikely scoreline)
- *   - "miss"  → otherwise
+ * Verdict definition (four tiers, best → worst):
+ *   - "nailed" → the exact predicted scoreline landed (scorelineHit). The
+ *                strongest possible call — the model named the precise result.
+ *   - "hit"    → the money-line was right (correctPick: the model's most-likely
+ *                outcome matched the result), but the exact scoreline did not.
+ *                Like winning a money-line bet regardless of the final margin.
+ *   - "close"  → the money-line was wrong, but the result was a live alternative
+ *                the model gave real weight to — the 2nd-most-likely outcome at
+ *                ≥ CLOSE_MIN_PROB, or a scoreline within one goal on both sides.
+ *   - "miss"   → otherwise (the model was confidently wrong).
  *
  * "Within 1 goal" means |mostLikely.home − actual.home| ≤ 1 AND
  *                        |mostLikely.away − actual.away| ≤ 1.
@@ -97,7 +101,7 @@ export type PolymarketEntry = {
   resolved?: { home: 0 | 1; draw: 0 | 1; away: 0 | 1 } | null;
 };
 
-export type Verdict = "hit" | "close" | "miss";
+export type Verdict = "nailed" | "hit" | "close" | "miss";
 
 export type OfficialRow = {
   slug: string;
@@ -199,6 +203,9 @@ function parseScore(result: string): { home: number; away: number } | null {
 const CLOSE_MIN_PROB = 20;
 
 function classifyVerdict(entry: LockedEntry): Verdict {
+  // Exact predicted scoreline = the strongest possible call.
+  if (entry.scorelineHit) return "nailed";
+  // Money-line: the model's most-likely outcome matched the result.
   if (entry.correctPick) return "hit";
 
   // Precondition for any "close": the model must have given the realized outcome

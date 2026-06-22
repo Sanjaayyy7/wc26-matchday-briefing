@@ -32,7 +32,7 @@ describe("buildGlobeNations", () => {
   });
 
   it("uses only known verdict states", () => {
-    const allowed = new Set(["hit", "close", "miss", "locked"]);
+    const allowed = new Set(["nailed", "hit", "close", "miss", "locked"]);
     for (const n of nations) expect(allowed.has(n.verdict)).toBe(true);
   });
 
