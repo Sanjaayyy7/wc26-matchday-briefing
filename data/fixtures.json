@@ -718,7 +718,9 @@
     "group": "G",
     "tzOffsetMinutes": -420,
     "tzLabel": "PDT",
-    "neutral": true
+    "neutral": true,
+    "homeScore": 1,
+    "awayScore": 3
   },
   {
     "id": "esp-ksa-gh",
