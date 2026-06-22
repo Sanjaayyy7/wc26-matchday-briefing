@@ -34,7 +34,7 @@ export function WCS26Shell({
           <div className="grid gap-6 border-b border-[var(--line)] pb-8 lg:grid-cols-[1fr_auto] lg:items-end">
             <div>
               <p className="text-label">{eyebrow}</p>
-              {title && <h1 className="text-display mt-3 text-5xl md:text-7xl">{title}</h1>}
+              {title && <h1 className="text-hero mt-3">{title}</h1>}
               {title && <div className="mt-5 h-px w-40 bg-[var(--line)]" />}
             </div>
             {rail && <div className="min-w-0">{rail}</div>}
