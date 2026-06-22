@@ -453,33 +453,19 @@
     linear-gradient(180deg, transparent, color-mix(in oklab, var(--ink) 4%, transparent), transparent);
 }
 
+/* Single-accent section rule (constitution: one accent, no rainbow, no glow). */
 @utility chroma-rule {
   background: linear-gradient(
     90deg,
-    var(--signal-1),
-    var(--signal-2) 18%,
-    var(--signal-3) 36%,
-    var(--signal-4) 54%,
-    var(--signal-5) 72%,
-    var(--signal-6)
+    var(--up),
+    color-mix(in oklab, var(--up) 28%, transparent) 46%,
+    transparent
   );
-  box-shadow:
-    0 0 22px color-mix(in oklab, var(--signal-1) 16%, transparent),
-    0 0 28px color-mix(in oklab, var(--signal-5) 12%, transparent);
 }
 
+/* Retired the rainbow text gradient — display copy reads in solid ink. */
 @utility chroma-text {
-  background: linear-gradient(
-    90deg,
-    var(--signal-1),
-    var(--signal-2) 24%,
-    var(--signal-3) 48%,
-    var(--signal-5) 76%,
-    var(--signal-6)
-  );
-  background-clip: text;
-  -webkit-background-clip: text;
-  color: transparent;
+  color: var(--ink);
 }
 
 @utility signal-sheen {
