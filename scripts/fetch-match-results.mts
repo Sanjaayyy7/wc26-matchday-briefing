@@ -106,7 +106,7 @@ for (const result of wc26) {
   }
 
   // Find fixture by homeId + awayId
-  let fixture = fixtureArr.find((f) => f.homeId === homeId && f.awayId === awayId);
+  const fixture = fixtureArr.find((f) => f.homeId === homeId && f.awayId === awayId);
 
   if (!fixture) {
     // Try reversed (neutral-ground listings sometimes swap sides)

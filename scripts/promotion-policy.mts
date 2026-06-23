@@ -98,7 +98,7 @@ function incompleteBetaReg(x: number, a: number, b: number): number {
 function betaCF(x: number, a: number, b: number): number {
   const MAXITER = 200;
   const EPS = 3e-12;
-  let qab = a + b, qap = a + 1, qam = a - 1;
+  const qab = a + b, qap = a + 1, qam = a - 1;
   let c = 1.0, d = 1.0 - qab * x / qap;
   if (Math.abs(d) < 1e-30) d = 1e-30;
   d = 1.0 / d;
