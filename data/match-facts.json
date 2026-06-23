@@ -1,5 +1,5 @@
 {
-  "_note": "Per-match facts for finished WC26 group fixtures. Keys are fixture slugs from data/fixtures.json. Facts sourced only from live fetches; omitted fields mean no source provided the data. Updated 2026-06-21.",
+  "_note": "Per-match facts for finished WC26 group fixtures. Keys are fixture slugs from data/fixtures.json. Facts sourced only from live fetches; omitted fields mean no source provided the data. Updated 2026-06-23.",
   "mexico-vs-south-africa": {
     "score": {
       "home": 2,
@@ -392,6 +392,89 @@
     "_sources": [
       "https://www.fifa.com/en/match-centre/match/17/285023/289273/400021450",
       "https://www.ctvnews.ca/vancouver/article/fifa-world-cup-jonathan-david-hat-trick-brings-score-to-6-0-for-canada-follow-live-updates-here/"
+    ]
+  },
+  "france-vs-iraq": {
+    "score": {
+      "home": 3,
+      "away": 0
+    },
+    "btts": false,
+    "totalGoals": 3,
+    "_sources": [
+      "https://www.aljazeera.com/sports/2026/6/23/mbappe-leads-france-to-win-over-iraq-in-lightening-delayed-world-cup-tie",
+      "https://www.espn.com/soccer/match/_/gameId/760457/iraq-france",
+      "https://www.bbc.com/sport/football/live/cq810n4exgvt",
+      "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/france-iraq-match-report-highlights"
+    ]
+  },
+  "norway-vs-senegal": {
+    "score": {
+      "home": 3,
+      "away": 2
+    },
+    "btts": true,
+    "totalGoals": 5,
+    "_sources": [
+      "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/norway-senegal-match-report-highlights",
+      "https://apnews.com/article/world-cup-norway-senegal-score-9d7931dc6f21173c9fb83ddf21a68b71",
+      "https://www.espn.com/soccer/match/_/gameId/760454/senegal-norway",
+      "https://www.bbc.co.uk/sport/football/live/c3ey5pj14yxt"
+    ]
+  },
+  "argentina-vs-austria": {
+    "score": {
+      "home": 2,
+      "away": 0
+    },
+    "scorers": [
+      {
+        "player": "Lionel Messi",
+        "team": "arg",
+        "minute": 38
+      },
+      {
+        "player": "Lionel Messi",
+        "team": "arg",
+        "minute": 95
+      }
+    ],
+    "btts": false,
+    "totalGoals": 2,
+    "_sources": [
+      "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/argentina-austria-match-report-highlights",
+      "https://africa.espn.com/football/match/_/gameId/760456/austria-argentina",
+      "https://www.theguardian.com/football/live/2026/jun/22/argentina-v-austria-world-cup-2026-live"
+    ]
+  },
+  "jordan-vs-algeria": {
+    "score": {
+      "home": 1,
+      "away": 2
+    },
+    "scorers": [
+      {
+        "player": "Nizar Al-Rashdan",
+        "team": "jor",
+        "minute": 36
+      },
+      {
+        "player": "Nadhir Benbouali",
+        "team": "alg",
+        "minute": 69
+      },
+      {
+        "player": "Amine Gouiri",
+        "team": "alg",
+        "minute": 82
+      }
+    ],
+    "btts": true,
+    "totalGoals": 3,
+    "_sources": [
+      "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/jordan-algeria-match-report-highlights",
+      "https://www.theguardian.com/football/live/2026/jun/23/fifa-world-cup-2026-live-jordan-v-algeria-updates-jor-v-alg-group-j-match-score-latest",
+      "https://www.espn.com/soccer/story/_/id/49145580/jordan-algeria-live-world-cup-2026-latest-updates-commentary-score-result"
     ]
   }
 }

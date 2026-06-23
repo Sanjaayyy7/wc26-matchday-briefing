@@ -775,7 +775,9 @@
     "group": "I",
     "tzOffsetMinutes": -240,
     "tzLabel": "EDT",
-    "neutral": true
+    "neutral": true,
+    "homeScore": 3,
+    "awayScore": 0
   },
   {
     "id": "nor-sen-gi",
@@ -792,7 +794,9 @@
     "group": "I",
     "tzOffsetMinutes": -240,
     "tzLabel": "EDT",
-    "neutral": true
+    "neutral": true,
+    "homeScore": 3,
+    "awayScore": 2
   },
   {
     "id": "arg-aut-gj",
@@ -809,7 +813,9 @@
     "group": "J",
     "tzOffsetMinutes": -300,
     "tzLabel": "CDT",
-    "neutral": true
+    "neutral": true,
+    "homeScore": 2,
+    "awayScore": 0
   },
   {
     "id": "jor-alg-gj",
@@ -826,7 +832,9 @@
     "group": "J",
     "tzOffsetMinutes": -420,
     "tzLabel": "PDT",
-    "neutral": true
+    "neutral": true,
+    "homeScore": 1,
+    "awayScore": 2
   },
   {
     "id": "por-uzb-gk",
