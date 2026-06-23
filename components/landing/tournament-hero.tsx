@@ -23,7 +23,7 @@ export function TournamentHero({
 }) {
   return (
     <section
-      className="animate-rise rounded-3xl p-6 dark:border dark:border-[var(--hairline)] md:p-8"
+      className="animate-rise p-6 md:p-8"
       style={kitPairWashStyle(home.primary, away.primary)}
     >
       <div className="grid gap-8 lg:grid-cols-[1.2fr_0.8fr] lg:items-end">
@@ -41,7 +41,7 @@ export function TournamentHero({
                 name={home.name}
                 size={72}
               />
-              <h1 className="text-display text-4xl">{home.name}</h1>
+              <h1 className="text-display">{home.name}</h1>
             </div>
             <span className="text-title text-[var(--ink-faint)]">vs</span>
             <div className="flex items-center gap-4">
@@ -52,7 +52,7 @@ export function TournamentHero({
                 name={away.name}
                 size={72}
               />
-              <h2 className="text-display text-4xl">{away.name}</h2>
+              <h2 className="text-display">{away.name}</h2>
             </div>
           </div>
           <p className="mt-6 max-w-2xl text-[var(--ink-muted)]">{fixture.stakes}</p>
@@ -64,22 +64,22 @@ export function TournamentHero({
           </Link>
         </div>
         <div className="grid gap-4 sm:grid-cols-3 lg:grid-cols-1">
-          <div className="rounded-2xl bg-[var(--surface)] p-4 dark:border dark:border-[var(--hairline)]">
+          <div className="border-t border-[var(--hairline)] pt-4">
             <span className="text-label">Official sample</span>
-            <NumberTicker value={officialCount} className="text-display mt-2 block text-3xl" />
+            <NumberTicker value={officialCount} className="mt-2 block font-[family-name:var(--font-display)] text-[clamp(1.625rem,2.4vw,2.25rem)] font-bold leading-none tracking-tight tabular" />
           </div>
-          <div className="rounded-2xl bg-[var(--surface)] p-4 dark:border dark:border-[var(--hairline)]">
+          <div className="border-t border-[var(--hairline)] pt-4">
             <span className="text-label">Open locks</span>
-            <NumberTicker value={openLocks} className="text-display mt-2 block text-3xl" />
+            <NumberTicker value={openLocks} className="mt-2 block font-[family-name:var(--font-display)] text-[clamp(1.625rem,2.4vw,2.25rem)] font-bold leading-none tracking-tight tabular" />
           </div>
-          <div className="rounded-2xl bg-[var(--surface)] p-4 dark:border dark:border-[var(--hairline)]">
+          <div className="border-t border-[var(--hairline)] pt-4">
             <span className="text-label">Cup favorite</span>
             <span className="text-title mt-2 block">{leader.name}</span>
             <NumberTicker
               value={leader.pct}
               suffix="%"
               decimals={1}
-              className="text-display mt-1 block text-3xl text-[var(--up)]"
+              className="mt-1 block font-[family-name:var(--font-display)] text-[clamp(1.625rem,2.4vw,2.25rem)] font-bold leading-none tracking-tight tabular text-[var(--up)]"
             />
           </div>
         </div>

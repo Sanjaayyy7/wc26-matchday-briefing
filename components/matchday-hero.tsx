@@ -32,7 +32,7 @@ export function MatchdayHero({
               name={home.name}
               size={96}
             />
-            <span className="text-display text-3xl md:text-5xl">{home.name}</span>
+            <span className="text-display">{home.name}</span>
           </div>
           <span className="text-title text-[var(--ink-faint)]" aria-hidden>
             vs
@@ -45,7 +45,7 @@ export function MatchdayHero({
               name={away.name}
               size={96}
             />
-            <span className="text-display text-3xl md:text-5xl">{away.name}</span>
+            <span className="text-display">{away.name}</span>
           </div>
         </div>
         <p className="max-w-xl text-[var(--ink-muted)]">

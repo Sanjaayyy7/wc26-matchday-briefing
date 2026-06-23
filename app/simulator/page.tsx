@@ -64,7 +64,7 @@ export default function SimulatorPage() {
         <CanvasSection eyebrow="Simulation engine" title="Every contender, priced like a futures desk.">
           <DataPlane>
             <div className="grid gap-10 lg:grid-cols-[minmax(0,0.95fr)_minmax(18rem,0.55fr)] lg:items-start">
-              <p className="max-w-3xl text-title text-xl leading-relaxed md:text-2xl">
+              <p className="max-w-3xl text-title leading-relaxed">
                 {sim.runMeta.runs.toLocaleString()} full tournaments sampled from the
                 Elo + Dixon-Coles model: every unplayed match drawn from its score
                 grid, FIFA group tiebreakers, the verified round-of-32 bracket, and

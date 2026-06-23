@@ -60,7 +60,7 @@ export function MatchResultPanel({ view }: { view: MatchView }) {
             {view.status === "official" ? "Settled result" : "Played match"}
           </h2>
           <div className="flex flex-wrap items-center gap-4">
-            <span className="text-display tabular text-5xl">
+            <span className="text-display tabular">
               {Number.isFinite(homeScore) ? homeScore : view.score}
               {Number.isFinite(homeScore) && Number.isFinite(awayScore) ? (
                 <>
