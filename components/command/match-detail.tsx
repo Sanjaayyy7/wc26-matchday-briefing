@@ -86,10 +86,8 @@ export function MatchDetail({ fixture, prediction, dispatch, homeClub, awayClub,
             <div
               key={label}
               className={[
-                "flex-1 px-3 py-2.5 relative border",
-                winner
-                  ? "bg-[rgba(124,255,178,0.04)] border-[rgba(124,255,178,0.18)]"
-                  : "bg-[rgba(255,255,255,0.02)] border-[var(--hairline)]",
+                "flex-1 px-3 py-2.5 relative border-t",
+                winner ? "border-[var(--up)]" : "border-[var(--hairline)]",
               ].join(" ")}
             >
               <div className="text-tiny text-[var(--ink-faint)] uppercase tracking-widest mb-1.5">{label}</div>
@@ -97,10 +95,10 @@ export function MatchDetail({ fixture, prediction, dispatch, homeClub, awayClub,
                 {pct}%
               </div>
               <div
-                className="absolute bottom-0 left-0 h-0.5 rounded-b"
+                className="absolute bottom-0 left-0 h-0.5"
                 style={{
                   width: `${pct}%`,
-                  background: winner ? "var(--up)" : "rgba(255,255,255,0.1)",
+                  background: winner ? "var(--up)" : "var(--line)",
                 }}
               />
             </div>

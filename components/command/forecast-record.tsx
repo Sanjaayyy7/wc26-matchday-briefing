@@ -3,11 +3,11 @@
 import type { CommandFixture, ForecastGrade } from "@/lib/command-data";
 
 const GRADE_STYLES: Record<ForecastGrade, { bg: string; text: string; border?: string }> = {
-  sharp:    { bg: "bg-[rgba(124,255,178,0.1)]",  text: "text-[var(--up)]" },
+  sharp:    { bg: "bg-[rgba(127,209,176,0.1)]",  text: "text-[var(--up)]" },
   solid:    { bg: "bg-[rgba(74,144,217,0.1)]",   text: "text-[var(--signal-1)]" },
   close:    { bg: "bg-[rgba(255,196,107,0.1)]",  text: "text-[var(--warn)]" },
-  miss:     { bg: "bg-[rgba(255,103,77,0.1)]",   text: "text-[var(--down)]" },
-  surprise: { bg: "bg-[rgba(255,103,77,0.15)]",  text: "text-[var(--down)]", border: "border border-[rgba(255,103,77,0.28)]" },
+  miss:     { bg: "bg-[rgba(224,101,79,0.1)]",   text: "text-[var(--down)]" },
+  surprise: { bg: "bg-[rgba(224,101,79,0.15)]",  text: "text-[var(--down)]", border: "border border-[rgba(224,101,79,0.28)]" },
 };
 
 function GradeBadge({ grade }: { grade: ForecastGrade }) {
@@ -56,7 +56,7 @@ export function ForecastRecord({ fixtures, selectedSlug, onSelect }: Props) {
               className={[
                 "w-full flex items-center gap-2 px-4 py-1.5 border-b border-[var(--hairline)] text-left transition-colors",
                 f.slug === selectedSlug
-                  ? "bg-[rgba(124,255,178,0.04)]"
+                  ? "bg-[rgba(127,209,176,0.04)]"
                   : "hover:bg-[rgba(255,255,255,0.03)]",
               ].join(" ")}
             >
@@ -88,7 +88,7 @@ export function ForecastRecord({ fixtures, selectedSlug, onSelect }: Props) {
               className={[
                 "w-full flex items-center gap-2 px-4 py-1.5 border-b border-[var(--hairline)] text-left transition-colors",
                 f.slug === selectedSlug
-                  ? "bg-[rgba(124,255,178,0.04)]"
+                  ? "bg-[rgba(127,209,176,0.04)]"
                   : "hover:bg-[rgba(255,255,255,0.03)]",
               ].join(" ")}
             >
