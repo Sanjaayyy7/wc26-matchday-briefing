@@ -37,7 +37,7 @@ function LedgerMetric({
   return (
     <div className="border-b border-[var(--line)] pb-5 last:border-0">
       <span className="text-label">{label}</span>
-      <div className="mt-2 text-3xl text-display tabular">{value}</div>
+      <div className="mt-2 font-[family-name:var(--font-display)] text-[clamp(1.625rem,2.4vw,2.25rem)] font-bold leading-none tracking-tight tabular">{value}</div>
       {sub && <p className="text-caption mt-1">{sub}</p>}
     </div>
   );

@@ -20,14 +20,14 @@ function cellType(row: number, col: number): "home" | "draw" | "away" {
 }
 
 const CELL_BASE: Record<"home" | "draw" | "away", string> = {
-  home:  "rgba(124,255,178,",
+  home:  "rgba(127,209,176,",
   draw:  "rgba(255,255,255,",
-  away:  "rgba(255,103,77,",
+  away:  "rgba(224,101,79,",
 };
 const CELL_TEXT: Record<"home" | "draw" | "away", string> = {
-  home:  "rgba(124,255,178,0.85)",
+  home:  "rgba(127,209,176,0.85)",
   draw:  "rgba(244,244,239,0.55)",
-  away:  "rgba(255,103,77,0.8)",
+  away:  "rgba(224,101,79,0.8)",
 };
 
 function pctStr(p: number): string {
@@ -136,7 +136,7 @@ export function ScoreProbabilitySurface({ grid, homeTeam, awayTeam, lambdas, elo
             ? `${homeTeam} ${cell.r}–${cell.c}`
             : `${awayTeam} ${cell.c}–${cell.r}`;
         return (
-          <div className="mb-2.5 px-3 py-2 rounded border border-[var(--hairline)] bg-[var(--surface)] flex flex-wrap items-center gap-x-4 gap-y-1">
+          <div className="mb-2.5 py-2 border-b border-[var(--hairline)] flex flex-wrap items-center gap-x-4 gap-y-1">
             <span className="text-slight font-semibold text-[var(--ink)]">{label}</span>
             <span className="text-fine text-[var(--ink-faint)]">P <span className="data-mono tabular text-[var(--ink-muted)]">{pctStr(prob)}</span></span>
             <span className="text-fine text-[var(--ink-faint)]">xG <span className="data-mono tabular text-[var(--ink-muted)]">{lambdas.home.toFixed(2)}–{lambdas.away.toFixed(2)}</span></span>
@@ -173,7 +173,7 @@ export function ScoreProbabilitySurface({ grid, homeTeam, awayTeam, lambdas, elo
               className={[
                 "flex items-center gap-1 px-2 py-1 rounded-full border text-slight tabular-nums",
                 i === 0
-                  ? "border-[rgba(124,255,178,0.28)] bg-[rgba(124,255,178,0.04)] text-[var(--up)]"
+                  ? "border-[rgba(127,209,176,0.28)] bg-[rgba(127,209,176,0.04)] text-[var(--up)]"
                   : "border-[var(--hairline)] text-[var(--ink-muted)]",
               ].join(" ")}
             >

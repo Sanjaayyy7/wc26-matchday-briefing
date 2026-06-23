@@ -34,7 +34,7 @@ export function PlayerLeaderboard({ players }: { players: PlayerRowView[] }) {
               className={[
                 "border px-3 py-1 text-label transition-colors duration-300",
                 sortKey === key
-                  ? "border-[var(--tint)] bg-[var(--panel)] text-[var(--ink)]"
+                  ? "border-[var(--up)] text-[var(--ink)]"
                   : "border-[var(--line)] text-[var(--ink-muted)] hover:border-[var(--ink-muted)]",
               ].join(" ")}
             >

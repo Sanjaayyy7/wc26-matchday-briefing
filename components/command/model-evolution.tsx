@@ -3,9 +3,9 @@
 import type { EvolutionEntry } from "@/lib/command-data";
 
 const ENTRY_STYLES = {
-  surprise:    { borderClass: "border-l-[var(--down)]", bgClass: "bg-[rgba(255,103,77,0.02)]", tagBg: "bg-[rgba(255,103,77,0.12)]", tagText: "text-[var(--down)]", label: "Surprise observed" },
+  surprise:    { borderClass: "border-l-[var(--down)]", bgClass: "bg-[rgba(224,101,79,0.02)]", tagBg: "bg-[rgba(224,101,79,0.12)]", tagText: "text-[var(--down)]", label: "Surprise observed" },
   calibration: { borderClass: "border-l-[var(--warn)]", bgClass: "bg-[rgba(255,196,107,0.02)]", tagBg: "bg-[rgba(255,196,107,0.1)]",  tagText: "text-[var(--warn)]", label: "Calibration updated" },
-  confirm:     { borderClass: "border-l-[var(--up)]",   bgClass: "bg-[rgba(124,255,178,0.02)]", tagBg: "bg-[rgba(124,255,178,0.1)]",  tagText: "text-[var(--up)]",   label: "Pattern confirmed" },
+  confirm:     { borderClass: "border-l-[var(--up)]",   bgClass: "bg-[rgba(127,209,176,0.02)]", tagBg: "bg-[rgba(127,209,176,0.1)]",  tagText: "text-[var(--up)]",   label: "Pattern confirmed" },
 };
 
 const STATUS_COLORS = {
@@ -50,7 +50,7 @@ export function ModelEvolution({ entries }: { entries: EvolutionEntry[] }) {
               </div>
 
               {entry.autopsy && (
-                <div className="mt-2 pt-2 border-t border-[rgba(255,103,77,0.1)] -mx-3 px-3 pb-0">
+                <div className="mt-2 pt-2 border-t border-[rgba(224,101,79,0.1)] -mx-3 px-3 pb-0">
                   <div className="text-tiny font-semibold uppercase tracking-widest text-[var(--down)] mb-1.5">
                     Forecast autopsy
                   </div>

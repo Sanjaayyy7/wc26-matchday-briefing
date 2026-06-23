@@ -18,13 +18,15 @@ function toneClass(tone: Tone = "neutral") {
   return "text-[var(--ink)]";
 }
 
+// Restrained accent cycle (constitution: one accent + monochrome, no rainbow).
+// Decorative tick marks read as ink with a single jade/gold signal.
 const SPECTRAL = [
-  "var(--stage-r32)",
   "var(--up)",
-  "var(--stage-final)",
-  "var(--down)",
-  "var(--stage-qf)",
-  "var(--stage-r16)",
+  "var(--ink-faint)",
+  "var(--warn)",
+  "var(--ink-faint)",
+  "var(--up)",
+  "var(--ink-faint)",
 ] as const;
 
 function spectralColor(index: number) {
@@ -64,7 +66,7 @@ export function CanvasSection({
         <div className={headingClass}>
           <div>
             <p className="text-label">{eyebrow}</p>
-            {title && <h2 className="text-display mt-3 text-4xl md:text-6xl">{title}</h2>}
+            {title && <h2 className="text-display mt-3">{title}</h2>}
           </div>
           {visual}
         </div>
@@ -113,7 +115,7 @@ export function SignalStat({
         value={value}
         suffix={suffix}
         decimals={decimals}
-        className={`text-display mt-1 block text-3xl ${toneClass(tone)}`}
+        className={`mt-1 block font-[family-name:var(--font-display)] text-[clamp(1.625rem,2.4vw,2.25rem)] font-bold leading-none tracking-tight tabular ${toneClass(tone)}`}
       />
       {detail && <p className="text-caption mt-1 truncate">{detail}</p>}
     </div>
@@ -239,7 +241,7 @@ export function HeroScene({
               <div className="max-w-5xl">
                 <p className="text-label">World Cup 2026</p>
                 <h1 className="text-hero mt-5">Tournament command.</h1>
-                <p className="text-title mt-6 max-w-3xl text-2xl text-[var(--ink-muted)] md:text-3xl">
+                <p className="text-title mt-6 max-w-3xl text-[var(--ink-muted)]">
                   Match rooms, locked probabilities, simulation odds, and a public ledger on one cinematic black desk.
                 </p>
                 <Link
@@ -256,14 +258,14 @@ export function HeroScene({
                   <div className="flex items-center justify-between gap-4">
                     <div className="flex min-w-0 items-center gap-3">
                       <Crest short={home.short} primary={home.primary} secondary={home.secondary} name={home.name} size={48} />
-                      <span className="text-title truncate text-2xl">{home.name}</span>
+                      <span className="text-title truncate">{home.name}</span>
                     </div>
                     <span className="h-px w-12 shrink-0" style={{ background: "var(--kit-home)" }} />
                   </div>
                   <div className="flex items-center justify-between gap-4">
                     <div className="flex min-w-0 items-center gap-3">
                       <Crest short={away.short} primary={away.primary} secondary={away.secondary} name={away.name} size={48} />
-                      <span className="text-title truncate text-2xl">{away.name}</span>
+                      <span className="text-title truncate">{away.name}</span>
                     </div>
                     <span className="h-px w-12 shrink-0" style={{ background: "var(--kit-away)" }} />
                   </div>
@@ -295,7 +297,7 @@ export function HeroScene({
               </div>
 
               <div className="hidden text-center lg:block">
-                <div className="text-display chroma-text text-4xl">VS</div>
+                <div className="text-display chroma-text">VS</div>
                 <div className="mx-auto mt-5 h-16 w-px bg-[var(--line)]" />
               </div>
 
@@ -312,7 +314,7 @@ export function HeroScene({
 
             <div className="grid gap-8 border-t border-[var(--line)] pt-6 lg:grid-cols-[minmax(0,1fr)_minmax(18rem,0.42fr)] lg:items-start">
               <div>
-                <p className="text-title max-w-3xl text-2xl md:text-3xl">{fixture.stakes}</p>
+                <p className="text-title max-w-3xl">{fixture.stakes}</p>
                 <Link
                   href={`/fixture/${fixture.slug}`}
                   className="mt-7 inline-flex items-center gap-2 border-b border-[var(--stage-final)] pb-1 text-title transition-colors duration-300 hover:text-[var(--stage-final)]"

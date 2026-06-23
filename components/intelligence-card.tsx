@@ -15,7 +15,7 @@ export function IntelligenceCard({
 }) {
   return (
     <div
-      className="flex flex-col gap-2 p-4 bg-[var(--surface)] border-b border-[var(--line)]"
+      className="flex flex-col gap-2 py-4 border-b border-[var(--line)]"
       style={accent ? { borderBottomColor: ACCENT_BORDER[accent], borderBottomWidth: 2 } : undefined}
     >
       <span className="text-micro uppercase tracking-widest text-[var(--ink-faint)]">

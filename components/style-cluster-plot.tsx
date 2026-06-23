@@ -47,7 +47,7 @@ export function StyleClusterPlot({
 
       {/* Scatter plot area */}
       <div
-        className="relative border border-[var(--line)] bg-[var(--panel)]"
+        className="relative border border-[var(--line)]"
         style={{ height: 320, overflow: "hidden" }}
         aria-label="Player style cluster scatter plot: X=goals, Y=impact"
       >

@@ -38,8 +38,8 @@ export function ProbabilityBar({
               suffix="%"
               className={
                 hero
-                  ? "text-display text-5xl md:text-6xl"
-                  : "text-display text-2xl"
+                  ? "font-[family-name:var(--font-display)] text-[clamp(2.25rem,3.6vw,3.25rem)] font-bold leading-none tracking-tight tabular"
+                  : "font-[family-name:var(--font-display)] text-[clamp(1.375rem,2vw,1.75rem)] font-bold leading-none tracking-tight tabular"
               }
             />
           </div>

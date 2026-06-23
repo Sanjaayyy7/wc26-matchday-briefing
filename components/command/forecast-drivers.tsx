@@ -29,7 +29,7 @@ function DriverCell({
     neutral: "text-[var(--ink-faint)]",
   };
   return (
-    <div className="p-2 bg-[var(--surface)] border border-[var(--hairline)]">
+    <div className="py-2 border-b border-[var(--hairline)]">
       <div className="text-tiny text-[var(--ink-faint)] mb-1">{label}</div>
       <div className="text-xs font-medium text-[var(--ink-muted)]">{value}</div>
       <div className={`text-fine font-semibold mt-0.5 ${edgeColors[edgeColor]}`}>{edge}</div>

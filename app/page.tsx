@@ -6,6 +6,7 @@ import { SettlementRow } from "@/components/settlement-row";
 import { CalibrationDiagram } from "@/components/calibration-diagram";
 import { ForecastPulse } from "@/components/forecast-pulse";
 import { MatchdayToday, type TodaysMatch } from "@/components/matchday-today";
+import { AuroraFieldMount } from "@/components/aurora-field-mount";
 import { Reveal } from "@/components/reveal";
 import { allMatchViews } from "@/lib/match-view";
 import { selectUpcomingLocks } from "@/lib/upcoming-locks";
@@ -229,15 +230,9 @@ export default function HomePage() {
         {/* ── SCOREBOARD HERO — the score, with the forecast pulse ── */}
         <section className="route-section animate-rise relative overflow-hidden border-t border-[var(--line)] pt-8">
           <div className="chroma-rule absolute left-0 top-0 h-px w-36" />
-          {/* one restrained light source for depth (constitution: light as material) */}
-          <div
-            aria-hidden
-            className="pointer-events-none absolute inset-0"
-            style={{
-              background:
-                "radial-gradient(58% 56% at 74% 42%, color-mix(in oklab, var(--up) 6%, transparent), transparent 62%), radial-gradient(46% 52% at 8% 24%, color-mix(in oklab, var(--ink) 4%, transparent), transparent 58%)",
-            }}
-          />
+          {/* Signature moment — a living Aurora probability field on jet black
+              (constitution: one cinematic moment per page, light as material). */}
+          <AuroraFieldMount className="opacity-60 [mask-image:radial-gradient(72%_68%_at_68%_46%,black,transparent_82%)]" />
           <div className="relative z-10 grid items-center gap-12 py-16 lg:min-h-[72vh] lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)]">
             <div className="relative z-10 max-w-2xl">
             <span className="text-micro uppercase tracking-widest text-[var(--ink-faint)]">
