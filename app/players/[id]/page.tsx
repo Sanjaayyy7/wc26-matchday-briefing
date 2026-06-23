@@ -66,22 +66,22 @@ export default async function PlayerPage({
             <div className="mt-8 grid gap-6 border-t border-[var(--line)] pt-6 sm:grid-cols-4">
               <div>
                 <span className="text-label">Goals</span>
-                <NumberTicker value={player.goals} className="text-display mt-1 block text-4xl" />
+                <NumberTicker value={player.goals} className="mt-1 block font-[family-name:var(--font-display)] text-[clamp(1.625rem,2.4vw,2.25rem)] font-bold leading-none tracking-tight tabular" />
               </div>
               <div>
                 <span className="text-label">Assists</span>
-                <NumberTicker value={player.assists} className="text-display mt-1 block text-4xl" />
+                <NumberTicker value={player.assists} className="mt-1 block font-[family-name:var(--font-display)] text-[clamp(1.625rem,2.4vw,2.25rem)] font-bold leading-none tracking-tight tabular" />
               </div>
               <div>
                 <span className="text-label">Minutes</span>
-                <NumberTicker value={player.minutes} suffix="′" className="text-display mt-1 block text-4xl" />
+                <NumberTicker value={player.minutes} suffix="′" className="mt-1 block font-[family-name:var(--font-display)] text-[clamp(1.625rem,2.4vw,2.25rem)] font-bold leading-none tracking-tight tabular" />
               </div>
               <div>
                 <span className="text-label">Impact</span>
                 <NumberTicker
                   value={player.impact * 1000}
                   decimals={0}
-                  className="text-display mt-1 block text-4xl text-[var(--up)]"
+                  className="mt-1 block font-[family-name:var(--font-display)] text-[clamp(1.625rem,2.4vw,2.25rem)] font-bold leading-none tracking-tight tabular text-[var(--up)]"
                 />
                 <span className="text-caption">×10⁻³</span>
               </div>

@@ -35,7 +35,7 @@ function GroupBand({ letter, clubs, index }: { letter: string; clubs: Club[]; in
       style={{ "--group-signal": signal } as CSSProperties}
     >
       <div>
-        <div className="text-display chroma-text text-8xl leading-none md:text-9xl">{letter}</div>
+        <div className="text-hero chroma-text leading-none">{letter}</div>
         <div className="mt-4 h-px w-20" style={{ background: "var(--group-signal)" }} />
         <p className="text-label mt-4">Group {letter}</p>
         <p className="text-caption mt-1 max-w-28">Top two advance</p>
@@ -130,7 +130,7 @@ function GroupsBoard({ clubs }: { clubs: Club[] }) {
       <div className="grid gap-8 border-b border-[var(--line)] pb-8 lg:grid-cols-[minmax(0,1fr)_18rem] lg:items-end">
         <div>
           <p className="text-label">Qualification matrix</p>
-          <h2 className="text-display mt-3 text-4xl md:text-6xl">Twelve groups. One knockout gate.</h2>
+          <h2 className="text-display mt-3">Twelve groups. One knockout gate.</h2>
         </div>
         <div className="grid grid-cols-3 gap-5">
           <div>
