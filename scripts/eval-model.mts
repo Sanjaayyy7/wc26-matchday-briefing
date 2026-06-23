@@ -278,6 +278,26 @@ async function main() {
     });
   }
 
+  // ---- Variant 4: rho sweep + Platt recalibration (draw-weighting test) ----
+  // Tests fix #1 honestly: add draw mass via a more-negative Dixon-Coles rho,
+  // THEN refit Platt on the holdout so the change is properly recalibrated.
+  // Scored on the robust 2024+ slice — adopt only if it beats baseline on
+  // Brier AND keeps ECE < bar (avoids the small-sample draw-overfit trap).
+  for (const rho of [-0.08, -0.1, -0.12]) {
+    const params: ModelParams = { ...baseParams, rho };
+    const cal = fitPlattHoldout(rows, params);
+    const m = scoreVariant(backtest, (h, a, row) =>
+      applyPlattSplit(rawSplit(params, h, a, row), cal.a, cal.b),
+    );
+    results.push({
+      variant: `rho${rho}-platt`,
+      params,
+      calibration: cal,
+      ...m,
+      passesBar: m.brier < BRIER_MAX && m.ece < ECE_MAX,
+    });
+  }
+
   // ---- Pick lowest-Brier variant with ECE < ECE_MAX ----
   const eligible = results.filter((r) => r.ece < ECE_MAX);
   const chosen = (eligible.length ? eligible : results)

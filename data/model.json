@@ -1,113 +1,113 @@
 {
  "source": "martj42/international_results (GitHub mirror)",
- "dataThrough": "2026-06-12",
- "matches": 49409,
+ "dataThrough": "2026-06-21",
+ "matches": 49445,
  "params": {
-  "baseLogGoals": 0.15559468296112772,
-  "eloSlope": 0.8493046860985826,
-  "rho": -0.05
+  "baseLogGoals": 0.15551457303531332,
+  "eloSlope": 0.8494878630544168,
+  "rho": -0.1
  },
  "calibration": {
-  "a": 0.8940084012950075,
-  "b": -0.06486473866203729
+  "a": 0.9005479330756108,
+  "b": -0.06051222810307072
  },
  "backtest": {
   "from": "2024-01-01",
-  "n": 2548,
-  "brier": 0.5085,
+  "n": 2584,
+  "brier": 0.5096,
   "uniformBrier": 0.6667,
-  "rps": 0.1669,
-  "uniformRps": 0.2383,
-  "logLoss": 0.8654,
-  "ece": 0.0089,
+  "rps": 0.167,
+  "uniformRps": 0.2381,
+  "logLoss": 0.8666,
+  "ece": 0.009,
   "calibrationBins": [
    {
     "range": "0.0–0.1",
-    "count": 1081,
-    "predicted": 0.052,
-    "realized": 0.048
+    "count": 1116,
+    "predicted": 0.051,
+    "realized": 0.051
    },
    {
     "range": "0.1–0.2",
-    "count": 1263,
+    "count": 1258,
     "predicted": 0.153,
-    "realized": 0.15
+    "realized": 0.148
    },
    {
     "range": "0.2–0.3",
-    "count": 2404,
-    "predicted": 0.264,
-    "realized": 0.275
+    "count": 1893,
+    "predicted": 0.258,
+    "realized": 0.274
    },
    {
     "range": "0.3–0.4",
-    "count": 666,
-    "predicted": 0.349,
-    "realized": 0.353
+    "count": 1255,
+    "predicted": 0.329,
+    "realized": 0.324
    },
    {
     "range": "0.4–0.5",
-    "count": 570,
+    "count": 571,
     "predicted": 0.449,
-    "realized": 0.432
+    "realized": 0.441
    },
    {
     "range": "0.5–0.6",
-    "count": 471,
+    "count": 462,
     "predicted": 0.549,
-    "realized": 0.55
+    "realized": 0.545
    },
    {
     "range": "0.6–0.7",
-    "count": 369,
-    "predicted": 0.647,
-    "realized": 0.621
+    "count": 373,
+    "predicted": 0.646,
+    "realized": 0.627
    },
    {
     "range": "0.7–0.8",
-    "count": 345,
+    "count": 348,
     "predicted": 0.748,
-    "realized": 0.748
+    "realized": 0.744
    },
    {
     "range": "0.8–0.9",
-    "count": 278,
+    "count": 277,
     "predicted": 0.846,
-    "realized": 0.856
+    "realized": 0.859
    },
    {
     "range": "0.9–1.0",
-    "count": 197,
+    "count": 199,
     "predicted": 0.944,
-    "realized": 0.914
+    "realized": 0.91
    }
   ]
  },
  "ratings": {
-  "Scotland": 1845,
-  "England": 2084,
+  "Scotland": 1844,
+  "England": 2115,
   "Wales": 1740,
   "Northern Ireland": 1658,
-  "United States": 1876,
-  "Canada": 1871,
-  "Uruguay": 1970,
-  "Argentina": 2177,
-  "Austria": 1884,
+  "United States": 1918,
+  "Canada": 1884,
+  "Uruguay": 1930,
+  "Argentina": 2194,
+  "Austria": 1915,
   "Hungary": 1764,
   "Czechoslovakia": 1802,
-  "Belgium": 1958,
-  "France": 2125,
-  "Switzerland": 1944,
+  "Belgium": 1940,
+  "France": 2145,
+  "Switzerland": 1940,
   "Guernsey": 1746,
   "Alderney": 1077,
   "Jersey": 1805,
-  "Netherlands": 2007,
+  "Netherlands": 2035,
   "Guyana": 1502,
   "Trinidad and Tobago": 1539,
-  "South Africa": 1650,
-  "Germany": 2000,
-  "Sweden": 1766,
-  "Norway": 1968,
+  "South Africa": 1661,
+  "Germany": 2029,
+  "Sweden": 1790,
+  "Norway": 1990,
   "Denmark": 1925,
   "Italy": 1928,
   "Chile": 1798,
@@ -117,15 +117,15 @@
   "Catalonia": 1653,
   "Philippines": 1342,
   "China": 1554,
-  "Brazil": 2064,
+  "Brazil": 2068,
   "Basque Country": 1796,
-  "Japan": 1996,
-  "Paraguay": 1865,
+  "Japan": 2013,
+  "Paraguay": 1899,
   "Romania": 1694,
   "Greece": 1801,
   "Yugoslavia": 1873,
-  "Spain": 2201,
-  "Egypt": 1799,
+  "Spain": 2181,
+  "Egypt": 1847,
   "Estonia": 1421,
   "Suriname": 1593,
   "Provence": 1461,
@@ -133,23 +133,23 @@
   "El Salvador": 1503,
   "Guatemala": 1642,
   "Poland": 1770,
-  "Portugal": 2046,
+  "Portugal": 2025,
   "Brittany": 1504,
-  "New Zealand": 1722,
-  "Australia": 1901,
+  "New Zealand": 1700,
+  "Australia": 1911,
   "Latvia": 1329,
   "Galicia": 1527,
   "Central Spain": 1495,
-  "Mexico": 1974,
+  "Mexico": 1991,
   "Andalusia": 1593,
   "Asturias": 1521,
   "Lithuania": 1331,
-  "Turkey": 1961,
+  "Turkey": 1875,
   "Aruba": 1216,
-  "Curaçao": 1607,
+  "Curaçao": 1619,
   "Bulgaria": 1534,
   "Republic of Ireland": 1758,
-  "Haiti": 1711,
+  "Haiti": 1681,
   "Jamaica": 1662,
   "Kenya": 1472,
   "Uganda": 1520,
@@ -169,20 +169,20 @@
   "Indonesia": 1504,
   "French Guiana": 1424,
   "Saint Lucia": 1206,
-  "Colombia": 2054,
-  "Panama": 1844,
+  "Colombia": 2072,
+  "Panama": 1797,
   "Venezuela": 1814,
-  "Ecuador": 2021,
+  "Ecuador": 1951,
   "Saint Kitts and Nevis": 1255,
   "Grenada": 1288,
   "India": 1240,
   "Slovakia": 1720,
   "Manchukuo": 1430,
-  "Croatia": 1972,
+  "Croatia": 1941,
   "Lebanon": 1446,
   "Puerto Rico": 1354,
   "Afghanistan": 1173,
-  "Iran": 1894,
+  "Iran": 1886,
   "Mongolia": 983,
   "Tanzania": 1413,
   "Zimbabwe": 1478,
@@ -196,8 +196,8 @@
   "Zanzibar": 1535,
   "Djibouti": 1075,
   "Ethiopia": 1392,
-  "DR Congo": 1757,
-  "South Korea": 1906,
+  "DR Congo": 1778,
+  "South Korea": 1889,
   "Vietnam": 1473,
   "Macau": 840,
   "Dominican Republic": 1475,
@@ -207,7 +207,7 @@
   "Syria": 1597,
   "Serbia": 1795,
   "Taiwan": 1060,
-  "Ghana": 1628,
+  "Ghana": 1674,
   "Myanmar": 1137,
   "New Caledonia": 1603,
   "Vanuatu": 1444,
@@ -235,34 +235,34 @@
   "North Korea": 1498,
   "Sudan": 1478,
   "Malta": 1347,
-  "Tunisia": 1746,
+  "Tunisia": 1677,
   "Libya": 1529,
   "Malawi": 1437,
-  "Morocco": 1983,
+  "Morocco": 2009,
   "Benin": 1541,
-  "Cape Verde": 1648,
-  "Ivory Coast": 1808,
+  "Cape Verde": 1696,
+  "Ivory Coast": 1838,
   "Burkina Faso": 1657,
   "Gabon": 1531,
   "Congo": 1328,
   "Mali": 1712,
   "Central African Republic": 1362,
-  "Iraq": 1736,
+  "Iraq": 1714,
   "Saint Vincent and the Grenadines": 1347,
-  "Senegal": 1909,
+  "Senegal": 1889,
   "Laos": 940,
   "Mauritania": 1445,
   "Liberia": 1430,
   "Chad": 1246,
   "Niger": 1498,
   "Guinea": 1579,
-  "Algeria": 1887,
+  "Algeria": 1870,
   "Kuwait": 1474,
-  "Jordan": 1770,
+  "Jordan": 1740,
   "Papua New Guinea": 1457,
   "Solomon Islands": 1373,
   "Somalia": 1061,
-  "Saudi Arabia": 1693,
+  "Saudi Arabia": 1705,
   "Bermuda": 1337,
   "Palestine": 1588,
   "Yemen": 1309,
@@ -273,7 +273,7 @@
   "Western Australia": 1398,
   "Eswatini": 1316,
   "Botswana": 1393,
-  "Qatar": 1561,
+  "Qatar": 1572,
   "Lesotho": 1417,
   "Bahamas": 917,
   "Brunei": 892,
@@ -325,13 +325,13 @@
   "Isle of Wight": 1660,
   "Turkmenistan": 1390,
   "Tajikistan": 1436,
-  "Uzbekistan": 1816,
+  "Uzbekistan": 1798,
   "Eritrea": 1198,
   "Gibraltar": 1136,
   "Isle of Man": 1709,
   "North Macedonia": 1647,
-  "Czech Republic": 1778,
-  "Bosnia and Herzegovina": 1671,
+  "Czech Republic": 1768,
+  "Bosnia and Herzegovina": 1650,
   "Canary Islands": 1515,
   "Andorra": 1141,
   "Frøya": 1194,
@@ -423,16 +423,16 @@
  },
  "forms": {
   "Scotland": {
-   "results": "WWLLWLWWWD",
-   "gf": 21,
-   "ga": 10,
-   "lastDate": "2026-06-06"
+   "results": "LWWWLLWLWW",
+   "gf": 20,
+   "ga": 11,
+   "lastDate": "2026-06-19"
   },
   "England": {
-   "results": "WWLDWWWWWW",
-   "gf": 24,
-   "ga": 2,
-   "lastDate": "2026-06-10"
+   "results": "WWWLDWWWWW",
+   "gf": 26,
+   "ga": 4,
+   "lastDate": "2026-06-17"
   },
   "Wales": {
    "results": "LDDDWWLLLW",
@@ -447,34 +447,34 @@
    "lastDate": "2026-06-08"
   },
   "United States": {
-   "results": "WLWLLWWWDW",
+   "results": "WWLWLLWWWD",
    "gf": 22,
    "ga": 16,
-   "lastDate": "2026-06-12"
+   "lastDate": "2026-06-19"
   },
   "Canada": {
-   "results": "DDWDDWDDLW",
-   "gf": 9,
+   "results": "WDDWDDWDDL",
+   "gf": 14,
    "ga": 5,
-   "lastDate": "2026-06-12"
+   "lastDate": "2026-06-18"
   },
   "Uruguay": {
-   "results": "DDLDWWDWWL",
-   "gf": 10,
-   "ga": 9,
-   "lastDate": "2026-03-31"
+   "results": "DDDDLDWWDW",
+   "gf": 11,
+   "ga": 10,
+   "lastDate": "2026-06-21"
   },
   "Argentina": {
-   "results": "WWWWWWWLWD",
-   "gf": 25,
-   "ga": 3,
-   "lastDate": "2026-06-09"
+   "results": "WWWWWWWWLW",
+   "gf": 27,
+   "ga": 2,
+   "lastDate": "2026-06-16"
   },
   "Austria": {
-   "results": "WWWDWLWWWW",
-   "gf": 27,
-   "ga": 4,
-   "lastDate": "2026-06-01"
+   "results": "WWWWDWLWWW",
+   "gf": 26,
+   "ga": 5,
+   "lastDate": "2026-06-16"
   },
   "Hungary": {
    "results": "WWDWLWDWLD",
@@ -489,22 +489,22 @@
    "lastDate": "1993-11-17"
   },
   "Belgium": {
-   "results": "WWDWWDWDWW",
-   "gf": 37,
-   "ga": 6,
-   "lastDate": "2026-06-06"
+   "results": "DDWWDWWDWD",
+   "gf": 26,
+   "ga": 7,
+   "lastDate": "2026-06-21"
   },
   "France": {
-   "results": "WLWWWWDWWW",
-   "gf": 25,
-   "ga": 9,
-   "lastDate": "2026-06-08"
+   "results": "WWLWWWWDWW",
+   "gf": 26,
+   "ga": 10,
+   "lastDate": "2026-06-16"
   },
   "Switzerland": {
-   "results": "DWDLDWDWWW",
-   "gf": 22,
-   "ga": 8,
-   "lastDate": "2026-06-06"
+   "results": "WDDWDLDWDW",
+   "gf": 20,
+   "ga": 10,
+   "lastDate": "2026-06-18"
   },
   "Guernsey": {
    "results": "WLWWLLWLWW",
@@ -525,10 +525,10 @@
    "lastDate": "2025-07-18"
   },
   "Netherlands": {
-   "results": "WLDWWDWWWD",
-   "gf": 22,
+   "results": "WDWLDWWDWW",
+   "gf": 25,
    "ga": 8,
-   "lastDate": "2026-06-08"
+   "lastDate": "2026-06-20"
   },
   "Guyana": {
    "results": "WWWWWLLWWW",
@@ -543,28 +543,28 @@
    "lastDate": "2026-06-09"
   },
   "South Africa": {
-   "results": "LWDLDLWLWW",
-   "gf": 12,
+   "results": "DLWDLDLWLW",
+   "gf": 10,
    "ga": 12,
-   "lastDate": "2026-06-11"
+   "lastDate": "2026-06-18"
   },
   "Germany": {
-   "results": "WWWWWWWWWL",
-   "gf": 28,
-   "ga": 8,
-   "lastDate": "2026-06-06"
+   "results": "WWWWWWWWWW",
+   "gf": 34,
+   "ga": 7,
+   "lastDate": "2026-06-20"
   },
   "Sweden": {
-   "results": "DLWWDLLLLD",
-   "gf": 13,
-   "ga": 20,
-   "lastDate": "2026-06-04"
+   "results": "LWDLWWDLLL",
+   "gf": 17,
+   "ga": 22,
+   "lastDate": "2026-06-20"
   },
   "Norway": {
-   "results": "DWDLWWDWWW",
-   "gf": 31,
-   "ga": 8,
-   "lastDate": "2026-06-07"
+   "results": "WDWDLWWDWW",
+   "gf": 34,
+   "ga": 9,
+   "lastDate": "2026-06-16"
   },
   "Denmark": {
    "results": "WDDWLDWWWD",
@@ -621,10 +621,10 @@
    "lastDate": "2026-06-09"
   },
   "Brazil": {
-   "results": "WWWLDWLWLW",
-   "gf": 25,
+   "results": "WDWWWLDWLW",
+   "gf": 26,
    "ga": 11,
-   "lastDate": "2026-06-06"
+   "lastDate": "2026-06-19"
   },
   "Basque Country": {
    "results": "WDWDWWDWDW",
@@ -633,16 +633,16 @@
    "lastDate": "2025-11-15"
   },
   "Japan": {
-   "results": "WWWWWWDLDW",
+   "results": "WDWWWWWWDL",
    "gf": 19,
-   "ga": 6,
-   "lastDate": "2026-05-31"
+   "ga": 8,
+   "lastDate": "2026-06-20"
   },
   "Paraguay": {
-   "results": "LWLWWLLDWD",
-   "gf": 13,
+   "results": "WLWLWWLLDW",
+   "gf": 14,
    "ga": 13,
-   "lastDate": "2026-06-12"
+   "lastDate": "2026-06-19"
   },
   "Romania": {
    "results": "WDLLWLWWDL",
@@ -663,16 +663,16 @@
    "lastDate": "1992-03-25"
   },
   "Spain": {
-   "results": "WDDWDWWWWW",
-   "gf": 28,
+   "results": "WDWDDWDWWW",
+   "gf": 23,
    "ga": 4,
-   "lastDate": "2026-06-08"
+   "lastDate": "2026-06-21"
   },
   "Egypt": {
-   "results": "LWDWDLWWDW",
-   "gf": 13,
-   "ga": 6,
-   "lastDate": "2026-06-06"
+   "results": "WDLWDWDLWW",
+   "gf": 16,
+   "ga": 8,
+   "lastDate": "2026-06-21"
   },
   "Estonia": {
    "results": "WWLDWLDLDL",
@@ -717,10 +717,10 @@
    "lastDate": "2026-06-03"
   },
   "Portugal": {
-   "results": "WWWDWLDWWW",
-   "gf": 26,
-   "ga": 9,
-   "lastDate": "2026-06-10"
+   "results": "DWWWDWLDWW",
+   "gf": 22,
+   "ga": 10,
+   "lastDate": "2026-06-17"
   },
   "Brittany": {
    "results": "WLWLWDWDDL",
@@ -729,16 +729,16 @@
    "lastDate": "2013-05-28"
   },
   "New Zealand": {
-   "results": "LLWLLLDLLL",
-   "gf": 7,
-   "ga": 18,
-   "lastDate": "2026-06-06"
+   "results": "LDLLWLLLDL",
+   "gf": 9,
+   "ga": 19,
+   "lastDate": "2026-06-21"
   },
   "Australia": {
-   "results": "DLWWLLLWWW",
-   "gf": 13,
-   "ga": 10,
-   "lastDate": "2026-06-06"
+   "results": "LWDLWWLLLW",
+   "gf": 11,
+   "ga": 11,
+   "lastDate": "2026-06-19"
   },
   "Latvia": {
    "results": "LDLDLDLLDD",
@@ -759,10 +759,10 @@
    "lastDate": "1923-11-25"
   },
   "Mexico": {
-   "results": "WWWWDDWWWL",
+   "results": "WWWWWDDWWW",
    "gf": 18,
-   "ga": 4,
-   "lastDate": "2026-06-11"
+   "ga": 2,
+   "lastDate": "2026-06-18"
   },
   "Andalusia": {
    "results": "WWWDWWDWWW",
@@ -783,10 +783,10 @@
    "lastDate": "2026-06-09"
   },
   "Turkey": {
-   "results": "WWWWDWWWLW",
-   "gf": 25,
-   "ga": 13,
-   "lastDate": "2026-06-06"
+   "results": "LLWWWWDWWW",
+   "gf": 22,
+   "ga": 8,
+   "lastDate": "2026-06-19"
   },
   "Aruba": {
    "results": "LWWWDLDWLL",
@@ -795,10 +795,10 @@
    "lastDate": "2026-06-06"
   },
   "Curaçao": {
-   "results": "WLLLDWDWWD",
-   "gf": 19,
-   "ga": 14,
-   "lastDate": "2026-06-06"
+   "results": "DLWLLLDWDW",
+   "gf": 17,
+   "ga": 19,
+   "lastDate": "2026-06-20"
   },
   "Bulgaria": {
    "results": "DLWWWLLLLL",
@@ -813,10 +813,10 @@
    "lastDate": "2026-06-05"
   },
   "Haiti": {
-   "results": "LWDLWWLWDD",
-   "gf": 15,
-   "ga": 10,
-   "lastDate": "2026-06-05"
+   "results": "LLLWDLWWLW",
+   "gf": 12,
+   "ga": 11,
+   "lastDate": "2026-06-19"
   },
   "Jamaica": {
    "results": "LLWLWWDDWL",
@@ -933,16 +933,16 @@
    "lastDate": "2026-03-27"
   },
   "Colombia": {
-   "results": "WWLLWWDWWW",
+   "results": "WWWLLWWDWW",
    "gf": 25,
-   "ga": 10,
-   "lastDate": "2026-06-07"
+   "ga": 11,
+   "lastDate": "2026-06-17"
   },
   "Panama": {
-   "results": "DWLWDLDWWD",
-   "gf": 18,
+   "results": "LDWLWDLDWW",
+   "gf": 17,
    "ga": 16,
-   "lastDate": "2026-06-06"
+   "lastDate": "2026-06-17"
   },
   "Venezuela": {
    "results": "WLDWLWLLLL",
@@ -951,10 +951,10 @@
    "lastDate": "2026-06-09"
   },
   "Ecuador": {
-   "results": "WWDDWDDDWD",
-   "gf": 12,
-   "ga": 5,
-   "lastDate": "2026-06-07"
+   "results": "DLWWDDWDDD",
+   "gf": 11,
+   "ga": 6,
+   "lastDate": "2026-06-20"
   },
   "Saint Kitts and Nevis": {
    "results": "WLLDWWLLLW",
@@ -987,10 +987,10 @@
    "lastDate": "1942-08-09"
   },
   "Croatia": {
-   "results": "WLLWWWWDWW",
-   "gf": 19,
-   "ga": 10,
-   "lastDate": "2026-06-07"
+   "results": "LWLLWWWWDW",
+   "gf": 20,
+   "ga": 14,
+   "lastDate": "2026-06-17"
   },
   "Lebanon": {
    "results": "LWWWDDDLWW",
@@ -1011,10 +1011,10 @@
    "lastDate": "2026-06-10"
   },
   "Iran": {
-   "results": "WWWLDDWLWL",
-   "gf": 17,
-   "ga": 6,
-   "lastDate": "2026-06-04"
+   "results": "DDWWWLDDWL",
+   "gf": 16,
+   "ga": 7,
+   "lastDate": "2026-06-21"
   },
   "Mongolia": {
    "results": "LLLLWLWLLL",
@@ -1095,16 +1095,16 @@
    "lastDate": "2026-06-09"
   },
   "DR Congo": {
-   "results": "LDWWLWDWDW",
+   "results": "DLDWWLWDWD",
    "gf": 11,
-   "ga": 5,
-   "lastDate": "2026-06-09"
+   "ga": 6,
+   "lastDate": "2026-06-17"
   },
   "South Korea": {
-   "results": "WWWLLWWWLD",
-   "gf": 15,
-   "ga": 13,
-   "lastDate": "2026-06-11"
+   "results": "LWWWLLWWWL",
+   "gf": 13,
+   "ga": 12,
+   "lastDate": "2026-06-18"
   },
   "Vietnam": {
    "results": "WWWWLWWWWW",
@@ -1161,10 +1161,10 @@
    "lastDate": "2025-11-18"
   },
   "Ghana": {
-   "results": "DLLLLLWWWD",
+   "results": "WDLLLLLWWW",
    "gf": 11,
-   "ga": 14,
-   "lastDate": "2026-06-02"
+   "ga": 13,
+   "lastDate": "2026-06-17"
   },
   "Myanmar": {
    "results": "LWLLDWWLWD",
@@ -1329,10 +1329,10 @@
    "lastDate": "2026-06-05"
   },
   "Tunisia": {
-   "results": "LLDWDDLWWD",
-   "gf": 13,
-   "ga": 14,
-   "lastDate": "2026-06-06"
+   "results": "LLLLDWDDLW",
+   "gf": 9,
+   "ga": 21,
+   "lastDate": "2026-06-20"
   },
   "Libya": {
    "results": "DDDWDDWWLD",
@@ -1347,10 +1347,10 @@
    "lastDate": "2026-06-09"
   },
   "Morocco": {
-   "results": "DWWWDWDWWW",
-   "gf": 22,
-   "ga": 3,
-   "lastDate": "2026-06-07"
+   "results": "WDDWWWDWDW",
+   "gf": 20,
+   "ga": 4,
+   "lastDate": "2026-06-19"
   },
   "Benin": {
    "results": "LDWWLLWLLL",
@@ -1359,16 +1359,16 @@
    "lastDate": "2026-06-09"
   },
   "Cape Verde": {
-   "results": "LWDLDDWDWW",
-   "gf": 16,
-   "ga": 12,
-   "lastDate": "2026-06-06"
+   "results": "DDLWDLDDWD",
+   "gf": 15,
+   "ga": 14,
+   "lastDate": "2026-06-21"
   },
   "Ivory Coast": {
-   "results": "WWWLWWDWWL",
+   "results": "LWWWWLWWDW",
    "gf": 19,
-   "ga": 8,
-   "lastDate": "2026-06-04"
+   "ga": 9,
+   "lastDate": "2026-06-20"
   },
   "Burkina Faso": {
    "results": "DLDWLWLWWW",
@@ -1401,10 +1401,10 @@
    "lastDate": "2026-06-09"
   },
   "Iraq": {
-   "results": "LDWWLLWWWD",
+   "results": "LLDWWLLWWW",
    "gf": 11,
-   "ga": 10,
-   "lastDate": "2026-06-09"
+   "ga": 13,
+   "lastDate": "2026-06-16"
   },
   "Saint Vincent and the Grenadines": {
    "results": "WLWLWWLWDW",
@@ -1413,10 +1413,10 @@
    "lastDate": "2026-03-29"
   },
   "Senegal": {
-   "results": "DLWWLWWWWD",
+   "results": "LDLWWLWWWW",
    "gf": 16,
-   "ga": 9,
-   "lastDate": "2026-06-09"
+   "ga": 11,
+   "lastDate": "2026-06-16"
   },
   "Laos": {
    "results": "LLLWLLLDDL",
@@ -1455,10 +1455,10 @@
    "lastDate": "2026-06-04"
   },
   "Algeria": {
-   "results": "WWDWLWWWWD",
-   "gf": 21,
-   "ga": 4,
-   "lastDate": "2026-06-10"
+   "results": "LWWDWLWWWW",
+   "gf": 20,
+   "ga": 6,
+   "lastDate": "2026-06-16"
   },
   "Kuwait": {
    "results": "DLLDWDWLDL",
@@ -1467,10 +1467,10 @@
    "lastDate": "2026-06-05"
   },
   "Jordan": {
-   "results": "LLDDLWWWWW",
-   "gf": 17,
-   "ga": 15,
-   "lastDate": "2026-06-07"
+   "results": "LLLDDLWWWW",
+   "gf": 16,
+   "ga": 17,
+   "lastDate": "2026-06-16"
   },
   "Papua New Guinea": {
    "results": "DWWWWDLDLW",
@@ -1491,10 +1491,10 @@
    "lastDate": "2025-11-26"
   },
   "Saudi Arabia": {
-   "results": "DWLLLLWLWW",
-   "gf": 12,
-   "ga": 13,
-   "lastDate": "2026-06-09"
+   "results": "LDDWLLLLWL",
+   "gf": 8,
+   "ga": 16,
+   "lastDate": "2026-06-21"
   },
   "Bermuda": {
    "results": "WLDLLLLLWW",
@@ -1557,10 +1557,10 @@
    "lastDate": "2026-03-31"
   },
   "Qatar": {
-   "results": "DLLDLLWDLD",
-   "gf": 7,
-   "ga": 15,
-   "lastDate": "2026-06-06"
+   "results": "LDDLLDLLWD",
+   "gf": 5,
+   "ga": 16,
+   "lastDate": "2026-06-18"
   },
   "Lesotho": {
    "results": "DLDWLLLDWL",
@@ -1869,10 +1869,10 @@
    "lastDate": "2026-06-09"
   },
   "Uzbekistan": {
-   "results": "LLDWDDWLWW",
-   "gf": 14,
-   "ga": 9,
-   "lastDate": "2026-06-08"
+   "results": "LLLDWDDWLW",
+   "gf": 12,
+   "ga": 12,
+   "lastDate": "2026-06-17"
   },
   "Eritrea": {
    "results": "LLLLLLLLLD",
@@ -1899,16 +1899,16 @@
    "lastDate": "2026-06-01"
   },
   "Czech Republic": {
-   "results": "LWWDDWWLDD",
+   "results": "DLWWDDWWLD",
    "gf": 21,
    "ga": 11,
-   "lastDate": "2026-06-11"
+   "lastDate": "2026-06-18"
   },
   "Bosnia and Herzegovina": {
-   "results": "DDDDDDWWDL",
+   "results": "LDDDDDDWWD",
    "gf": 15,
-   "ga": 11,
-   "lastDate": "2026-06-12"
+   "ga": 13,
+   "lastDate": "2026-06-18"
   },
   "Canary Islands": {
    "results": "WLWW",

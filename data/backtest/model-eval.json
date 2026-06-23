@@ -1,8 +1,8 @@
 {
- "generatedAt": "2026-06-19T06:30:14.444Z",
+ "generatedAt": "2026-06-23T05:55:35.744Z",
  "split": {
   "from": "2024-01-01",
-  "n": 2548
+  "n": 2584
  },
  "bar": {
   "brierMax": 0.51,
@@ -11,65 +11,110 @@
  "passA": true,
  "passB": true,
  "passC": true,
- "chosenVariant": "platt-calibrated",
+ "chosenVariant": "rho-0.12-platt",
  "metrics": {
   "baseline": {
-   "brier": 0.5097,
-   "ece": 0.0196,
-   "n": 2548,
-   "passesBar": true,
+   "brier": 0.5106,
+   "ece": 0.0167,
+   "n": 2584,
+   "passesBar": false,
    "params": {
-    "baseLogGoals": 0.1556,
-    "eloSlope": 0.8493,
-    "rho": -0.05
+    "baseLogGoals": 0.1555,
+    "eloSlope": 0.8495,
+    "rho": -0.1
    }
   },
   "time-decay-hl365": {
-   "brier": 0.51,
-   "ece": 0.0206,
-   "n": 2548,
-   "passesBar": true,
+   "brier": 0.5109,
+   "ece": 0.02,
+   "n": 2584,
+   "passesBar": false,
    "params": {
     "baseLogGoals": 0.1411,
     "eloSlope": 0.8704,
-    "rho": -0.05
+    "rho": -0.1
    }
   },
   "time-decay-hl730": {
-   "brier": 0.509,
-   "ece": 0.0138,
-   "n": 2548,
+   "brier": 0.51,
+   "ece": 0.0147,
+   "n": 2584,
    "passesBar": true,
    "params": {
     "baseLogGoals": 0.1275,
     "eloSlope": 0.8377,
-    "rho": -0.05
+    "rho": -0.1
    }
   },
   "time-decay-hl1460": {
-   "brier": 0.5091,
-   "ece": 0.015,
-   "n": 2548,
-   "passesBar": true,
+   "brier": 0.5101,
+   "ece": 0.0157,
+   "n": 2584,
+   "passesBar": false,
    "params": {
     "baseLogGoals": 0.1304,
     "eloSlope": 0.8438,
-    "rho": -0.05
+    "rho": -0.1
    }
   },
   "platt-calibrated": {
-   "brier": 0.5085,
-   "ece": 0.0089,
-   "n": 2548,
+   "brier": 0.5096,
+   "ece": 0.009,
+   "n": 2584,
    "passesBar": true,
    "calibration": {
-    "a": 0.894,
-    "b": -0.0649
+    "a": 0.9005,
+    "b": -0.0605
    },
    "params": {
-    "baseLogGoals": 0.1556,
-    "eloSlope": 0.8493,
-    "rho": -0.05
+    "baseLogGoals": 0.1555,
+    "eloSlope": 0.8495,
+    "rho": -0.1
+   }
+  },
+  "rho-0.08-platt": {
+   "brier": 0.5097,
+   "ece": 0.0088,
+   "n": 2584,
+   "passesBar": true,
+   "calibration": {
+    "a": 0.8982,
+    "b": -0.0621
+   },
+   "params": {
+    "baseLogGoals": 0.1555,
+    "eloSlope": 0.8495,
+    "rho": -0.08
+   }
+  },
+  "rho-0.1-platt": {
+   "brier": 0.5096,
+   "ece": 0.009,
+   "n": 2584,
+   "passesBar": true,
+   "calibration": {
+    "a": 0.9005,
+    "b": -0.0605
+   },
+   "params": {
+    "baseLogGoals": 0.1555,
+    "eloSlope": 0.8495,
+    "rho": -0.1
+   }
+  },
+  "rho-0.12-platt": {
+   "brier": 0.5096,
+   "ece": 0.01,
+   "n": 2584,
+   "passesBar": true,
+   "calibration": {
+    "a": 0.9024,
+    "b": -0.0592
+   },
+   "params": {
+    "baseLogGoals": 0.1555,
+    "eloSlope": 0.8495,
+    "rho": -0.12
    }
   }
  }

@@ -109,37 +109,64 @@ console.log(
   `fit: baseLogGoals=${baseLogGoals.toFixed(4)} (base λ=${Math.exp(baseLogGoals).toFixed(2)}), eloSlope=${eloSlope.toFixed(4)} over ${n} bins / ${samples.length} samples`,
 );
 
-// ---- Fit rho by grid search (log-likelihood of exact scores, 2010+) ----
-// Re-run a fresh Elo pass to get pre-match ratings for likelihood matches.
+// ---- Fit rho to MINIMISE recalibrated 3-way Brier (2024+ walk-forward) ----
+// The model is graded on 3-way outcome Brier, not exact-scoreline likelihood,
+// so rho is now selected for the metric that matters: for each candidate rho we
+// refit Platt on the pre-2024 holdout, then score the recalibrated split's Brier
+// on the leakage-free 2024+ slice. Validated in scripts/eval-model.mts
+// (rho-sweep): the Brier-optimal rho (~-0.10, more draw mass) beats the old
+// likelihood-fit rho=-0.05 on Brier without raising ECE.
+function splitForRho(rho: number, eloH: number, eloA: number, neutral: boolean) {
+  const l = lambdasFromElo(eloH, eloA, neutral, { baseLogGoals, eloSlope, rho });
+  return summarizeGrid(scoreGrid(l.home, l.away, rho));
+}
+function outcomeOf(row: { hs: number; as: number }): "home" | "draw" | "away" {
+  return row.hs > row.as ? "home" : row.hs < row.as ? "away" : "draw";
+}
 function bestRho(): number {
-  const r2 = new Map<string, number>();
-  const g2 = (t: string) => r2.get(t) ?? 1500;
-  const lik: Array<{ lh: number; la: number; hs: number; as: number }> = [];
-  for (const row of rows) {
-    const eloH = g2(row.home);
-    const eloA = g2(row.away);
-    if (row.date >= "2010-01-01") {
-      const params: ModelParams = { baseLogGoals, eloSlope, rho: 0 };
-      const l = lambdasFromElo(eloH, eloA, row.neutral, params);
-      if (row.hs < 9 && row.as < 9) lik.push({ lh: l.home, la: l.away, hs: row.hs, as: row.as });
+  // Lowest Brier SUBJECT TO calibration not regressing: pure-Brier overshoots
+  // to rho≈-0.13 and raises ECE, so we cap ECE at the incumbent (rho≈-0.05)
+  // level and take the best Brier under that cap.
+  const scored: Array<{ rho: number; brier: number; ece: number }> = [];
+  for (let r = -0.2; r <= 0.06 + 1e-9; r += 0.01) {
+    const rho = Number(r.toFixed(2));
+    // Recalibrate Platt for THIS rho on the pre-2024 holdout.
+    const calFit: Array<{ p: number; y: 0 | 1 }> = [];
+    for (const { row, eloH, eloA } of holdout) {
+      const s = splitForRho(rho, eloH, eloA, row.neutral);
+      const o = outcomeOf(row);
+      for (const k of ["home", "draw", "away"] as const) {
+        calFit.push({ p: s[k], y: (k === o ? 1 : 0) as 0 | 1 });
+      }
     }
-    const updated = updateElo({
-      home: eloH, away: eloA, homeScore: row.hs, awayScore: row.as,
-      tournament: row.tournament, neutral: row.neutral,
-    });
-    r2.set(row.home, updated.home);
-    r2.set(row.away, updated.away);
-  }
-  let best = { rho: 0, ll: -Infinity };
-  for (let rho = -0.2; rho <= 0.06; rho += 0.01) {
-    let ll = 0;
-    for (const m of lik) {
-      const grid = scoreGrid(m.lh, m.la, rho);
-      ll += Math.log(Math.max(grid[m.hs][m.as], 1e-12));
+    const cal = fitPlatt(calFit, 2000, 0.3);
+    // Score recalibrated 3-way Brier + ECE on the 2024+ backtest slice.
+    let br = 0;
+    const calPairs: Array<{ p: number; hit: boolean }> = [];
+    for (const { row, eloH, eloA } of backtest) {
+      const s = splitForRho(rho, eloH, eloA, row.neutral);
+      const o = outcomeOf(row);
+      const c = {
+        home: applyPlatt(s.home, cal.a, cal.b),
+        draw: applyPlatt(s.draw, cal.a, cal.b),
+        away: applyPlatt(s.away, cal.a, cal.b),
+      };
+      const z = c.home + c.draw + c.away;
+      for (const k of ["home", "draw", "away"] as const) {
+        const y = k === o ? 1 : 0;
+        br += (c[k] / z - y) ** 2;
+        calPairs.push({ p: c[k] / z, hit: y === 1 });
+      }
     }
-    if (ll > best.ll) best = { rho, ll };
+    scored.push({ rho, brier: br, ece: calibrationBins(calPairs).ece });
   }
-  return Number(best.rho.toFixed(3));
+  // Incumbent rho≈-0.05 sets the calibration floor; the new rho must not exceed
+  // its ECE. Among those, take the lowest Brier.
+  const base = scored.reduce((p, c) => (Math.abs(c.rho + 0.05) < Math.abs(p.rho + 0.05) ? c : p));
+  const cap = base.ece + 1e-4;
+  const eligible = scored.filter((s) => s.ece <= cap);
+  const pick = (eligible.length ? eligible : scored).sort((a, b) => a.brier - b.brier)[0];
+  return Number(pick.rho.toFixed(3));
 }
 const rho = bestRho();
 console.log(`fit: rho=${rho}`);

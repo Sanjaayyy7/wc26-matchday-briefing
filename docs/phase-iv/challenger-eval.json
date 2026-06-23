@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-06-21T22:46:46.748Z",
-  "n": 35,
+  "generatedAt": "2026-06-23T03:41:21.004Z",
+  "n": 37,
   "champion": {
     "name": "Champion (v1.0.0-platt)",
-    "avgBrier": 0.589617142857143
+    "avgBrier": 0.6032594594594596
   },
   "configs": [
     {
@@ -12,12 +12,12 @@
       "rho": -0.05,
       "drawAdjust": "none",
       "eloCap": "none",
-      "avgBrier": 0.589617142857143,
+      "avgBrier": 0.6032594594594596,
       "deltaBrier": 0,
-      "correctPicks": 20,
+      "correctPicks": 21,
       "drawPicks": 0,
       "drawHits": 0,
-      "avgDrawBrier": 1.051490909090909
+      "avgDrawBrier": 1.0649833333333334
     },
     {
       "name": "A: Rho×1.5",
@@ -25,12 +25,12 @@
       "rho": -0.075,
       "drawAdjust": "none",
       "eloCap": "none",
-      "avgBrier": 0.5914342857142859,
-      "deltaBrier": 0.0018171428571429615,
-      "correctPicks": 20,
+      "avgBrier": 0.604610810810811,
+      "deltaBrier": 0.0013513513513514486,
+      "correctPicks": 21,
       "drawPicks": 0,
       "drawHits": 0,
-      "avgDrawBrier": 1.0446181818181817
+      "avgDrawBrier": 1.0561166666666666
     },
     {
       "name": "B: Rho×3",
@@ -38,12 +38,12 @@
       "rho": -0.15,
       "drawAdjust": "none",
       "eloCap": "none",
-      "avgBrier": 0.5881599999999999,
-      "deltaBrier": -0.0014571428571430456,
-      "correctPicks": 20,
+      "avgBrier": 0.601054054054054,
+      "deltaBrier": -0.0022054054054055916,
+      "correctPicks": 21,
       "drawPicks": 0,
       "drawHits": 0,
-      "avgDrawBrier": 1.0132545454545456
+      "avgDrawBrier": 1.0258833333333335
     },
     {
       "name": "C: Draw Prior +30%",
@@ -51,12 +51,12 @@
       "rho": -0.05,
       "drawAdjust": "inflate1.3",
       "eloCap": "none",
-      "avgBrier": 0.5854685714285713,
-      "deltaBrier": -0.004148571428571612,
-      "correctPicks": 20,
+      "avgBrier": 0.5976162162162162,
+      "deltaBrier": -0.00564324324324339,
+      "correctPicks": 21,
       "drawPicks": 2,
       "drawHits": 1,
-      "avgDrawBrier": 0.9388727272727273
+      "avgDrawBrier": 0.95025
     },
     {
       "name": "D: Draw Prior +50%",
@@ -64,12 +64,12 @@
       "rho": -0.05,
       "drawAdjust": "inflate1.5",
       "eloCap": "none",
-      "avgBrier": 0.5891314285714288,
-      "deltaBrier": -0.0004857142857142005,
+      "avgBrier": 0.6006432432432435,
+      "deltaBrier": -0.002616216216216105,
       "correctPicks": 21,
-      "drawPicks": 4,
+      "drawPicks": 5,
       "drawHits": 2,
-      "avgDrawBrier": 0.8782727272727272
+      "avgDrawBrier": 0.8898999999999999
     },
     {
       "name": "E: Draw Prior +70%",
@@ -77,12 +77,12 @@
       "rho": -0.05,
       "drawAdjust": "inflate1.7",
       "eloCap": "none",
-      "avgBrier": 0.5912857142857144,
-      "deltaBrier": 0.0016685714285714637,
+      "avgBrier": 0.6016216216216218,
+      "deltaBrier": -0.0016378378378377745,
       "correctPicks": 21,
-      "drawPicks": 7,
+      "drawPicks": 8,
       "drawHits": 3,
-      "avgDrawBrier": 0.8198363636363637
+      "avgDrawBrier": 0.8293833333333334
     },
     {
       "name": "F: Rho×3 + Elo Cap 400",
@@ -90,12 +90,12 @@
       "rho": -0.15,
       "drawAdjust": "none",
       "eloCap": "cap400",
-      "avgBrier": 0.5783371428571428,
-      "deltaBrier": -0.011280000000000179,
-      "correctPicks": 20,
+      "avgBrier": 0.5917621621621622,
+      "deltaBrier": -0.011497297297297426,
+      "correctPicks": 21,
       "drawPicks": 0,
       "drawHits": 0,
-      "avgDrawBrier": 0.9773454545454545
+      "avgDrawBrier": 0.9929666666666667
     },
     {
       "name": "G: Rho×3 + Draw +30%",
@@ -103,12 +103,12 @@
       "rho": -0.15,
       "drawAdjust": "inflate1.3",
       "eloCap": "none",
-      "avgBrier": 0.5867142857142855,
-      "deltaBrier": -0.002902857142857429,
-      "correctPicks": 20,
+      "avgBrier": 0.5985945945945944,
+      "deltaBrier": -0.00466486486486517,
+      "correctPicks": 21,
       "drawPicks": 3,
       "drawHits": 1,
-      "avgDrawBrier": 0.8970181818181818
+      "avgDrawBrier": 0.9094666666666668
     },
     {
       "name": "H: Rho×3 + Draw +30% + Cap400",
@@ -116,12 +116,12 @@
       "rho": -0.15,
       "drawAdjust": "inflate1.3",
       "eloCap": "cap400",
-      "avgBrier": 0.5775371428571427,
-      "deltaBrier": -0.012080000000000202,
-      "correctPicks": 20,
+      "avgBrier": 0.5899135135135134,
+      "deltaBrier": -0.01334594594594618,
+      "correctPicks": 21,
       "drawPicks": 3,
       "drawHits": 1,
-      "avgDrawBrier": 0.8620181818181817
+      "avgDrawBrier": 0.8773833333333333
     }
   ],
   "matchResults": [
@@ -309,6 +309,68 @@
         "F: Rho×3 + Elo Cap 400": 1.3176,
         "G: Rho×3 + Draw +30%": 1.205,
         "H: Rho×3 + Draw +30% + Cap400": 1.205
+      }
+    },
+    {
+      "slug": "uruguay-vs-cape-verde",
+      "realized": "draw",
+      "splits": {
+        "Champion (v1.0.0-platt)": {
+          "home": 73,
+          "draw": 18,
+          "away": 9
+        },
+        "A: Rho×1.5": {
+          "home": 72,
+          "draw": 19,
+          "away": 9
+        },
+        "B: Rho×3": {
+          "home": 72,
+          "draw": 20,
+          "away": 8
+        },
+        "C: Draw Prior +30%": {
+          "home": 69,
+          "draw": 23,
+          "away": 8
+        },
+        "D: Draw Prior +50%": {
+          "home": 67,
+          "draw": 25,
+          "away": 8
+        },
+        "E: Draw Prior +70%": {
+          "home": 64,
+          "draw": 28,
+          "away": 8
+        },
+        "F: Rho×3 + Elo Cap 400": {
+          "home": 72,
+          "draw": 20,
+          "away": 8
+        },
+        "G: Rho×3 + Draw +30%": {
+          "home": 68,
+          "draw": 24,
+          "away": 8
+        },
+        "H: Rho×3 + Draw +30% + Cap400": {
+          "home": 68,
+          "draw": 24,
+          "away": 8
+        }
+      },
+      "briers": {
+        "Champion (v1.0.0-platt)": 1.2134,
+        "A: Rho×1.5": 1.1826,
+        "B: Rho×3": 1.1648,
+        "C: Draw Prior +30%": 1.0754,
+        "D: Draw Prior +50%": 1.0178,
+        "E: Draw Prior +70%": 0.9343999999999999,
+        "F: Rho×3 + Elo Cap 400": 1.1648,
+        "G: Rho×3 + Draw +30%": 1.0464,
+        "H: Rho×3 + Draw +30% + Cap400": 1.0464
       }
     },
     {
@@ -1175,6 +1237,68 @@
         "D: Draw Prior +50%": 0.5864,
         "E: Draw Prior +70%": 0.6306,
         "F: Rho×3 + Elo Cap 400": 0.5064000000000001,
+        "G: Rho×3 + Draw +30%": 0.5666,
+        "H: Rho×3 + Draw +30% + Cap400": 0.5666
+      }
+    },
+    {
+      "slug": "new-zealand-vs-egypt",
+      "realized": "away",
+      "splits": {
+        "Champion (v1.0.0-platt)": {
+          "home": 27,
+          "draw": 29,
+          "away": 44
+        },
+        "A: Rho×1.5": {
+          "home": 27,
+          "draw": 30,
+          "away": 43
+        },
+        "B: Rho×3": {
+          "home": 26,
+          "draw": 31,
+          "away": 43
+        },
+        "C: Draw Prior +30%": {
+          "home": 25,
+          "draw": 35,
+          "away": 40
+        },
+        "D: Draw Prior +50%": {
+          "home": 24,
+          "draw": 38,
+          "away": 38
+        },
+        "E: Draw Prior +70%": {
+          "home": 23,
+          "draw": 41,
+          "away": 36
+        },
+        "F: Rho×3 + Elo Cap 400": {
+          "home": 26,
+          "draw": 31,
+          "away": 43
+        },
+        "G: Rho×3 + Draw +30%": {
+          "home": 24,
+          "draw": 37,
+          "away": 39
+        },
+        "H: Rho×3 + Draw +30% + Cap400": {
+          "home": 24,
+          "draw": 37,
+          "away": 39
+        }
+      },
+      "briers": {
+        "Champion (v1.0.0-platt)": 0.4706,
+        "A: Rho×1.5": 0.48780000000000007,
+        "B: Rho×3": 0.4886000000000001,
+        "C: Draw Prior +30%": 0.5449999999999999,
+        "D: Draw Prior +50%": 0.5864,
+        "E: Draw Prior +70%": 0.6306,
+        "F: Rho×3 + Elo Cap 400": 0.4886000000000001,
         "G: Rho×3 + Draw +30%": 0.5666,
         "H: Rho×3 + Draw +30% + Cap400": 0.5666
       }
