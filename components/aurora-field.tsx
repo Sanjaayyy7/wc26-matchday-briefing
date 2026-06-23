@@ -39,9 +39,20 @@ function Field() {
     return { positions, colors, grid };
   }, []);
 
-  const dim = useMemo(() => new THREE.Color(palette.pointDim), []);
-  const crest = useMemo(() => new THREE.Color(palette.crest), []);
+  // Multi-hue aurora spectrum (teal → jade → cyan → periwinkle → violet).
+  // Troughs recede to near-black; crests bloom into vibrant colour curtains.
+  const stops = useMemo(() => palette.stops.map((h) => new THREE.Color(h)), []);
+  const trough = useMemo(() => new THREE.Color(palette.trough), []);
   const tmp = useMemo(() => new THREE.Color(), []);
+  const hue = useMemo(() => new THREE.Color(), []);
+
+  // Sample the spectrum at p∈[0,1) with linear interpolation between stops.
+  const sample = (p: number, out: THREE.Color) => {
+    const n = stops.length;
+    const x = (((p % 1) + 1) % 1) * (n - 1);
+    const i = Math.floor(x);
+    out.copy(stops[i]).lerp(stops[Math.min(i + 1, n - 1)], x - i);
+  };
 
   useFrame(({ clock }) => {
     const pts = ref.current;
@@ -56,7 +67,11 @@ function Field() {
       const wave = Math.sin(x * 0.55 + t * 0.85) * Math.cos(z * 0.42 - t * 0.5);
       pos[i * 3 + 1] = wave * AMP;
       const m = (wave + 1) / 2; // 0..1 crest factor
-      tmp.copy(dim).lerp(crest, m * m);
+      // Drifting colour curtains: hue position shifts across X/Z and over time,
+      // nudged by the wave so crests pull toward the brighter end of the band.
+      const huePos = x * 0.05 + z * 0.03 + t * 0.045 + m * 0.35;
+      sample(huePos, hue);
+      tmp.copy(trough).lerp(hue, Math.pow(m, 1.35)); // dark valleys, vivid crests
       col[i * 3] = tmp.r;
       col[i * 3 + 1] = tmp.g;
       col[i * 3 + 2] = tmp.b;
@@ -73,12 +88,13 @@ function Field() {
         <bufferAttribute attach="attributes-color" args={[colors, 3]} />
       </bufferGeometry>
       <pointsMaterial
-        size={0.05}
+        size={0.055}
         vertexColors
         transparent
-        opacity={0.82}
+        opacity={0.95}
         sizeAttenuation
         depthWrite={false}
+        blending={THREE.AdditiveBlending}
       />
     </points>
   );

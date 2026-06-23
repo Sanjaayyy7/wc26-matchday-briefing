@@ -232,7 +232,7 @@ export default function HomePage() {
           <div className="chroma-rule absolute left-0 top-0 h-px w-36" />
           {/* Signature moment — a living Aurora probability field on jet black
               (constitution: one cinematic moment per page, light as material). */}
-          <AuroraFieldMount className="opacity-60 [mask-image:radial-gradient(72%_68%_at_68%_46%,black,transparent_82%)]" />
+          <AuroraFieldMount className="opacity-90 [mask-image:radial-gradient(80%_76%_at_66%_44%,black,black_30%,transparent_88%)]" />
           <div className="relative z-10 grid items-center gap-12 py-16 lg:min-h-[72vh] lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)]">
             <div className="relative z-10 max-w-2xl">
             <span className="text-micro uppercase tracking-widest text-[var(--ink-faint)]">

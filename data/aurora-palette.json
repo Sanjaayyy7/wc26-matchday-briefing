@@ -1,5 +1,7 @@
 {
   "point": "#7fd1b0",
   "pointDim": "#2c3a35",
-  "crest": "#9fe9d2"
+  "crest": "#9fe9d2",
+  "trough": "#13231f",
+  "stops": ["#1f7a8c", "#2fb39e", "#7fe3b0", "#56d6e8", "#7d8bff", "#b884ff"]
 }
