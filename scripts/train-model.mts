@@ -76,13 +76,13 @@ for (const row of rows) {
     samples.push({ x: (effH - eloA) / 400, goals: row.hs });
     samples.push({ x: (eloA - effH) / 400, goals: row.as });
   }
-    if (isFinalsTournament(row.tournament) && row.date >= SAMPLE_FROM) {
-      const effH = eloH + (row.neutral ? 0 : HOME_ADVANTAGE);
-      const diff = (effH - eloA) / 400;
-      regimeSamples.push({ x: diff, goals: row.hs });
-      regimeSamples.push({ x: -diff, goals: row.as });
-      if (row.hs < 9 && row.as < 9) regimeLik.push({ diff, hs: row.hs, as: row.as });
-    }
+  if (isFinalsTournament(row.tournament) && row.date >= SAMPLE_FROM) {
+    const effH = eloH + (row.neutral ? 0 : HOME_ADVANTAGE);
+    const diff = (effH - eloA) / 400;
+    regimeSamples.push({ x: diff, goals: row.hs });
+    regimeSamples.push({ x: -diff, goals: row.as });
+    if (row.hs < 9 && row.as < 9) regimeLik.push({ diff, hs: row.hs, as: row.as });
+  }
   const updated = updateElo({
     home: eloH,
     away: eloA,
