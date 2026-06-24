@@ -65,7 +65,8 @@ export function inspectModel(args: { model: ModelLike; verdict: VerdictLike | nu
       if (model.promotion?.seed !== SEED) {
         fails.push(`model.promotion.seed ${model.promotion?.seed} ≠ pre-registered ${SEED}`);
       }
-      if (model.promotion?.harnessGeneratedAt !== verdict.config?.generatedAt) {
+      if (!model.promotion?.harnessGeneratedAt || !verdict.config?.generatedAt ||
+          model.promotion.harnessGeneratedAt !== verdict.config.generatedAt) {
         fails.push("model.promotion.harnessGeneratedAt does not match the verdict artifact");
       }
       const base = verdict.drawGap?.baseline;

@@ -53,4 +53,10 @@ describe("inspectModel", () => {
     const m = { ...okModel, backtest: { brier: 0.7, uniformBrier: 0.6667, ece: 0.0089 } };
     expect(inspectModel({ model: m, verdict: okVerdict }).join(" ")).toMatch(/uniform|brier/i);
   });
+
+  it("fails when a shipped model and verdict both omit the harness timestamp", () => {
+    const m = { ...okModel, promotion: { ...okModel.promotion, harnessGeneratedAt: undefined } };
+    const v = { ...okVerdict, config: { ...okVerdict.config, generatedAt: undefined } };
+    expect(inspectModel({ model: m, verdict: v }).join(" ")).toMatch(/harnessGeneratedAt|timestamp|verdict/i);
+  });
 });
