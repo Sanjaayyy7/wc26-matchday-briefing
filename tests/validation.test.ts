@@ -4,6 +4,7 @@ import {
   isFinalsTournament,
   pairedDeltaBrierCI,
   promotionVerdict,
+  calibrationWinVerdict,
 } from "@/lib/validation";
 
 // ---------------------------------------------------------------------------
@@ -126,5 +127,59 @@ describe("promotionVerdict", () => {
     const a = [0.4, 0.55, 0.6, 0.3, 0.7];
     const v = promotionVerdict(a, a, 0.01);
     expect(v.ship).toBe(false);
+  });
+});
+
+// ---------------------------------------------------------------------------
+// calibrationWinVerdict — secondary rule: non-inferiority on Brier + draw-gap
+// reduction + ECE in bound
+// ---------------------------------------------------------------------------
+
+describe("calibrationWinVerdict", () => {
+  // Brier-neutral arrays: identical per-match Brier → ΔBrier CI centered on 0.
+  const neutral = Array.from({ length: 200 }, (_, i) => 0.4 + (i % 5) * 0.02);
+
+  it("ships when Brier is non-inferior, draw-gap drops ≥5pp, and ECE is in bound", () => {
+    const v = calibrationWinVerdict(neutral, neutral, {
+      baselineDrawGap: 0.15,
+      challengerDrawGap: 0.04, // 11pp reduction
+      challengerEce: 0.01,
+    });
+    expect(v.ship).toBe(true);
+    expect(v.nonInferior).toBe(true);
+    expect(v.drawGapReduced).toBe(true);
+    expect(v.eceOk).toBe(true);
+  });
+
+  it("holds when the draw-gap reduction is under the threshold", () => {
+    const v = calibrationWinVerdict(neutral, neutral, {
+      baselineDrawGap: 0.15,
+      challengerDrawGap: 0.13, // only 2pp
+      challengerEce: 0.01,
+    });
+    expect(v.ship).toBe(false);
+    expect(v.drawGapReduced).toBe(false);
+  });
+
+  it("holds when ECE breaches the ceiling", () => {
+    const v = calibrationWinVerdict(neutral, neutral, {
+      baselineDrawGap: 0.15,
+      challengerDrawGap: 0.02,
+      challengerEce: 0.05,
+    });
+    expect(v.ship).toBe(false);
+    expect(v.eceOk).toBe(false);
+  });
+
+  it("holds when the challenger is materially worse on Brier (below the margin)", () => {
+    // challenger worse by ~0.05 per match → ΔBrier strongly negative, below −δ
+    const worse = neutral.map((b) => b + 0.05);
+    const v = calibrationWinVerdict(neutral, worse, {
+      baselineDrawGap: 0.15,
+      challengerDrawGap: 0.02,
+      challengerEce: 0.01,
+    });
+    expect(v.ship).toBe(false);
+    expect(v.nonInferior).toBe(false);
   });
 });
