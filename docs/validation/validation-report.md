@@ -1,6 +1,6 @@
 # Tournament-Holdout Validation Report
 
-_Generated 2026-06-24T00:34:50.527Z. Do not edit by hand — produced by `npm run ml:validate`._
+_Generated 2026-06-24T16:48:08.098Z. Do not edit by hand — produced by `npm run ml:validate`._
 
 ## What this measures
 
@@ -23,13 +23,26 @@ calibrated. This is the rule that correctly rejects small-sample "wins" within v
 
 | variant | Brier | 95% CI | ECE |
 | --- | --- | --- | --- |
-| baseline (raw model) | 0.5769 | [0.5631, 0.591] | 0.0079 |
+| baseline (raw model) | 0.5769 | [0.5631, 0.591] | 0.0078 |
 | platt-calibrated | 0.5768 | [0.5637, 0.59] | 0.0086 |
+| regime | 0.5775 | [0.5639, 0.5913] | 0.0043 |
 
 **ΔBrier (baseline − platt-calibrated):** mean 0.0001,
 95% CI [-0.0008, 0.0011].
 
 **Verdict:** HOLD — ΔBrier 95% CI [-0.0008, 0.0011] straddles 0 (not significant)
+
+## Draw-rate calibration
+
+| variant | draw-gap |
+| --- | --- |
+| baseline | 0.0122 |
+| regime | 0.0122 |
+
+## Regime promotion
+
+- **primary:** HOLD — ΔBrier 95% CI [-0.0014, 0.0001] straddles 0 (not significant)
+- **secondary:** HOLD — draw-gap reduction 0.0pp < 5pp
 
 ## Reliability — platt-calibrated (per-outcome)
 

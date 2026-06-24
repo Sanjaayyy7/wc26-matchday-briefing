@@ -1,6 +1,6 @@
 {
   "config": {
-    "generatedAt": "2026-06-24T00:34:50.527Z",
+    "generatedAt": "2026-06-24T16:48:08.098Z",
     "evalFrom": "1990-01-01",
     "holdoutLabels": [
       "FIFA World Cup",
@@ -32,7 +32,7 @@
         "lo": 0.5631,
         "hi": 0.591
       },
-      "ece": 0.0079,
+      "ece": 0.0078,
       "n": 2237,
       "reliability": [
         {
@@ -41,7 +41,7 @@
           "count": 363
         },
         {
-          "meanPredicted": 0.1562,
+          "meanPredicted": 0.1561,
           "realized": 0.1563,
           "count": 998
         },
@@ -56,34 +56,34 @@
           "count": 776
         },
         {
-          "meanPredicted": 0.4503,
-          "realized": 0.474,
-          "count": 654
+          "meanPredicted": 0.4502,
+          "realized": 0.4732,
+          "count": 653
         },
         {
-          "meanPredicted": 0.5474,
-          "realized": 0.5308,
-          "count": 535
+          "meanPredicted": 0.5473,
+          "realized": 0.5317,
+          "count": 536
         },
         {
-          "meanPredicted": 0.6452,
-          "realized": 0.6396,
-          "count": 369
+          "meanPredicted": 0.6451,
+          "realized": 0.6386,
+          "count": 368
         },
         {
-          "meanPredicted": 0.7455,
-          "realized": 0.7186,
-          "count": 199
+          "meanPredicted": 0.7453,
+          "realized": 0.72,
+          "count": 200
         },
         {
-          "meanPredicted": 0.8451,
-          "realized": 0.8247,
-          "count": 97
+          "meanPredicted": 0.8447,
+          "realized": 0.8229,
+          "count": 96
         },
         {
-          "meanPredicted": 0.932,
-          "realized": 0.8462,
-          "count": 26
+          "meanPredicted": 0.9309,
+          "realized": 0.8519,
+          "count": 27
         }
       ]
     },
@@ -147,7 +147,72 @@
           "count": 18
         }
       ]
+    },
+    "regime": {
+      "brier": 0.5775,
+      "brierCI": {
+        "lo": 0.5639,
+        "hi": 0.5913
+      },
+      "ece": 0.0043,
+      "n": 2237,
+      "reliability": [
+        {
+          "meanPredicted": 0.0648,
+          "realized": 0.069,
+          "count": 319
+        },
+        {
+          "meanPredicted": 0.1569,
+          "realized": 0.1563,
+          "count": 960
+        },
+        {
+          "meanPredicted": 0.2611,
+          "realized": 0.2601,
+          "count": 2749
+        },
+        {
+          "meanPredicted": 0.3491,
+          "realized": 0.3467,
+          "count": 799
+        },
+        {
+          "meanPredicted": 0.4495,
+          "realized": 0.454,
+          "count": 685
+        },
+        {
+          "meanPredicted": 0.5463,
+          "realized": 0.5593,
+          "count": 540
+        },
+        {
+          "meanPredicted": 0.6438,
+          "realized": 0.6521,
+          "count": 365
+        },
+        {
+          "meanPredicted": 0.7436,
+          "realized": 0.7181,
+          "count": 188
+        },
+        {
+          "meanPredicted": 0.8435,
+          "realized": 0.8214,
+          "count": 84
+        },
+        {
+          "meanPredicted": 0.9301,
+          "realized": 0.8182,
+          "count": 22
+        }
+      ]
     }
+  },
+  "drawGap": {
+    "baseline": 0.0122,
+    "regime": 0.0122
   },
   "promotion": {
     "incumbent": "baseline",
@@ -160,5 +225,26 @@
     },
     "eceOk": true,
     "reason": "HOLD — ΔBrier 95% CI [-0.0008, 0.0011] straddles 0 (not significant)"
+  },
+  "regimePromotion": {
+    "incumbent": "baseline",
+    "challenger": "regime",
+    "primary": {
+      "ship": false,
+      "deltaBrierCI": {
+        "mean": -0.0007,
+        "lo": -0.0014,
+        "hi": 0.0001
+      },
+      "eceOk": true,
+      "reason": "HOLD — ΔBrier 95% CI [-0.0014, 0.0001] straddles 0 (not significant)"
+    },
+    "secondary": {
+      "ship": false,
+      "nonInferior": true,
+      "drawGapReduced": false,
+      "eceOk": true,
+      "reason": "HOLD — draw-gap reduction 0.0pp < 5pp"
+    }
   }
 }
