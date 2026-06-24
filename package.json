@@ -17,6 +17,7 @@
     "ml:history": "tsx scripts/build-history.mts",
     "ml:backtest": "tsx scripts/run-backtest.mts",
     "ml:eval": "tsx scripts/eval-model.mts",
+    "ml:validate": "tsx scripts/validate-model.mts",
     "ml:cycle": "npm run ml:fetch && npm run ml:train && npm run ml:eval && npm run ml:backtest",
     "pipeline:fetch": "tsx scripts/fetch-kalshi.mts",
     "pipeline:run": "tsx scripts/run-briefing.mts",
