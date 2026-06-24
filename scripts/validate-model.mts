@@ -13,7 +13,7 @@
 import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
 import path from "node:path";
 import { pathToFileURL } from "node:url";
-import { updateElo } from "../lib/elo";
+import { updateElo, HOME_ADVANTAGE } from "../lib/elo";
 import {
   lambdasFromElo,
   scoreGrid,
@@ -33,8 +33,10 @@ import {
   isFinalsTournament,
   FINALS_TOURNAMENTS,
   promotionVerdict,
+  calibrationWinVerdict,
   ECE_MAX,
 } from "../lib/validation";
+import { fitRegimeParams, drawRateGap, type GoalSample, type LikRow } from "../lib/regime-params";
 import { appDir } from "./shared.mts";
 
 const EVAL_FROM = "1990-01-01"; // modern era: mature Elo, plentiful prior calibration data
@@ -137,6 +139,14 @@ async function main() {
   const platt = newCollector();
   const byTournament = new Map<string, number>();
 
+  const regimeSamplesAll: Array<{ s: GoalSample; date: string }> = [];
+  const regimeLikAll: Array<{ l: LikRow; date: string }> = [];
+  const regimeParamCache = new Map<string, ModelParams | null>();
+  const regime = newCollector();
+  const baseDraw: Array<{ pDraw: number; isDraw: boolean }> = [];
+  const regimeDraw: Array<{ pDraw: number; isDraw: boolean }> = [];
+  const MIN_REGIME_SAMPLES = 400;
+
   for (const row of rows) {
     const eloH = get(row.home);
     const eloA = get(row.away);
@@ -156,11 +166,35 @@ async function main() {
       record(base, rs, o);
       record(platt, applyPlattSplit(rs, cal.a, cal.b), o);
       byTournament.set(row.tournament, (byTournament.get(row.tournament) ?? 0) + 1);
+
+      // Walk-forward regime params: fit on finals-tournament matches strictly
+      // before this instance's first match (expanding window), cached per instance.
+      let regimeParams = regimeParamCache.get(key);
+      if (regimeParams === undefined) {
+        const firstDate = row.date;
+        const priorS = regimeSamplesAll.filter((q) => q.date < firstDate).map((q) => q.s);
+        const priorL = regimeLikAll.filter((q) => q.date < firstDate).map((q) => q.l);
+        regimeParams =
+          priorL.length >= MIN_REGIME_SAMPLES ? fitRegimeParams(priorS, priorL, 30) : null;
+        regimeParamCache.set(key, regimeParams);
+      }
+      const rgSplit = regimeParams ? rawSplit(regimeParams, eloH, eloA, row) : rs;
+      record(regime, rgSplit, o);
+      baseDraw.push({ pDraw: rs.draw, isDraw: o === "draw" });
+      regimeDraw.push({ pDraw: rgSplit.draw, isDraw: o === "draw" });
     }
 
     // Accumulate this match's pairs AFTER scoring it (never calibrates itself).
     for (const k of ["home", "draw", "away"] as const) {
       calibPairs.push({ p: rs[k], y: (k === o ? 1 : 0) as 0 | 1, date: row.date });
+    }
+
+    if (isFinalsTournament(row.tournament) && row.date >= EVAL_FROM) {
+      const effH = eloH + (row.neutral ? 0 : HOME_ADVANTAGE);
+      const diff = (effH - eloA) / 400;
+      regimeSamplesAll.push({ s: { x: diff, goals: row.hs }, date: row.date });
+      regimeSamplesAll.push({ s: { x: -diff, goals: row.as }, date: row.date });
+      if (row.hs < 9 && row.as < 9) regimeLikAll.push({ l: { diff, hs: row.hs, as: row.as }, date: row.date });
     }
 
     const u = updateElo({
@@ -177,8 +211,26 @@ async function main() {
 
   const baseM = metricsOf(base);
   const plattM = metricsOf(platt);
+  const regimeM = metricsOf(regime);
+  const baselineDrawGap = drawRateGap(baseDraw);
+  const regimeDrawGap = drawRateGap(regimeDraw);
+
   // Incumbent = raw model; challenger = Platt-calibrated. ΔBrier>0 ⇒ Platt better.
   const verdict = promotionVerdict(base.brierByMatch, platt.brierByMatch, plattM.ece, {
+    n: BOOTSTRAP_N,
+    seed: SEED,
+  });
+
+  // Primary rule: incumbent = baseline (raw), challenger = regime.
+  const primaryRegime = promotionVerdict(base.brierByMatch, regime.brierByMatch, regimeM.ece, {
+    n: BOOTSTRAP_N,
+    seed: SEED,
+  });
+  // Secondary rule: calibration win.
+  const secondaryRegime = calibrationWinVerdict(base.brierByMatch, regime.brierByMatch, {
+    baselineDrawGap,
+    challengerDrawGap: regimeDrawGap,
+    challengerEce: regimeM.ece,
     n: BOOTSTRAP_N,
     seed: SEED,
   });
@@ -203,7 +255,9 @@ async function main() {
     variants: {
       baseline: serializeVariant(baseM),
       "platt-calibrated": serializeVariant(plattM),
+      regime: serializeVariant(regimeM),
     },
+    drawGap: { baseline: r4(baselineDrawGap), regime: r4(regimeDrawGap) },
     promotion: {
       incumbent: "baseline",
       challenger: "platt-calibrated",
@@ -211,6 +265,23 @@ async function main() {
       deltaBrierCI: { mean: r4(verdict.deltaBrierCI.mean), lo: r4(verdict.deltaBrierCI.lo), hi: r4(verdict.deltaBrierCI.hi) },
       eceOk: verdict.eceOk,
       reason: verdict.reason,
+    },
+    regimePromotion: {
+      incumbent: "baseline",
+      challenger: "regime",
+      primary: {
+        ship: primaryRegime.ship,
+        deltaBrierCI: { mean: r4(primaryRegime.deltaBrierCI.mean), lo: r4(primaryRegime.deltaBrierCI.lo), hi: r4(primaryRegime.deltaBrierCI.hi) },
+        eceOk: primaryRegime.eceOk,
+        reason: primaryRegime.reason,
+      },
+      secondary: {
+        ship: secondaryRegime.ship,
+        nonInferior: secondaryRegime.nonInferior,
+        drawGapReduced: secondaryRegime.drawGapReduced,
+        eceOk: secondaryRegime.eceOk,
+        reason: secondaryRegime.reason,
+      },
     },
   };
 
@@ -227,14 +298,39 @@ async function main() {
   console.log("");
   console.log("  variant            Brier    95% CI              ECE");
   console.log("  ------------------ -------- ------------------- -------");
-  for (const [name, m] of [["baseline", baseM], ["platt-calibrated", plattM]] as const) {
+  for (const [name, m] of [["baseline", baseM], ["platt-calibrated", plattM], ["regime", regimeM]] as const) {
     console.log(
       `  ${name.padEnd(18)} ${r4(m.brier).toFixed(4)}  [${r4(m.brierCI.lo).toFixed(4)}, ${r4(m.brierCI.hi).toFixed(4)}]  ${r4(m.ece).toFixed(4)}`,
     );
   }
   console.log("");
   console.log(`[validate] ${verdict.reason}`);
+  console.log(`[validate] draw-gap  baseline=${r4(baselineDrawGap).toFixed(4)}  regime=${r4(regimeDrawGap).toFixed(4)}`);
+  const ruleFired = primaryRegime.ship ? "primary" : secondaryRegime.ship ? "secondary" : null;
+  console.log(`[validate] regime rule: ${ruleFired ?? "none fired (HOLD)"}. Re-run with --promote to ship.`);
   console.log(`[validate] wrote ${path.join(dir, "tournament-validation.json")} + validation-report.md`);
+
+  if (process.argv.includes("--promote")) {
+    if (!ruleFired) {
+      console.error("[validate] --promote refused: neither pre-registered rule fired (HOLD). model.json unchanged.");
+      process.exitCode = 3;
+    } else {
+      const modelPath = path.join(appDir, "data", "model.json");
+      const m = JSON.parse(readFileSync(modelPath, "utf8"));
+      m.promotion = {
+        shipped: true,
+        status: "shipped",
+        rule: ruleFired,
+        deltaBrierCI: { mean: r4(primaryRegime.deltaBrierCI.mean), lo: r4(primaryRegime.deltaBrierCI.lo), hi: r4(primaryRegime.deltaBrierCI.hi) },
+        ece: r4(regimeM.ece),
+        drawGap: r4(regimeDrawGap),
+        harnessGeneratedAt: out.config.generatedAt,
+        seed: SEED,
+      };
+      writeFileSync(modelPath, JSON.stringify(m, null, 1));
+      console.log(`[validate] PROMOTED regime params (${ruleFired} rule). model.json.promotion.shipped = true.`);
+    }
+  }
 }
 
 function serializeVariant(m: VariantMetrics) {
@@ -264,7 +360,8 @@ type Out = {
     promotionRule: string;
   };
   holdout: { n: number; byTournament: Record<string, number> };
-  variants: { baseline: SerializedVariant; "platt-calibrated": SerializedVariant };
+  variants: { baseline: SerializedVariant; "platt-calibrated": SerializedVariant; regime: SerializedVariant };
+  drawGap: { baseline: number; regime: number };
   promotion: {
     incumbent: string;
     challenger: string;
@@ -272,6 +369,12 @@ type Out = {
     deltaBrierCI: { mean: number; lo: number; hi: number };
     eceOk: boolean;
     reason: string;
+  };
+  regimePromotion: {
+    incumbent: string;
+    challenger: string;
+    primary: { ship: boolean; deltaBrierCI: { mean: number; lo: number; hi: number }; eceOk: boolean; reason: string };
+    secondary: { ship: boolean; nonInferior: boolean; drawGapReduced: boolean; eceOk: boolean; reason: string };
   };
 };
 
@@ -314,11 +417,24 @@ calibrated. This is the rule that correctly rejects small-sample "wins" within v
 | --- | --- | --- | --- |
 | baseline (raw model) | ${v.baseline.brier} | [${v.baseline.brierCI.lo}, ${v.baseline.brierCI.hi}] | ${v.baseline.ece} |
 | platt-calibrated | ${v["platt-calibrated"].brier} | [${v["platt-calibrated"].brierCI.lo}, ${v["platt-calibrated"].brierCI.hi}] | ${v["platt-calibrated"].ece} |
+| regime | ${v.regime.brier} | [${v.regime.brierCI.lo}, ${v.regime.brierCI.hi}] | ${v.regime.ece} |
 
 **ΔBrier (baseline − platt-calibrated):** mean ${out.promotion.deltaBrierCI.mean},
 95% CI [${out.promotion.deltaBrierCI.lo}, ${out.promotion.deltaBrierCI.hi}].
 
 **Verdict:** ${out.promotion.reason}
+
+## Draw-rate calibration
+
+| variant | draw-gap |
+| --- | --- |
+| baseline | ${out.drawGap.baseline} |
+| regime | ${out.drawGap.regime} |
+
+## Regime promotion
+
+- **primary:** ${out.regimePromotion.primary.reason}
+- **secondary:** ${out.regimePromotion.secondary.reason}
 
 ## Reliability — platt-calibrated (per-outcome)
 

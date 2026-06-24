@@ -17,6 +17,8 @@ import {
 } from "../lib/poisson-model";
 import { rps, calibrationBins, type Split } from "../lib/calibration";
 import { applyPlatt, fitPlatt } from "../lib/model-experiments";
+import { fitRegimeParams, type GoalSample, type LikRow } from "../lib/regime-params";
+import { isFinalsTournament } from "../lib/validation";
 import { appDir } from "./shared.mts";
 
 type Row = {
@@ -54,8 +56,9 @@ console.log(`training on ${rows.length} completed matches (${rows[0].date} → $
 const ratings = new Map<string, number>();
 const get = (t: string) => ratings.get(t) ?? 1500;
 
-type GoalSample = { x: number; goals: number };
 const samples: GoalSample[] = [];
+const regimeSamples: GoalSample[] = [];
+const regimeLik: LikRow[] = [];
 const backtest: Array<{ row: Row; eloH: number; eloA: number }> = [];
 const holdout: Array<{ row: Row; eloH: number; eloA: number }> = [];
 
@@ -72,6 +75,13 @@ for (const row of rows) {
     const effH = eloH + (row.neutral ? 0 : HOME_ADVANTAGE);
     samples.push({ x: (effH - eloA) / 400, goals: row.hs });
     samples.push({ x: (eloA - effH) / 400, goals: row.as });
+  }
+  if (isFinalsTournament(row.tournament) && row.date >= SAMPLE_FROM) {
+    const effH = eloH + (row.neutral ? 0 : HOME_ADVANTAGE);
+    const diff = (effH - eloA) / 400;
+    regimeSamples.push({ x: diff, goals: row.hs });
+    regimeSamples.push({ x: -diff, goals: row.as });
+    if (row.hs < 9 && row.as < 9) regimeLik.push({ diff, hs: row.hs, as: row.as });
   }
   const updated = updateElo({
     home: eloH,
@@ -144,6 +154,14 @@ function bestRho(): number {
 const rho = bestRho();
 console.log(`fit: rho=${rho}`);
 const params: ModelParams = { baseLogGoals, eloSlope, rho };
+
+const regimeTournament = fitRegimeParams(regimeSamples, regimeLik, 50);
+console.log(
+  `fit (regime/tournament): baseLogGoals=${regimeTournament.baseLogGoals.toFixed(4)} ` +
+    `(base λ=${Math.exp(regimeTournament.baseLogGoals).toFixed(2)}), ` +
+    `eloSlope=${regimeTournament.eloSlope.toFixed(4)}, rho=${regimeTournament.rho} ` +
+    `over ${regimeSamples.length} regime samples`,
+);
 
 // ---- Fit post-hoc Platt calibration on the pre-2024 holdout (2014–2024) ----
 // Calibrates the 3-way split without disturbing the generative model. The fit
@@ -256,6 +274,17 @@ const model = {
   dataThrough: rows.at(-1)!.date,
   matches: rows.length,
   params,
+  regimeParams: { tournament: regimeTournament },
+  promotion: { shipped: false, status: "candidate" } as {
+    shipped: boolean;
+    status: string;
+    rule?: string;
+    deltaBrierCI?: { lo: number; hi: number; mean: number };
+    ece?: number;
+    drawGap?: number;
+    harnessGeneratedAt?: string;
+    seed?: number;
+  },
   calibration,
   backtest: {
     from: BACKTEST_FROM,

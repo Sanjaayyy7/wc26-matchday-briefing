@@ -20,6 +20,19 @@ const forms = model.forms as Record<
   { results: string; gf: number; ga: number; lastDate: string }
 >;
 
+type ModelShape = {
+  params: ModelParams;
+  regimeParams?: { tournament?: ModelParams };
+  promotion?: { shipped?: boolean };
+};
+
+/** The product serves only World Cup fixtures (all finals-tournament regime), so
+ *  regime params apply whenever they have been promoted; otherwise global params. */
+export function selectParams(m: ModelShape): ModelParams {
+  if (m.promotion?.shipped && m.regimeParams?.tournament) return m.regimeParams.tournament;
+  return m.params;
+}
+
 export function resolveTeamName(appName: string): string {
   const name = ALIASES[appName] ?? appName;
   if (!(name in ratings)) {
@@ -82,7 +95,8 @@ export function predictFixture(args: {
   const awayName = resolveTeamName(args.away);
   const eloHome = ratings[homeName];
   const eloAway = ratings[awayName];
-  const params = model.params as ModelParams;
+  // model is a JSON import without a declared type; `as unknown` bridges to ModelShape
+  const params = selectParams(model as unknown as ModelShape);
 
   const lambdas = lambdasFromElo(eloHome, eloAway, args.neutral, params);
   const grid = scoreGrid(lambdas.home, lambdas.away, params.rho);
