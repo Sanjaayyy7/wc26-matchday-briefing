@@ -95,6 +95,7 @@ export function predictFixture(args: {
   const awayName = resolveTeamName(args.away);
   const eloHome = ratings[homeName];
   const eloAway = ratings[awayName];
+  // model is a JSON import without a declared type; `as unknown` bridges to ModelShape
   const params = selectParams(model as unknown as ModelShape);
 
   const lambdas = lambdasFromElo(eloHome, eloAway, args.neutral, params);
