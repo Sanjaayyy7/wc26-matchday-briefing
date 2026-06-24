@@ -106,6 +106,30 @@ export default function MethodologyPage() {
           </div>
         </CanvasSection>
 
+        <CanvasSection eyebrow="Validation" title="How we validate">
+          <div className="flex flex-col gap-8">
+            <Principle title="Tournament-holdout regime">
+              The model is measured on the regime it actually runs in: finals-tournament
+              matches — the World Cup, the Euros, Copa América, the Africa Cup of Nations, and
+              the Asian Cup. A time split dominated by friendlies flatters a forecaster on
+              matches that look nothing like a knockout summer, so it is not the yardstick we
+              promote against.
+            </Principle>
+            <Principle title="Walk-forward, no leakage">
+              Every variant is fit only on matches that finished strictly before the one it is
+              scoring, and calibration is re-derived per tournament from prior data alone.
+              Nothing from the future ever informs a past forecast, so the measured skill is
+              the skill the model would have had live.
+            </Principle>
+            <Principle title="Confidence-gated promotion">
+              A challenger replaces the champion only when its Brier improvement clears a
+              pre-registered bootstrap confidence interval — the whole interval better than the
+              incumbent, not a lead that fits inside run-to-run noise — while staying within the
+              calibration gate. A win that could be variance is held, by rule.
+            </Principle>
+          </div>
+        </CanvasSection>
+
         <CanvasSection eyebrow="Caveats" title="Sample size & limits">
           <p className="max-w-2xl text-[var(--ink-muted)]">
             The official sample is {graded} graded matches. Below roughly 30–50 matches, all figures
