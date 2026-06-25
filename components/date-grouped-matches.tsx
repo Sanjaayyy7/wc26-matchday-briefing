@@ -5,14 +5,13 @@
  *
  * Receives pre-serialized match groups from the server page (no server-only
  * imports here). Renders <DateNav> as the primary navigator and the selected
- * day's matches as a Surface card grid, with <MatchesFilter> as a secondary
- * status/team filter row below the date bar.
+ * day's matches as a Surface card grid, with a status/team filter row as a
+ * secondary control below the date bar.
  */
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { DateNav } from "./date-nav";
 import type { DateNavGroup } from "./date-nav";
-import { MatchesFilter } from "./matches-filter";
 import { Surface } from "./ui/surface";
 import { Crest } from "./crest";
 import { VerdictChip } from "./verdict-chip";
@@ -28,15 +27,65 @@ interface DateGroupedMatchesProps {
   defaultSelected: number;
 }
 
+// ── Filter types ───────────────────────────────────────────────────────────
+
+type StatusFilter = "all" | "settled" | "locked" | "upcoming";
+const STATUS_FILTERS: StatusFilter[] = ["all", "settled", "upcoming", "locked"];
+const STATUS_LABEL: Record<StatusFilter, string> = {
+  all: "All",
+  settled: "Settled",
+  upcoming: "Upcoming",
+  locked: "Locked",
+};
+
+function matchesStatus(row: MatchRowData, key: StatusFilter): boolean {
+  if (key === "all") return true;
+  if (key === "settled") return row.status === "official";
+  if (key === "locked") return row.status === "locked";
+  return row.status === "upcoming";
+}
+
 export function DateGroupedMatches({
   groups,
   defaultSelected,
 }: DateGroupedMatchesProps) {
   const [selected, setSelected] = useState(defaultSelected);
+  const [statusFilter, setStatusFilter] = useState<StatusFilter>("all");
+  const [query, setQuery] = useState("");
 
   const safeSelected = Math.max(0, Math.min(selected, groups.length - 1));
   const currentGroup = groups[safeSelected];
   const rows = currentGroup?.rows ?? [];
+
+  const filteredRows = useMemo(
+    () =>
+      rows.filter(
+        (r) =>
+          matchesStatus(r, statusFilter) &&
+          (!query ||
+            `${r.homeName} ${r.awayName}`
+              .toLowerCase()
+              .includes(query.toLowerCase())),
+      ),
+    [rows, statusFilter, query],
+  );
+
+  const counts = useMemo(
+    () => ({
+      all: rows.length,
+      settled: rows.filter((r) => r.status === "official").length,
+      upcoming: rows.filter((r) => r.status === "upcoming").length,
+      locked: rows.filter((r) => r.status === "locked").length,
+    }),
+    [rows],
+  );
+
+  const tabCls = (active: boolean) =>
+    `text-label h-9 shrink-0 border-b px-1 transition-colors duration-300 ${
+      active
+        ? "border-[var(--ink)] text-[var(--ink)]"
+        : "border-transparent text-[var(--ink-muted)] hover:border-[var(--line)] hover:text-[var(--ink)]"
+    }`;
 
   return (
     <div className="flex flex-col gap-0">
@@ -44,21 +93,45 @@ export function DateGroupedMatches({
       <DateNav
         groups={groups}
         selected={safeSelected}
-        onSelect={setSelected}
+        onSelect={(i) => {
+          setSelected(i);
+          setStatusFilter("all");
+          setQuery("");
+        }}
       />
 
-      {/* Secondary filter row + match grid */}
-      <div className="flex flex-col gap-6 pt-6">
-        <MatchesFilter rows={rows} />
+      {/* Secondary filter row */}
+      <div className="flex flex-wrap items-center gap-4 pt-5 pb-3">
+        <div className="flex min-w-0 gap-4 overflow-x-auto">
+          {STATUS_FILTERS.map((key) => (
+            <button
+              key={key}
+              className={tabCls(statusFilter === key)}
+              onClick={() => setStatusFilter(key)}
+            >
+              {STATUS_LABEL[key]}{" "}
+              <span className="text-mono data-mono tabular text-[var(--ink-faint)]">
+                {counts[key]}
+              </span>
+            </button>
+          ))}
+        </div>
+        <input
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          placeholder="Search team"
+          aria-label="Search team"
+          className="text-label h-9 min-w-0 flex-1 border-b border-[var(--line)] bg-transparent px-1 outline-none placeholder:text-[var(--ink-faint)] sm:max-w-48"
+        />
       </div>
+
+      {/* Primary display — Surface card grid for selected day */}
+      <MatchCardGrid rows={filteredRows} />
     </div>
   );
 }
 
 // ── Match card grid for a single day ──────────────────────────────────────
-// (Not used in the current wiring — MatchesFilter owns the list view.
-//  Kept here as a separate export in case a future task wants a card-grid
-//  view for a single day without the filter chrome.)
 
 export function MatchCardGrid({ rows }: { rows: MatchRowData[] }) {
   if (rows.length === 0) {

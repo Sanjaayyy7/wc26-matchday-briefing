@@ -57,17 +57,28 @@ export interface DateNavProps {
 export function DateNav({ groups, selected, onSelect, className }: DateNavProps) {
   const tabRefs = React.useRef<Array<HTMLButtonElement | null>>([]);
 
-  // Find the index of the "Today" tab, if present
-  const todayIdx = groups.findIndex((g) => g.label === "Today");
+  // Find the index of today's group by comparing dateISO to today's ET date
+  // (robust: does not depend on the "Today" label string)
+  const todayISO = new Date().toLocaleDateString("en-US", {
+    timeZone: "America/New_York",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).replace(/(\d+)\/(\d+)\/(\d+)/, "$3-$1-$2");
+  const todayIdx = groups.findIndex((g) => g.dateISO === todayISO);
 
   function handleKeyDown(e: React.KeyboardEvent<HTMLDivElement>) {
+    const handled =
+      e.key === "ArrowRight" ||
+      e.key === "ArrowLeft" ||
+      e.key === "Home" ||
+      e.key === "End";
+    if (!handled) return;
+    e.preventDefault(); // prevent scroll even at boundaries
     const next = nextTabIndex(e.key, selected, groups.length);
-    if (next !== selected) {
-      e.preventDefault();
-      onSelect(next);
-      // Focus follows selection
-      tabRefs.current[next]?.focus();
-    }
+    onSelect(next);
+    // Focus follows selection
+    tabRefs.current[next]?.focus();
   }
 
   function jumpToToday() {
