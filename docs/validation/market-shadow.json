@@ -1,0 +1,317 @@
+{
+ "generatedFrom": [
+  "data/predictions.json"
+ ],
+ "n": 1,
+ "excluded": [
+  {
+   "slug": "qatar-vs-switzerland",
+   "reason": "no market probs"
+  },
+  {
+   "slug": "brazil-vs-morocco",
+   "reason": "no market probs"
+  },
+  {
+   "slug": "germany-vs-cura-ao",
+   "reason": "no market probs"
+  },
+  {
+   "slug": "ivory-coast-vs-ecuador",
+   "reason": "no market probs"
+  },
+  {
+   "slug": "sweden-vs-tunisia",
+   "reason": "no market probs"
+  },
+  {
+   "slug": "haiti-vs-scotland",
+   "reason": "no market probs"
+  },
+  {
+   "slug": "australia-vs-turkiye",
+   "reason": "no market probs"
+  },
+  {
+   "slug": "netherlands-vs-japan",
+   "reason": "no market probs"
+  },
+  {
+   "slug": "belgium-vs-egypt",
+   "reason": "no market probs"
+  },
+  {
+   "slug": "iran-vs-new-zealand",
+   "reason": "no market probs"
+  },
+  {
+   "slug": "spain-vs-cape-verde",
+   "reason": "no market probs"
+  },
+  {
+   "slug": "saudi-arabia-vs-uruguay",
+   "reason": "no market probs"
+  },
+  {
+   "slug": "france-vs-senegal",
+   "reason": "no market probs"
+  },
+  {
+   "slug": "iraq-vs-norway",
+   "reason": "no market probs"
+  },
+  {
+   "slug": "argentina-vs-algeria",
+   "reason": "no market probs"
+  },
+  {
+   "slug": "austria-vs-jordan",
+   "reason": "no market probs"
+  },
+  {
+   "slug": "portugal-vs-dr-congo",
+   "reason": "no market probs"
+  },
+  {
+   "slug": "uzbekistan-vs-colombia",
+   "reason": "no market probs"
+  },
+  {
+   "slug": "england-vs-croatia",
+   "reason": "no market probs"
+  },
+  {
+   "slug": "ghana-vs-panama",
+   "reason": "no market probs"
+  },
+  {
+   "slug": "czech-republic-vs-south-africa",
+   "reason": "no market probs"
+  },
+  {
+   "slug": "mexico-vs-south-korea",
+   "reason": "no market probs"
+  },
+  {
+   "slug": "switzerland-vs-bosnia-herzegovina",
+   "reason": "no market probs"
+  },
+  {
+   "slug": "canada-vs-qatar",
+   "reason": "no market probs"
+  },
+  {
+   "slug": "scotland-vs-morocco",
+   "reason": "no market probs"
+  },
+  {
+   "slug": "brazil-vs-haiti",
+   "reason": "no market probs"
+  },
+  {
+   "slug": "united-states-vs-australia",
+   "reason": "no market probs"
+  },
+  {
+   "slug": "turkiye-vs-paraguay",
+   "reason": "no market probs"
+  },
+  {
+   "slug": "germany-vs-ivory-coast",
+   "reason": "no market probs"
+  },
+  {
+   "slug": "ecuador-vs-cura-ao",
+   "reason": "no market probs"
+  },
+  {
+   "slug": "netherlands-vs-sweden",
+   "reason": "no market probs"
+  },
+  {
+   "slug": "tunisia-vs-japan",
+   "reason": "no market probs"
+  },
+  {
+   "slug": "belgium-vs-iran",
+   "reason": "no market probs"
+  },
+  {
+   "slug": "new-zealand-vs-egypt",
+   "reason": "no market probs"
+  },
+  {
+   "slug": "spain-vs-saudi-arabia",
+   "reason": "no market probs"
+  },
+  {
+   "slug": "uruguay-vs-cape-verde",
+   "reason": "no market probs"
+  },
+  {
+   "slug": "france-vs-iraq",
+   "reason": "no market probs"
+  },
+  {
+   "slug": "norway-vs-senegal",
+   "reason": "no market probs"
+  },
+  {
+   "slug": "argentina-vs-austria",
+   "reason": "no market probs"
+  },
+  {
+   "slug": "jordan-vs-algeria",
+   "reason": "no market probs"
+  },
+  {
+   "slug": "portugal-vs-uzbekistan",
+   "reason": "no market probs"
+  },
+  {
+   "slug": "colombia-vs-dr-congo",
+   "reason": "no market probs"
+  },
+  {
+   "slug": "england-vs-ghana",
+   "reason": "no market probs"
+  },
+  {
+   "slug": "panama-vs-croatia",
+   "reason": "no market probs"
+  },
+  {
+   "slug": "mexico-vs-czech-republic",
+   "reason": "no market probs"
+  },
+  {
+   "slug": "south-africa-vs-south-korea",
+   "reason": "no market probs"
+  },
+  {
+   "slug": "canada-vs-switzerland",
+   "reason": "no market probs"
+  },
+  {
+   "slug": "bosnia-herzegovina-vs-qatar",
+   "reason": "no market probs"
+  },
+  {
+   "slug": "scotland-vs-brazil",
+   "reason": "no market probs"
+  },
+  {
+   "slug": "morocco-vs-haiti",
+   "reason": "no market probs"
+  },
+  {
+   "slug": "united-states-vs-turkiye",
+   "reason": "no market probs"
+  },
+  {
+   "slug": "paraguay-vs-australia",
+   "reason": "no market probs"
+  },
+  {
+   "slug": "cura-ao-vs-ivory-coast",
+   "reason": "no market probs"
+  },
+  {
+   "slug": "ecuador-vs-germany",
+   "reason": "no market probs"
+  },
+  {
+   "slug": "japan-vs-sweden",
+   "reason": "no market probs"
+  },
+  {
+   "slug": "tunisia-vs-netherlands",
+   "reason": "no market probs"
+  },
+  {
+   "slug": "egypt-vs-iran",
+   "reason": "no market probs"
+  },
+  {
+   "slug": "new-zealand-vs-belgium",
+   "reason": "no market probs"
+  },
+  {
+   "slug": "cape-verde-vs-saudi-arabia",
+   "reason": "no market probs"
+  },
+  {
+   "slug": "uruguay-vs-spain",
+   "reason": "no market probs"
+  },
+  {
+   "slug": "norway-vs-france",
+   "reason": "no market probs"
+  },
+  {
+   "slug": "senegal-vs-iraq",
+   "reason": "no market probs"
+  },
+  {
+   "slug": "algeria-vs-austria",
+   "reason": "no market probs"
+  },
+  {
+   "slug": "jordan-vs-argentina",
+   "reason": "no market probs"
+  },
+  {
+   "slug": "colombia-vs-portugal",
+   "reason": "no market probs"
+  },
+  {
+   "slug": "dr-congo-vs-uzbekistan",
+   "reason": "no market probs"
+  },
+  {
+   "slug": "panama-vs-england",
+   "reason": "no market probs"
+  },
+  {
+   "slug": "croatia-vs-ghana",
+   "reason": "no market probs"
+  }
+ ],
+ "grid": [
+  {
+   "lambda": 0,
+   "brier": 0.6152,
+   "rps": 0.2626
+  },
+  {
+   "lambda": 0.25,
+   "brier": 0.5616,
+   "rps": 0.2363
+  },
+  {
+   "lambda": 0.5,
+   "brier": 0.5111,
+   "rps": 0.2115
+  },
+  {
+   "lambda": 0.75,
+   "brier": 0.4635,
+   "rps": 0.1882
+  },
+  {
+   "lambda": 1,
+   "brier": 0.419,
+   "rps": 0.1664
+  }
+ ],
+ "model": {
+  "brier": 0.6152,
+  "rps": 0.2626
+ },
+ "market": {
+  "brier": 0.419,
+  "rps": 0.1664
+ },
+ "candidateLambda": 0.5,
+ "verdict": "HOLD"
+}
