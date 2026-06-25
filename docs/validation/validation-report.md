@@ -1,6 +1,6 @@
 # Tournament-Holdout Validation Report
 
-_Generated 2026-06-24T16:48:08.098Z. Do not edit by hand — produced by `npm run ml:validate`._
+_Generated 2026-06-25T01:58:40.126Z. Do not edit by hand — produced by `npm run ml:validate`._
 
 ## What this measures
 
@@ -26,6 +26,7 @@ calibrated. This is the rule that correctly rejects small-sample "wins" within v
 | baseline (raw model) | 0.5769 | [0.5631, 0.591] | 0.0078 |
 | platt-calibrated | 0.5768 | [0.5637, 0.59] | 0.0086 |
 | regime | 0.5775 | [0.5639, 0.5913] | 0.0043 |
+| stage-aware | 0.5774 | [0.5638, 0.5911] | 0.0043 |
 
 **ΔBrier (baseline − platt-calibrated):** mean 0.0001,
 95% CI [-0.0008, 0.0011].
@@ -43,6 +44,18 @@ calibrated. This is the rule that correctly rejects small-sample "wins" within v
 
 - **primary:** HOLD — ΔBrier 95% CI [-0.0014, 0.0001] straddles 0 (not significant)
 - **secondary:** HOLD — draw-gap reduction 0.0pp < 5pp
+
+## Stage-aware draw-rate calibration
+
+| stage | baseline draw-gap | stage-aware draw-gap |
+| --- | --- | --- |
+| group | 0.0231 | 0.018 |
+| knockout | 0.0203 | 0.0083 |
+
+Fallback tiers: stage 1712, pooled 112, baseline 413.
+
+- **stage-aware primary:** HOLD — ΔBrier 95% CI [-0.0016, 0.0005] straddles 0 (not significant)
+- **stage-aware secondary:** HOLD — draw-gap reduction 0.0pp < 5pp
 
 ## Reliability — platt-calibrated (per-outcome)
 

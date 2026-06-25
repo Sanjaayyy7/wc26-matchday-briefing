@@ -98,3 +98,16 @@ export function deriveEditionStages(matches: EditionMatch[]): EditionResult {
   }
   return { labels, resolved: true };
 }
+
+export type StageLabelRow = { date: string; home: string; away: string; tournament: string; stage: StageLabel };
+
+/** Stable join key for a single match. */
+export const stageKey = (date: string, home: string, away: string, tournament: string): string =>
+  `${date}|${home}|${away}|${tournament}`;
+
+/** Index stage labels (e.g. data/stage-labels.json `labels`) for O(1) per-match lookup. */
+export function indexStageLabels(labels: StageLabelRow[]): Map<string, StageLabel> {
+  const m = new Map<string, StageLabel>();
+  for (const l of labels) m.set(stageKey(l.date, l.home, l.away, l.tournament), l.stage);
+  return m;
+}

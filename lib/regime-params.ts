@@ -10,13 +10,8 @@ export type LikRow = { diff: number; hs: number; as: number };
 
 const BIN = 0.125;
 
-/** Binned log-mean regression of goals on (own−opp Elo)/400. `minBinCount`
- *  drops sparse bins; the global trainer uses 200, regime fits use a lower value
- *  because the tournament-only sample is smaller. */
-export function fitBaseAndSlope(
-  samples: GoalSample[],
-  minBinCount = 200,
-): { baseLogGoals: number; eloSlope: number } {
+/** Binned log-mean (x, y=log mean goals) points, dropping bins below minBinCount. */
+function binnedLogMeans(samples: GoalSample[], minBinCount: number): Array<{ x: number; y: number }> {
   const bins = new Map<number, { sum: number; n: number }>();
   for (const s of samples) {
     const b = Math.max(-1.5, Math.min(1.5, Math.round(s.x / BIN) * BIN));
@@ -25,9 +20,19 @@ export function fitBaseAndSlope(
     e.n += 1;
     bins.set(b, e);
   }
-  const pts = [...bins.entries()]
+  return [...bins.entries()]
     .filter(([, e]) => e.n >= minBinCount)
     .map(([x, e]) => ({ x, y: Math.log(Math.max(e.sum / e.n, 0.05)) }));
+}
+
+/** Binned log-mean regression of goals on (own−opp Elo)/400. `minBinCount`
+ *  drops sparse bins; the global trainer uses 200, regime fits use a lower value
+ *  because the tournament-only sample is smaller. */
+export function fitBaseAndSlope(
+  samples: GoalSample[],
+  minBinCount = 200,
+): { baseLogGoals: number; eloSlope: number } {
+  const pts = binnedLogMeans(samples, minBinCount);
   const n = pts.length;
   if (n < 2) throw new Error(`fitBaseAndSlope: too few populated bins (${n}); lower minBinCount or supply more samples`);
   const sx = pts.reduce((a, p) => a + p.x, 0);
@@ -65,6 +70,22 @@ export function fitRegimeParams(
   const { baseLogGoals, eloSlope } = fitBaseAndSlope(samples, minBinCount);
   const rho = fitRho(likRows, baseLogGoals, eloSlope);
   return { baseLogGoals, eloSlope, rho };
+}
+
+/** Fit a stage-specific {baseLogGoals, rho} holding eloSlope fixed at `sharedSlope`.
+ *  With the slope pinned, the least-squares intercept is mean(y − slope·x) over the
+ *  populated bins; rho is the usual 1-D grid search under that base/slope. */
+export function fitStageParams(
+  samples: GoalSample[],
+  likRows: LikRow[],
+  sharedSlope: number,
+  minBinCount = 200,
+): ModelParams {
+  const pts = binnedLogMeans(samples, minBinCount);
+  if (pts.length < 1) throw new Error(`fitStageParams: no populated bins; lower minBinCount or supply more samples`);
+  const baseLogGoals = pts.reduce((a, p) => a + (p.y - sharedSlope * p.x), 0) / pts.length;
+  const rho = fitRho(likRows, baseLogGoals, sharedSlope);
+  return { baseLogGoals, eloSlope: sharedSlope, rho };
 }
 
 /** |mean predicted P(draw) − observed draw frequency| over a set of scored matches. */

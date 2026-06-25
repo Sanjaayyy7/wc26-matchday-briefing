@@ -37,6 +37,15 @@ import {
   ECE_MAX,
 } from "../lib/validation";
 import { fitRegimeParams, drawRateGap, type GoalSample, type LikRow } from "../lib/regime-params";
+import {
+  fitStageParamsByStage,
+  selectStageParams,
+  type StageSample,
+  type StageLik,
+  type StageFits,
+  type FallbackTier,
+} from "../lib/stage-regime";
+import { indexStageLabels, stageKey, type StageLabelRow } from "../lib/stage-derivation";
 import { appDir } from "./shared.mts";
 
 const EVAL_FROM = "1990-01-01"; // modern era: mature Elo, plentiful prior calibration data
@@ -146,6 +155,23 @@ async function main() {
   const baseDraw: Array<{ pDraw: number; isDraw: boolean }> = [];
   const regimeDraw: Array<{ pDraw: number; isDraw: boolean }> = [];
   const MIN_REGIME_SAMPLES = 400;
+  const MIN_STAGE_SAMPLES = 150;
+
+  const stageLabels = JSON.parse(
+    readFileSync(path.join(appDir, "data", "stage-labels.json"), "utf8"),
+  ) as { labels: StageLabelRow[] };
+  const stageIndex = indexStageLabels(stageLabels.labels);
+  const stageOf = (row: Row) => stageIndex.get(stageKey(row.date, row.home, row.away, row.tournament));
+  const stageSamplesAll: StageSample[] = [];
+  const stageLikAll: StageLik[] = [];
+  const stageFitCache = new Map<string, StageFits>();
+  const stageAware = newCollector();
+  const stageAwareDraw: Array<{ pDraw: number; isDraw: boolean }> = [];
+  const tierCounts: Record<FallbackTier, number> = { stage: 0, pooled: 0, baseline: 0 };
+  const stageDraw = {
+    group: { baseline: [] as Array<{ pDraw: number; isDraw: boolean }>, stageAware: [] as Array<{ pDraw: number; isDraw: boolean }> },
+    knockout: { baseline: [] as Array<{ pDraw: number; isDraw: boolean }>, stageAware: [] as Array<{ pDraw: number; isDraw: boolean }> },
+  };
 
   for (const row of rows) {
     const eloH = get(row.home);
@@ -182,6 +208,24 @@ async function main() {
       record(regime, rgSplit, o);
       baseDraw.push({ pDraw: rs.draw, isDraw: o === "draw" });
       regimeDraw.push({ pDraw: rgSplit.draw, isDraw: o === "draw" });
+
+      // Stage-aware: per-instance cached stage fits sharing the pooled regime slope.
+      let stageFits = stageFitCache.get(key);
+      if (stageFits === undefined) {
+        const sharedSlope = regimeParams ? regimeParams.eloSlope : null;
+        stageFits = fitStageParamsByStage(stageSamplesAll, stageLikAll, row.date, sharedSlope, MIN_STAGE_SAMPLES);
+        stageFitCache.set(key, stageFits);
+      }
+      const stage = stageOf(row);
+      const sel = selectStageParams(stage, stageFits, regimeParams, params);
+      tierCounts[sel.tier] += 1;
+      const saSplit = rawSplit(sel.params, eloH, eloA, row);
+      record(stageAware, saSplit, o);
+      stageAwareDraw.push({ pDraw: saSplit.draw, isDraw: o === "draw" });
+      if (stage === "group" || stage === "knockout") {
+        stageDraw[stage].baseline.push({ pDraw: rs.draw, isDraw: o === "draw" });
+        stageDraw[stage].stageAware.push({ pDraw: saSplit.draw, isDraw: o === "draw" });
+      }
     }
 
     // Accumulate this match's pairs AFTER scoring it (never calibrates itself).
@@ -195,6 +239,13 @@ async function main() {
       regimeSamplesAll.push({ s: { x: diff, goals: row.hs }, date: row.date });
       regimeSamplesAll.push({ s: { x: -diff, goals: row.as }, date: row.date });
       if (row.hs < 9 && row.as < 9) regimeLikAll.push({ l: { diff, hs: row.hs, as: row.as }, date: row.date });
+
+      const stg = stageOf(row);
+      if (stg === "group" || stg === "knockout") {
+        stageSamplesAll.push({ x: diff, goals: row.hs, date: row.date, stage: stg });
+        stageSamplesAll.push({ x: -diff, goals: row.as, date: row.date, stage: stg });
+        if (row.hs < 9 && row.as < 9) stageLikAll.push({ diff, hs: row.hs, as: row.as, date: row.date, stage: stg });
+      }
     }
 
     const u = updateElo({
@@ -214,6 +265,25 @@ async function main() {
   const regimeM = metricsOf(regime);
   const baselineDrawGap = drawRateGap(baseDraw);
   const regimeDrawGap = drawRateGap(regimeDraw);
+
+  const stageAwareM = metricsOf(stageAware);
+  const stageAwareDrawGap = drawRateGap(stageAwareDraw);
+  const stageDrawGaps = {
+    group: { baseline: r4(drawRateGap(stageDraw.group.baseline)), stageAware: r4(drawRateGap(stageDraw.group.stageAware)) },
+    knockout: { baseline: r4(drawRateGap(stageDraw.knockout.baseline)), stageAware: r4(drawRateGap(stageDraw.knockout.stageAware)) },
+  };
+
+  const stagePrimary = promotionVerdict(base.brierByMatch, stageAware.brierByMatch, stageAwareM.ece, {
+    n: BOOTSTRAP_N,
+    seed: SEED,
+  });
+  const stageSecondary = calibrationWinVerdict(base.brierByMatch, stageAware.brierByMatch, {
+    baselineDrawGap,
+    challengerDrawGap: stageAwareDrawGap,
+    challengerEce: stageAwareM.ece,
+    n: BOOTSTRAP_N,
+    seed: SEED,
+  });
 
   // Incumbent = raw model; challenger = Platt-calibrated. ΔBrier>0 ⇒ Platt better.
   const verdict = promotionVerdict(base.brierByMatch, platt.brierByMatch, plattM.ece, {
@@ -256,6 +326,7 @@ async function main() {
       baseline: serializeVariant(baseM),
       "platt-calibrated": serializeVariant(plattM),
       regime: serializeVariant(regimeM),
+      "stage-aware": serializeVariant(stageAwareM),
     },
     drawGap: { baseline: r4(baselineDrawGap), regime: r4(regimeDrawGap) },
     promotion: {
@@ -283,6 +354,26 @@ async function main() {
         reason: secondaryRegime.reason,
       },
     },
+    stageDrawGap: stageDrawGaps,
+    fallbackCounts: tierCounts,
+    stageAwarePromotion: {
+      incumbent: "baseline",
+      challenger: "stage-aware",
+      note: "report-only; not wired to --promote (predict.ts uses single params)",
+      primary: {
+        ship: stagePrimary.ship,
+        deltaBrierCI: { mean: r4(stagePrimary.deltaBrierCI.mean), lo: r4(stagePrimary.deltaBrierCI.lo), hi: r4(stagePrimary.deltaBrierCI.hi) },
+        eceOk: stagePrimary.eceOk,
+        reason: stagePrimary.reason,
+      },
+      secondary: {
+        ship: stageSecondary.ship,
+        nonInferior: stageSecondary.nonInferior,
+        drawGapReduced: stageSecondary.drawGapReduced,
+        eceOk: stageSecondary.eceOk,
+        reason: stageSecondary.reason,
+      },
+    },
   };
 
   const dir = path.join(appDir, "docs", "validation");
@@ -308,6 +399,16 @@ async function main() {
   console.log(`[validate] draw-gap  baseline=${r4(baselineDrawGap).toFixed(4)}  regime=${r4(regimeDrawGap).toFixed(4)}`);
   const ruleFired = primaryRegime.ship ? "primary" : secondaryRegime.ship ? "secondary" : null;
   console.log(`[validate] regime rule: ${ruleFired ?? "none fired (HOLD)"}. Re-run with --promote to ship.`);
+  console.log(
+    `[validate] stage-aware Brier=${r4(stageAwareM.brier).toFixed(4)}  ` +
+      `draw-gap group ${stageDrawGaps.group.baseline}->${stageDrawGaps.group.stageAware}  ` +
+      `knockout ${stageDrawGaps.knockout.baseline}->${stageDrawGaps.knockout.stageAware}`,
+  );
+  const stageRule = stagePrimary.ship ? "primary" : stageSecondary.ship ? "secondary" : null;
+  console.log(
+    `[validate] stage-aware rule: ${stageRule ?? "none fired (HOLD)"} ` +
+      `| fallback stage=${tierCounts.stage} pooled=${tierCounts.pooled} baseline=${tierCounts.baseline} (report-only)`,
+  );
   console.log(`[validate] wrote ${path.join(dir, "tournament-validation.json")} + validation-report.md`);
 
   if (process.argv.includes("--promote")) {
@@ -360,7 +461,7 @@ type Out = {
     promotionRule: string;
   };
   holdout: { n: number; byTournament: Record<string, number> };
-  variants: { baseline: SerializedVariant; "platt-calibrated": SerializedVariant; regime: SerializedVariant };
+  variants: { baseline: SerializedVariant; "platt-calibrated": SerializedVariant; regime: SerializedVariant; "stage-aware": SerializedVariant };
   drawGap: { baseline: number; regime: number };
   promotion: {
     incumbent: string;
@@ -373,6 +474,18 @@ type Out = {
   regimePromotion: {
     incumbent: string;
     challenger: string;
+    primary: { ship: boolean; deltaBrierCI: { mean: number; lo: number; hi: number }; eceOk: boolean; reason: string };
+    secondary: { ship: boolean; nonInferior: boolean; drawGapReduced: boolean; eceOk: boolean; reason: string };
+  };
+  stageDrawGap: {
+    group: { baseline: number; stageAware: number };
+    knockout: { baseline: number; stageAware: number };
+  };
+  fallbackCounts: Record<FallbackTier, number>;
+  stageAwarePromotion: {
+    incumbent: string;
+    challenger: string;
+    note: string;
     primary: { ship: boolean; deltaBrierCI: { mean: number; lo: number; hi: number }; eceOk: boolean; reason: string };
     secondary: { ship: boolean; nonInferior: boolean; drawGapReduced: boolean; eceOk: boolean; reason: string };
   };
@@ -418,6 +531,7 @@ calibrated. This is the rule that correctly rejects small-sample "wins" within v
 | baseline (raw model) | ${v.baseline.brier} | [${v.baseline.brierCI.lo}, ${v.baseline.brierCI.hi}] | ${v.baseline.ece} |
 | platt-calibrated | ${v["platt-calibrated"].brier} | [${v["platt-calibrated"].brierCI.lo}, ${v["platt-calibrated"].brierCI.hi}] | ${v["platt-calibrated"].ece} |
 | regime | ${v.regime.brier} | [${v.regime.brierCI.lo}, ${v.regime.brierCI.hi}] | ${v.regime.ece} |
+| stage-aware | ${v["stage-aware"].brier} | [${v["stage-aware"].brierCI.lo}, ${v["stage-aware"].brierCI.hi}] | ${v["stage-aware"].ece} |
 
 **ΔBrier (baseline − platt-calibrated):** mean ${out.promotion.deltaBrierCI.mean},
 95% CI [${out.promotion.deltaBrierCI.lo}, ${out.promotion.deltaBrierCI.hi}].
@@ -435,6 +549,18 @@ calibrated. This is the rule that correctly rejects small-sample "wins" within v
 
 - **primary:** ${out.regimePromotion.primary.reason}
 - **secondary:** ${out.regimePromotion.secondary.reason}
+
+## Stage-aware draw-rate calibration
+
+| stage | baseline draw-gap | stage-aware draw-gap |
+| --- | --- | --- |
+| group | ${out.stageDrawGap.group.baseline} | ${out.stageDrawGap.group.stageAware} |
+| knockout | ${out.stageDrawGap.knockout.baseline} | ${out.stageDrawGap.knockout.stageAware} |
+
+Fallback tiers: stage ${out.fallbackCounts.stage}, pooled ${out.fallbackCounts.pooled}, baseline ${out.fallbackCounts.baseline}.
+
+- **stage-aware primary:** ${out.stageAwarePromotion.primary.reason}
+- **stage-aware secondary:** ${out.stageAwarePromotion.secondary.reason}
 
 ## Reliability — platt-calibrated (per-outcome)
 

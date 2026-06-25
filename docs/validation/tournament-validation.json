@@ -1,6 +1,6 @@
 {
   "config": {
-    "generatedAt": "2026-06-24T16:48:08.098Z",
+    "generatedAt": "2026-06-25T01:58:40.126Z",
     "evalFrom": "1990-01-01",
     "holdoutLabels": [
       "FIFA World Cup",
@@ -208,6 +208,67 @@
           "count": 22
         }
       ]
+    },
+    "stage-aware": {
+      "brier": 0.5774,
+      "brierCI": {
+        "lo": 0.5638,
+        "hi": 0.5911
+      },
+      "ece": 0.0043,
+      "n": 2237,
+      "reliability": [
+        {
+          "meanPredicted": 0.0647,
+          "realized": 0.0662,
+          "count": 317
+        },
+        {
+          "meanPredicted": 0.1571,
+          "realized": 0.1594,
+          "count": 966
+        },
+        {
+          "meanPredicted": 0.2603,
+          "realized": 0.259,
+          "count": 2676
+        },
+        {
+          "meanPredicted": 0.3458,
+          "realized": 0.3425,
+          "count": 873
+        },
+        {
+          "meanPredicted": 0.4496,
+          "realized": 0.4535,
+          "count": 677
+        },
+        {
+          "meanPredicted": 0.5463,
+          "realized": 0.5503,
+          "count": 547
+        },
+        {
+          "meanPredicted": 0.6437,
+          "realized": 0.663,
+          "count": 362
+        },
+        {
+          "meanPredicted": 0.743,
+          "realized": 0.7196,
+          "count": 189
+        },
+        {
+          "meanPredicted": 0.8434,
+          "realized": 0.8415,
+          "count": 82
+        },
+        {
+          "meanPredicted": 0.9292,
+          "realized": 0.7727,
+          "count": 22
+        }
+      ]
     }
   },
   "drawGap": {
@@ -238,6 +299,43 @@
       },
       "eceOk": true,
       "reason": "HOLD — ΔBrier 95% CI [-0.0014, 0.0001] straddles 0 (not significant)"
+    },
+    "secondary": {
+      "ship": false,
+      "nonInferior": true,
+      "drawGapReduced": false,
+      "eceOk": true,
+      "reason": "HOLD — draw-gap reduction 0.0pp < 5pp"
+    }
+  },
+  "stageDrawGap": {
+    "group": {
+      "baseline": 0.0231,
+      "stageAware": 0.018
+    },
+    "knockout": {
+      "baseline": 0.0203,
+      "stageAware": 0.0083
+    }
+  },
+  "fallbackCounts": {
+    "stage": 1712,
+    "pooled": 112,
+    "baseline": 413
+  },
+  "stageAwarePromotion": {
+    "incumbent": "baseline",
+    "challenger": "stage-aware",
+    "note": "report-only; not wired to --promote (predict.ts uses single params)",
+    "primary": {
+      "ship": false,
+      "deltaBrierCI": {
+        "mean": -0.0006,
+        "lo": -0.0016,
+        "hi": 0.0005
+      },
+      "eceOk": true,
+      "reason": "HOLD — ΔBrier 95% CI [-0.0016, 0.0005] straddles 0 (not significant)"
     },
     "secondary": {
       "ship": false,
