@@ -67,6 +67,17 @@ export function DateNav({ groups, selected, onSelect, className }: DateNavProps)
   }).replace(/(\d+)\/(\d+)\/(\d+)/, "$3-$1-$2");
   const todayIdx = groups.findIndex((g) => g.dateISO === todayISO);
 
+  // Bring the selected day-tab into view on mount and whenever it changes, so
+  // the active day (default: Today) is never stranded off-screen in the
+  // horizontally-scrollable bar. `block: "nearest"` avoids any vertical page jump.
+  React.useEffect(() => {
+    tabRefs.current[selected]?.scrollIntoView({
+      inline: "center",
+      block: "nearest",
+      behavior: "auto",
+    });
+  }, [selected]);
+
   function handleKeyDown(e: React.KeyboardEvent<HTMLDivElement>) {
     const handled =
       e.key === "ArrowRight" ||
