@@ -515,6 +515,15 @@
   color: var(--ink);
 }
 
+@utility hero-glow {
+  background: radial-gradient(
+    ellipse 80% 60% at 50% 0%,
+    color-mix(in oklab, var(--accent) 12%, transparent),
+    transparent
+  );
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 30%, transparent 70%);
+}
+
 @utility signal-sheen {
   background:
     linear-gradient(115deg, color-mix(in oklab, var(--signal-1) 8%, transparent), transparent 34%),
