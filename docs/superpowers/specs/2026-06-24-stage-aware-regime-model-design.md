@@ -117,8 +117,15 @@ Challenger = `stage-aware`, incumbent = `baseline`:
   third ship rule on it would be overfitting the decision procedure (YAGNI). It informs the next
   phase; it does not flip `model.json`.
 
-`model.json.promotion.shipped` flips to `true` only if a rule fires (via existing `--promote`
-path). `predict.ts` is untouched regardless.
+**Stage-aware is report-only this phase — it is NOT wired into `--promote`.** A stage-aware model
+scores each match with the params for *its* stage, so adopting it live would require `predict.ts`
+to look up a match's stage and hold per-stage params — a change explicitly out of scope here
+(`predict.ts` stays untouched). The existing `--promote` path (which writes a single param set for
+the `regime` variant) is therefore left exactly as Phase 1 shipped it; it is not extended to
+stage-aware, because a single-param `model.json` cannot represent a per-stage model. If a
+stage-aware rule fires, that is a printed green-light recommending a follow-up *adoption* phase
+(predict.ts + `model.json` schema change) — never a silent `model.json` flip. Given the Phase 1/2
+priors, HOLD is the expected outcome regardless.
 
 ## Constants (pre-registered)
 
@@ -151,7 +158,8 @@ Read-only on `data/raw/results.csv` and `data/stage-labels.json`. **Never** run
 1. `npm run ml:validate` emits the `stage-aware` variant with Brier + 95% CI + ECE, per-stage
    draw-gaps (group + knockout), and fallback-tier counts.
 2. Walk-forward leakage-free, proven by test.
-3. Pre-registered verdict printed; `model.json` unchanged unless a rule fires.
+3. Pre-registered stage-aware verdict printed (primary + secondary); `model.json` unchanged by this
+   phase — stage-aware is report-only and not wired to `--promote`.
 4. All commit gates green: `npm test`, `npm run lint` (0 errors), `design:inspect`,
    `inspect:execution`, `model:inspect`, `npm run build`.
 
