@@ -25,7 +25,7 @@ const BAD_MOTION_RE = /y:\s*8|stiffness:\s*300|damping:\s*30/;
 // Comment lines (// …) are skipped at the call site so "shadow-" in a comment
 // never false-positives here.
 const BAD_ELEVATION_RE =
-  /\bboxShadow\b|\bbg-(?:white|black|gray|slate|zinc)-?\b|(?<!hover:)\bshadow-(?!\[var\(--shadow-(?:hover|pop)\)\])/;
+  /\bboxShadow\b|\bbg-(?:white|black|gray|slate|zinc)-?\b|(?<!--)(?<!hover:)\bshadow-(?!\[var\(--shadow-(?:hover|pop)\)\])/;
 // Radius-token: route pages must use rounded-[var(--radius-card)] for large radii.
 const RADIUS_TOKEN_RE = /\brounded-(?:2xl|3xl|4xl)\b/;
 const NUMERIC_TEXT_RE = /\b(?:score|pct|prob|rating|elo|brier|rps|count|total|goals|locks|odds)\b/i;

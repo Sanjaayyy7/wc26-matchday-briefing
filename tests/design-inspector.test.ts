@@ -89,6 +89,47 @@ describe("design-inspector (Linear constitution)", () => {
     }
   });
 
+  it("does NOT flag shadow-[var(--shadow-pop)] as elevation on a route page", () => {
+    const root = makeFixtureDir();
+    try {
+      writeFixturePage(
+        root,
+        "test-shadow-pop",
+        `export default function Page() {
+  return (
+    <WCS26Shell>
+      <RouteStack>
+        <CanvasSection eyebrow="Test">
+          <div className="shadow-[var(--shadow-pop)]">content</div>
+        </CanvasSection>
+      </RouteStack>
+    </WCS26Shell>
+  );
+}`,
+      );
+      const violations = inspectProject(root);
+      const elevationViolations = violations.filter((v) => v.rule === "elevation");
+      expect(elevationViolations).toHaveLength(0);
+    } finally {
+      rmSync(root, { recursive: true, force: true });
+    }
+  });
+
+  it("still flags shadow-lg as elevation (detection not disabled)", () => {
+    const root = makeFixtureDir();
+    try {
+      writeFixtureLib(
+        root,
+        "test-shadow-lg.ts",
+        `export const cardClass = "shadow-lg";`,
+      );
+      const violations = inspectProject(root);
+      expect(violations.some((v) => v.rule === "elevation")).toBe(true);
+    } finally {
+      rmSync(root, { recursive: true, force: true });
+    }
+  });
+
   it("does NOT false-positive on shadow- inside a // comment", () => {
     const root = makeFixtureDir();
     try {
