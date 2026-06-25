@@ -19,6 +19,7 @@
     "ml:eval": "tsx scripts/eval-model.mts",
     "ml:validate": "tsx scripts/validate-model.mts",
     "ml:market-shadow": "tsx scripts/market-shadow.mts",
+    "ml:stage-labels": "tsx scripts/derive-stage-labels.mts",
     "ml:cycle": "npm run ml:fetch && npm run ml:train && npm run ml:eval && npm run ml:backtest",
     "pipeline:fetch": "tsx scripts/fetch-kalshi.mts",
     "pipeline:run": "tsx scripts/run-briefing.mts",
