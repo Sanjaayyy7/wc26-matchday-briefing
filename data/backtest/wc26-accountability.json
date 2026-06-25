@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-23T23:52:52.943Z",
+  "generatedAt": "2026-06-25T18:00:13.019Z",
   "official": {
     "rows": [
       {
@@ -784,16 +784,206 @@
           "bttsDerivedPostHoc": true
         },
         "verdict": "hit"
+      },
+      {
+        "slug": "portugal-vs-uzbekistan",
+        "locked": {
+          "home": 65,
+          "draw": 22,
+          "away": 13
+        },
+        "actual": "5-0",
+        "grades": {
+          "modelBrier": 0.1878,
+          "modelRps": 0.0697,
+          "scorelineHit": false,
+          "top3ScorelineHit": false,
+          "correctPick": true,
+          "bttsBrier": 0.1948345436782259,
+          "bttsDerivedPostHoc": true
+        },
+        "verdict": "hit"
+      },
+      {
+        "slug": "colombia-vs-dr-congo",
+        "locked": {
+          "home": 73,
+          "draw": 18,
+          "away": 9
+        },
+        "actual": "1-0",
+        "grades": {
+          "modelBrier": 0.1134,
+          "modelRps": 0.04050000000000001,
+          "scorelineHit": false,
+          "top3ScorelineHit": true,
+          "correctPick": true,
+          "bttsBrier": 0.17362190609830555,
+          "bttsDerivedPostHoc": true
+        },
+        "verdict": "hit"
+      },
+      {
+        "slug": "england-vs-ghana",
+        "locked": {
+          "home": 88,
+          "draw": 9,
+          "away": 3
+        },
+        "actual": "0-0",
+        "grades": {
+          "modelBrier": 1.6034,
+          "modelRps": 0.38765,
+          "scorelineHit": false,
+          "top3ScorelineHit": false,
+          "correctPick": false,
+          "bttsBrier": 0.12309613229449656,
+          "bttsDerivedPostHoc": true
+        },
+        "verdict": "miss"
+      },
+      {
+        "slug": "panama-vs-croatia",
+        "locked": {
+          "home": 21,
+          "draw": 27,
+          "away": 52
+        },
+        "actual": "0-1",
+        "grades": {
+          "modelBrier": 0.3474,
+          "modelRps": 0.13724999999999998,
+          "scorelineHit": true,
+          "top3ScorelineHit": true,
+          "correctPick": true,
+          "bttsBrier": 0.21602828330787335,
+          "bttsDerivedPostHoc": true
+        },
+        "verdict": "nailed"
+      },
+      {
+        "slug": "mexico-vs-czech-republic",
+        "locked": {
+          "home": 73,
+          "draw": 18,
+          "away": 9
+        },
+        "actual": "3-0",
+        "grades": {
+          "modelBrier": 0.1134,
+          "modelRps": 0.04050000000000001,
+          "scorelineHit": false,
+          "top3ScorelineHit": true,
+          "correctPick": true,
+          "bttsBrier": 0.16378535813514258,
+          "bttsDerivedPostHoc": true
+        },
+        "verdict": "hit"
+      },
+      {
+        "slug": "south-africa-vs-south-korea",
+        "locked": {
+          "home": 11,
+          "draw": 21,
+          "away": 68
+        },
+        "actual": "1-0",
+        "grades": {
+          "modelBrier": 1.2986000000000002,
+          "modelRps": 0.62725,
+          "scorelineHit": false,
+          "top3ScorelineHit": false,
+          "correctPick": false,
+          "bttsBrier": 0.1945396136922555,
+          "bttsDerivedPostHoc": true
+        },
+        "verdict": "miss"
+      },
+      {
+        "slug": "canada-vs-switzerland",
+        "locked": {
+          "home": 42,
+          "draw": 29,
+          "away": 29
+        },
+        "actual": "1-2",
+        "grades": {
+          "modelBrier": 0.7646,
+          "modelRps": 0.34025,
+          "scorelineHit": false,
+          "top3ScorelineHit": false,
+          "correctPick": false,
+          "bttsBrier": 0.2705679199529523,
+          "bttsDerivedPostHoc": true
+        },
+        "verdict": "close"
+      },
+      {
+        "slug": "bosnia-herzegovina-vs-qatar",
+        "locked": {
+          "home": 46,
+          "draw": 28,
+          "away": 26
+        },
+        "actual": "3-1",
+        "grades": {
+          "modelBrier": 0.43760000000000004,
+          "modelRps": 0.1796,
+          "scorelineHit": false,
+          "top3ScorelineHit": false,
+          "correctPick": true,
+          "bttsBrier": 0.27408773205984716,
+          "bttsDerivedPostHoc": true
+        },
+        "verdict": "hit"
+      },
+      {
+        "slug": "scotland-vs-brazil",
+        "locked": {
+          "home": 13,
+          "draw": 23,
+          "away": 64
+        },
+        "actual": "0-3",
+        "grades": {
+          "modelBrier": 0.1994,
+          "modelRps": 0.07325,
+          "scorelineHit": false,
+          "top3ScorelineHit": false,
+          "correctPick": true,
+          "bttsBrier": 0.19571457115102228,
+          "bttsDerivedPostHoc": true
+        },
+        "verdict": "hit"
+      },
+      {
+        "slug": "morocco-vs-haiti",
+        "locked": {
+          "home": 70,
+          "draw": 20,
+          "away": 10
+        },
+        "actual": "4-2",
+        "grades": {
+          "modelBrier": 0.14000000000000004,
+          "modelRps": 0.050000000000000024,
+          "scorelineHit": false,
+          "top3ScorelineHit": false,
+          "correctPick": true,
+          "bttsBrier": 0.3569175309847478,
+          "bttsDerivedPostHoc": true
+        },
+        "verdict": "hit"
       }
     ],
     "aggregates": {
-      "n": 41,
-      "accuracy": 0.6097560975609756,
-      "meanBrier": 0.5797073170731708,
-      "meanRps": 0.17735975609756094,
-      "bttsAccuracy": 0.43902439024390244,
-      "scorelineHitRate": 0.12195121951219512,
-      "top3Rate": 0.2926829268292683,
+      "n": 51,
+      "accuracy": 0.6274509803921569,
+      "meanBrier": 0.5681098039215686,
+      "meanRps": 0.1807392156862745,
+      "bttsAccuracy": 0.49019607843137253,
+      "scorelineHitRate": 0.11764705882352941,
+      "top3Rate": 0.29411764705882354,
       "vsKalshi": {
         "n": 1,
         "modelBrier": 0.6152000000000001,
@@ -810,21 +1000,21 @@
     "calibrationBins": [
       {
         "midpoint": 0.05,
-        "predicted": 0.05666666666666668,
-        "observed": 0.06666666666666667,
-        "n": 15
+        "predicted": 0.060526315789473706,
+        "observed": 0.10526315789473684,
+        "n": 19
       },
       {
         "midpoint": 0.15,
-        "predicted": 0.14708333333333334,
-        "observed": 0.2916666666666667,
-        "n": 24
+        "predicted": 0.14533333333333334,
+        "observed": 0.26666666666666666,
+        "n": 30
       },
       {
         "midpoint": 0.25,
-        "predicted": 0.25540540540540535,
-        "observed": 0.1891891891891892,
-        "n": 37
+        "predicted": 0.25340425531914884,
+        "observed": 0.1702127659574468,
+        "n": 47
       },
       {
         "midpoint": 0.35,
@@ -834,33 +1024,33 @@
       },
       {
         "midpoint": 0.45,
-        "predicted": 0.43500000000000005,
-        "observed": 0.3333333333333333,
-        "n": 6
-      },
-      {
-        "midpoint": 0.55,
-        "predicted": 0.5311111111111111,
-        "observed": 0.6666666666666666,
-        "n": 9
-      },
-      {
-        "midpoint": 0.65,
-        "predicted": 0.6425,
-        "observed": 0.75,
+        "predicted": 0.43625,
+        "observed": 0.375,
         "n": 8
       },
       {
+        "midpoint": 0.55,
+        "predicted": 0.53,
+        "observed": 0.7,
+        "n": 10
+      },
+      {
+        "midpoint": 0.65,
+        "predicted": 0.6463636363636364,
+        "observed": 0.7272727272727273,
+        "n": 11
+      },
+      {
         "midpoint": 0.75,
-        "predicted": 0.7371428571428572,
-        "observed": 0.5714285714285714,
-        "n": 7
+        "predicted": 0.7320000000000001,
+        "observed": 0.7,
+        "n": 10
       },
       {
         "midpoint": 0.85,
-        "predicted": 0.8400000000000001,
-        "observed": 0.6,
-        "n": 5
+        "predicted": 0.8466666666666667,
+        "observed": 0.5,
+        "n": 6
       },
       {
         "midpoint": 0.95,
@@ -902,7 +1092,7 @@
     ]
   },
   "caveats": [
-    "Official graded record contains n=41 match(es). This is a very small sample — do not over-read the aggregate numbers.",
+    "Official graded record contains n=51 match(es). This is a very small sample — do not over-read the aggregate numbers.",
     "BTTS and over/under probabilities are derived post-hoc from the same model that generated the 1X2 split; they are NOT separately validated predictions.",
     "No pre-kickoff Polymarket books exist for played matches — vsPolymarket comparisons are deferred to the Phase C backtest.",
     "Kalshi market Brier shown is computed from the pre-kickoff locked book; market edge from a single match is noise.",

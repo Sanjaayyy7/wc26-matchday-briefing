@@ -851,7 +851,9 @@
     "group": "K",
     "tzOffsetMinutes": -300,
     "tzLabel": "CDT",
-    "neutral": true
+    "neutral": true,
+    "homeScore": 5,
+    "awayScore": 0
   },
   {
     "id": "col-cod-gk",
@@ -868,7 +870,9 @@
     "group": "K",
     "tzOffsetMinutes": -360,
     "tzLabel": "CST",
-    "neutral": true
+    "neutral": true,
+    "homeScore": 1,
+    "awayScore": 0
   },
   {
     "id": "eng-gha-gl",
@@ -885,7 +889,9 @@
     "group": "L",
     "tzOffsetMinutes": -240,
     "tzLabel": "EDT",
-    "neutral": true
+    "neutral": true,
+    "homeScore": 0,
+    "awayScore": 0
   },
   {
     "id": "pan-cro-gl",
@@ -902,7 +908,9 @@
     "group": "L",
     "tzOffsetMinutes": -240,
     "tzLabel": "EDT",
-    "neutral": true
+    "neutral": true,
+    "homeScore": 0,
+    "awayScore": 1
   },
   {
     "id": "mex-cze-ga",
@@ -919,7 +927,9 @@
     "group": "A",
     "tzOffsetMinutes": -360,
     "tzLabel": "CST",
-    "neutral": false
+    "neutral": false,
+    "homeScore": 3,
+    "awayScore": 0
   },
   {
     "id": "rsa-kor-ga",
@@ -936,7 +946,9 @@
     "group": "A",
     "tzOffsetMinutes": -360,
     "tzLabel": "CST",
-    "neutral": true
+    "neutral": true,
+    "homeScore": 1,
+    "awayScore": 0
   },
   {
     "id": "can-sui-gb",
@@ -953,7 +965,9 @@
     "group": "B",
     "tzOffsetMinutes": -420,
     "tzLabel": "PDT",
-    "neutral": false
+    "neutral": false,
+    "homeScore": 1,
+    "awayScore": 2
   },
   {
     "id": "bih-qat-gb",
@@ -970,7 +984,9 @@
     "group": "B",
     "tzOffsetMinutes": -420,
     "tzLabel": "PDT",
-    "neutral": true
+    "neutral": true,
+    "homeScore": 3,
+    "awayScore": 1
   },
   {
     "id": "sco-bra-gc",
@@ -987,7 +1003,9 @@
     "group": "C",
     "tzOffsetMinutes": -240,
     "tzLabel": "EDT",
-    "neutral": true
+    "neutral": true,
+    "homeScore": 0,
+    "awayScore": 3
   },
   {
     "id": "mar-hai-gc",
@@ -1004,7 +1022,9 @@
     "group": "C",
     "tzOffsetMinutes": -240,
     "tzLabel": "EDT",
-    "neutral": true
+    "neutral": true,
+    "homeScore": 4,
+    "awayScore": 2
   },
   {
     "id": "usa-tur-gd",
