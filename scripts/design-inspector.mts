@@ -20,9 +20,15 @@ const ARBITRARY_RE =
   /\b(?:text|p|m|mt|mb|ml|mr|mx|my|gap|rounded|border)-\[(?!clamp\()[^\]]*(?:px|rem|%|calc|vh|vw)[^\]]*\]/;
 const BAD_DURATION_RE = /\bduration-(?!300\b)\d+\b|duration:\s*(?!0\.3)\d*\.?\d+/;
 const BAD_MOTION_RE = /y:\s*8|stiffness:\s*300|damping:\s*30/;
-const BAD_ELEVATION_RE = /\bboxShadow\b|\bbg-(?:white|black|gray|slate|zinc)-?\b|(?<!hover:)\bshadow-(?!\[var\(--shadow-hover\)\])/;
+// Elevation: flag raw boxShadow, raw bg literals, and non-token shadow utilities.
+// --shadow-hover and --shadow-pop are the two allowed elevation tokens.
+// Comment lines (// …) are skipped at the call site so "shadow-" in a comment
+// never false-positives here.
+const BAD_ELEVATION_RE =
+  /\bboxShadow\b|\bbg-(?:white|black|gray|slate|zinc)-?\b|(?<!hover:)\bshadow-(?!\[var\(--shadow-(?:hover|pop)\)\])/;
+// Radius-token: route pages must use rounded-[var(--radius-card)] for large radii.
+const RADIUS_TOKEN_RE = /\brounded-(?:2xl|3xl|4xl)\b/;
 const NUMERIC_TEXT_RE = /\b(?:score|pct|prob|rating|elo|brier|rps|count|total|goals|locks|odds)\b/i;
-const ROUTE_BOX_RE = /<CommandPanel\b|<CinematicSection\b|<MarketTape\b|<FixtureSurface\b|<MatchMarketRow\b|rounded-(?:2xl|3xl)|bg-\[var\(--surface\)\]|MetricCard|FixtureCard|GroupCard/;
 const OLD_PRIMARY_PRIMITIVE_RE = /export function CommandPanel|export function CinematicSection|export function MarketTape|export function FixtureSurface|export function MatchMarketRow|export function DataRail/;
 const AD_HOC_ROUTE_SPACE_RE = /className=["'][^"']*\bspace-y-16\b|style=\{\{\s*animationDelay:/;
 const BACKGROUND_LINE_RE = /field-mesh|stadium-frame|hero-field|repeating-linear-gradient/;
@@ -121,14 +127,17 @@ export function inspectProject(root = ROOT): DesignViolation[] {
         "motion-pattern",
         "Entrance motion should use y: 4 with 0.3s timing; value springs are reserved for data animation.",
       );
+      // Scan line-by-line for elevation violations.
+      // Skip pure comment lines so "shadow-" in a // comment never false-positives.
       text.split("\n").forEach((line, idx) => {
-        if (line.includes("shadow-[var(--shadow-hover)]")) return;
+        if (line.trimStart().startsWith("//")) return;
         if (BAD_ELEVATION_RE.test(line)) {
           violations.push({
             file: rel,
             line: idx + 1,
             rule: "elevation",
-            message: "Use surface/elevated tokens and the single --shadow-hover token.",
+            message:
+              "Use surface/elevated tokens and the --shadow-hover or --shadow-pop token.",
           });
         }
       });
@@ -184,14 +193,16 @@ export function inspectProject(root = ROOT): DesignViolation[] {
           message: "Pages must use WCS26Shell; SiteHeader is no longer the primary shell.",
         });
       }
-      if (ROUTE_BOX_RE.test(text)) {
-        violations.push({
-          file: rel,
-          line: lineNumber(text, text.search(ROUTE_BOX_RE)),
-          rule: "no-box-layout",
-          message: "Primary route layout must use canvas primitives and line/data planes, not rounded containers or retired panel primitives.",
-        });
-      }
+      // Surface cards with rounded-[var(--radius-card)] are ALLOWED.
+      // Raw large radius utilities on route pages are NOT — use the token.
+      pushMatches(
+        violations,
+        rel,
+        text,
+        RADIUS_TOKEN_RE,
+        "radius-token",
+        "Route pages must use rounded-[var(--radius-card)] instead of raw large-radius utilities (rounded-2xl/3xl/4xl).",
+      );
       const sectionCount = (text.match(/<section\b/g) ?? []).length;
       const labelCount =
         (text.match(/<h2 className="text-label/g) ?? []).length +
@@ -227,7 +238,6 @@ export function inspectProject(root = ROOT): DesignViolation[] {
         }
       }
     }
-
 
     if (rel === "app/groups/page.tsx") {
       const dataPlaneCount = (text.match(/<DataPlane\b/g) ?? []).length;
