@@ -1,17 +1,29 @@
 import { Suspense } from "react";
 import { WCS26Shell } from "@/components/wc26-shell";
 import { CanvasSection, DataPlane, RouteStack, SignalLine } from "@/components/cinematic";
-import { MatchesFilter } from "@/components/matches-filter";
-import { allMatchRows } from "@/lib/match-rows";
+import { DateGroupedMatches } from "@/components/date-grouped-matches";
+import { allMatchViews, matchViewToRow } from "@/lib/match-view";
+import { groupByMatchday, defaultSelectedIndex } from "@/lib/match-day-groups";
 import knockouts from "@/data/knockouts.json";
 
 export const metadata = { title: "Matches — Matchday Briefing" };
 
 export default function MatchesPage() {
-  const rows = allMatchRows();
-  const settled = rows.filter((r) => r.status === "official").length;
-  const locked = rows.filter((r) => r.status === "locked").length;
-  const informational = rows.filter((r) => r.status === "informational").length;
+  const views = allMatchViews();
+
+  // Rail counts derived from views (same source of truth as grouping)
+  const settled = views.filter((v) => v.status === "official").length;
+  const locked = views.filter((v) => v.status === "locked").length;
+  const informational = views.filter((v) => v.status === "informational").length;
+
+  // Group by ET calendar date; serialize to plain MatchRowData for the client
+  const dayGroups = groupByMatchday(views);
+  const groups = dayGroups.map((g) => ({
+    dateISO: g.dateISO,
+    label: g.label,
+    rows: g.views.map(matchViewToRow),
+  }));
+  const defaultSelected = defaultSelectedIndex(dayGroups, new Date());
 
   return (
     <WCS26Shell
@@ -21,7 +33,7 @@ export default function MatchesPage() {
         <div className="flex flex-col gap-3">
           <SignalLine
             signals={[
-              { label: "Total", value: rows.length, detail: "all fixtures" },
+              { label: "Total", value: views.length, detail: "all fixtures" },
               { label: "Settled", value: settled, tone: "up", detail: "graded" },
               { label: "Locked", value: locked, tone: "warn", detail: "in-flight" },
               { label: "Informational", value: informational, detail: "pre-lock" },
@@ -37,7 +49,10 @@ export default function MatchesPage() {
         <CanvasSection eyebrow="Ledger" title="Every prediction, with its status.">
           <DataPlane>
             <Suspense fallback={<p className="text-caption">Loading predictions…</p>}>
-              <MatchesFilter rows={rows} />
+              <DateGroupedMatches
+                groups={groups}
+                defaultSelected={defaultSelected}
+              />
             </Suspense>
           </DataPlane>
         </CanvasSection>
