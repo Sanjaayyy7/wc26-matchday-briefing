@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import Link from "next/link";
 import { kitAccent } from "@/lib/kit-color";
+import { Surface } from "@/components/ui/surface";
 
 export type OddsRow = {
   id: string;
@@ -39,7 +40,7 @@ export function OddsTable({ rows }: { rows: OddsRow[] }) {
     x >= 0.995 ? "100%" : x < 0.001 ? "<0.1%" : `${(x * 100).toFixed(1)}%`;
 
   return (
-    <div className="min-w-0 max-w-full overflow-x-auto">
+    <Surface className="min-w-0 max-w-full overflow-x-auto">
       <table className="w-full min-w-160">
         <thead>
           <tr className="text-caption border-b border-[var(--hairline)] text-left">
@@ -49,10 +50,10 @@ export function OddsTable({ rows }: { rows: OddsRow[] }) {
               <th key={c.key} className="px-2 py-3 text-right font-normal">
                 <button
                   onClick={() => setSortKey(c.key)}
-                  className={`rounded px-1 transition-colors ${
+                  className={`rounded px-1 transition-colors duration-300 ${
                     sortKey === c.key
-                      ? "font-semibold text-[var(--ink)]"
-                      : "hover:text-[var(--ink)]"
+                      ? "font-semibold text-[var(--accent)]"
+                      : "hover:text-[var(--accent)]"
                   }`}
                 >
                   {c.label} {sortKey === c.key ? "↓" : ""}
@@ -66,7 +67,10 @@ export function OddsTable({ rows }: { rows: OddsRow[] }) {
             <tr key={r.id} className="border-b border-[var(--hairline)] last:border-0">
               <td className="text-caption tabular px-4 py-2.5">{i + 1}</td>
               <td className="px-2 py-2.5">
-                <Link href={`/team/${r.id}`} className="flex items-center gap-2 hover:underline">
+                <Link
+                  href={`/team/${r.id}`}
+                  className="flex items-center gap-2 transition-colors duration-300 hover:text-[var(--accent)]"
+                >
                   <span
                     className="h-2 w-2 rounded-full"
                     style={{ background: kitAccent(r.color, "up") }}
@@ -87,6 +91,6 @@ export function OddsTable({ rows }: { rows: OddsRow[] }) {
           ))}
         </tbody>
       </table>
-    </div>
+    </Surface>
   );
 }
