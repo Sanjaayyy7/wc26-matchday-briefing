@@ -1,6 +1,6 @@
 // tests/stage-derivation.test.ts
 import { describe, it, expect } from "vitest";
-import { deriveEditionStages, type EditionMatch } from "../lib/stage-derivation";
+import { deriveEditionStages, indexStageLabels, stageKey, type EditionMatch } from "../lib/stage-derivation";
 
 // Helper: build a match with a sequential idx.
 let _i = 0;
@@ -105,5 +105,21 @@ describe("deriveEditionStages", () => {
     const { resolved, reason } = deriveEditionStages(ms);
     expect(resolved).toBe(false);
     expect(reason).toBeTruthy();
+  });
+});
+
+describe("indexStageLabels", () => {
+  it("builds an exact lookup keyed by date|home|away|tournament", () => {
+    const idx = indexStageLabels([
+      { date: "2018-06-14", home: "Russia", away: "Saudi Arabia", tournament: "FIFA World Cup", stage: "group" },
+      { date: "2018-07-15", home: "France", away: "Croatia", tournament: "FIFA World Cup", stage: "knockout" },
+    ]);
+    expect(idx.get(stageKey("2018-06-14", "Russia", "Saudi Arabia", "FIFA World Cup"))).toBe("group");
+    expect(idx.get(stageKey("2018-07-15", "France", "Croatia", "FIFA World Cup"))).toBe("knockout");
+  });
+
+  it("returns undefined for an absent triple", () => {
+    const idx = indexStageLabels([]);
+    expect(idx.get(stageKey("2018-06-14", "A", "B", "FIFA World Cup"))).toBeUndefined();
   });
 });
