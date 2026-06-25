@@ -6,12 +6,12 @@
 // predictions.
 import type { ProbSplit } from "./polymarket";
 
-/** normalize(λ·market + (1−λ)·model). λ ∈ [0,1]; throws otherwise. */
+/** normalize((1−λ)·model + λ·market). λ ∈ [0,1]; throws otherwise. */
 export function blendSplit(model: ProbSplit, market: ProbSplit, lambda: number): ProbSplit {
   if (lambda < 0 || lambda > 1) throw new Error(`blendSplit: lambda ${lambda} out of [0,1]`);
-  // Edge cases: return exact input to avoid floating-point noise
-  if (lambda === 0) return model;
-  if (lambda === 1) return market;
+  // Return fresh copies at boundaries to avoid floating-point precision issues in arithmetic.
+  if (lambda === 0) return { home: model.home, draw: model.draw, away: model.away };
+  if (lambda === 1) return { home: market.home, draw: market.draw, away: market.away };
   const mix = (m: number, k: number) => (1 - lambda) * m + lambda * k;
   const home = mix(model.home, market.home);
   const draw = mix(model.draw, market.draw);
