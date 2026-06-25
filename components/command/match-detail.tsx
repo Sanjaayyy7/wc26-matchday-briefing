@@ -5,6 +5,7 @@ import { parseSettledScoreline } from "@/lib/command-data";
 import type { Prediction } from "@/lib/predict";
 import { ScoreProbabilitySurface } from "./score-probability-surface";
 import { ForecastDrivers } from "./forecast-drivers";
+import { Surface } from "@/components/ui/surface";
 
 type ClubInfo = { short: string; venue: string };
 
@@ -19,14 +20,14 @@ type Props = {
 
 function DispatchCard({ dispatch }: { dispatch: Dispatch }) {
   return (
-    <div className="px-6 py-5 border-b border-[var(--hairline)] bg-[var(--canvas)]">
-      <div className="text-tiny font-semibold uppercase tracking-widest text-[var(--ink-faint)] mb-2">
+    <Surface className="mx-4 mt-4 mb-0 px-5 py-4 border-b-0">
+      <div className="text-tiny font-semibold uppercase tracking-widest text-[var(--accent)] mb-2">
         {dispatch.dateline}
       </div>
-      <div className="text-sm font-semibold text-[var(--ink)] leading-snug mb-2">
+      <div className="text-label font-semibold text-[var(--ink)] leading-snug mb-2">
         {dispatch.headline}
       </div>
-      <div className="text-xs text-[var(--ink-muted)] leading-relaxed max-w-xl">
+      <div className="text-slight text-[var(--ink-muted)] leading-relaxed max-w-xl">
         {dispatch.body}
       </div>
       <div className="flex gap-4 mt-3">
@@ -39,7 +40,7 @@ function DispatchCard({ dispatch }: { dispatch: Dispatch }) {
           </div>
         ))}
       </div>
-    </div>
+    </Surface>
   );
 }
 
@@ -53,7 +54,7 @@ export function MatchDetail({ fixture, prediction, dispatch, homeClub, awayClub,
       <DispatchCard dispatch={dispatch} />
 
       {/* Match header */}
-      <div className="px-6 py-5 border-b border-[var(--hairline)]">
+      <div className="px-6 py-5 mt-4 border-b border-[var(--hairline)]">
         <div className="flex items-center justify-between text-fine text-[var(--ink-faint)] mb-2.5">
           <span>
             {fixture.group ? `Group ${fixture.group.replace("Group ", "")} · ` : ""}

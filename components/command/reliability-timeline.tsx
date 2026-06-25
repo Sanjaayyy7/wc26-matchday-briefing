@@ -18,7 +18,7 @@ export function ReliabilityTimeline({ ticks }: { ticks: ReliabilityTick[] }) {
   return (
     <section className="border-t border-[var(--line)] px-6 py-3">
       <div className="flex items-center gap-3 mb-2">
-        <div className="text-fine font-semibold text-[var(--ink-faint)] uppercase tracking-widest">
+        <div className="text-label font-semibold text-[var(--ink)]">
           Reliability Timeline
         </div>
         <div className="flex-1 h-px bg-[var(--hairline)]" />
