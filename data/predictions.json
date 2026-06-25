@@ -1835,6 +1835,37 @@
    "mostLikely": {
     "home": 1,
     "away": 0
+   },
+   "result": "5-0",
+   "realized": "home",
+   "correctPick": true,
+   "modelBrier": 0.1878,
+   "modelRps": 0.0697,
+   "logLoss": 0.4307829160924542,
+   "scorelineHit": false,
+   "top3ScorelineHit": false,
+   "btts": {
+    "prob": 0.4414006611665029,
+    "actual": false,
+    "brier": 0.1948345436782259,
+    "derivedPostHoc": true
+   },
+   "ou25": {
+    "prob": 0.48481662113650953,
+    "actual": true,
+    "brier": 0.2654139138572028,
+    "derivedPostHoc": true
+   },
+   "markets": {
+    "polymarket": {
+     "probs": {
+      "home": 0.7821782178217822,
+      "draw": 0.13861386138613863,
+      "away": 0.07920792079207921
+     },
+     "brier": 0.0729340260758749,
+     "rps": 0.02686011175374962
+    }
    }
   },
   {
@@ -1848,6 +1879,37 @@
    "mostLikely": {
     "home": 2,
     "away": 0
+   },
+   "result": "1-0",
+   "realized": "home",
+   "correctPick": true,
+   "modelBrier": 0.1134,
+   "modelRps": 0.04050000000000001,
+   "logLoss": 0.31471074483970024,
+   "scorelineHit": false,
+   "top3ScorelineHit": true,
+   "btts": {
+    "prob": 0.4166796204499394,
+    "actual": false,
+    "brier": 0.17362190609830555,
+    "derivedPostHoc": true
+   },
+   "ou25": {
+    "prob": 0.5319887868408818,
+    "actual": false,
+    "brier": 0.2830120693244332,
+    "derivedPostHoc": true
+   },
+   "markets": {
+    "polymarket": {
+     "probs": {
+      "home": 0.6568627450980392,
+      "draw": 0.21568627450980393,
+      "away": 0.12745098039215685
+     },
+     "brier": 0.18050749711649366,
+     "rps": 0.06699346405228758
+    }
    }
   },
   {
@@ -1861,6 +1923,37 @@
    "mostLikely": {
     "home": 3,
     "away": 0
+   },
+   "result": "0-0",
+   "realized": "draw",
+   "correctPick": false,
+   "modelBrier": 1.6034,
+   "modelRps": 0.38765,
+   "logLoss": 2.407945608651872,
+   "scorelineHit": false,
+   "top3ScorelineHit": false,
+   "btts": {
+    "prob": 0.35085058400193175,
+    "actual": false,
+    "brier": 0.12309613229449656,
+    "derivedPostHoc": true
+   },
+   "ou25": {
+    "prob": 0.6664053366864795,
+    "actual": false,
+    "brier": 0.4440960727642201,
+    "derivedPostHoc": true
+   },
+   "markets": {
+    "polymarket": {
+     "probs": {
+      "home": 0.7425742574257426,
+      "draw": 0.16831683168316833,
+      "away": 0.0891089108910891
+     },
+     "brier": 1.2510538182531121,
+     "rps": 0.2796784628957945
+    }
    }
   },
   {
@@ -1874,6 +1967,37 @@
    "mostLikely": {
     "home": 0,
     "away": 1
+   },
+   "result": "0-1",
+   "realized": "away",
+   "correctPick": true,
+   "modelBrier": 0.3474,
+   "modelRps": 0.13724999999999998,
+   "logLoss": 0.6539264674066639,
+   "scorelineHit": true,
+   "top3ScorelineHit": true,
+   "btts": {
+    "prob": 0.4647884285434324,
+    "actual": false,
+    "brier": 0.21602828330787335,
+    "derivedPostHoc": true
+   },
+   "ou25": {
+    "prob": 0.44238193052891583,
+    "actual": false,
+    "brier": 0.19570177245849052,
+    "derivedPostHoc": true
+   },
+   "markets": {
+    "polymarket": {
+     "probs": {
+      "home": 0.13,
+      "draw": 0.24,
+      "away": 0.63
+     },
+     "brier": 0.21139999999999998,
+     "rps": 0.0769
+    }
    }
   },
   {
@@ -1887,6 +2011,37 @@
    "mostLikely": {
     "home": 2,
     "away": 0
+   },
+   "result": "3-0",
+   "realized": "home",
+   "correctPick": true,
+   "modelBrier": 0.1134,
+   "modelRps": 0.04050000000000001,
+   "logLoss": 0.31471074483970024,
+   "scorelineHit": false,
+   "top3ScorelineHit": true,
+   "btts": {
+    "prob": 0.40470403770550967,
+    "actual": false,
+    "brier": 0.16378535813514258,
+    "derivedPostHoc": true
+   },
+   "ou25": {
+    "prob": 0.5556126445250612,
+    "actual": true,
+    "brier": 0.19748012170600962,
+    "derivedPostHoc": true
+   },
+   "markets": {
+    "polymarket": {
+     "probs": {
+      "home": 0.5346534653465347,
+      "draw": 0.26732673267326734,
+      "away": 0.19801980198019803
+     },
+     "brier": 0.32722282129203023,
+     "rps": 0.1278796196451328
+    }
    }
   },
   {
@@ -1900,6 +2055,37 @@
    "mostLikely": {
     "home": 0,
     "away": 2
+   },
+   "result": "1-0",
+   "realized": "home",
+   "correctPick": false,
+   "modelBrier": 1.2986000000000002,
+   "modelRps": 0.62725,
+   "logLoss": 2.2072749131897207,
+   "scorelineHit": false,
+   "top3ScorelineHit": false,
+   "btts": {
+    "prob": 0.4410664504269799,
+    "actual": false,
+    "brier": 0.1945396136922555,
+    "derivedPostHoc": true
+   },
+   "ou25": {
+    "prob": 0.4854389820641081,
+    "actual": false,
+    "brier": 0.2356510053074375,
+    "derivedPostHoc": true
+   },
+   "markets": {
+    "polymarket": {
+     "probs": {
+      "home": 0.1485148514851485,
+      "draw": 0.22772277227722773,
+      "away": 0.6237623762376238
+     },
+     "brier": 1.1659641211645917,
+     "rps": 0.5570532300754828
+    }
    }
   },
   {
@@ -1913,6 +2099,37 @@
    "mostLikely": {
     "home": 1,
     "away": 1
+   },
+   "result": "1-2",
+   "realized": "away",
+   "correctPick": false,
+   "modelBrier": 0.7646,
+   "modelRps": 0.34025,
+   "logLoss": 1.2378743560016174,
+   "scorelineHit": false,
+   "top3ScorelineHit": false,
+   "btts": {
+    "prob": 0.47983856356612486,
+    "actual": true,
+    "brier": 0.2705679199529523,
+    "derivedPostHoc": true
+   },
+   "ou25": {
+    "prob": 0.41628252665703636,
+    "actual": true,
+    "brier": 0.3407260886858935,
+    "derivedPostHoc": true
+   },
+   "markets": {
+    "polymarket": {
+     "probs": {
+      "home": 0.2718446601941748,
+      "draw": 0.2815533980582524,
+      "away": 0.44660194174757284
+     },
+     "brier": 0.45942124611179186,
+     "rps": 0.19007446507682157
+    }
    }
   },
   {
@@ -1926,6 +2143,37 @@
    "mostLikely": {
     "home": 1,
     "away": 1
+   },
+   "result": "3-1",
+   "realized": "home",
+   "correctPick": true,
+   "modelBrier": 0.43760000000000004,
+   "modelRps": 0.1796,
+   "logLoss": 0.7765287894989963,
+   "scorelineHit": false,
+   "top3ScorelineHit": false,
+   "btts": {
+    "prob": 0.47646611183243626,
+    "actual": true,
+    "brier": 0.27408773205984716,
+    "derivedPostHoc": true
+   },
+   "ou25": {
+    "prob": 0.42204663442934226,
+    "actual": true,
+    "brier": 0.3340300927744503,
+    "derivedPostHoc": true
+   },
+   "markets": {
+    "polymarket": {
+     "probs": {
+      "home": 0.5784313725490196,
+      "draw": 0.2549019607843137,
+      "away": 0.16666666666666669
+     },
+     "brier": 0.27047289504036914,
+     "rps": 0.10274894271434068
+    }
    }
   },
   {
@@ -1939,6 +2187,37 @@
    "mostLikely": {
     "home": 0,
     "away": 1
+   },
+   "result": "0-3",
+   "realized": "away",
+   "correctPick": true,
+   "modelBrier": 0.1994,
+   "modelRps": 0.07325,
+   "logLoss": 0.4462871026284195,
+   "scorelineHit": false,
+   "top3ScorelineHit": false,
+   "btts": {
+    "prob": 0.4423963959516649,
+    "actual": false,
+    "brier": 0.19571457115102228,
+    "derivedPostHoc": true
+   },
+   "ou25": {
+    "prob": 0.48296498140750405,
+    "actual": true,
+    "brier": 0.2673252104509426,
+    "derivedPostHoc": true
+   },
+   "markets": {
+    "polymarket": {
+     "probs": {
+      "home": 0.14563106796116504,
+      "draw": 0.1941747572815534,
+      "away": 0.6601941747572816
+     },
+     "brier": 0.17438024318974452,
+     "rps": 0.06833820341219718
+    }
    }
   },
   {
@@ -1952,6 +2231,37 @@
    "mostLikely": {
     "home": 2,
     "away": 0
+   },
+   "result": "4-2",
+   "realized": "home",
+   "correctPick": true,
+   "modelBrier": 0.14000000000000004,
+   "modelRps": 0.050000000000000024,
+   "logLoss": 0.35667494393873245,
+   "scorelineHit": false,
+   "top3ScorelineHit": false,
+   "btts": {
+    "prob": 0.4025742464667698,
+    "actual": true,
+    "brier": 0.3569175309847478,
+    "derivedPostHoc": true
+   },
+   "ou25": {
+    "prob": 0.5598619337755683,
+    "actual": true,
+    "brier": 0.19372151733978227,
+    "derivedPostHoc": true
+   },
+   "markets": {
+    "polymarket": {
+     "probs": {
+      "home": 0.7227722772277227,
+      "draw": 0.1782178217821782,
+      "away": 0.09900990099009901
+     },
+     "brier": 0.11841976276835599,
+     "rps": 0.04332908538378587
+    }
    }
   },
   {

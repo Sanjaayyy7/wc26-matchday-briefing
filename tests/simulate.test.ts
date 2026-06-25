@@ -105,12 +105,13 @@ describe("simulateTournament (real data, seeded, small N)", () => {
     expect(out.teams["Spain"].champion).toBeGreaterThan(out.teams[weakest].champion);
   });
 
-  it("locked result honored: Mexico's real 2-0 win is in every run's standings (advance prob reflects it)", () => {
+  it("locked result honored: Mexico's real wins are in every run's standings (advance prob reflects it)", () => {
     const out = simulateTournament(input, 400, 42);
-    // Mexico already banked 3 points in reality; their group-advance probability
-    // must comfortably exceed South Africa's, who banked the loss.
+    // Mexico banked real locked wins (incl. 2-0 over South Africa, 3-0 over Czech
+    // Republic) and clinched Group A; Czech Republic were eliminated on locked
+    // results. Mexico's group-advance probability must comfortably exceed theirs.
     expect(out.teams["Mexico"].advanceGroup).toBeGreaterThan(
-      out.teams["South Africa"].advanceGroup,
+      out.teams["Czech Republic"].advanceGroup,
     );
   });
 });
