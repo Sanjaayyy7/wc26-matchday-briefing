@@ -3,6 +3,7 @@ import {
   fitBaseAndSlope,
   fitRho,
   fitRegimeParams,
+  fitStageParams,
   drawRateGap,
   type GoalSample,
   type LikRow,
@@ -54,6 +55,28 @@ describe("fitRegimeParams", () => {
     expect(p.baseLogGoals).toBeCloseTo(0.1, 1);
     expect(p.eloSlope).toBeCloseTo(0.7, 1);
     expect(typeof p.rho).toBe("number");
+  });
+});
+
+describe("fitStageParams", () => {
+  it("recovers the intercept while holding the slope fixed", () => {
+    const p = fitStageParams(syntheticSamples(0.3, 0.6, 60), [{ diff: 0, hs: 1, as: 1 }], 0.6, 50);
+    expect(p.baseLogGoals).toBeCloseTo(0.3, 1);
+    expect(p.eloSlope).toBe(0.6);
+    expect(typeof p.rho).toBe("number");
+  });
+
+  it("returns a lower base and a more-negative rho on a cagey draw-heavy stage than an open one", () => {
+    const cageySamples = syntheticSamples(Math.log(0.9), 0.6, 60); // low-scoring
+    const openSamples = syntheticSamples(Math.log(1.6), 0.6, 60);  // high-scoring
+    const cageyLik: LikRow[] = Array.from({ length: 300 }, () => ({ diff: 0, hs: 0, as: 0 }))
+      .concat(Array.from({ length: 300 }, () => ({ diff: 0, hs: 1, as: 1 }))); // draws
+    const openLik: LikRow[] = Array.from({ length: 300 }, () => ({ diff: 0, hs: 2, as: 0 }))
+      .concat(Array.from({ length: 300 }, () => ({ diff: 0, hs: 0, as: 2 })));  // decisive
+    const cagey = fitStageParams(cageySamples, cageyLik, 0.6, 50);
+    const open = fitStageParams(openSamples, openLik, 0.6, 50);
+    expect(cagey.baseLogGoals).toBeLessThan(open.baseLogGoals);
+    expect(cagey.rho).toBeLessThan(open.rho);
   });
 });
 
