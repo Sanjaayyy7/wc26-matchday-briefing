@@ -1,7 +1,7 @@
 // lib/market-blend.ts
 //
 // Linear-pool blend of the model and market forecasts + the pre-registered
-// shadow-adoption rule. Pure; no I/O. Used by scripts/market-shadow.mts to
+// shadow adoption rule. Pure; no I/O. Used by the market-shadow script to
 // evaluate the blend on the settled market-covered sample without touching live
 // predictions.
 import type { ProbSplit } from "./polymarket";
