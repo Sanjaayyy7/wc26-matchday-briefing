@@ -46,12 +46,49 @@ describe("deriveEditionStages", () => {
     expect(labels.get(third.idx)).toBe("knockout");
   });
 
-  it("handles pen-decided (drawn) knockouts: advancement is by appearance, not score", () => {
-    // identical structure; scores are irrelevant to the algorithm (no scores in EditionMatch)
-    const ms = bracketEdition(false);
-    const { labels } = deriveEditionStages(ms);
-    const fin = ms.at(-1)!;
-    expect(labels.get(fin.idx)).toBe("knockout");
+  it("does NOT promote a group match to knockout when its teams are not both knockout-eliminated", () => {
+    // Scenario: a late group-stage match between two teams (P and Q) that never appear
+    // in any knockout match is dated on the same day as the first knockout round.
+    // The match is a consolation candidate (date >= minKoDate) but neither P nor Q is
+    // in koEliminated (they were never in a knockout match at all), so the tightened
+    // detector must leave it as "group".
+    //
+    // The old detector used koParticipants (union of ALL teams in any KO match), which
+    // did NOT include P or Q either — so this particular scenario wouldn't have been
+    // promoted even by the old code.  We confirm the new code also leaves it as "group",
+    // while the legitimate third-place match (between two genuine SF losers) is still
+    // correctly promoted to "knockout".
+    _i = 0;
+    // Group prefix: P and Q are group-only teams (never appear in knockout).
+    const groupMatches: EditionMatch[] = [
+      m("2026-06-01", "P", "Q"),
+      m("2026-06-01", "A", "B"), m("2026-06-01", "C", "D"),
+      m("2026-06-02", "A", "C"), m("2026-06-02", "B", "D"),
+      m("2026-06-03", "E", "F"), m("2026-06-03", "G", "H"),
+      m("2026-06-04", "E", "G"), m("2026-06-04", "F", "H"),
+    ];
+    // QF (minKoDate = 2026-06-10): A, C, E, G advance
+    const qf = [
+      m("2026-06-10", "A", "B"), m("2026-06-10", "C", "D"),
+      m("2026-06-10", "E", "F"), m("2026-06-10", "G", "H"),
+    ];
+    // A group match between P and Q dated on the same day as QF — consolation candidate
+    // but neither team was ever in a knockout match, so neither is in koEliminated.
+    const candidate = m("2026-06-10", "P", "Q");
+    // SF: A, E advance (C and G eliminated)
+    const sf = [ m("2026-06-14", "A", "C"), m("2026-06-15", "E", "G") ];
+    // Third-place: C vs G (the two genuine SF losers)
+    const third = m("2026-06-18", "C", "G");
+    // Final
+    const fin = m("2026-06-19", "A", "E");
+    const ms = [...groupMatches, ...qf, candidate, ...sf, third, fin];
+    const { labels, resolved } = deriveEditionStages(ms);
+    // Edition must resolve cleanly
+    expect(resolved).toBe(true);
+    // P vs Q must stay "group" — neither team was knockout-eliminated
+    expect(labels.get(candidate.idx)).toBe("group");
+    // The genuine third-place match must be promoted to "knockout"
+    expect(labels.get(third.idx)).toBe("knockout");
   });
 
   it("does NOT mislabel a final-group-round match whose loser is eliminated", () => {

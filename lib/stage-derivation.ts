@@ -31,9 +31,10 @@ export function deriveEditionStages(matches: EditionMatch[]): EditionResult {
 
   const knockout = new Set<number>(); // positions in `sorted`
 
-  // The final is the last match — unless the last match is between two teams that
-  // never reach a later match (a third-place playoff dated last). Pick the final as
-  // the last match whose participants each have NO later match (true terminal).
+  // The final is the chronologically last match. For all in-scope 1990+ finals-tournament
+  // editions the third-place playoff is dated before the final, so this is correct.
+  // Anomalous editions (e.g. misordered dates) are caught downstream when the doubling /
+  // single-feed reconstruction fails to resolve cleanly (resolved: false).
   const finalPos = sorted.length - 1;
   knockout.add(finalPos);
   let round = [finalPos];
@@ -67,14 +68,22 @@ export function deriveEditionStages(matches: EditionMatch[]): EditionResult {
   if (knockout.size < 3) return { labels, resolved: false, reason: "no clean doubling bracket found" };
 
   // Third-place playoff: an unlabeled match, dated within the knockout window, between
-  // two teams that were the non-advancers (losers) of semifinal-level knockout matches.
+  // two teams that were eliminated in the knockout phase — i.e. they appear in at least
+  // one knockout match but have NO later knockout appearance (they did not advance further).
   const knockoutDates = [...knockout].map((p) => sorted[p].date);
   const minKoDate = knockoutDates.reduce((a, b) => (a < b ? a : b));
-  const koParticipants = new Set([...knockout].flatMap((p) => teamsOf(sorted[p])));
+  // Build the set of knockout-eliminated teams: appear in a KO match with no subsequent KO match.
+  const koEliminated = new Set<string>();
+  for (const p of knockout) {
+    for (const t of teamsOf(sorted[p])) {
+      const laterKO = [...knockout].some((q) => q > p && (sorted[q].home === t || sorted[q].away === t));
+      if (!laterKO) koEliminated.add(t);
+    }
+  }
   for (let i = 0; i < sorted.length; i++) {
     if (knockout.has(i)) continue;
-    if (sorted[i].date >= minKoDate && teamsOf(sorted[i]).every((t) => koParticipants.has(t))) {
-      knockout.add(i); // third-place / consolation among already-eliminated knockout teams
+    if (sorted[i].date >= minKoDate && teamsOf(sorted[i]).every((t) => koEliminated.has(t))) {
+      knockout.add(i); // third-place / consolation among knockout-eliminated teams
     }
   }
 
