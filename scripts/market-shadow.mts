@@ -1,10 +1,10 @@
 // scripts/market-shadow.mts
 //
 // Shadow evaluation of a model/market linear-pool blend on the settled
-// market-covered WC26 sample. Reads locked model predictions co-located in
-// data/predictions.json (which already carries de-vigged market probs and
-// resolved outcomes per entry). Reports model/market/blend Brier+RPS over a
-// λ-grid and the pre-registered shadow verdict. No live prediction is changed.
+// market-covered WC26 sample. Joins data/predictions.json entries (model split
+// + realized outcome) with data/markets/polymarket.json (de-vigged market
+// probs). Reports model/market/blend Brier+RPS over a λ-grid and the
+// pre-registered shadow verdict. No live prediction is changed.
 //   npm run ml:market-shadow
 import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
 import path from "node:path";
@@ -21,8 +21,12 @@ type ProbSplit = { home: number; draw: number; away: number };
 type PredEntry = {
   slug: string;
   split?: { home: number; draw: number; away: number };
-  market?: { home: number; draw: number; away: number } | null;
   realized?: string;
+};
+
+type PolymarketEntry = {
+  probs: { home: number; draw: number; away: number };
+  [key: string]: unknown;
 };
 
 type SampleRow = {
@@ -32,29 +36,29 @@ type SampleRow = {
   outcome: Outcome;
 };
 
-// ── load predictions ─────────────────────────────────────────────────────────
+// ── load data ────────────────────────────────────────────────────────────────
 
 const predPath = path.join(appDir, "data", "predictions.json");
 const rawPred = JSON.parse(readFileSync(predPath, "utf8")) as { entries: PredEntry[] };
+
+const polyPath = path.join(appDir, "data", "markets", "polymarket.json");
+const rawPoly = JSON.parse(readFileSync(polyPath, "utf8")) as Record<string, unknown>;
+
+// Build polymarket lookup (skip keys starting with "_")
+const polymap = new Map<string, PolymarketEntry>();
+for (const [key, val] of Object.entries(rawPoly)) {
+  if (key.startsWith("_")) continue;
+  const entry = val as PolymarketEntry;
+  if (entry?.probs && typeof entry.probs.home === "number") {
+    polymap.set(key, entry);
+  }
+}
 
 const samples: SampleRow[] = [];
 const excluded: Array<{ slug: string; reason: string }> = [];
 
 for (const e of rawPred.entries) {
   const slug = e.slug ?? "";
-
-  // Must have top-level market probs (de-vigged, 0..1)
-  if (!e.market || typeof e.market !== "object") {
-    excluded.push({ slug, reason: "no market probs" });
-    continue;
-  }
-
-  // Must have a settled realized outcome
-  const realized = e.realized ?? "";
-  if (realized !== "home" && realized !== "draw" && realized !== "away") {
-    excluded.push({ slug, reason: "not settled or invalid realized" });
-    continue;
-  }
 
   // Must have a model split (stored as percentages ~100)
   const sp = e.split;
@@ -63,12 +67,26 @@ for (const e of rawPred.entries) {
     continue;
   }
 
+  // Must be settled (realized outcome present)
+  const realized = e.realized ?? "";
+  if (realized !== "home" && realized !== "draw" && realized !== "away") {
+    // Unsettled — not part of sample, don't add to excluded
+    continue;
+  }
+
+  // Must have polymarket probs for this slug
+  const poly = polymap.get(slug);
+  if (!poly) {
+    excluded.push({ slug, reason: "settled but slug missing from polymarket" });
+    continue;
+  }
+
   // Normalize model split (percentages → 0..1)
   const mz = sp.home + sp.draw + sp.away || 1;
   const model: ProbSplit = { home: sp.home / mz, draw: sp.draw / mz, away: sp.away / mz };
 
-  // Normalize market (defensively re-normalize even though already 0..1)
-  const mk = e.market;
+  // Normalize market (defensively re-normalize even though already ~0..1)
+  const mk = poly.probs;
   const kz = mk.home + mk.draw + mk.away || 1;
   const market: ProbSplit = { home: mk.home / kz, draw: mk.draw / kz, away: mk.away / kz };
 
@@ -117,7 +135,7 @@ const verdict = shadowVerdict(n, modelMetrics.brier, marketMetrics.brier, blend0
 // ── artifact ──────────────────────────────────────────────────────────────────
 
 const artifact = {
-  generatedFrom: ["data/predictions.json"],
+  generatedFrom: ["data/predictions.json", "data/markets/polymarket.json"],
   n,
   excluded,
   grid,
