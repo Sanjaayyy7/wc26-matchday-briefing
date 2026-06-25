@@ -135,7 +135,7 @@ export default function MethodologyPage() {
             The official sample is {graded} graded matches. Below roughly 30–50 matches, all figures
             are provisional and carry wide error bars; they describe the record so far, not a settled
             conclusion. See the full{" "}
-            <Link href="/record" className="underline underline-offset-2">
+            <Link href="/" className="underline underline-offset-2">
               accountability record →
             </Link>
             .
