@@ -302,39 +302,41 @@
 @utility text-hero {
   font-family: var(--font-display);
   font-size: clamp(2.75rem, 6vw, 6.5rem); /* S1 — 44 → 104 */
-  font-weight: 520;            /* Codex display is lighter / opener than Linear */
-  letter-spacing: -0.012em;
-  line-height: 1.05;
+  font-weight: 500;            /* OpenAI Sans display = medium */
+  letter-spacing: -0.03em;     /* signature tight display tracking */
+  line-height: 1.02;
 }
 @utility text-display {
   font-family: var(--font-display);
   font-size: clamp(1.875rem, 3.4vw, 3.5rem); /* S2 — 30 → 56 (section titles) */
-  font-weight: 460;
-  letter-spacing: -0.014em;
-  line-height: 1.06;
+  font-weight: 500;
+  letter-spacing: -0.028em;
+  line-height: 1.08;
 }
 @utility text-title {
   font-family: var(--font-display);
   font-size: clamp(1.125rem, 1.4vw, 1.375rem); /* S3 — 18 → 22 (subheads/leads) */
-  font-weight: 590;
-  letter-spacing: -0.012em;
+  font-weight: 500;
+  letter-spacing: -0.01em;
   line-height: 1.3;
 }
 @utility text-body {
   font-size: 0.9375rem; /* S4 — 15 */
   font-weight: 400;
-  line-height: 1.65;
+  line-height: 1.6;
+  letter-spacing: -0.01em;
   color: var(--ink-muted);
 }
 @utility text-label {
   font-size: 0.75rem; /* S5 — 12 */
   font-weight: 500;
-  letter-spacing: 0.01em;
+  letter-spacing: -0.006em;
   color: var(--ink-muted);
 }
 @utility text-caption {
   font-size: 0.75rem; /* S5 — 12 (muted variant) */
   font-weight: 400;
+  letter-spacing: -0.006em;
   color: var(--ink-muted);
 }
 
@@ -353,7 +355,7 @@
 }
 @utility text-micro {
   font-size: 0.625rem; /* 10 (alias of tiny) */
-  font-weight: 400;
+  font-weight: 500;
   letter-spacing: 0.04em;
 }
 
