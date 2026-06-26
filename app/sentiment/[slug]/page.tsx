@@ -83,7 +83,7 @@ export default async function SentimentSlugPage({ params }: { params: Promise<{ 
             <dl className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
               <div>
                 <dt className="text-label">Model</dt>
-                <dd className="text-caption mt-1 font-mono text-xs break-all">{data.model}</dd>
+                <dd className="text-caption mt-1 font-mono text-fine break-all">{data.model}</dd>
               </div>
               <div>
                 <dt className="text-label">Source</dt>

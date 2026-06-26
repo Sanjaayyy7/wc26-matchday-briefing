@@ -37,6 +37,9 @@ const BAD_ELEVATION_RE =
   /\bboxShadow\b|\bbg-(?:white|black|gray|slate|zinc)-?\b|(?<!--)(?<!hover:)\bshadow-(?!\[var\(--shadow-(?:hover|pop)\)\])/;
 // Radius-token: route pages must use rounded-[var(--radius-card)] for large radii.
 const RADIUS_TOKEN_RE = /\brounded-(?:2xl|3xl|4xl)\b/;
+// Raw font-size on route pages → cross-page drift. Pages must use the text-* tokens.
+const RAW_FONT_SIZE_RE =
+  /\btext-(?:xs|sm|base|lg|xl|2xl|3xl|4xl|5xl|6xl|7xl)\b|\btext-\[clamp\(/;
 const NUMERIC_TEXT_RE = /\b(?:score|pct|prob|rating|elo|brier|rps|count|total|goals|locks|odds)\b/i;
 const OLD_PRIMARY_PRIMITIVE_RE = /export function CommandPanel|export function CinematicSection|export function MarketTape|export function FixtureSurface|export function MatchMarketRow|export function DataRail/;
 const AD_HOC_ROUTE_SPACE_RE = /className=["'][^"']*\bspace-y-16\b|style=\{\{\s*animationDelay:/;
@@ -211,6 +214,14 @@ export function inspectProject(root = ROOT): DesignViolation[] {
         RADIUS_TOKEN_RE,
         "radius-token",
         "Route pages must use rounded-[var(--radius-card)] instead of raw large-radius utilities (rounded-2xl/3xl/4xl).",
+      );
+      pushMatches(
+        violations,
+        rel,
+        text,
+        RAW_FONT_SIZE_RE,
+        "no-raw-font-size",
+        "Route pages must use the text-* tokens (text-hero/display/title/body/label/caption), not raw font-size utilities.",
       );
       const sectionCount = (text.match(/<section\b/g) ?? []).length;
       const labelCount =

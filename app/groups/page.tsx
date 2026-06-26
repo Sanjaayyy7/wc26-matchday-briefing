@@ -94,7 +94,7 @@ function GroupBand({ letter, clubs, index }: { letter: string; clubs: Club[]; in
                   </div>
                   <div className="md:text-right">
                     <span className="text-caption md:hidden">Pts </span>
-                    <span className="text-display tabular text-2xl">{r.pts}</span>
+                    <span className="text-title tabular">{r.pts}</span>
                   </div>
                 </div>
 
@@ -135,15 +135,15 @@ function GroupsBoard({ clubs }: { clubs: Club[] }) {
         <div className="grid grid-cols-3 gap-5">
           <div>
             <p className="text-caption">Groups</p>
-            <p className="text-display tabular text-3xl">{GROUPS.length}</p>
+            <p className="text-title tabular">{GROUPS.length}</p>
           </div>
           <div>
             <p className="text-caption">Teams</p>
-            <p className="text-display tabular text-3xl">{clubs.length}</p>
+            <p className="text-title tabular">{clubs.length}</p>
           </div>
           <div>
             <p className="text-caption">Advance</p>
-            <p className="text-display tabular text-3xl">24</p>
+            <p className="text-title tabular">24</p>
           </div>
         </div>
       </div>

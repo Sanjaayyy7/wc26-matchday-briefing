@@ -180,6 +180,60 @@ describe("design-inspector (Codex constitution)", () => {
     }
   });
 
+  it("flags raw font-size utilities on a route as no-raw-font-size", () => {
+    const root = makeFixtureDir();
+    try {
+      writeFixturePage(
+        root,
+        "test-raw-font",
+        `export default function Page() {
+  return (
+    <WCS26Shell>
+      <RouteStack>
+        <CanvasSection eyebrow="Test">
+          <h1 className="text-5xl font-bold">Big</h1>
+        </CanvasSection>
+      </RouteStack>
+    </WCS26Shell>
+  );
+}`,
+      );
+      const violations = inspectProject(root);
+      expect(violations.some((v) => v.rule === "no-raw-font-size")).toBe(true);
+    } finally {
+      rmSync(root, { recursive: true, force: true });
+    }
+  });
+
+  it("does NOT flag the text-* tokens as no-raw-font-size", () => {
+    const root = makeFixtureDir();
+    try {
+      writeFixturePage(
+        root,
+        "test-text-tokens",
+        `export default function Page() {
+  return (
+    <WCS26Shell>
+      <RouteStack>
+        <CanvasSection eyebrow="Test">
+          <h1 className="text-hero">A</h1>
+          <h2 className="text-display">B</h2>
+          <p className="text-title">C</p>
+          <p className="text-body">D</p>
+          <span className="text-stat tabular">42</span>
+        </CanvasSection>
+      </RouteStack>
+    </WCS26Shell>
+  );
+}`,
+      );
+      const violations = inspectProject(root);
+      expect(violations.filter((v) => v.rule === "no-raw-font-size")).toHaveLength(0);
+    } finally {
+      rmSync(root, { recursive: true, force: true });
+    }
+  });
+
   it("allows the white-pill CTA pattern (bg-[var(--ink)] + rounded-[var(--radius-pill)])", () => {
     const root = makeFixtureDir();
     try {

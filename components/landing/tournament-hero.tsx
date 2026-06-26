@@ -66,11 +66,11 @@ export function TournamentHero({
         <div className="grid gap-4 sm:grid-cols-3 lg:grid-cols-1">
           <div className="border-t border-[var(--hairline)] pt-4">
             <span className="text-label">Official sample</span>
-            <NumberTicker value={officialCount} className="mt-2 block font-[family-name:var(--font-display)] text-[clamp(1.625rem,2.4vw,2.25rem)] font-bold leading-none tracking-tight tabular" />
+            <NumberTicker value={officialCount} className="mt-2 block text-stat" />
           </div>
           <div className="border-t border-[var(--hairline)] pt-4">
             <span className="text-label">Open locks</span>
-            <NumberTicker value={openLocks} className="mt-2 block font-[family-name:var(--font-display)] text-[clamp(1.625rem,2.4vw,2.25rem)] font-bold leading-none tracking-tight tabular" />
+            <NumberTicker value={openLocks} className="mt-2 block text-stat" />
           </div>
           <div className="border-t border-[var(--hairline)] pt-4">
             <span className="text-label">Cup favorite</span>
@@ -79,7 +79,7 @@ export function TournamentHero({
               value={leader.pct}
               suffix="%"
               decimals={1}
-              className="mt-1 block font-[family-name:var(--font-display)] text-[clamp(1.625rem,2.4vw,2.25rem)] font-bold leading-none tracking-tight tabular text-[var(--up)]"
+              className="mt-1 block text-stat text-[var(--up)]"
             />
           </div>
         </div>
