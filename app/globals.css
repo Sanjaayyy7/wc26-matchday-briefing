@@ -188,10 +188,13 @@
   --accent-bright: #8f8bff;
   /* Codex cinematic gradients (bookend) — sampled from the reference shots. */
   --gradient-hero:
-    radial-gradient(90% 80% at 28% 8%, rgba(150,156,224,.55) 0%, transparent 42%),
-    linear-gradient(135deg, #2c2d86 0%, #1b1c4f 28%, #0a0a1f 58%, #000 100%);
+    linear-gradient(115deg, transparent 38%, rgba(120,150,255,.20) 50%, transparent 60%),
+    radial-gradient(120% 95% at 50% -12%, rgba(120,140,255,.42) 0%, transparent 46%),
+    radial-gradient(85% 75% at 22% 10%, rgba(91,83,255,.55) 0%, transparent 52%),
+    linear-gradient(150deg, #3a2db0 0%, #241c7a 22%, #130f42 48%, #05050f 74%, #000 100%);
   --gradient-cta:
-    linear-gradient(100deg, #0a0a1f 0%, #2c2d86 42%, #4b4bf0 74%, #6f6dff 100%);
+    linear-gradient(115deg, transparent 30%, rgba(130,160,255,.22) 50%, transparent 66%),
+    linear-gradient(100deg, #05050f 0%, #241c7a 28%, #4b3ff0 62%, #7c7bff 100%);
   --gradient-frame:
     linear-gradient(135deg, #5b53ff 0%, #7b78ff 50%, #4b4bf0 100%);
   /* Aurora language — desaturated sage-jade signal, muted clay-red breach,
@@ -512,11 +515,11 @@
 
 @utility hero-glow {
   background: radial-gradient(
-    ellipse 80% 60% at 50% 0%,
-    color-mix(in oklab, var(--accent) 12%, transparent),
+    ellipse 78% 58% at 50% 0%,
+    color-mix(in oklab, var(--accent) 16%, transparent),
     transparent
   );
-  mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 30%, transparent 70%);
+  mask-image: radial-gradient(ellipse 78% 58% at 50% 0%, black 28%, transparent 72%);
 }
 
 /* ── CODEX CINEMATIC LAYER ────────────────────────────────────────────────
