@@ -53,7 +53,7 @@ export default async function TeamPage({
       <NumberTicker
         value={value * 100}
         suffix="%"
-        className="text-display text-2xl"
+        className="text-stat"
       />
     </div>
   );
@@ -81,7 +81,7 @@ export default async function TeamPage({
             <div className="mt-10 grid gap-5 border-t border-[var(--line)] pt-6 sm:grid-cols-3">
               <div>
                 <span className="text-label">Elo</span>
-                <NumberTicker value={rating} className="mt-1 block font-[family-name:var(--font-display)] text-[clamp(1.625rem,2.4vw,2.25rem)] font-bold leading-none tracking-tight tabular" />
+                <NumberTicker value={rating} className="mt-1 block text-stat" />
                 <span className="text-caption tabular">world #{rank}</span>
               </div>
               <div>
@@ -90,7 +90,7 @@ export default async function TeamPage({
                   value={(odds?.advanceGroup ?? 0) * 100}
                   suffix="%"
                   decimals={1}
-                  className="mt-1 block font-[family-name:var(--font-display)] text-[clamp(1.625rem,2.4vw,2.25rem)] font-bold leading-none tracking-tight tabular"
+                  className="mt-1 block text-stat"
                 />
               </div>
               <div>
@@ -99,7 +99,7 @@ export default async function TeamPage({
                   value={(odds?.champion ?? 0) * 100}
                   suffix="%"
                   decimals={1}
-                  className="mt-1 block font-[family-name:var(--font-display)] text-[clamp(1.625rem,2.4vw,2.25rem)] font-bold leading-none tracking-tight tabular text-[var(--up)]"
+                  className="mt-1 block text-stat text-[var(--up)]"
                 />
               </div>
             </div>

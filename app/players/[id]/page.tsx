@@ -45,7 +45,7 @@ export default async function PlayerPage({
           <div className="chroma-rule absolute left-6 top-0 h-px w-64 md:w-96" />
           <div className="absolute bottom-0 left-0 h-1 w-full" style={{ background: player.teamPrimary }} />
           <div
-            className="flex h-16 w-16 items-center justify-center border text-xl font-bold"
+            className="flex h-16 w-16 items-center justify-center border text-title"
             style={{ background: player.teamPrimary, color: player.teamSecondary, borderColor: player.teamPrimary }}
           >
             {player.teamShort}
@@ -66,22 +66,22 @@ export default async function PlayerPage({
             <div className="mt-8 grid gap-6 border-t border-[var(--line)] pt-6 sm:grid-cols-4">
               <div>
                 <span className="text-label">Goals</span>
-                <NumberTicker value={player.goals} className="mt-1 block font-[family-name:var(--font-display)] text-[clamp(1.625rem,2.4vw,2.25rem)] font-bold leading-none tracking-tight tabular" />
+                <NumberTicker value={player.goals} className="mt-1 block text-stat" />
               </div>
               <div>
                 <span className="text-label">Assists</span>
-                <NumberTicker value={player.assists} className="mt-1 block font-[family-name:var(--font-display)] text-[clamp(1.625rem,2.4vw,2.25rem)] font-bold leading-none tracking-tight tabular" />
+                <NumberTicker value={player.assists} className="mt-1 block text-stat" />
               </div>
               <div>
                 <span className="text-label">Minutes</span>
-                <NumberTicker value={player.minutes} suffix="′" className="mt-1 block font-[family-name:var(--font-display)] text-[clamp(1.625rem,2.4vw,2.25rem)] font-bold leading-none tracking-tight tabular" />
+                <NumberTicker value={player.minutes} suffix="′" className="mt-1 block text-stat" />
               </div>
               <div>
                 <span className="text-label">Impact</span>
                 <NumberTicker
                   value={player.impact * 1000}
                   decimals={0}
-                  className="mt-1 block font-[family-name:var(--font-display)] text-[clamp(1.625rem,2.4vw,2.25rem)] font-bold leading-none tracking-tight tabular text-[var(--up)]"
+                  className="mt-1 block text-stat text-[var(--up)]"
                 />
                 <span className="text-caption">×10⁻³</span>
               </div>

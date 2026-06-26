@@ -115,7 +115,7 @@ export function SignalStat({
         value={value}
         suffix={suffix}
         decimals={decimals}
-        className={`mt-1 block font-[family-name:var(--font-display)] text-[clamp(1.625rem,2.4vw,2.25rem)] font-bold leading-none tracking-tight tabular ${toneClass(tone)}`}
+        className={`mt-1 block text-stat ${toneClass(tone)}`}
       />
       {detail && <p className="text-caption mt-1 truncate">{detail}</p>}
     </div>

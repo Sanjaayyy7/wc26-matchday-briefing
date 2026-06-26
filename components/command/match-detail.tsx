@@ -71,9 +71,9 @@ export function MatchDetail({ fixture, prediction, dispatch, homeClub, awayClub,
           )}
         </div>
 
-        <div className="text-2xl font-bold mb-1">
+        <div className="text-title mb-1">
           <span className="text-[var(--ink)]">{fixture.homeTeam}</span>
-          <span className="mx-2 text-sm font-normal text-[var(--ink-faint)]">vs</span>
+          <span className="mx-2 text-caption text-[var(--ink-faint)]">vs</span>
           <span className="text-[var(--ink-muted)]">{fixture.awayTeam}</span>
         </div>
 

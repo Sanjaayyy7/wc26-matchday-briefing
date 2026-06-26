@@ -103,7 +103,7 @@ export function ScoreProbabilitySurface({ grid, homeTeam, awayTeam, lambdas, elo
                   onClick={() => setSelectedCell((s) => (s?.r === r && s?.c === c ? null : { r, c }))}
                   className={[
                     "flex-1 aspect-square min-h-11 flex items-center justify-center rounded-sm",
-                    "text-sm font-semibold data-mono transition-transform duration-300",
+                    "text-label data-mono transition-transform duration-300",
                     isSettled ? "settle-cell" : "",
                   ].join(" ")}
                   style={{
