@@ -11,6 +11,15 @@ export type DesignViolation = {
 
 const ROOT = join(fileURLToPath(new URL(".", import.meta.url)), "..");
 
+// ── Codex constitution allowlist (informational) ──────────────────────────
+// These class/token names are first-class and intentionally NOT flagged:
+//   utilities: gradient-hero, gradient-cta, showcase-frame, showcase-frame-inner,
+//              full-bleed
+//   tokens:    --gradient-hero, --gradient-cta, --gradient-frame, --accent
+// They are plain class names / CSS-resolved tokens (hex lives only in globals.css),
+// so tokens-only, elevation, scale-only, and no-background-lines never fire on them.
+// The single section accent (chroma-rule) + row-hover edge are violet --accent, not jade.
+
 const FIRST_PARTY_DIRS = ["app", "components", "lib"] as const;
 const PAGE_RE = /app(?:\/.+)?\/page\.tsx$/;
 // Pages that use an alternative full-screen shell (CommandShell etc.) and are exempt from page-shell checks

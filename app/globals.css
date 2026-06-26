@@ -508,12 +508,12 @@
     linear-gradient(180deg, transparent, color-mix(in oklab, var(--ink) 4%, transparent), transparent);
 }
 
-/* Single-accent section rule (constitution: one accent, no rainbow, no glow). */
+/* Single-accent section rule (Codex constitution: one violet accent, no rainbow). */
 @utility chroma-rule {
   background: linear-gradient(
     90deg,
-    var(--up),
-    color-mix(in oklab, var(--up) 28%, transparent) 46%,
+    var(--accent),
+    color-mix(in oklab, var(--accent) 28%, transparent) 46%,
     transparent
   );
 }
@@ -616,7 +616,7 @@
   top: 0;
   bottom: 0;
   width: 2px;
-  background: var(--up);
+  background: var(--accent);
   transform: scaleY(0);
   transform-origin: top;
   transition: transform var(--dur) var(--ease);
