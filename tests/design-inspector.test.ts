@@ -147,3 +147,64 @@ export const foo = "bar";`,
     }
   });
 });
+
+// ── Codex constitution tests ─────────────────────────────────────────────────
+
+describe("design-inspector (Codex constitution)", () => {
+  it("allows gradient + showcase-frame utilities on a route (no elevation/radius/bg-line flags)", () => {
+    const root = makeFixtureDir();
+    try {
+      writeFixturePage(
+        root,
+        "test-codex",
+        `export default function Page() {
+  return (
+    <WCS26Shell>
+      <RouteStack>
+        <div className="gradient-hero full-bleed" />
+        <CanvasSection eyebrow="Test">
+          <div className="showcase-frame"><div className="showcase-frame-inner">content</div></div>
+        </CanvasSection>
+      </RouteStack>
+    </WCS26Shell>
+  );
+}`,
+      );
+      const violations = inspectProject(root);
+      const offenders = violations.filter(
+        (v) => v.rule === "elevation" || v.rule === "radius-token" || v.rule === "no-background-lines",
+      );
+      expect(offenders).toHaveLength(0);
+    } finally {
+      rmSync(root, { recursive: true, force: true });
+    }
+  });
+
+  it("allows the white-pill CTA pattern (bg-[var(--ink)] + rounded-[var(--radius-pill)])", () => {
+    const root = makeFixtureDir();
+    try {
+      writeFixturePage(
+        root,
+        "test-cta",
+        `export default function Page() {
+  return (
+    <WCS26Shell>
+      <RouteStack>
+        <CanvasSection eyebrow="Test">
+          <a className="rounded-[var(--radius-pill)] bg-[var(--ink)] text-[var(--canvas)]">Open</a>
+        </CanvasSection>
+      </RouteStack>
+    </WCS26Shell>
+  );
+}`,
+      );
+      const violations = inspectProject(root);
+      const offenders = violations.filter(
+        (v) => v.rule === "elevation" || v.rule === "scale-only",
+      );
+      expect(offenders).toHaveLength(0);
+    } finally {
+      rmSync(root, { recursive: true, force: true });
+    }
+  });
+});

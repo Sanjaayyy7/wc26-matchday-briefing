@@ -77,7 +77,7 @@
   --radius-2xl: 1.75rem;
   --radius-3xl: 2rem;
   --radius-4xl: 2.5rem;
-  --radius-card: 0.5rem;
+  --radius-card: 1.25rem;
   --radius-pill: 9999px;
   --blur-glass: 20px;
   --shadow-pop: 0 8px 40px rgba(0,0,0,.5);
@@ -145,7 +145,7 @@
   --secondary-foreground: var(--ink);
   --muted: var(--neutral-fill);
   --muted-foreground: var(--ink-muted);
-  --accent: #5e6ad2;
+  --accent: #5b53ff;
   --accent-foreground: #ffffff;
   --destructive: var(--down);
   --border: var(--hairline);
@@ -173,19 +173,27 @@
      content containers (surface/elevated are transparent); only faint hover
      washes + hairlines define structure. */
   --void: #000000;
-  --canvas: #08090a;
-  --surface: #0f1011;
+  --canvas: #000000;        /* Codex mid-sections are true black */
+  --surface: #0e0e10;
   --panel: rgba(255, 255, 255, 0.028);
   --panel-strong: rgba(255, 255, 255, 0.05);
   --rail: rgba(0, 0, 0, 0.6);
   --elevated: transparent;
   --ink: #f7f8f8;
-  --ink-muted: #8a8f98;
-  --ink-faint: #5f5f59;
-  --hairline: rgba(255,255,255,.06);
-  --line: rgba(255,255,255,.09);
+  --ink-muted: #9aa0aa;
+  --ink-faint: #6b6f78;
+  --hairline: rgba(255,255,255,.08);
+  --line: rgba(255,255,255,.12);
   --tint: #f4f4ef;
-  --accent-bright: #8fa6ff;
+  --accent-bright: #8f8bff;
+  /* Codex cinematic gradients (bookend) — sampled from the reference shots. */
+  --gradient-hero:
+    radial-gradient(90% 80% at 28% 8%, rgba(150,156,224,.55) 0%, transparent 42%),
+    linear-gradient(135deg, #2c2d86 0%, #1b1c4f 28%, #0a0a1f 58%, #000 100%);
+  --gradient-cta:
+    linear-gradient(100deg, #0a0a1f 0%, #2c2d86 42%, #4b4bf0 74%, #6f6dff 100%);
+  --gradient-frame:
+    linear-gradient(135deg, #5b53ff 0%, #7b78ff 50%, #4b4bf0 100%);
   /* Aurora language — desaturated sage-jade signal, muted clay-red breach,
      muted gold for the "close" tier. Never neon. */
   --up: #7fd1b0;
@@ -230,7 +238,7 @@
   --secondary-foreground: var(--ink);
   --muted: var(--neutral-fill);
   --muted-foreground: var(--ink-muted);
-  --accent: #5e6ad2;
+  --accent: #5b53ff;
   --accent-foreground: #0b0b0c;
   --destructive: var(--down);
   --border: var(--hairline);
@@ -294,16 +302,16 @@
 @utility text-hero {
   font-family: var(--font-display);
   font-size: clamp(2.75rem, 6vw, 6.5rem); /* S1 — 44 → 104 */
-  font-weight: 560;
-  letter-spacing: -0.022em;
-  line-height: 1.0;
+  font-weight: 520;            /* Codex display is lighter / opener than Linear */
+  letter-spacing: -0.012em;
+  line-height: 1.05;
 }
 @utility text-display {
   font-family: var(--font-display);
   font-size: clamp(1.875rem, 3.4vw, 3.5rem); /* S2 — 30 → 56 (section titles) */
-  font-weight: 510;
-  letter-spacing: -0.022em;
-  line-height: 1.04;
+  font-weight: 460;
+  letter-spacing: -0.014em;
+  line-height: 1.06;
 }
 @utility text-title {
   font-family: var(--font-display);
@@ -392,32 +400,6 @@
   }
 }
 
-/* Forecast Pulse nodes: hover ring for the per-call detail. */
-.pulse-node {
-  cursor: pointer;
-  transition: stroke 0.2s var(--ease);
-}
-.pulse-node:hover {
-  stroke: var(--ink);
-  stroke-width: 2;
-}
-
-/* Forecast Pulse: the hero line draws itself on load. */
-@keyframes pulse-draw {
-  from {
-    stroke-dashoffset: 1;
-  }
-  to {
-    stroke-dashoffset: 0;
-  }
-}
-@media (prefers-reduced-motion: reduce) {
-  #forecast-pulse-path {
-    animation: none !important;
-    stroke-dashoffset: 0 !important;
-  }
-}
-
 @keyframes settle-flash {
   0%   { box-shadow: inset 0 0 0 1px rgba(244,244,239,0.9), 0 0 0 0 rgba(244,244,239,0.0); }
   35%  { box-shadow: inset 0 0 0 1px rgba(244,244,239,0.9), 0 0 18px 2px rgba(244,244,239,0.35); }
@@ -500,12 +482,12 @@
     linear-gradient(180deg, transparent, color-mix(in oklab, var(--ink) 4%, transparent), transparent);
 }
 
-/* Single-accent section rule (constitution: one accent, no rainbow, no glow). */
+/* Single-accent section rule (Codex constitution: one violet accent, no rainbow). */
 @utility chroma-rule {
   background: linear-gradient(
     90deg,
-    var(--up),
-    color-mix(in oklab, var(--up) 28%, transparent) 46%,
+    var(--accent),
+    color-mix(in oklab, var(--accent) 28%, transparent) 46%,
     transparent
   );
 }
@@ -522,6 +504,33 @@
     transparent
   );
   mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 30%, transparent 70%);
+}
+
+/* ── CODEX CINEMATIC LAYER ────────────────────────────────────────────────
+   Bookend gradient bands (hero + closing CTA) and the device-frame motif. */
+@utility gradient-hero {
+  background: var(--gradient-hero);
+}
+@utility gradient-cta {
+  background: var(--gradient-cta);
+}
+/* Codex device-frame: a panel floats on a violet gradient mat with a soft glow. */
+@utility showcase-frame {
+  position: relative;
+  border-radius: 1.5rem;
+  padding: 7px;
+  background: var(--gradient-frame);
+  box-shadow: 0 28px 90px -24px color-mix(in oklab, var(--accent) 55%, transparent);
+}
+@utility showcase-frame-inner {
+  border-radius: calc(1.5rem - 7px);
+  background: var(--surface);
+  overflow: hidden;
+}
+/* Break a section out of the centered max-width container to viewport width. */
+@utility full-bleed {
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
 }
 
 @utility signal-sheen {
@@ -581,7 +590,7 @@
   top: 0;
   bottom: 0;
   width: 2px;
-  background: var(--up);
+  background: var(--accent);
   transform: scaleY(0);
   transform-origin: top;
   transition: transform var(--dur) var(--ease);
