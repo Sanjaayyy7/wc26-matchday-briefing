@@ -3,7 +3,7 @@ import { WCS26Shell } from "@/components/wc26-shell";
 import { RouteStack, CanvasSection } from "@/components/cinematic";
 import { IntelligenceCard } from "@/components/intelligence-card";
 import { SettlementRow } from "@/components/settlement-row";
-import { CalibrationDiagram } from "@/components/calibration-diagram";
+import { ReliabilityAudit } from "@/components/reliability-audit";
 import { MatchdayToday, type TodaysMatch } from "@/components/matchday-today";
 import { GradientBand } from "@/components/ui/gradient-band";
 import { ShowcaseFrame } from "@/components/ui/showcase-frame";
@@ -281,26 +281,6 @@ export default function HomePage() {
           </div>
         </GradientBand>
 
-        {/* ── HERO SHOWCASE — Calibration in a Codex device frame ── */}
-        <CanvasSection eyebrow="Calibration · the model, audited" title="On the diagonal = calibrated">
-          <div className="flex flex-col gap-4">
-            <p className="text-caption max-w-md text-[var(--ink-muted)]">
-              On the diagonal = calibrated. Off it = miscalibrated. We publish both.
-            </p>
-            <ShowcaseFrame>
-              <div className="p-6 md:p-10">
-                <CalibrationDiagram
-                  bins={accountability.official.calibrationBins ?? []}
-                  caption={`${agg.n} graded · ECE ${eceStr} vs 3.0% target`}
-                />
-              </div>
-            </ShowcaseFrame>
-            <Link href="/methodology" className="ix-link text-caption underline underline-offset-2">
-              How we grade ourselves →
-            </Link>
-          </div>
-        </CanvasSection>
-
         {todaysMatches.length > 0 && (
           <Reveal>
           <CanvasSection eyebrow="Matchday" title="Today's slate">
@@ -325,6 +305,24 @@ export default function HomePage() {
           <div className="grid animate-rise gap-12 lg:grid-cols-[2fr_320px]">
             {/* ── MAIN COLUMN ── */}
             <div className="flex flex-col gap-16">
+              {/* RELIABILITY AUDIT — the framed honesty artifact (Image #7) */}
+              <div className="flex flex-col gap-4">
+                <p className="text-caption max-w-md text-[var(--ink-muted)]">
+                  On the diagonal = calibrated. Off it = miscalibrated. We publish the gap.
+                </p>
+                <ShowcaseFrame>
+                  <div className="p-6 md:p-8">
+                    <ReliabilityAudit
+                      bins={accountability.official.calibrationBins ?? []}
+                      graded={agg.n}
+                    />
+                  </div>
+                </ShowcaseFrame>
+                <Link href="/methodology" className="ix-link text-caption underline underline-offset-2">
+                  How we grade ourselves →
+                </Link>
+              </div>
+
               {/* IntelligenceSection — 2×2 analytical briefing */}
               <div className="flex flex-col gap-3">
                 <h2 className="text-label">Intelligence briefing</h2>
