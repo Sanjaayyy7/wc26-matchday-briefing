@@ -8,7 +8,7 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-inter), Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  --font-display: var(--font-archivo), var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-jetbrains-mono), "JetBrains Mono", ui-monospace, "SF Mono", monospace;
 
   --color-canvas: var(--canvas);
@@ -77,20 +77,24 @@
   --radius-2xl: 1.75rem;
   --radius-3xl: 2rem;
   --radius-4xl: 2.5rem;
+  --radius-card: 0.5rem;
+  --radius-pill: 9999px;
+  --blur-glass: 20px;
+  --shadow-pop: 0 8px 40px rgba(0,0,0,.5);
 }
 
 /* Light theme = warm editorial "paper" (the annual-report side). The terminal
    black lives in `.dark` below; the toggle flips between the two. */
 :root {
   --void: #ffffff;
-  --canvas: #f5f4ef;
-  --surface: transparent;
+  --canvas: #fbfbfb;
+  --surface: #ffffff;
   --panel: rgba(16, 16, 12, 0.04);
   --panel-strong: rgba(16, 16, 12, 0.07);
   --rail: rgba(255, 255, 255, 0.7);
   --elevated: transparent;
-  --ink: #14150f;
-  --ink-muted: #5c5d54;
+  --ink: #0f1011;
+  --ink-muted: #6b7280;
   --ink-faint: #9a9a8d;
   --hairline: rgba(16, 16, 12, 0.12);
   --line: rgba(16, 16, 12, 0.16);
@@ -141,7 +145,7 @@
   --secondary-foreground: var(--ink);
   --muted: var(--neutral-fill);
   --muted-foreground: var(--ink-muted);
-  --accent: var(--tint);
+  --accent: #5e6ad2;
   --accent-foreground: #ffffff;
   --destructive: var(--down);
   --border: var(--hairline);
@@ -169,18 +173,19 @@
      content containers (surface/elevated are transparent); only faint hover
      washes + hairlines define structure. */
   --void: #000000;
-  --canvas: #000000;
-  --surface: transparent;
+  --canvas: #08090a;
+  --surface: #0f1011;
   --panel: rgba(255, 255, 255, 0.028);
   --panel-strong: rgba(255, 255, 255, 0.05);
   --rail: rgba(0, 0, 0, 0.6);
   --elevated: transparent;
-  --ink: #f4f4ef;
-  --ink-muted: #9b9b94;
+  --ink: #f7f8f8;
+  --ink-muted: #8a8f98;
   --ink-faint: #5f5f59;
-  --hairline: rgba(255, 255, 255, 0.07);
-  --line: rgba(255, 255, 255, 0.1);
+  --hairline: rgba(255,255,255,.06);
+  --line: rgba(255,255,255,.09);
   --tint: #f4f4ef;
+  --accent-bright: #8fa6ff;
   /* Aurora language — desaturated sage-jade signal, muted clay-red breach,
      muted gold for the "close" tier. Never neon. */
   --up: #7fd1b0;
@@ -225,7 +230,7 @@
   --secondary-foreground: var(--ink);
   --muted: var(--neutral-fill);
   --muted-foreground: var(--ink-muted);
-  --accent: var(--tint);
+  --accent: #5e6ad2;
   --accent-foreground: #0b0b0c;
   --destructive: var(--down);
   --border: var(--hairline);
@@ -289,22 +294,22 @@
 @utility text-hero {
   font-family: var(--font-display);
   font-size: clamp(2.75rem, 6vw, 6.5rem); /* S1 — 44 → 104 */
-  font-weight: 800;
-  letter-spacing: -0.035em;
-  line-height: 0.92;
+  font-weight: 560;
+  letter-spacing: -0.022em;
+  line-height: 1.0;
 }
 @utility text-display {
   font-family: var(--font-display);
   font-size: clamp(1.875rem, 3.4vw, 3.5rem); /* S2 — 30 → 56 (section titles) */
-  font-weight: 700;
-  letter-spacing: -0.02em;
+  font-weight: 510;
+  letter-spacing: -0.022em;
   line-height: 1.04;
 }
 @utility text-title {
   font-family: var(--font-display);
   font-size: clamp(1.125rem, 1.4vw, 1.375rem); /* S3 — 18 → 22 (subheads/leads) */
-  font-weight: 600;
-  letter-spacing: -0.01em;
+  font-weight: 590;
+  letter-spacing: -0.012em;
   line-height: 1.3;
 }
 @utility text-body {
@@ -508,6 +513,15 @@
 /* Retired the rainbow text gradient — display copy reads in solid ink. */
 @utility chroma-text {
   color: var(--ink);
+}
+
+@utility hero-glow {
+  background: radial-gradient(
+    ellipse 80% 60% at 50% 0%,
+    color-mix(in oklab, var(--accent) 12%, transparent),
+    transparent
+  );
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 30%, transparent 70%);
 }
 
 @utility signal-sheen {

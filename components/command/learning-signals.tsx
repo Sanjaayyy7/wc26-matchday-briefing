@@ -1,5 +1,7 @@
 "use client";
 
+import { Surface } from "@/components/ui/surface";
+
 interface LearningSignal {
   id: string;
   status: "monitoring" | "resolved" | "action_required";
@@ -62,9 +64,9 @@ export function LearningSig({ signal }: { signal: LearningSignal }) {
   const evidenceProgress = Math.min(100, (signal.currentN / signal.promotionRequiredN) * 100);
 
   return (
-    <div className="border border-[var(--line)] rounded overflow-hidden">
+    <Surface className="overflow-hidden">
       {/* Header */}
-      <div className="px-4 py-3 border-b border-[var(--line)] flex items-start justify-between gap-3">
+      <div className="px-4 py-3 border-b border-[var(--hairline)] flex items-start justify-between gap-3">
         <div>
           <div className="flex items-center gap-2 mb-1">
             <span
@@ -98,7 +100,7 @@ export function LearningSig({ signal }: { signal: LearningSignal }) {
         </div>
 
         {/* Governance decision */}
-        <div className="rounded-sm bg-[rgba(255,255,255,0.03)] border border-[rgba(255,255,255,0.06)] px-3 py-2.5">
+        <div className="rounded-[var(--radius-card)] bg-[var(--canvas)] border border-[var(--hairline)] px-3 py-2.5">
           <div className="flex items-center justify-between mb-2">
             <span className="text-fine font-semibold text-[var(--ink-faint)] uppercase tracking-widest">Promotion Decision</span>
             <span
@@ -140,14 +142,14 @@ export function LearningSig({ signal }: { signal: LearningSignal }) {
       </div>
 
       {/* Footer */}
-      <div className="px-4 py-2.5 border-t border-[var(--line)] bg-[rgba(255,255,255,0.015)]">
+      <div className="px-4 py-2.5 border-t border-[var(--hairline)] bg-[var(--canvas)]">
         <div className="text-fine text-[var(--ink-faint)]">
           Next review: <span className="text-[var(--warn)]">{signal.revisitDate}</span>
           <span className="mx-2 opacity-40">·</span>
           {signal.revisitTrigger}
         </div>
       </div>
-    </div>
+    </Surface>
   );
 }
 
@@ -156,7 +158,7 @@ export function LearningSignals({ signals }: { signals: LearningSignal[] }) {
   return (
     <section className="border-t border-[var(--line)] px-6 py-5">
       <div className="flex items-center gap-3 mb-4">
-        <div className="text-fine font-semibold text-[var(--ink-faint)] uppercase tracking-widest">
+        <div className="text-label font-semibold text-[var(--ink)]">
           Learning Signals
         </div>
         <div className="flex-1 h-px bg-[var(--hairline)]" />

@@ -173,7 +173,7 @@ export function ScoreProbabilitySurface({ grid, homeTeam, awayTeam, lambdas, elo
               className={[
                 "flex items-center gap-1 px-2 py-1 rounded-full border text-slight tabular-nums",
                 i === 0
-                  ? "border-[rgba(127,209,176,0.28)] bg-[rgba(127,209,176,0.04)] text-[var(--up)]"
+                  ? "border-[var(--up)]/28 bg-[var(--up)]/5 text-[var(--up)]"
                   : "border-[var(--hairline)] text-[var(--ink-muted)]",
               ].join(" ")}
             >
@@ -186,7 +186,7 @@ export function ScoreProbabilitySurface({ grid, homeTeam, awayTeam, lambdas, elo
 
       {/* Lock countdown */}
       {lockDisplay && (
-        <div className="flex items-center justify-between px-3 py-2 border border-[rgba(255,196,107,0.22)] bg-[rgba(255,196,107,0.025)] rounded">
+        <div className="flex items-center justify-between px-3 py-2 border border-[var(--warn)]/22 bg-[var(--warn)]/5 rounded-[var(--radius-card)]">
           <div>
             <div className="text-slight text-[var(--warn)] font-medium">Prediction lock expires</div>
             <div className="text-fine text-[var(--ink-faint)]">

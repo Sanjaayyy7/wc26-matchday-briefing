@@ -1,6 +1,7 @@
 import { WCS26Shell } from "@/components/wc26-shell";
 import { CanvasSection, DataPlane, RouteStack, SignalLine } from "@/components/cinematic";
 import { OddsTable, type OddsRow } from "@/components/odds-table";
+import { Surface } from "@/components/ui/surface";
 import { allClubs } from "@/lib/data";
 import { kitAccent } from "@/lib/kit-color";
 import simulation from "@/data/simulation.json";
@@ -71,7 +72,7 @@ export default function SimulatorPage() {
                 extra-time/penalty resolution for drawn knockouts.{" "}
                 {sim.runMeta.playedLocked} real results locked in.
               </p>
-              <div>
+              <Surface className="p-5">
                 <p className="text-label">Champion pressure</p>
                 <div className="mt-5 space-y-4">
                   {leaders.map((row, index) => (
@@ -95,7 +96,7 @@ export default function SimulatorPage() {
                     </div>
                   ))}
                 </div>
-              </div>
+              </Surface>
             </div>
           </DataPlane>
         </CanvasSection>

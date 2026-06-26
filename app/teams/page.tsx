@@ -1,8 +1,9 @@
 import { WCS26Shell } from "@/components/wc26-shell";
 import Link from "next/link";
 import { Crest } from "@/components/crest";
-import { CanvasSection, DataPlane, RouteStack, SignalLine } from "@/components/cinematic";
+import { CanvasSection, RouteStack, SignalLine } from "@/components/cinematic";
 import { NumberTicker } from "@/components/number-ticker";
+import { Surface } from "@/components/ui/surface";
 import { allClubs } from "@/lib/data";
 import model from "@/data/model.json";
 import simulation from "@/data/simulation.json";
@@ -33,17 +34,17 @@ export default function TeamsPage() {
     >
       <RouteStack>
         <CanvasSection eyebrow="Power rating table" title="All 48 dossiers, ranked by Elo.">
-          <DataPlane>
-          <ul className="divide-y divide-[var(--line)]">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {clubs.map((c, i) => {
               const key = c.datasetName ?? c.name;
+              const champPct = (sim[key]?.champion ?? 0) * 100;
               return (
-                <li key={c.id}>
+                <Surface key={c.id} interactive>
                   <Link
                     href={`/team/${c.id}`}
-                    className="grid grid-cols-[2rem_auto_1fr_auto] items-center gap-4 py-4 transition-colors duration-300 hover:bg-[var(--panel)]"
+                    className="group flex items-center gap-3 p-4 transition-colors duration-300 hover:bg-[var(--panel)]"
                   >
-                    <span className="text-caption tabular w-6">{i + 1}</span>
+                    <span className="text-label tabular w-6 shrink-0 text-[var(--ink-faint)]">{i + 1}</span>
                     <Crest
                       short={c.short}
                       primary={c.primary}
@@ -51,26 +52,28 @@ export default function TeamsPage() {
                       name={c.name}
                       size={40}
                     />
-                    <span className="text-title flex-1 truncate">{c.name}</span>
-                    <span className="flex flex-col items-end">
+                    <span className="min-w-0 flex-1">
+                      <span className="text-title block truncate transition-colors duration-300 group-hover:text-[var(--accent)]">{c.name}</span>
+                      <span className="text-label tabular mt-0.5 block text-[var(--ink-muted)]">
+                        cup <span className="text-[var(--up)]">{champPct.toFixed(1)}%</span>
+                      </span>
+                    </span>
+                    <span className="shrink-0 text-right">
                       {ratings[key] !== undefined ? (
                         <NumberTicker
                           value={ratings[key]}
-                          className="text-title"
+                          className="text-display"
                         />
                       ) : (
-                        <span className="text-title">—</span>
+                        <span className="text-display">—</span>
                       )}
-                      <span className="text-caption tabular">
-                        cup {((sim[key]?.champion ?? 0) * 100).toFixed(1)}%
-                      </span>
+                      <span className="text-label tabular mt-0.5 block text-[var(--ink-faint)]">Elo</span>
                     </span>
                   </Link>
-                </li>
+                </Surface>
               );
             })}
-          </ul>
-          </DataPlane>
+          </div>
         </CanvasSection>
       </RouteStack>
     </WCS26Shell>

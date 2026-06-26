@@ -17,6 +17,7 @@ import { ChampionshipProjection as ChampionProjectionPanel } from "./championshi
 import { LearningSignals } from "./learning-signals";
 import { ReliabilityTimeline } from "./reliability-timeline";
 import { WC26ShellHeader } from "@/components/wc26-shell-header";
+import { Surface } from "@/components/ui/surface";
 import type { ReliabilityTick } from "@/lib/command-data";
 
 export type OperationalPrediction = {
@@ -114,10 +115,10 @@ export function CommandShell({
         extra={
           <>
             <div className="flex items-center gap-1.5 px-4 border-l border-[var(--hairline)] text-[var(--ink-faint)]">
-              <span>Next:</span>
-              <span className="font-semibold text-[var(--warn)]">{nextClosing}</span>
+              <span className="text-fine">Next:</span>
+              <span className="text-fine font-semibold text-[var(--warn)]">{nextClosing}</span>
             </div>
-            <div className="ml-auto text-[var(--ink-faint)]">{matchdayLabel}</div>
+            <div className="ml-auto text-fine text-[var(--ink-faint)]">{matchdayLabel}</div>
           </>
         }
       />
@@ -155,21 +156,23 @@ export function CommandShell({
         {/* Right: System health + projections */}
         <div className="border-l border-[var(--line)] overflow-y-auto">
           <div className="p-4 border-b border-[var(--hairline)]">
-            <div className="text-tiny font-semibold text-[var(--ink-faint)] uppercase tracking-widest mb-3">System Health</div>
+            <div className="text-label font-semibold text-[var(--ink)] mb-3">System Health</div>
             <div className="flex items-center gap-2 mb-3">
               <span className="inline-block h-1.5 w-1.5 rounded-full" style={{ backgroundColor: dotColor }} />
               <span className={`text-label font-semibold ${textCls}`}>{systemHealth.status}</span>
             </div>
-            {[
-              { key: "Brier score", val: systemHealth.brier.toFixed(3) },
-              { key: "Reliability (ECE)", val: `${(systemHealth.ece * 100).toFixed(1)}%` },
-              { key: "RPS", val: systemHealth.rps.toFixed(3) },
-            ].map(({ key, val }) => (
-              <div key={key} className="flex justify-between items-center py-1 border-b border-[rgba(255,255,255,0.025)] last:border-0">
-                <span className="text-slight text-[var(--ink-faint)]">{key}</span>
-                <span className={`text-slight font-semibold data-mono ${metricColor(key, systemHealth.status)}`}>{val}</span>
-              </div>
-            ))}
+            <Surface className="px-3 py-2 rounded-[var(--radius-card)]">
+              {[
+                { key: "Brier score", val: systemHealth.brier.toFixed(3) },
+                { key: "Reliability (ECE)", val: `${(systemHealth.ece * 100).toFixed(1)}%` },
+                { key: "RPS", val: systemHealth.rps.toFixed(3) },
+              ].map(({ key, val }) => (
+                <div key={key} className="flex justify-between items-center py-1 border-b border-[var(--hairline)] last:border-0">
+                  <span className="text-slight text-[var(--ink-faint)]">{key}</span>
+                  <span className={`text-slight font-semibold tabular-nums ${metricColor(key, systemHealth.status)}`}>{val}</span>
+                </div>
+              ))}
+            </Surface>
             {systemHealth.status === "BREACH" && (
               <div className="mt-3 text-fine text-[var(--down)] leading-snug">
                 All metrics exceed training-gate thresholds. Active investigation: LSig-001.

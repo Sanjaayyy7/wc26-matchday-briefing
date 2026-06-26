@@ -3,11 +3,11 @@
 import type { CommandFixture, ForecastGrade } from "@/lib/command-data";
 
 const GRADE_STYLES: Record<ForecastGrade, { bg: string; text: string; border?: string }> = {
-  sharp:    { bg: "bg-[rgba(127,209,176,0.1)]",  text: "text-[var(--up)]" },
-  solid:    { bg: "bg-[rgba(74,144,217,0.1)]",   text: "text-[var(--signal-1)]" },
-  close:    { bg: "bg-[rgba(255,196,107,0.1)]",  text: "text-[var(--warn)]" },
-  miss:     { bg: "bg-[rgba(224,101,79,0.1)]",   text: "text-[var(--down)]" },
-  surprise: { bg: "bg-[rgba(224,101,79,0.15)]",  text: "text-[var(--down)]", border: "border border-[rgba(224,101,79,0.28)]" },
+  sharp:    { bg: "bg-[var(--up)]/10",  text: "text-[var(--up)]" },
+  solid:    { bg: "bg-[var(--signal-1)]/10",   text: "text-[var(--signal-1)]" },
+  close:    { bg: "bg-[var(--warn)]/10",  text: "text-[var(--warn)]" },
+  miss:     { bg: "bg-[var(--down)]/10",   text: "text-[var(--down)]" },
+  surprise: { bg: "bg-[var(--down)]/15",  text: "text-[var(--down)]", border: "border border-[var(--down)]/28" },
 };
 
 function GradeBadge({ grade }: { grade: ForecastGrade }) {
@@ -21,7 +21,7 @@ function GradeBadge({ grade }: { grade: ForecastGrade }) {
 
 function LockBadge() {
   return (
-    <span className="text-micro font-bold px-1.5 py-0.5 rounded-sm uppercase tracking-wide bg-[rgba(255,255,255,0.05)] text-[var(--ink-faint)]">
+    <span className="text-micro font-bold px-1.5 py-0.5 rounded-sm uppercase tracking-wide bg-[var(--hairline)] text-[var(--ink-faint)]">
       Locked
     </span>
   );
@@ -56,8 +56,8 @@ export function ForecastRecord({ fixtures, selectedSlug, onSelect }: Props) {
               className={[
                 "w-full flex items-center gap-2 px-4 py-1.5 border-b border-[var(--hairline)] text-left transition-colors",
                 f.slug === selectedSlug
-                  ? "bg-[rgba(127,209,176,0.04)]"
-                  : "hover:bg-[rgba(255,255,255,0.03)]",
+                  ? "bg-[var(--accent)]/5 border-l border-l-[var(--accent)]"
+                  : "hover:bg-[var(--hairline)] border-l border-l-transparent",
               ].join(" ")}
             >
               <div className="flex-1 min-w-0">
@@ -88,8 +88,8 @@ export function ForecastRecord({ fixtures, selectedSlug, onSelect }: Props) {
               className={[
                 "w-full flex items-center gap-2 px-4 py-1.5 border-b border-[var(--hairline)] text-left transition-colors",
                 f.slug === selectedSlug
-                  ? "bg-[rgba(127,209,176,0.04)]"
-                  : "hover:bg-[rgba(255,255,255,0.03)]",
+                  ? "bg-[var(--accent)]/5 border-l border-l-[var(--accent)]"
+                  : "hover:bg-[var(--hairline)] border-l border-l-transparent",
               ].join(" ")}
             >
               <div className="flex-1 min-w-0">

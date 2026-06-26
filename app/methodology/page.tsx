@@ -3,6 +3,7 @@ import type { ReactNode } from "react";
 import { WCS26Shell } from "@/components/wc26-shell";
 import { RouteStack, CanvasSection } from "@/components/cinematic";
 import { IntelligenceCard } from "@/components/intelligence-card";
+import { Surface } from "@/components/ui/surface";
 import type { AccountabilityOutput } from "@/lib/accountability";
 import accountabilityJson from "@/data/backtest/wc26-accountability.json";
 import learningSignalsJson from "@/data/learning-signals.json";
@@ -13,10 +14,10 @@ const accountability = accountabilityJson as AccountabilityOutput;
 
 function Principle({ title, children }: { title: string; children: ReactNode }) {
   return (
-    <div className="flex flex-col gap-2">
-      <h3 className="text-label">{title}</h3>
-      <p className="max-w-2xl text-[var(--ink-muted)]">{children}</p>
-    </div>
+    <Surface className="p-5 flex flex-col gap-2">
+      <h3 className="text-title">{title}</h3>
+      <p className="text-body">{children}</p>
+    </Surface>
   );
 }
 
@@ -41,7 +42,7 @@ export default function MethodologyPage() {
     <WCS26Shell route="methodology">
       <RouteStack>
         <CanvasSection eyebrow="Operating procedures" title="How WC26 grades itself">
-          <p className="max-w-2xl text-[var(--ink-muted)]">
+          <p className="max-w-2xl text-title leading-relaxed text-[var(--ink-muted)]">
             WC26 is an accountable forecasting engine. Every forecast is locked before kickoff,
             graded after the whistle, and audited in public — including where the model is wrong.
             These are the operating procedures behind the record.
@@ -49,7 +50,7 @@ export default function MethodologyPage() {
         </CanvasSection>
 
         <CanvasSection eyebrow="Protocol" title="Lock, settle, score">
-          <div className="flex flex-col gap-8">
+          <div className="flex flex-col gap-4 max-w-3xl">
             <Principle title="Lock policy">
               Every prediction is committed before kickoff with a timestamp and stored in an
               immutable ledger. Locked probabilities are never edited after the fact — settlement
@@ -67,8 +68,8 @@ export default function MethodologyPage() {
           </div>
         </CanvasSection>
 
-        <CanvasSection eyebrow="Definitions" title="Verdicts & gates">
-          <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
+        <CanvasSection eyebrow="Definitions" title="Verdicts &amp; gates">
+          <div className="grid grid-cols-1 gap-3 md:grid-cols-2 max-w-3xl">
             <IntelligenceCard category="Verdict — hit / close / miss">
               <strong className="text-[var(--ink)]">Hit:</strong> the model&rsquo;s most-likely
               outcome occurred. <strong className="text-[var(--ink)]">Close:</strong> the realized
@@ -81,14 +82,16 @@ export default function MethodologyPage() {
               accent={calibStatus === "NOMINAL" ? "up" : calibStatus === "WARNING" ? "warn" : "down"}
             >
               Expected calibration error under 3% is NOMINAL, under 5% is WARNING, otherwise BREACH.
-              Current calibration error is {ecePct}% over {graded} graded matches — status{" "}
+              Current calibration error is{" "}
+              <span className="tabular-nums">{ecePct}%</span> over{" "}
+              <span className="tabular-nums">{graded}</span> graded matches — status{" "}
               {calibStatus}, shown rather than hidden.
             </IntelligenceCard>
           </div>
         </CanvasSection>
 
-        <CanvasSection eyebrow="Governance" title="Versioning & model promotion">
-          <div className="flex flex-col gap-8">
+        <CanvasSection eyebrow="Governance" title="Versioning &amp; model promotion">
+          <div className="flex flex-col gap-4 max-w-3xl">
             <Principle title="Champion model">
               The live model is {ls.champion}. A version only changes when a challenger earns it.
             </Principle>
@@ -107,7 +110,7 @@ export default function MethodologyPage() {
         </CanvasSection>
 
         <CanvasSection eyebrow="Validation" title="How we validate">
-          <div className="flex flex-col gap-8">
+          <div className="flex flex-col gap-4 max-w-3xl">
             <Principle title="Tournament-holdout regime">
               The model is measured on the regime it actually runs in: finals-tournament
               matches — the World Cup, the Euros, Copa América, the Africa Cup of Nations, and
@@ -130,16 +133,22 @@ export default function MethodologyPage() {
           </div>
         </CanvasSection>
 
-        <CanvasSection eyebrow="Caveats" title="Sample size & limits">
-          <p className="max-w-2xl text-[var(--ink-muted)]">
-            The official sample is {graded} graded matches. Below roughly 30–50 matches, all figures
-            are provisional and carry wide error bars; they describe the record so far, not a settled
-            conclusion. See the full{" "}
-            <Link href="/record" className="underline underline-offset-2">
-              accountability record →
-            </Link>
-            .
-          </p>
+        <CanvasSection eyebrow="Caveats" title="Sample size &amp; limits">
+          <Surface className="p-5 max-w-2xl">
+            <p className="text-body">
+              The official sample is{" "}
+              <span className="tabular-nums">{graded}</span> graded matches. Below roughly 30–50
+              matches, all figures are provisional and carry wide error bars; they describe the
+              record so far, not a settled conclusion. See the full{" "}
+              <Link
+                href="/"
+                className="underline underline-offset-2 text-[var(--accent)] hover:opacity-80 transition-opacity duration-300"
+              >
+                accountability record →
+              </Link>
+              .
+            </p>
+          </Surface>
         </CanvasSection>
       </RouteStack>
     </WCS26Shell>

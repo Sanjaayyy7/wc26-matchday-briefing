@@ -8,6 +8,7 @@ import { ForecastPulse } from "@/components/forecast-pulse";
 import { MatchdayToday, type TodaysMatch } from "@/components/matchday-today";
 import { AuroraFieldMount } from "@/components/aurora-field-mount";
 import { Reveal } from "@/components/reveal";
+import { LedgerRecordSections } from "@/components/ledger-record-sections";
 import { allMatchViews } from "@/lib/match-view";
 import { selectUpcomingLocks } from "@/lib/upcoming-locks";
 import { fixtureBySlug, clubById, allClubs } from "@/lib/data";
@@ -104,7 +105,8 @@ export default function HomePage() {
     .sort((a, b) => b.modelBrier! - a.modelBrier!);
 
   const correct = settled.filter((e) => e.correctPick).length;
-  const openLocks = entries.filter((e) => e.result === undefined).length;
+  const openEntries = entries.filter((e) => e.result === undefined);
+  const openLocks = openEntries.length;
 
   const gradeCounts = { SURPRISE: 0, MISS: 0, CLOSE: 0, SOLID: 0, SHARP: 0 };
   for (const e of settled) gradeCounts[gradeFrom(e.modelBrier!)]++;
@@ -440,6 +442,13 @@ export default function HomePage() {
           </div>
         </CanvasSection>
         </Reveal>
+
+        {/* ── RECORD SECTIONS — absorbed from /record ── */}
+        <LedgerRecordSections
+          officialRows={accountability.official.rows}
+          caveats={accountability.caveats}
+          openEntries={openEntries}
+        />
       </RouteStack>
     </WCS26Shell>
   );

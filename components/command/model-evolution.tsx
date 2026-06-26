@@ -1,11 +1,12 @@
 "use client";
 
 import type { EvolutionEntry } from "@/lib/command-data";
+import { Surface } from "@/components/ui/surface";
 
 const ENTRY_STYLES = {
-  surprise:    { borderClass: "border-l-[var(--down)]", bgClass: "bg-[rgba(224,101,79,0.02)]", tagBg: "bg-[rgba(224,101,79,0.12)]", tagText: "text-[var(--down)]", label: "Surprise observed" },
-  calibration: { borderClass: "border-l-[var(--warn)]", bgClass: "bg-[rgba(255,196,107,0.02)]", tagBg: "bg-[rgba(255,196,107,0.1)]",  tagText: "text-[var(--warn)]", label: "Calibration updated" },
-  confirm:     { borderClass: "border-l-[var(--up)]",   bgClass: "bg-[rgba(127,209,176,0.02)]", tagBg: "bg-[rgba(127,209,176,0.1)]",  tagText: "text-[var(--up)]",   label: "Pattern confirmed" },
+  surprise:    { borderClass: "border-l-[var(--down)]", tagBg: "bg-[var(--down)]/12", tagText: "text-[var(--down)]", label: "Surprise observed" },
+  calibration: { borderClass: "border-l-[var(--warn)]", tagBg: "bg-[var(--warn)]/10", tagText: "text-[var(--warn)]", label: "Calibration updated" },
+  confirm:     { borderClass: "border-l-[var(--up)]",   tagBg: "bg-[var(--up)]/10",   tagText: "text-[var(--up)]",   label: "Pattern confirmed" },
 };
 
 const STATUS_COLORS = {
@@ -24,17 +25,17 @@ export function ModelEvolution({ entries }: { entries: EvolutionEntry[] }) {
 
   return (
     <div className="px-6 py-5">
-      <div className="text-tiny font-semibold uppercase tracking-widest text-[var(--ink-faint)] mb-3 flex items-center justify-between">
+      <div className="text-label font-semibold text-[var(--ink)] mb-3 flex items-center justify-between">
         <span>Model evolution</span>
-        <span className="font-normal normal-case text-[var(--ink-faint)]">how this model learns</span>
+        <span className="text-fine font-normal text-[var(--ink-faint)]">how this model learns</span>
       </div>
       <div className="flex flex-col gap-1.5">
         {entries.map((entry) => {
           const s = ENTRY_STYLES[entry.type];
           return (
-            <div
+            <Surface
               key={entry.id}
-              className={`pl-3 pr-3 py-2.5 border-l-2 rounded-r-sm ${s.borderClass} ${s.bgClass}`}
+              className={`pl-3 pr-3 py-2.5 border-l-2 rounded-r-[var(--radius-card)] ${s.borderClass}`}
             >
               <div className="flex items-center gap-2 mb-1.5">
                 <span className="text-fine text-[var(--ink-faint)]">
@@ -50,7 +51,7 @@ export function ModelEvolution({ entries }: { entries: EvolutionEntry[] }) {
               </div>
 
               {entry.autopsy && (
-                <div className="mt-2 pt-2 border-t border-[rgba(224,101,79,0.1)] -mx-3 px-3 pb-0">
+                <div className="mt-2 pt-2 border-t border-[var(--down)]/10 -mx-3 px-3 pb-0">
                   <div className="text-tiny font-semibold uppercase tracking-widest text-[var(--down)] mb-1.5">
                     Forecast autopsy
                   </div>
@@ -64,7 +65,7 @@ export function ModelEvolution({ entries }: { entries: EvolutionEntry[] }) {
                       <span className="text-[var(--ink-muted)] font-medium">{val}</span>
                     </div>
                   ))}
-                  <div className="text-fine text-[var(--ink-faint)] mt-1.5 pt-1.5 border-t border-[rgba(255,255,255,0.04)]">
+                  <div className="text-fine text-[var(--ink-faint)] mt-1.5 pt-1.5 border-t border-[var(--hairline)]">
                     {entry.autopsy.patternNote}
                   </div>
                 </div>
@@ -74,7 +75,7 @@ export function ModelEvolution({ entries }: { entries: EvolutionEntry[] }) {
                 <div className={`w-1 h-1 rounded-full flex-shrink-0 ${STATUS_DOT[entry.statusColor]}`} />
                 <span className={STATUS_COLORS[entry.statusColor]}>{entry.statusLine}</span>
               </div>
-            </div>
+            </Surface>
           );
         })}
       </div>
