@@ -1,7 +1,10 @@
 import { describe, it, expect } from "vitest";
 import { groupByMatchday, defaultSelectedIndex } from "@/lib/match-day-groups";
+import type { MatchView } from "@/lib/match-view";
 
-const v = (iso: string) => ({ fixture: { kickoffISO: iso, slug: iso } } as any);
+// Minimal stub — groupByMatchday only reads fixture.kickoffISO.
+const v = (iso: string) =>
+  ({ fixture: { kickoffISO: iso, slug: iso } }) as unknown as MatchView;
 
 describe("groupByMatchday", () => {
   it("buckets views by ET calendar date, ascending", () => {
