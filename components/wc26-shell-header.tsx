@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { ThemeToggle } from "./theme-toggle";
 import GlassHeader from "./glass-header";
 import type { SystemHealth } from "@/lib/command-data";
 
@@ -68,9 +67,6 @@ export function WC26ShellHeader({
             <span className="inline-block h-1.5 w-1.5 rounded-full" style={{ backgroundColor: dotColor }} />
             <span className={`font-semibold ${textCls}`}>{systemHealth.status}</span>
             <span className="text-[var(--ink-faint)]">· {systemHealth.graded} graded · 48 nations</span>
-          </div>
-          <div className="pl-2">
-            <ThemeToggle />
           </div>
         </div>
       </nav>
