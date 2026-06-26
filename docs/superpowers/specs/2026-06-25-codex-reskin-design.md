@@ -31,7 +31,7 @@ changes.
 |---|---|
 | Clone scope | Reskin `/` in the Codex skin (single dashboard, content stays in place) |
 | Gradient base | **Bookend** — gradient behind hero + closing CTA band; true-black mid-sections |
-| Hero layout | **Centered** headline + CTA; forecast pulse moves *below* as the first framed showcase |
+| Hero layout | **Centered** headline + CTA on a clean gradient. **ForecastPulse chart + particle aurora field REMOVED** (user: read cheap). The **Calibration diagram** becomes the framed showcase below the hero |
 | Nav | **Restyle to Codex** single slim bar; keep BREACH (restyled); status rail relocates under hero |
 | Theme | **Dark-only** — remove light theme + `next-themes` + toggle |
 | Panels | **Gradient device frames** on key panels (forecast pulse, calibration, today's slate) |
@@ -93,12 +93,17 @@ Centered stack on `gradient-hero`:
 4. one-line dek (existing honesty copy)
 5. CTA pill `Open the ledger →` (anchors to the ledger section) + secondary text link `How we grade →`
 6. relocated graded/ECE/BREACH strip
-Then **directly below**, the `ForecastPulse` inside a `showcase-frame` (the hero mockup beat).
+
+No particle/aurora field behind the hero — the gradient is clean (Codex-style). Then **directly
+below**, the **Calibration diagram** inside a `showcase-frame` (the hero mockup beat). The
+`ForecastPulse` "heart-rate" chart and the `AuroraField` particle wave are **removed entirely** per
+user (both read cheap / not Codex-rich).
 
 ### Mid-sections (flat true-black)
-Today's slate, Calibration, Intelligence briefing, Recent settlements, Next locks, the rail, and the
-absorbed Record sections keep their structure. Key analytical panels (Calibration diagram, Today's
-slate) get wrapped in `showcase-frame`. Everything else stays flat on black.
+Today's slate, Intelligence briefing, Recent settlements, Next locks, the rail, and the absorbed
+Record sections keep their structure. (Calibration is promoted to the **hero showcase** above.)
+Today's slate gets wrapped in `showcase-frame`. Everything else stays flat on black. **No
+ForecastPulse** section anywhere.
 
 ### Closing CTA band — `app/page.tsx` (new, bottom)
 A `gradient-cta` band echoing Codex's "Try Codex today": an honest line
@@ -116,7 +121,9 @@ A `gradient-cta` band echoing Codex's "Try Codex today": an honest line
 | `components/theme-toggle.tsx` | **delete** |
 | `components/ui/showcase-frame.tsx` | **new** — gradient device-frame primitive (`as`, `glow?`, `className`) |
 | `components/ui/gradient-band.tsx` | **new** — hero/CTA gradient section wrapper (`variant: "hero" \| "cta"`) |
-| `app/page.tsx` | centered hero + pulse-below + framed panels + closing band |
+| `app/page.tsx` | centered hero (no aurora field) + Calibration framed showcase + framed Today's slate + closing band; **remove `AuroraFieldMount` + `ForecastPulse` usages** |
+| `components/forecast-pulse.tsx` | **delete** (verify no other importers first) |
+| `components/aurora-field.tsx`, `aurora-field-mount.tsx` | **delete** (verify no other importers; if used elsewhere, only drop from `/`) |
 | `scripts/design-inspector.mts` | **rewrite to Codex constitution** (see §7) |
 
 `components/ui/surface.tsx`, `glass-header.tsx`, `hero.tsx`, `cinematic.tsx` (RouteStack/CanvasSection)
@@ -137,6 +144,10 @@ Per `[[project-wc26-design-transformation]]`:
 
 These survive the reskin: the gradient/dark-only chrome is monochrome + violet; **data keeps its
 semantic palette**.
+
+**ForecastPulse removal is allowed** — it is decorative accuracy-rhythm viz, *not* a locked honesty
+invariant. The **Calibration reliability diagram** remains the primary honesty data-viz (now promoted
+to the hero showcase), so the "model audited in public" claim still has its on-page proof.
 
 ---
 
