@@ -540,16 +540,16 @@
 @utility gradient-cta {
   background: var(--gradient-cta);
 }
-/* Codex device-frame: a panel floats inside a violet gradient bezel. */
+/* Codex device-frame: a panel floats on a violet gradient mat with a soft glow. */
 @utility showcase-frame {
   position: relative;
   border-radius: 1.5rem;
-  padding: 1px;
+  padding: 7px;
   background: var(--gradient-frame);
-  box-shadow: var(--shadow-pop);
+  box-shadow: 0 28px 90px -24px color-mix(in oklab, var(--accent) 55%, transparent);
 }
 @utility showcase-frame-inner {
-  border-radius: calc(1.5rem - 1px);
+  border-radius: calc(1.5rem - 7px);
   background: var(--surface);
   overflow: hidden;
 }

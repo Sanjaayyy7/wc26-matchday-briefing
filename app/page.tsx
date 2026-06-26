@@ -4,9 +4,9 @@ import { RouteStack, CanvasSection } from "@/components/cinematic";
 import { IntelligenceCard } from "@/components/intelligence-card";
 import { SettlementRow } from "@/components/settlement-row";
 import { CalibrationDiagram } from "@/components/calibration-diagram";
-import { ForecastPulse } from "@/components/forecast-pulse";
 import { MatchdayToday, type TodaysMatch } from "@/components/matchday-today";
-import { AuroraFieldMount } from "@/components/aurora-field-mount";
+import { GradientBand } from "@/components/ui/gradient-band";
+import { ShowcaseFrame } from "@/components/ui/showcase-frame";
 import { Reveal } from "@/components/reveal";
 import { LedgerRecordSections } from "@/components/ledger-record-sections";
 import { allMatchViews } from "@/lib/match-view";
@@ -229,44 +229,77 @@ export default function HomePage() {
   return (
     <WCS26Shell route="home">
       <RouteStack>
-        {/* ── SCOREBOARD HERO — the score, with the forecast pulse ── */}
-        <section className="route-section animate-rise relative overflow-hidden border-t border-[var(--line)] pt-8">
-          <div className="chroma-rule absolute left-0 top-0 h-px w-36" />
-          {/* Signature moment — a living Aurora probability field on jet black
-              (constitution: one cinematic moment per page, light as material). */}
-          <AuroraFieldMount className="opacity-60 [mask-image:radial-gradient(72%_68%_at_68%_46%,black,transparent_82%)]" />
-          <div className="relative z-10 grid items-center gap-12 py-16 lg:min-h-[72vh] lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)]">
-            <div className="relative z-10 max-w-2xl">
-            <span className="text-micro uppercase tracking-widest text-[var(--ink-faint)]">
+        {/* ── CODEX HERO — centered, on the cinematic gradient bookend ── */}
+        <GradientBand variant="hero">
+          <div className="mx-auto max-w-3xl px-6 py-24 text-center md:py-32">
+            <p className="text-micro uppercase tracking-widest text-[var(--ink-muted)]">
               Live tournament · 48 nations · one ledger
-            </span>
-            <div className="text-hero tabular mt-5">
+            </p>
+            <div className="text-hero tabular mt-6">
               {correct}/{agg.n} <span className="text-[var(--ink-muted)]">correct picks</span>
             </div>
             <div className="text-title tabular mt-4 text-[var(--ink-muted)]">
               Brier {brierStr} · {accuracyStr} accuracy
             </div>
-            <p className="text-body mt-6 max-w-md">
+            <p className="text-body mx-auto mt-6 max-w-md">
               Locked before kickoff. Graded in public. A public record of what one model believed —
               Elo · Dixon-Coles · Platt — and what actually happened.
             </p>
-            {nextLock && (
-              <div className="mt-9 inline-flex flex-wrap items-center gap-4 border-t border-[var(--hairline)] pt-5 md:ml-16">
-                <span className="text-micro uppercase tracking-widest text-[var(--ink-faint)]">
-                  Next · locked
-                </span>
-                <span className="text-label text-[var(--ink)]">
-                  {nextHome} vs {nextAway}
-                </span>
-                <span className="text-slight data-mono text-[var(--ink-muted)]">{nextKick}</span>
-              </div>
-            )}
+            <div className="mt-9 flex flex-wrap items-center justify-center gap-5">
+              <Link
+                href="#ledger"
+                className="rounded-[var(--radius-pill)] bg-[var(--ink)] px-6 py-2.5 text-label font-semibold text-[var(--canvas)] transition-opacity duration-300 hover:opacity-90"
+              >
+                Open the ledger →
+              </Link>
+              <Link href="/methodology" className="ix-link text-label underline underline-offset-4">
+                How we grade ourselves
+              </Link>
             </div>
-            <div className="relative z-10 hidden lg:block">
-              <ForecastPulse />
+            <div className="mt-10 flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-fine text-[var(--ink-muted)]">
+              <span className="data-mono tabular">{agg.n} of {entries.length} graded</span>
+              <span aria-hidden>·</span>
+              <span>
+                Calibration{" "}
+                <span className="font-semibold" style={{ color: statusColor }}>
+                  {status}
+                </span>
+              </span>
+              <span aria-hidden>·</span>
+              <span>
+                ECE <span className="data-mono tabular">{eceStr}</span>
+              </span>
+              {nextLock && (
+                <>
+                  <span aria-hidden>·</span>
+                  <span>
+                    Next · {nextHome} vs {nextAway} <span className="data-mono">{nextKick}</span>
+                  </span>
+                </>
+              )}
             </div>
           </div>
-        </section>
+        </GradientBand>
+
+        {/* ── HERO SHOWCASE — Calibration in a Codex device frame ── */}
+        <CanvasSection eyebrow="Calibration · the model, audited" title="On the diagonal = calibrated">
+          <div className="flex flex-col gap-4">
+            <p className="text-caption max-w-md text-[var(--ink-muted)]">
+              On the diagonal = calibrated. Off it = miscalibrated. We publish both.
+            </p>
+            <ShowcaseFrame>
+              <div className="p-6 md:p-10">
+                <CalibrationDiagram
+                  bins={accountability.official.calibrationBins ?? []}
+                  caption={`${agg.n} graded · ECE ${eceStr} vs 3.0% target`}
+                />
+              </div>
+            </ShowcaseFrame>
+            <Link href="/methodology" className="ix-link text-caption underline underline-offset-2">
+              How we grade ourselves →
+            </Link>
+          </div>
+        </CanvasSection>
 
         {todaysMatches.length > 0 && (
           <Reveal>
@@ -276,35 +309,22 @@ export default function HomePage() {
                 Locked before kickoff — the model&apos;s pre-match read. Graded at full-time, never
                 edited after lock.
               </p>
-              <MatchdayToday matches={todaysMatches} />
+              <ShowcaseFrame>
+                <div className="p-4 md:p-6">
+                  <MatchdayToday matches={todaysMatches} />
+                </div>
+              </ShowcaseFrame>
             </div>
           </CanvasSection>
           </Reveal>
         )}
 
+        <div id="ledger" className="scroll-mt-24">
         <Reveal>
         <CanvasSection eyebrow="Live ledger" title="The Reckoning">
           <div className="grid animate-rise gap-12 lg:grid-cols-[2fr_320px]">
             {/* ── MAIN COLUMN ── */}
             <div className="flex flex-col gap-16">
-              {/* Signature artifact — calibration reliability diagram */}
-              <div className="flex flex-col gap-3">
-                <h2 className="text-label">Calibration — the model, audited</h2>
-                <p className="text-caption max-w-md text-[var(--ink-muted)]">
-                  On the diagonal = calibrated. Off it = miscalibrated. We publish both.
-                </p>
-                <CalibrationDiagram
-                  bins={accountability.official.calibrationBins ?? []}
-                  caption={`${agg.n} graded · ECE ${eceStr} vs 3.0% target`}
-                />
-                <Link
-                  href="/methodology"
-                  className="text-caption text-[var(--ink-faint)] underline underline-offset-2 transition-colors duration-300 hover:text-[var(--ink)]"
-                >
-                  How we grade ourselves →
-                </Link>
-              </div>
-
               {/* IntelligenceSection — 2×2 analytical briefing */}
               <div className="flex flex-col gap-3">
                 <h2 className="text-label">Intelligence briefing</h2>
@@ -442,6 +462,7 @@ export default function HomePage() {
           </div>
         </CanvasSection>
         </Reveal>
+        </div>
 
         {/* ── RECORD SECTIONS — absorbed from /record ── */}
         <LedgerRecordSections
@@ -449,6 +470,22 @@ export default function HomePage() {
           caveats={accountability.caveats}
           openEntries={openEntries}
         />
+
+        {/* ── CLOSING CTA BAND — the cinematic bookend close ── */}
+        <GradientBand variant="cta">
+          <div className="mx-auto max-w-2xl px-6 py-20 text-center">
+            <h2 className="text-display">Locked before kickoff. Graded in public.</h2>
+            <p className="text-body mx-auto mt-4 max-w-md">
+              One model — Elo · Dixon-Coles · Platt — held to its word, match after match.
+            </p>
+            <Link
+              href="/methodology"
+              className="mt-8 inline-block rounded-[var(--radius-pill)] bg-[var(--ink)] px-6 py-2.5 text-label font-semibold text-[var(--canvas)] transition-opacity duration-300 hover:opacity-90"
+            >
+              See the methodology →
+            </Link>
+          </div>
+        </GradientBand>
       </RouteStack>
     </WCS26Shell>
   );
