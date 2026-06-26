@@ -37,56 +37,42 @@ export function WC26ShellHeader({
   const textCls = statusTextCls(systemHealth.status);
 
   return (
-    <GlassHeader>
-      {/* Nav */}
-      <nav className="flex-shrink-0 border-b border-[var(--line)]">
-        <div className="flex h-12 items-center px-6 gap-0">
-          <Link href="/" className="flex-shrink-0 text-label font-bold tracking-tight pr-5 border-r border-[var(--line)]">
-            WC<span className="text-[var(--up)]">26</span>
-          </Link>
-          <div className="flex flex-1">
-            {WC26_NAV.map((tab) => {
-              const active = tab.routeKey === route;
-              return (
-                <Link
-                  key={tab.href}
-                  href={tab.href}
-                  className={[
-                    "flex h-12 items-center px-4 text-label border-r border-[var(--hairline)] transition-colors duration-300",
-                    active
-                      ? "text-[var(--accent)] border-b-2 border-b-[var(--accent)]"
-                      : "text-[var(--ink-faint)] hover:text-[var(--ink-muted)]",
-                  ].join(" ")}
-                >
-                  {tab.label}
-                </Link>
-              );
-            })}
-          </div>
-          <div className="flex items-center gap-2 pl-4 border-l border-[var(--hairline)] text-slight">
+    <GlassHeader className="bg-[color-mix(in_oklab,var(--canvas)_72%,transparent)] border-[var(--hairline)]">
+      <nav className="mx-auto flex h-14 w-full max-w-7xl items-center gap-6 px-6">
+        <Link href="/" className="shrink-0 text-label font-bold tracking-tight text-[var(--ink)]">
+          WC<span className="text-[var(--accent)]">26</span>
+        </Link>
+        <div className="hidden flex-1 items-center justify-center gap-7 md:flex">
+          {WC26_NAV.map((tab) => {
+            const active = tab.routeKey === route;
+            return (
+              <Link
+                key={tab.href}
+                href={tab.href}
+                className={[
+                  "ix-link text-label",
+                  active ? "text-[var(--ink)]" : "text-[var(--ink-muted)]",
+                ].join(" ")}
+              >
+                {tab.label}
+              </Link>
+            );
+          })}
+        </div>
+        {extra && <div className="hidden items-center gap-2 lg:flex">{extra}</div>}
+        <div className="ml-auto flex shrink-0 items-center gap-3 md:ml-0">
+          <span className="ix-chip inline-flex items-center gap-1.5 rounded-[var(--radius-pill)] px-3 py-1 text-fine">
             <span className="inline-block h-1.5 w-1.5 rounded-full" style={{ backgroundColor: dotColor }} />
             <span className={`font-semibold ${textCls}`}>{systemHealth.status}</span>
-            <span className="text-[var(--ink-faint)]">· {systemHealth.graded} graded · 48 nations</span>
-          </div>
+          </span>
+          <Link
+            href="/matches"
+            className="hidden rounded-[var(--radius-pill)] bg-[var(--ink)] px-4 py-1.5 text-label font-semibold text-[var(--canvas)] transition-opacity duration-300 hover:opacity-90 sm:inline-block"
+          >
+            Today&apos;s slate →
+          </Link>
         </div>
       </nav>
-
-      {/* Status rail */}
-      <div className="flex-shrink-0 flex h-8 items-center px-6 gap-0 text-fine">
-        <div className="flex items-center gap-1.5 pr-4 border-r border-[var(--hairline)] text-[var(--ink-faint)]">
-          <span className="data-mono tabular">{systemHealth.graded} of {systemHealth.total}</span>
-          <span className="font-semibold text-[var(--ink-muted)]">graded</span>
-        </div>
-        <div className="flex items-center gap-1.5 px-4 border-r border-[var(--hairline)] text-[var(--ink-faint)]">
-          <span>Calibration</span>
-          <span className={`font-semibold ${textCls}`}>{systemHealth.status}</span>
-        </div>
-        <div className="flex items-center gap-1.5 px-4 text-[var(--ink-faint)]">
-          <span>ECE</span>
-          <span className={`font-semibold data-mono tabular ${textCls}`}>{(systemHealth.ece * 100).toFixed(1)}%</span>
-        </div>
-        {extra}
-      </div>
     </GlassHeader>
   );
 }
