@@ -2,35 +2,35 @@
  "runMeta": {
   "runs": 10000,
   "seed": 20260612,
-  "dataThrough": "2026-06-22",
-  "generatedAt": "2026-06-25T18:03:49.421Z",
-  "playedLocked": 54,
+  "dataThrough": "2026-07-03",
+  "generatedAt": "2026-07-04T05:08:36.807Z",
+  "playedLocked": 72,
   "knockoutVenueNote": "Knockout matches simulated as neutral-venue; host venue edges not modeled."
  },
  "teams": {
   "Mexico": {
    "advanceGroup": 1,
-   "reachR16": 0.6791,
-   "reachQF": 0.2942,
-   "reachSF": 0.1308,
-   "reachFinal": 0.0418,
-   "champion": 0.0141
+   "reachR16": 1,
+   "reachQF": 0.3834,
+   "reachSF": 0.1706,
+   "reachFinal": 0.0583,
+   "champion": 0.0188
   },
   "South Africa": {
    "advanceGroup": 1,
-   "reachR16": 0.2106,
-   "reachQF": 0.0221,
-   "reachSF": 0.0015,
-   "reachFinal": 0.0001,
+   "reachR16": 0,
+   "reachQF": 0,
+   "reachSF": 0,
+   "reachFinal": 0,
    "champion": 0
   },
   "South Korea": {
-   "advanceGroup": 0.9367,
-   "reachR16": 0.4821,
-   "reachQF": 0.2486,
-   "reachSF": 0.0585,
-   "reachFinal": 0.0148,
-   "champion": 0.0032
+   "advanceGroup": 0,
+   "reachR16": 0,
+   "reachQF": 0,
+   "reachSF": 0,
+   "reachFinal": 0,
+   "champion": 0
   },
   "Czech Republic": {
    "advanceGroup": 0,
@@ -42,19 +42,19 @@
   },
   "Canada": {
    "advanceGroup": 1,
-   "reachR16": 0.7894,
-   "reachQF": 0.2511,
-   "reachSF": 0.0666,
-   "reachFinal": 0.0186,
-   "champion": 0.0038
+   "reachR16": 1,
+   "reachQF": 0.2843,
+   "reachSF": 0.0476,
+   "reachFinal": 0.0094,
+   "champion": 0.0024
   },
   "Bosnia and Herzegovina": {
    "advanceGroup": 1,
-   "reachR16": 0.1115,
-   "reachQF": 0.0155,
-   "reachSF": 0.0006,
-   "reachFinal": 0.0001,
-   "champion": 0.0001
+   "reachR16": 0,
+   "reachQF": 0,
+   "reachSF": 0,
+   "reachFinal": 0,
+   "champion": 0
   },
   "Qatar": {
    "advanceGroup": 0,
@@ -66,27 +66,27 @@
   },
   "Switzerland": {
    "advanceGroup": 1,
-   "reachR16": 0.6063,
-   "reachQF": 0.2309,
-   "reachSF": 0.0533,
-   "reachFinal": 0.019,
-   "champion": 0.0053
+   "reachR16": 1,
+   "reachQF": 0.3965,
+   "reachSF": 0.1097,
+   "reachFinal": 0.0442,
+   "champion": 0.0138
   },
   "Brazil": {
    "advanceGroup": 1,
-   "reachR16": 0.5909,
-   "reachQF": 0.3519,
-   "reachSF": 0.1936,
-   "reachFinal": 0.0821,
-   "champion": 0.0368
+   "reachR16": 1,
+   "reachQF": 0.6619,
+   "reachSF": 0.3634,
+   "reachFinal": 0.1559,
+   "champion": 0.07
   },
   "Morocco": {
    "advanceGroup": 1,
-   "reachR16": 0.4803,
-   "reachQF": 0.3425,
-   "reachSF": 0.1403,
-   "reachFinal": 0.0601,
-   "champion": 0.021
+   "reachR16": 1,
+   "reachQF": 0.7157,
+   "reachSF": 0.2318,
+   "reachFinal": 0.087,
+   "champion": 0.0313
   },
   "Haiti": {
    "advanceGroup": 0,
@@ -97,103 +97,103 @@
    "champion": 0
   },
   "Scotland": {
-   "advanceGroup": 0.3669,
-   "reachR16": 0.1054,
-   "reachQF": 0.0248,
-   "reachSF": 0.0071,
-   "reachFinal": 0.0014,
-   "champion": 0.0003
+   "advanceGroup": 0,
+   "reachR16": 0,
+   "reachQF": 0,
+   "reachSF": 0,
+   "reachFinal": 0,
+   "champion": 0
   },
   "United States": {
    "advanceGroup": 1,
-   "reachR16": 0.6926,
-   "reachQF": 0.3759,
-   "reachSF": 0.0953,
-   "reachFinal": 0.0307,
-   "champion": 0.0074
-  },
-  "Paraguay": {
-   "advanceGroup": 0.7701,
-   "reachR16": 0.2588,
-   "reachQF": 0.0562,
-   "reachSF": 0.0214,
-   "reachFinal": 0.0057,
-   "champion": 0.0015
-  },
-  "Australia": {
-   "advanceGroup": 0.9373,
-   "reachR16": 0.4144,
-   "reachQF": 0.0796,
-   "reachSF": 0.0313,
-   "reachFinal": 0.0092,
+   "reachR16": 1,
+   "reachQF": 0.3567,
+   "reachSF": 0.0615,
+   "reachFinal": 0.0132,
    "champion": 0.0027
   },
+  "Paraguay": {
+   "advanceGroup": 1,
+   "reachR16": 1,
+   "reachQF": 0.1495,
+   "reachSF": 0.0615,
+   "reachFinal": 0.0145,
+   "champion": 0.0036
+  },
+  "Australia": {
+   "advanceGroup": 1,
+   "reachR16": 0,
+   "reachQF": 0,
+   "reachSF": 0,
+   "reachFinal": 0,
+   "champion": 0
+  },
   "Turkey": {
-   "advanceGroup": 0.0815,
-   "reachR16": 0.013,
-   "reachQF": 0.0044,
-   "reachSF": 0.0017,
-   "reachFinal": 0.0004,
-   "champion": 0.0001
+   "advanceGroup": 0,
+   "reachR16": 0,
+   "reachQF": 0,
+   "reachSF": 0,
+   "reachFinal": 0,
+   "champion": 0
   },
   "Germany": {
    "advanceGroup": 1,
-   "reachR16": 0.8369,
-   "reachQF": 0.3572,
-   "reachSF": 0.1985,
-   "reachFinal": 0.0905,
-   "champion": 0.0349
+   "reachR16": 0,
+   "reachQF": 0,
+   "reachSF": 0,
+   "reachFinal": 0,
+   "champion": 0
   },
   "Curaçao": {
-   "advanceGroup": 0.1381,
-   "reachR16": 0.0109,
-   "reachQF": 0.0006,
-   "reachSF": 0.0001,
+   "advanceGroup": 0,
+   "reachR16": 0,
+   "reachQF": 0,
+   "reachSF": 0,
    "reachFinal": 0,
    "champion": 0
   },
   "Ecuador": {
-   "advanceGroup": 0.2592,
-   "reachR16": 0.1099,
-   "reachQF": 0.0459,
-   "reachSF": 0.0163,
-   "reachFinal": 0.0043,
-   "champion": 0.001
+   "advanceGroup": 1,
+   "reachR16": 0,
+   "reachQF": 0,
+   "reachSF": 0,
+   "reachFinal": 0,
+   "champion": 0
   },
   "Ivory Coast": {
-   "advanceGroup": 0.9511,
-   "reachR16": 0.2474,
-   "reachQF": 0.0582,
-   "reachSF": 0.0144,
-   "reachFinal": 0.0025,
-   "champion": 0.0007
+   "advanceGroup": 1,
+   "reachR16": 0,
+   "reachQF": 0,
+   "reachSF": 0,
+   "reachFinal": 0,
+   "champion": 0
   },
   "Netherlands": {
    "advanceGroup": 1,
-   "reachR16": 0.514,
-   "reachQF": 0.3505,
-   "reachSF": 0.1639,
-   "reachFinal": 0.0713,
-   "champion": 0.0275
+   "reachR16": 0,
+   "reachQF": 0,
+   "reachSF": 0,
+   "reachFinal": 0,
+   "champion": 0
   },
   "Japan": {
    "advanceGroup": 1,
-   "reachR16": 0.4577,
-   "reachQF": 0.2638,
-   "reachSF": 0.1214,
-   "reachFinal": 0.046,
-   "champion": 0.0176
+   "reachR16": 0,
+   "reachQF": 0,
+   "reachSF": 0,
+   "reachFinal": 0,
+   "champion": 0
   },
   "Sweden": {
-   "advanceGroup": 0.8983,
-   "reachR16": 0.234,
-   "reachQF": 0.0632,
-   "reachSF": 0.0107,
-   "reachFinal": 0.0017,
-   "champion": 0.0003
+   "advanceGroup": 1,
+   "reachR16": 0,
+   "reachQF": 0,
+   "reachSF": 0,
+   "reachFinal": 0,
+   "champion": 0
   },
   "Tunisia": {
-   "advanceGroup": 0.0001,
+   "advanceGroup": 0,
    "reachR16": 0,
    "reachQF": 0,
    "reachSF": 0,
@@ -201,195 +201,195 @@
    "champion": 0
   },
   "Belgium": {
-   "advanceGroup": 0.8785,
-   "reachR16": 0.4713,
-   "reachQF": 0.1458,
-   "reachSF": 0.0485,
-   "reachFinal": 0.0159,
-   "champion": 0.0044
+   "advanceGroup": 1,
+   "reachR16": 1,
+   "reachQF": 0.6433,
+   "reachSF": 0.1683,
+   "reachFinal": 0.0504,
+   "champion": 0.0153
   },
   "Egypt": {
    "advanceGroup": 1,
-   "reachR16": 0.4042,
-   "reachQF": 0.1337,
-   "reachSF": 0.0272,
-   "reachFinal": 0.0064,
-   "champion": 0.0017
+   "reachR16": 1,
+   "reachQF": 0.1004,
+   "reachSF": 0.0234,
+   "reachFinal": 0.0053,
+   "champion": 0.0007
   },
   "Iran": {
-   "advanceGroup": 0.6986,
-   "reachR16": 0.313,
-   "reachQF": 0.1121,
-   "reachSF": 0.0262,
-   "reachFinal": 0.0085,
-   "champion": 0.002
+   "advanceGroup": 0,
+   "reachR16": 0,
+   "reachQF": 0,
+   "reachSF": 0,
+   "reachFinal": 0,
+   "champion": 0
   },
   "New Zealand": {
-   "advanceGroup": 0.1208,
-   "reachR16": 0.0239,
-   "reachQF": 0.001,
-   "reachSF": 0.0001,
+   "advanceGroup": 0,
+   "reachR16": 0,
+   "reachQF": 0,
+   "reachSF": 0,
    "reachFinal": 0,
    "champion": 0
   },
   "Spain": {
    "advanceGroup": 1,
-   "reachR16": 0.8081,
-   "reachQF": 0.583,
-   "reachSF": 0.4888,
-   "reachFinal": 0.3259,
-   "champion": 0.1857
+   "reachR16": 1,
+   "reachQF": 0.687,
+   "reachSF": 0.5642,
+   "reachFinal": 0.3443,
+   "champion": 0.1989
   },
   "Cape Verde": {
-   "advanceGroup": 0.6354,
-   "reachR16": 0.0328,
-   "reachQF": 0.0074,
-   "reachSF": 0.0007,
+   "advanceGroup": 1,
+   "reachR16": 0,
+   "reachQF": 0,
+   "reachSF": 0,
    "reachFinal": 0,
    "champion": 0
   },
   "Saudi Arabia": {
-   "advanceGroup": 0.3652,
-   "reachR16": 0.0152,
-   "reachQF": 0.0024,
-   "reachSF": 0.0001,
+   "advanceGroup": 0,
+   "reachR16": 0,
+   "reachQF": 0,
+   "reachSF": 0,
    "reachFinal": 0,
    "champion": 0
   },
   "Uruguay": {
-   "advanceGroup": 0.323,
-   "reachR16": 0.1166,
-   "reachQF": 0.0513,
-   "reachSF": 0.0205,
-   "reachFinal": 0.0056,
-   "champion": 0.0013
+   "advanceGroup": 0,
+   "reachR16": 0,
+   "reachQF": 0,
+   "reachSF": 0,
+   "reachFinal": 0,
+   "champion": 0
   },
   "France": {
    "advanceGroup": 1,
-   "reachR16": 0.8328,
-   "reachQF": 0.5689,
-   "reachSF": 0.404,
-   "reachFinal": 0.2389,
-   "champion": 0.1346
+   "reachR16": 1,
+   "reachQF": 0.8505,
+   "reachSF": 0.6591,
+   "reachFinal": 0.3923,
+   "champion": 0.2238
   },
   "Senegal": {
-   "advanceGroup": 0.5012,
-   "reachR16": 0.1681,
-   "reachQF": 0.0612,
-   "reachSF": 0.0153,
-   "reachFinal": 0.0035,
-   "champion": 0.0011
+   "advanceGroup": 1,
+   "reachR16": 0,
+   "reachQF": 0,
+   "reachSF": 0,
+   "reachFinal": 0,
+   "champion": 0
   },
   "Iraq": {
-   "advanceGroup": 0.0277,
-   "reachR16": 0.004,
-   "reachQF": 0.0007,
+   "advanceGroup": 0,
+   "reachR16": 0,
+   "reachQF": 0,
    "reachSF": 0,
    "reachFinal": 0,
    "champion": 0
   },
   "Norway": {
    "advanceGroup": 1,
-   "reachR16": 0.7222,
-   "reachQF": 0.3431,
-   "reachSF": 0.1708,
-   "reachFinal": 0.0639,
-   "champion": 0.0245
+   "reachR16": 1,
+   "reachQF": 0.3381,
+   "reachSF": 0.1307,
+   "reachFinal": 0.0407,
+   "champion": 0.0125
   },
   "Argentina": {
    "advanceGroup": 1,
-   "reachR16": 0.9295,
-   "reachQF": 0.8014,
-   "reachSF": 0.6126,
-   "reachFinal": 0.4275,
-   "champion": 0.2791
+   "reachR16": 1,
+   "reachQF": 0.8996,
+   "reachSF": 0.6453,
+   "reachFinal": 0.4382,
+   "champion": 0.2564
   },
   "Algeria": {
-   "advanceGroup": 0.8104,
-   "reachR16": 0.2329,
-   "reachQF": 0.0908,
-   "reachSF": 0.0265,
-   "reachFinal": 0.0064,
-   "champion": 0.0012
+   "advanceGroup": 1,
+   "reachR16": 0,
+   "reachQF": 0,
+   "reachSF": 0,
+   "reachFinal": 0,
+   "champion": 0
   },
   "Austria": {
-   "advanceGroup": 0.9527,
-   "reachR16": 0.2491,
-   "reachQF": 0.0933,
-   "reachSF": 0.0348,
-   "reachFinal": 0.0106,
-   "champion": 0.0027
+   "advanceGroup": 1,
+   "reachR16": 0,
+   "reachQF": 0,
+   "reachSF": 0,
+   "reachFinal": 0,
+   "champion": 0
   },
   "Jordan": {
-   "advanceGroup": 0.0083,
-   "reachR16": 0.0014,
-   "reachQF": 0.0002,
+   "advanceGroup": 0,
+   "reachR16": 0,
+   "reachQF": 0,
    "reachSF": 0,
    "reachFinal": 0,
    "champion": 0
   },
   "Portugal": {
    "advanceGroup": 1,
-   "reachR16": 0.6919,
-   "reachQF": 0.3309,
-   "reachSF": 0.1705,
-   "reachFinal": 0.0799,
-   "champion": 0.0329
+   "reachR16": 1,
+   "reachQF": 0.313,
+   "reachSF": 0.206,
+   "reachFinal": 0.0889,
+   "champion": 0.0387
   },
   "DR Congo": {
-   "advanceGroup": 0.3254,
-   "reachR16": 0.0548,
-   "reachQF": 0.0135,
-   "reachSF": 0.0021,
-   "reachFinal": 0.0002,
-   "champion": 0.0001
+   "advanceGroup": 1,
+   "reachR16": 0,
+   "reachQF": 0,
+   "reachSF": 0,
+   "reachFinal": 0,
+   "champion": 0
   },
   "Uzbekistan": {
-   "advanceGroup": 0.0311,
-   "reachR16": 0.0056,
-   "reachQF": 0.0016,
-   "reachSF": 0.0003,
+   "advanceGroup": 0,
+   "reachR16": 0,
+   "reachQF": 0,
+   "reachSF": 0,
    "reachFinal": 0,
    "champion": 0
   },
   "Colombia": {
    "advanceGroup": 1,
-   "reachR16": 0.8085,
-   "reachQF": 0.5217,
-   "reachSF": 0.2331,
-   "reachFinal": 0.1234,
-   "champion": 0.0579
+   "reachR16": 1,
+   "reachQF": 0.6035,
+   "reachSF": 0.2216,
+   "reachFinal": 0.1099,
+   "champion": 0.0454
   },
   "England": {
    "advanceGroup": 1,
-   "reachR16": 0.7817,
-   "reachQF": 0.5271,
-   "reachSF": 0.3279,
-   "reachFinal": 0.1622,
-   "champion": 0.086
+   "reachR16": 1,
+   "reachQF": 0.6166,
+   "reachSF": 0.3353,
+   "reachFinal": 0.1475,
+   "champion": 0.0657
   },
   "Croatia": {
-   "advanceGroup": 0.9761,
-   "reachR16": 0.3957,
-   "reachQF": 0.157,
-   "reachSF": 0.0618,
-   "reachFinal": 0.0207,
-   "champion": 0.0065
+   "advanceGroup": 1,
+   "reachR16": 0,
+   "reachQF": 0,
+   "reachSF": 0,
+   "reachFinal": 0,
+   "champion": 0
   },
   "Ghana": {
    "advanceGroup": 1,
-   "reachR16": 0.0903,
-   "reachQF": 0.0145,
-   "reachSF": 0.0008,
-   "reachFinal": 0.0001,
+   "reachR16": 0,
+   "reachQF": 0,
+   "reachSF": 0,
+   "reachFinal": 0,
    "champion": 0
   },
   "Panama": {
-   "advanceGroup": 0.0063,
-   "reachR16": 0.0012,
-   "reachQF": 0.0003,
-   "reachSF": 0.0001,
-   "reachFinal": 0.0001,
+   "advanceGroup": 0,
+   "reachR16": 0,
+   "reachQF": 0,
+   "reachSF": 0,
+   "reachFinal": 0,
    "champion": 0
   }
  }

@@ -3,42 +3,42 @@
   "data/predictions.json",
   "data/markets/polymarket.json"
  ],
- "n": 41,
+ "n": 69,
  "excluded": [],
  "grid": [
   {
    "lambda": 0,
-   "brier": 0.5797,
-   "rps": 0.1774
+   "brier": 0.5414,
+   "rps": 0.1669
   },
   {
    "lambda": 0.25,
-   "brier": 0.5598,
-   "rps": 0.168
+   "brier": 0.524,
+   "rps": 0.1592
   },
   {
    "lambda": 0.5,
-   "brier": 0.5446,
-   "rps": 0.1608
+   "brier": 0.5108,
+   "rps": 0.1534
   },
   {
    "lambda": 0.75,
-   "brier": 0.5342,
-   "rps": 0.1557
+   "brier": 0.5016,
+   "rps": 0.1495
   },
   {
    "lambda": 1,
-   "brier": 0.5286,
-   "rps": 0.1527
+   "brier": 0.4965,
+   "rps": 0.1473
   }
  ],
  "model": {
-  "brier": 0.5797,
-  "rps": 0.1774
+  "brier": 0.5414,
+  "rps": 0.1669
  },
  "market": {
-  "brier": 0.5286,
-  "rps": 0.1527
+  "brier": 0.4965,
+  "rps": 0.1473
  },
  "candidateLambda": 0.5,
  "verdict": "HOLD"

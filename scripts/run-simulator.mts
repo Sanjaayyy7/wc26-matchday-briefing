@@ -34,6 +34,20 @@ const fixtures: SimFixture[] = fixturesJson.map((f) => ({
   awayScore: f.awayScore,
 }));
 
+// Settled knockout matches are pinned, not resampled (data/knockout-results.json).
+const koResults = (() => {
+  try {
+    return read("knockout-results.json") as {
+      roundOf32: Array<{ match: number; winnerId: string }>;
+    };
+  } catch {
+    return { roundOf32: [] };
+  }
+})();
+const knownWinners = Object.fromEntries(
+  koResults.roundOf32.map((r) => [r.match, byId.get(r.winnerId)!]),
+);
+
 const t0 = Date.now();
 const out = simulateTournament(
   {
@@ -42,6 +56,7 @@ const out = simulateTournament(
     bracket,
     ratings: model.ratings,
     params: model.params,
+    knownWinners,
   },
   runs,
 );

@@ -105,6 +105,24 @@ describe("simulateTournament (real data, seeded, small N)", () => {
     expect(out.teams["Spain"].champion).toBeGreaterThan(out.teams[weakest].champion);
   });
 
+  it("knownWinners pins knockout outcomes: forced R32 winners advance in every run", () => {
+    const forced = [
+      "Paraguay", "France", "Canada", "Morocco", "Portugal", "Spain",
+      "United States", "Belgium", "Brazil", "Norway", "Mexico", "England",
+      "Argentina", "Egypt", "Switzerland", "Colombia",
+    ];
+    const knownWinners = Object.fromEntries(
+      (bracket as { roundOf32: Array<{ match: number }> }).roundOf32.map(
+        (m, i) => [m.match, forced[i]],
+      ),
+    );
+    const out = simulateTournament({ ...input, knownWinners }, 200, 42);
+    for (const t of forced) expect(out.teams[t].reachR16, t).toBe(1);
+    expect(out.teams["Germany"].reachR16).toBe(0);
+    const champSum = Object.values(out.teams).reduce((a, t) => a + t.champion, 0);
+    expect(champSum).toBeCloseTo(1, 6);
+  });
+
   it("locked result honored: Mexico's real wins are in every run's standings (advance prob reflects it)", () => {
     const out = simulateTournament(input, 400, 42);
     // Mexico banked real locked wins (incl. 2-0 over South Africa, 3-0 over Czech

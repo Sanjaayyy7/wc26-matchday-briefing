@@ -1,6 +1,6 @@
 {
   "config": {
-    "generatedAt": "2026-06-25T01:58:40.126Z",
+    "generatedAt": "2026-07-04T05:17:22.569Z",
     "evalFrom": "1990-01-01",
     "holdoutLabels": [
       "FIFA World Cup",
@@ -16,10 +16,10 @@
     "promotionRule": "ship iff ΔBrier(incumbent−challenger) 95% bootstrap CI > 0 AND challenger ECE < eceMax"
   },
   "holdout": {
-    "n": 2237,
+    "n": 2281,
     "byTournament": {
       "African Cup of Nations": 642,
-      "FIFA World Cup": 596,
+      "FIFA World Cup": 640,
       "Copa América": 378,
       "UEFA Euro": 323,
       "AFC Asian Cup": 298
@@ -27,180 +27,180 @@
   },
   "variants": {
     "baseline": {
-      "brier": 0.5769,
+      "brier": 0.5742,
       "brierCI": {
-        "lo": 0.5631,
-        "hi": 0.591
+        "lo": 0.5594,
+        "hi": 0.5883
       },
-      "ece": 0.0078,
-      "n": 2237,
+      "ece": 0.0076,
+      "n": 2281,
       "reliability": [
         {
-          "meanPredicted": 0.063,
-          "realized": 0.0744,
-          "count": 363
+          "meanPredicted": 0.0632,
+          "realized": 0.0739,
+          "count": 379
         },
         {
-          "meanPredicted": 0.1561,
-          "realized": 0.1563,
-          "count": 998
+          "meanPredicted": 0.1562,
+          "realized": 0.1548,
+          "count": 1021
         },
         {
           "meanPredicted": 0.2625,
-          "realized": 0.265,
-          "count": 2694
+          "realized": 0.2647,
+          "count": 2735
         },
         {
           "meanPredicted": 0.3493,
-          "realized": 0.3415,
-          "count": 776
+          "realized": 0.338,
+          "count": 790
         },
         {
           "meanPredicted": 0.4502,
-          "realized": 0.4732,
-          "count": 653
+          "realized": 0.4744,
+          "count": 664
         },
         {
-          "meanPredicted": 0.5473,
-          "realized": 0.5317,
-          "count": 536
+          "meanPredicted": 0.5472,
+          "realized": 0.5351,
+          "count": 542
         },
         {
-          "meanPredicted": 0.6451,
-          "realized": 0.6386,
-          "count": 368
+          "meanPredicted": 0.6454,
+          "realized": 0.6419,
+          "count": 377
         },
         {
-          "meanPredicted": 0.7453,
-          "realized": 0.72,
-          "count": 200
+          "meanPredicted": 0.7455,
+          "realized": 0.7295,
+          "count": 207
         },
         {
-          "meanPredicted": 0.8447,
-          "realized": 0.8229,
-          "count": 96
+          "meanPredicted": 0.8449,
+          "realized": 0.82,
+          "count": 100
         },
         {
-          "meanPredicted": 0.9309,
-          "realized": 0.8519,
-          "count": 27
+          "meanPredicted": 0.9306,
+          "realized": 0.8571,
+          "count": 28
         }
       ]
     },
     "platt-calibrated": {
-      "brier": 0.5768,
+      "brier": 0.5743,
       "brierCI": {
-        "lo": 0.5637,
-        "hi": 0.59
+        "lo": 0.5604,
+        "hi": 0.5876
       },
-      "ece": 0.0086,
-      "n": 2237,
+      "ece": 0.0089,
+      "n": 2281,
       "reliability": [
         {
-          "meanPredicted": 0.0656,
-          "realized": 0.066,
-          "count": 288
+          "meanPredicted": 0.0657,
+          "realized": 0.0635,
+          "count": 299
         },
         {
-          "meanPredicted": 0.1565,
-          "realized": 0.1478,
-          "count": 927
+          "meanPredicted": 0.1563,
+          "realized": 0.1465,
+          "count": 949
         },
         {
-          "meanPredicted": 0.2644,
-          "realized": 0.2593,
-          "count": 2815
+          "meanPredicted": 0.2643,
+          "realized": 0.2589,
+          "count": 2862
         },
         {
           "meanPredicted": 0.3493,
-          "realized": 0.3571,
-          "count": 843
+          "realized": 0.3527,
+          "count": 859
         },
         {
           "meanPredicted": 0.4504,
-          "realized": 0.4676,
-          "count": 695
+          "realized": 0.4709,
+          "count": 705
         },
         {
-          "meanPredicted": 0.5467,
-          "realized": 0.5568,
-          "count": 528
+          "meanPredicted": 0.5465,
+          "realized": 0.5591,
+          "count": 533
         },
         {
-          "meanPredicted": 0.6422,
-          "realized": 0.6533,
-          "count": 349
+          "meanPredicted": 0.6425,
+          "realized": 0.6593,
+          "count": 361
         },
         {
-          "meanPredicted": 0.7439,
-          "realized": 0.7168,
-          "count": 173
+          "meanPredicted": 0.7443,
+          "realized": 0.7263,
+          "count": 179
         },
         {
-          "meanPredicted": 0.8415,
-          "realized": 0.8533,
-          "count": 75
+          "meanPredicted": 0.842,
+          "realized": 0.8442,
+          "count": 77
         },
         {
-          "meanPredicted": 0.9295,
-          "realized": 0.8333,
-          "count": 18
+          "meanPredicted": 0.9279,
+          "realized": 0.8421,
+          "count": 19
         }
       ]
     },
     "regime": {
-      "brier": 0.5775,
+      "brier": 0.5751,
       "brierCI": {
-        "lo": 0.5639,
-        "hi": 0.5913
+        "lo": 0.5606,
+        "hi": 0.5889
       },
-      "ece": 0.0043,
-      "n": 2237,
+      "ece": 0.0056,
+      "n": 2281,
       "reliability": [
         {
-          "meanPredicted": 0.0648,
-          "realized": 0.069,
-          "count": 319
+          "meanPredicted": 0.065,
+          "realized": 0.0667,
+          "count": 330
         },
         {
-          "meanPredicted": 0.1569,
-          "realized": 0.1563,
-          "count": 960
+          "meanPredicted": 0.1567,
+          "realized": 0.1548,
+          "count": 982
         },
         {
           "meanPredicted": 0.2611,
-          "realized": 0.2601,
-          "count": 2749
+          "realized": 0.2597,
+          "count": 2796
         },
         {
           "meanPredicted": 0.3491,
-          "realized": 0.3467,
-          "count": 799
+          "realized": 0.3428,
+          "count": 814
         },
         {
           "meanPredicted": 0.4495,
-          "realized": 0.454,
-          "count": 685
+          "realized": 0.4569,
+          "count": 696
         },
         {
-          "meanPredicted": 0.5463,
-          "realized": 0.5593,
-          "count": 540
+          "meanPredicted": 0.5461,
+          "realized": 0.5615,
+          "count": 545
         },
         {
-          "meanPredicted": 0.6438,
-          "realized": 0.6521,
-          "count": 365
+          "meanPredicted": 0.644,
+          "realized": 0.6578,
+          "count": 377
         },
         {
-          "meanPredicted": 0.7436,
-          "realized": 0.7181,
-          "count": 188
+          "meanPredicted": 0.7439,
+          "realized": 0.7268,
+          "count": 194
         },
         {
-          "meanPredicted": 0.8435,
-          "realized": 0.8214,
-          "count": 84
+          "meanPredicted": 0.8443,
+          "realized": 0.8161,
+          "count": 87
         },
         {
           "meanPredicted": 0.9301,
@@ -210,58 +210,58 @@
       ]
     },
     "stage-aware": {
-      "brier": 0.5774,
+      "brier": 0.575,
       "brierCI": {
-        "lo": 0.5638,
-        "hi": 0.5911
+        "lo": 0.5607,
+        "hi": 0.5886
       },
-      "ece": 0.0043,
-      "n": 2237,
+      "ece": 0.0054,
+      "n": 2281,
       "reliability": [
         {
-          "meanPredicted": 0.0647,
-          "realized": 0.0662,
-          "count": 317
+          "meanPredicted": 0.0649,
+          "realized": 0.064,
+          "count": 328
         },
         {
-          "meanPredicted": 0.1571,
-          "realized": 0.1594,
-          "count": 966
+          "meanPredicted": 0.1569,
+          "realized": 0.1579,
+          "count": 988
         },
         {
           "meanPredicted": 0.2603,
-          "realized": 0.259,
-          "count": 2676
+          "realized": 0.2585,
+          "count": 2723
         },
         {
-          "meanPredicted": 0.3458,
-          "realized": 0.3425,
-          "count": 873
+          "meanPredicted": 0.3459,
+          "realized": 0.339,
+          "count": 888
         },
         {
           "meanPredicted": 0.4496,
-          "realized": 0.4535,
-          "count": 677
+          "realized": 0.4564,
+          "count": 688
         },
         {
-          "meanPredicted": 0.5463,
-          "realized": 0.5503,
-          "count": 547
+          "meanPredicted": 0.5461,
+          "realized": 0.5525,
+          "count": 552
         },
         {
-          "meanPredicted": 0.6437,
-          "realized": 0.663,
-          "count": 362
+          "meanPredicted": 0.6439,
+          "realized": 0.6684,
+          "count": 374
         },
         {
-          "meanPredicted": 0.743,
-          "realized": 0.7196,
-          "count": 189
+          "meanPredicted": 0.7433,
+          "realized": 0.7282,
+          "count": 195
         },
         {
-          "meanPredicted": 0.8434,
-          "realized": 0.8415,
-          "count": 82
+          "meanPredicted": 0.8442,
+          "realized": 0.8353,
+          "count": 85
         },
         {
           "meanPredicted": 0.9292,
@@ -272,20 +272,20 @@
     }
   },
   "drawGap": {
-    "baseline": 0.0122,
-    "regime": 0.0122
+    "baseline": 0.0119,
+    "regime": 0.0118
   },
   "promotion": {
     "incumbent": "baseline",
     "challenger": "platt-calibrated",
     "ship": false,
     "deltaBrierCI": {
-      "mean": 0.0001,
-      "lo": -0.0008,
-      "hi": 0.0011
+      "mean": 0,
+      "lo": -0.001,
+      "hi": 0.0009
     },
     "eceOk": true,
-    "reason": "HOLD — ΔBrier 95% CI [-0.0008, 0.0011] straddles 0 (not significant)"
+    "reason": "HOLD — ΔBrier 95% CI [-0.0010, 0.0009] straddles 0 (not significant)"
   },
   "regimePromotion": {
     "incumbent": "baseline",
@@ -293,12 +293,12 @@
     "primary": {
       "ship": false,
       "deltaBrierCI": {
-        "mean": -0.0007,
-        "lo": -0.0014,
-        "hi": 0.0001
+        "mean": -0.0008,
+        "lo": -0.0016,
+        "hi": 0
       },
       "eceOk": true,
-      "reason": "HOLD — ΔBrier 95% CI [-0.0014, 0.0001] straddles 0 (not significant)"
+      "reason": "HOLD — ΔBrier 95% CI [-0.0016, -0.0000] straddles 0 (not significant)"
     },
     "secondary": {
       "ship": false,
@@ -311,7 +311,7 @@
   "stageDrawGap": {
     "group": {
       "baseline": 0.0231,
-      "stageAware": 0.018
+      "stageAware": 0.0181
     },
     "knockout": {
       "baseline": 0.0203,
@@ -320,7 +320,7 @@
   },
   "fallbackCounts": {
     "stage": 1712,
-    "pooled": 112,
+    "pooled": 156,
     "baseline": 413
   },
   "stageAwarePromotion": {
@@ -330,12 +330,12 @@
     "primary": {
       "ship": false,
       "deltaBrierCI": {
-        "mean": -0.0006,
-        "lo": -0.0016,
-        "hi": 0.0005
+        "mean": -0.0007,
+        "lo": -0.0018,
+        "hi": 0.0003
       },
       "eceOk": true,
-      "reason": "HOLD — ΔBrier 95% CI [-0.0016, 0.0005] straddles 0 (not significant)"
+      "reason": "HOLD — ΔBrier 95% CI [-0.0018, 0.0003] straddles 0 (not significant)"
     },
     "secondary": {
       "ship": false,
