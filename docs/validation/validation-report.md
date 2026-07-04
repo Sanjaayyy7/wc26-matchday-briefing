@@ -1,6 +1,6 @@
 # Tournament-Holdout Validation Report
 
-_Generated 2026-06-25T01:58:40.126Z. Do not edit by hand — produced by `npm run ml:validate`._
+_Generated 2026-07-04T05:17:22.569Z. Do not edit by hand — produced by `npm run ml:validate`._
 
 ## What this measures
 
@@ -9,7 +9,7 @@ from 1990-01-01, **walk-forward**: Elo and Platt calibration only ever see match
 strictly before the one being scored. This is the World-Cup-like regime — neutral venues,
 high stakes, more draws — not the friendly-dominated time split that `ml:eval` uses.
 
-Holdout: **2237 matches**.
+Holdout: **2281 matches**.
 
 ## Promotion rule (pre-registered)
 
@@ -23,61 +23,61 @@ calibrated. This is the rule that correctly rejects small-sample "wins" within v
 
 | variant | Brier | 95% CI | ECE |
 | --- | --- | --- | --- |
-| baseline (raw model) | 0.5769 | [0.5631, 0.591] | 0.0078 |
-| platt-calibrated | 0.5768 | [0.5637, 0.59] | 0.0086 |
-| regime | 0.5775 | [0.5639, 0.5913] | 0.0043 |
-| stage-aware | 0.5774 | [0.5638, 0.5911] | 0.0043 |
+| baseline (raw model) | 0.5742 | [0.5594, 0.5883] | 0.0076 |
+| platt-calibrated | 0.5743 | [0.5604, 0.5876] | 0.0089 |
+| regime | 0.5751 | [0.5606, 0.5889] | 0.0056 |
+| stage-aware | 0.575 | [0.5607, 0.5886] | 0.0054 |
 
-**ΔBrier (baseline − platt-calibrated):** mean 0.0001,
-95% CI [-0.0008, 0.0011].
+**ΔBrier (baseline − platt-calibrated):** mean 0,
+95% CI [-0.001, 0.0009].
 
-**Verdict:** HOLD — ΔBrier 95% CI [-0.0008, 0.0011] straddles 0 (not significant)
+**Verdict:** HOLD — ΔBrier 95% CI [-0.0010, 0.0009] straddles 0 (not significant)
 
 ## Draw-rate calibration
 
 | variant | draw-gap |
 | --- | --- |
-| baseline | 0.0122 |
-| regime | 0.0122 |
+| baseline | 0.0119 |
+| regime | 0.0118 |
 
 ## Regime promotion
 
-- **primary:** HOLD — ΔBrier 95% CI [-0.0014, 0.0001] straddles 0 (not significant)
+- **primary:** HOLD — ΔBrier 95% CI [-0.0016, -0.0000] straddles 0 (not significant)
 - **secondary:** HOLD — draw-gap reduction 0.0pp < 5pp
 
 ## Stage-aware draw-rate calibration
 
 | stage | baseline draw-gap | stage-aware draw-gap |
 | --- | --- | --- |
-| group | 0.0231 | 0.018 |
+| group | 0.0231 | 0.0181 |
 | knockout | 0.0203 | 0.0083 |
 
-Fallback tiers: stage 1712, pooled 112, baseline 413.
+Fallback tiers: stage 1712, pooled 156, baseline 413.
 
-- **stage-aware primary:** HOLD — ΔBrier 95% CI [-0.0016, 0.0005] straddles 0 (not significant)
+- **stage-aware primary:** HOLD — ΔBrier 95% CI [-0.0018, 0.0003] straddles 0 (not significant)
 - **stage-aware secondary:** HOLD — draw-gap reduction 0.0pp < 5pp
 
 ## Reliability — platt-calibrated (per-outcome)
 
 | mean predicted | realized | count |
 | --- | --- | --- |
-| 0.066 | 0.066 | 288 |
-| 0.157 | 0.148 | 927 |
-| 0.264 | 0.259 | 2815 |
-| 0.349 | 0.357 | 843 |
-| 0.450 | 0.468 | 695 |
-| 0.547 | 0.557 | 528 |
-| 0.642 | 0.653 | 349 |
-| 0.744 | 0.717 | 173 |
-| 0.842 | 0.853 | 75 |
-| 0.929 | 0.833 | 18 |
+| 0.066 | 0.064 | 299 |
+| 0.156 | 0.146 | 949 |
+| 0.264 | 0.259 | 2862 |
+| 0.349 | 0.353 | 859 |
+| 0.450 | 0.471 | 705 |
+| 0.546 | 0.559 | 533 |
+| 0.642 | 0.659 | 361 |
+| 0.744 | 0.726 | 179 |
+| 0.842 | 0.844 | 77 |
+| 0.928 | 0.842 | 19 |
 
 ## Holdout composition
 
 | tournament | matches |
 | --- | --- |
 | African Cup of Nations | 642 |
-| FIFA World Cup | 596 |
+| FIFA World Cup | 640 |
 | Copa América | 378 |
 | UEFA Euro | 323 |
 | AFC Asian Cup | 298 |

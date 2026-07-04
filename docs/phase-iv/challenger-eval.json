@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-06-21T22:46:46.748Z",
-  "n": 35,
+  "generatedAt": "2026-07-04T05:17:28.849Z",
+  "n": 69,
   "champion": {
     "name": "Champion (v1.0.0-platt)",
-    "avgBrier": 0.589617142857143
+    "avgBrier": 0.4749014492753623
   },
   "configs": [
     {
@@ -12,12 +12,12 @@
       "rho": -0.05,
       "drawAdjust": "none",
       "eloCap": "none",
-      "avgBrier": 0.589617142857143,
+      "avgBrier": 0.4749014492753623,
       "deltaBrier": 0,
-      "correctPicks": 20,
+      "correctPicks": 43,
       "drawPicks": 0,
       "drawHits": 0,
-      "avgDrawBrier": 1.051490909090909
+      "avgDrawBrier": 0.9710631578947366
     },
     {
       "name": "A: Rho×1.5",
@@ -25,12 +25,12 @@
       "rho": -0.075,
       "drawAdjust": "none",
       "eloCap": "none",
-      "avgBrier": 0.5914342857142859,
-      "deltaBrier": 0.0018171428571429615,
-      "correctPicks": 20,
+      "avgBrier": 0.47516811594202907,
+      "deltaBrier": 0.0002666666666667483,
+      "correctPicks": 43,
       "drawPicks": 0,
       "drawHits": 0,
-      "avgDrawBrier": 1.0446181818181817
+      "avgDrawBrier": 0.9642315789473682
     },
     {
       "name": "B: Rho×3",
@@ -38,12 +38,12 @@
       "rho": -0.15,
       "drawAdjust": "none",
       "eloCap": "none",
-      "avgBrier": 0.5881599999999999,
-      "deltaBrier": -0.0014571428571430456,
-      "correctPicks": 20,
+      "avgBrier": 0.4725884057971014,
+      "deltaBrier": -0.0023130434782609455,
+      "correctPicks": 43,
       "drawPicks": 0,
       "drawHits": 0,
-      "avgDrawBrier": 1.0132545454545456
+      "avgDrawBrier": 0.9302315789473683
     },
     {
       "name": "C: Draw Prior +30%",
@@ -51,12 +51,12 @@
       "rho": -0.05,
       "drawAdjust": "inflate1.3",
       "eloCap": "none",
-      "avgBrier": 0.5854685714285713,
-      "deltaBrier": -0.004148571428571612,
-      "correctPicks": 20,
-      "drawPicks": 2,
-      "drawHits": 1,
-      "avgDrawBrier": 0.9388727272727273
+      "avgBrier": 0.4763797101449276,
+      "deltaBrier": 0.0014782608695652621,
+      "correctPicks": 47,
+      "drawPicks": 9,
+      "drawHits": 5,
+      "avgDrawBrier": 0.8564421052631578
     },
     {
       "name": "D: Draw Prior +50%",
@@ -64,12 +64,12 @@
       "rho": -0.05,
       "drawAdjust": "inflate1.5",
       "eloCap": "none",
-      "avgBrier": 0.5891314285714288,
-      "deltaBrier": -0.0004857142857142005,
-      "correctPicks": 21,
-      "drawPicks": 4,
-      "drawHits": 2,
-      "avgDrawBrier": 0.8782727272727272
+      "avgBrier": 0.47971304347826066,
+      "deltaBrier": 0.004811594202898339,
+      "correctPicks": 49,
+      "drawPicks": 11,
+      "drawHits": 7,
+      "avgDrawBrier": 0.7927368421052631
     },
     {
       "name": "E: Draw Prior +70%",
@@ -77,12 +77,12 @@
       "rho": -0.05,
       "drawAdjust": "inflate1.7",
       "eloCap": "none",
-      "avgBrier": 0.5912857142857144,
-      "deltaBrier": 0.0016685714285714637,
-      "correctPicks": 21,
-      "drawPicks": 7,
-      "drawHits": 3,
-      "avgDrawBrier": 0.8198363636363637
+      "avgBrier": 0.4873971014492753,
+      "deltaBrier": 0.012495652173912963,
+      "correctPicks": 48,
+      "drawPicks": 18,
+      "drawHits": 9,
+      "avgDrawBrier": 0.7366526315789473
     },
     {
       "name": "F: Rho×3 + Elo Cap 400",
@@ -90,12 +90,12 @@
       "rho": -0.15,
       "drawAdjust": "none",
       "eloCap": "cap400",
-      "avgBrier": 0.5783371428571428,
-      "deltaBrier": -0.011280000000000179,
-      "correctPicks": 20,
+      "avgBrier": 0.46774202898550715,
+      "deltaBrier": -0.007159420289855167,
+      "correctPicks": 43,
       "drawPicks": 0,
       "drawHits": 0,
-      "avgDrawBrier": 0.9773454545454545
+      "avgDrawBrier": 0.903621052631579
     },
     {
       "name": "G: Rho×3 + Draw +30%",
@@ -103,12 +103,12 @@
       "rho": -0.15,
       "drawAdjust": "inflate1.3",
       "eloCap": "none",
-      "avgBrier": 0.5867142857142855,
-      "deltaBrier": -0.002902857142857429,
-      "correctPicks": 20,
-      "drawPicks": 3,
-      "drawHits": 1,
-      "avgDrawBrier": 0.8970181818181818
+      "avgBrier": 0.4761420289855072,
+      "deltaBrier": 0.0012405797101449068,
+      "correctPicks": 48,
+      "drawPicks": 10,
+      "drawHits": 6,
+      "avgDrawBrier": 0.8140105263157895
     },
     {
       "name": "H: Rho×3 + Draw +30% + Cap400",
@@ -116,12 +116,12 @@
       "rho": -0.15,
       "drawAdjust": "inflate1.3",
       "eloCap": "cap400",
-      "avgBrier": 0.5775371428571427,
-      "deltaBrier": -0.012080000000000202,
-      "correctPicks": 20,
-      "drawPicks": 3,
-      "drawHits": 1,
-      "avgDrawBrier": 0.8620181818181817
+      "avgBrier": 0.4712289855072464,
+      "deltaBrier": -0.003672463768115919,
+      "correctPicks": 48,
+      "drawPicks": 10,
+      "drawHits": 6,
+      "avgDrawBrier": 0.7847157894736843
     }
   ],
   "matchResults": [
@@ -130,33 +130,33 @@
       "realized": "draw",
       "splits": {
         "Champion (v1.0.0-platt)": {
-          "home": 92,
-          "draw": 6,
-          "away": 2
-        },
-        "A: Rho×1.5": {
-          "home": 92,
-          "draw": 6,
-          "away": 2
-        },
-        "B: Rho×3": {
-          "home": 92,
-          "draw": 7,
-          "away": 1
-        },
-        "C: Draw Prior +30%": {
           "home": 90,
           "draw": 8,
           "away": 2
         },
-        "D: Draw Prior +50%": {
+        "A: Rho×1.5": {
+          "home": 90,
+          "draw": 8,
+          "away": 2
+        },
+        "B: Rho×3": {
           "home": 89,
           "draw": 9,
           "away": 2
         },
-        "E: Draw Prior +70%": {
+        "C: Draw Prior +30%": {
           "home": 88,
           "draw": 10,
+          "away": 2
+        },
+        "D: Draw Prior +50%": {
+          "home": 86,
+          "draw": 12,
+          "away": 2
+        },
+        "E: Draw Prior +70%": {
+          "home": 85,
+          "draw": 13,
           "away": 2
         },
         "F: Rho×3 + Elo Cap 400": {
@@ -165,9 +165,9 @@
           "away": 5
         },
         "G: Rho×3 + Draw +30%": {
-          "home": 90,
-          "draw": 9,
-          "away": 1
+          "home": 87,
+          "draw": 11,
+          "away": 2
         },
         "H: Rho×3 + Draw +30% + Cap400": {
           "home": 77,
@@ -176,76 +176,14 @@
         }
       },
       "briers": {
-        "Champion (v1.0.0-platt)": 1.7304,
-        "A: Rho×1.5": 1.7304,
-        "B: Rho×3": 1.7114,
-        "C: Draw Prior +30%": 1.6568,
-        "D: Draw Prior +50%": 1.6206,
-        "E: Draw Prior +70%": 1.5848,
+        "Champion (v1.0.0-platt)": 1.6568,
+        "A: Rho×1.5": 1.6568,
+        "B: Rho×3": 1.6206,
+        "C: Draw Prior +30%": 1.5848,
+        "D: Draw Prior +50%": 1.5143999999999997,
+        "E: Draw Prior +70%": 1.4798,
         "F: Rho×3 + Elo Cap 400": 1.365,
-        "G: Rho×3 + Draw +30%": 1.6382,
-        "H: Rho×3 + Draw +30% + Cap400": 1.2678
-      }
-    },
-    {
-      "slug": "ecuador-vs-cura-ao",
-      "realized": "draw",
-      "splits": {
-        "Champion (v1.0.0-platt)": {
-          "home": 82,
-          "draw": 13,
-          "away": 5
-        },
-        "A: Rho×1.5": {
-          "home": 82,
-          "draw": 13,
-          "away": 5
-        },
-        "B: Rho×3": {
-          "home": 82,
-          "draw": 14,
-          "away": 4
-        },
-        "C: Draw Prior +30%": {
-          "home": 79,
-          "draw": 16,
-          "away": 5
-        },
-        "D: Draw Prior +50%": {
-          "home": 77,
-          "draw": 18,
-          "away": 5
-        },
-        "E: Draw Prior +70%": {
-          "home": 75,
-          "draw": 20,
-          "away": 5
-        },
-        "F: Rho×3 + Elo Cap 400": {
-          "home": 80,
-          "draw": 15,
-          "away": 5
-        },
-        "G: Rho×3 + Draw +30%": {
-          "home": 78,
-          "draw": 18,
-          "away": 4
-        },
-        "H: Rho×3 + Draw +30% + Cap400": {
-          "home": 77,
-          "draw": 18,
-          "away": 5
-        }
-      },
-      "briers": {
-        "Champion (v1.0.0-platt)": 1.4318,
-        "A: Rho×1.5": 1.4318,
-        "B: Rho×3": 1.4136,
-        "C: Draw Prior +30%": 1.3321999999999998,
-        "D: Draw Prior +50%": 1.2678,
-        "E: Draw Prior +70%": 1.205,
-        "F: Rho×3 + Elo Cap 400": 1.365,
-        "G: Rho×3 + Draw +30%": 1.2824000000000002,
+        "G: Rho×3 + Draw +30%": 1.5493999999999999,
         "H: Rho×3 + Draw +30% + Cap400": 1.2678
       }
     },
@@ -254,123 +192,185 @@
       "realized": "draw",
       "splits": {
         "Champion (v1.0.0-platt)": {
-          "home": 6,
-          "draw": 15,
-          "away": 79
+          "home": 3,
+          "draw": 10,
+          "away": 87
         },
         "A: Rho×1.5": {
-          "home": 6,
-          "draw": 15,
-          "away": 79
+          "home": 3,
+          "draw": 10,
+          "away": 87
         },
         "B: Rho×3": {
-          "home": 6,
-          "draw": 16,
-          "away": 78
+          "home": 3,
+          "draw": 11,
+          "away": 86
         },
         "C: Draw Prior +30%": {
-          "home": 6,
-          "draw": 18,
-          "away": 76
+          "home": 3,
+          "draw": 13,
+          "away": 84
         },
         "D: Draw Prior +50%": {
-          "home": 6,
-          "draw": 20,
-          "away": 74
+          "home": 3,
+          "draw": 14,
+          "away": 83
         },
         "E: Draw Prior +70%": {
-          "home": 5,
-          "draw": 23,
-          "away": 72
+          "home": 3,
+          "draw": 16,
+          "away": 81
         },
         "F: Rho×3 + Elo Cap 400": {
-          "home": 6,
-          "draw": 16,
-          "away": 78
+          "home": 5,
+          "draw": 15,
+          "away": 80
         },
         "G: Rho×3 + Draw +30%": {
-          "home": 5,
-          "draw": 20,
-          "away": 75
+          "home": 3,
+          "draw": 13,
+          "away": 84
         },
         "H: Rho×3 + Draw +30% + Cap400": {
           "home": 5,
-          "draw": 20,
-          "away": 75
+          "draw": 18,
+          "away": 77
         }
       },
       "briers": {
-        "Champion (v1.0.0-platt)": 1.3502,
-        "A: Rho×1.5": 1.3502,
-        "B: Rho×3": 1.3176,
-        "C: Draw Prior +30%": 1.2536,
-        "D: Draw Prior +50%": 1.1912000000000003,
-        "E: Draw Prior +70%": 1.1138,
-        "F: Rho×3 + Elo Cap 400": 1.3176,
-        "G: Rho×3 + Draw +30%": 1.205,
-        "H: Rho×3 + Draw +30% + Cap400": 1.205
+        "Champion (v1.0.0-platt)": 1.5678,
+        "A: Rho×1.5": 1.5678,
+        "B: Rho×3": 1.5326,
+        "C: Draw Prior +30%": 1.4634,
+        "D: Draw Prior +50%": 1.4293999999999998,
+        "E: Draw Prior +70%": 1.3626,
+        "F: Rho×3 + Elo Cap 400": 1.365,
+        "G: Rho×3 + Draw +30%": 1.4634,
+        "H: Rho×3 + Draw +30% + Cap400": 1.2678
       }
     },
     {
-      "slug": "ghana-vs-panama",
-      "realized": "home",
+      "slug": "england-vs-ghana",
+      "realized": "draw",
       "splits": {
         "Champion (v1.0.0-platt)": {
-          "home": 15,
-          "draw": 24,
-          "away": 61
+          "home": 83,
+          "draw": 12,
+          "away": 5
         },
         "A: Rho×1.5": {
-          "home": 15,
-          "draw": 25,
-          "away": 60
+          "home": 83,
+          "draw": 12,
+          "away": 5
         },
         "B: Rho×3": {
-          "home": 14,
-          "draw": 26,
-          "away": 60
+          "home": 83,
+          "draw": 13,
+          "away": 4
         },
         "C: Draw Prior +30%": {
-          "home": 15,
-          "draw": 29,
-          "away": 56
+          "home": 80,
+          "draw": 15,
+          "away": 5
         },
         "D: Draw Prior +50%": {
-          "home": 14,
-          "draw": 32,
-          "away": 54
+          "home": 79,
+          "draw": 17,
+          "away": 4
         },
         "E: Draw Prior +70%": {
-          "home": 13,
-          "draw": 35,
-          "away": 52
+          "home": 77,
+          "draw": 19,
+          "away": 4
         },
         "F: Rho×3 + Elo Cap 400": {
-          "home": 14,
-          "draw": 26,
-          "away": 60
+          "home": 80,
+          "draw": 15,
+          "away": 5
         },
         "G: Rho×3 + Draw +30%": {
-          "home": 14,
-          "draw": 31,
-          "away": 55
+          "home": 80,
+          "draw": 16,
+          "away": 4
         },
         "H: Rho×3 + Draw +30% + Cap400": {
-          "home": 14,
-          "draw": 31,
-          "away": 55
+          "home": 77,
+          "draw": 18,
+          "away": 5
         }
       },
       "briers": {
-        "Champion (v1.0.0-platt)": 1.1522,
-        "A: Rho×1.5": 1.145,
-        "B: Rho×3": 1.1671999999999998,
-        "C: Draw Prior +30%": 1.1201999999999999,
-        "D: Draw Prior +50%": 1.1336,
-        "E: Draw Prior +70%": 1.1498,
-        "F: Rho×3 + Elo Cap 400": 1.1671999999999998,
-        "G: Rho×3 + Draw +30%": 1.1381999999999999,
-        "H: Rho×3 + Draw +30% + Cap400": 1.1381999999999999
+        "Champion (v1.0.0-platt)": 1.4657999999999998,
+        "A: Rho×1.5": 1.4657999999999998,
+        "B: Rho×3": 1.4474,
+        "C: Draw Prior +30%": 1.365,
+        "D: Draw Prior +50%": 1.3146000000000002,
+        "E: Draw Prior +70%": 1.2506000000000002,
+        "F: Rho×3 + Elo Cap 400": 1.365,
+        "G: Rho×3 + Draw +30%": 1.3472000000000002,
+        "H: Rho×3 + Draw +30% + Cap400": 1.2678
+      }
+    },
+    {
+      "slug": "ecuador-vs-cura-ao",
+      "realized": "draw",
+      "splits": {
+        "Champion (v1.0.0-platt)": {
+          "home": 77,
+          "draw": 16,
+          "away": 7
+        },
+        "A: Rho×1.5": {
+          "home": 76,
+          "draw": 17,
+          "away": 7
+        },
+        "B: Rho×3": {
+          "home": 76,
+          "draw": 17,
+          "away": 7
+        },
+        "C: Draw Prior +30%": {
+          "home": 73,
+          "draw": 20,
+          "away": 7
+        },
+        "D: Draw Prior +50%": {
+          "home": 71,
+          "draw": 22,
+          "away": 7
+        },
+        "E: Draw Prior +70%": {
+          "home": 69,
+          "draw": 25,
+          "away": 6
+        },
+        "F: Rho×3 + Elo Cap 400": {
+          "home": 76,
+          "draw": 17,
+          "away": 7
+        },
+        "G: Rho×3 + Draw +30%": {
+          "home": 72,
+          "draw": 22,
+          "away": 6
+        },
+        "H: Rho×3 + Draw +30% + Cap400": {
+          "home": 72,
+          "draw": 22,
+          "away": 6
+        }
+      },
+      "briers": {
+        "Champion (v1.0.0-platt)": 1.3033999999999997,
+        "A: Rho×1.5": 1.2713999999999999,
+        "B: Rho×3": 1.2713999999999999,
+        "C: Draw Prior +30%": 1.1778,
+        "D: Draw Prior +50%": 1.1174,
+        "E: Draw Prior +70%": 1.0422,
+        "F: Rho×3 + Elo Cap 400": 1.2713999999999999,
+        "G: Rho×3 + Draw +30%": 1.1304,
+        "H: Rho×3 + Draw +30% + Cap400": 1.1304
       }
     },
     {
@@ -378,66 +378,190 @@
       "realized": "draw",
       "splits": {
         "Champion (v1.0.0-platt)": {
-          "home": 69,
-          "draw": 20,
-          "away": 11
+          "home": 67,
+          "draw": 21,
+          "away": 12
         },
         "A: Rho×1.5": {
-          "home": 69,
-          "draw": 21,
-          "away": 10
+          "home": 67,
+          "draw": 22,
+          "away": 11
         },
         "B: Rho×3": {
-          "home": 68,
-          "draw": 22,
-          "away": 10
+          "home": 66,
+          "draw": 23,
+          "away": 11
         },
         "C: Draw Prior +30%": {
-          "home": 65,
-          "draw": 25,
-          "away": 10
+          "home": 63,
+          "draw": 26,
+          "away": 11
         },
         "D: Draw Prior +50%": {
-          "home": 63,
-          "draw": 27,
+          "home": 61,
+          "draw": 29,
           "away": 10
         },
         "E: Draw Prior +70%": {
-          "home": 61,
-          "draw": 30,
-          "away": 9
-        },
-        "F: Rho×3 + Elo Cap 400": {
-          "home": 68,
-          "draw": 22,
+          "home": 59,
+          "draw": 31,
           "away": 10
         },
+        "F: Rho×3 + Elo Cap 400": {
+          "home": 66,
+          "draw": 23,
+          "away": 11
+        },
         "G: Rho×3 + Draw +30%": {
-          "home": 64,
-          "draw": 27,
-          "away": 9
+          "home": 62,
+          "draw": 28,
+          "away": 10
         },
         "H: Rho×3 + Draw +30% + Cap400": {
-          "home": 64,
-          "draw": 27,
-          "away": 9
+          "home": 62,
+          "draw": 28,
+          "away": 10
         }
       },
       "briers": {
-        "Champion (v1.0.0-platt)": 1.1282,
-        "A: Rho×1.5": 1.1102,
-        "B: Rho×3": 1.0808000000000002,
-        "C: Draw Prior +30%": 0.9950000000000001,
-        "D: Draw Prior +50%": 0.9398,
-        "E: Draw Prior +70%": 0.8701999999999999,
-        "F: Rho×3 + Elo Cap 400": 1.0808000000000002,
-        "G: Rho×3 + Draw +30%": 0.9505999999999999,
-        "H: Rho×3 + Draw +30% + Cap400": 0.9505999999999999
+        "Champion (v1.0.0-platt)": 1.0874000000000001,
+        "A: Rho×1.5": 1.0694000000000001,
+        "B: Rho×3": 1.0406,
+        "C: Draw Prior +30%": 0.9566,
+        "D: Draw Prior +50%": 0.8862,
+        "E: Draw Prior +70%": 0.8341999999999998,
+        "F: Rho×3 + Elo Cap 400": 1.0406,
+        "G: Rho×3 + Draw +30%": 0.9128000000000001,
+        "H: Rho×3 + Draw +30% + Cap400": 0.9128000000000001
       }
     },
     {
-      "slug": "ivory-coast-vs-ecuador",
+      "slug": "south-africa-vs-south-korea",
       "realized": "home",
+      "splits": {
+        "Champion (v1.0.0-platt)": {
+          "home": 20,
+          "draw": 27,
+          "away": 53
+        },
+        "A: Rho×1.5": {
+          "home": 20,
+          "draw": 27,
+          "away": 53
+        },
+        "B: Rho×3": {
+          "home": 19,
+          "draw": 29,
+          "away": 52
+        },
+        "C: Draw Prior +30%": {
+          "home": 19,
+          "draw": 32,
+          "away": 49
+        },
+        "D: Draw Prior +50%": {
+          "home": 18,
+          "draw": 36,
+          "away": 46
+        },
+        "E: Draw Prior +70%": {
+          "home": 17,
+          "draw": 39,
+          "away": 44
+        },
+        "F: Rho×3 + Elo Cap 400": {
+          "home": 19,
+          "draw": 29,
+          "away": 52
+        },
+        "G: Rho×3 + Draw +30%": {
+          "home": 18,
+          "draw": 35,
+          "away": 47
+        },
+        "H: Rho×3 + Draw +30% + Cap400": {
+          "home": 18,
+          "draw": 35,
+          "away": 47
+        }
+      },
+      "briers": {
+        "Champion (v1.0.0-platt)": 0.9938000000000001,
+        "A: Rho×1.5": 0.9938000000000001,
+        "B: Rho×3": 1.0106000000000002,
+        "C: Draw Prior +30%": 0.9986000000000002,
+        "D: Draw Prior +50%": 1.0136,
+        "E: Draw Prior +70%": 1.0346,
+        "F: Rho×3 + Elo Cap 400": 1.0106000000000002,
+        "G: Rho×3 + Draw +30%": 1.0158,
+        "H: Rho×3 + Draw +30% + Cap400": 1.0158
+      }
+    },
+    {
+      "slug": "uruguay-vs-cape-verde",
+      "realized": "draw",
+      "splits": {
+        "Champion (v1.0.0-platt)": {
+          "home": 61,
+          "draw": 24,
+          "away": 15
+        },
+        "A: Rho×1.5": {
+          "home": 61,
+          "draw": 24,
+          "away": 15
+        },
+        "B: Rho×3": {
+          "home": 61,
+          "draw": 25,
+          "away": 14
+        },
+        "C: Draw Prior +30%": {
+          "home": 57,
+          "draw": 29,
+          "away": 14
+        },
+        "D: Draw Prior +50%": {
+          "home": 55,
+          "draw": 32,
+          "away": 13
+        },
+        "E: Draw Prior +70%": {
+          "home": 53,
+          "draw": 34,
+          "away": 13
+        },
+        "F: Rho×3 + Elo Cap 400": {
+          "home": 61,
+          "draw": 25,
+          "away": 14
+        },
+        "G: Rho×3 + Draw +30%": {
+          "home": 56,
+          "draw": 31,
+          "away": 13
+        },
+        "H: Rho×3 + Draw +30% + Cap400": {
+          "home": 56,
+          "draw": 31,
+          "away": 13
+        }
+      },
+      "briers": {
+        "Champion (v1.0.0-platt)": 0.9722,
+        "A: Rho×1.5": 0.9722,
+        "B: Rho×3": 0.9541999999999999,
+        "C: Draw Prior +30%": 0.8485999999999999,
+        "D: Draw Prior +50%": 0.7817999999999999,
+        "E: Draw Prior +70%": 0.7333999999999999,
+        "F: Rho×3 + Elo Cap 400": 0.9541999999999999,
+        "G: Rho×3 + Draw +30%": 0.8066,
+        "H: Rho×3 + Draw +30% + Cap400": 0.8066
+      }
+    },
+    {
+      "slug": "saudi-arabia-vs-uruguay",
+      "realized": "draw",
       "splits": {
         "Champion (v1.0.0-platt)": {
           "home": 16,
@@ -465,9 +589,9 @@
           "away": 54
         },
         "E: Draw Prior +70%": {
-          "home": 14,
+          "home": 13,
           "draw": 35,
-          "away": 51
+          "away": 52
         },
         "F: Rho×3 + Elo Cap 400": {
           "home": 15,
@@ -486,77 +610,15 @@
         }
       },
       "briers": {
-        "Champion (v1.0.0-platt)": 1.1231999999999998,
-        "A: Rho×1.5": 1.145,
-        "B: Rho×3": 1.1381999999999999,
-        "C: Draw Prior +30%": 1.1201999999999999,
-        "D: Draw Prior +50%": 1.1336,
-        "E: Draw Prior +70%": 1.1221999999999999,
-        "F: Rho×3 + Elo Cap 400": 1.1381999999999999,
-        "G: Rho×3 + Draw +30%": 1.1381999999999999,
-        "H: Rho×3 + Draw +30% + Cap400": 1.1381999999999999
-      }
-    },
-    {
-      "slug": "saudi-arabia-vs-uruguay",
-      "realized": "draw",
-      "splits": {
-        "Champion (v1.0.0-platt)": {
-          "home": 11,
-          "draw": 21,
-          "away": 68
-        },
-        "A: Rho×1.5": {
-          "home": 11,
-          "draw": 21,
-          "away": 68
-        },
-        "B: Rho×3": {
-          "home": 11,
-          "draw": 22,
-          "away": 67
-        },
-        "C: Draw Prior +30%": {
-          "home": 11,
-          "draw": 25,
-          "away": 64
-        },
-        "D: Draw Prior +50%": {
-          "home": 11,
-          "draw": 28,
-          "away": 61
-        },
-        "E: Draw Prior +70%": {
-          "home": 10,
-          "draw": 31,
-          "away": 59
-        },
-        "F: Rho×3 + Elo Cap 400": {
-          "home": 11,
-          "draw": 22,
-          "away": 67
-        },
-        "G: Rho×3 + Draw +30%": {
-          "home": 10,
-          "draw": 27,
-          "away": 63
-        },
-        "H: Rho×3 + Draw +30% + Cap400": {
-          "home": 10,
-          "draw": 27,
-          "away": 63
-        }
-      },
-      "briers": {
-        "Champion (v1.0.0-platt)": 1.0986000000000002,
-        "A: Rho×1.5": 1.0986000000000002,
-        "B: Rho×3": 1.0694000000000001,
-        "C: Draw Prior +30%": 0.9842,
-        "D: Draw Prior +50%": 0.9026,
-        "E: Draw Prior +70%": 0.8341999999999998,
-        "F: Rho×3 + Elo Cap 400": 1.0694000000000001,
-        "G: Rho×3 + Draw +30%": 0.9398,
-        "H: Rho×3 + Draw +30% + Cap400": 0.9398
+        "Champion (v1.0.0-platt)": 0.9632,
+        "A: Rho×1.5": 0.945,
+        "B: Rho×3": 0.9181999999999999,
+        "C: Draw Prior +30%": 0.8402000000000001,
+        "D: Draw Prior +50%": 0.7736,
+        "E: Draw Prior +70%": 0.7098000000000001,
+        "F: Rho×3 + Elo Cap 400": 0.9181999999999999,
+        "G: Rho×3 + Draw +30%": 0.7982,
+        "H: Rho×3 + Draw +30% + Cap400": 0.7982
       }
     },
     {
@@ -564,23 +626,147 @@
       "realized": "draw",
       "splits": {
         "Champion (v1.0.0-platt)": {
-          "home": 55,
-          "draw": 26,
-          "away": 19
+          "home": 59,
+          "draw": 25,
+          "away": 16
         },
         "A: Rho×1.5": {
-          "home": 55,
+          "home": 59,
+          "draw": 25,
+          "away": 16
+        },
+        "B: Rho×3": {
+          "home": 58,
           "draw": 27,
+          "away": 15
+        },
+        "C: Draw Prior +30%": {
+          "home": 55,
+          "draw": 30,
+          "away": 15
+        },
+        "D: Draw Prior +50%": {
+          "home": 53,
+          "draw": 33,
+          "away": 14
+        },
+        "E: Draw Prior +70%": {
+          "home": 50,
+          "draw": 36,
+          "away": 14
+        },
+        "F: Rho×3 + Elo Cap 400": {
+          "home": 58,
+          "draw": 27,
+          "away": 15
+        },
+        "G: Rho×3 + Draw +30%": {
+          "home": 54,
+          "draw": 32,
+          "away": 14
+        },
+        "H: Rho×3 + Draw +30% + Cap400": {
+          "home": 54,
+          "draw": 32,
+          "away": 14
+        }
+      },
+      "briers": {
+        "Champion (v1.0.0-platt)": 0.9361999999999999,
+        "A: Rho×1.5": 0.9361999999999999,
+        "B: Rho×3": 0.8917999999999999,
+        "C: Draw Prior +30%": 0.815,
+        "D: Draw Prior +50%": 0.7494,
+        "E: Draw Prior +70%": 0.6791999999999999,
+        "F: Rho×3 + Elo Cap 400": 0.8917999999999999,
+        "G: Rho×3 + Draw +30%": 0.7736,
+        "H: Rho×3 + Draw +30% + Cap400": 0.7736
+      }
+    },
+    {
+      "slug": "ivory-coast-vs-ecuador",
+      "realized": "home",
+      "splits": {
+        "Champion (v1.0.0-platt)": {
+          "home": 23,
+          "draw": 28,
+          "away": 49
+        },
+        "A: Rho×1.5": {
+          "home": 23,
+          "draw": 29,
+          "away": 48
+        },
+        "B: Rho×3": {
+          "home": 22,
+          "draw": 30,
+          "away": 48
+        },
+        "C: Draw Prior +30%": {
+          "home": 21,
+          "draw": 34,
+          "away": 45
+        },
+        "D: Draw Prior +50%": {
+          "home": 20,
+          "draw": 37,
+          "away": 43
+        },
+        "E: Draw Prior +70%": {
+          "home": 19,
+          "draw": 40,
+          "away": 41
+        },
+        "F: Rho×3 + Elo Cap 400": {
+          "home": 22,
+          "draw": 30,
+          "away": 48
+        },
+        "G: Rho×3 + Draw +30%": {
+          "home": 20,
+          "draw": 36,
+          "away": 44
+        },
+        "H: Rho×3 + Draw +30% + Cap400": {
+          "home": 20,
+          "draw": 36,
+          "away": 44
+        }
+      },
+      "briers": {
+        "Champion (v1.0.0-platt)": 0.9114,
+        "A: Rho×1.5": 0.9074,
+        "B: Rho×3": 0.9288000000000001,
+        "C: Draw Prior +30%": 0.9422000000000001,
+        "D: Draw Prior +50%": 0.9618000000000001,
+        "E: Draw Prior +70%": 0.9842000000000002,
+        "F: Rho×3 + Elo Cap 400": 0.9288000000000001,
+        "G: Rho×3 + Draw +30%": 0.9632000000000001,
+        "H: Rho×3 + Draw +30% + Cap400": 0.9632000000000001
+      }
+    },
+    {
+      "slug": "japan-vs-sweden",
+      "realized": "draw",
+      "splits": {
+        "Champion (v1.0.0-platt)": {
+          "home": 56,
+          "draw": 26,
+          "away": 18
+        },
+        "A: Rho×1.5": {
+          "home": 56,
+          "draw": 26,
           "away": 18
         },
         "B: Rho×3": {
-          "home": 54,
+          "home": 55,
           "draw": 28,
-          "away": 18
+          "away": 17
         },
         "C: Draw Prior +30%": {
-          "home": 51,
-          "draw": 32,
+          "home": 52,
+          "draw": 31,
           "away": 17
         },
         "D: Draw Prior +50%": {
@@ -594,159 +780,35 @@
           "away": 16
         },
         "F: Rho×3 + Elo Cap 400": {
-          "home": 54,
+          "home": 55,
           "draw": 28,
-          "away": 18
+          "away": 17
         },
         "G: Rho×3 + Draw +30%": {
-          "home": 50,
-          "draw": 34,
+          "home": 51,
+          "draw": 33,
           "away": 16
         },
         "H: Rho×3 + Draw +30% + Cap400": {
-          "home": 50,
-          "draw": 34,
+          "home": 51,
+          "draw": 33,
           "away": 16
         }
       },
       "briers": {
-        "Champion (v1.0.0-platt)": 0.8862000000000001,
-        "A: Rho×1.5": 0.8677999999999999,
-        "B: Rho×3": 0.8424,
-        "C: Draw Prior +30%": 0.7514,
+        "Champion (v1.0.0-platt)": 0.8936,
+        "A: Rho×1.5": 0.8936,
+        "B: Rho×3": 0.8498,
+        "C: Draw Prior +30%": 0.7754,
         "D: Draw Prior +50%": 0.6882,
         "E: Draw Prior +70%": 0.6434,
-        "F: Rho×3 + Elo Cap 400": 0.8424,
-        "G: Rho×3 + Draw +30%": 0.7111999999999998,
-        "H: Rho×3 + Draw +30% + Cap400": 0.7111999999999998
-      }
-    },
-    {
-      "slug": "turkiye-vs-paraguay",
-      "realized": "away",
-      "splits": {
-        "Champion (v1.0.0-platt)": {
-          "home": 46,
-          "draw": 29,
-          "away": 25
-        },
-        "A: Rho×1.5": {
-          "home": 46,
-          "draw": 29,
-          "away": 25
-        },
-        "B: Rho×3": {
-          "home": 45,
-          "draw": 31,
-          "away": 24
-        },
-        "C: Draw Prior +30%": {
-          "home": 42,
-          "draw": 34,
-          "away": 24
-        },
-        "D: Draw Prior +50%": {
-          "home": 40,
-          "draw": 38,
-          "away": 22
-        },
-        "E: Draw Prior +70%": {
-          "home": 38,
-          "draw": 41,
-          "away": 21
-        },
-        "F: Rho×3 + Elo Cap 400": {
-          "home": 45,
-          "draw": 31,
-          "away": 24
-        },
-        "G: Rho×3 + Draw +30%": {
-          "home": 41,
-          "draw": 37,
-          "away": 22
-        },
-        "H: Rho×3 + Draw +30% + Cap400": {
-          "home": 41,
-          "draw": 37,
-          "away": 22
-        }
-      },
-      "briers": {
-        "Champion (v1.0.0-platt)": 0.8582000000000001,
-        "A: Rho×1.5": 0.8582000000000001,
-        "B: Rho×3": 0.8762000000000001,
-        "C: Draw Prior +30%": 0.8695999999999999,
-        "D: Draw Prior +50%": 0.9128000000000001,
-        "E: Draw Prior +70%": 0.9366000000000001,
-        "F: Rho×3 + Elo Cap 400": 0.8762000000000001,
-        "G: Rho×3 + Draw +30%": 0.9134,
-        "H: Rho×3 + Draw +30% + Cap400": 0.9134
+        "F: Rho×3 + Elo Cap 400": 0.8498,
+        "G: Rho×3 + Draw +30%": 0.7345999999999998,
+        "H: Rho×3 + Draw +30% + Cap400": 0.7345999999999998
       }
     },
     {
       "slug": "belgium-vs-egypt",
-      "realized": "draw",
-      "splits": {
-        "Champion (v1.0.0-platt)": {
-          "home": 53,
-          "draw": 27,
-          "away": 20
-        },
-        "A: Rho×1.5": {
-          "home": 53,
-          "draw": 27,
-          "away": 20
-        },
-        "B: Rho×3": {
-          "home": 52,
-          "draw": 29,
-          "away": 19
-        },
-        "C: Draw Prior +30%": {
-          "home": 50,
-          "draw": 32,
-          "away": 18
-        },
-        "D: Draw Prior +50%": {
-          "home": 47,
-          "draw": 35,
-          "away": 18
-        },
-        "E: Draw Prior +70%": {
-          "home": 45,
-          "draw": 38,
-          "away": 17
-        },
-        "F: Rho×3 + Elo Cap 400": {
-          "home": 52,
-          "draw": 29,
-          "away": 19
-        },
-        "G: Rho×3 + Draw +30%": {
-          "home": 49,
-          "draw": 34,
-          "away": 17
-        },
-        "H: Rho×3 + Draw +30% + Cap400": {
-          "home": 49,
-          "draw": 34,
-          "away": 17
-        }
-      },
-      "briers": {
-        "Champion (v1.0.0-platt)": 0.8538,
-        "A: Rho×1.5": 0.8538,
-        "B: Rho×3": 0.8106,
-        "C: Draw Prior +30%": 0.7447999999999999,
-        "D: Draw Prior +50%": 0.6758,
-        "E: Draw Prior +70%": 0.6158,
-        "F: Rho×3 + Elo Cap 400": 0.8106,
-        "G: Rho×3 + Draw +30%": 0.7045999999999999,
-        "H: Rho×3 + Draw +30% + Cap400": 0.7045999999999999
-      }
-    },
-    {
-      "slug": "czech-republic-vs-south-africa",
       "realized": "draw",
       "splits": {
         "Champion (v1.0.0-platt)": {
@@ -808,27 +870,213 @@
       }
     },
     {
+      "slug": "ghana-vs-panama",
+      "realized": "home",
+      "splits": {
+        "Champion (v1.0.0-platt)": {
+          "home": 27,
+          "draw": 29,
+          "away": 44
+        },
+        "A: Rho×1.5": {
+          "home": 26,
+          "draw": 30,
+          "away": 44
+        },
+        "B: Rho×3": {
+          "home": 26,
+          "draw": 31,
+          "away": 43
+        },
+        "C: Draw Prior +30%": {
+          "home": 24,
+          "draw": 35,
+          "away": 41
+        },
+        "D: Draw Prior +50%": {
+          "home": 23,
+          "draw": 38,
+          "away": 39
+        },
+        "E: Draw Prior +70%": {
+          "home": 22,
+          "draw": 41,
+          "away": 37
+        },
+        "F: Rho×3 + Elo Cap 400": {
+          "home": 26,
+          "draw": 31,
+          "away": 43
+        },
+        "G: Rho×3 + Draw +30%": {
+          "home": 23,
+          "draw": 37,
+          "away": 40
+        },
+        "H: Rho×3 + Draw +30% + Cap400": {
+          "home": 23,
+          "draw": 37,
+          "away": 40
+        }
+      },
+      "briers": {
+        "Champion (v1.0.0-platt)": 0.8105999999999999,
+        "A: Rho×1.5": 0.8311999999999999,
+        "B: Rho×3": 0.8285999999999999,
+        "C: Draw Prior +30%": 0.8681999999999999,
+        "D: Draw Prior +50%": 0.8894,
+        "E: Draw Prior +70%": 0.9134,
+        "F: Rho×3 + Elo Cap 400": 0.8285999999999999,
+        "G: Rho×3 + Draw +30%": 0.8898,
+        "H: Rho×3 + Draw +30% + Cap400": 0.8898
+      }
+    },
+    {
+      "slug": "belgium-vs-iran",
+      "realized": "draw",
+      "splits": {
+        "Champion (v1.0.0-platt)": {
+          "home": 47,
+          "draw": 28,
+          "away": 25
+        },
+        "A: Rho×1.5": {
+          "home": 47,
+          "draw": 29,
+          "away": 24
+        },
+        "B: Rho×3": {
+          "home": 46,
+          "draw": 31,
+          "away": 23
+        },
+        "C: Draw Prior +30%": {
+          "home": 43,
+          "draw": 34,
+          "away": 23
+        },
+        "D: Draw Prior +50%": {
+          "home": 41,
+          "draw": 37,
+          "away": 22
+        },
+        "E: Draw Prior +70%": {
+          "home": 39,
+          "draw": 40,
+          "away": 21
+        },
+        "F: Rho×3 + Elo Cap 400": {
+          "home": 46,
+          "draw": 31,
+          "away": 23
+        },
+        "G: Rho×3 + Draw +30%": {
+          "home": 42,
+          "draw": 37,
+          "away": 21
+        },
+        "H: Rho×3 + Draw +30% + Cap400": {
+          "home": 42,
+          "draw": 37,
+          "away": 21
+        }
+      },
+      "briers": {
+        "Champion (v1.0.0-platt)": 0.8018,
+        "A: Rho×1.5": 0.7826,
+        "B: Rho×3": 0.7405999999999999,
+        "C: Draw Prior +30%": 0.6733999999999998,
+        "D: Draw Prior +50%": 0.6134,
+        "E: Draw Prior +70%": 0.5562,
+        "F: Rho×3 + Elo Cap 400": 0.7405999999999999,
+        "G: Rho×3 + Draw +30%": 0.6174000000000001,
+        "H: Rho×3 + Draw +30% + Cap400": 0.6174000000000001
+      }
+    },
+    {
+      "slug": "united-states-vs-turkiye",
+      "realized": "away",
+      "splits": {
+        "Champion (v1.0.0-platt)": {
+          "home": 43,
+          "draw": 29,
+          "away": 28
+        },
+        "A: Rho×1.5": {
+          "home": 43,
+          "draw": 30,
+          "away": 27
+        },
+        "B: Rho×3": {
+          "home": 42,
+          "draw": 32,
+          "away": 26
+        },
+        "C: Draw Prior +30%": {
+          "home": 40,
+          "draw": 35,
+          "away": 25
+        },
+        "D: Draw Prior +50%": {
+          "home": 38,
+          "draw": 38,
+          "away": 24
+        },
+        "E: Draw Prior +70%": {
+          "home": 36,
+          "draw": 41,
+          "away": 23
+        },
+        "F: Rho×3 + Elo Cap 400": {
+          "home": 42,
+          "draw": 32,
+          "away": 26
+        },
+        "G: Rho×3 + Draw +30%": {
+          "home": 39,
+          "draw": 37,
+          "away": 24
+        },
+        "H: Rho×3 + Draw +30% + Cap400": {
+          "home": 39,
+          "draw": 37,
+          "away": 24
+        }
+      },
+      "briers": {
+        "Champion (v1.0.0-platt)": 0.7873999999999999,
+        "A: Rho×1.5": 0.8077999999999999,
+        "B: Rho×3": 0.8264,
+        "C: Draw Prior +30%": 0.845,
+        "D: Draw Prior +50%": 0.8664000000000001,
+        "E: Draw Prior +70%": 0.8906,
+        "F: Rho×3 + Elo Cap 400": 0.8264,
+        "G: Rho×3 + Draw +30%": 0.8666,
+        "H: Rho×3 + Draw +30% + Cap400": 0.8666
+      }
+    },
+    {
       "slug": "brazil-vs-morocco",
       "realized": "draw",
       "splits": {
         "Champion (v1.0.0-platt)": {
-          "home": 44,
+          "home": 45,
           "draw": 29,
-          "away": 27
+          "away": 26
         },
         "A: Rho×1.5": {
-          "home": 44,
-          "draw": 30,
+          "home": 45,
+          "draw": 29,
           "away": 26
         },
         "B: Rho×3": {
-          "home": 43,
+          "home": 44,
           "draw": 31,
-          "away": 26
+          "away": 25
         },
         "C: Draw Prior +30%": {
-          "home": 41,
-          "draw": 35,
+          "home": 42,
+          "draw": 34,
           "away": 24
         },
         "D: Draw Prior +50%": {
@@ -837,102 +1085,102 @@
           "away": 23
         },
         "E: Draw Prior +70%": {
-          "home": 37,
+          "home": 38,
           "draw": 41,
-          "away": 22
+          "away": 21
         },
         "F: Rho×3 + Elo Cap 400": {
-          "home": 43,
+          "home": 44,
           "draw": 31,
-          "away": 26
+          "away": 25
         },
         "G: Rho×3 + Draw +30%": {
-          "home": 39,
+          "home": 40,
           "draw": 37,
-          "away": 24
+          "away": 23
         },
         "H: Rho×3 + Draw +30% + Cap400": {
-          "home": 39,
+          "home": 40,
           "draw": 37,
-          "away": 24
+          "away": 23
         }
       },
       "briers": {
-        "Champion (v1.0.0-platt)": 0.7706,
-        "A: Rho×1.5": 0.7512,
-        "B: Rho×3": 0.7285999999999999,
-        "C: Draw Prior +30%": 0.6482,
+        "Champion (v1.0.0-platt)": 0.7742,
+        "A: Rho×1.5": 0.7742,
+        "B: Rho×3": 0.7322,
+        "C: Draw Prior +30%": 0.6695999999999999,
         "D: Draw Prior +50%": 0.5893999999999999,
-        "E: Draw Prior +70%": 0.5334000000000001,
-        "F: Rho×3 + Elo Cap 400": 0.7285999999999999,
-        "G: Rho×3 + Draw +30%": 0.6066,
-        "H: Rho×3 + Draw +30% + Cap400": 0.6066
+        "E: Draw Prior +70%": 0.5366000000000001,
+        "F: Rho×3 + Elo Cap 400": 0.7322,
+        "G: Rho×3 + Draw +30%": 0.6098000000000001,
+        "H: Rho×3 + Draw +30% + Cap400": 0.6098000000000001
       }
     },
     {
-      "slug": "australia-vs-turkiye",
-      "realized": "home",
+      "slug": "netherlands-vs-japan",
+      "realized": "draw",
       "splits": {
         "Champion (v1.0.0-platt)": {
-          "home": 29,
+          "home": 43,
           "draw": 29,
-          "away": 42
+          "away": 28
         },
         "A: Rho×1.5": {
-          "home": 29,
+          "home": 42,
           "draw": 30,
-          "away": 41
+          "away": 28
         },
         "B: Rho×3": {
-          "home": 28,
-          "draw": 32,
-          "away": 40
+          "home": 42,
+          "draw": 31,
+          "away": 27
         },
         "C: Draw Prior +30%": {
-          "home": 27,
+          "home": 39,
           "draw": 35,
-          "away": 38
+          "away": 26
         },
         "D: Draw Prior +50%": {
-          "home": 25,
+          "home": 37,
           "draw": 38,
-          "away": 37
+          "away": 25
         },
         "E: Draw Prior +70%": {
-          "home": 24,
+          "home": 36,
           "draw": 41,
-          "away": 35
+          "away": 23
         },
         "F: Rho×3 + Elo Cap 400": {
-          "home": 28,
-          "draw": 32,
-          "away": 40
+          "home": 42,
+          "draw": 31,
+          "away": 27
         },
         "G: Rho×3 + Draw +30%": {
-          "home": 25,
-          "draw": 38,
-          "away": 37
+          "home": 38,
+          "draw": 37,
+          "away": 25
         },
         "H: Rho×3 + Draw +30% + Cap400": {
-          "home": 25,
-          "draw": 38,
-          "away": 37
+          "home": 38,
+          "draw": 37,
+          "away": 25
         }
       },
       "briers": {
-        "Champion (v1.0.0-platt)": 0.7646,
-        "A: Rho×1.5": 0.7622,
-        "B: Rho×3": 0.7808,
-        "C: Draw Prior +30%": 0.7997999999999998,
-        "D: Draw Prior +50%": 0.8438,
-        "E: Draw Prior +70%": 0.8682,
-        "F: Rho×3 + Elo Cap 400": 0.7808,
-        "G: Rho×3 + Draw +30%": 0.8438,
-        "H: Rho×3 + Draw +30% + Cap400": 0.8438
+        "Champion (v1.0.0-platt)": 0.7674,
+        "A: Rho×1.5": 0.7447999999999999,
+        "B: Rho×3": 0.7253999999999998,
+        "C: Draw Prior +30%": 0.6422,
+        "D: Draw Prior +50%": 0.5838,
+        "E: Draw Prior +70%": 0.5306000000000001,
+        "F: Rho×3 + Elo Cap 400": 0.7253999999999998,
+        "G: Rho×3 + Draw +30%": 0.6038,
+        "H: Rho×3 + Draw +30% + Cap400": 0.6038
       }
     },
     {
-      "slug": "belgium-vs-iran",
+      "slug": "czech-republic-vs-south-africa",
       "realized": "draw",
       "splits": {
         "Champion (v1.0.0-platt)": {
@@ -971,13 +1219,13 @@
           "away": 27
         },
         "G: Rho×3 + Draw +30%": {
-          "home": 38,
-          "draw": 37,
+          "home": 37,
+          "draw": 38,
           "away": 25
         },
         "H: Rho×3 + Draw +30% + Cap400": {
-          "home": 38,
-          "draw": 37,
+          "home": 37,
+          "draw": 38,
           "away": 25
         }
       },
@@ -989,12 +1237,136 @@
         "D: Draw Prior +50%": 0.5838,
         "E: Draw Prior +70%": 0.5282000000000001,
         "F: Rho×3 + Elo Cap 400": 0.7033999999999998,
-        "G: Rho×3 + Draw +30%": 0.6038,
-        "H: Rho×3 + Draw +30% + Cap400": 0.6038
+        "G: Rho×3 + Draw +30%": 0.5838,
+        "H: Rho×3 + Draw +30% + Cap400": 0.5838
       }
     },
     {
-      "slug": "netherlands-vs-japan",
+      "slug": "egypt-vs-iran",
+      "realized": "draw",
+      "splits": {
+        "Champion (v1.0.0-platt)": {
+          "home": 32,
+          "draw": 30,
+          "away": 38
+        },
+        "A: Rho×1.5": {
+          "home": 32,
+          "draw": 30,
+          "away": 38
+        },
+        "B: Rho×3": {
+          "home": 31,
+          "draw": 32,
+          "away": 37
+        },
+        "C: Draw Prior +30%": {
+          "home": 30,
+          "draw": 35,
+          "away": 35
+        },
+        "D: Draw Prior +50%": {
+          "home": 28,
+          "draw": 39,
+          "away": 33
+        },
+        "E: Draw Prior +70%": {
+          "home": 27,
+          "draw": 42,
+          "away": 31
+        },
+        "F: Rho×3 + Elo Cap 400": {
+          "home": 31,
+          "draw": 32,
+          "away": 37
+        },
+        "G: Rho×3 + Draw +30%": {
+          "home": 28,
+          "draw": 38,
+          "away": 34
+        },
+        "H: Rho×3 + Draw +30% + Cap400": {
+          "home": 28,
+          "draw": 38,
+          "away": 34
+        }
+      },
+      "briers": {
+        "Champion (v1.0.0-platt)": 0.7367999999999999,
+        "A: Rho×1.5": 0.7367999999999999,
+        "B: Rho×3": 0.6953999999999999,
+        "C: Draw Prior +30%": 0.635,
+        "D: Draw Prior +50%": 0.5594,
+        "E: Draw Prior +70%": 0.5054000000000001,
+        "F: Rho×3 + Elo Cap 400": 0.6953999999999999,
+        "G: Rho×3 + Draw +30%": 0.5784,
+        "H: Rho×3 + Draw +30% + Cap400": 0.5784
+      }
+    },
+    {
+      "slug": "algeria-vs-austria",
+      "realized": "draw",
+      "splits": {
+        "Champion (v1.0.0-platt)": {
+          "home": 32,
+          "draw": 30,
+          "away": 38
+        },
+        "A: Rho×1.5": {
+          "home": 32,
+          "draw": 30,
+          "away": 38
+        },
+        "B: Rho×3": {
+          "home": 31,
+          "draw": 32,
+          "away": 37
+        },
+        "C: Draw Prior +30%": {
+          "home": 30,
+          "draw": 35,
+          "away": 35
+        },
+        "D: Draw Prior +50%": {
+          "home": 28,
+          "draw": 39,
+          "away": 33
+        },
+        "E: Draw Prior +70%": {
+          "home": 27,
+          "draw": 42,
+          "away": 31
+        },
+        "F: Rho×3 + Elo Cap 400": {
+          "home": 31,
+          "draw": 32,
+          "away": 37
+        },
+        "G: Rho×3 + Draw +30%": {
+          "home": 28,
+          "draw": 38,
+          "away": 34
+        },
+        "H: Rho×3 + Draw +30% + Cap400": {
+          "home": 28,
+          "draw": 38,
+          "away": 34
+        }
+      },
+      "briers": {
+        "Champion (v1.0.0-platt)": 0.7367999999999999,
+        "A: Rho×1.5": 0.7367999999999999,
+        "B: Rho×3": 0.6953999999999999,
+        "C: Draw Prior +30%": 0.635,
+        "D: Draw Prior +50%": 0.5594,
+        "E: Draw Prior +70%": 0.5054000000000001,
+        "F: Rho×3 + Elo Cap 400": 0.6953999999999999,
+        "G: Rho×3 + Draw +30%": 0.5784,
+        "H: Rho×3 + Draw +30% + Cap400": 0.5784
+      }
+    },
+    {
+      "slug": "colombia-vs-portugal",
       "realized": "draw",
       "splits": {
         "Champion (v1.0.0-platt)": {
@@ -1018,9 +1390,9 @@
           "away": 31
         },
         "D: Draw Prior +50%": {
-          "home": 32,
+          "home": 31,
           "draw": 39,
-          "away": 29
+          "away": 30
         },
         "E: Draw Prior +70%": {
           "home": 30,
@@ -1048,7 +1420,7 @@
         "A: Rho×1.5": 0.7352,
         "B: Rho×3": 0.6937999999999999,
         "C: Draw Prior +30%": 0.6146,
-        "D: Draw Prior +50%": 0.5586,
+        "D: Draw Prior +50%": 0.5582,
         "E: Draw Prior +70%": 0.5048000000000001,
         "F: Rho×3 + Elo Cap 400": 0.6937999999999999,
         "G: Rho×3 + Draw +30%": 0.5768,
@@ -1056,69 +1428,441 @@
       }
     },
     {
-      "slug": "sweden-vs-tunisia",
-      "realized": "home",
+      "slug": "cape-verde-vs-saudi-arabia",
+      "realized": "draw",
       "splits": {
         "Champion (v1.0.0-platt)": {
-          "home": 37,
+          "home": 34,
           "draw": 30,
-          "away": 33
+          "away": 36
         },
         "A: Rho×1.5": {
-          "home": 37,
+          "home": 34,
           "draw": 30,
-          "away": 33
+          "away": 36
         },
         "B: Rho×3": {
-          "home": 36,
+          "home": 33,
           "draw": 32,
-          "away": 32
+          "away": 35
         },
         "C: Draw Prior +30%": {
-          "home": 34,
+          "home": 31,
           "draw": 36,
-          "away": 30
+          "away": 33
         },
         "D: Draw Prior +50%": {
-          "home": 32,
+          "home": 30,
           "draw": 39,
-          "away": 29
+          "away": 31
         },
         "E: Draw Prior +70%": {
-          "home": 31,
+          "home": 28,
           "draw": 42,
-          "away": 27
+          "away": 30
         },
         "F: Rho×3 + Elo Cap 400": {
-          "home": 36,
+          "home": 33,
           "draw": 32,
-          "away": 32
+          "away": 35
         },
         "G: Rho×3 + Draw +30%": {
-          "home": 33,
+          "home": 30,
           "draw": 38,
-          "away": 29
+          "away": 32
         },
         "H: Rho×3 + Draw +30% + Cap400": {
-          "home": 33,
+          "home": 30,
           "draw": 38,
-          "away": 29
+          "away": 32
         }
       },
       "briers": {
-        "Champion (v1.0.0-platt)": 0.5958,
-        "A: Rho×1.5": 0.5958,
-        "B: Rho×3": 0.6144000000000001,
-        "C: Draw Prior +30%": 0.6551999999999999,
-        "D: Draw Prior +50%": 0.6985999999999999,
-        "E: Draw Prior +70%": 0.7253999999999998,
-        "F: Rho×3 + Elo Cap 400": 0.6144000000000001,
-        "G: Rho×3 + Draw +30%": 0.6773999999999999,
-        "H: Rho×3 + Draw +30% + Cap400": 0.6773999999999999
+        "Champion (v1.0.0-platt)": 0.7351999999999999,
+        "A: Rho×1.5": 0.7351999999999999,
+        "B: Rho×3": 0.6937999999999999,
+        "C: Draw Prior +30%": 0.6146,
+        "D: Draw Prior +50%": 0.5581999999999999,
+        "E: Draw Prior +70%": 0.5048000000000001,
+        "F: Rho×3 + Elo Cap 400": 0.6937999999999999,
+        "G: Rho×3 + Draw +30%": 0.5768000000000001,
+        "H: Rho×3 + Draw +30% + Cap400": 0.5768000000000001
       }
     },
     {
-      "slug": "united-states-vs-australia",
+      "slug": "paraguay-vs-australia",
+      "realized": "draw",
+      "splits": {
+        "Champion (v1.0.0-platt)": {
+          "home": 35,
+          "draw": 30,
+          "away": 35
+        },
+        "A: Rho×1.5": {
+          "home": 35,
+          "draw": 30,
+          "away": 35
+        },
+        "B: Rho×3": {
+          "home": 34,
+          "draw": 32,
+          "away": 34
+        },
+        "C: Draw Prior +30%": {
+          "home": 32,
+          "draw": 36,
+          "away": 32
+        },
+        "D: Draw Prior +50%": {
+          "home": 31,
+          "draw": 39,
+          "away": 30
+        },
+        "E: Draw Prior +70%": {
+          "home": 29,
+          "draw": 42,
+          "away": 29
+        },
+        "F: Rho×3 + Elo Cap 400": {
+          "home": 34,
+          "draw": 32,
+          "away": 34
+        },
+        "G: Rho×3 + Draw +30%": {
+          "home": 31,
+          "draw": 38,
+          "away": 31
+        },
+        "H: Rho×3 + Draw +30% + Cap400": {
+          "home": 31,
+          "draw": 38,
+          "away": 31
+        }
+      },
+      "briers": {
+        "Champion (v1.0.0-platt)": 0.7349999999999999,
+        "A: Rho×1.5": 0.7349999999999999,
+        "B: Rho×3": 0.6936,
+        "C: Draw Prior +30%": 0.6144000000000001,
+        "D: Draw Prior +50%": 0.5582,
+        "E: Draw Prior +70%": 0.5046,
+        "F: Rho×3 + Elo Cap 400": 0.6936,
+        "G: Rho×3 + Draw +30%": 0.5766,
+        "H: Rho×3 + Draw +30% + Cap400": 0.5766
+      }
+    },
+    {
+      "slug": "ecuador-vs-germany",
+      "realized": "home",
+      "splits": {
+        "Champion (v1.0.0-platt)": {
+          "home": 32,
+          "draw": 30,
+          "away": 38
+        },
+        "A: Rho×1.5": {
+          "home": 32,
+          "draw": 30,
+          "away": 38
+        },
+        "B: Rho×3": {
+          "home": 31,
+          "draw": 32,
+          "away": 37
+        },
+        "C: Draw Prior +30%": {
+          "home": 29,
+          "draw": 36,
+          "away": 35
+        },
+        "D: Draw Prior +50%": {
+          "home": 28,
+          "draw": 39,
+          "away": 33
+        },
+        "E: Draw Prior +70%": {
+          "home": 26,
+          "draw": 42,
+          "away": 32
+        },
+        "F: Rho×3 + Elo Cap 400": {
+          "home": 31,
+          "draw": 32,
+          "away": 37
+        },
+        "G: Rho×3 + Draw +30%": {
+          "home": 28,
+          "draw": 38,
+          "away": 34
+        },
+        "H: Rho×3 + Draw +30% + Cap400": {
+          "home": 28,
+          "draw": 38,
+          "away": 34
+        }
+      },
+      "briers": {
+        "Champion (v1.0.0-platt)": 0.6967999999999999,
+        "A: Rho×1.5": 0.6967999999999999,
+        "B: Rho×3": 0.7153999999999999,
+        "C: Draw Prior +30%": 0.7561999999999999,
+        "D: Draw Prior +50%": 0.7794,
+        "E: Draw Prior +70%": 0.8264,
+        "F: Rho×3 + Elo Cap 400": 0.7153999999999999,
+        "G: Rho×3 + Draw +30%": 0.7784,
+        "H: Rho×3 + Draw +30% + Cap400": 0.7784
+      }
+    },
+    {
+      "slug": "turkiye-vs-paraguay",
+      "realized": "away",
+      "splits": {
+        "Champion (v1.0.0-platt)": {
+          "home": 36,
+          "draw": 30,
+          "away": 34
+        },
+        "A: Rho×1.5": {
+          "home": 36,
+          "draw": 30,
+          "away": 34
+        },
+        "B: Rho×3": {
+          "home": 35,
+          "draw": 32,
+          "away": 33
+        },
+        "C: Draw Prior +30%": {
+          "home": 33,
+          "draw": 36,
+          "away": 31
+        },
+        "D: Draw Prior +50%": {
+          "home": 31,
+          "draw": 39,
+          "away": 30
+        },
+        "E: Draw Prior +70%": {
+          "home": 30,
+          "draw": 42,
+          "away": 28
+        },
+        "F: Rho×3 + Elo Cap 400": {
+          "home": 35,
+          "draw": 32,
+          "away": 33
+        },
+        "G: Rho×3 + Draw +30%": {
+          "home": 32,
+          "draw": 38,
+          "away": 30
+        },
+        "H: Rho×3 + Draw +30% + Cap400": {
+          "home": 32,
+          "draw": 38,
+          "away": 30
+        }
+      },
+      "briers": {
+        "Champion (v1.0.0-platt)": 0.6551999999999999,
+        "A: Rho×1.5": 0.6551999999999999,
+        "B: Rho×3": 0.6738,
+        "C: Draw Prior +30%": 0.7145999999999999,
+        "D: Draw Prior +50%": 0.7382,
+        "E: Draw Prior +70%": 0.7847999999999999,
+        "F: Rho×3 + Elo Cap 400": 0.6738,
+        "G: Rho×3 + Draw +30%": 0.7367999999999999,
+        "H: Rho×3 + Draw +30% + Cap400": 0.7367999999999999
+      }
+    },
+    {
+      "slug": "australia-vs-turkiye",
+      "realized": "home",
+      "splits": {
+        "Champion (v1.0.0-platt)": {
+          "home": 34,
+          "draw": 30,
+          "away": 36
+        },
+        "A: Rho×1.5": {
+          "home": 34,
+          "draw": 30,
+          "away": 36
+        },
+        "B: Rho×3": {
+          "home": 33,
+          "draw": 32,
+          "away": 35
+        },
+        "C: Draw Prior +30%": {
+          "home": 31,
+          "draw": 36,
+          "away": 33
+        },
+        "D: Draw Prior +50%": {
+          "home": 29,
+          "draw": 39,
+          "away": 32
+        },
+        "E: Draw Prior +70%": {
+          "home": 28,
+          "draw": 42,
+          "away": 30
+        },
+        "F: Rho×3 + Elo Cap 400": {
+          "home": 33,
+          "draw": 32,
+          "away": 35
+        },
+        "G: Rho×3 + Draw +30%": {
+          "home": 30,
+          "draw": 38,
+          "away": 32
+        },
+        "H: Rho×3 + Draw +30% + Cap400": {
+          "home": 30,
+          "draw": 38,
+          "away": 32
+        }
+      },
+      "briers": {
+        "Champion (v1.0.0-platt)": 0.6551999999999998,
+        "A: Rho×1.5": 0.6551999999999998,
+        "B: Rho×3": 0.6737999999999998,
+        "C: Draw Prior +30%": 0.7145999999999999,
+        "D: Draw Prior +50%": 0.7586,
+        "E: Draw Prior +70%": 0.7847999999999999,
+        "F: Rho×3 + Elo Cap 400": 0.6737999999999998,
+        "G: Rho×3 + Draw +30%": 0.7368,
+        "H: Rho×3 + Draw +30% + Cap400": 0.7368
+      }
+    },
+    {
+      "slug": "canada-vs-switzerland",
+      "realized": "away",
+      "splits": {
+        "Champion (v1.0.0-platt)": {
+          "home": 31,
+          "draw": 30,
+          "away": 39
+        },
+        "A: Rho×1.5": {
+          "home": 31,
+          "draw": 30,
+          "away": 39
+        },
+        "B: Rho×3": {
+          "home": 30,
+          "draw": 32,
+          "away": 38
+        },
+        "C: Draw Prior +30%": {
+          "home": 28,
+          "draw": 36,
+          "away": 36
+        },
+        "D: Draw Prior +50%": {
+          "home": 27,
+          "draw": 39,
+          "away": 34
+        },
+        "E: Draw Prior +70%": {
+          "home": 25,
+          "draw": 42,
+          "away": 33
+        },
+        "F: Rho×3 + Elo Cap 400": {
+          "home": 30,
+          "draw": 32,
+          "away": 38
+        },
+        "G: Rho×3 + Draw +30%": {
+          "home": 27,
+          "draw": 38,
+          "away": 35
+        },
+        "H: Rho×3 + Draw +30% + Cap400": {
+          "home": 27,
+          "draw": 38,
+          "away": 35
+        }
+      },
+      "briers": {
+        "Champion (v1.0.0-platt)": 0.5582,
+        "A: Rho×1.5": 0.5582,
+        "B: Rho×3": 0.5768,
+        "C: Draw Prior +30%": 0.6176,
+        "D: Draw Prior +50%": 0.6605999999999999,
+        "E: Draw Prior +70%": 0.6877999999999999,
+        "F: Rho×3 + Elo Cap 400": 0.5768,
+        "G: Rho×3 + Draw +30%": 0.6398,
+        "H: Rho×3 + Draw +30% + Cap400": 0.6398
+      }
+    },
+    {
+      "slug": "united-states-vs-paraguay",
+      "realized": "home",
+      "splits": {
+        "Champion (v1.0.0-platt)": {
+          "home": 44,
+          "draw": 29,
+          "away": 27
+        },
+        "A: Rho×1.5": {
+          "home": 44,
+          "draw": 30,
+          "away": 26
+        },
+        "B: Rho×3": {
+          "home": 43,
+          "draw": 31,
+          "away": 26
+        },
+        "C: Draw Prior +30%": {
+          "home": 41,
+          "draw": 35,
+          "away": 24
+        },
+        "D: Draw Prior +50%": {
+          "home": 39,
+          "draw": 38,
+          "away": 23
+        },
+        "E: Draw Prior +70%": {
+          "home": 37,
+          "draw": 41,
+          "away": 22
+        },
+        "F: Rho×3 + Elo Cap 400": {
+          "home": 43,
+          "draw": 31,
+          "away": 26
+        },
+        "G: Rho×3 + Draw +30%": {
+          "home": 40,
+          "draw": 37,
+          "away": 23
+        },
+        "H: Rho×3 + Draw +30% + Cap400": {
+          "home": 40,
+          "draw": 37,
+          "away": 23
+        }
+      },
+      "briers": {
+        "Champion (v1.0.0-platt)": 0.4706000000000001,
+        "A: Rho×1.5": 0.47120000000000006,
+        "B: Rho×3": 0.4886000000000001,
+        "C: Draw Prior +30%": 0.5282000000000001,
+        "D: Draw Prior +50%": 0.5693999999999999,
+        "E: Draw Prior +70%": 0.6134,
+        "F: Rho×3 + Elo Cap 400": 0.4886000000000001,
+        "G: Rho×3 + Draw +30%": 0.5498000000000001,
+        "H: Rho×3 + Draw +30% + Cap400": 0.5498000000000001
+      }
+    },
+    {
+      "slug": "dr-congo-vs-uzbekistan",
       "realized": "home",
       "splits": {
         "Champion (v1.0.0-platt)": {
@@ -1132,8 +1876,8 @@
           "away": 27
         },
         "B: Rho×3": {
-          "home": 42,
-          "draw": 32,
+          "home": 43,
+          "draw": 31,
           "away": 26
         },
         "C: Draw Prior +30%": {
@@ -1152,8 +1896,8 @@
           "away": 23
         },
         "F: Rho×3 + Elo Cap 400": {
-          "home": 42,
-          "draw": 32,
+          "home": 43,
+          "draw": 31,
           "away": 26
         },
         "G: Rho×3 + Draw +30%": {
@@ -1170,271 +1914,333 @@
       "briers": {
         "Champion (v1.0.0-platt)": 0.4706000000000001,
         "A: Rho×1.5": 0.48780000000000007,
-        "B: Rho×3": 0.5064000000000001,
+        "B: Rho×3": 0.4886000000000001,
         "C: Draw Prior +30%": 0.5449999999999999,
         "D: Draw Prior +50%": 0.5864,
         "E: Draw Prior +70%": 0.6306,
-        "F: Rho×3 + Elo Cap 400": 0.5064000000000001,
+        "F: Rho×3 + Elo Cap 400": 0.4886000000000001,
         "G: Rho×3 + Draw +30%": 0.5666,
         "H: Rho×3 + Draw +30% + Cap400": 0.5666
       }
     },
     {
-      "slug": "united-states-vs-paraguay",
+      "slug": "united-states-vs-australia",
       "realized": "home",
       "splits": {
         "Champion (v1.0.0-platt)": {
-          "home": 48,
-          "draw": 28,
-          "away": 24
+          "home": 45,
+          "draw": 29,
+          "away": 26
         },
         "A: Rho×1.5": {
-          "home": 47,
-          "draw": 29,
-          "away": 24
+          "home": 44,
+          "draw": 30,
+          "away": 26
         },
         "B: Rho×3": {
-          "home": 47,
-          "draw": 30,
-          "away": 23
+          "home": 44,
+          "draw": 31,
+          "away": 25
         },
         "C: Draw Prior +30%": {
-          "home": 44,
-          "draw": 34,
-          "away": 22
+          "home": 41,
+          "draw": 35,
+          "away": 24
         },
         "D: Draw Prior +50%": {
-          "home": 42,
-          "draw": 37,
-          "away": 21
-        },
-        "E: Draw Prior +70%": {
-          "home": 40,
-          "draw": 40,
-          "away": 20
-        },
-        "F: Rho×3 + Elo Cap 400": {
-          "home": 47,
-          "draw": 30,
+          "home": 39,
+          "draw": 38,
           "away": 23
         },
+        "E: Draw Prior +70%": {
+          "home": 37,
+          "draw": 41,
+          "away": 22
+        },
+        "F: Rho×3 + Elo Cap 400": {
+          "home": 44,
+          "draw": 31,
+          "away": 25
+        },
         "G: Rho×3 + Draw +30%": {
-          "home": 43,
-          "draw": 36,
-          "away": 21
+          "home": 40,
+          "draw": 37,
+          "away": 23
         },
         "H: Rho×3 + Draw +30% + Cap400": {
-          "home": 43,
-          "draw": 36,
-          "away": 21
+          "home": 40,
+          "draw": 37,
+          "away": 23
         }
       },
       "briers": {
-        "Champion (v1.0.0-platt)": 0.40640000000000004,
-        "A: Rho×1.5": 0.42260000000000003,
-        "B: Rho×3": 0.4238,
-        "C: Draw Prior +30%": 0.4776000000000001,
-        "D: Draw Prior +50%": 0.5174000000000001,
-        "E: Draw Prior +70%": 0.56,
-        "F: Rho×3 + Elo Cap 400": 0.4238,
-        "G: Rho×3 + Draw +30%": 0.49860000000000004,
-        "H: Rho×3 + Draw +30% + Cap400": 0.49860000000000004
+        "Champion (v1.0.0-platt)": 0.45420000000000005,
+        "A: Rho×1.5": 0.47120000000000006,
+        "B: Rho×3": 0.47220000000000006,
+        "C: Draw Prior +30%": 0.5282000000000001,
+        "D: Draw Prior +50%": 0.5693999999999999,
+        "E: Draw Prior +70%": 0.6134,
+        "F: Rho×3 + Elo Cap 400": 0.47220000000000006,
+        "G: Rho×3 + Draw +30%": 0.5498000000000001,
+        "H: Rho×3 + Draw +30% + Cap400": 0.5498000000000001
       }
     },
     {
-      "slug": "austria-vs-jordan",
+      "slug": "norway-vs-senegal",
       "realized": "home",
       "splits": {
         "Champion (v1.0.0-platt)": {
-          "home": 48,
+          "home": 49,
           "draw": 28,
-          "away": 24
+          "away": 23
         },
         "A: Rho×1.5": {
-          "home": 48,
-          "draw": 29,
+          "home": 49,
+          "draw": 28,
           "away": 23
         },
         "B: Rho×3": {
-          "home": 47,
+          "home": 48,
           "draw": 30,
-          "away": 23
-        },
-        "C: Draw Prior +30%": {
-          "home": 44,
-          "draw": 34,
           "away": 22
         },
-        "D: Draw Prior +50%": {
-          "home": 42,
-          "draw": 37,
+        "C: Draw Prior +30%": {
+          "home": 45,
+          "draw": 34,
           "away": 21
         },
-        "E: Draw Prior +70%": {
-          "home": 40,
-          "draw": 40,
+        "D: Draw Prior +50%": {
+          "home": 43,
+          "draw": 37,
           "away": 20
         },
+        "E: Draw Prior +70%": {
+          "home": 41,
+          "draw": 40,
+          "away": 19
+        },
         "F: Rho×3 + Elo Cap 400": {
-          "home": 47,
+          "home": 48,
           "draw": 30,
-          "away": 23
+          "away": 22
         },
         "G: Rho×3 + Draw +30%": {
-          "home": 43,
+          "home": 44,
           "draw": 36,
-          "away": 21
+          "away": 20
         },
         "H: Rho×3 + Draw +30% + Cap400": {
-          "home": 43,
+          "home": 44,
           "draw": 36,
-          "away": 21
+          "away": 20
         }
       },
       "briers": {
-        "Champion (v1.0.0-platt)": 0.40640000000000004,
-        "A: Rho×1.5": 0.40740000000000004,
-        "B: Rho×3": 0.4238,
-        "C: Draw Prior +30%": 0.4776000000000001,
-        "D: Draw Prior +50%": 0.5174000000000001,
-        "E: Draw Prior +70%": 0.56,
-        "F: Rho×3 + Elo Cap 400": 0.4238,
-        "G: Rho×3 + Draw +30%": 0.49860000000000004,
-        "H: Rho×3 + Draw +30% + Cap400": 0.49860000000000004
+        "Champion (v1.0.0-platt)": 0.3914,
+        "A: Rho×1.5": 0.3914,
+        "B: Rho×3": 0.40880000000000005,
+        "C: Draw Prior +30%": 0.46220000000000006,
+        "D: Draw Prior +50%": 0.5018000000000001,
+        "E: Draw Prior +70%": 0.5442000000000001,
+        "F: Rho×3 + Elo Cap 400": 0.40880000000000005,
+        "G: Rho×3 + Draw +30%": 0.4832000000000001,
+        "H: Rho×3 + Draw +30% + Cap400": 0.4832000000000001
       }
     },
     {
-      "slug": "england-vs-croatia",
+      "slug": "sweden-vs-tunisia",
       "realized": "home",
       "splits": {
         "Champion (v1.0.0-platt)": {
-          "home": 48,
+          "home": 50,
           "draw": 28,
-          "away": 24
-        },
-        "A: Rho×1.5": {
-          "home": 48,
-          "draw": 29,
-          "away": 23
-        },
-        "B: Rho×3": {
-          "home": 47,
-          "draw": 30,
-          "away": 23
-        },
-        "C: Draw Prior +30%": {
-          "home": 44,
-          "draw": 34,
           "away": 22
         },
-        "D: Draw Prior +50%": {
-          "home": 42,
-          "draw": 37,
-          "away": 21
-        },
-        "E: Draw Prior +70%": {
-          "home": 40,
-          "draw": 40,
-          "away": 20
-        },
-        "F: Rho×3 + Elo Cap 400": {
-          "home": 47,
-          "draw": 30,
-          "away": 23
-        },
-        "G: Rho×3 + Draw +30%": {
-          "home": 43,
-          "draw": 36,
-          "away": 21
-        },
-        "H: Rho×3 + Draw +30% + Cap400": {
-          "home": 43,
-          "draw": 36,
-          "away": 21
-        }
-      },
-      "briers": {
-        "Champion (v1.0.0-platt)": 0.40640000000000004,
-        "A: Rho×1.5": 0.40740000000000004,
-        "B: Rho×3": 0.4238,
-        "C: Draw Prior +30%": 0.4776000000000001,
-        "D: Draw Prior +50%": 0.5174000000000001,
-        "E: Draw Prior +70%": 0.56,
-        "F: Rho×3 + Elo Cap 400": 0.4238,
-        "G: Rho×3 + Draw +30%": 0.49860000000000004,
-        "H: Rho×3 + Draw +30% + Cap400": 0.49860000000000004
-      }
-    },
-    {
-      "slug": "haiti-vs-scotland",
-      "realized": "away",
-      "splits": {
-        "Champion (v1.0.0-platt)": {
-          "home": 22,
-          "draw": 27,
-          "away": 51
-        },
         "A: Rho×1.5": {
-          "home": 22,
+          "home": 50,
           "draw": 28,
-          "away": 50
+          "away": 22
         },
         "B: Rho×3": {
-          "home": 21,
+          "home": 49,
           "draw": 30,
-          "away": 49
+          "away": 21
         },
         "C: Draw Prior +30%": {
-          "home": 20,
+          "home": 46,
           "draw": 33,
-          "away": 47
+          "away": 21
         },
         "D: Draw Prior +50%": {
-          "home": 19,
+          "home": 44,
           "draw": 36,
-          "away": 45
+          "away": 20
         },
         "E: Draw Prior +70%": {
-          "home": 19,
+          "home": 42,
           "draw": 39,
-          "away": 42
+          "away": 19
         },
         "F: Rho×3 + Elo Cap 400": {
-          "home": 21,
+          "home": 49,
           "draw": 30,
-          "away": 49
+          "away": 21
         },
         "G: Rho×3 + Draw +30%": {
-          "home": 19,
+          "home": 45,
           "draw": 36,
-          "away": 45
+          "away": 19
         },
         "H: Rho×3 + Draw +30% + Cap400": {
-          "home": 19,
+          "home": 45,
           "draw": 36,
-          "away": 45
+          "away": 19
         }
       },
       "briers": {
-        "Champion (v1.0.0-platt)": 0.3614,
+        "Champion (v1.0.0-platt)": 0.3768,
         "A: Rho×1.5": 0.3768,
-        "B: Rho×3": 0.3942,
-        "C: Draw Prior +30%": 0.42980000000000007,
-        "D: Draw Prior +50%": 0.46820000000000006,
+        "B: Rho×3": 0.39419999999999994,
+        "C: Draw Prior +30%": 0.4446,
+        "D: Draw Prior +50%": 0.4832000000000001,
         "E: Draw Prior +70%": 0.5246000000000001,
-        "F: Rho×3 + Elo Cap 400": 0.3942,
+        "F: Rho×3 + Elo Cap 400": 0.39419999999999994,
         "G: Rho×3 + Draw +30%": 0.46820000000000006,
         "H: Rho×3 + Draw +30% + Cap400": 0.46820000000000006
       }
     },
     {
-      "slug": "scotland-vs-morocco",
+      "slug": "bosnia-herzegovina-vs-qatar",
+      "realized": "home",
+      "splits": {
+        "Champion (v1.0.0-platt)": {
+          "home": 51,
+          "draw": 27,
+          "away": 22
+        },
+        "A: Rho×1.5": {
+          "home": 50,
+          "draw": 28,
+          "away": 22
+        },
+        "B: Rho×3": {
+          "home": 49,
+          "draw": 30,
+          "away": 21
+        },
+        "C: Draw Prior +30%": {
+          "home": 47,
+          "draw": 33,
+          "away": 20
+        },
+        "D: Draw Prior +50%": {
+          "home": 45,
+          "draw": 36,
+          "away": 19
+        },
+        "E: Draw Prior +70%": {
+          "home": 42,
+          "draw": 39,
+          "away": 19
+        },
+        "F: Rho×3 + Elo Cap 400": {
+          "home": 49,
+          "draw": 30,
+          "away": 21
+        },
+        "G: Rho×3 + Draw +30%": {
+          "home": 45,
+          "draw": 36,
+          "away": 19
+        },
+        "H: Rho×3 + Draw +30% + Cap400": {
+          "home": 45,
+          "draw": 36,
+          "away": 19
+        }
+      },
+      "briers": {
+        "Champion (v1.0.0-platt)": 0.3614,
+        "A: Rho×1.5": 0.3768,
+        "B: Rho×3": 0.39419999999999994,
+        "C: Draw Prior +30%": 0.42980000000000007,
+        "D: Draw Prior +50%": 0.46820000000000006,
+        "E: Draw Prior +70%": 0.5246000000000001,
+        "F: Rho×3 + Elo Cap 400": 0.39419999999999994,
+        "G: Rho×3 + Draw +30%": 0.46820000000000006,
+        "H: Rho×3 + Draw +30% + Cap400": 0.46820000000000006
+      }
+    },
+    {
+      "slug": "germany-vs-ivory-coast",
+      "realized": "home",
+      "splits": {
+        "Champion (v1.0.0-platt)": {
+          "home": 52,
+          "draw": 27,
+          "away": 21
+        },
+        "A: Rho×1.5": {
+          "home": 52,
+          "draw": 28,
+          "away": 20
+        },
+        "B: Rho×3": {
+          "home": 51,
+          "draw": 29,
+          "away": 20
+        },
+        "C: Draw Prior +30%": {
+          "home": 48,
+          "draw": 33,
+          "away": 19
+        },
+        "D: Draw Prior +50%": {
+          "home": 46,
+          "draw": 36,
+          "away": 18
+        },
+        "E: Draw Prior +70%": {
+          "home": 44,
+          "draw": 39,
+          "away": 17
+        },
+        "F: Rho×3 + Elo Cap 400": {
+          "home": 51,
+          "draw": 29,
+          "away": 20
+        },
+        "G: Rho×3 + Draw +30%": {
+          "home": 47,
+          "draw": 35,
+          "away": 18
+        },
+        "H: Rho×3 + Draw +30% + Cap400": {
+          "home": 47,
+          "draw": 35,
+          "away": 18
+        }
+      },
+      "briers": {
+        "Champion (v1.0.0-platt)": 0.3474,
+        "A: Rho×1.5": 0.3488,
+        "B: Rho×3": 0.36419999999999997,
+        "C: Draw Prior +30%": 0.41540000000000005,
+        "D: Draw Prior +50%": 0.4536,
+        "E: Draw Prior +70%": 0.49460000000000004,
+        "F: Rho×3 + Elo Cap 400": 0.36419999999999997,
+        "G: Rho×3 + Draw +30%": 0.4358,
+        "H: Rho×3 + Draw +30% + Cap400": 0.4358
+      }
+    },
+    {
+      "slug": "jordan-vs-algeria",
       "realized": "away",
       "splits": {
         "Champion (v1.0.0-platt)": {
-          "home": 22,
+          "home": 21,
           "draw": 27,
-          "away": 51
+          "away": 52
         },
         "A: Rho×1.5": {
           "home": 21,
@@ -1478,7 +2284,7 @@
         }
       },
       "briers": {
-        "Champion (v1.0.0-platt)": 0.3614,
+        "Champion (v1.0.0-platt)": 0.3474,
         "A: Rho×1.5": 0.3626,
         "B: Rho×3": 0.38,
         "C: Draw Prior +30%": 0.42980000000000007,
@@ -1490,7 +2296,131 @@
       }
     },
     {
-      "slug": "mexico-vs-south-korea",
+      "slug": "haiti-vs-scotland",
+      "realized": "away",
+      "splits": {
+        "Champion (v1.0.0-platt)": {
+          "home": 20,
+          "draw": 27,
+          "away": 53
+        },
+        "A: Rho×1.5": {
+          "home": 20,
+          "draw": 27,
+          "away": 53
+        },
+        "B: Rho×3": {
+          "home": 19,
+          "draw": 29,
+          "away": 52
+        },
+        "C: Draw Prior +30%": {
+          "home": 19,
+          "draw": 32,
+          "away": 49
+        },
+        "D: Draw Prior +50%": {
+          "home": 18,
+          "draw": 35,
+          "away": 47
+        },
+        "E: Draw Prior +70%": {
+          "home": 17,
+          "draw": 38,
+          "away": 45
+        },
+        "F: Rho×3 + Elo Cap 400": {
+          "home": 19,
+          "draw": 29,
+          "away": 52
+        },
+        "G: Rho×3 + Draw +30%": {
+          "home": 18,
+          "draw": 34,
+          "away": 48
+        },
+        "H: Rho×3 + Draw +30% + Cap400": {
+          "home": 18,
+          "draw": 34,
+          "away": 48
+        }
+      },
+      "briers": {
+        "Champion (v1.0.0-platt)": 0.3338,
+        "A: Rho×1.5": 0.3338,
+        "B: Rho×3": 0.3506,
+        "C: Draw Prior +30%": 0.3986,
+        "D: Draw Prior +50%": 0.4358,
+        "E: Draw Prior +70%": 0.47580000000000006,
+        "F: Rho×3 + Elo Cap 400": 0.3506,
+        "G: Rho×3 + Draw +30%": 0.41840000000000005,
+        "H: Rho×3 + Draw +30% + Cap400": 0.41840000000000005
+      }
+    },
+    {
+      "slug": "england-vs-croatia",
+      "realized": "home",
+      "splits": {
+        "Champion (v1.0.0-platt)": {
+          "home": 54,
+          "draw": 27,
+          "away": 19
+        },
+        "A: Rho×1.5": {
+          "home": 54,
+          "draw": 27,
+          "away": 19
+        },
+        "B: Rho×3": {
+          "home": 53,
+          "draw": 29,
+          "away": 18
+        },
+        "C: Draw Prior +30%": {
+          "home": 50,
+          "draw": 32,
+          "away": 18
+        },
+        "D: Draw Prior +50%": {
+          "home": 48,
+          "draw": 35,
+          "away": 17
+        },
+        "E: Draw Prior +70%": {
+          "home": 46,
+          "draw": 38,
+          "away": 16
+        },
+        "F: Rho×3 + Elo Cap 400": {
+          "home": 53,
+          "draw": 29,
+          "away": 18
+        },
+        "G: Rho×3 + Draw +30%": {
+          "home": 49,
+          "draw": 34,
+          "away": 17
+        },
+        "H: Rho×3 + Draw +30% + Cap400": {
+          "home": 49,
+          "draw": 34,
+          "away": 17
+        }
+      },
+      "briers": {
+        "Champion (v1.0.0-platt)": 0.3206,
+        "A: Rho×1.5": 0.3206,
+        "B: Rho×3": 0.3374,
+        "C: Draw Prior +30%": 0.3848,
+        "D: Draw Prior +50%": 0.4218,
+        "E: Draw Prior +70%": 0.46160000000000007,
+        "F: Rho×3 + Elo Cap 400": 0.3374,
+        "G: Rho×3 + Draw +30%": 0.4046,
+        "H: Rho×3 + Draw +30% + Cap400": 0.4046
+      }
+    },
+    {
+      "slug": "austria-vs-jordan",
       "realized": "home",
       "splits": {
         "Champion (v1.0.0-platt)": {
@@ -1552,193 +2482,317 @@
       }
     },
     {
-      "slug": "germany-vs-ivory-coast",
-      "realized": "home",
+      "slug": "new-zealand-vs-egypt",
+      "realized": "away",
       "splits": {
         "Champion (v1.0.0-platt)": {
-          "home": 58,
-          "draw": 25,
-          "away": 17
+          "home": 18,
+          "draw": 26,
+          "away": 56
         },
         "A: Rho×1.5": {
-          "home": 57,
+          "home": 18,
           "draw": 26,
-          "away": 17
+          "away": 56
         },
         "B: Rho×3": {
-          "home": 57,
-          "draw": 27,
-          "away": 16
+          "home": 17,
+          "draw": 28,
+          "away": 55
         },
         "C: Draw Prior +30%": {
-          "home": 54,
-          "draw": 30,
-          "away": 16
+          "home": 17,
+          "draw": 31,
+          "away": 52
         },
         "D: Draw Prior +50%": {
-          "home": 51,
+          "home": 16,
           "draw": 34,
-          "away": 15
+          "away": 50
         },
         "E: Draw Prior +70%": {
-          "home": 49,
-          "draw": 36,
-          "away": 15
+          "home": 16,
+          "draw": 37,
+          "away": 47
         },
         "F: Rho×3 + Elo Cap 400": {
-          "home": 57,
-          "draw": 27,
-          "away": 16
+          "home": 17,
+          "draw": 28,
+          "away": 55
         },
         "G: Rho×3 + Draw +30%": {
-          "home": 52,
+          "home": 16,
           "draw": 33,
-          "away": 15
+          "away": 51
         },
         "H: Rho×3 + Draw +30% + Cap400": {
-          "home": 52,
+          "home": 16,
           "draw": 33,
-          "away": 15
+          "away": 51
+        }
+      },
+      "briers": {
+        "Champion (v1.0.0-platt)": 0.29359999999999997,
+        "A: Rho×1.5": 0.29359999999999997,
+        "B: Rho×3": 0.30979999999999996,
+        "C: Draw Prior +30%": 0.3554,
+        "D: Draw Prior +50%": 0.3912,
+        "E: Draw Prior +70%": 0.4434,
+        "F: Rho×3 + Elo Cap 400": 0.30979999999999996,
+        "G: Rho×3 + Draw +30%": 0.3746,
+        "H: Rho×3 + Draw +30% + Cap400": 0.3746
+      }
+    },
+    {
+      "slug": "panama-vs-croatia",
+      "realized": "away",
+      "splits": {
+        "Champion (v1.0.0-platt)": {
+          "home": 18,
+          "draw": 26,
+          "away": 56
+        },
+        "A: Rho×1.5": {
+          "home": 18,
+          "draw": 26,
+          "away": 56
+        },
+        "B: Rho×3": {
+          "home": 17,
+          "draw": 28,
+          "away": 55
+        },
+        "C: Draw Prior +30%": {
+          "home": 17,
+          "draw": 31,
+          "away": 52
+        },
+        "D: Draw Prior +50%": {
+          "home": 16,
+          "draw": 34,
+          "away": 50
+        },
+        "E: Draw Prior +70%": {
+          "home": 15,
+          "draw": 37,
+          "away": 48
+        },
+        "F: Rho×3 + Elo Cap 400": {
+          "home": 17,
+          "draw": 28,
+          "away": 55
+        },
+        "G: Rho×3 + Draw +30%": {
+          "home": 16,
+          "draw": 33,
+          "away": 51
+        },
+        "H: Rho×3 + Draw +30% + Cap400": {
+          "home": 16,
+          "draw": 33,
+          "away": 51
+        }
+      },
+      "briers": {
+        "Champion (v1.0.0-platt)": 0.29359999999999997,
+        "A: Rho×1.5": 0.29359999999999997,
+        "B: Rho×3": 0.30979999999999996,
+        "C: Draw Prior +30%": 0.3554,
+        "D: Draw Prior +50%": 0.3912,
+        "E: Draw Prior +70%": 0.4298,
+        "F: Rho×3 + Elo Cap 400": 0.30979999999999996,
+        "G: Rho×3 + Draw +30%": 0.3746,
+        "H: Rho×3 + Draw +30% + Cap400": 0.3746
+      }
+    },
+    {
+      "slug": "norway-vs-france",
+      "realized": "away",
+      "splits": {
+        "Champion (v1.0.0-platt)": {
+          "home": 17,
+          "draw": 25,
+          "away": 58
+        },
+        "A: Rho×1.5": {
+          "home": 17,
+          "draw": 25,
+          "away": 58
+        },
+        "B: Rho×3": {
+          "home": 16,
+          "draw": 27,
+          "away": 57
+        },
+        "C: Draw Prior +30%": {
+          "home": 16,
+          "draw": 30,
+          "away": 54
+        },
+        "D: Draw Prior +50%": {
+          "home": 15,
+          "draw": 33,
+          "away": 52
+        },
+        "E: Draw Prior +70%": {
+          "home": 14,
+          "draw": 36,
+          "away": 50
+        },
+        "F: Rho×3 + Elo Cap 400": {
+          "home": 16,
+          "draw": 27,
+          "away": 57
+        },
+        "G: Rho×3 + Draw +30%": {
+          "home": 15,
+          "draw": 32,
+          "away": 53
+        },
+        "H: Rho×3 + Draw +30% + Cap400": {
+          "home": 15,
+          "draw": 32,
+          "away": 53
         }
       },
       "briers": {
         "Champion (v1.0.0-platt)": 0.26780000000000004,
-        "A: Rho×1.5": 0.28140000000000004,
+        "A: Rho×1.5": 0.26780000000000004,
         "B: Rho×3": 0.28340000000000004,
-        "C: Draw Prior +30%": 0.3272,
-        "D: Draw Prior +50%": 0.37820000000000004,
-        "E: Draw Prior +70%": 0.4122,
+        "C: Draw Prior +30%": 0.32719999999999994,
+        "D: Draw Prior +50%": 0.3618,
+        "E: Draw Prior +70%": 0.3992,
         "F: Rho×3 + Elo Cap 400": 0.28340000000000004,
-        "G: Rho×3 + Draw +30%": 0.3618,
-        "H: Rho×3 + Draw +30% + Cap400": 0.3618
+        "G: Rho×3 + Draw +30%": 0.3458,
+        "H: Rho×3 + Draw +30% + Cap400": 0.3458
       }
     },
     {
-      "slug": "france-vs-senegal",
+      "slug": "scotland-vs-morocco",
+      "realized": "away",
+      "splits": {
+        "Champion (v1.0.0-platt)": {
+          "home": 16,
+          "draw": 25,
+          "away": 59
+        },
+        "A: Rho×1.5": {
+          "home": 16,
+          "draw": 25,
+          "away": 59
+        },
+        "B: Rho×3": {
+          "home": 15,
+          "draw": 27,
+          "away": 58
+        },
+        "C: Draw Prior +30%": {
+          "home": 15,
+          "draw": 30,
+          "away": 55
+        },
+        "D: Draw Prior +50%": {
+          "home": 15,
+          "draw": 33,
+          "away": 52
+        },
+        "E: Draw Prior +70%": {
+          "home": 14,
+          "draw": 36,
+          "away": 50
+        },
+        "F: Rho×3 + Elo Cap 400": {
+          "home": 15,
+          "draw": 27,
+          "away": 58
+        },
+        "G: Rho×3 + Draw +30%": {
+          "home": 14,
+          "draw": 32,
+          "away": 54
+        },
+        "H: Rho×3 + Draw +30% + Cap400": {
+          "home": 14,
+          "draw": 32,
+          "away": 54
+        }
+      },
+      "briers": {
+        "Champion (v1.0.0-platt)": 0.25620000000000004,
+        "A: Rho×1.5": 0.25620000000000004,
+        "B: Rho×3": 0.27180000000000004,
+        "C: Draw Prior +30%": 0.31499999999999995,
+        "D: Draw Prior +50%": 0.3618,
+        "E: Draw Prior +70%": 0.3992,
+        "F: Rho×3 + Elo Cap 400": 0.27180000000000004,
+        "G: Rho×3 + Draw +30%": 0.33359999999999995,
+        "H: Rho×3 + Draw +30% + Cap400": 0.33359999999999995
+      }
+    },
+    {
+      "slug": "senegal-vs-iraq",
       "realized": "home",
       "splits": {
         "Champion (v1.0.0-platt)": {
-          "home": 61,
-          "draw": 24,
-          "away": 15
+          "home": 59,
+          "draw": 25,
+          "away": 16
         },
         "A: Rho×1.5": {
-          "home": 60,
+          "home": 59,
           "draw": 25,
-          "away": 15
+          "away": 16
         },
         "B: Rho×3": {
-          "home": 60,
-          "draw": 26,
-          "away": 14
+          "home": 58,
+          "draw": 27,
+          "away": 15
         },
         "C: Draw Prior +30%": {
-          "home": 56,
-          "draw": 29,
+          "home": 55,
+          "draw": 30,
           "away": 15
         },
         "D: Draw Prior +50%": {
+          "home": 53,
+          "draw": 33,
+          "away": 14
+        },
+        "E: Draw Prior +70%": {
+          "home": 50,
+          "draw": 36,
+          "away": 14
+        },
+        "F: Rho×3 + Elo Cap 400": {
+          "home": 58,
+          "draw": 27,
+          "away": 15
+        },
+        "G: Rho×3 + Draw +30%": {
           "home": 54,
           "draw": 32,
           "away": 14
         },
-        "E: Draw Prior +70%": {
-          "home": 52,
-          "draw": 35,
-          "away": 13
-        },
-        "F: Rho×3 + Elo Cap 400": {
-          "home": 60,
-          "draw": 26,
-          "away": 14
-        },
-        "G: Rho×3 + Draw +30%": {
-          "home": 55,
-          "draw": 31,
-          "away": 14
-        },
         "H: Rho×3 + Draw +30% + Cap400": {
-          "home": 55,
-          "draw": 31,
+          "home": 54,
+          "draw": 32,
           "away": 14
         }
       },
       "briers": {
-        "Champion (v1.0.0-platt)": 0.2322,
-        "A: Rho×1.5": 0.24500000000000002,
-        "B: Rho×3": 0.24720000000000003,
-        "C: Draw Prior +30%": 0.30019999999999997,
-        "D: Draw Prior +50%": 0.33359999999999995,
-        "E: Draw Prior +70%": 0.3698,
-        "F: Rho×3 + Elo Cap 400": 0.24720000000000003,
-        "G: Rho×3 + Draw +30%": 0.3182,
-        "H: Rho×3 + Draw +30% + Cap400": 0.3182
+        "Champion (v1.0.0-platt)": 0.25620000000000004,
+        "A: Rho×1.5": 0.25620000000000004,
+        "B: Rho×3": 0.27180000000000004,
+        "C: Draw Prior +30%": 0.315,
+        "D: Draw Prior +50%": 0.3494,
+        "E: Draw Prior +70%": 0.3992,
+        "F: Rho×3 + Elo Cap 400": 0.27180000000000004,
+        "G: Rho×3 + Draw +30%": 0.33359999999999995,
+        "H: Rho×3 + Draw +30% + Cap400": 0.33359999999999995
       }
     },
     {
-      "slug": "iraq-vs-norway",
-      "realized": "away",
-      "splits": {
-        "Champion (v1.0.0-platt)": {
-          "home": 14,
-          "draw": 23,
-          "away": 63
-        },
-        "A: Rho×1.5": {
-          "home": 14,
-          "draw": 24,
-          "away": 62
-        },
-        "B: Rho×3": {
-          "home": 13,
-          "draw": 25,
-          "away": 62
-        },
-        "C: Draw Prior +30%": {
-          "home": 14,
-          "draw": 28,
-          "away": 58
-        },
-        "D: Draw Prior +50%": {
-          "home": 13,
-          "draw": 31,
-          "away": 56
-        },
-        "E: Draw Prior +70%": {
-          "home": 12,
-          "draw": 34,
-          "away": 54
-        },
-        "F: Rho×3 + Elo Cap 400": {
-          "home": 13,
-          "draw": 25,
-          "away": 62
-        },
-        "G: Rho×3 + Draw +30%": {
-          "home": 13,
-          "draw": 30,
-          "away": 57
-        },
-        "H: Rho×3 + Draw +30% + Cap400": {
-          "home": 13,
-          "draw": 30,
-          "away": 57
-        }
-      },
-      "briers": {
-        "Champion (v1.0.0-platt)": 0.2094,
-        "A: Rho×1.5": 0.22160000000000002,
-        "B: Rho×3": 0.2238,
-        "C: Draw Prior +30%": 0.27440000000000003,
-        "D: Draw Prior +50%": 0.3066,
-        "E: Draw Prior +70%": 0.3416,
-        "F: Rho×3 + Elo Cap 400": 0.2238,
-        "G: Rho×3 + Draw +30%": 0.29180000000000006,
-        "H: Rho×3 + Draw +30% + Cap400": 0.29180000000000006
-      }
-    },
-    {
-      "slug": "uzbekistan-vs-colombia",
+      "slug": "cura-ao-vs-ivory-coast",
       "realized": "away",
       "splits": {
         "Champion (v1.0.0-platt)": {
@@ -1804,28 +2858,28 @@
       "realized": "home",
       "splits": {
         "Champion (v1.0.0-platt)": {
-          "home": 63,
+          "home": 64,
           "draw": 23,
-          "away": 14
+          "away": 13
         },
         "A: Rho×1.5": {
-          "home": 63,
+          "home": 64,
           "draw": 23,
-          "away": 14
+          "away": 13
         },
         "B: Rho×3": {
-          "home": 62,
-          "draw": 25,
+          "home": 63,
+          "draw": 24,
           "away": 13
         },
         "C: Draw Prior +30%": {
-          "home": 59,
-          "draw": 28,
+          "home": 60,
+          "draw": 27,
           "away": 13
         },
         "D: Draw Prior +50%": {
-          "home": 57,
-          "draw": 31,
+          "home": 58,
+          "draw": 30,
           "away": 12
         },
         "E: Draw Prior +70%": {
@@ -1834,108 +2888,46 @@
           "away": 12
         },
         "F: Rho×3 + Elo Cap 400": {
-          "home": 62,
-          "draw": 25,
+          "home": 63,
+          "draw": 24,
           "away": 13
         },
         "G: Rho×3 + Draw +30%": {
-          "home": 58,
-          "draw": 30,
+          "home": 59,
+          "draw": 29,
           "away": 12
         },
         "H: Rho×3 + Draw +30% + Cap400": {
-          "home": 58,
-          "draw": 30,
+          "home": 59,
+          "draw": 29,
           "away": 12
         }
       },
       "briers": {
-        "Champion (v1.0.0-platt)": 0.2094,
-        "A: Rho×1.5": 0.2094,
-        "B: Rho×3": 0.2238,
-        "C: Draw Prior +30%": 0.2634000000000001,
-        "D: Draw Prior +50%": 0.29540000000000005,
-        "E: Draw Prior +70%": 0.3258,
-        "F: Rho×3 + Elo Cap 400": 0.2238,
-        "G: Rho×3 + Draw +30%": 0.28080000000000005,
-        "H: Rho×3 + Draw +30% + Cap400": 0.28080000000000005
-      }
-    },
-    {
-      "slug": "tunisia-vs-japan",
-      "realized": "away",
-      "splits": {
-        "Champion (v1.0.0-platt)": {
-          "home": 13,
-          "draw": 22,
-          "away": 65
-        },
-        "A: Rho×1.5": {
-          "home": 13,
-          "draw": 23,
-          "away": 64
-        },
-        "B: Rho×3": {
-          "home": 12,
-          "draw": 24,
-          "away": 64
-        },
-        "C: Draw Prior +30%": {
-          "home": 12,
-          "draw": 27,
-          "away": 61
-        },
-        "D: Draw Prior +50%": {
-          "home": 12,
-          "draw": 30,
-          "away": 58
-        },
-        "E: Draw Prior +70%": {
-          "home": 11,
-          "draw": 33,
-          "away": 56
-        },
-        "F: Rho×3 + Elo Cap 400": {
-          "home": 12,
-          "draw": 24,
-          "away": 64
-        },
-        "G: Rho×3 + Draw +30%": {
-          "home": 11,
-          "draw": 29,
-          "away": 60
-        },
-        "H: Rho×3 + Draw +30% + Cap400": {
-          "home": 11,
-          "draw": 29,
-          "away": 60
-        }
-      },
-      "briers": {
-        "Champion (v1.0.0-platt)": 0.18779999999999997,
+        "Champion (v1.0.0-platt)": 0.1994,
         "A: Rho×1.5": 0.1994,
-        "B: Rho×3": 0.2016,
-        "C: Draw Prior +30%": 0.2394,
+        "B: Rho×3": 0.2114,
+        "C: Draw Prior +30%": 0.24980000000000005,
         "D: Draw Prior +50%": 0.28080000000000005,
-        "E: Draw Prior +70%": 0.3146,
-        "F: Rho×3 + Elo Cap 400": 0.2016,
-        "G: Rho×3 + Draw +30%": 0.25620000000000004,
-        "H: Rho×3 + Draw +30% + Cap400": 0.25620000000000004
+        "E: Draw Prior +70%": 0.3258,
+        "F: Rho×3 + Elo Cap 400": 0.2114,
+        "G: Rho×3 + Draw +30%": 0.26660000000000006,
+        "H: Rho×3 + Draw +30% + Cap400": 0.26660000000000006
       }
     },
     {
-      "slug": "switzerland-vs-bosnia-herzegovina",
+      "slug": "croatia-vs-ghana",
       "realized": "home",
       "splits": {
         "Champion (v1.0.0-platt)": {
-          "home": 67,
-          "draw": 21,
+          "home": 66,
+          "draw": 22,
           "away": 12
         },
         "A: Rho×1.5": {
-          "home": 67,
+          "home": 66,
           "draw": 22,
-          "away": 11
+          "away": 12
         },
         "B: Rho×3": {
           "home": 66,
@@ -1943,13 +2935,75 @@
           "away": 11
         },
         "C: Draw Prior +30%": {
-          "home": 63,
+          "home": 62,
           "draw": 26,
+          "away": 12
+        },
+        "D: Draw Prior +50%": {
+          "home": 60,
+          "draw": 29,
+          "away": 11
+        },
+        "E: Draw Prior +70%": {
+          "home": 57,
+          "draw": 32,
+          "away": 11
+        },
+        "F: Rho×3 + Elo Cap 400": {
+          "home": 66,
+          "draw": 23,
+          "away": 11
+        },
+        "G: Rho×3 + Draw +30%": {
+          "home": 61,
+          "draw": 28,
+          "away": 11
+        },
+        "H: Rho×3 + Draw +30% + Cap400": {
+          "home": 61,
+          "draw": 28,
+          "away": 11
+        }
+      },
+      "briers": {
+        "Champion (v1.0.0-platt)": 0.17839999999999998,
+        "A: Rho×1.5": 0.17839999999999998,
+        "B: Rho×3": 0.18059999999999998,
+        "C: Draw Prior +30%": 0.22640000000000002,
+        "D: Draw Prior +50%": 0.25620000000000004,
+        "E: Draw Prior +70%": 0.29940000000000005,
+        "F: Rho×3 + Elo Cap 400": 0.18059999999999998,
+        "G: Rho×3 + Draw +30%": 0.24260000000000004,
+        "H: Rho×3 + Draw +30% + Cap400": 0.24260000000000004
+      }
+    },
+    {
+      "slug": "colombia-vs-dr-congo",
+      "realized": "home",
+      "splits": {
+        "Champion (v1.0.0-platt)": {
+          "home": 68,
+          "draw": 21,
+          "away": 11
+        },
+        "A: Rho×1.5": {
+          "home": 68,
+          "draw": 21,
+          "away": 11
+        },
+        "B: Rho×3": {
+          "home": 67,
+          "draw": 22,
+          "away": 11
+        },
+        "C: Draw Prior +30%": {
+          "home": 64,
+          "draw": 25,
           "away": 11
         },
         "D: Draw Prior +50%": {
-          "home": 61,
-          "draw": 29,
+          "home": 62,
+          "draw": 28,
           "away": 10
         },
         "E: Draw Prior +70%": {
@@ -1958,35 +3012,35 @@
           "away": 10
         },
         "F: Rho×3 + Elo Cap 400": {
-          "home": 66,
-          "draw": 23,
+          "home": 67,
+          "draw": 22,
           "away": 11
         },
         "G: Rho×3 + Draw +30%": {
-          "home": 62,
-          "draw": 28,
+          "home": 63,
+          "draw": 27,
           "away": 10
         },
         "H: Rho×3 + Draw +30% + Cap400": {
-          "home": 62,
-          "draw": 28,
+          "home": 63,
+          "draw": 27,
           "away": 10
         }
       },
       "briers": {
-        "Champion (v1.0.0-platt)": 0.16739999999999997,
-        "A: Rho×1.5": 0.16939999999999997,
-        "B: Rho×3": 0.18059999999999998,
-        "C: Draw Prior +30%": 0.21660000000000001,
-        "D: Draw Prior +50%": 0.24620000000000003,
+        "Champion (v1.0.0-platt)": 0.15859999999999996,
+        "A: Rho×1.5": 0.15859999999999996,
+        "B: Rho×3": 0.16939999999999997,
+        "C: Draw Prior +30%": 0.2042,
+        "D: Draw Prior +50%": 0.2328,
         "E: Draw Prior +70%": 0.27420000000000005,
-        "F: Rho×3 + Elo Cap 400": 0.18059999999999998,
-        "G: Rho×3 + Draw +30%": 0.2328,
-        "H: Rho×3 + Draw +30% + Cap400": 0.2328
+        "F: Rho×3 + Elo Cap 400": 0.16939999999999997,
+        "G: Rho×3 + Draw +30%": 0.2198,
+        "H: Rho×3 + Draw +30% + Cap400": 0.2198
       }
     },
     {
-      "slug": "argentina-vs-algeria",
+      "slug": "mexico-vs-south-korea",
       "realized": "home",
       "splits": {
         "Champion (v1.0.0-platt)": {
@@ -2000,13 +3054,13 @@
           "away": 10
         },
         "B: Rho×3": {
-          "home": 68,
-          "draw": 22,
+          "home": 69,
+          "draw": 21,
           "away": 10
         },
         "C: Draw Prior +30%": {
-          "home": 65,
-          "draw": 25,
+          "home": 66,
+          "draw": 24,
           "away": 10
         },
         "D: Draw Prior +50%": {
@@ -2020,19 +3074,81 @@
           "away": 9
         },
         "F: Rho×3 + Elo Cap 400": {
-          "home": 68,
-          "draw": 22,
+          "home": 69,
+          "draw": 21,
           "away": 10
         },
         "G: Rho×3 + Draw +30%": {
-          "home": 64,
-          "draw": 27,
+          "home": 65,
+          "draw": 26,
           "away": 9
         },
         "H: Rho×3 + Draw +30% + Cap400": {
-          "home": 64,
-          "draw": 27,
+          "home": 65,
+          "draw": 26,
           "away": 9
+        }
+      },
+      "briers": {
+        "Champion (v1.0.0-platt)": 0.14820000000000005,
+        "A: Rho×1.5": 0.15020000000000003,
+        "B: Rho×3": 0.15020000000000003,
+        "C: Draw Prior +30%": 0.18319999999999997,
+        "D: Draw Prior +50%": 0.2198,
+        "E: Draw Prior +70%": 0.25020000000000003,
+        "F: Rho×3 + Elo Cap 400": 0.15020000000000003,
+        "G: Rho×3 + Draw +30%": 0.1982,
+        "H: Rho×3 + Draw +30% + Cap400": 0.1982
+      }
+    },
+    {
+      "slug": "scotland-vs-brazil",
+      "realized": "away",
+      "splits": {
+        "Champion (v1.0.0-platt)": {
+          "home": 11,
+          "draw": 20,
+          "away": 69
+        },
+        "A: Rho×1.5": {
+          "home": 10,
+          "draw": 21,
+          "away": 69
+        },
+        "B: Rho×3": {
+          "home": 10,
+          "draw": 22,
+          "away": 68
+        },
+        "C: Draw Prior +30%": {
+          "home": 10,
+          "draw": 25,
+          "away": 65
+        },
+        "D: Draw Prior +50%": {
+          "home": 10,
+          "draw": 27,
+          "away": 63
+        },
+        "E: Draw Prior +70%": {
+          "home": 9,
+          "draw": 30,
+          "away": 61
+        },
+        "F: Rho×3 + Elo Cap 400": {
+          "home": 10,
+          "draw": 22,
+          "away": 68
+        },
+        "G: Rho×3 + Draw +30%": {
+          "home": 9,
+          "draw": 27,
+          "away": 64
+        },
+        "H: Rho×3 + Draw +30% + Cap400": {
+          "home": 9,
+          "draw": 27,
+          "away": 64
         }
       },
       "briers": {
@@ -2041,14 +3157,572 @@
         "B: Rho×3": 0.16079999999999997,
         "C: Draw Prior +30%": 0.195,
         "D: Draw Prior +50%": 0.2198,
-        "E: Draw Prior +70%": 0.25020000000000003,
+        "E: Draw Prior +70%": 0.2502,
         "F: Rho×3 + Elo Cap 400": 0.16079999999999997,
         "G: Rho×3 + Draw +30%": 0.2106,
         "H: Rho×3 + Draw +30% + Cap400": 0.2106
       }
     },
     {
-      "slug": "brazil-vs-haiti",
+      "slug": "uruguay-vs-spain",
+      "realized": "away",
+      "splits": {
+        "Champion (v1.0.0-platt)": {
+          "home": 11,
+          "draw": 20,
+          "away": 69
+        },
+        "A: Rho×1.5": {
+          "home": 10,
+          "draw": 21,
+          "away": 69
+        },
+        "B: Rho×3": {
+          "home": 10,
+          "draw": 22,
+          "away": 68
+        },
+        "C: Draw Prior +30%": {
+          "home": 10,
+          "draw": 25,
+          "away": 65
+        },
+        "D: Draw Prior +50%": {
+          "home": 10,
+          "draw": 27,
+          "away": 63
+        },
+        "E: Draw Prior +70%": {
+          "home": 9,
+          "draw": 30,
+          "away": 61
+        },
+        "F: Rho×3 + Elo Cap 400": {
+          "home": 10,
+          "draw": 22,
+          "away": 68
+        },
+        "G: Rho×3 + Draw +30%": {
+          "home": 9,
+          "draw": 27,
+          "away": 64
+        },
+        "H: Rho×3 + Draw +30% + Cap400": {
+          "home": 9,
+          "draw": 27,
+          "away": 64
+        }
+      },
+      "briers": {
+        "Champion (v1.0.0-platt)": 0.14820000000000005,
+        "A: Rho×1.5": 0.15020000000000003,
+        "B: Rho×3": 0.16079999999999997,
+        "C: Draw Prior +30%": 0.195,
+        "D: Draw Prior +50%": 0.2198,
+        "E: Draw Prior +70%": 0.2502,
+        "F: Rho×3 + Elo Cap 400": 0.16079999999999997,
+        "G: Rho×3 + Draw +30%": 0.2106,
+        "H: Rho×3 + Draw +30% + Cap400": 0.2106
+      }
+    },
+    {
+      "slug": "tunisia-vs-japan",
+      "realized": "away",
+      "splits": {
+        "Champion (v1.0.0-platt)": {
+          "home": 10,
+          "draw": 19,
+          "away": 71
+        },
+        "A: Rho×1.5": {
+          "home": 9,
+          "draw": 20,
+          "away": 71
+        },
+        "B: Rho×3": {
+          "home": 9,
+          "draw": 21,
+          "away": 70
+        },
+        "C: Draw Prior +30%": {
+          "home": 9,
+          "draw": 24,
+          "away": 67
+        },
+        "D: Draw Prior +50%": {
+          "home": 9,
+          "draw": 26,
+          "away": 65
+        },
+        "E: Draw Prior +70%": {
+          "home": 8,
+          "draw": 29,
+          "away": 63
+        },
+        "F: Rho×3 + Elo Cap 400": {
+          "home": 9,
+          "draw": 21,
+          "away": 70
+        },
+        "G: Rho×3 + Draw +30%": {
+          "home": 8,
+          "draw": 25,
+          "away": 67
+        },
+        "H: Rho×3 + Draw +30% + Cap400": {
+          "home": 8,
+          "draw": 25,
+          "away": 67
+        }
+      },
+      "briers": {
+        "Champion (v1.0.0-platt)": 0.13020000000000004,
+        "A: Rho×1.5": 0.13220000000000004,
+        "B: Rho×3": 0.14220000000000002,
+        "C: Draw Prior +30%": 0.17459999999999998,
+        "D: Draw Prior +50%": 0.1982,
+        "E: Draw Prior +70%": 0.2274,
+        "F: Rho×3 + Elo Cap 400": 0.14220000000000002,
+        "G: Rho×3 + Draw +30%": 0.17779999999999996,
+        "H: Rho×3 + Draw +30% + Cap400": 0.17779999999999996
+      }
+    },
+    {
+      "slug": "new-zealand-vs-belgium",
+      "realized": "away",
+      "splits": {
+        "Champion (v1.0.0-platt)": {
+          "home": 10,
+          "draw": 19,
+          "away": 71
+        },
+        "A: Rho×1.5": {
+          "home": 10,
+          "draw": 19,
+          "away": 71
+        },
+        "B: Rho×3": {
+          "home": 9,
+          "draw": 20,
+          "away": 71
+        },
+        "C: Draw Prior +30%": {
+          "home": 9,
+          "draw": 23,
+          "away": 68
+        },
+        "D: Draw Prior +50%": {
+          "home": 9,
+          "draw": 26,
+          "away": 65
+        },
+        "E: Draw Prior +70%": {
+          "home": 8,
+          "draw": 29,
+          "away": 63
+        },
+        "F: Rho×3 + Elo Cap 400": {
+          "home": 9,
+          "draw": 20,
+          "away": 71
+        },
+        "G: Rho×3 + Draw +30%": {
+          "home": 8,
+          "draw": 25,
+          "away": 67
+        },
+        "H: Rho×3 + Draw +30% + Cap400": {
+          "home": 8,
+          "draw": 25,
+          "away": 67
+        }
+      },
+      "briers": {
+        "Champion (v1.0.0-platt)": 0.13020000000000004,
+        "A: Rho×1.5": 0.13020000000000004,
+        "B: Rho×3": 0.13220000000000004,
+        "C: Draw Prior +30%": 0.16339999999999996,
+        "D: Draw Prior +50%": 0.1982,
+        "E: Draw Prior +70%": 0.2274,
+        "F: Rho×3 + Elo Cap 400": 0.13220000000000004,
+        "G: Rho×3 + Draw +30%": 0.17779999999999996,
+        "H: Rho×3 + Draw +30% + Cap400": 0.17779999999999996
+      }
+    },
+    {
+      "slug": "france-vs-senegal",
+      "realized": "home",
+      "splits": {
+        "Champion (v1.0.0-platt)": {
+          "home": 72,
+          "draw": 19,
+          "away": 9
+        },
+        "A: Rho×1.5": {
+          "home": 72,
+          "draw": 19,
+          "away": 9
+        },
+        "B: Rho×3": {
+          "home": 72,
+          "draw": 20,
+          "away": 8
+        },
+        "C: Draw Prior +30%": {
+          "home": 68,
+          "draw": 23,
+          "away": 9
+        },
+        "D: Draw Prior +50%": {
+          "home": 66,
+          "draw": 26,
+          "away": 8
+        },
+        "E: Draw Prior +70%": {
+          "home": 64,
+          "draw": 28,
+          "away": 8
+        },
+        "F: Rho×3 + Elo Cap 400": {
+          "home": 72,
+          "draw": 20,
+          "away": 8
+        },
+        "G: Rho×3 + Draw +30%": {
+          "home": 68,
+          "draw": 24,
+          "away": 8
+        },
+        "H: Rho×3 + Draw +30% + Cap400": {
+          "home": 68,
+          "draw": 24,
+          "away": 8
+        }
+      },
+      "briers": {
+        "Champion (v1.0.0-platt)": 0.12260000000000001,
+        "A: Rho×1.5": 0.12260000000000001,
+        "B: Rho×3": 0.12480000000000002,
+        "C: Draw Prior +30%": 0.16339999999999996,
+        "D: Draw Prior +50%": 0.18959999999999996,
+        "E: Draw Prior +70%": 0.2144,
+        "F: Rho×3 + Elo Cap 400": 0.12480000000000002,
+        "G: Rho×3 + Draw +30%": 0.16639999999999996,
+        "H: Rho×3 + Draw +30% + Cap400": 0.16639999999999996
+      }
+    },
+    {
+      "slug": "iraq-vs-norway",
+      "realized": "away",
+      "splits": {
+        "Champion (v1.0.0-platt)": {
+          "home": 9,
+          "draw": 18,
+          "away": 73
+        },
+        "A: Rho×1.5": {
+          "home": 9,
+          "draw": 18,
+          "away": 73
+        },
+        "B: Rho×3": {
+          "home": 8,
+          "draw": 19,
+          "away": 73
+        },
+        "C: Draw Prior +30%": {
+          "home": 8,
+          "draw": 22,
+          "away": 70
+        },
+        "D: Draw Prior +50%": {
+          "home": 8,
+          "draw": 25,
+          "away": 67
+        },
+        "E: Draw Prior +70%": {
+          "home": 8,
+          "draw": 27,
+          "away": 65
+        },
+        "F: Rho×3 + Elo Cap 400": {
+          "home": 8,
+          "draw": 19,
+          "away": 73
+        },
+        "G: Rho×3 + Draw +30%": {
+          "home": 7,
+          "draw": 24,
+          "away": 69
+        },
+        "H: Rho×3 + Draw +30% + Cap400": {
+          "home": 7,
+          "draw": 24,
+          "away": 69
+        }
+      },
+      "briers": {
+        "Champion (v1.0.0-platt)": 0.1134,
+        "A: Rho×1.5": 0.1134,
+        "B: Rho×3": 0.1154,
+        "C: Draw Prior +30%": 0.14480000000000004,
+        "D: Draw Prior +50%": 0.17779999999999996,
+        "E: Draw Prior +70%": 0.20179999999999998,
+        "F: Rho×3 + Elo Cap 400": 0.1154,
+        "G: Rho×3 + Draw +30%": 0.15860000000000002,
+        "H: Rho×3 + Draw +30% + Cap400": 0.15860000000000002
+      }
+    },
+    {
+      "slug": "switzerland-vs-bosnia-herzegovina",
+      "realized": "home",
+      "splits": {
+        "Champion (v1.0.0-platt)": {
+          "home": 74,
+          "draw": 18,
+          "away": 8
+        },
+        "A: Rho×1.5": {
+          "home": 74,
+          "draw": 18,
+          "away": 8
+        },
+        "B: Rho×3": {
+          "home": 74,
+          "draw": 19,
+          "away": 7
+        },
+        "C: Draw Prior +30%": {
+          "home": 71,
+          "draw": 21,
+          "away": 8
+        },
+        "D: Draw Prior +50%": {
+          "home": 68,
+          "draw": 24,
+          "away": 8
+        },
+        "E: Draw Prior +70%": {
+          "home": 66,
+          "draw": 27,
+          "away": 7
+        },
+        "F: Rho×3 + Elo Cap 400": {
+          "home": 74,
+          "draw": 19,
+          "away": 7
+        },
+        "G: Rho×3 + Draw +30%": {
+          "home": 70,
+          "draw": 23,
+          "away": 7
+        },
+        "H: Rho×3 + Draw +30% + Cap400": {
+          "home": 70,
+          "draw": 23,
+          "away": 7
+        }
+      },
+      "briers": {
+        "Champion (v1.0.0-platt)": 0.10640000000000001,
+        "A: Rho×1.5": 0.10640000000000001,
+        "B: Rho×3": 0.10860000000000002,
+        "C: Draw Prior +30%": 0.1346,
+        "D: Draw Prior +50%": 0.16639999999999996,
+        "E: Draw Prior +70%": 0.1934,
+        "F: Rho×3 + Elo Cap 400": 0.10860000000000002,
+        "G: Rho×3 + Draw +30%": 0.14780000000000001,
+        "H: Rho×3 + Draw +30% + Cap400": 0.14780000000000001
+      }
+    },
+    {
+      "slug": "argentina-vs-austria",
+      "realized": "home",
+      "splits": {
+        "Champion (v1.0.0-platt)": {
+          "home": 74,
+          "draw": 18,
+          "away": 8
+        },
+        "A: Rho×1.5": {
+          "home": 74,
+          "draw": 18,
+          "away": 8
+        },
+        "B: Rho×3": {
+          "home": 73,
+          "draw": 19,
+          "away": 8
+        },
+        "C: Draw Prior +30%": {
+          "home": 70,
+          "draw": 22,
+          "away": 8
+        },
+        "D: Draw Prior +50%": {
+          "home": 68,
+          "draw": 24,
+          "away": 8
+        },
+        "E: Draw Prior +70%": {
+          "home": 66,
+          "draw": 27,
+          "away": 7
+        },
+        "F: Rho×3 + Elo Cap 400": {
+          "home": 73,
+          "draw": 19,
+          "away": 8
+        },
+        "G: Rho×3 + Draw +30%": {
+          "home": 70,
+          "draw": 23,
+          "away": 7
+        },
+        "H: Rho×3 + Draw +30% + Cap400": {
+          "home": 70,
+          "draw": 23,
+          "away": 7
+        }
+      },
+      "briers": {
+        "Champion (v1.0.0-platt)": 0.10640000000000001,
+        "A: Rho×1.5": 0.10640000000000001,
+        "B: Rho×3": 0.11540000000000002,
+        "C: Draw Prior +30%": 0.1448,
+        "D: Draw Prior +50%": 0.16639999999999996,
+        "E: Draw Prior +70%": 0.1934,
+        "F: Rho×3 + Elo Cap 400": 0.11540000000000002,
+        "G: Rho×3 + Draw +30%": 0.14780000000000001,
+        "H: Rho×3 + Draw +30% + Cap400": 0.14780000000000001
+      }
+    },
+    {
+      "slug": "portugal-vs-uzbekistan",
+      "realized": "home",
+      "splits": {
+        "Champion (v1.0.0-platt)": {
+          "home": 75,
+          "draw": 17,
+          "away": 8
+        },
+        "A: Rho×1.5": {
+          "home": 75,
+          "draw": 17,
+          "away": 8
+        },
+        "B: Rho×3": {
+          "home": 75,
+          "draw": 18,
+          "away": 7
+        },
+        "C: Draw Prior +30%": {
+          "home": 72,
+          "draw": 21,
+          "away": 7
+        },
+        "D: Draw Prior +50%": {
+          "home": 70,
+          "draw": 23,
+          "away": 7
+        },
+        "E: Draw Prior +70%": {
+          "home": 68,
+          "draw": 25,
+          "away": 7
+        },
+        "F: Rho×3 + Elo Cap 400": {
+          "home": 75,
+          "draw": 18,
+          "away": 7
+        },
+        "G: Rho×3 + Draw +30%": {
+          "home": 71,
+          "draw": 22,
+          "away": 7
+        },
+        "H: Rho×3 + Draw +30% + Cap400": {
+          "home": 71,
+          "draw": 22,
+          "away": 7
+        }
+      },
+      "briers": {
+        "Champion (v1.0.0-platt)": 0.09780000000000001,
+        "A: Rho×1.5": 0.09780000000000001,
+        "B: Rho×3": 0.0998,
+        "C: Draw Prior +30%": 0.12739999999999999,
+        "D: Draw Prior +50%": 0.14780000000000001,
+        "E: Draw Prior +70%": 0.16979999999999995,
+        "F: Rho×3 + Elo Cap 400": 0.0998,
+        "G: Rho×3 + Draw +30%": 0.1374,
+        "H: Rho×3 + Draw +30% + Cap400": 0.1374
+      }
+    },
+    {
+      "slug": "panama-vs-england",
+      "realized": "away",
+      "splits": {
+        "Champion (v1.0.0-platt)": {
+          "home": 8,
+          "draw": 17,
+          "away": 75
+        },
+        "A: Rho×1.5": {
+          "home": 8,
+          "draw": 17,
+          "away": 75
+        },
+        "B: Rho×3": {
+          "home": 7,
+          "draw": 18,
+          "away": 75
+        },
+        "C: Draw Prior +30%": {
+          "home": 7,
+          "draw": 21,
+          "away": 72
+        },
+        "D: Draw Prior +50%": {
+          "home": 7,
+          "draw": 23,
+          "away": 70
+        },
+        "E: Draw Prior +70%": {
+          "home": 7,
+          "draw": 26,
+          "away": 67
+        },
+        "F: Rho×3 + Elo Cap 400": {
+          "home": 7,
+          "draw": 18,
+          "away": 75
+        },
+        "G: Rho×3 + Draw +30%": {
+          "home": 7,
+          "draw": 22,
+          "away": 71
+        },
+        "H: Rho×3 + Draw +30% + Cap400": {
+          "home": 7,
+          "draw": 22,
+          "away": 71
+        }
+      },
+      "briers": {
+        "Champion (v1.0.0-platt)": 0.0978,
+        "A: Rho×1.5": 0.0978,
+        "B: Rho×3": 0.0998,
+        "C: Draw Prior +30%": 0.1274,
+        "D: Draw Prior +50%": 0.14780000000000004,
+        "E: Draw Prior +70%": 0.18139999999999998,
+        "F: Rho×3 + Elo Cap 400": 0.0998,
+        "G: Rho×3 + Draw +30%": 0.13740000000000002,
+        "H: Rho×3 + Draw +30% + Cap400": 0.13740000000000002
+      }
+    },
+    {
+      "slug": "morocco-vs-haiti",
       "realized": "home",
       "splits": {
         "Champion (v1.0.0-platt)": {
@@ -2110,65 +3784,313 @@
       }
     },
     {
+      "slug": "argentina-vs-algeria",
+      "realized": "home",
+      "splits": {
+        "Champion (v1.0.0-platt)": {
+          "home": 77,
+          "draw": 16,
+          "away": 7
+        },
+        "A: Rho×1.5": {
+          "home": 77,
+          "draw": 16,
+          "away": 7
+        },
+        "B: Rho×3": {
+          "home": 76,
+          "draw": 17,
+          "away": 7
+        },
+        "C: Draw Prior +30%": {
+          "home": 73,
+          "draw": 20,
+          "away": 7
+        },
+        "D: Draw Prior +50%": {
+          "home": 71,
+          "draw": 22,
+          "away": 7
+        },
+        "E: Draw Prior +70%": {
+          "home": 69,
+          "draw": 25,
+          "away": 6
+        },
+        "F: Rho×3 + Elo Cap 400": {
+          "home": 76,
+          "draw": 17,
+          "away": 7
+        },
+        "G: Rho×3 + Draw +30%": {
+          "home": 73,
+          "draw": 21,
+          "away": 6
+        },
+        "H: Rho×3 + Draw +30% + Cap400": {
+          "home": 73,
+          "draw": 21,
+          "away": 6
+        }
+      },
+      "briers": {
+        "Champion (v1.0.0-platt)": 0.08339999999999999,
+        "A: Rho×1.5": 0.08339999999999999,
+        "B: Rho×3": 0.09140000000000001,
+        "C: Draw Prior +30%": 0.11780000000000002,
+        "D: Draw Prior +50%": 0.1374,
+        "E: Draw Prior +70%": 0.1622,
+        "F: Rho×3 + Elo Cap 400": 0.09140000000000001,
+        "G: Rho×3 + Draw +30%": 0.1206,
+        "H: Rho×3 + Draw +30% + Cap400": 0.1206
+      }
+    },
+    {
+      "slug": "uzbekistan-vs-colombia",
+      "realized": "away",
+      "splits": {
+        "Champion (v1.0.0-platt)": {
+          "home": 7,
+          "draw": 16,
+          "away": 77
+        },
+        "A: Rho×1.5": {
+          "home": 7,
+          "draw": 17,
+          "away": 76
+        },
+        "B: Rho×3": {
+          "home": 7,
+          "draw": 17,
+          "away": 76
+        },
+        "C: Draw Prior +30%": {
+          "home": 7,
+          "draw": 20,
+          "away": 73
+        },
+        "D: Draw Prior +50%": {
+          "home": 7,
+          "draw": 22,
+          "away": 71
+        },
+        "E: Draw Prior +70%": {
+          "home": 6,
+          "draw": 25,
+          "away": 69
+        },
+        "F: Rho×3 + Elo Cap 400": {
+          "home": 7,
+          "draw": 17,
+          "away": 76
+        },
+        "G: Rho×3 + Draw +30%": {
+          "home": 6,
+          "draw": 22,
+          "away": 72
+        },
+        "H: Rho×3 + Draw +30% + Cap400": {
+          "home": 6,
+          "draw": 22,
+          "away": 72
+        }
+      },
+      "briers": {
+        "Champion (v1.0.0-platt)": 0.08339999999999999,
+        "A: Rho×1.5": 0.09140000000000001,
+        "B: Rho×3": 0.09140000000000001,
+        "C: Draw Prior +30%": 0.11780000000000002,
+        "D: Draw Prior +50%": 0.13740000000000002,
+        "E: Draw Prior +70%": 0.16220000000000004,
+        "F: Rho×3 + Elo Cap 400": 0.09140000000000001,
+        "G: Rho×3 + Draw +30%": 0.13040000000000002,
+        "H: Rho×3 + Draw +30% + Cap400": 0.13040000000000002
+      }
+    },
+    {
       "slug": "germany-vs-cura-ao",
       "realized": "home",
       "splits": {
         "Champion (v1.0.0-platt)": {
-          "home": 80,
-          "draw": 14,
+          "home": 79,
+          "draw": 15,
           "away": 6
         },
         "A: Rho×1.5": {
-          "home": 80,
-          "draw": 14,
+          "home": 79,
+          "draw": 15,
           "away": 6
         },
         "B: Rho×3": {
-          "home": 80,
-          "draw": 15,
+          "home": 79,
+          "draw": 16,
           "away": 5
         },
         "C: Draw Prior +30%": {
-          "home": 77,
+          "home": 76,
           "draw": 18,
-          "away": 5
+          "away": 6
         },
         "D: Draw Prior +50%": {
+          "home": 74,
+          "draw": 20,
+          "away": 6
+        },
+        "E: Draw Prior +70%": {
+          "home": 72,
+          "draw": 22,
+          "away": 6
+        },
+        "F: Rho×3 + Elo Cap 400": {
+          "home": 79,
+          "draw": 16,
+          "away": 5
+        },
+        "G: Rho×3 + Draw +30%": {
           "home": 75,
           "draw": 20,
           "away": 5
         },
-        "E: Draw Prior +70%": {
-          "home": 73,
-          "draw": 22,
-          "away": 5
-        },
-        "F: Rho×3 + Elo Cap 400": {
-          "home": 80,
-          "draw": 15,
-          "away": 5
-        },
-        "G: Rho×3 + Draw +30%": {
-          "home": 76,
-          "draw": 19,
-          "away": 5
-        },
         "H: Rho×3 + Draw +30% + Cap400": {
-          "home": 76,
-          "draw": 19,
+          "home": 75,
+          "draw": 20,
           "away": 5
         }
       },
       "briers": {
-        "Champion (v1.0.0-platt)": 0.06319999999999999,
-        "A: Rho×1.5": 0.06319999999999999,
-        "B: Rho×3": 0.06499999999999997,
-        "C: Draw Prior +30%": 0.08779999999999999,
-        "D: Draw Prior +50%": 0.10500000000000001,
-        "E: Draw Prior +70%": 0.12380000000000001,
-        "F: Rho×3 + Elo Cap 400": 0.06499999999999997,
-        "G: Rho×3 + Draw +30%": 0.09620000000000001,
-        "H: Rho×3 + Draw +30% + Cap400": 0.09620000000000001
+        "Champion (v1.0.0-platt)": 0.0702,
+        "A: Rho×1.5": 0.0702,
+        "B: Rho×3": 0.07219999999999999,
+        "C: Draw Prior +30%": 0.0936,
+        "D: Draw Prior +50%": 0.11120000000000002,
+        "E: Draw Prior +70%": 0.13040000000000002,
+        "F: Rho×3 + Elo Cap 400": 0.07219999999999999,
+        "G: Rho×3 + Draw +30%": 0.10500000000000001,
+        "H: Rho×3 + Draw +30% + Cap400": 0.10500000000000001
+      }
+    },
+    {
+      "slug": "mexico-vs-czech-republic",
+      "realized": "home",
+      "splits": {
+        "Champion (v1.0.0-platt)": {
+          "home": 79,
+          "draw": 15,
+          "away": 6
+        },
+        "A: Rho×1.5": {
+          "home": 79,
+          "draw": 15,
+          "away": 6
+        },
+        "B: Rho×3": {
+          "home": 78,
+          "draw": 16,
+          "away": 6
+        },
+        "C: Draw Prior +30%": {
+          "home": 76,
+          "draw": 18,
+          "away": 6
+        },
+        "D: Draw Prior +50%": {
+          "home": 73,
+          "draw": 21,
+          "away": 6
+        },
+        "E: Draw Prior +70%": {
+          "home": 71,
+          "draw": 23,
+          "away": 6
+        },
+        "F: Rho×3 + Elo Cap 400": {
+          "home": 78,
+          "draw": 16,
+          "away": 6
+        },
+        "G: Rho×3 + Draw +30%": {
+          "home": 75,
+          "draw": 20,
+          "away": 5
+        },
+        "H: Rho×3 + Draw +30% + Cap400": {
+          "home": 75,
+          "draw": 20,
+          "away": 5
+        }
+      },
+      "briers": {
+        "Champion (v1.0.0-platt)": 0.0702,
+        "A: Rho×1.5": 0.0702,
+        "B: Rho×3": 0.0776,
+        "C: Draw Prior +30%": 0.0936,
+        "D: Draw Prior +50%": 0.1206,
+        "E: Draw Prior +70%": 0.1406,
+        "F: Rho×3 + Elo Cap 400": 0.0776,
+        "G: Rho×3 + Draw +30%": 0.10500000000000001,
+        "H: Rho×3 + Draw +30% + Cap400": 0.10500000000000001
+      }
+    },
+    {
+      "slug": "tunisia-vs-netherlands",
+      "realized": "away",
+      "splits": {
+        "Champion (v1.0.0-platt)": {
+          "home": 6,
+          "draw": 15,
+          "away": 79
+        },
+        "A: Rho×1.5": {
+          "home": 6,
+          "draw": 16,
+          "away": 78
+        },
+        "B: Rho×3": {
+          "home": 6,
+          "draw": 16,
+          "away": 78
+        },
+        "C: Draw Prior +30%": {
+          "home": 6,
+          "draw": 19,
+          "away": 75
+        },
+        "D: Draw Prior +50%": {
+          "home": 6,
+          "draw": 21,
+          "away": 73
+        },
+        "E: Draw Prior +70%": {
+          "home": 6,
+          "draw": 23,
+          "away": 71
+        },
+        "F: Rho×3 + Elo Cap 400": {
+          "home": 6,
+          "draw": 16,
+          "away": 78
+        },
+        "G: Rho×3 + Draw +30%": {
+          "home": 6,
+          "draw": 20,
+          "away": 74
+        },
+        "H: Rho×3 + Draw +30% + Cap400": {
+          "home": 6,
+          "draw": 20,
+          "away": 74
+        }
+      },
+      "briers": {
+        "Champion (v1.0.0-platt)": 0.07019999999999998,
+        "A: Rho×1.5": 0.07759999999999999,
+        "B: Rho×3": 0.07759999999999999,
+        "C: Draw Prior +30%": 0.1022,
+        "D: Draw Prior +50%": 0.1206,
+        "E: Draw Prior +70%": 0.14060000000000003,
+        "F: Rho×3 + Elo Cap 400": 0.07759999999999999,
+        "G: Rho×3 + Draw +30%": 0.11120000000000002,
+        "H: Rho×3 + Draw +30% + Cap400": 0.11120000000000002
       }
     },
     {
@@ -2176,34 +4098,96 @@
       "realized": "home",
       "splits": {
         "Champion (v1.0.0-platt)": {
-          "home": 82,
-          "draw": 13,
+          "home": 83,
+          "draw": 12,
           "away": 5
         },
         "A: Rho×1.5": {
-          "home": 81,
-          "draw": 14,
+          "home": 83,
+          "draw": 12,
           "away": 5
         },
         "B: Rho×3": {
+          "home": 83,
+          "draw": 13,
+          "away": 4
+        },
+        "C: Draw Prior +30%": {
+          "home": 81,
+          "draw": 15,
+          "away": 4
+        },
+        "D: Draw Prior +50%": {
+          "home": 79,
+          "draw": 17,
+          "away": 4
+        },
+        "E: Draw Prior +70%": {
+          "home": 77,
+          "draw": 19,
+          "away": 4
+        },
+        "F: Rho×3 + Elo Cap 400": {
           "home": 81,
           "draw": 14,
           "away": 5
         },
-        "C: Draw Prior +30%": {
+        "G: Rho×3 + Draw +30%": {
+          "home": 80,
+          "draw": 16,
+          "away": 4
+        },
+        "H: Rho×3 + Draw +30% + Cap400": {
           "home": 78,
-          "draw": 17,
-          "away": 5
+          "draw": 18,
+          "away": 4
+        }
+      },
+      "briers": {
+        "Champion (v1.0.0-platt)": 0.045800000000000014,
+        "A: Rho×1.5": 0.045800000000000014,
+        "B: Rho×3": 0.04740000000000001,
+        "C: Draw Prior +30%": 0.060199999999999976,
+        "D: Draw Prior +50%": 0.0746,
+        "E: Draw Prior +70%": 0.0906,
+        "F: Rho×3 + Elo Cap 400": 0.05819999999999999,
+        "G: Rho×3 + Draw +30%": 0.06719999999999998,
+        "H: Rho×3 + Draw +30% + Cap400": 0.08239999999999999
+      }
+    },
+    {
+      "slug": "brazil-vs-haiti",
+      "realized": "home",
+      "splits": {
+        "Champion (v1.0.0-platt)": {
+          "home": 85,
+          "draw": 11,
+          "away": 4
+        },
+        "A: Rho×1.5": {
+          "home": 84,
+          "draw": 12,
+          "away": 4
+        },
+        "B: Rho×3": {
+          "home": 84,
+          "draw": 12,
+          "away": 4
+        },
+        "C: Draw Prior +30%": {
+          "home": 82,
+          "draw": 14,
+          "away": 4
         },
         "D: Draw Prior +50%": {
-          "home": 76,
-          "draw": 19,
-          "away": 5
+          "home": 80,
+          "draw": 16,
+          "away": 4
         },
         "E: Draw Prior +70%": {
-          "home": 75,
-          "draw": 20,
-          "away": 5
+          "home": 78,
+          "draw": 18,
+          "away": 4
         },
         "F: Rho×3 + Elo Cap 400": {
           "home": 80,
@@ -2211,8 +4195,8 @@
           "away": 5
         },
         "G: Rho×3 + Draw +30%": {
-          "home": 78,
-          "draw": 18,
+          "home": 81,
+          "draw": 15,
           "away": 4
         },
         "H: Rho×3 + Draw +30% + Cap400": {
@@ -2222,14 +4206,14 @@
         }
       },
       "briers": {
-        "Champion (v1.0.0-platt)": 0.05180000000000003,
-        "A: Rho×1.5": 0.05819999999999999,
-        "B: Rho×3": 0.05819999999999999,
-        "C: Draw Prior +30%": 0.0798,
-        "D: Draw Prior +50%": 0.09620000000000001,
-        "E: Draw Prior +70%": 0.10500000000000001,
+        "Champion (v1.0.0-platt)": 0.0362,
+        "A: Rho×1.5": 0.041600000000000005,
+        "B: Rho×3": 0.041600000000000005,
+        "C: Draw Prior +30%": 0.053600000000000016,
+        "D: Draw Prior +50%": 0.06719999999999998,
+        "E: Draw Prior +70%": 0.08239999999999999,
         "F: Rho×3 + Elo Cap 400": 0.06499999999999997,
-        "G: Rho×3 + Draw +30%": 0.08239999999999999,
+        "G: Rho×3 + Draw +30%": 0.060199999999999976,
         "H: Rho×3 + Draw +30% + Cap400": 0.08779999999999999
       }
     },
@@ -2254,8 +4238,8 @@
         },
         "C: Draw Prior +30%": {
           "home": 87,
-          "draw": 10,
-          "away": 3
+          "draw": 11,
+          "away": 2
         },
         "D: Draw Prior +50%": {
           "home": 86,
@@ -2263,9 +4247,9 @@
           "away": 2
         },
         "E: Draw Prior +70%": {
-          "home": 85,
+          "home": 84,
           "draw": 13,
-          "away": 2
+          "away": 3
         },
         "F: Rho×3 + Elo Cap 400": {
           "home": 80,
@@ -2287,11 +4271,135 @@
         "Champion (v1.0.0-platt)": 0.0194,
         "A: Rho×1.5": 0.0194,
         "B: Rho×3": 0.020599999999999997,
-        "C: Draw Prior +30%": 0.027800000000000005,
+        "C: Draw Prior +30%": 0.029400000000000003,
         "D: Draw Prior +50%": 0.0344,
-        "E: Draw Prior +70%": 0.0398,
+        "E: Draw Prior +70%": 0.04340000000000001,
         "F: Rho×3 + Elo Cap 400": 0.06499999999999997,
         "G: Rho×3 + Draw +30%": 0.029400000000000003,
+        "H: Rho×3 + Draw +30% + Cap400": 0.08779999999999999
+      }
+    },
+    {
+      "slug": "jordan-vs-argentina",
+      "realized": "away",
+      "splits": {
+        "Champion (v1.0.0-platt)": {
+          "home": 3,
+          "draw": 8,
+          "away": 89
+        },
+        "A: Rho×1.5": {
+          "home": 2,
+          "draw": 9,
+          "away": 89
+        },
+        "B: Rho×3": {
+          "home": 2,
+          "draw": 9,
+          "away": 89
+        },
+        "C: Draw Prior +30%": {
+          "home": 2,
+          "draw": 11,
+          "away": 87
+        },
+        "D: Draw Prior +50%": {
+          "home": 3,
+          "draw": 12,
+          "away": 85
+        },
+        "E: Draw Prior +70%": {
+          "home": 2,
+          "draw": 14,
+          "away": 84
+        },
+        "F: Rho×3 + Elo Cap 400": {
+          "home": 5,
+          "draw": 15,
+          "away": 80
+        },
+        "G: Rho×3 + Draw +30%": {
+          "home": 2,
+          "draw": 12,
+          "away": 86
+        },
+        "H: Rho×3 + Draw +30% + Cap400": {
+          "home": 5,
+          "draw": 18,
+          "away": 77
+        }
+      },
+      "briers": {
+        "Champion (v1.0.0-platt)": 0.019399999999999997,
+        "A: Rho×1.5": 0.020599999999999997,
+        "B: Rho×3": 0.020599999999999997,
+        "C: Draw Prior +30%": 0.029400000000000003,
+        "D: Draw Prior +50%": 0.03780000000000001,
+        "E: Draw Prior +70%": 0.045600000000000016,
+        "F: Rho×3 + Elo Cap 400": 0.06499999999999997,
+        "G: Rho×3 + Draw +30%": 0.0344,
+        "H: Rho×3 + Draw +30% + Cap400": 0.08779999999999999
+      }
+    },
+    {
+      "slug": "france-vs-iraq",
+      "realized": "home",
+      "splits": {
+        "Champion (v1.0.0-platt)": {
+          "home": 90,
+          "draw": 8,
+          "away": 2
+        },
+        "A: Rho×1.5": {
+          "home": 90,
+          "draw": 8,
+          "away": 2
+        },
+        "B: Rho×3": {
+          "home": 90,
+          "draw": 8,
+          "away": 2
+        },
+        "C: Draw Prior +30%": {
+          "home": 88,
+          "draw": 10,
+          "away": 2
+        },
+        "D: Draw Prior +50%": {
+          "home": 87,
+          "draw": 11,
+          "away": 2
+        },
+        "E: Draw Prior +70%": {
+          "home": 86,
+          "draw": 12,
+          "away": 2
+        },
+        "F: Rho×3 + Elo Cap 400": {
+          "home": 80,
+          "draw": 15,
+          "away": 5
+        },
+        "G: Rho×3 + Draw +30%": {
+          "home": 88,
+          "draw": 10,
+          "away": 2
+        },
+        "H: Rho×3 + Draw +30% + Cap400": {
+          "home": 77,
+          "draw": 18,
+          "away": 5
+        }
+      },
+      "briers": {
+        "Champion (v1.0.0-platt)": 0.016799999999999995,
+        "A: Rho×1.5": 0.016799999999999995,
+        "B: Rho×3": 0.016799999999999995,
+        "C: Draw Prior +30%": 0.024800000000000003,
+        "D: Draw Prior +50%": 0.029400000000000003,
+        "E: Draw Prior +70%": 0.0344,
+        "F: Rho×3 + Elo Cap 400": 0.06499999999999997,
+        "G: Rho×3 + Draw +30%": 0.024800000000000003,
         "H: Rho×3 + Draw +30% + Cap400": 0.08779999999999999
       }
     }
