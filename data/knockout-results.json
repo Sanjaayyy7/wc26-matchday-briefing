@@ -1,0 +1,137 @@
+{
+ "roundOf32": [
+  {
+   "match": 73,
+   "homeId": "rsa",
+   "awayId": "can",
+   "homeScore": 0,
+   "awayScore": 1,
+   "winnerId": "can"
+  },
+  {
+   "match": 74,
+   "homeId": "ger",
+   "awayId": "par",
+   "homeScore": 1,
+   "awayScore": 1,
+   "winnerId": "par",
+   "note": "pens 3–4"
+  },
+  {
+   "match": 75,
+   "homeId": "ned",
+   "awayId": "mar",
+   "homeScore": 1,
+   "awayScore": 1,
+   "winnerId": "mar",
+   "note": "pens 2–3"
+  },
+  {
+   "match": 76,
+   "homeId": "bra",
+   "awayId": "jpn",
+   "homeScore": 2,
+   "awayScore": 1,
+   "winnerId": "bra"
+  },
+  {
+   "match": 77,
+   "homeId": "fra",
+   "awayId": "swe",
+   "homeScore": 3,
+   "awayScore": 0,
+   "winnerId": "fra"
+  },
+  {
+   "match": 78,
+   "homeId": "civ",
+   "awayId": "nor",
+   "homeScore": 1,
+   "awayScore": 2,
+   "winnerId": "nor"
+  },
+  {
+   "match": 79,
+   "homeId": "mex",
+   "awayId": "ecu",
+   "homeScore": 2,
+   "awayScore": 0,
+   "winnerId": "mex"
+  },
+  {
+   "match": 80,
+   "homeId": "eng",
+   "awayId": "cod",
+   "homeScore": 2,
+   "awayScore": 1,
+   "winnerId": "eng"
+  },
+  {
+   "match": 81,
+   "homeId": "usa",
+   "awayId": "bih",
+   "homeScore": 2,
+   "awayScore": 0,
+   "winnerId": "usa"
+  },
+  {
+   "match": 82,
+   "homeId": "bel",
+   "awayId": "sen",
+   "homeScore": 3,
+   "awayScore": 2,
+   "winnerId": "bel",
+   "note": "AET"
+  },
+  {
+   "match": 83,
+   "homeId": "por",
+   "awayId": "cro",
+   "homeScore": 2,
+   "awayScore": 1,
+   "winnerId": "por"
+  },
+  {
+   "match": 84,
+   "homeId": "esp",
+   "awayId": "aut",
+   "homeScore": 3,
+   "awayScore": 0,
+   "winnerId": "esp"
+  },
+  {
+   "match": 85,
+   "homeId": "sui",
+   "awayId": "alg",
+   "homeScore": 2,
+   "awayScore": 0,
+   "winnerId": "sui"
+  },
+  {
+   "match": 86,
+   "homeId": "arg",
+   "awayId": "cpv",
+   "homeScore": 3,
+   "awayScore": 2,
+   "winnerId": "arg",
+   "note": "AET"
+  },
+  {
+   "match": 87,
+   "homeId": "col",
+   "awayId": "gha",
+   "homeScore": 1,
+   "awayScore": 0,
+   "winnerId": "col"
+  },
+  {
+   "match": 88,
+   "homeId": "aus",
+   "awayId": "egy",
+   "homeScore": 1,
+   "awayScore": 1,
+   "winnerId": "egy",
+   "note": "pens 2–4"
+  }
+ ]
+}

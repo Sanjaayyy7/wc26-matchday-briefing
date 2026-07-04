@@ -31,6 +31,9 @@ export type SimInput = {
   bracket: Bracket;
   ratings: Record<string, number>;
   params: ModelParams;
+  /** Settled knockout outcomes, bracket match number → winning team.
+   *  Pinned in every run instead of sampling (keeps odds conditional on reality). */
+  knownWinners?: Record<number, string>;
 };
 
 export type TeamOdds = {
@@ -209,30 +212,31 @@ export function simulateTournament(
     };
 
     const winners = new Map<number, string>();
+    const known = input.knownWinners ?? {};
     for (const m of bracket.roundOf32) {
-      const w = koWin(resolve(m.home, m.match), resolve(m.away, m.match));
+      const w = known[m.match] ?? koWin(resolve(m.home, m.match), resolve(m.away, m.match));
       winners.set(m.match, w);
       counters.get(w)!.reachR16++;
     }
     for (const m of bracket.roundOf16) {
-      const w = koWin(winners.get(m.home)!, winners.get(m.away)!);
+      const w = known[m.match] ?? koWin(winners.get(m.home)!, winners.get(m.away)!);
       winners.set(m.match, w);
       counters.get(w)!.reachQF++;
     }
     for (const m of bracket.quarterFinals) {
-      const w = koWin(winners.get(m.home)!, winners.get(m.away)!);
+      const w = known[m.match] ?? koWin(winners.get(m.home)!, winners.get(m.away)!);
       winners.set(m.match, w);
       counters.get(w)!.reachSF++;
     }
     for (const m of bracket.semiFinals) {
-      const w = koWin(winners.get(m.home)!, winners.get(m.away)!);
+      const w = known[m.match] ?? koWin(winners.get(m.home)!, winners.get(m.away)!);
       winners.set(m.match, w);
       counters.get(w)!.reachFinal++;
     }
     const f = bracket.final;
     const finalist1 = winners.get(f.home)!;
     const finalist2 = winners.get(f.away)!;
-    counters.get(koWin(finalist1, finalist2))!.champion++;
+    counters.get(known[f.match] ?? koWin(finalist1, finalist2))!.champion++;
   }
 
   const teams: Record<string, TeamOdds> = {};
