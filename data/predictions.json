@@ -3055,6 +3055,152 @@
      "rps": 0.10076350268639836
     }
    }
+  },
+  {
+   "slug": "canada-vs-morocco",
+   "lockedAt": "2026-07-04T05:10:27.849Z",
+   "split": {
+    "home": 29,
+    "draw": 30,
+    "away": 41
+   },
+   "mostLikely": {
+    "home": 1,
+    "away": 1
+   },
+   "market": {
+    "home": 0.19402985074626863,
+    "draw": 0.2736318407960199,
+    "away": 0.5323383084577115
+   },
+   "marketTicker": "KXWCGAME-26JUL04CANMAR"
+  },
+  {
+   "slug": "paraguay-vs-france",
+   "lockedAt": "2026-07-04T05:10:27.849Z",
+   "split": {
+    "home": 11,
+    "draw": 20,
+    "away": 69
+   },
+   "mostLikely": {
+    "home": 0,
+    "away": 2
+   },
+   "market": {
+    "home": 0.04477611940298508,
+    "draw": 0.12437810945273634,
+    "away": 0.8308457711442787
+   },
+   "marketTicker": "KXWCGAME-26JUL04PARFRA"
+  },
+  {
+   "slug": "brazil-vs-norway",
+   "lockedAt": "2026-07-04T05:10:27.849Z",
+   "split": {
+    "home": 48,
+    "draw": 28,
+    "away": 24
+   },
+   "mostLikely": {
+    "home": 1,
+    "away": 1
+   },
+   "market": {
+    "home": 0.5376884422110553,
+    "draw": 0.2562814070351759,
+    "away": 0.20603015075376885
+   },
+   "marketTicker": "KXWCGAME-26JUL05BRANOR"
+  },
+  {
+   "slug": "mexico-vs-england",
+   "lockedAt": "2026-07-04T05:10:27.849Z",
+   "split": {
+    "home": 37,
+    "draw": 30,
+    "away": 33
+   },
+   "mostLikely": {
+    "home": 1,
+    "away": 1
+   },
+   "market": {
+    "home": 0.3165829145728643,
+    "draw": 0.2964824120603015,
+    "away": 0.3869346733668342
+   },
+   "marketTicker": "KXWCGAME-26JUL05MEXENG"
+  },
+  {
+   "slug": "portugal-vs-spain",
+   "lockedAt": "2026-07-04T05:10:27.849Z",
+   "split": {
+    "home": 22,
+    "draw": 28,
+    "away": 50
+   },
+   "mostLikely": {
+    "home": 0,
+    "away": 1
+   },
+   "market": {
+    "home": 0.23152709359605908,
+    "draw": 0.2610837438423645,
+    "away": 0.5073891625615763
+   },
+   "marketTicker": "KXWCGAME-26JUL06PORESP"
+  },
+  {
+   "slug": "united-states-vs-belgium",
+   "lockedAt": "2026-07-04T05:10:27.849Z",
+   "split": {
+    "home": 35,
+    "draw": 30,
+    "away": 35
+   },
+   "mostLikely": {
+    "home": 1,
+    "away": 1
+   },
+   "market": {
+    "home": 0.34673366834170855,
+    "draw": 0.2864321608040201,
+    "away": 0.36683417085427134
+   },
+   "marketTicker": "KXWCGAME-26JUL06USABEL"
+  },
+  {
+   "slug": "argentina-vs-egypt",
+   "lockedAt": "2026-07-04T05:10:27.849Z",
+   "split": {
+    "home": 77,
+    "draw": 16,
+    "away": 7
+   },
+   "mostLikely": {
+    "home": 2,
+    "away": 0
+   },
+   "market": {
+    "home": 0.7286432160804021,
+    "draw": 0.18592964824120606,
+    "away": 0.08542713567839195
+   },
+   "marketTicker": "KXWCGAME-26JUL07ARGEGY"
+  },
+  {
+   "slug": "switzerland-vs-colombia",
+   "lockedAt": "2026-07-04T05:10:27.849Z",
+   "split": {
+    "home": 27,
+    "draw": 29,
+    "away": 44
+   },
+   "mostLikely": {
+    "home": 1,
+    "away": 1
+   }
   }
  ]
 }
