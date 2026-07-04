@@ -72,6 +72,67 @@ describe("settle", () => {
     const none = settle(locked, [{ slug: "a-vs-b" }]);
     expect(none[0].result).toBeUndefined();
   });
+
+  it("grades the 90-minute market from homeScore90 when a match went to extra time", () => {
+    const et: LockedEntry[] = [
+      {
+        slug: "x-vs-y",
+        lockedAt: "2026-07-01T00:00:00.000Z",
+        split: { home: 40, draw: 35, away: 25 },
+        mostLikely: { home: 2, away: 2 },
+      },
+    ];
+    const out = settle(et, [
+      {
+        slug: "x-vs-y",
+        homeScore: 3,
+        awayScore: 2,
+        homeScore90: 2,
+        awayScore90: 2,
+        decidedBy: "et" as const,
+      },
+    ]);
+    const e = out[0];
+    expect(e.realized).toBe("draw"); // NOT "home" from the AET 3-2
+    expect(e.result).toBe("2-2"); // 90' score is the graded result
+    expect(e.correctPick).toBe(false); // top of split was home
+    expect(e.scorelineHit).toBe(true); // mostLikely 2-2 vs 90' 2-2
+    expect(e.extraTime).toEqual({ finalScore: "3-2", decidedBy: "et" });
+  });
+
+  it("uses the 90' score for grid-derived btts/ou25", () => {
+    const grid = scoreGrid(1.5, 1.2, DEFAULT_PARAMS.rho);
+    const out = settle(
+      [
+        {
+          slug: "x-vs-y",
+          lockedAt: "2026-07-01T00:00:00.000Z",
+          split,
+          mostLikely: { home: 1, away: 0 },
+        },
+      ],
+      [
+        {
+          slug: "x-vs-y",
+          homeScore: 2,
+          awayScore: 1,
+          homeScore90: 0,
+          awayScore90: 0,
+          decidedBy: "pens" as const,
+        },
+      ],
+      { gridForSlug: () => grid },
+    );
+    const e = out[0];
+    expect(e.btts!.actual).toBe(false); // 0-0 at 90', not the AET 2-1
+    expect(e.ou25!.actual).toBe(false); // 0 goals at 90'
+    expect(e.extraTime).toEqual({ finalScore: "2-1", decidedBy: "pens" });
+  });
+
+  it("omits extraTime for matches decided in 90 minutes", () => {
+    const out = settle(locked, [{ slug: "a-vs-b", homeScore: 2, awayScore: 1 }]);
+    expect(out[0].extraTime).toBeUndefined();
+  });
 });
 
 describe("settle — per-match grading extensions", () => {
