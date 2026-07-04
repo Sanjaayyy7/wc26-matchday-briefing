@@ -5,6 +5,7 @@
 import { readFileSync, writeFileSync, existsSync } from "node:fs";
 import path from "node:path";
 import { settle, type LockedEntry, type PolymarketEntry } from "../lib/predictions-ledger";
+import { applyKnockoutScores90, type KnockoutResultRow } from "../lib/knockout-grading";
 import { predictFixture } from "../lib/predict";
 import { appDir, fixtures, teams } from "./shared.mts";
 
@@ -33,6 +34,14 @@ const polymarketData: Record<string, PolymarketEntry> = Object.fromEntries(
 
 // Build slug → fixture row map for grid recomputation.
 const allFixtures = fixtures();
+
+// 90-min grading gate: knockout fixtures with scores must have explicit
+// knockout-results.json metadata (after/homeScore90) — throws otherwise.
+const koPath = path.join(appDir, "data", "knockout-results.json");
+const koRows: KnockoutResultRow[] = existsSync(koPath)
+  ? (Object.values(JSON.parse(readFileSync(koPath, "utf8"))) as KnockoutResultRow[][]).flat()
+  : [];
+const gradableFixtures = applyKnockoutScores90(allFixtures, koRows);
 const teamList = teams();
 const teamName = (id: string) => teamList.find((t) => t.id === id)?.name ?? id;
 const HOSTS = ["United States", "Canada", "Mexico"];
@@ -58,7 +67,7 @@ function gridForSlug(slug: string): number[][] | undefined {
 }
 
 const before = ledger.entries.filter((e) => e.result !== undefined).length;
-const entries = settle(ledger.entries, allFixtures, {
+const entries = settle(ledger.entries, gradableFixtures, {
   gridForSlug,
   kalshiResolutions,
   polymarketData,
@@ -76,6 +85,7 @@ if (after - before > 0) {
   for (const e of newlySettled) {
     console.log(`\n--- ${e.slug} ---`);
     console.log(`  result: ${e.result}  realized: ${e.realized}  correctPick: ${e.correctPick}`);
+    if (e.extraTime) console.log(`  extraTime: AET ${e.extraTime.finalScore} (${e.extraTime.decidedBy})`);
     console.log(`  modelBrier: ${e.modelBrier?.toFixed(4)}  modelRps: ${e.modelRps?.toFixed(4)}  logLoss: ${e.logLoss?.toFixed(4)}`);
     console.log(`  scorelineHit: ${e.scorelineHit}  top3Hit: ${e.top3ScorelineHit}`);
     if (e.btts) console.log(`  btts: prob=${e.btts.prob.toFixed(4)} actual=${e.btts.actual} brier=${e.btts.brier.toFixed(4)}`);
