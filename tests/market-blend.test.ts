@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { blendSplit, shadowVerdict } from "../lib/market-blend";
+import { blendSplit, preserveSnapshotProbs, shadowVerdict } from "../lib/market-blend";
 
 const model = { home: 0.5, draw: 0.3, away: 0.2 };
 const market = { home: 0.7, draw: 0.2, away: 0.1 };
@@ -39,5 +39,29 @@ describe("shadowVerdict", () => {
   it("HOLD when blend does not beat both endpoints", () => {
     expect(shadowVerdict(50, 0.50, 0.40, 0.45)).toBe("HOLD"); // market better than blend
     expect(shadowVerdict(50, 0.44, 0.48, 0.45)).toBe("HOLD"); // model better than blend
+  });
+});
+
+describe("preserveSnapshotProbs", () => {
+  const pre = { home: 0.55, draw: 0.25, away: 0.2 };
+  const post = { home: 0.998, draw: 0.001, away: 0.001 };
+
+  it("keeps the stored pre-kickoff snapshot once the match has kicked off", () => {
+    expect(preserveSnapshotProbs(pre, post, true)).toEqual(pre);
+  });
+
+  it("takes the fresh probs before kickoff (live snapshot updates allowed)", () => {
+    const fresher = { home: 0.5, draw: 0.28, away: 0.22 };
+    expect(preserveSnapshotProbs(pre, fresher, false)).toEqual(fresher);
+  });
+
+  it("falls back to fresh probs when nothing was stored", () => {
+    expect(preserveSnapshotProbs(null, post, true)).toEqual(post);
+    expect(preserveSnapshotProbs(undefined, post, true)).toEqual(post);
+  });
+
+  it("keeps the stored snapshot when the fresh feed has none", () => {
+    expect(preserveSnapshotProbs(pre, null, true)).toEqual(pre);
+    expect(preserveSnapshotProbs(pre, null, false)).toEqual(pre);
   });
 });

@@ -11,11 +11,12 @@
 //
 //   npm run pipeline:polymarket
 
-import { writeFileSync, mkdirSync } from "node:fs";
+import { writeFileSync, mkdirSync, readFileSync, existsSync } from "node:fs";
 import path from "node:path";
 import { pathToFileURL } from "node:url";
 import { appDir, fixtures, type FixtureRow } from "./shared.mts";
 import { parsePolymarketMatch, type ProbSplit, type ResolvedSplit } from "../lib/polymarket.ts";
+import { preserveSnapshotProbs } from "../lib/market-blend";
 
 const GAMMA_API = "https://gamma-api.polymarket.com";
 
@@ -158,6 +159,17 @@ async function main() {
   const allFixtures: FixtureRow[] = fixtures();
   const now = new Date();
   const checkedAt = now.toISOString();
+
+  // Stored pre-kickoff snapshots are immutable once a match kicks off — a
+  // re-fetch must never replace them with in-play/resolved (0/1-ish) prices.
+  const priorPath = path.join(appDir, "data", "markets", "polymarket.json");
+  const prior: Record<string, MatchEntry> = existsSync(priorPath)
+    ? Object.fromEntries(
+        Object.entries(
+          JSON.parse(readFileSync(priorPath, "utf8")) as Record<string, MatchEntry>,
+        ).filter(([k]) => !k.startsWith("_")),
+      )
+    : {};
   const output: Record<string, MatchEntry> = {};
 
   console.log(`[polymarket] Processing ${allFixtures.length} fixture(s)...`);
@@ -223,10 +235,15 @@ async function main() {
     output[fixture.slug] = {
       polymarketSlug: polySlug,
       negRiskMarketID: result.negRiskMarketID,
-      probs: result.probs,
+      probs: preserveSnapshotProbs(prior[fixture.slug]?.probs, result.probs, isKickedOff),
       resolved: result.resolved,
       _sources: [sourceUrl],
     };
+  }
+
+  // Carry over any stored match the live API no longer returns.
+  for (const [slug, entry] of Object.entries(prior)) {
+    if (!(slug in output)) output[slug] = entry;
   }
 
   console.log(

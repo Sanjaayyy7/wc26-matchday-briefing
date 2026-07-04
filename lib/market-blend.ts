@@ -39,3 +39,17 @@ export function shadowVerdict(
   if (!beatsBoth) return "HOLD";
   return n >= minN ? "ADOPT-SHADOW" : "PROVISIONAL";
 }
+
+/**
+ * A market snapshot is a pre-kickoff observation: once the match has kicked
+ * off, live/resolved prices collapse toward 0/1 and must never replace the
+ * stored snapshot. Before kickoff the freshest quote wins.
+ */
+export function preserveSnapshotProbs<T>(
+  stored: T | null | undefined,
+  fresh: T | null,
+  kickedOff: boolean,
+): T | null {
+  if (kickedOff && stored) return stored;
+  return fresh ?? stored ?? null;
+}
