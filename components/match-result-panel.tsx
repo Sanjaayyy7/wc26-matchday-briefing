@@ -69,6 +69,12 @@ export function MatchResultPanel({ view }: { view: MatchView }) {
                 </>
               ) : null}
             </span>
+            {view.status === "official" && view.lock.extraTime ? (
+              <span className="text-label border-b border-[var(--line)] px-1 py-0.5">
+                90′ market · AET {view.lock.extraTime.finalScore.replace("-", "–")}
+                {view.lock.extraTime.decidedBy === "pens" ? " (pens)" : ""}
+              </span>
+            ) : null}
             {view.status === "official" ? (
               <VerdictChip verdict={view.verdict} />
             ) : (
