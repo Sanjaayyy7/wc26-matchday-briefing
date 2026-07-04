@@ -17,6 +17,8 @@ export type FixtureRow = {
   featured?: boolean;
   stage?: string;
   group?: string;
+  homeScore?: number;
+  awayScore?: number;
   tzOffsetMinutes?: number;
   tzLabel?: string;
 };

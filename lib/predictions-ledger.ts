@@ -22,6 +22,9 @@ export type LockedEntry = {
   logLoss?: number;
   /** True when the locked mostLikely scoreline exactly equals the actual result. */
   scorelineHit?: boolean;
+  /** Present when the match went past 90'. result/realized grade the 90-minute
+   *  market; finalScore is the after-extra-time score the match ended with. */
+  extraTime?: { finalScore: string; decidedBy: "et" | "pens" };
   // Legacy market fields (kept for backwards compat and existing tests/UI):
   marketBrier?: number;
   marketRps?: number;
@@ -115,21 +118,31 @@ export function lockNew(
 
 export function settle(
   entries: LockedEntry[],
-  fixtures: Array<{ slug: string; homeScore?: number; awayScore?: number }>,
+  fixtures: Array<{
+    slug: string;
+    homeScore?: number;
+    awayScore?: number;
+    homeScore90?: number;
+    awayScore90?: number;
+    decidedBy?: "et" | "pens";
+  }>,
   options: SettleOptions = {},
 ): LockedEntry[] {
   const { gridForSlug, polymarketData, kalshiResolutions } = options;
 
-  const scores = new Map(
+  const scored = new Map(
     fixtures
       .filter((f) => f.homeScore !== undefined && f.awayScore !== undefined)
-      .map((f) => [f.slug, [f.homeScore!, f.awayScore!] as const]),
+      .map((f) => [f.slug, f]),
   );
   return entries.map((e) => {
     if (e.result !== undefined) return e;
-    const score = scores.get(e.slug);
-    if (!score) return e;
-    const [h, a] = score;
+    const fx = scored.get(e.slug);
+    if (!fx) return e;
+    // The ledger grades 90-minute markets. Fixture scores follow the martj42
+    // AET convention, so prefer the explicit 90' score when the match went long.
+    const h = fx.homeScore90 ?? fx.homeScore!;
+    const a = fx.awayScore90 ?? fx.awayScore!;
     const realized: Outcome = h > a ? "home" : h < a ? "away" : "draw";
     const top = (Object.entries(e.split) as Array<[Outcome, number]>).reduce(
       (best, cur) => (cur[1] > best[1] ? cur : best),
@@ -144,6 +157,12 @@ export function settle(
       modelBrier: brier(e.split, realized),
       modelRps: rps(e.split, realized),
     };
+    if (fx.homeScore90 !== undefined && fx.decidedBy !== undefined) {
+      settled.extraTime = {
+        finalScore: `${fx.homeScore}-${fx.awayScore}`,
+        decidedBy: fx.decidedBy,
+      };
+    }
 
     // --- logLoss ---
     const pRealized = Math.max(e.split[realized] / 100, MIN_LOG_PROB);
