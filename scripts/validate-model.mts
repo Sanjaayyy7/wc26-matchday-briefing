@@ -46,6 +46,15 @@ import {
   type FallbackTier,
 } from "../lib/stage-regime";
 import { indexStageLabels, stageKey, type StageLabelRow } from "../lib/stage-derivation";
+import {
+  applyFeatureAdjust,
+  fitFeatureBetas,
+  matchFeatures,
+  newFeatureState,
+  pushMatch,
+  type FeatureBetas,
+  type FeatureLikRow,
+} from "../lib/feature-signals";
 import { appDir } from "./shared.mts";
 
 const EVAL_FROM = "1990-01-01"; // modern era: mature Elo, plentiful prior calibration data
@@ -156,6 +165,14 @@ async function main() {
   const regimeDraw: Array<{ pDraw: number; isDraw: boolean }> = [];
   const MIN_REGIME_SAMPLES = 400;
   const MIN_STAGE_SAMPLES = 150;
+  const MIN_FEATURE_SAMPLES = 400;
+
+  const featState = newFeatureState();
+  const featLikAll: Array<{ l: FeatureLikRow; date: string }> = [];
+  const featBetaCache = new Map<string, FeatureBetas | null>();
+  const features = newCollector();
+  const featuresDraw: Array<{ pDraw: number; isDraw: boolean }> = [];
+  const featTierCounts = { features: 0, baseline: 0 };
 
   const stageLabels = JSON.parse(
     readFileSync(path.join(appDir, "data", "stage-labels.json"), "utf8"),
@@ -178,6 +195,8 @@ async function main() {
     const eloA = get(row.away);
     const rs = rawSplit(params, eloH, eloA, row);
     const o = outcomeOf(row);
+    // Read features BEFORE this row is pushed into the tracker (walk-forward).
+    const feats = matchFeatures(featState, row);
 
     if (isFinalsTournament(row.tournament) && row.date >= EVAL_FROM) {
       const key = `${row.tournament}:${yearOf(row.date)}`;
@@ -222,6 +241,25 @@ async function main() {
       const saSplit = rawSplit(sel.params, eloH, eloA, row);
       record(stageAware, saSplit, o);
       stageAwareDraw.push({ pDraw: saSplit.draw, isDraw: o === "draw" });
+
+      // Features variant: pooled params, lambdas shifted by rest/form betas
+      // fit walk-forward on strictly-prior finals matches (per-instance cache).
+      let featBetas = featBetaCache.get(key);
+      if (featBetas === undefined) {
+        const priorF = featLikAll.filter((q) => q.date < row.date).map((q) => q.l);
+        featBetas = priorF.length >= MIN_FEATURE_SAMPLES ? fitFeatureBetas(priorF, params) : null;
+        featBetaCache.set(key, featBetas);
+      }
+      let ftSplit = rs;
+      if (featBetas) {
+        const l = lambdasFromElo(eloH, eloA, row.neutral, params);
+        const adj = applyFeatureAdjust(l, feats, featBetas);
+        const s = summarizeGrid(scoreGrid(adj.home, adj.away, params.rho));
+        ftSplit = { home: s.home, draw: s.draw, away: s.away };
+      }
+      featTierCounts[featBetas ? "features" : "baseline"] += 1;
+      record(features, ftSplit, o);
+      featuresDraw.push({ pDraw: ftSplit.draw, isDraw: o === "draw" });
       if (stage === "group" || stage === "knockout") {
         stageDraw[stage].baseline.push({ pDraw: rs.draw, isDraw: o === "draw" });
         stageDraw[stage].stageAware.push({ pDraw: saSplit.draw, isDraw: o === "draw" });
@@ -238,7 +276,13 @@ async function main() {
       const diff = (effH - eloA) / 400;
       regimeSamplesAll.push({ s: { x: diff, goals: row.hs }, date: row.date });
       regimeSamplesAll.push({ s: { x: -diff, goals: row.as }, date: row.date });
-      if (row.hs < 9 && row.as < 9) regimeLikAll.push({ l: { diff, hs: row.hs, as: row.as }, date: row.date });
+      if (row.hs < 9 && row.as < 9) {
+        regimeLikAll.push({ l: { diff, hs: row.hs, as: row.as }, date: row.date });
+        featLikAll.push({
+          l: { diff, hs: row.hs, as: row.as, restF: feats.restF, formF: feats.formF },
+          date: row.date,
+        });
+      }
 
       const stg = stageOf(row);
       if (stg === "group" || stg === "knockout") {
@@ -258,6 +302,10 @@ async function main() {
     });
     ratings.set(row.home, u.home);
     ratings.set(row.away, u.away);
+
+    // Feature state accrues over ALL matches (friendlies included) — rest and
+    // form are real regardless of competition. Pushed last, after scoring.
+    pushMatch(featState, row);
   }
 
   const baseM = metricsOf(base);
@@ -272,6 +320,20 @@ async function main() {
     group: { baseline: r4(drawRateGap(stageDraw.group.baseline)), stageAware: r4(drawRateGap(stageDraw.group.stageAware)) },
     knockout: { baseline: r4(drawRateGap(stageDraw.knockout.baseline)), stageAware: r4(drawRateGap(stageDraw.knockout.stageAware)) },
   };
+
+  const featuresM = metricsOf(features);
+  const featuresDrawGap = drawRateGap(featuresDraw);
+  const featPrimary = promotionVerdict(base.brierByMatch, features.brierByMatch, featuresM.ece, {
+    n: BOOTSTRAP_N,
+    seed: SEED,
+  });
+  const featSecondary = calibrationWinVerdict(base.brierByMatch, features.brierByMatch, {
+    baselineDrawGap,
+    challengerDrawGap: featuresDrawGap,
+    challengerEce: featuresM.ece,
+    n: BOOTSTRAP_N,
+    seed: SEED,
+  });
 
   const stagePrimary = promotionVerdict(base.brierByMatch, stageAware.brierByMatch, stageAwareM.ece, {
     n: BOOTSTRAP_N,
@@ -327,6 +389,7 @@ async function main() {
       "platt-calibrated": serializeVariant(plattM),
       regime: serializeVariant(regimeM),
       "stage-aware": serializeVariant(stageAwareM),
+      features: serializeVariant(featuresM),
     },
     drawGap: { baseline: r4(baselineDrawGap), regime: r4(regimeDrawGap) },
     promotion: {
@@ -356,6 +419,27 @@ async function main() {
     },
     stageDrawGap: stageDrawGaps,
     fallbackCounts: tierCounts,
+    featurePromotion: {
+      incumbent: "baseline",
+      challenger: "features",
+      note: "report-only; rest-days + goal-form lambda multipliers (Phase 3)",
+      betasLastInstance: [...featBetaCache.values()].filter(Boolean).at(-1) ?? null,
+      fallbackCounts: featTierCounts,
+      drawGap: r4(featuresDrawGap),
+      primary: {
+        ship: featPrimary.ship,
+        deltaBrierCI: { mean: r4(featPrimary.deltaBrierCI.mean), lo: r4(featPrimary.deltaBrierCI.lo), hi: r4(featPrimary.deltaBrierCI.hi) },
+        eceOk: featPrimary.eceOk,
+        reason: featPrimary.reason,
+      },
+      secondary: {
+        ship: featSecondary.ship,
+        nonInferior: featSecondary.nonInferior,
+        drawGapReduced: featSecondary.drawGapReduced,
+        eceOk: featSecondary.eceOk,
+        reason: featSecondary.reason,
+      },
+    },
     stageAwarePromotion: {
       incumbent: "baseline",
       challenger: "stage-aware",
@@ -389,7 +473,7 @@ async function main() {
   console.log("");
   console.log("  variant            Brier    95% CI              ECE");
   console.log("  ------------------ -------- ------------------- -------");
-  for (const [name, m] of [["baseline", baseM], ["platt-calibrated", plattM], ["regime", regimeM]] as const) {
+  for (const [name, m] of [["baseline", baseM], ["platt-calibrated", plattM], ["regime", regimeM], ["features", featuresM]] as const) {
     console.log(
       `  ${name.padEnd(18)} ${r4(m.brier).toFixed(4)}  [${r4(m.brierCI.lo).toFixed(4)}, ${r4(m.brierCI.hi).toFixed(4)}]  ${r4(m.ece).toFixed(4)}`,
     );
@@ -399,6 +483,12 @@ async function main() {
   console.log(`[validate] draw-gap  baseline=${r4(baselineDrawGap).toFixed(4)}  regime=${r4(regimeDrawGap).toFixed(4)}`);
   const ruleFired = primaryRegime.ship ? "primary" : secondaryRegime.ship ? "secondary" : null;
   console.log(`[validate] regime rule: ${ruleFired ?? "none fired (HOLD)"}. Re-run with --promote to ship.`);
+  const featRule = featPrimary.ship ? "primary" : featSecondary.ship ? "secondary" : null;
+  console.log(
+    `[validate] features rule: ${featRule ?? "none fired (HOLD)"} ` +
+      `(betas latest ${JSON.stringify([...featBetaCache.values()].filter(Boolean).at(-1) ?? null)}, ` +
+      `adjusted ${featTierCounts.features}/${featTierCounts.features + featTierCounts.baseline})`,
+  );
   console.log(
     `[validate] stage-aware Brier=${r4(stageAwareM.brier).toFixed(4)}  ` +
       `draw-gap group ${stageDrawGaps.group.baseline}->${stageDrawGaps.group.stageAware}  ` +
@@ -461,7 +551,7 @@ type Out = {
     promotionRule: string;
   };
   holdout: { n: number; byTournament: Record<string, number> };
-  variants: { baseline: SerializedVariant; "platt-calibrated": SerializedVariant; regime: SerializedVariant; "stage-aware": SerializedVariant };
+  variants: { baseline: SerializedVariant; "platt-calibrated": SerializedVariant; regime: SerializedVariant; "stage-aware": SerializedVariant; features: SerializedVariant };
   drawGap: { baseline: number; regime: number };
   promotion: {
     incumbent: string;
@@ -482,6 +572,16 @@ type Out = {
     knockout: { baseline: number; stageAware: number };
   };
   fallbackCounts: Record<FallbackTier, number>;
+  featurePromotion: {
+    incumbent: string;
+    challenger: string;
+    note: string;
+    betasLastInstance: { betaRest: number; betaForm: number } | null;
+    fallbackCounts: { features: number; baseline: number };
+    drawGap: number;
+    primary: { ship: boolean; deltaBrierCI: { mean: number; lo: number; hi: number }; eceOk: boolean; reason: string };
+    secondary: { ship: boolean; nonInferior: boolean; drawGapReduced: boolean; eceOk: boolean; reason: string };
+  };
   stageAwarePromotion: {
     incumbent: string;
     challenger: string;
@@ -532,6 +632,7 @@ calibrated. This is the rule that correctly rejects small-sample "wins" within v
 | platt-calibrated | ${v["platt-calibrated"].brier} | [${v["platt-calibrated"].brierCI.lo}, ${v["platt-calibrated"].brierCI.hi}] | ${v["platt-calibrated"].ece} |
 | regime | ${v.regime.brier} | [${v.regime.brierCI.lo}, ${v.regime.brierCI.hi}] | ${v.regime.ece} |
 | stage-aware | ${v["stage-aware"].brier} | [${v["stage-aware"].brierCI.lo}, ${v["stage-aware"].brierCI.hi}] | ${v["stage-aware"].ece} |
+| features | ${v.features.brier} | [${v.features.brierCI.lo}, ${v.features.brierCI.hi}] | ${v.features.ece} |
 
 **ΔBrier (baseline − platt-calibrated):** mean ${out.promotion.deltaBrierCI.mean},
 95% CI [${out.promotion.deltaBrierCI.lo}, ${out.promotion.deltaBrierCI.hi}].
@@ -549,6 +650,14 @@ calibrated. This is the rule that correctly rejects small-sample "wins" within v
 
 - **primary:** ${out.regimePromotion.primary.reason}
 - **secondary:** ${out.regimePromotion.secondary.reason}
+
+## Feature-signals promotion (rest-days + goal-form)
+
+- **primary:** ${out.featurePromotion.primary.reason}
+- **secondary:** ${out.featurePromotion.secondary.reason}
+- fitted betas (latest instance): ${JSON.stringify(out.featurePromotion.betasLastInstance)}
+- activation: ${out.featurePromotion.fallbackCounts.features} feature-adjusted / ${out.featurePromotion.fallbackCounts.baseline} baseline fallback
+- draw-gap: ${out.featurePromotion.drawGap}
 
 ## Stage-aware draw-rate calibration
 

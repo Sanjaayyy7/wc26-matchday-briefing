@@ -1,6 +1,6 @@
 {
   "config": {
-    "generatedAt": "2026-07-04T05:17:22.569Z",
+    "generatedAt": "2026-07-07T02:40:37.940Z",
     "evalFrom": "1990-01-01",
     "holdoutLabels": [
       "FIFA World Cup",
@@ -16,10 +16,10 @@
     "promotionRule": "ship iff ΔBrier(incumbent−challenger) 95% bootstrap CI > 0 AND challenger ECE < eceMax"
   },
   "holdout": {
-    "n": 2281,
+    "n": 2287,
     "byTournament": {
+      "FIFA World Cup": 646,
       "African Cup of Nations": 642,
-      "FIFA World Cup": 640,
       "Copa América": 378,
       "UEFA Euro": 323,
       "AFC Asian Cup": 298
@@ -27,43 +27,43 @@
   },
   "variants": {
     "baseline": {
-      "brier": 0.5742,
+      "brier": 0.574,
       "brierCI": {
-        "lo": 0.5594,
-        "hi": 0.5883
+        "lo": 0.5597,
+        "hi": 0.5884
       },
-      "ece": 0.0076,
-      "n": 2281,
+      "ece": 0.0072,
+      "n": 2287,
       "reliability": [
         {
           "meanPredicted": 0.0632,
-          "realized": 0.0739,
-          "count": 379
+          "realized": 0.0737,
+          "count": 380
         },
         {
-          "meanPredicted": 0.1562,
-          "realized": 0.1548,
-          "count": 1021
+          "meanPredicted": 0.1563,
+          "realized": 0.1544,
+          "count": 1023
         },
         {
           "meanPredicted": 0.2625,
-          "realized": 0.2647,
-          "count": 2735
+          "realized": 0.2644,
+          "count": 2742
         },
         {
           "meanPredicted": 0.3493,
-          "realized": 0.338,
-          "count": 790
+          "realized": 0.3388,
+          "count": 794
         },
         {
-          "meanPredicted": 0.4502,
-          "realized": 0.4744,
-          "count": 664
+          "meanPredicted": 0.4503,
+          "realized": 0.4737,
+          "count": 665
         },
         {
-          "meanPredicted": 0.5472,
-          "realized": 0.5351,
-          "count": 542
+          "meanPredicted": 0.5471,
+          "realized": 0.5368,
+          "count": 544
         },
         {
           "meanPredicted": 0.6454,
@@ -71,9 +71,9 @@
           "count": 377
         },
         {
-          "meanPredicted": 0.7455,
-          "realized": 0.7295,
-          "count": 207
+          "meanPredicted": 0.7453,
+          "realized": 0.7308,
+          "count": 208
         },
         {
           "meanPredicted": 0.8449,
@@ -88,13 +88,13 @@
       ]
     },
     "platt-calibrated": {
-      "brier": 0.5743,
+      "brier": 0.5741,
       "brierCI": {
-        "lo": 0.5604,
-        "hi": 0.5876
+        "lo": 0.5606,
+        "hi": 0.5877
       },
-      "ece": 0.0089,
-      "n": 2281,
+      "ece": 0.0092,
+      "n": 2287,
       "reliability": [
         {
           "meanPredicted": 0.0657,
@@ -103,33 +103,33 @@
         },
         {
           "meanPredicted": 0.1563,
-          "realized": 0.1465,
-          "count": 949
+          "realized": 0.1463,
+          "count": 950
         },
         {
           "meanPredicted": 0.2643,
-          "realized": 0.2589,
-          "count": 2862
+          "realized": 0.2584,
+          "count": 2871
         },
         {
           "meanPredicted": 0.3493,
-          "realized": 0.3527,
-          "count": 859
+          "realized": 0.3534,
+          "count": 863
         },
         {
-          "meanPredicted": 0.4504,
-          "realized": 0.4709,
-          "count": 705
+          "meanPredicted": 0.4505,
+          "realized": 0.4703,
+          "count": 706
         },
         {
-          "meanPredicted": 0.5465,
-          "realized": 0.5591,
-          "count": 533
+          "meanPredicted": 0.5464,
+          "realized": 0.5607,
+          "count": 535
         },
         {
-          "meanPredicted": 0.6425,
-          "realized": 0.6593,
-          "count": 361
+          "meanPredicted": 0.6426,
+          "realized": 0.6602,
+          "count": 362
         },
         {
           "meanPredicted": 0.7443,
@@ -149,13 +149,13 @@
       ]
     },
     "regime": {
-      "brier": 0.5751,
+      "brier": 0.5749,
       "brierCI": {
-        "lo": 0.5606,
+        "lo": 0.561,
         "hi": 0.5889
       },
-      "ece": 0.0056,
-      "n": 2281,
+      "ece": 0.0058,
+      "n": 2287,
       "reliability": [
         {
           "meanPredicted": 0.065,
@@ -164,33 +164,33 @@
         },
         {
           "meanPredicted": 0.1567,
-          "realized": 0.1548,
-          "count": 982
+          "realized": 0.1546,
+          "count": 983
         },
         {
           "meanPredicted": 0.2611,
-          "realized": 0.2597,
-          "count": 2796
+          "realized": 0.2592,
+          "count": 2805
         },
         {
           "meanPredicted": 0.3491,
-          "realized": 0.3428,
-          "count": 814
+          "realized": 0.3435,
+          "count": 818
         },
         {
-          "meanPredicted": 0.4495,
-          "realized": 0.4569,
-          "count": 696
+          "meanPredicted": 0.4496,
+          "realized": 0.4562,
+          "count": 697
         },
         {
-          "meanPredicted": 0.5461,
-          "realized": 0.5615,
-          "count": 545
+          "meanPredicted": 0.546,
+          "realized": 0.5631,
+          "count": 547
         },
         {
-          "meanPredicted": 0.644,
-          "realized": 0.6578,
-          "count": 377
+          "meanPredicted": 0.6441,
+          "realized": 0.6587,
+          "count": 378
         },
         {
           "meanPredicted": 0.7439,
@@ -210,13 +210,13 @@
       ]
     },
     "stage-aware": {
-      "brier": 0.575,
+      "brier": 0.5748,
       "brierCI": {
-        "lo": 0.5607,
-        "hi": 0.5886
+        "lo": 0.5609,
+        "hi": 0.5889
       },
-      "ece": 0.0054,
-      "n": 2281,
+      "ece": 0.0055,
+      "n": 2287,
       "reliability": [
         {
           "meanPredicted": 0.0649,
@@ -225,33 +225,33 @@
         },
         {
           "meanPredicted": 0.1569,
-          "realized": 0.1579,
-          "count": 988
+          "realized": 0.1577,
+          "count": 989
         },
         {
-          "meanPredicted": 0.2603,
-          "realized": 0.2585,
-          "count": 2723
+          "meanPredicted": 0.2602,
+          "realized": 0.2581,
+          "count": 2732
         },
         {
-          "meanPredicted": 0.3459,
-          "realized": 0.339,
-          "count": 888
+          "meanPredicted": 0.346,
+          "realized": 0.3397,
+          "count": 892
         },
         {
           "meanPredicted": 0.4496,
-          "realized": 0.4564,
-          "count": 688
+          "realized": 0.4557,
+          "count": 689
         },
         {
           "meanPredicted": 0.5461,
-          "realized": 0.5525,
-          "count": 552
+          "realized": 0.5542,
+          "count": 554
         },
         {
-          "meanPredicted": 0.6439,
-          "realized": 0.6684,
-          "count": 374
+          "meanPredicted": 0.644,
+          "realized": 0.6693,
+          "count": 375
         },
         {
           "meanPredicted": 0.7433,
@@ -269,18 +269,79 @@
           "count": 22
         }
       ]
+    },
+    "features": {
+      "brier": 0.5736,
+      "brierCI": {
+        "lo": 0.5589,
+        "hi": 0.5883
+      },
+      "ece": 0.0069,
+      "n": 2287,
+      "reliability": [
+        {
+          "meanPredicted": 0.0629,
+          "realized": 0.0714,
+          "count": 406
+        },
+        {
+          "meanPredicted": 0.1559,
+          "realized": 0.1567,
+          "count": 1053
+        },
+        {
+          "meanPredicted": 0.2623,
+          "realized": 0.267,
+          "count": 2708
+        },
+        {
+          "meanPredicted": 0.3492,
+          "realized": 0.3444,
+          "count": 752
+        },
+        {
+          "meanPredicted": 0.4498,
+          "realized": 0.4595,
+          "count": 655
+        },
+        {
+          "meanPredicted": 0.5462,
+          "realized": 0.5272,
+          "count": 533
+        },
+        {
+          "meanPredicted": 0.644,
+          "realized": 0.6427,
+          "count": 389
+        },
+        {
+          "meanPredicted": 0.7446,
+          "realized": 0.7325,
+          "count": 228
+        },
+        {
+          "meanPredicted": 0.845,
+          "realized": 0.8113,
+          "count": 106
+        },
+        {
+          "meanPredicted": 0.9327,
+          "realized": 0.8387,
+          "count": 31
+        }
+      ]
     }
   },
   "drawGap": {
-    "baseline": 0.0119,
-    "regime": 0.0118
+    "baseline": 0.0112,
+    "regime": 0.0111
   },
   "promotion": {
     "incumbent": "baseline",
     "challenger": "platt-calibrated",
     "ship": false,
     "deltaBrierCI": {
-      "mean": 0,
+      "mean": -0.0001,
       "lo": -0.001,
       "hi": 0.0009
     },
@@ -320,8 +381,39 @@
   },
   "fallbackCounts": {
     "stage": 1712,
-    "pooled": 156,
+    "pooled": 162,
     "baseline": 413
+  },
+  "featurePromotion": {
+    "incumbent": "baseline",
+    "challenger": "features",
+    "note": "report-only; rest-days + goal-form lambda multipliers (Phase 3)",
+    "betasLastInstance": {
+      "betaRest": 0.02,
+      "betaForm": -0.04
+    },
+    "fallbackCounts": {
+      "features": 1874,
+      "baseline": 413
+    },
+    "drawGap": 0.013,
+    "primary": {
+      "ship": false,
+      "deltaBrierCI": {
+        "mean": 0.0004,
+        "lo": -0.0004,
+        "hi": 0.0013
+      },
+      "eceOk": true,
+      "reason": "HOLD — ΔBrier 95% CI [-0.0004, 0.0013] straddles 0 (not significant)"
+    },
+    "secondary": {
+      "ship": false,
+      "nonInferior": true,
+      "drawGapReduced": false,
+      "eceOk": true,
+      "reason": "HOLD — draw-gap reduction -0.2pp < 5pp"
+    }
   },
   "stageAwarePromotion": {
     "incumbent": "baseline",
