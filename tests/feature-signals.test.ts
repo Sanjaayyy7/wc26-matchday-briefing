@@ -1,9 +1,13 @@
 import { describe, expect, it } from "vitest";
 import {
+  applyFeatureAdjust,
+  fitFeatureBetas,
   newFeatureState,
   matchFeatures,
   pushMatch,
+  type FeatureLikRow,
 } from "@/lib/feature-signals";
+import { type ModelParams } from "@/lib/poisson-model";
 
 describe("matchFeatures", () => {
   it("cold start: both unseen teams are fully rested with zero form", () => {
@@ -55,5 +59,67 @@ describe("matchFeatures", () => {
     const f = matchFeatures(s, { date: "2026-06-20", home: "fra", away: "mar" });
     // (0 − (−4))/3 = 1.333 → clamped to 1
     expect(f.formF).toBe(1);
+  });
+});
+
+const PARAMS: ModelParams = { baseLogGoals: 0.155, eloSlope: 0.85, rho: -0.05 };
+
+describe("applyFeatureAdjust", () => {
+  it("identity at zero features and zero betas", () => {
+    const l = { home: 1.4, away: 1.1 };
+    expect(applyFeatureAdjust(l, { restF: 0, formF: 0 }, { betaRest: 0.2, betaForm: 0.1 })).toEqual(l);
+    expect(applyFeatureAdjust(l, { restF: 0.5, formF: -0.3 }, { betaRest: 0, betaForm: 0 })).toEqual(l);
+  });
+
+  it("boosts home and suppresses away symmetrically", () => {
+    const l = { home: 1.0, away: 1.0 };
+    const out = applyFeatureAdjust(l, { restF: 1, formF: 0 }, { betaRest: 0.1, betaForm: 0 });
+    expect(out.home).toBeCloseTo(Math.exp(0.1), 10);
+    expect(out.away).toBeCloseTo(Math.exp(-0.1), 10);
+  });
+});
+
+describe("fitFeatureBetas", () => {
+  // Deterministic LCG so the synthetic data is reproducible.
+  const lcg = (seed: number) => () => {
+    seed = (seed * 1664525 + 1013904223) % 4294967296;
+    return seed / 4294967296;
+  };
+
+  const samplePoisson = (lambda: number, rnd: () => number): number => {
+    let k = 0;
+    let p = Math.exp(-lambda);
+    let cdf = p;
+    const u = rnd();
+    while (u > cdf && k < 8) {
+      k += 1;
+      p = (p * lambda) / k;
+      cdf += p;
+    }
+    return k;
+  };
+
+  const synth = (betaForm: number, n: number): FeatureLikRow[] => {
+    const rnd = lcg(42);
+    const rows: FeatureLikRow[] = [];
+    for (let i = 0; i < n; i++) {
+      const formF = rnd() * 2 - 1;
+      const lh = Math.exp(PARAMS.baseLogGoals + betaForm * formF);
+      const la = Math.exp(PARAMS.baseLogGoals - betaForm * formF);
+      rows.push({ diff: 0, hs: samplePoisson(lh, rnd), as: samplePoisson(la, rnd), restF: 0, formF });
+    }
+    return rows;
+  };
+
+  it("recovers a planted form effect (sign and rough size)", () => {
+    const betas = fitFeatureBetas(synth(0.2, 4000), PARAMS);
+    expect(betas.betaForm).toBeGreaterThan(0.1);
+    expect(betas.betaForm).toBeLessThan(0.3);
+  });
+
+  it("finds no effect in featureless data", () => {
+    const betas = fitFeatureBetas(synth(0, 4000), PARAMS);
+    expect(Math.abs(betas.betaForm)).toBeLessThanOrEqual(0.04);
+    expect(Math.abs(betas.betaRest)).toBeLessThanOrEqual(0.04);
   });
 });
