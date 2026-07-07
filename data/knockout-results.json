@@ -179,6 +179,15 @@
    "awayScore": 1,
    "winnerId": "esp",
    "after": "90"
+  },
+  {
+   "match": 94,
+   "homeId": "usa",
+   "awayId": "bel",
+   "homeScore": 1,
+   "awayScore": 4,
+   "winnerId": "bel",
+   "after": "90"
   }
  ]
 }

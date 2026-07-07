@@ -3369,7 +3369,40 @@
     "draw": 0.2864321608040201,
     "away": 0.36683417085427134
    },
-   "marketTicker": "KXWCGAME-26JUL06USABEL"
+   "marketTicker": "KXWCGAME-26JUL06USABEL",
+   "result": "1-4",
+   "realized": "away",
+   "correctPick": false,
+   "modelBrier": 0.635,
+   "modelRps": 0.2724999999999999,
+   "logLoss": 1.0498221244986778,
+   "scorelineHit": false,
+   "marketBrier": 0.6031665867023561,
+   "marketRps": 0.26056160197974804,
+   "markets": {
+    "kalshi": {
+     "probs": {
+      "home": 0.34673366834170855,
+      "draw": 0.2864321608040201,
+      "away": 0.36683417085427134
+     },
+     "brier": 0.6031665867023561,
+     "rps": 0.26056160197974804
+    }
+   },
+   "top3ScorelineHit": false,
+   "btts": {
+    "prob": 0.48154024571118265,
+    "actual": true,
+    "brier": 0.26880051681722095,
+    "derivedPostHoc": true
+   },
+   "ou25": {
+    "prob": 0.41375873070420954,
+    "actual": true,
+    "brier": 0.3436788258255395,
+    "derivedPostHoc": true
+   }
   },
   {
    "slug": "argentina-vs-egypt",

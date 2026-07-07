@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-07T01:15:54.827Z",
+  "generatedAt": "2026-07-07T02:27:36.386Z",
   "official": {
     "rows": [
       {
@@ -1431,21 +1431,44 @@
           "brier": 0.3644349535295688,
           "rps": 0.14813511611541166
         }
+      },
+      {
+        "slug": "united-states-vs-belgium",
+        "locked": {
+          "home": 35,
+          "draw": 30,
+          "away": 35
+        },
+        "actual": "1-4",
+        "grades": {
+          "modelBrier": 0.635,
+          "modelRps": 0.2724999999999999,
+          "scorelineHit": false,
+          "top3ScorelineHit": false,
+          "correctPick": false,
+          "bttsBrier": 0.26880051681722095,
+          "bttsDerivedPostHoc": true
+        },
+        "verdict": "close",
+        "kalshi": {
+          "brier": 0.6031665867023561,
+          "rps": 0.26056160197974804
+        }
       }
     ],
     "aggregates": {
-      "n": 74,
-      "accuracy": 0.6216216216216216,
-      "meanBrier": 0.540056756756757,
-      "meanRps": 0.17066216216216215,
-      "bttsAccuracy": 0.47297297297297297,
-      "scorelineHitRate": 0.13513513513513514,
-      "top3Rate": 0.3108108108108108,
+      "n": 75,
+      "accuracy": 0.6133333333333333,
+      "meanBrier": 0.541322666666667,
+      "meanRps": 0.17201999999999998,
+      "bttsAccuracy": 0.4666666666666667,
+      "scorelineHitRate": 0.13333333333333333,
+      "top3Rate": 0.30666666666666664,
       "vsKalshi": {
-        "n": 6,
-        "modelBrier": 0.5374333333333334,
-        "marketBrier": 0.45164252863743265,
-        "edge": -0.08579080469590072
+        "n": 7,
+        "modelBrier": 0.5513714285714286,
+        "marketBrier": 0.47328882264670746,
+        "edge": -0.07808260592472117
       },
       "vsPolymarket": {
         "n": 0,
@@ -1475,9 +1498,9 @@
       },
       {
         "midpoint": 0.35,
-        "predicted": 0.33879999999999993,
-        "observed": 0.28,
-        "n": 25
+        "predicted": 0.3382142857142857,
+        "observed": 0.2857142857142857,
+        "n": 28
       },
       {
         "midpoint": 0.45,
@@ -1549,7 +1572,7 @@
     ]
   },
   "caveats": [
-    "Official graded record contains n=74 match(es). This is a very small sample — do not over-read the aggregate numbers.",
+    "Official graded record contains n=75 match(es). This is a very small sample — do not over-read the aggregate numbers.",
     "BTTS and over/under probabilities are derived post-hoc from the same model that generated the 1X2 split; they are NOT separately validated predictions.",
     "No pre-kickoff Polymarket books exist for played matches — vsPolymarket comparisons are deferred to the Phase C backtest.",
     "Kalshi market Brier shown is computed from the pre-kickoff locked book; market edge from a single match is noise.",

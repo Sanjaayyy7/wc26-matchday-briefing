@@ -1,15 +1,15 @@
 {
  "source": "martj42/international_results (GitHub mirror)",
  "dataThrough": "2026-07-06",
- "matches": 49498,
+ "matches": 49499,
  "params": {
-  "baseLogGoals": 0.15572462889518623,
+  "baseLogGoals": 0.15574253009196934,
   "eloSlope": 0.849086808267122,
   "rho": -0.05
  },
  "regimeParams": {
   "tournament": {
-   "baseLogGoals": 0.14468044260112803,
+   "baseLogGoals": 0.14503808843620694,
    "eloSlope": 0.7947596705334468,
    "rho": -0.04
   }
@@ -19,18 +19,18 @@
   "status": "candidate"
  },
  "calibration": {
-  "a": 0.8941983844904366,
-  "b": -0.06474978588962217
+  "a": 0.8941865586018547,
+  "b": -0.06475703519852699
  },
  "backtest": {
   "from": "2024-01-01",
-  "n": 2637,
-  "brier": 0.5084,
+  "n": 2638,
+  "brier": 0.5085,
   "uniformBrier": 0.6667,
-  "rps": 0.1666,
+  "rps": 0.1667,
   "uniformRps": 0.2383,
-  "logLoss": 0.8654,
-  "ece": 0.0082,
+  "logLoss": 0.8655,
+  "ece": 0.0081,
   "calibrationBins": [
    {
     "range": "0.0–0.1",
@@ -46,15 +46,15 @@
    },
    {
     "range": "0.2–0.3",
-    "count": 2501,
-    "predicted": 0.263,
+    "count": 2502,
+    "predicted": 0.264,
     "realized": 0.273
    },
    {
     "range": "0.3–0.4",
-    "count": 692,
+    "count": 694,
     "predicted": 0.349,
-    "realized": 0.348
+    "realized": 0.349
    },
    {
     "range": "0.4–0.5",
@@ -99,14 +99,14 @@
   "England": 2144,
   "Wales": 1740,
   "Northern Ireland": 1658,
-  "United States": 1890,
+  "United States": 1837,
   "Canada": 1838,
   "Uruguay": 1919,
   "Argentina": 2217,
   "Austria": 1883,
   "Hungary": 1764,
   "Czechoslovakia": 1802,
-  "Belgium": 1987,
+  "Belgium": 2040,
   "France": 2205,
   "Switzerland": 2008,
   "Guernsey": 1746,
@@ -458,10 +458,10 @@
    "lastDate": "2026-06-08"
   },
   "United States": {
-   "results": "WLWWLWLLWW",
-   "gf": 23,
-   "ga": 17,
-   "lastDate": "2026-07-01"
+   "results": "LWLWWLWLLW",
+   "gf": 22,
+   "ga": 20,
+   "lastDate": "2026-07-06"
   },
   "Canada": {
    "results": "LWLWDDWDDW",
@@ -500,10 +500,10 @@
    "lastDate": "1993-11-17"
   },
   "Belgium": {
-   "results": "WWDDWWDWWD",
-   "gf": 30,
+   "results": "WWWDDWWDWW",
+   "gf": 33,
    "ga": 8,
-   "lastDate": "2026-07-01"
+   "lastDate": "2026-07-06"
   },
   "France": {
    "results": "WWWWWWLWWW",

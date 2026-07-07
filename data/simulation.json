@@ -3,8 +3,8 @@
   "runs": 10000,
   "seed": 20260612,
   "dataThrough": "2026-07-06",
-  "generatedAt": "2026-07-07T01:19:10.672Z",
-  "playedLocked": 77,
+  "generatedAt": "2026-07-07T02:27:40.533Z",
+  "playedLocked": 78,
   "knockoutVenueNote": "Knockout matches simulated as neutral-venue; host venue edges not modeled."
  },
  "teams": {
@@ -67,10 +67,10 @@
   "Switzerland": {
    "advanceGroup": 1,
    "reachR16": 1,
-   "reachQF": 0.3921,
-   "reachSF": 0.1072,
-   "reachFinal": 0.0422,
-   "champion": 0.0099
+   "reachQF": 0.3915,
+   "reachSF": 0.1046,
+   "reachFinal": 0.04,
+   "champion": 0.0108
   },
   "Brazil": {
    "advanceGroup": 1,
@@ -84,9 +84,9 @@
    "advanceGroup": 1,
    "reachR16": 1,
    "reachQF": 1,
-   "reachSF": 0.2892,
-   "reachFinal": 0.0917,
-   "champion": 0.0331
+   "reachSF": 0.2976,
+   "reachFinal": 0.1005,
+   "champion": 0.0353
   },
   "Haiti": {
    "advanceGroup": 0,
@@ -107,10 +107,10 @@
   "United States": {
    "advanceGroup": 1,
    "reachR16": 1,
-   "reachQF": 0.362,
-   "reachSF": 0.0346,
-   "reachFinal": 0.0058,
-   "champion": 0.0015
+   "reachQF": 0,
+   "reachSF": 0,
+   "reachFinal": 0,
+   "champion": 0
   },
   "Paraguay": {
    "advanceGroup": 1,
@@ -203,18 +203,18 @@
   "Belgium": {
    "advanceGroup": 1,
    "reachR16": 1,
-   "reachQF": 0.638,
-   "reachSF": 0.1198,
-   "reachFinal": 0.0332,
-   "champion": 0.0092
+   "reachQF": 1,
+   "reachSF": 0.2535,
+   "reachFinal": 0.0864,
+   "champion": 0.0307
   },
   "Egypt": {
    "advanceGroup": 1,
    "reachR16": 1,
-   "reachQF": 0.0928,
-   "reachSF": 0.0222,
-   "reachFinal": 0.0053,
-   "champion": 0.0002
+   "reachQF": 0.0963,
+   "reachSF": 0.0248,
+   "reachFinal": 0.0048,
+   "champion": 0.0007
   },
   "Iran": {
    "advanceGroup": 0,
@@ -236,9 +236,9 @@
    "advanceGroup": 1,
    "reachR16": 1,
    "reachQF": 1,
-   "reachSF": 0.8456,
-   "reachFinal": 0.5007,
-   "champion": 0.3033
+   "reachSF": 0.7465,
+   "reachFinal": 0.4415,
+   "champion": 0.2677
   },
   "Cape Verde": {
    "advanceGroup": 1,
@@ -268,9 +268,9 @@
    "advanceGroup": 1,
    "reachR16": 1,
    "reachQF": 1,
-   "reachSF": 0.7108,
-   "reachFinal": 0.3686,
-   "champion": 0.2064
+   "reachSF": 0.7024,
+   "reachFinal": 0.3716,
+   "champion": 0.2091
   },
   "Senegal": {
    "advanceGroup": 1,
@@ -292,17 +292,17 @@
    "advanceGroup": 1,
    "reachR16": 1,
    "reachQF": 1,
-   "reachSF": 0.3469,
-   "reachFinal": 0.1103,
-   "champion": 0.0314
+   "reachSF": 0.3552,
+   "reachFinal": 0.1187,
+   "champion": 0.0388
   },
   "Argentina": {
    "advanceGroup": 1,
    "reachR16": 1,
-   "reachQF": 0.9072,
-   "reachSF": 0.6558,
-   "reachFinal": 0.4291,
-   "champion": 0.2305
+   "reachQF": 0.9037,
+   "reachSF": 0.6542,
+   "reachFinal": 0.4269,
+   "champion": 0.232
   },
   "Algeria": {
    "advanceGroup": 1,
@@ -355,18 +355,18 @@
   "Colombia": {
    "advanceGroup": 1,
    "reachR16": 1,
-   "reachQF": 0.6079,
-   "reachSF": 0.2148,
-   "reachFinal": 0.1022,
-   "champion": 0.0376
+   "reachQF": 0.6085,
+   "reachSF": 0.2164,
+   "reachFinal": 0.1017,
+   "champion": 0.035
   },
   "England": {
    "advanceGroup": 1,
    "reachR16": 1,
    "reachQF": 1,
-   "reachSF": 0.6531,
-   "reachFinal": 0.3109,
-   "champion": 0.1369
+   "reachSF": 0.6448,
+   "reachFinal": 0.3079,
+   "champion": 0.1399
   },
   "Croatia": {
    "advanceGroup": 1,
