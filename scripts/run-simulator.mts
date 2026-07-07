@@ -35,17 +35,22 @@ const fixtures: SimFixture[] = fixturesJson.map((f) => ({
 }));
 
 // Settled knockout matches are pinned, not resampled (data/knockout-results.json).
+// All round keys (roundOf32, roundOf16, ...) are flattened — known[m.match]
+// works for any bracket match number.
 const koResults = (() => {
   try {
-    return read("knockout-results.json") as {
-      roundOf32: Array<{ match: number; winnerId: string }>;
-    };
+    return read("knockout-results.json") as Record<
+      string,
+      Array<{ match: number; winnerId: string }>
+    >;
   } catch {
-    return { roundOf32: [] };
+    return {} as Record<string, Array<{ match: number; winnerId: string }>>;
   }
 })();
 const knownWinners = Object.fromEntries(
-  koResults.roundOf32.map((r) => [r.match, byId.get(r.winnerId)!]),
+  Object.values(koResults)
+    .flat()
+    .map((r) => [r.match, byId.get(r.winnerId)!]),
 );
 
 const t0 = Date.now();
