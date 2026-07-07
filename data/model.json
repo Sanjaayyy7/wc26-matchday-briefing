@@ -1,16 +1,16 @@
 {
  "source": "martj42/international_results (GitHub mirror)",
- "dataThrough": "2026-07-03",
- "matches": 49493,
+ "dataThrough": "2026-07-06",
+ "matches": 49498,
  "params": {
-  "baseLogGoals": 0.15574503273468335,
-  "eloSlope": 0.8490717247619228,
+  "baseLogGoals": 0.15572462889518623,
+  "eloSlope": 0.849086808267122,
   "rho": -0.05
  },
  "regimeParams": {
   "tournament": {
-   "baseLogGoals": 0.14528041231941716,
-   "eloSlope": 0.7935943213311254,
+   "baseLogGoals": 0.14468044260112803,
+   "eloSlope": 0.7947596705334468,
    "rho": -0.04
   }
  },
@@ -19,16 +19,16 @@
   "status": "candidate"
  },
  "calibration": {
-  "a": 0.8942040031853535,
-  "b": -0.06474644581357393
+  "a": 0.8941983844904366,
+  "b": -0.06474978588962217
  },
  "backtest": {
   "from": "2024-01-01",
-  "n": 2632,
-  "brier": 0.5085,
+  "n": 2637,
+  "brier": 0.5084,
   "uniformBrier": 0.6667,
   "rps": 0.1666,
-  "uniformRps": 0.2382,
+  "uniformRps": 0.2383,
   "logLoss": 0.8654,
   "ece": 0.0082,
   "calibrationBins": [
@@ -40,39 +40,39 @@
    },
    {
     "range": "0.1–0.2",
-    "count": 1309,
+    "count": 1310,
     "predicted": 0.153,
     "realized": 0.149
    },
    {
     "range": "0.2–0.3",
-    "count": 2493,
-    "predicted": 0.264,
-    "realized": 0.274
+    "count": 2501,
+    "predicted": 0.263,
+    "realized": 0.273
    },
    {
     "range": "0.3–0.4",
-    "count": 690,
+    "count": 692,
     "predicted": 0.349,
     "realized": 0.348
    },
    {
     "range": "0.4–0.5",
-    "count": 589,
+    "count": 590,
     "predicted": 0.449,
-    "realized": 0.438
+    "realized": 0.437
    },
    {
     "range": "0.5–0.6",
-    "count": 483,
+    "count": 485,
     "predicted": 0.549,
-    "realized": 0.555
+    "realized": 0.557
    },
    {
     "range": "0.6–0.7",
-    "count": 392,
+    "count": 393,
     "predicted": 0.647,
-    "realized": 0.625
+    "realized": 0.626
    },
    {
     "range": "0.7–0.8",
@@ -96,18 +96,18 @@
  },
  "ratings": {
   "Scotland": 1822,
-  "England": 2112,
+  "England": 2144,
   "Wales": 1740,
   "Northern Ireland": 1658,
   "United States": 1890,
-  "Canada": 1868,
+  "Canada": 1838,
   "Uruguay": 1919,
   "Argentina": 2217,
   "Austria": 1883,
   "Hungary": 1764,
   "Czechoslovakia": 1802,
   "Belgium": 1987,
-  "France": 2196,
+  "France": 2205,
   "Switzerland": 2008,
   "Guernsey": 1746,
   "Alderney": 1077,
@@ -118,7 +118,7 @@
   "South Africa": 1690,
   "Germany": 1985,
   "Sweden": 1797,
-  "Norway": 1999,
+  "Norway": 2038,
   "Denmark": 1925,
   "Italy": 1928,
   "Chile": 1798,
@@ -128,14 +128,14 @@
   "Catalonia": 1653,
   "Philippines": 1342,
   "China": 1554,
-  "Brazil": 2113,
+  "Brazil": 2074,
   "Basque Country": 1796,
   "Japan": 1974,
-  "Paraguay": 1908,
+  "Paraguay": 1898,
   "Romania": 1694,
   "Greece": 1801,
   "Yugoslavia": 1873,
-  "Spain": 2209,
+  "Spain": 2228,
   "Egypt": 1856,
   "Estonia": 1421,
   "Suriname": 1593,
@@ -144,14 +144,14 @@
   "El Salvador": 1503,
   "Guatemala": 1642,
   "Poland": 1770,
-  "Portugal": 2076,
+  "Portugal": 2057,
   "Brittany": 1504,
   "New Zealand": 1677,
   "Australia": 1905,
   "Latvia": 1329,
   "Galicia": 1527,
   "Central Spain": 1495,
-  "Mexico": 2035,
+  "Mexico": 2003,
   "Andalusia": 1593,
   "Asturias": 1521,
   "Lithuania": 1331,
@@ -249,7 +249,7 @@
   "Tunisia": 1666,
   "Libya": 1529,
   "Malawi": 1437,
-  "Morocco": 2023,
+  "Morocco": 2054,
   "Benin": 1541,
   "Cape Verde": 1694,
   "Ivory Coast": 1838,
@@ -440,10 +440,10 @@
    "lastDate": "2026-06-24"
   },
   "England": {
-   "results": "WWDWWWLDWW",
-   "gf": 17,
-   "ga": 5,
-   "lastDate": "2026-07-01"
+   "results": "WWWDWWWLDW",
+   "gf": 18,
+   "ga": 7,
+   "lastDate": "2026-07-05"
   },
   "Wales": {
    "results": "LDDDWWLLLW",
@@ -464,10 +464,10 @@
    "lastDate": "2026-07-01"
   },
   "Canada": {
-   "results": "WLWDDWDDWD",
+   "results": "LWLWDDWDDW",
    "gf": 16,
-   "ga": 6,
-   "lastDate": "2026-06-28"
+   "ga": 9,
+   "lastDate": "2026-07-04"
   },
   "Uruguay": {
    "results": "LDDDDLDWWD",
@@ -506,10 +506,10 @@
    "lastDate": "2026-07-01"
   },
   "France": {
-   "results": "WWWWWLWWWW",
-   "gf": 29,
+   "results": "WWWWWWLWWW",
+   "gf": 26,
    "ga": 8,
-   "lastDate": "2026-06-30"
+   "lastDate": "2026-07-04"
   },
   "Switzerland": {
    "results": "WWWDDWDLDW",
@@ -572,10 +572,10 @@
    "lastDate": "2026-06-30"
   },
   "Norway": {
-   "results": "WLWWDWDLWW",
-   "gf": 23,
+   "results": "WWLWWDWDLW",
+   "gf": 21,
    "ga": 14,
-   "lastDate": "2026-06-30"
+   "lastDate": "2026-07-05"
   },
   "Denmark": {
    "results": "WDDWLDWWWD",
@@ -632,10 +632,10 @@
    "lastDate": "2026-06-09"
   },
   "Brazil": {
-   "results": "WWWDWWWLDW",
-   "gf": 24,
-   "ga": 9,
-   "lastDate": "2026-06-29"
+   "results": "LWWWDWWWLD",
+   "gf": 23,
+   "ga": 11,
+   "lastDate": "2026-07-05"
   },
   "Basque Country": {
    "results": "WDWDWWDWDW",
@@ -650,10 +650,10 @@
    "lastDate": "2026-06-29"
   },
   "Paraguay": {
-   "results": "DDWLWLWWLL",
+   "results": "LDDWLWLWWL",
    "gf": 12,
-   "ga": 12,
-   "lastDate": "2026-06-29"
+   "ga": 11,
+   "lastDate": "2026-07-04"
   },
   "Romania": {
    "results": "WDLLWLWWDL",
@@ -674,10 +674,10 @@
    "lastDate": "1992-03-25"
   },
   "Spain": {
-   "results": "WWWDWDDWDW",
-   "gf": 21,
+   "results": "WWWWDWDDWD",
+   "gf": 18,
    "ga": 4,
-   "lastDate": "2026-07-02"
+   "lastDate": "2026-07-06"
   },
   "Egypt": {
    "results": "DDWDLWDWDL",
@@ -728,10 +728,10 @@
    "lastDate": "2026-06-03"
   },
   "Portugal": {
-   "results": "WDWDWWWDWL",
+   "results": "LWDWDWWWDW",
    "gf": 23,
-   "ga": 7,
-   "lastDate": "2026-07-02"
+   "ga": 6,
+   "lastDate": "2026-07-06"
   },
   "Brittany": {
    "results": "WLWLWDWDDL",
@@ -770,10 +770,10 @@
    "lastDate": "1923-11-25"
   },
   "Mexico": {
-   "results": "WWWWWWWDDW",
-   "gf": 21,
-   "ga": 2,
-   "lastDate": "2026-06-30"
+   "results": "LWWWWWWWDD",
+   "gf": 19,
+   "ga": 5,
+   "lastDate": "2026-07-05"
   },
   "Andalusia": {
    "results": "WWWDWWDWWW",
@@ -1358,10 +1358,10 @@
    "lastDate": "2026-06-09"
   },
   "Morocco": {
-   "results": "DWWDDWWWDW",
+   "results": "WDWWDDWWWD",
    "gf": 23,
    "ga": 7,
-   "lastDate": "2026-06-29"
+   "lastDate": "2026-07-04"
   },
   "Benin": {
    "results": "LDWWLLWLLL",
