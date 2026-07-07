@@ -133,5 +133,61 @@
    "winnerId": "egy",
    "note": "pens 2–4"
   }
+ ],
+ "roundOf16": [
+  {
+   "match": 89,
+   "homeId": "par",
+   "awayId": "fra",
+   "homeScore": 0,
+   "awayScore": 1,
+   "winnerId": "fra",
+   "after": "90"
+  },
+  {
+   "match": 90,
+   "homeId": "can",
+   "awayId": "mar",
+   "homeScore": 0,
+   "awayScore": 3,
+   "winnerId": "mar",
+   "after": "90"
+  },
+  {
+   "match": 91,
+   "homeId": "bra",
+   "awayId": "nor",
+   "homeScore": 1,
+   "awayScore": 2,
+   "winnerId": "nor",
+   "after": "90"
+  },
+  {
+   "match": 92,
+   "homeId": "mex",
+   "awayId": "eng",
+   "homeScore": 2,
+   "awayScore": 3,
+   "winnerId": "eng",
+   "after": "90"
+  },
+  {
+   "match": 93,
+   "homeId": "por",
+   "awayId": "esp",
+   "homeScore": 0,
+   "awayScore": 1,
+   "winnerId": "esp",
+   "after": "90"
+  },
+  {
+   "match": 94,
+   "homeId": "usa",
+   "awayId": "bel",
+   "homeScore": 1,
+   "awayScore": 4,
+   "winnerId": "bel",
+   "after": "90"
+  }
  ]
 }

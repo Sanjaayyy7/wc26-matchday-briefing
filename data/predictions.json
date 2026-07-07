@@ -3073,7 +3073,49 @@
     "draw": 0.2736318407960199,
     "away": 0.5323383084577115
    },
-   "marketTicker": "KXWCGAME-26JUL04CANMAR"
+   "marketTicker": "KXWCGAME-26JUL04CANMAR",
+   "result": "0-3",
+   "realized": "away",
+   "correctPick": true,
+   "modelBrier": 0.5222,
+   "modelRps": 0.2161,
+   "logLoss": 0.8915981192837836,
+   "scorelineHit": false,
+   "marketBrier": 0.33122942501423225,
+   "marketRps": 0.12817752035840696,
+   "markets": {
+    "kalshi": {
+     "probs": {
+      "home": 0.19402985074626863,
+      "draw": 0.2736318407960199,
+      "away": 0.5323383084577115
+     },
+     "brier": 0.33122942501423225,
+     "rps": 0.12817752035840696
+    },
+    "polymarket": {
+     "probs": {
+      "home": 0.1941747572815534,
+      "draw": 0.2815533980582524,
+      "away": 0.5242718446601942
+     },
+     "brier": 0.34329343010651336,
+     "rps": 0.1320105570741823
+    }
+   },
+   "top3ScorelineHit": false,
+   "btts": {
+    "prob": 0.4790872285300034,
+    "actual": false,
+    "brier": 0.22952457254055972,
+    "derivedPostHoc": true
+   },
+   "ou25": {
+    "prob": 0.4179587931336191,
+    "actual": true,
+    "brier": 0.33877196649047325,
+    "derivedPostHoc": true
+   }
   },
   {
    "slug": "paraguay-vs-france",
@@ -3092,7 +3134,49 @@
     "draw": 0.12437810945273634,
     "away": 0.8308457711442787
    },
-   "marketTicker": "KXWCGAME-26JUL04PARFRA"
+   "marketTicker": "KXWCGAME-26JUL04PARFRA",
+   "result": "0-1",
+   "realized": "away",
+   "correctPick": true,
+   "modelBrier": 0.14820000000000005,
+   "modelRps": 0.0541,
+   "logLoss": 0.37106368139083207,
+   "scorelineHit": false,
+   "marketBrier": 0.046087968119600975,
+   "marketRps": 0.015309027004282078,
+   "markets": {
+    "kalshi": {
+     "probs": {
+      "home": 0.04477611940298508,
+      "draw": 0.12437810945273634,
+      "away": 0.8308457711442787
+     },
+     "brier": 0.046087968119600975,
+     "rps": 0.015309027004282078
+    },
+    "polymarket": {
+     "probs": {
+      "home": 0.04950495049504951,
+      "draw": 0.12871287128712872,
+      "away": 0.8217821782178217
+     },
+     "brier": 0.05077933535927852,
+     "rps": 0.017106166062150766
+    }
+   },
+   "top3ScorelineHit": true,
+   "btts": {
+    "prob": 0.41924902443584283,
+    "actual": false,
+    "brier": 0.17576974449040594,
+    "derivedPostHoc": true
+   },
+   "ou25": {
+    "prob": 0.5273796092861164,
+    "actual": false,
+    "brier": 0.2781292522907768,
+    "derivedPostHoc": true
+   }
   },
   {
    "slug": "brazil-vs-norway",
@@ -3111,7 +3195,49 @@
     "draw": 0.2562814070351759,
     "away": 0.20603015075376885
    },
-   "marketTicker": "KXWCGAME-26JUL05BRANOR"
+   "marketTicker": "KXWCGAME-26JUL05BRANOR",
+   "result": "1-2",
+   "realized": "away",
+   "correctPick": false,
+   "modelBrier": 0.8864000000000001,
+   "modelRps": 0.404,
+   "logLoss": 1.4271163556401458,
+   "scorelineHit": false,
+   "marketBrier": 0.9851771419913639,
+   "marketRps": 0.45974849119971717,
+   "markets": {
+    "kalshi": {
+     "probs": {
+      "home": 0.5376884422110553,
+      "draw": 0.2562814070351759,
+      "away": 0.20603015075376885
+     },
+     "brier": 0.9851771419913639,
+     "rps": 0.45974849119971717
+    },
+    "polymarket": {
+     "probs": {
+      "home": 0.5294117647058824,
+      "draw": 0.2647058823529412,
+      "away": 0.20588235294117646
+     },
+     "brier": 0.9809688581314879,
+     "rps": 0.45544982698961944
+    }
+   },
+   "top3ScorelineHit": false,
+   "btts": {
+    "prob": 0.47105499341287776,
+    "actual": true,
+    "brier": 0.2797828199934507,
+    "derivedPostHoc": true
+   },
+   "ou25": {
+    "prob": 0.4317949998117569,
+    "actual": true,
+    "brier": 0.32285692223892126,
+    "derivedPostHoc": true
+   }
   },
   {
    "slug": "mexico-vs-england",
@@ -3130,7 +3256,40 @@
     "draw": 0.2964824120603015,
     "away": 0.3869346733668342
    },
-   "marketTicker": "KXWCGAME-26JUL05MEXENG"
+   "marketTicker": "KXWCGAME-26JUL05MEXENG",
+   "result": "2-3",
+   "realized": "away",
+   "correctPick": false,
+   "modelBrier": 0.6758,
+   "modelRps": 0.29289999999999994,
+   "logLoss": 1.1086626245216111,
+   "scorelineHit": false,
+   "marketBrier": 0.5639756571803742,
+   "marketRps": 0.2380369182596399,
+   "markets": {
+    "kalshi": {
+     "probs": {
+      "home": 0.3165829145728643,
+      "draw": 0.2964824120603015,
+      "away": 0.3869346733668342
+     },
+     "brier": 0.5639756571803742,
+     "rps": 0.2380369182596399
+    }
+   },
+   "top3ScorelineHit": false,
+   "btts": {
+    "prob": 0.4811246043695725,
+    "actual": true,
+    "brier": 0.26923167619063265,
+    "derivedPostHoc": true
+   },
+   "ou25": {
+    "prob": 0.414493326341334,
+    "actual": true,
+    "brier": 0.34281806489883565,
+    "derivedPostHoc": true
+   }
   },
   {
    "slug": "portugal-vs-spain",
@@ -3149,7 +3308,49 @@
     "draw": 0.2610837438423645,
     "away": 0.5073891625615763
    },
-   "marketTicker": "KXWCGAME-26JUL06PORESP"
+   "marketTicker": "KXWCGAME-26JUL06PORESP",
+   "result": "0-1",
+   "realized": "away",
+   "correctPick": true,
+   "modelBrier": 0.3768,
+   "modelRps": 0.1492,
+   "logLoss": 0.6931471805599453,
+   "scorelineHit": true,
+   "marketBrier": 0.3644349535295688,
+   "marketRps": 0.14813511611541166,
+   "markets": {
+    "kalshi": {
+     "probs": {
+      "home": 0.23152709359605908,
+      "draw": 0.2610837438423645,
+      "away": 0.5073891625615763
+     },
+     "brier": 0.3644349535295688,
+     "rps": 0.14813511611541166
+    },
+    "polymarket": {
+     "probs": {
+      "home": 0.23300970873786406,
+      "draw": 0.2621359223300971,
+      "away": 0.5048543689320388
+     },
+     "brier": 0.3681779621076444,
+     "rps": 0.1497313601658969
+    }
+   },
+   "top3ScorelineHit": true,
+   "btts": {
+    "prob": 0.46733288285164787,
+    "actual": false,
+    "brier": 0.21840002339443204,
+    "derivedPostHoc": true
+   },
+   "ou25": {
+    "prob": 0.43829997349394967,
+    "actual": false,
+    "brier": 0.192106866764797,
+    "derivedPostHoc": true
+   }
   },
   {
    "slug": "united-states-vs-belgium",
@@ -3168,7 +3369,40 @@
     "draw": 0.2864321608040201,
     "away": 0.36683417085427134
    },
-   "marketTicker": "KXWCGAME-26JUL06USABEL"
+   "marketTicker": "KXWCGAME-26JUL06USABEL",
+   "result": "1-4",
+   "realized": "away",
+   "correctPick": false,
+   "modelBrier": 0.635,
+   "modelRps": 0.2724999999999999,
+   "logLoss": 1.0498221244986778,
+   "scorelineHit": false,
+   "marketBrier": 0.6031665867023561,
+   "marketRps": 0.26056160197974804,
+   "markets": {
+    "kalshi": {
+     "probs": {
+      "home": 0.34673366834170855,
+      "draw": 0.2864321608040201,
+      "away": 0.36683417085427134
+     },
+     "brier": 0.6031665867023561,
+     "rps": 0.26056160197974804
+    }
+   },
+   "top3ScorelineHit": false,
+   "btts": {
+    "prob": 0.48154024571118265,
+    "actual": true,
+    "brier": 0.26880051681722095,
+    "derivedPostHoc": true
+   },
+   "ou25": {
+    "prob": 0.41375873070420954,
+    "actual": true,
+    "brier": 0.3436788258255395,
+    "derivedPostHoc": true
+   }
   },
   {
    "slug": "argentina-vs-egypt",

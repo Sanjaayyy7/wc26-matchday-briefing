@@ -33,7 +33,7 @@ describe("buildPulsePoints", () => {
   const points = buildPulsePoints();
 
   it("returns every settled call", () => {
-    expect(points.length).toBe(69);
+    expect(points.length).toBe(75);
   });
 
   it("uses only known verdicts and finite Briers", () => {

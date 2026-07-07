@@ -1382,7 +1382,9 @@
     "stage": "round-of-16",
     "tzOffsetMinutes": -300,
     "tzLabel": "CDT",
-    "neutral": true
+    "neutral": true,
+    "homeScore": 0,
+    "awayScore": 3
   },
   {
     "id": "par-fra-r16",
@@ -1398,7 +1400,9 @@
     "stage": "round-of-16",
     "tzOffsetMinutes": -240,
     "tzLabel": "EDT",
-    "neutral": true
+    "neutral": true,
+    "homeScore": 0,
+    "awayScore": 1
   },
   {
     "id": "bra-nor-r16",
@@ -1414,7 +1418,9 @@
     "stage": "round-of-16",
     "tzOffsetMinutes": -240,
     "tzLabel": "EDT",
-    "neutral": true
+    "neutral": true,
+    "homeScore": 1,
+    "awayScore": 2
   },
   {
     "id": "mex-eng-r16",
@@ -1430,7 +1436,9 @@
     "stage": "round-of-16",
     "tzOffsetMinutes": -360,
     "tzLabel": "CST",
-    "neutral": false
+    "neutral": false,
+    "homeScore": 2,
+    "awayScore": 3
   },
   {
     "id": "por-esp-r16",
@@ -1446,7 +1454,9 @@
     "stage": "round-of-16",
     "tzOffsetMinutes": -300,
     "tzLabel": "CDT",
-    "neutral": true
+    "neutral": true,
+    "homeScore": 0,
+    "awayScore": 1
   },
   {
     "id": "usa-bel-r16",
@@ -1462,7 +1472,9 @@
     "stage": "round-of-16",
     "tzOffsetMinutes": -420,
     "tzLabel": "PDT",
-    "neutral": false
+    "neutral": false,
+    "homeScore": 1,
+    "awayScore": 4
   },
   {
     "id": "arg-egy-r16",
@@ -1492,6 +1504,54 @@
     "stakes": "Round of 16: Switzerland meet Colombia.",
     "privateNotes": null,
     "stage": "round-of-16",
+    "tzOffsetMinutes": -420,
+    "tzLabel": "PDT",
+    "neutral": true
+  },
+  {
+    "id": "fra-mar-qf",
+    "slug": "france-vs-morocco",
+    "homeId": "fra",
+    "awayId": "mar",
+    "kickoffISO": "2026-07-09T20:00:00Z",
+    "timeTBD": false,
+    "venue": "Boston Stadium (Foxborough)",
+    "competition": "FIFA World Cup 2026",
+    "stakes": "Quarter-final: France meet Morocco.",
+    "privateNotes": null,
+    "stage": "quarter-final",
+    "tzOffsetMinutes": -240,
+    "tzLabel": "EDT",
+    "neutral": true
+  },
+  {
+    "id": "nor-eng-qf",
+    "slug": "norway-vs-england",
+    "homeId": "nor",
+    "awayId": "eng",
+    "kickoffISO": "2026-07-11T21:00:00Z",
+    "timeTBD": false,
+    "venue": "Miami Stadium (Miami Gardens)",
+    "competition": "FIFA World Cup 2026",
+    "stakes": "Quarter-final: Norway meet England.",
+    "privateNotes": null,
+    "stage": "quarter-final",
+    "tzOffsetMinutes": -240,
+    "tzLabel": "EDT",
+    "neutral": true
+  },
+  {
+    "id": "esp-bel-qf",
+    "slug": "spain-vs-belgium",
+    "homeId": "esp",
+    "awayId": "bel",
+    "kickoffISO": "2026-07-10T19:00:00Z",
+    "timeTBD": false,
+    "venue": "Los Angeles Stadium (Inglewood)",
+    "competition": "FIFA World Cup 2026",
+    "stakes": "Quarter-final: Spain meet Belgium.",
+    "privateNotes": null,
+    "stage": "quarter-final",
     "tzOffsetMinutes": -420,
     "tzLabel": "PDT",
     "neutral": true
