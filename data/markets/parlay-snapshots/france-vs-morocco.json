@@ -1,0 +1,245 @@
+{
+ "fetchedAt": "2026-07-08T17:08:29.600Z",
+ "markets": [
+  {
+   "ticker": "KXWCGAME-26JUL09FRAMAR-MAR",
+   "title": "France vs Morocco Winner?",
+   "yesMid": 0.14500000000000002
+  },
+  {
+   "ticker": "KXWCGAME-26JUL09FRAMAR-FRA",
+   "title": "France vs Morocco Winner?",
+   "yesMid": 0.615
+  },
+  {
+   "ticker": "KXWCGAME-26JUL09FRAMAR-TIE",
+   "title": "France vs Morocco Winner?",
+   "yesMid": 0.245
+  },
+  {
+   "ticker": "KXWCADVANCE-26JUL09FRAMAR-MAR",
+   "title": "France vs Morocco: To Advance",
+   "yesMid": 0.225
+  },
+  {
+   "ticker": "KXWCADVANCE-26JUL09FRAMAR-FRA",
+   "title": "France vs Morocco: To Advance",
+   "yesMid": 0.775
+  },
+  {
+   "ticker": "KXWCSPREAD-26JUL09FRAMAR-MAR2",
+   "title": "Morocco wins by more than 1.5 goals?",
+   "yesMid": 0.035
+  },
+  {
+   "ticker": "KXWCSPREAD-26JUL09FRAMAR-FRA2",
+   "title": "France wins by more than 1.5 goals?",
+   "yesMid": 0.345
+  },
+  {
+   "ticker": "KXWCSPREAD-26JUL09FRAMAR-FRA3",
+   "title": "France wins by more than 2.5 goals?",
+   "yesMid": 0.155
+  },
+  {
+   "ticker": "KXWCSPREAD-26JUL09FRAMAR-MAR3",
+   "title": "Morocco wins by more than 2.5 goals?",
+   "yesMid": 0.01
+  },
+  {
+   "ticker": "KXWCTOTAL-26JUL09FRAMAR-2",
+   "title": "Will over 1.5 goals be scored?",
+   "yesMid": 0.745
+  },
+  {
+   "ticker": "KXWCTOTAL-26JUL09FRAMAR-5",
+   "title": "Will over 4.5 goals be scored?",
+   "yesMid": 0.125
+  },
+  {
+   "ticker": "KXWCTOTAL-26JUL09FRAMAR-6",
+   "title": "Will over 5.5 goals be scored?",
+   "yesMid": 0.055
+  },
+  {
+   "ticker": "KXWCTOTAL-26JUL09FRAMAR-4",
+   "title": "Will over 3.5 goals be scored?",
+   "yesMid": 0.265
+  },
+  {
+   "ticker": "KXWCTOTAL-26JUL09FRAMAR-3",
+   "title": "Will over 2.5 goals be scored?",
+   "yesMid": 0.485
+  },
+  {
+   "ticker": "KXWCTOTAL-26JUL09FRAMAR-1",
+   "title": "Will over 0.5 goals be scored?",
+   "yesMid": 0.925
+  },
+  {
+   "ticker": "KXWCTEAMTOTAL-26JUL09FRAMAR-FRA1",
+   "title": "Will France score over 0.5 goals?",
+   "yesMid": 0.865
+  },
+  {
+   "ticker": "KXWCTEAMTOTAL-26JUL09FRAMAR-MAR2",
+   "title": "Will Morocco score over 1.5 goals?",
+   "yesMid": 0.195
+  },
+  {
+   "ticker": "KXWCTEAMTOTAL-26JUL09FRAMAR-FRA3",
+   "title": "Will France score over 2.5 goals?",
+   "yesMid": 0.28500000000000003
+  },
+  {
+   "ticker": "KXWCTEAMTOTAL-26JUL09FRAMAR-MAR1",
+   "title": "Will Morocco score over 0.5 goals?",
+   "yesMid": 0.5700000000000001
+  },
+  {
+   "ticker": "KXWCTEAMTOTAL-26JUL09FRAMAR-FRA2",
+   "title": "Will France score over 1.5 goals?",
+   "yesMid": 0.565
+  },
+  {
+   "ticker": "KXWCTEAMTOTAL-26JUL09FRAMAR-MAR3",
+   "title": "Will Morocco score over 2.5 goals?",
+   "yesMid": 0.055
+  },
+  {
+   "ticker": "KXWCTEAMTOTAL-26JUL09FRAMAR-FRA4",
+   "title": "Will France score over 3.5 goals?",
+   "yesMid": 0.10500000000000001
+  },
+  {
+   "ticker": "KXWCBTTS-26JUL09FRAMAR-BTTS",
+   "title": "Will both teams score?",
+   "yesMid": 0.505
+  },
+  {
+   "ticker": "KXWCSCORE-26JUL09FRAMAR-FRA3MAR3",
+   "title": "Will the final score be Draw 3-3?",
+   "yesMid": 0.01
+  },
+  {
+   "ticker": "KXWCSCORE-26JUL09FRAMAR-FRA1MAR0",
+   "title": "Will the final score be France wins 1-0?",
+   "yesMid": 0.135
+  },
+  {
+   "ticker": "KXWCSCORE-26JUL09FRAMAR-FRA0MAR2",
+   "title": "Will the final score be Morocco wins 2-0?",
+   "yesMid": 0.025
+  },
+  {
+   "ticker": "KXWCSCORE-26JUL09FRAMAR-FRA0MAR1",
+   "title": "Will the final score be Morocco wins 1-0?",
+   "yesMid": 0.055
+  },
+  {
+   "ticker": "KXWCSCORE-26JUL09FRAMAR-FRA2MAR3",
+   "title": "Will the final score be Morocco wins 3-2?",
+   "yesMid": 0.015
+  },
+  {
+   "ticker": "KXWCSCORE-26JUL09FRAMAR-FRA0MAR0",
+   "title": "Will the final score be Draw 0-0?",
+   "yesMid": 0.07500000000000001
+  },
+  {
+   "ticker": "KXWCSCORE-26JUL09FRAMAR-FRA3MAR0",
+   "title": "Will the final score be France wins 3-0?",
+   "yesMid": 0.065
+  },
+  {
+   "ticker": "KXWCSCORE-26JUL09FRAMAR-FRA3MAR1",
+   "title": "Will the final score be France wins 3-1?",
+   "yesMid": 0.065
+  },
+  {
+   "ticker": "KXWCSCORE-26JUL09FRAMAR-FRA3MAR2",
+   "title": "Will the final score be France wins 3-2?",
+   "yesMid": 0.03
+  },
+  {
+   "ticker": "KXWCSCORE-26JUL09FRAMAR-FRA2MAR0",
+   "title": "Will the final score be France wins 2-0?",
+   "yesMid": 0.125
+  },
+  {
+   "ticker": "KXWCSCORE-26JUL09FRAMAR-FRA0MAR3",
+   "title": "Will the final score be Morocco wins 3-0?",
+   "yesMid": 0.01
+  },
+  {
+   "ticker": "KXWCSCORE-26JUL09FRAMAR-FRA1MAR2",
+   "title": "Will the final score be Morocco wins 2-1?",
+   "yesMid": 0.045
+  },
+  {
+   "ticker": "KXWCSCORE-26JUL09FRAMAR-FRA4MAR1",
+   "title": "Will the final score be France wins 4-1?",
+   "yesMid": 0.03
+  },
+  {
+   "ticker": "KXWCSCORE-26JUL09FRAMAR-FRA2MAR1",
+   "title": "Will the final score be France wins 2-1?",
+   "yesMid": 0.11499999999999999
+  },
+  {
+   "ticker": "KXWCSCORE-26JUL09FRAMAR-FRA4MAR2",
+   "title": "Will the final score be France wins 4-2?",
+   "yesMid": 0.015
+  },
+  {
+   "ticker": "KXWCSCORE-26JUL09FRAMAR-FRA4MAR0",
+   "title": "Will the final score be France wins 4-0?",
+   "yesMid": 0.035
+  },
+  {
+   "ticker": "KXWCSCORE-26JUL09FRAMAR-FRA1MAR3",
+   "title": "Will the final score be Morocco wins 3-1?",
+   "yesMid": 0.015
+  },
+  {
+   "ticker": "KXWCSCORE-26JUL09FRAMAR-FRA2MAR2",
+   "title": "Will the final score be Draw 2-2?",
+   "yesMid": 0.045
+  },
+  {
+   "ticker": "KXWCSCORE-26JUL09FRAMAR-FRA1MAR1",
+   "title": "Will the final score be Draw 1-1?",
+   "yesMid": 0.11499999999999999
+  },
+  {
+   "ticker": "KXWCSCORE-26JUL09FRAMAR-FRA6MAR0",
+   "title": "Will the final score be France wins 6-0?",
+   "yesMid": 0.01
+  },
+  {
+   "ticker": "KXWCSCORE-26JUL09FRAMAR-FRA6MAR1",
+   "title": "Will the final score be France wins 6-1?",
+   "yesMid": 0.01
+  },
+  {
+   "ticker": "KXWCSCORE-26JUL09FRAMAR-FRA5MAR2",
+   "title": "Will the final score be France wins 5-2?",
+   "yesMid": 0.01
+  },
+  {
+   "ticker": "KXWCSCORE-26JUL09FRAMAR-FRA5MAR1",
+   "title": "Will the final score be France wins 5-1?",
+   "yesMid": 0.01
+  },
+  {
+   "ticker": "KXWCSCORE-26JUL09FRAMAR-FRA5MAR0",
+   "title": "Will the final score be France wins 5-0?",
+   "yesMid": 0.01
+  },
+  {
+   "ticker": "KXWCSCORE-26JUL09FRAMAR-FRA4MAR3",
+   "title": "Will the final score be France wins 4-3?",
+   "yesMid": 0.01
+  }
+ ]
+}

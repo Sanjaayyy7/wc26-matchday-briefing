@@ -14,7 +14,7 @@
  *   npm run report:accountability
  */
 
-import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
+import { existsSync, readFileSync, writeFileSync, mkdirSync } from "node:fs";
 import path from "node:path";
 import { pathToFileURL } from "node:url";
 import { appDir } from "./shared.mts";
@@ -119,9 +119,79 @@ function renderInformationalTable(rows: InformationalRow[]): string {
   return [...header, ...rowLines].join("\n");
 }
 
+type ParlaySlipRow = {
+  verdict?: "no-slip";
+  jointProb?: number;
+  legs?: Array<{ ticker: string }>;
+  result?: { legs: Array<{ ticker: string; hit: boolean }>; slipHit: boolean };
+};
+
+type ParlaySummary = {
+  slips: number;
+  noSlips: number;
+  graded: number;
+  slipHits: number;
+  slipHitRate: number | null;
+  legHits: number;
+  legs: number;
+  legHitRate: number | null;
+  meanLockedJoint: number | null;
+  realizedSlipHitRate: number | null;
+};
+
+/** Slip/leg hit rates + locked-joint calibration from data/parlays.json (null if absent/empty). */
+function parlaySummary(): ParlaySummary | null {
+  const parlaysPath = path.join(appDir, "data", "parlays.json");
+  if (!existsSync(parlaysPath)) return null;
+  const rows = readJson<ParlaySlipRow[]>(parlaysPath);
+  if (!Array.isArray(rows) || rows.length === 0) return null;
+  const locked = rows.filter((r) => r.verdict !== "no-slip");
+  const noSlips = rows.length - locked.length;
+  const graded = locked.filter((r) => r.result);
+  const slipHits = graded.filter((r) => r.result?.slipHit).length;
+  const legRows = graded.flatMap((r) => r.result?.legs ?? []);
+  const legHits = legRows.filter((l) => l.hit).length;
+  const joints = graded.map((r) => r.jointProb).filter((j): j is number => typeof j === "number");
+  const slipHitRate = graded.length > 0 ? slipHits / graded.length : null;
+  return {
+    slips: locked.length,
+    noSlips,
+    graded: graded.length,
+    slipHits,
+    slipHitRate,
+    legHits,
+    legs: legRows.length,
+    legHitRate: legRows.length > 0 ? legHits / legRows.length : null,
+    meanLockedJoint: joints.length > 0 ? joints.reduce((a, b) => a + b, 0) / joints.length : null,
+    realizedSlipHitRate: slipHitRate,
+  };
+}
+
+function renderParlays(p: ParlaySummary): string {
+  return [
+    "## Parlays",
+    "",
+    "Model-optimized Kalshi parlay slips (pre-registered floors, locked pre-kickoff, graded on the same 90-minute semantics as predictions).",
+    "",
+    "| Metric | Value |",
+    "|--------|-------|",
+    `| Locked slips | ${p.slips} |`,
+    `| No-slip days | ${p.noSlips} |`,
+    `| Graded | ${p.graded} |`,
+    `| Slip hit rate | ${pct(p.slipHitRate)} (${p.slipHits}/${p.graded}) |`,
+    `| Leg hit rate | ${pct(p.legHitRate)} (${p.legHits}/${p.legs}) |`,
+    `| Locked joint avg (graded) | ${pct(p.meanLockedJoint)} |`,
+    `| Realized slip hit rate | ${pct(p.realizedSlipHitRate)} |`,
+    "",
+    "---",
+    "",
+  ].join("\n");
+}
+
 function renderMarkdown(
   output: ReturnType<typeof buildAccountability>,
   generatedDate: string,
+  parlays: ParlaySummary | null,
 ): string {
   const sections: string[] = [
     "# WC26 Accountability Report",
@@ -165,6 +235,7 @@ function renderMarkdown(
     "",
     "---",
     "",
+    ...(parlays ? [renderParlays(parlays)] : []),
     "## Caveats",
     "",
     ...output.caveats.map((c) => `- ${c}`),
@@ -205,12 +276,13 @@ async function main() {
 
   console.log("[accountability] Building accountability output...");
   const output = buildAccountability(ledger, matchFacts, kalshiRaw, polymarketEntries);
+  const parlays = parlaySummary();
 
   // Write JSON
   const backtestDir = path.join(appDir, "data", "backtest");
   mkdirSync(backtestDir, { recursive: true });
   const jsonPath = path.join(backtestDir, "wc26-accountability.json");
-  writeFileSync(jsonPath, JSON.stringify(output, null, 2) + "\n");
+  writeFileSync(jsonPath, JSON.stringify(parlays ? { ...output, parlays } : output, null, 2) + "\n");
   console.log(`[accountability] Wrote ${jsonPath}`);
 
   // Write markdown
@@ -218,7 +290,7 @@ async function main() {
   mkdirSync(readmeDir, { recursive: true });
   const mdPath = path.join(readmeDir, "accountability-report.md");
   const generatedDate = new Date().toISOString().replace("T", " ").slice(0, 19) + " UTC";
-  writeFileSync(mdPath, renderMarkdown(output, generatedDate));
+  writeFileSync(mdPath, renderMarkdown(output, generatedDate, parlays));
   console.log(`[accountability] Wrote ${mdPath}`);
 
   // Print summary to stdout
@@ -230,6 +302,13 @@ async function main() {
   console.log(`  Mean RPS: ${aggregates.meanRps !== null ? aggregates.meanRps.toFixed(4) : "—"}`);
   console.log(`  vsKalshi n=${aggregates.vsKalshi.n}, edge=${aggregates.vsKalshi.edge !== null ? aggregates.vsKalshi.edge.toFixed(4) : "—"}`);
   console.log(`  Informational rows: ${output.informational.rows.length}`);
+  if (parlays) {
+    console.log(
+      `  Parlays: ${parlays.graded} graded, slip hit rate ${parlays.slipHitRate !== null ? (parlays.slipHitRate * 100).toFixed(1) + "%" : "—"}, ` +
+        `leg hit rate ${parlays.legHitRate !== null ? (parlays.legHitRate * 100).toFixed(1) + "%" : "—"}, ` +
+        `locked joint avg ${parlays.meanLockedJoint !== null ? (parlays.meanLockedJoint * 100).toFixed(1) + "%" : "—"} vs realized ${parlays.realizedSlipHitRate !== null ? (parlays.realizedSlipHitRate * 100).toFixed(1) + "%" : "—"}`,
+    );
+  }
 }
 
 const isMain = import.meta.url === pathToFileURL(process.argv[1]).href;
