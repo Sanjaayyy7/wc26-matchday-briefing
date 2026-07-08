@@ -1490,7 +1490,9 @@
     "stage": "round-of-16",
     "tzOffsetMinutes": -240,
     "tzLabel": "EDT",
-    "neutral": true
+    "neutral": true,
+    "homeScore": 3,
+    "awayScore": 2
   },
   {
     "id": "sui-col-r16",
@@ -1506,7 +1508,9 @@
     "stage": "round-of-16",
     "tzOffsetMinutes": -420,
     "tzLabel": "PDT",
-    "neutral": true
+    "neutral": true,
+    "homeScore": 0,
+    "awayScore": 0
   },
   {
     "id": "fra-mar-qf",
@@ -1554,6 +1558,22 @@
     "stage": "quarter-final",
     "tzOffsetMinutes": -420,
     "tzLabel": "PDT",
+    "neutral": true
+  },
+  {
+    "id": "arg-sui-qf",
+    "slug": "argentina-vs-switzerland",
+    "homeId": "arg",
+    "awayId": "sui",
+    "kickoffISO": "2026-07-12T01:00:00Z",
+    "timeTBD": false,
+    "venue": "Kansas City Stadium",
+    "competition": "FIFA World Cup 2026",
+    "stakes": "Quarter-final: Argentina meet Switzerland.",
+    "privateNotes": null,
+    "stage": "quarter-final",
+    "tzOffsetMinutes": -300,
+    "tzLabel": "CDT",
     "neutral": true
   }
 ]

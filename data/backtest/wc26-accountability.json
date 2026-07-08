@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-07T02:27:36.386Z",
+  "generatedAt": "2026-07-08T06:51:23.263Z",
   "official": {
     "rows": [
       {
@@ -1454,21 +1454,63 @@
           "brier": 0.6031665867023561,
           "rps": 0.26056160197974804
         }
+      },
+      {
+        "slug": "argentina-vs-egypt",
+        "locked": {
+          "home": 77,
+          "draw": 16,
+          "away": 7
+        },
+        "actual": "3-2",
+        "grades": {
+          "modelBrier": 0.08339999999999999,
+          "modelRps": 0.02889999999999999,
+          "scorelineHit": false,
+          "top3ScorelineHit": false,
+          "correctPick": true,
+          "bttsBrier": 0.3741833827139084,
+          "bttsDerivedPostHoc": true
+        },
+        "verdict": "hit",
+        "kalshi": {
+          "brier": 0.11550213378450044,
+          "rps": 0.04046614984470091
+        }
+      },
+      {
+        "slug": "switzerland-vs-colombia",
+        "locked": {
+          "home": 27,
+          "draw": 29,
+          "away": 44
+        },
+        "actual": "0-0",
+        "grades": {
+          "modelBrier": 0.7706,
+          "modelRps": 0.13324999999999998,
+          "scorelineHit": false,
+          "top3ScorelineHit": true,
+          "correctPick": false,
+          "bttsBrier": 0.22738854990963023,
+          "bttsDerivedPostHoc": true
+        },
+        "verdict": "close"
       }
     ],
     "aggregates": {
-      "n": 75,
-      "accuracy": 0.6133333333333333,
-      "meanBrier": 0.541322666666667,
-      "meanRps": 0.17201999999999998,
-      "bttsAccuracy": 0.4666666666666667,
-      "scorelineHitRate": 0.13333333333333333,
-      "top3Rate": 0.30666666666666664,
+      "n": 77,
+      "accuracy": 0.6103896103896104,
+      "meanBrier": 0.5383532467532469,
+      "meanRps": 0.1696577922077922,
+      "bttsAccuracy": 0.4675324675324675,
+      "scorelineHitRate": 0.12987012987012986,
+      "top3Rate": 0.3116883116883117,
       "vsKalshi": {
-        "n": 7,
-        "modelBrier": 0.5513714285714286,
-        "marketBrier": 0.47328882264670746,
-        "edge": -0.07808260592472117
+        "n": 8,
+        "modelBrier": 0.49287500000000006,
+        "marketBrier": 0.4285654865389316,
+        "edge": -0.06430951346106847
       },
       "vsPolymarket": {
         "n": 0,
@@ -1480,21 +1522,21 @@
     "calibrationBins": [
       {
         "midpoint": 0.05,
-        "predicted": 0.06000000000000002,
-        "observed": 0.09523809523809523,
-        "n": 21
+        "predicted": 0.060454545454545476,
+        "observed": 0.09090909090909091,
+        "n": 22
       },
       {
         "midpoint": 0.15,
-        "predicted": 0.14292682926829273,
-        "observed": 0.1951219512195122,
-        "n": 41
+        "predicted": 0.1433333333333334,
+        "observed": 0.19047619047619047,
+        "n": 42
       },
       {
         "midpoint": 0.25,
-        "predicted": 0.25428571428571417,
-        "observed": 0.21428571428571427,
-        "n": 70
+        "predicted": 0.25499999999999984,
+        "observed": 0.2222222222222222,
+        "n": 72
       },
       {
         "midpoint": 0.35,
@@ -1504,9 +1546,9 @@
       },
       {
         "midpoint": 0.45,
-        "predicted": 0.435,
-        "observed": 0.35714285714285715,
-        "n": 14
+        "predicted": 0.43533333333333335,
+        "observed": 0.3333333333333333,
+        "n": 15
       },
       {
         "midpoint": 0.55,
@@ -1522,9 +1564,9 @@
       },
       {
         "midpoint": 0.75,
-        "predicted": 0.7363636363636364,
-        "observed": 0.7272727272727273,
-        "n": 11
+        "predicted": 0.7391666666666667,
+        "observed": 0.75,
+        "n": 12
       },
       {
         "midpoint": 0.85,
@@ -1572,7 +1614,7 @@
     ]
   },
   "caveats": [
-    "Official graded record contains n=75 match(es). This is a very small sample — do not over-read the aggregate numbers.",
+    "Official graded record contains n=77 match(es). This is a very small sample — do not over-read the aggregate numbers.",
     "BTTS and over/under probabilities are derived post-hoc from the same model that generated the 1X2 split; they are NOT separately validated predictions.",
     "No pre-kickoff Polymarket books exist for played matches — vsPolymarket comparisons are deferred to the Phase C backtest.",
     "Kalshi market Brier shown is computed from the pre-kickoff locked book; market edge from a single match is noise.",
