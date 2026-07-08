@@ -1,8 +1,40 @@
 import { describe, expect, it } from "vitest";
-import { parseMarket, type KalshiMarket } from "../lib/parlay";
+import { parseMarket, type KalshiMarket, jointProb, legProb, type CandidateLeg } from "../lib/parlay";
+import { scoreGrid } from "../lib/poisson-model";
 
 const mk = (ticker: string, title = "t"): KalshiMarket => ({ ticker, title, yesMid: 0.5 });
 const P = (t: string) => parseMarket(mk(t), "FRA", "MAR");
+
+const grid = scoreGrid(1.4, 0.9, -0.05);
+const yes = (m: ReturnType<typeof parseMarket>): CandidateLeg => ({ market: m!, side: "yes" });
+const no = (m: ReturnType<typeof parseMarket>): CandidateLeg => ({ market: m!, side: "no" });
+const ET = 0.62;
+
+const bruteJoint = (legs: CandidateLeg[]): number => {
+  let p = 0;
+  for (let h = 0; h < grid.length; h++)
+    for (let a = 0; a < grid.length; a++) {
+      let cell = grid[h][a];
+      let advFactor: number | null = null;
+      for (const leg of legs) {
+        if (leg.market.kind === "reg") {
+          const pass = leg.market.pred(h, a) === (leg.side === "yes");
+          if (!pass) { cell = 0; break; }
+        } else {
+          const wantsHome = (leg.market.advanceSide === "home") === (leg.side === "yes");
+          if (h > a) { if (!wantsHome) { cell = 0; break; } }
+          else if (h < a) { if (wantsHome) { cell = 0; break; } }
+          else {
+            const f = wantsHome ? ET : 1 - ET;
+            if (advFactor === null) advFactor = f;
+            else if (advFactor !== f) { cell = 0; break; } // contradictory demands
+          }
+        }
+      }
+      p += cell * (advFactor ?? 1);
+    }
+  return p;
+};
 
 describe("parseMarket", () => {
   it("GAME: home / away / tie", () => {
@@ -63,5 +95,40 @@ describe("parseMarket", () => {
     expect(P("KXWCGOALSCORER-26JUL09FRAMAR-MBAPPE1")).toBeNull();
     expect(P("KXWCCORNERS-26JUL09FRAMAR-10")).toBeNull();
     expect(P("KXWCSCORE-26JUL09FRAMAR-WEIRDFORMAT")).toBeNull();
+  });
+});
+
+describe("jointProb", () => {
+  const home = yes(P("KXWCGAME-26JUL09FRAMAR-FRA"));
+  const o15 = yes(P("KXWCTOTAL-26JUL09FRAMAR-2"));
+  const noMar1 = no(P("KXWCTEAMTOTAL-26JUL09FRAMAR-MAR1"));
+  const adv = yes(P("KXWCADVANCE-26JUL09FRAMAR-FRA"));
+
+  it("empty slip has probability 1", () => {
+    expect(jointProb([], grid, ET)).toBeCloseTo(1, 6);
+  });
+
+  it("single reg leg equals legProb equals brute force", () => {
+    expect(jointProb([home], grid, ET)).toBeCloseTo(bruteJoint([home]), 12);
+    expect(legProb(home, grid, ET)).toBeCloseTo(bruteJoint([home]), 12);
+  });
+
+  it("correlated legs: joint != product of marginals, == brute force", () => {
+    const legs = [home, o15, noMar1];
+    const j = jointProb(legs, grid, ET);
+    expect(j).toBeCloseTo(bruteJoint(legs), 12);
+    const naive = legs.reduce((p, l) => p * legProb(l, grid, ET), 1);
+    expect(Math.abs(j - naive)).toBeGreaterThan(0.01);
+  });
+
+  it("advance leg mixes win cells + ET share of draw cells", () => {
+    expect(jointProb([adv], grid, ET)).toBeCloseTo(bruteJoint([adv]), 12);
+    expect(jointProb([adv, home], grid, ET)).toBeCloseTo(bruteJoint([adv, home]), 12);
+  });
+
+  it("contradictory advance demands give 0 on draw branch", () => {
+    const advAwayNo = no(P("KXWCADVANCE-26JUL09FRAMAR-MAR")); // == home advances
+    const advHomeNo = no(P("KXWCADVANCE-26JUL09FRAMAR-FRA")); // == away advances
+    expect(jointProb([advAwayNo, advHomeNo], grid, ET)).toBeCloseTo(bruteJoint([advAwayNo, advHomeNo]), 12);
   });
 });

@@ -69,3 +69,40 @@ export function parseMarket(m: KalshiMarket, homeAbbr: string, awayAbbr: string)
       return null; // player props, corners, mentions, unknown: unpriceable
   }
 }
+
+export type CandidateLeg = { market: ParsedMarket; side: "yes" | "no" };
+
+/** Exact probability over the 90' score grid. Advance legs resolve win/loss
+ *  cells by sign and draw cells by the shared ET Bernoulli (etWinProbHome) —
+ *  a slip's advance demands must agree on the draw branch or that branch is 0. */
+export function jointProb(legs: CandidateLeg[], grid: number[][], etWinProbHome: number): number {
+  let p = 0;
+  for (let h = 0; h < grid.length; h++) {
+    for (let a = 0; a < grid.length; a++) {
+      const mass = grid[h][a];
+      if (mass === 0) continue;
+      let pass = true;
+      let advFactor: number | null = null;
+      for (const leg of legs) {
+        if (leg.market.kind === "reg") {
+          if (leg.market.pred(h, a) !== (leg.side === "yes")) { pass = false; break; }
+        } else {
+          const wantsHome = (leg.market.advanceSide === "home") === (leg.side === "yes");
+          if (h > a && !wantsHome) { pass = false; break; }
+          if (h < a && wantsHome) { pass = false; break; }
+          if (h === a) {
+            const f = wantsHome ? etWinProbHome : 1 - etWinProbHome;
+            if (advFactor === null) advFactor = f;
+            else if (advFactor !== f) { pass = false; break; }
+          }
+        }
+      }
+      if (pass) p += mass * (advFactor ?? 1);
+    }
+  }
+  return p;
+}
+
+export function legProb(leg: CandidateLeg, grid: number[][], etWinProbHome: number): number {
+  return jointProb([leg], grid, etWinProbHome);
+}
