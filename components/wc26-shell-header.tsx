@@ -10,6 +10,7 @@ export const WC26_NAV: NavItem[] = [
   { label: "Command", href: "/command", routeKey: "command" },
   { label: "Teams", href: "/teams", routeKey: "teams" },
   { label: "Simulate", href: "/simulator", routeKey: "simulator" },
+  { label: "Parlays", href: "/parlay", routeKey: "parlay" },
   { label: "Methodology", href: "/methodology", routeKey: "methodology" },
 ];
 
