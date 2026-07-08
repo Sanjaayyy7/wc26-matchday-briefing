@@ -1,0 +1,120 @@
+{
+ "fetchedAt": "2026-07-08T17:08:30.356Z",
+ "markets": [
+  {
+   "ticker": "KXWCGAME-26JUL11NORENG-ENG",
+   "title": "Norway vs England Winner?",
+   "yesMid": 0.515
+  },
+  {
+   "ticker": "KXWCGAME-26JUL11NORENG-TIE",
+   "title": "Norway vs England Winner?",
+   "yesMid": 0.255
+  },
+  {
+   "ticker": "KXWCGAME-26JUL11NORENG-NOR",
+   "title": "Norway vs England Winner?",
+   "yesMid": 0.235
+  },
+  {
+   "ticker": "KXWCADVANCE-26JUL11NORENG-ENG",
+   "title": "Norway vs England: To Advance",
+   "yesMid": 0.645
+  },
+  {
+   "ticker": "KXWCADVANCE-26JUL11NORENG-NOR",
+   "title": "Norway vs England: To Advance",
+   "yesMid": 0.365
+  },
+  {
+   "ticker": "KXWCSPREAD-26JUL11NORENG-ENG2",
+   "title": "England wins by more than 1.5 goals?",
+   "yesMid": 0.28500000000000003
+  },
+  {
+   "ticker": "KXWCSPREAD-26JUL11NORENG-NOR2",
+   "title": "Norway wins by more than 1.5 goals?",
+   "yesMid": 0.08499999999999999
+  },
+  {
+   "ticker": "KXWCSPREAD-26JUL11NORENG-ENG3",
+   "title": "England wins by more than 2.5 goals?",
+   "yesMid": 0.125
+  },
+  {
+   "ticker": "KXWCSPREAD-26JUL11NORENG-NOR3",
+   "title": "Norway wins by more than 2.5 goals?",
+   "yesMid": 0.025
+  },
+  {
+   "ticker": "KXWCTOTAL-26JUL11NORENG-3",
+   "title": "Will over 2.5 goals be scored?",
+   "yesMid": 0.565
+  },
+  {
+   "ticker": "KXWCTOTAL-26JUL11NORENG-2",
+   "title": "Will over 1.5 goals be scored?",
+   "yesMid": 0.795
+  },
+  {
+   "ticker": "KXWCTOTAL-26JUL11NORENG-5",
+   "title": "Will over 4.5 goals be scored?",
+   "yesMid": 0.175
+  },
+  {
+   "ticker": "KXWCTOTAL-26JUL11NORENG-1",
+   "title": "Will over 0.5 goals be scored?",
+   "yesMid": 0.94
+  },
+  {
+   "ticker": "KXWCTOTAL-26JUL11NORENG-4",
+   "title": "Will over 3.5 goals be scored?",
+   "yesMid": 0.335
+  },
+  {
+   "ticker": "KXWCTOTAL-26JUL11NORENG-6",
+   "title": "Will over 5.5 goals be scored?",
+   "yesMid": 0.07500000000000001
+  },
+  {
+   "ticker": "KXWCTEAMTOTAL-26JUL11NORENG-ENG2",
+   "title": "Will England score over 1.5 goals?",
+   "yesMid": 0.555
+  },
+  {
+   "ticker": "KXWCTEAMTOTAL-26JUL11NORENG-NOR1",
+   "title": "Will Norway score over 0.5 goals?",
+   "yesMid": 0.705
+  },
+  {
+   "ticker": "KXWCTEAMTOTAL-26JUL11NORENG-ENG4",
+   "title": "Will England score over 3.5 goals?",
+   "yesMid": 0.12
+  },
+  {
+   "ticker": "KXWCTEAMTOTAL-26JUL11NORENG-ENG3",
+   "title": "Will England score over 2.5 goals?",
+   "yesMid": 0.265
+  },
+  {
+   "ticker": "KXWCTEAMTOTAL-26JUL11NORENG-NOR3",
+   "title": "Will Norway score over 2.5 goals?",
+   "yesMid": 0.11499999999999999
+  },
+  {
+   "ticker": "KXWCTEAMTOTAL-26JUL11NORENG-NOR2",
+   "title": "Will Norway score over 1.5 goals?",
+   "yesMid": 0.345
+  },
+  {
+   "ticker": "KXWCTEAMTOTAL-26JUL11NORENG-ENG1",
+   "title": "Will England score over 0.5 goals?",
+   "yesMid": 0.85
+  },
+  {
+   "ticker": "KXWCBTTS-26JUL11NORENG-BTTS",
+   "title": "Will both teams score?",
+   "yesMid": 0.595
+  }
+ ]
+}

@@ -59,8 +59,8 @@ export function outDir(slug: string): string {
   return dir;
 }
 
-/** Kalshi event ticker for a fixture: KXWCGAME-<YY><MON><DD><HOME><AWAY> (venue-local date). */
-export function kalshiEventTicker(f: FixtureRow): string {
+/** Event code for a fixture, e.g. "26JUL09FRAMAR" (venue-local date). */
+export function kalshiEventCode(f: FixtureRow): string {
   const local = new Date(
     new Date(f.kickoffISO).getTime() + (f.tzOffsetMinutes ?? 0) * 60 * 1000,
   );
@@ -68,5 +68,10 @@ export function kalshiEventTicker(f: FixtureRow): string {
   const yy = String(local.getUTCFullYear()).slice(2);
   const mon = months[local.getUTCMonth()];
   const dd = String(local.getUTCDate()).padStart(2, "0");
-  return `KXWCGAME-${yy}${mon}${dd}${f.homeId.toUpperCase()}${f.awayId.toUpperCase()}`;
+  return `${yy}${mon}${dd}${f.homeId.toUpperCase()}${f.awayId.toUpperCase()}`;
+}
+
+/** Kalshi event ticker for a fixture: KXWCGAME-<code>. */
+export function kalshiEventTicker(f: FixtureRow): string {
+  return `KXWCGAME-${kalshiEventCode(f)}`;
 }

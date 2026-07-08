@@ -1,0 +1,55 @@
+{
+ "fetchedAt": "2026-07-08T17:08:32.098Z",
+ "markets": [
+  {
+   "ticker": "KXWCADVANCE-26JUL11ARGSUI-SUI",
+   "title": "Argentina vs Switzerland: To Advance",
+   "yesMid": 0.275
+  },
+  {
+   "ticker": "KXWCADVANCE-26JUL11ARGSUI-ARG",
+   "title": "Argentina vs Switzerland: To Advance",
+   "yesMid": 0.735
+  },
+  {
+   "ticker": "KXWCTEAMTOTAL-26JUL11ARGSUI-ARG1",
+   "title": "Will Argentina score over 0.5 goals?",
+   "yesMid": 0.825
+  },
+  {
+   "ticker": "KXWCTEAMTOTAL-26JUL11ARGSUI-SUI3",
+   "title": "Will Switzerland score over 2.5 goals?",
+   "yesMid": 0.07
+  },
+  {
+   "ticker": "KXWCTEAMTOTAL-26JUL11ARGSUI-ARG3",
+   "title": "Will Argentina score over 2.5 goals?",
+   "yesMid": 0.215
+  },
+  {
+   "ticker": "KXWCTEAMTOTAL-26JUL11ARGSUI-SUI1",
+   "title": "Will Switzerland score over 0.5 goals?",
+   "yesMid": 0.55
+  },
+  {
+   "ticker": "KXWCTEAMTOTAL-26JUL11ARGSUI-SUI2",
+   "title": "Will Switzerland score over 1.5 goals?",
+   "yesMid": 0.18
+  },
+  {
+   "ticker": "KXWCTEAMTOTAL-26JUL11ARGSUI-ARG4",
+   "title": "Will Argentina score over 3.5 goals?",
+   "yesMid": 0.08
+  },
+  {
+   "ticker": "KXWCTEAMTOTAL-26JUL11ARGSUI-ARG2",
+   "title": "Will Argentina score over 1.5 goals?",
+   "yesMid": 0.485
+  },
+  {
+   "ticker": "KXWCBTTS-26JUL11ARGSUI-BTTS",
+   "title": "Will both teams score?",
+   "yesMid": 0.455
+  }
+ ]
+}

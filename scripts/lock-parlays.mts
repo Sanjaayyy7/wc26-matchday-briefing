@@ -1,0 +1,135 @@
+// Locks one model-optimized parlay slip per upcoming fixture into
+// data/parlays.json (immutable, append-only) + full market snapshot per slug.
+// Selection is pure model (hit-max); Kalshi mids are display/benchmark only.
+// Refuses past kickoffs. Idempotent: existing slugs never rewritten.
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import path from "node:path";
+import { appDir, fixtures, teams, kalshiEventCode } from "./shared.mts";
+import { lambdasFromElo, scoreGrid, advancementProb, summarizeGrid, type ModelParams } from "../lib/poisson-model";
+import { legReasoning, parseMarket, selectSlip, legProb, type CandidateLeg, type KalshiMarket } from "../lib/parlay";
+
+const API = "https://api.elections.kalshi.com/trade-api/v2";
+const HOSTS = ["United States", "Canada", "Mexico"];
+export const PARLAY_SERIES = ["KXWCGAME","KXWCADVANCE","KXWCSPREAD","KXWCTOTAL","KXWCTEAMTOTAL","KXWCBTTS","KXWCSCORE"] as const;
+
+export function marketMid(m: { yes_bid_dollars?: string; yes_ask_dollars?: string; last_price_dollars?: string }): number | null {
+  const bid = Number(m.yes_bid_dollars ?? "0");
+  const ask = Number(m.yes_ask_dollars ?? "0");
+  if (bid > 0 && ask > 0) return (bid + ask) / 2;
+  const last = Number(m.last_price_dollars ?? "0");
+  return last > 0 ? last : null;
+}
+
+async function fetchSeries(series: string, code: string): Promise<KalshiMarket[]> {
+  try {
+    const res = await fetch(`${API}/markets?event_ticker=${series}-${code}&limit=100`, {
+      signal: AbortSignal.timeout(8000),
+    });
+    if (!res.ok) return [];
+    const { markets } = (await res.json()) as {
+      markets?: Array<{ ticker: string; title?: string; yes_bid_dollars?: string; yes_ask_dollars?: string; last_price_dollars?: string }>;
+    };
+    return (markets ?? []).map((m) => ({ ticker: m.ticker, title: m.title ?? m.ticker, yesMid: marketMid(m) }));
+  } catch {
+    return [];
+  }
+}
+
+const PARLAYS_PATH = path.join(appDir, "data", "parlays.json");
+const SNAP_DIR = path.join(appDir, "data", "markets", "parlay-snapshots");
+
+async function main(): Promise<void> {
+  const model = JSON.parse(readFileSync(path.join(appDir, "data", "model.json"), "utf8")) as {
+    params: ModelParams;
+    dataThrough: string;
+    ratings: Record<string, number>;
+  };
+  const nameOf = new Map(teams().map((t) => [t.id, t.name]));
+  const existing: Array<{ slug: string }> = existsSync(PARLAYS_PATH)
+    ? JSON.parse(readFileSync(PARLAYS_PATH, "utf8"))
+    : [];
+  const have = new Set(existing.map((e) => e.slug));
+  const now = Date.now();
+  const upcoming = fixtures().filter(
+    (f) => !have.has(f.slug) && new Date(f.kickoffISO).getTime() > now && f.stage !== "group",
+  );
+
+  const out: unknown[] = [...existing];
+  let added = 0;
+  for (const f of upcoming) {
+    const code = kalshiEventCode(f);
+    const all: KalshiMarket[] = [];
+    for (const s of PARLAY_SERIES) all.push(...(await fetchSeries(s, code)));
+    if (all.length === 0) {
+      console.error(`[lock-parlays] ${f.slug}: Kalshi returned no markets — skipping (retry later)`);
+      continue;
+    }
+    mkdirSync(SNAP_DIR, { recursive: true });
+    writeFileSync(
+      path.join(SNAP_DIR, `${f.slug}.json`),
+      `${JSON.stringify({ fetchedAt: new Date().toISOString(), markets: all }, null, 1)}\n`,
+    );
+
+    const homeName = nameOf.get(f.homeId) ?? "";
+    const eloH = model.ratings[homeName] ?? 1500;
+    const eloA = model.ratings[nameOf.get(f.awayId) ?? ""] ?? 1500;
+    // Same neutral-site convention as lock-predictions: only host nations get home advantage.
+    const lambdas = lambdasFromElo(eloH, eloA, !HOSTS.includes(homeName), model.params);
+    const grid = scoreGrid(lambdas.home, lambdas.away, model.params.rho);
+    const eloDiff = eloH - eloA;
+    const s = summarizeGrid(grid);
+    let etWinProbHome = 0.5;
+    if (s.draw > 0) {
+      etWinProbHome = (advancementProb(s.home, s.draw, eloDiff) - s.home) / s.draw;
+    } else {
+      console.error(`[lock-parlays] ${f.slug}: zero draw mass on grid — etWinProbHome defaulted to 0.5`);
+    }
+
+    const homeAbbr = f.homeId.toUpperCase();
+    const awayAbbr = f.awayId.toUpperCase();
+    const candidates: CandidateLeg[] = [];
+    for (const m of all) {
+      const parsed = parseMarket(m, homeAbbr, awayAbbr);
+      if (!parsed) continue;
+      candidates.push({ market: parsed, side: "yes" }, { market: parsed, side: "no" });
+    }
+
+    const sel = selectSlip(candidates, grid, etWinProbHome);
+    const lockedAt = new Date().toISOString();
+    if (sel.verdict === "no-slip") {
+      out.push({ slug: f.slug, lockedAt, verdict: "no-slip", reason: sel.reason });
+      console.log(`[lock-parlays] ${f.slug}: no-slip (${sel.reason})`);
+    } else {
+      const ctx = { eloDiff, homeAbbr, awayAbbr };
+      out.push({
+        slug: f.slug,
+        lockedAt,
+        modelDataThrough: model.dataThrough,
+        eloDiff,
+        lambdas,
+        rho: model.params.rho,
+        etWinProbHome,
+        legs: sel.legs.map((leg) => ({
+          ticker: leg.market.ticker,
+          side: leg.side,
+          title: leg.market.title,
+          modelProb: legProb(leg, grid, etWinProbHome),
+          kalshiMid: leg.market.yesMid === null ? null : leg.side === "yes" ? leg.market.yesMid : 1 - leg.market.yesMid,
+          reasoning: legReasoning(leg, grid, etWinProbHome, ctx),
+        })),
+        jointProb: sel.jointProb,
+      });
+      console.log(`[lock-parlays] ${f.slug}: ${sel.legs.length}-leg slip, joint ${(sel.jointProb * 100).toFixed(1)}%`);
+    }
+    added += 1;
+  }
+  writeFileSync(PARLAYS_PATH, `${JSON.stringify(out, null, 1)}\n`);
+  console.log(`[lock-parlays] locked ${added} new (total ${out.length})`);
+}
+
+if (process.argv[1] && process.argv[1].endsWith("lock-parlays.mts")) {
+  main().catch((e) => {
+    console.error("[lock-parlays] fatal:", e);
+    process.exitCode = 1;
+  });
+}
