@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { parseMarket, type KalshiMarket, jointProb, legProb, type CandidateLeg } from "../lib/parlay";
+import { parseMarket, type KalshiMarket, jointProb, legProb, type CandidateLeg, JOINT_FLOOR, LEG_FLOOR, MAX_LEGS, REDUNDANCY_CAP, selectSlip } from "../lib/parlay";
 import { scoreGrid } from "../lib/poisson-model";
 
 const mk = (ticker: string, title = "t"): KalshiMarket => ({ ticker, title, yesMid: 0.5 });
@@ -130,5 +130,41 @@ describe("jointProb", () => {
     const advAwayNo = no(P("KXWCADVANCE-26JUL09FRAMAR-MAR")); // == home advances
     const advHomeNo = no(P("KXWCADVANCE-26JUL09FRAMAR-FRA")); // == away advances
     expect(jointProb([advAwayNo, advHomeNo], grid, ET)).toBeCloseTo(bruteJoint([advAwayNo, advHomeNo]), 12);
+  });
+});
+
+describe("selectSlip", () => {
+  const home = yes(P("KXWCGAME-26JUL09FRAMAR-FRA"));
+  const adv = yes(P("KXWCADVANCE-26JUL09FRAMAR-FRA"));
+  const o05 = yes(P("KXWCTOTAL-26JUL09FRAMAR-1"));
+  const noMar2 = no(P("KXWCTEAMTOTAL-26JUL09FRAMAR-MAR2"));
+  const noSpread = no(P("KXWCSPREAD-26JUL09FRAMAR-MAR2"));
+
+  it("emits a deterministic multi-leg slip meeting every floor", () => {
+    const sel = selectSlip([home, adv, o05, noMar2, noSpread], grid, ET);
+    expect(sel.verdict).toBe("slip");
+    if (sel.verdict === "slip") {
+      expect(sel.legs.length).toBeGreaterThanOrEqual(2);
+      expect(sel.legs.length).toBeLessThanOrEqual(MAX_LEGS);
+      expect(sel.jointProb).toBeGreaterThanOrEqual(JOINT_FLOOR);
+      for (const l of sel.legs) expect(legProb(l, grid, ET)).toBeGreaterThanOrEqual(LEG_FLOOR);
+      // determinism: same inputs, same output
+      expect(selectSlip([home, adv, o05, noMar2, noSpread], grid, ET)).toEqual(sel);
+    }
+  });
+
+  it("rejects redundant legs (conditional above cap)", () => {
+    // "FRA advances" is near-implied by "FRA wins reg time" — conditional ≈ 1.
+    const sel = selectSlip([home, adv], grid, ET);
+    if (sel.verdict === "slip") {
+      const conditional = jointProb(sel.legs, grid, ET) / jointProb([sel.legs[0]], grid, ET);
+      expect(conditional).toBeLessThanOrEqual(REDUNDANCY_CAP + 1e-9);
+    }
+  });
+
+  it("returns no-slip when fewer than 2 candidates clear the leg floor", () => {
+    const longshot = yes(P("KXWCSCORE-26JUL09FRAMAR-FRA3MAR0"));
+    const sel = selectSlip([longshot], grid, ET);
+    expect(sel).toEqual({ verdict: "no-slip", reason: "no 2-leg combo ≥ floors" });
   });
 });

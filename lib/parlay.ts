@@ -106,3 +106,53 @@ export function jointProb(legs: CandidateLeg[], grid: number[][], etWinProbHome:
 export function legProb(leg: CandidateLeg, grid: number[][], etWinProbHome: number): number {
   return jointProb([leg], grid, etWinProbHome);
 }
+
+export const LEG_FLOOR = 0.6;
+export const JOINT_FLOOR = 0.35;
+export const REDUNDANCY_CAP = 0.97;
+export const MAX_LEGS = 5;
+
+export type Selection =
+  | { verdict: "slip"; legs: CandidateLeg[]; jointProb: number }
+  | { verdict: "no-slip"; reason: string };
+
+const legOrder = (a: { leg: CandidateLeg; p: number }, b: { leg: CandidateLeg; p: number }): number =>
+  b.p - a.p ||
+  a.leg.market.ticker.localeCompare(b.leg.market.ticker) ||
+  a.leg.side.localeCompare(b.leg.side);
+
+/** Confidence-tiered hit-max (pre-registered): greedy on conditional
+ *  probability, capped for redundancy, floored on leg + joint. Deterministic. */
+export function selectSlip(candidates: CandidateLeg[], grid: number[][], etWinProbHome: number): Selection {
+  const eligible = candidates
+    .map((leg) => ({ leg, p: legProb(leg, grid, etWinProbHome) }))
+    .filter((c) => c.p >= LEG_FLOOR)
+    .sort(legOrder);
+  if (eligible.length < 2) return { verdict: "no-slip", reason: "no 2-leg combo ≥ floors" };
+
+  const slip: CandidateLeg[] = [eligible[0].leg];
+  let joint = eligible[0].p;
+  let pool = eligible.slice(1);
+
+  while (slip.length < MAX_LEGS && pool.length > 0) {
+    const scored = pool
+      .map((c) => {
+        const j = jointProb([...slip, c.leg], grid, etWinProbHome);
+        return { ...c, j, conditional: j / joint };
+      })
+      .filter((c) => c.conditional <= REDUNDANCY_CAP && c.j >= JOINT_FLOOR)
+      .sort(
+        (a, b) =>
+          b.conditional - a.conditional ||
+          a.leg.market.ticker.localeCompare(b.leg.market.ticker) ||
+          a.leg.side.localeCompare(b.leg.side),
+      );
+    if (scored.length === 0) break;
+    slip.push(scored[0].leg);
+    joint = scored[0].j;
+    pool = pool.filter((c) => c.leg !== scored[0].leg);
+  }
+
+  if (slip.length < 2) return { verdict: "no-slip", reason: "no 2-leg combo ≥ floors" };
+  return { verdict: "slip", legs: slip, jointProb: joint };
+}
