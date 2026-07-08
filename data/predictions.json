@@ -3421,7 +3421,40 @@
     "draw": 0.18592964824120606,
     "away": 0.08542713567839195
    },
-   "marketTicker": "KXWCGAME-26JUL07ARGEGY"
+   "marketTicker": "KXWCGAME-26JUL07ARGEGY",
+   "result": "3-2",
+   "realized": "home",
+   "correctPick": true,
+   "modelBrier": 0.08339999999999999,
+   "modelRps": 0.02889999999999999,
+   "logLoss": 0.2613647641344075,
+   "scorelineHit": false,
+   "marketBrier": 0.11550213378450044,
+   "marketRps": 0.04046614984470091,
+   "markets": {
+    "kalshi": {
+     "probs": {
+      "home": 0.7286432160804021,
+      "draw": 0.18592964824120606,
+      "away": 0.08542713567839195
+     },
+     "brier": 0.11550213378450044,
+     "rps": 0.04046614984470091
+    }
+   },
+   "top3ScorelineHit": false,
+   "btts": {
+    "prob": 0.3882946929166721,
+    "actual": true,
+    "brier": 0.3741833827139084,
+    "derivedPostHoc": true
+   },
+   "ou25": {
+    "prob": 0.5890743942310406,
+    "actual": true,
+    "brier": 0.16885985347658625,
+    "derivedPostHoc": true
+   }
   },
   {
    "slug": "switzerland-vs-colombia",
@@ -3434,7 +3467,107 @@
    "mostLikely": {
     "home": 1,
     "away": 1
+   },
+   "result": "0-0",
+   "realized": "draw",
+   "correctPick": false,
+   "modelBrier": 0.7706,
+   "modelRps": 0.13324999999999998,
+   "extraTime": {
+    "finalScore": "0-0",
+    "decidedBy": "pens"
+   },
+   "logLoss": 1.2378743560016174,
+   "scorelineHit": false,
+   "top3ScorelineHit": true,
+   "btts": {
+    "prob": 0.4768527549565277,
+    "actual": false,
+    "brier": 0.22738854990963023,
+    "derivedPostHoc": true
+   },
+   "ou25": {
+    "prob": 0.42177641810579225,
+    "actual": false,
+    "brier": 0.17789534687015207,
+    "derivedPostHoc": true
    }
+  },
+  {
+   "slug": "france-vs-morocco",
+   "lockedAt": "2026-07-08T06:53:15.791Z",
+   "split": {
+    "home": 53,
+    "draw": 27,
+    "away": 20
+   },
+   "mostLikely": {
+    "home": 1,
+    "away": 0
+   },
+   "market": {
+    "home": 0.6119402985074628,
+    "draw": 0.2437810945273632,
+    "away": 0.14427860696517417
+   },
+   "marketTicker": "KXWCGAME-26JUL09FRAMAR"
+  },
+  {
+   "slug": "norway-vs-england",
+   "lockedAt": "2026-07-08T06:53:15.791Z",
+   "split": {
+    "home": 25,
+    "draw": 28,
+    "away": 47
+   },
+   "mostLikely": {
+    "home": 1,
+    "away": 1
+   },
+   "market": {
+    "home": 0.2338308457711443,
+    "draw": 0.2537313432835821,
+    "away": 0.5124378109452737
+   },
+   "marketTicker": "KXWCGAME-26JUL11NORENG"
+  },
+  {
+   "slug": "spain-vs-belgium",
+   "lockedAt": "2026-07-08T06:53:15.791Z",
+   "split": {
+    "home": 57,
+    "draw": 25,
+    "away": 18
+   },
+   "mostLikely": {
+    "home": 1,
+    "away": 0
+   },
+   "market": {
+    "home": 0.5979899497487436,
+    "draw": 0.23618090452261306,
+    "away": 0.1658291457286432
+   },
+   "marketTicker": "KXWCGAME-26JUL10ESPBEL"
+  },
+  {
+   "slug": "argentina-vs-switzerland",
+   "lockedAt": "2026-07-08T06:53:15.791Z",
+   "split": {
+    "home": 60,
+    "draw": 24,
+    "away": 16
+   },
+   "mostLikely": {
+    "home": 1,
+    "away": 0
+   },
+   "market": {
+    "home": 0.5678391959798994,
+    "draw": 0.2663316582914573,
+    "away": 0.1658291457286432
+   },
+   "marketTicker": "KXWCGAME-26JUL11ARGSUI"
   }
  ]
 }

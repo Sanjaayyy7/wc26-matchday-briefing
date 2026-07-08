@@ -1,12 +1,12 @@
 {
-  "_checkedAt": "2026-07-04T05:15:22.375Z",
+  "_checkedAt": "2026-07-08T06:53:40.826Z",
   "_source": "https://gamma-api.polymarket.com",
   "_summary": {
-    "totalFixtures": 80,
-    "matched": 74,
-    "resolved": 70,
-    "upcomingSnapshots": 4,
-    "notFound": 6
+    "totalFixtures": 84,
+    "matched": 79,
+    "resolved": 76,
+    "upcomingSnapshots": 3,
+    "notFound": 5
   },
   "mexico-vs-south-africa": {
     "polymarketSlug": "fifwc-mex-rsa-2026-06-11",
@@ -1206,7 +1206,11 @@
       "draw": 0.2815533980582524,
       "away": 0.5242718446601942
     },
-    "resolved": null,
+    "resolved": {
+      "home": 0,
+      "draw": 0,
+      "away": 1
+    },
     "_sources": [
       "https://gamma-api.polymarket.com/events?slug=fifwc-can-mar-2026-07-04"
     ]
@@ -1219,7 +1223,11 @@
       "draw": 0.12871287128712872,
       "away": 0.8217821782178217
     },
-    "resolved": null,
+    "resolved": {
+      "home": 0,
+      "draw": 0,
+      "away": 1
+    },
     "_sources": [
       "https://gamma-api.polymarket.com/events?slug=fifwc-par-fra-2026-07-04"
     ]
@@ -1232,7 +1240,11 @@
       "draw": 0.2647058823529412,
       "away": 0.20588235294117646
     },
-    "resolved": null,
+    "resolved": {
+      "home": 0,
+      "draw": 0,
+      "away": 1
+    },
     "_sources": [
       "https://gamma-api.polymarket.com/events?slug=fifwc-bra-nor-2026-07-05"
     ]
@@ -1245,9 +1257,86 @@
       "draw": 0.2621359223300971,
       "away": 0.5048543689320388
     },
-    "resolved": null,
+    "resolved": {
+      "home": 0,
+      "draw": 0,
+      "away": 1
+    },
     "_sources": [
       "https://gamma-api.polymarket.com/events?slug=fifwc-prt-esp-2026-07-06"
+    ]
+  },
+  "argentina-vs-egypt": {
+    "polymarketSlug": "fifwc-arg-egy-2026-07-07",
+    "negRiskMarketID": "0x4878b4e6757f75ab97111b60462f27673c8cff4841a834a3b78d63c22ef31200",
+    "probs": {
+      "home": 0.9980019980019981,
+      "draw": 0.0009990009990009992,
+      "away": 0.0009990009990009992
+    },
+    "resolved": {
+      "home": 1,
+      "draw": 0,
+      "away": 0
+    },
+    "_sources": [
+      "https://gamma-api.polymarket.com/events?slug=fifwc-arg-egy-2026-07-07"
+    ]
+  },
+  "switzerland-vs-colombia": {
+    "polymarketSlug": "fifwc-che-col-2026-07-07",
+    "negRiskMarketID": "0x30ee98f08bef018d37a3462a7a2b941bc1a43a9aeffd66c6451a4f2c15c5d400",
+    "probs": {
+      "home": 0.0009990009990009992,
+      "draw": 0.9980019980019981,
+      "away": 0.0009990009990009992
+    },
+    "resolved": {
+      "home": 0,
+      "draw": 1,
+      "away": 0
+    },
+    "_sources": [
+      "https://gamma-api.polymarket.com/events?slug=fifwc-che-col-2026-07-07"
+    ]
+  },
+  "france-vs-morocco": {
+    "polymarketSlug": "fifwc-fra-mar-2026-07-09",
+    "negRiskMarketID": "0x8ed4081ad2d806d64003a7a0891fae77285342e39c2ec1512a4b515868a5d100",
+    "probs": {
+      "home": 0.6078431372549019,
+      "draw": 0.24509803921568626,
+      "away": 0.14705882352941177
+    },
+    "resolved": null,
+    "_sources": [
+      "https://gamma-api.polymarket.com/events?slug=fifwc-fra-mar-2026-07-09"
+    ]
+  },
+  "norway-vs-england": {
+    "polymarketSlug": "fifwc-nor-eng-2026-07-11",
+    "negRiskMarketID": "0x8d0593b38a433528f49f8e211d7307635c3736b0e8047669aa41cc7296a6d300",
+    "probs": {
+      "home": 0.22330097087378642,
+      "draw": 0.2621359223300971,
+      "away": 0.5145631067961165
+    },
+    "resolved": null,
+    "_sources": [
+      "https://gamma-api.polymarket.com/events?slug=fifwc-nor-eng-2026-07-11"
+    ]
+  },
+  "spain-vs-belgium": {
+    "polymarketSlug": "fifwc-esp-bel-2026-07-10",
+    "negRiskMarketID": "0xd299565db682ef20192fb904d9d767182c66f78878b104f95b248c8baaf89200",
+    "probs": {
+      "home": 0.5980392156862745,
+      "draw": 0.23529411764705882,
+      "away": 0.16666666666666669
+    },
+    "resolved": null,
+    "_sources": [
+      "https://gamma-api.polymarket.com/events?slug=fifwc-esp-bel-2026-07-10"
     ]
   },
   "jordan-vs-algeria": {

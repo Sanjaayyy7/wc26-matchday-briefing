@@ -188,6 +188,27 @@
    "awayScore": 4,
    "winnerId": "bel",
    "after": "90"
+  },
+  {
+   "match": 95,
+   "homeId": "arg",
+   "awayId": "egy",
+   "homeScore": 3,
+   "awayScore": 2,
+   "winnerId": "arg",
+   "after": "90"
+  },
+  {
+   "match": 96,
+   "homeId": "sui",
+   "awayId": "col",
+   "homeScore": 0,
+   "awayScore": 0,
+   "homeScore90": 0,
+   "awayScore90": 0,
+   "winnerId": "sui",
+   "after": "pens",
+   "note": "pens 4–3"
   }
  ]
 }
