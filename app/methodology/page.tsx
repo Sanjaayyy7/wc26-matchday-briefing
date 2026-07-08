@@ -65,6 +65,13 @@ export default function MethodologyPage() {
               calibration error. Baselines are stated openly: a uniform one-third forecast scores
               Brier 0.667, and the model is only credible when it beats that line.
             </Principle>
+            <Principle title="Parlay slips">
+              Parlay legs are priced exactly on the model score grid and graded on the same
+              90-minute semantics as predictions; advancement legs settle on the actual winner.
+              The extra-time share behind advancement pricing is deliberately crude — an Elo
+              logistic with no penalty-shootout skill term, the same convention the simulator
+              ships. Consistency over false precision. Kalshi mids never influence selection.
+            </Principle>
           </div>
         </CanvasSection>
 
