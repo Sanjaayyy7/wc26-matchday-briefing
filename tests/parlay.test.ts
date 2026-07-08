@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { parseMarket, type KalshiMarket, jointProb, legProb, type CandidateLeg, JOINT_FLOOR, LEG_FLOOR, MAX_LEGS, REDUNDANCY_CAP, selectSlip } from "../lib/parlay";
+import { parseMarket, type KalshiMarket, jointProb, legProb, type CandidateLeg, JOINT_FLOOR, LEG_FLOOR, MAX_LEGS, REDUNDANCY_CAP, selectSlip, legReasoning, REASONING_GRAMMAR } from "../lib/parlay";
 import { scoreGrid } from "../lib/poisson-model";
 
 const mk = (ticker: string, title = "t"): KalshiMarket => ({ ticker, title, yesMid: 0.5 });
@@ -166,5 +166,24 @@ describe("selectSlip", () => {
     const longshot = yes(P("KXWCSCORE-26JUL09FRAMAR-FRA3MAR0"));
     const sel = selectSlip([longshot], grid, ET);
     expect(sel).toEqual({ verdict: "no-slip", reason: "no 2-leg combo ≥ floors" });
+  });
+});
+
+describe("legReasoning", () => {
+  const ctx = { eloDiff: 181, homeAbbr: "FRA", awayAbbr: "MAR" };
+
+  it("emits grammar-conforming string with recomputable numbers", () => {
+    const leg = yes(P("KXWCGAME-26JUL09FRAMAR-FRA"));
+    const r = legReasoning(leg, grid, ET, ctx);
+    expect(r).toMatch(REASONING_GRAMMAR);
+    expect(r).toContain(`model ${(legProb(leg, grid, ET) * 100).toFixed(1)}%`);
+    expect(r).toContain("Elo +181");
+  });
+
+  it("handles null kalshiMid as 'Kalshi n/a'", () => {
+    const m = parseMarket({ ticker: "KXWCBTTS-26JUL09FRAMAR-BTTS", title: "Both teams score?", yesMid: null }, "FRA", "MAR");
+    const r = legReasoning({ market: m!, side: "no" }, grid, ET, ctx);
+    expect(r).toMatch(REASONING_GRAMMAR);
+    expect(r).toContain("Kalshi n/a");
   });
 });

@@ -156,3 +156,50 @@ export function selectSlip(candidates: CandidateLeg[], grid: number[][], etWinPr
   if (slip.length < 2) return { verdict: "no-slip", reason: "no 2-leg combo ≥ floors" };
   return { verdict: "slip", legs: slip, jointProb: joint };
 }
+
+const pct1 = (x: number): string => `${(x * 100).toFixed(1)}%`;
+const signed = (x: number): string => `${x >= 0 ? "+" : ""}${x}`;
+
+export const REASONING_GRAMMAR =
+  /^.+ — (YES|NO): model \d{1,3}\.\d%; top scorelines [A-Z]+ \d-\d \d{1,3}\.\d% \/ [A-Z]+ \d-\d \d{1,3}\.\d% \/ [A-Z]+ \d-\d \d{1,3}\.\d%; Elo [+-]\d+; (Kalshi \d{1,3}\.\d% \(edge [+-]\d{1,3}\.\d\)|Kalshi n\/a)\.$/;
+
+/** Fixed-grammar reasoning: every number recomputable from (grid, etWinProbHome,
+ *  eloDiff, yesMid). No freeform text — the parlay inspector re-derives all of it. */
+export function legReasoning(
+  leg: CandidateLeg,
+  grid: number[][],
+  etWinProbHome: number,
+  ctx: { eloDiff: number; homeAbbr: string; awayAbbr: string },
+): string {
+  // Whether grid cell (h, a) satisfies leg's demand: reg legs check the market
+  // predicate directly; advance legs pass on win-branch cells matching the
+  // demanded side, and count draw cells as satisfying when the leg's ET factor
+  // (the demanded side's ET win share) is > 0.
+  const cellSatisfies = (l: CandidateLeg, h: number, a: number): boolean => {
+    if (l.market.kind === "reg") return l.market.pred(h, a) === (l.side === "yes");
+    const wantsHome = (l.market.advanceSide === "home") === (l.side === "yes");
+    if (h > a) return wantsHome;
+    if (h < a) return !wantsHome;
+    const etFactor = wantsHome ? etWinProbHome : 1 - etWinProbHome;
+    return etFactor > 0;
+  };
+
+  const p = legProb(leg, grid, etWinProbHome);
+  const cells: Array<{ h: number; a: number; mass: number }> = [];
+  for (let h = 0; h < grid.length; h++)
+    for (let a = 0; a < grid.length; a++)
+      if (grid[h][a] > 0 && cellSatisfies(leg, h, a)) cells.push({ h, a, mass: grid[h][a] });
+  cells.sort((x, y) => y.mass - x.mass || x.h - y.h || x.a - y.a);
+  const top = cells
+    .slice(0, 3)
+    .map((c) => `${c.h >= c.a ? ctx.homeAbbr : ctx.awayAbbr} ${Math.max(c.h, c.a)}-${Math.min(c.h, c.a)} ${pct1(c.mass)}`)
+    .join(" / ");
+  const mid = leg.market.yesMid;
+  const sideMid = mid === null ? null : leg.side === "yes" ? mid : 1 - mid;
+  const edgePts = sideMid === null ? null : (p - sideMid) * 100;
+  const kalshi =
+    sideMid === null || edgePts === null
+      ? "Kalshi n/a"
+      : `Kalshi ${pct1(sideMid)} (edge ${edgePts >= 0 ? "+" : ""}${edgePts.toFixed(1)})`;
+  return `${leg.market.title} — ${leg.side.toUpperCase()}: model ${pct1(p)}; top scorelines ${top}; Elo ${signed(Math.round(ctx.eloDiff))}; ${kalshi}.`;
+}
