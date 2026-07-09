@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-09T05:20:25.351Z",
+  "generatedAt": "2026-07-09T05:26:23.009Z",
   "official": {
     "rows": [
       {
@@ -1624,6 +1624,19 @@
   "parlays": [
     {
       "version": "v1",
+      "slips": 4,
+      "noSlips": 0,
+      "graded": 0,
+      "slipHits": 0,
+      "slipHitRate": null,
+      "legHits": 0,
+      "legs": 0,
+      "legHitRate": null,
+      "meanLockedJoint": null,
+      "realizedSlipHitRate": null
+    },
+    {
+      "version": "v2-combo",
       "slips": 4,
       "noSlips": 0,
       "graded": 0,

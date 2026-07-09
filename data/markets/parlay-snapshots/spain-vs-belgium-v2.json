@@ -1,0 +1,55 @@
+{
+ "fetchedAt": "2026-07-09T05:24:37.190Z",
+ "markets": [
+  {
+   "ticker": "KXWCTOTAL-26JUL10ESPBEL-3",
+   "title": "Will over 2.5 goals be scored?",
+   "yesMid": 0.535
+  },
+  {
+   "ticker": "KXWCTOTAL-26JUL10ESPBEL-1",
+   "title": "Will over 0.5 goals be scored?",
+   "yesMid": 0.935
+  },
+  {
+   "ticker": "KXWCTOTAL-26JUL10ESPBEL-6",
+   "title": "Will over 5.5 goals be scored?",
+   "yesMid": 0.065
+  },
+  {
+   "ticker": "KXWCTOTAL-26JUL10ESPBEL-4",
+   "title": "Will over 3.5 goals be scored?",
+   "yesMid": 0.305
+  },
+  {
+   "ticker": "KXWCTOTAL-26JUL10ESPBEL-2",
+   "title": "Will over 1.5 goals be scored?",
+   "yesMid": 0.775
+  },
+  {
+   "ticker": "KXWCTOTAL-26JUL10ESPBEL-5",
+   "title": "Will over 4.5 goals be scored?",
+   "yesMid": 0.155
+  },
+  {
+   "ticker": "KXWC1H-26JUL10ESPBEL-BEL",
+   "title": "Will Belgium win the 1st Half?",
+   "yesMid": 0.165
+  },
+  {
+   "ticker": "KXWC1H-26JUL10ESPBEL-ESP",
+   "title": "Will Spain win the 1st Half?",
+   "yesMid": 0.425
+  },
+  {
+   "ticker": "KXWC1H-26JUL10ESPBEL-TIE",
+   "title": "Will Tie be the result of the 1st Half?",
+   "yesMid": 0.405
+  },
+  {
+   "ticker": "KXWC1HBTTS-26JUL10ESPBEL-BTTS",
+   "title": "Will both teams score in the 1st Half?",
+   "yesMid": 0.20500000000000002
+  }
+ ]
+}

@@ -1,0 +1,135 @@
+{
+ "fetchedAt": "2026-07-09T05:24:35.365Z",
+ "markets": [
+  {
+   "ticker": "KXWCGAME-26JUL09FRAMAR-TIE",
+   "title": "France vs Morocco Winner?",
+   "yesMid": 0.245
+  },
+  {
+   "ticker": "KXWCGAME-26JUL09FRAMAR-MAR",
+   "title": "France vs Morocco Winner?",
+   "yesMid": 0.14500000000000002
+  },
+  {
+   "ticker": "KXWCGAME-26JUL09FRAMAR-FRA",
+   "title": "France vs Morocco Winner?",
+   "yesMid": 0.615
+  },
+  {
+   "ticker": "KXWCSPREAD-26JUL09FRAMAR-MAR3",
+   "title": "Morocco wins by more than 2.5 goals?",
+   "yesMid": 0.02
+  },
+  {
+   "ticker": "KXWCSPREAD-26JUL09FRAMAR-MAR2",
+   "title": "Morocco wins by more than 1.5 goals?",
+   "yesMid": 0.045
+  },
+  {
+   "ticker": "KXWCSPREAD-26JUL09FRAMAR-FRA3",
+   "title": "France wins by more than 2.5 goals?",
+   "yesMid": 0.14500000000000002
+  },
+  {
+   "ticker": "KXWCSPREAD-26JUL09FRAMAR-FRA2",
+   "title": "France wins by more than 1.5 goals?",
+   "yesMid": 0.345
+  },
+  {
+   "ticker": "KXWCTOTAL-26JUL09FRAMAR-6",
+   "title": "Will over 5.5 goals be scored?",
+   "yesMid": 0.055
+  },
+  {
+   "ticker": "KXWCTOTAL-26JUL09FRAMAR-4",
+   "title": "Will over 3.5 goals be scored?",
+   "yesMid": 0.265
+  },
+  {
+   "ticker": "KXWCTOTAL-26JUL09FRAMAR-2",
+   "title": "Will over 1.5 goals be scored?",
+   "yesMid": 0.735
+  },
+  {
+   "ticker": "KXWCTOTAL-26JUL09FRAMAR-5",
+   "title": "Will over 4.5 goals be scored?",
+   "yesMid": 0.135
+  },
+  {
+   "ticker": "KXWCTOTAL-26JUL09FRAMAR-1",
+   "title": "Will over 0.5 goals be scored?",
+   "yesMid": 0.925
+  },
+  {
+   "ticker": "KXWCTOTAL-26JUL09FRAMAR-3",
+   "title": "Will over 2.5 goals be scored?",
+   "yesMid": 0.475
+  },
+  {
+   "ticker": "KXWCBTTS-26JUL09FRAMAR-BTTS",
+   "title": "Will both teams score?",
+   "yesMid": 0.505
+  },
+  {
+   "ticker": "KXWC1H-26JUL09FRAMAR-TIE",
+   "title": "Will Tie be the result of the 1st Half?",
+   "yesMid": 0.425
+  },
+  {
+   "ticker": "KXWC1H-26JUL09FRAMAR-FRA",
+   "title": "Will France win the 1st Half?",
+   "yesMid": 0.445
+  },
+  {
+   "ticker": "KXWC1H-26JUL09FRAMAR-MAR",
+   "title": "Will Morocco win the 1st Half?",
+   "yesMid": 0.14500000000000002
+  },
+  {
+   "ticker": "KXWC1HSPREAD-26JUL09FRAMAR-FRA2",
+   "title": "France wins by more than 1.5 goals in the 1st Half?",
+   "yesMid": 0.14
+  },
+  {
+   "ticker": "KXWC1HSPREAD-26JUL09FRAMAR-MAR2",
+   "title": "Morocco wins by more than 1.5 goals in the 1st Half?",
+   "yesMid": 0.02
+  },
+  {
+   "ticker": "KXWC1HTOTAL-26JUL09FRAMAR-1",
+   "title": "Over 0.5 1H goals scored?",
+   "yesMid": 0.675
+  },
+  {
+   "ticker": "KXWC1HTOTAL-26JUL09FRAMAR-3",
+   "title": "Over 2.5 1H goals scored?",
+   "yesMid": 0.11
+  },
+  {
+   "ticker": "KXWC1HTOTAL-26JUL09FRAMAR-4",
+   "title": "Over 3.5 1H goals scored?",
+   "yesMid": 0.025
+  },
+  {
+   "ticker": "KXWC1HTOTAL-26JUL09FRAMAR-2",
+   "title": "Over 1.5 1H goals scored?",
+   "yesMid": 0.305
+  },
+  {
+   "ticker": "KXWC1HBTTS-26JUL09FRAMAR-BTTS",
+   "title": "Will both teams score in the 1st Half?",
+   "yesMid": 0.18
+  },
+  {
+   "ticker": "KXWCADVANCE-26JUL09FRAMAR-FRA",
+   "title": "France vs Morocco: To Advance",
+   "yesMid": 0.775
+  },
+  {
+   "ticker": "KXWCADVANCE-26JUL09FRAMAR-MAR",
+   "title": "France vs Morocco: To Advance",
+   "yesMid": 0.225
+  }
+ ]
+}

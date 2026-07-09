@@ -218,5 +218,217 @@
    }
   ],
   "jointProb": 0.5614511567126033
+ },
+ {
+  "slug": "france-vs-morocco",
+  "engineVersion": "v2-combo",
+  "lockedAt": "2026-07-09T05:24:35.381Z",
+  "modelDataThrough": "2026-07-07",
+  "eloDiff": 151,
+  "lambdas": {
+   "home": 1.6101011608129587,
+   "away": 0.8481311056769947
+  },
+  "rho": -0.05,
+  "etWinProbHome": 0.606974655364824,
+  "qFirstHalf": 0.45,
+  "floors": {
+   "leg": 0.75,
+   "joint": 0.6,
+   "maxLegs": 4
+  },
+  "legs": [
+   {
+    "ticker": "KXWCSPREAD-26JUL09FRAMAR-MAR3",
+    "side": "no",
+    "title": "Morocco wins by more than 2.5 goals?",
+    "modelProb": 0.9850254185383581,
+    "kalshiMid": 0.98,
+    "reasoning": "Morocco wins by more than 2.5 goals? — NO: model 98.5%; top scorelines FRA 1-0 13.2% / FRA 1-1 12.3% / FRA 2-0 11.1%; Elo +151; Kalshi 98.0% (edge +0.5)."
+   },
+   {
+    "ticker": "KXWCTOTAL-26JUL09FRAMAR-6",
+    "side": "no",
+    "title": "Will over 5.5 goals be scored?",
+    "modelProb": 0.9607569919773646,
+    "kalshiMid": 0.945,
+    "reasoning": "Will over 5.5 goals be scored? — NO: model 96.1%; top scorelines FRA 1-0 13.2% / FRA 1-1 12.3% / FRA 2-0 11.1%; Elo +151; Kalshi 94.5% (edge +1.6)."
+   },
+   {
+    "ticker": "KXWCSPREAD-26JUL09FRAMAR-MAR2",
+    "side": "no",
+    "title": "Morocco wins by more than 1.5 goals?",
+    "modelProb": 0.9376067613687079,
+    "kalshiMid": 0.955,
+    "reasoning": "Morocco wins by more than 1.5 goals? — NO: model 93.8%; top scorelines FRA 1-0 13.2% / FRA 1-1 12.3% / FRA 2-0 11.1%; Elo +151; Kalshi 95.5% (edge -1.7)."
+   },
+   {
+    "ticker": "KXWCTOTAL-26JUL09FRAMAR-5",
+    "side": "no",
+    "title": "Will over 4.5 goals be scored?",
+    "modelProb": 0.8967308377305016,
+    "kalshiMid": 0.865,
+    "reasoning": "Will over 4.5 goals be scored? — NO: model 89.7%; top scorelines FRA 1-0 13.2% / FRA 1-1 12.3% / FRA 2-0 11.1%; Elo +151; Kalshi 86.5% (edge +3.2)."
+   }
+  ],
+  "jointProb": 0.8413865642575663,
+  "comboImpliedProb": 0.7650280574999999
+ },
+ {
+  "slug": "norway-vs-england",
+  "engineVersion": "v2-combo",
+  "lockedAt": "2026-07-09T05:24:36.332Z",
+  "modelDataThrough": "2026-07-07",
+  "eloDiff": -106,
+  "lambdas": {
+   "home": 0.9331360559810263,
+   "away": 1.463427405917186
+  },
+  "rho": -0.05,
+  "etWinProbHome": 0.4243130476235703,
+  "qFirstHalf": 0.45,
+  "floors": {
+   "leg": 0.75,
+   "joint": 0.6,
+   "maxLegs": 4
+  },
+  "legs": [
+   {
+    "ticker": "KXWCSPREAD-26JUL11NORENG-NOR3",
+    "side": "no",
+    "title": "Norway wins by more than 2.5 goals?",
+    "modelProb": 0.9782996326913143,
+    "kalshiMid": 0.975,
+    "reasoning": "Norway wins by more than 2.5 goals? — NO: model 97.8%; top scorelines NOR 1-1 13.1% / ENG 1-0 12.7% / ENG 2-0 9.7%; Elo -106; Kalshi 97.5% (edge +0.3)."
+   },
+   {
+    "ticker": "KXWCTOTAL-26JUL11NORENG-6",
+    "side": "no",
+    "title": "Will over 5.5 goals be scored?",
+    "modelProb": 0.9645567175263773,
+    "kalshiMid": 0.925,
+    "reasoning": "Will over 5.5 goals be scored? — NO: model 96.5%; top scorelines NOR 1-1 13.1% / ENG 1-0 12.7% / ENG 2-0 9.7%; Elo -106; Kalshi 92.5% (edge +4.0)."
+   },
+   {
+    "ticker": "KXWCTOTAL-26JUL11NORENG-5",
+    "side": "no",
+    "title": "Will over 4.5 goals be scored?",
+    "modelProb": 0.9045832198342948,
+    "kalshiMid": 0.835,
+    "reasoning": "Will over 4.5 goals be scored? — NO: model 90.5%; top scorelines NOR 1-1 13.1% / ENG 1-0 12.7% / ENG 2-0 9.7%; Elo -106; Kalshi 83.5% (edge +7.0)."
+   },
+   {
+    "ticker": "KXWC1HTOTAL-26JUL11NORENG-3",
+    "side": "no",
+    "title": "Over 2.5 1H goals scored?",
+    "modelProb": 0.904735789378021,
+    "kalshiMid": 0.88,
+    "reasoning": "Over 2.5 1H goals scored? — NO: model 90.5%; top scorelines NOR 1-1 13.1% / ENG 1-0 12.7% / ENG 2-0 9.7%; Elo -106; Kalshi 88.0% (edge +2.5)."
+   }
+  ],
+  "jointProb": 0.841952028950621,
+  "comboImpliedProb": 0.66269775
+ },
+ {
+  "slug": "spain-vs-belgium",
+  "engineVersion": "v2-combo",
+  "lockedAt": "2026-07-09T05:24:37.199Z",
+  "modelDataThrough": "2026-07-07",
+  "eloDiff": 188,
+  "lambdas": {
+   "home": 1.741648733273343,
+   "away": 0.7840713524394628
+  },
+  "rho": -0.05,
+  "etWinProbHome": 0.6320700121000737,
+  "qFirstHalf": 0.45,
+  "floors": {
+   "leg": 0.75,
+   "joint": 0.6,
+   "maxLegs": 4
+  },
+  "legs": [
+   {
+    "ticker": "KXWCTOTAL-26JUL10ESPBEL-6",
+    "side": "no",
+    "title": "Will over 5.5 goals be scored?",
+    "modelProb": 0.9563209931313598,
+    "kalshiMid": 0.935,
+    "reasoning": "Will over 5.5 goals be scored? — NO: model 95.6%; top scorelines ESP 1-0 13.4% / ESP 2-0 12.1% / ESP 1-1 11.5%; Elo +188; Kalshi 93.5% (edge +2.1)."
+   },
+   {
+    "ticker": "KXWCTOTAL-26JUL10ESPBEL-5",
+    "side": "no",
+    "title": "Will over 4.5 goals be scored?",
+    "modelProb": 0.8877917524962952,
+    "kalshiMid": 0.845,
+    "reasoning": "Will over 4.5 goals be scored? — NO: model 88.8%; top scorelines ESP 1-0 13.4% / ESP 2-0 12.1% / ESP 1-1 11.5%; Elo +188; Kalshi 84.5% (edge +4.3)."
+   },
+   {
+    "ticker": "KXWCTOTAL-26JUL10ESPBEL-1",
+    "side": "yes",
+    "title": "Will over 0.5 goals be scored?",
+    "modelProb": 0.9145296064984666,
+    "kalshiMid": 0.935,
+    "reasoning": "Will over 0.5 goals be scored? — YES: model 91.5%; top scorelines ESP 1-0 13.4% / ESP 2-0 12.1% / ESP 1-1 11.5%; Elo +188; Kalshi 93.5% (edge -2.0)."
+   },
+   {
+    "ticker": "KXWC1HBTTS-26JUL10ESPBEL-BTTS",
+    "side": "no",
+    "title": "Will both teams score in the 1st Half?",
+    "modelProb": 0.8373778568122219,
+    "kalshiMid": 0.7949999999999999,
+    "reasoning": "Will both teams score in the 1st Half? — NO: model 83.7%; top scorelines ESP 1-0 13.4% / ESP 2-0 12.1% / ESP 1-1 9.1%; Elo +188; Kalshi 79.5% (edge +4.2)."
+   }
+  ],
+  "jointProb": 0.6927171984533435,
+  "comboImpliedProb": 0.587282499375
+ },
+ {
+  "slug": "argentina-vs-switzerland",
+  "engineVersion": "v2-combo",
+  "lockedAt": "2026-07-09T05:24:38.060Z",
+  "modelDataThrough": "2026-07-07",
+  "eloDiff": 209,
+  "lambdas": {
+   "home": 1.8210372318510537,
+   "away": 0.749889598019927
+  },
+  "rho": -0.05,
+  "etWinProbHome": 0.646010922991271,
+  "qFirstHalf": 0.45,
+  "floors": {
+   "leg": 0.75,
+   "joint": 0.6,
+   "maxLegs": 4
+  },
+  "legs": [
+   {
+    "ticker": "KXWC1HSPREAD-26JUL11ARGSUI-SUI2",
+    "side": "no",
+    "title": "Switzerland wins by more than 1.5 goals in the 1st Half?",
+    "modelProb": 0.978035963994229,
+    "kalshiMid": 0.98,
+    "reasoning": "Switzerland wins by more than 1.5 goals in the 1st Half? — NO: model 97.8%; top scorelines ARG 1-0 13.4% / ARG 2-0 12.7% / ARG 1-1 11.0%; Elo +209; Kalshi 98.0% (edge -0.2)."
+   },
+   {
+    "ticker": "KXWC1HSPREAD-26JUL11ARGSUI-ARG2",
+    "side": "no",
+    "title": "Argentina wins by more than 1.5 goals in the 1st Half?",
+    "modelProb": 0.8461330362459453,
+    "kalshiMid": 0.885,
+    "reasoning": "Argentina wins by more than 1.5 goals in the 1st Half? — NO: model 84.6%; top scorelines ARG 1-0 13.4% / ARG 1-1 11.0% / ARG 2-0 10.1%; Elo +209; Kalshi 88.5% (edge -3.9)."
+   },
+   {
+    "ticker": "KXWCADVANCE-26JUL11ARGSUI-ARG",
+    "side": "yes",
+    "title": "Argentina vs Switzerland: To Advance",
+    "modelProb": 0.7741453218806891,
+    "kalshiMid": 0.735,
+    "reasoning": "Argentina vs Switzerland: To Advance — YES: model 77.4%; top scorelines ARG 1-0 13.4% / ARG 2-0 12.7% / ARG 1-1 11.0%; Elo +209; Kalshi 73.5% (edge +3.9)."
+   }
+  ],
+  "jointProb": 0.6186818224406694,
+  "comboImpliedProb": 0.6374654999999999
  }
 ]
