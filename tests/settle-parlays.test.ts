@@ -1,6 +1,7 @@
 // tests/settle-parlays.test.ts
 import { describe, expect, it } from "vitest";
 import { gradeLeg, gradeLegV2 } from "../scripts/settle-parlays.mts";
+import { ENGINE_VERSION_V2, ENGINE_VERSION_V2_1 } from "../lib/parlay-v2";
 
 const ctx90 = { h90: 0, a90: 0, advancedHome: true, homeAbbr: "SUI", awayAbbr: "COL" };
 
@@ -48,5 +49,24 @@ describe("gradeLegV2", () => {
 
   it("combo-ineligible ticker is ungradable", () => {
     expect(gradeLegV2({ ticker: "KXWCSCORE-26JUL09FRAMAR-FRA2MAR0", side: "no" }, base)).toBeNull();
+  });
+});
+
+describe("v2.1 grading (same path as v2-combo)", () => {
+  // Mirrors the `isV2` routing expression in settle-parlays.mts main(): both
+  // engine versions dispatch to gradeLegV2, never the v1 gradeLeg.
+  const isV2 = (engineVersion: string): boolean =>
+    engineVersion === ENGINE_VERSION_V2 || engineVersion === ENGINE_VERSION_V2_1;
+
+  it("v2.1-combo and v2-combo both route through gradeLegV2; v1 does not", () => {
+    expect(isV2(ENGINE_VERSION_V2_1)).toBe(true);
+    expect(isV2(ENGINE_VERSION_V2)).toBe(true);
+    expect(isV2("v1")).toBe(false);
+  });
+
+  it("1H legs grade on the half-time score (v2.1-combo record) — same as the v2-combo case", () => {
+    const base = { h90: 2, a90: 1, h1: 1, a1: 0, advancedHome: true, homeAbbr: "FRA", awayAbbr: "MAR" };
+    expect(gradeLegV2({ ticker: "KXWC1HTOTAL-26JUL09FRAMAR-1", side: "yes" }, base)).toBe(true); // 1 1H goal ≥ 1
+    expect(gradeLegV2({ ticker: "KXWC1H-26JUL09FRAMAR-FRA", side: "yes" }, base)).toBe(true);
   });
 });

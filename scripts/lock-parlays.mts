@@ -2,16 +2,16 @@
 // data/parlays.json (immutable, append-only) + full market snapshot per slug.
 // Selection is pure model (hit-max); Kalshi mids are display/benchmark only.
 // Refuses past kickoffs. Idempotent per (slug, engineVersion).
-// v2: legs restricted to Kalshi combo-eligible series so every slip is
-// purchasable as one combo ticket; ledger is versioned — v1 entries are
-// history, lock only emits engineVersion "v2-combo" from now on.
+// v2.1: lock emits engineVersion "v2.1-combo" — one leg per series, per
+// Kalshi's combo rule (per-event size_max=1, collections API 2026-07-09).
+// v1 and v2-combo entries are history.
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { appDir, fixtures, teams, kalshiEventCode } from "./shared.mts";
 import { lambdasFromElo, scoreGrid, advancementProb, summarizeGrid, type ModelParams } from "../lib/poisson-model";
 import type { KalshiMarket } from "../lib/parlay";
 import {
-  COMBO_SERIES, ENGINE_VERSION_V2, Q_FIRST_HALF, V2_FLOORS,
+  COMBO_SERIES, ENGINE_VERSION_V2_1, MAX_LEGS_PER_SERIES, Q_FIRST_HALF, V2_FLOORS,
   candidateLegsV2, comboImpliedProb, halfLattice, legProbV2, legReasoningV2, selectSlipV2,
 } from "../lib/parlay-v2";
 
@@ -19,11 +19,13 @@ const API = "https://api.elections.kalshi.com/trade-api/v2";
 const HOSTS = ["United States", "Canada", "Mexico"];
 export const PARLAY_SERIES_V2 = COMBO_SERIES;
 
-export function haveV2Slugs(existing: Array<{ slug: string; engineVersion?: string }>): Set<string> {
-  return new Set(existing.filter((e) => e.engineVersion === ENGINE_VERSION_V2).map((e) => e.slug));
+export function lockedSlugs(existing: Array<{ slug: string; engineVersion?: string }>, version: string): Set<string> {
+  return new Set(existing.filter((e) => e.engineVersion === version).map((e) => e.slug));
 }
 
+/** @deprecated legacy v2-combo snapshot filename — inspector-compat only. */
 export const snapshotFileV2 = (slug: string): string => `${slug}-v2.json`;
+export const snapshotFileV21 = (slug: string): string => `${slug}-v2.1.json`;
 
 export function marketMid(m: { yes_bid_dollars?: string; yes_ask_dollars?: string; last_price_dollars?: string }): number | null {
   const bid = Number(m.yes_bid_dollars ?? "0");
@@ -61,7 +63,7 @@ async function main(): Promise<void> {
   const existing: Array<{ slug: string; engineVersion?: string }> = existsSync(PARLAYS_PATH)
     ? JSON.parse(readFileSync(PARLAYS_PATH, "utf8"))
     : [];
-  const have = haveV2Slugs(existing);
+  const have = lockedSlugs(existing, ENGINE_VERSION_V2_1);
   const now = Date.now();
   const upcoming = fixtures().filter(
     (f) => !have.has(f.slug) && new Date(f.kickoffISO).getTime() > now && f.stage !== "group",
@@ -79,7 +81,7 @@ async function main(): Promise<void> {
     }
     mkdirSync(SNAP_DIR, { recursive: true });
     writeFileSync(
-      path.join(SNAP_DIR, snapshotFileV2(f.slug)),
+      path.join(SNAP_DIR, snapshotFileV21(f.slug)),
       `${JSON.stringify({ fetchedAt: new Date().toISOString(), markets: all }, null, 1)}\n`,
     );
 
@@ -106,8 +108,8 @@ async function main(): Promise<void> {
     const sel = selectSlipV2(candidates, latticeCells, etWinProbHome, V2_FLOORS);
     const lockedAt = new Date().toISOString();
     if (sel.verdict === "no-slip") {
-      out.push({ slug: f.slug, engineVersion: ENGINE_VERSION_V2, lockedAt, verdict: "no-slip", reason: sel.reason });
-      console.log(`[lock-parlays] ${f.slug}: v2 no-slip (${sel.reason})`);
+      out.push({ slug: f.slug, engineVersion: ENGINE_VERSION_V2_1, lockedAt, verdict: "no-slip", reason: sel.reason });
+      console.log(`[lock-parlays] ${f.slug}: v2.1 no-slip (${sel.reason})`);
     } else {
       const ctx = { eloDiff, homeAbbr, awayAbbr };
       const legs = sel.legs.map((leg) => ({
@@ -120,7 +122,7 @@ async function main(): Promise<void> {
       }));
       out.push({
         slug: f.slug,
-        engineVersion: ENGINE_VERSION_V2,
+        engineVersion: ENGINE_VERSION_V2_1,
         lockedAt,
         modelDataThrough: model.dataThrough,
         eloDiff,
@@ -129,11 +131,12 @@ async function main(): Promise<void> {
         etWinProbHome,
         qFirstHalf: Q_FIRST_HALF,
         floors: { leg: V2_FLOORS.leg, joint: V2_FLOORS.joint, maxLegs: V2_FLOORS.maxLegs },
+        maxLegsPerSeries: MAX_LEGS_PER_SERIES,
         legs,
         jointProb: sel.jointProb,
         comboImpliedProb: comboImpliedProb(legs.map((l) => l.kalshiMid)),
       });
-      console.log(`[lock-parlays] ${f.slug}: v2 ${sel.legs.length}-leg slip, joint ${(sel.jointProb * 100).toFixed(1)}%`);
+      console.log(`[lock-parlays] ${f.slug}: v2.1 ${sel.legs.length}-leg slip, joint ${(sel.jointProb * 100).toFixed(1)}%`);
     }
     added += 1;
   }
