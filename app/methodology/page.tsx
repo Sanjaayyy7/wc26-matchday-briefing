@@ -72,10 +72,13 @@ export default function MethodologyPage() {
               binomial goal split on the model score grid (q = 0.45 — a tournament-wide constant,
               deliberately crude, refit only as a new dated registration). v2 floors are
               pre-registered at leg ≥ 75%, joint ≥ 60%, 2–4 legs; tight matches are expected to
-              produce honest no-slip days. Legs grade on the 90-minute score, half-time score, or
-              actual winner per market window. The extra-time share behind advancement pricing
-              stays the simulator Elo logistic — consistency over false precision. Kalshi mids
-              never influence selection.
+              produce honest no-slip days. Combos allow at most one leg per market category;
+              verified against the Kalshi collections API on 2026-07-09 — the engine was bumped to
+              v2.1-combo that day to enforce the rule, and earlier v2-combo slips are marked legacy
+              since they are not purchasable as one ticket under it. Legs grade on the 90-minute
+              score, half-time score, or actual winner per market window. The extra-time share
+              behind advancement pricing stays the simulator Elo logistic — consistency over false
+              precision. Kalshi mids never influence selection.
             </Principle>
           </div>
         </CanvasSection>

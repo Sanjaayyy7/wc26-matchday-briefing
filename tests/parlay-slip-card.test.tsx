@@ -67,4 +67,17 @@ describe("engine version rendering", () => {
     expect(v2Html).toContain("Kalshi combo ≈41.5%");
     expect(v2Html).toContain("edge +24.5 pts");
   });
+
+  it("badges v2-combo slips as legacy, and v2.1-combo slips render no legacy badge", () => {
+    const v2Html = renderToStaticMarkup(
+      <ParlaySlipCard slip={{ ...gradedMiss, engineVersion: "v2-combo", comboImpliedProb: 0.415, jointProb: 0.66 }} />,
+    );
+    expect(v2Html).toContain("pre category-rule — legs not combinable as one ticket");
+
+    const v21Html = renderToStaticMarkup(
+      <ParlaySlipCard slip={{ ...gradedMiss, engineVersion: "v2.1-combo", comboImpliedProb: 0.415, jointProb: 0.66 }} />,
+    );
+    expect(v21Html).not.toContain("pre category-rule");
+    expect(v21Html).not.toContain("v1 engine");
+  });
 });
