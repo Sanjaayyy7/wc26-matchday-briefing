@@ -66,11 +66,16 @@ export default function MethodologyPage() {
               Brier 0.667, and the model is only credible when it beats that line.
             </Principle>
             <Principle title="Parlay slips">
-              Parlay legs are priced exactly on the model score grid and graded on the same
-              90-minute semantics as predictions; advancement legs settle on the actual winner.
-              The extra-time share behind advancement pricing is deliberately crude — an Elo
-              logistic with no penalty-shootout skill term, the same convention the simulator
-              ships. Consistency over false precision. Kalshi mids never influence selection.
+              Parlay legs come only from markets the Kalshi combo builder can combine into one
+              ticket; goalscorer and corner markets are listed there but unmodeled, so the engine
+              is structurally unable to select them. First-half legs are priced by a pre-registered
+              binomial goal split on the model score grid (q = 0.45 — a tournament-wide constant,
+              deliberately crude, refit only as a new dated registration). v2 floors are
+              pre-registered at leg ≥ 75%, joint ≥ 60%, 2–4 legs; tight matches are expected to
+              produce honest no-slip days. Legs grade on the 90-minute score, half-time score, or
+              actual winner per market window. The extra-time share behind advancement pricing
+              stays the simulator Elo logistic — consistency over false precision. Kalshi mids
+              never influence selection.
             </Principle>
           </div>
         </CanvasSection>
