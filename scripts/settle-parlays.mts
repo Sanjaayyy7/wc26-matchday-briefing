@@ -7,7 +7,7 @@ import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { appDir, fixtures } from "./shared.mts";
 import { parseMarket } from "../lib/parlay";
-import { ENGINE_VERSION_V2, parseMarketV2 } from "../lib/parlay-v2";
+import { ENGINE_VERSION_V2, ENGINE_VERSION_V2_1, parseMarketV2 } from "../lib/parlay-v2";
 
 export function gradeLeg(
   leg: { ticker: string; side: "yes" | "no" },
@@ -71,7 +71,8 @@ function main(): void {
     const h1 = row?.ht ? row.ht.home : null;
     const a1 = row?.ht ? row.ht.away : null;
     const ctx = { h90, a90, advancedHome, homeAbbr: f.homeId.toUpperCase(), awayAbbr: f.awayId.toUpperCase() };
-    const isV2 = (slip as { engineVersion?: string }).engineVersion === ENGINE_VERSION_V2;
+    const v = (slip as { engineVersion?: string }).engineVersion;
+    const isV2 = v === ENGINE_VERSION_V2 || v === ENGINE_VERSION_V2_1;
     const legs = (slip.legs as Array<{ ticker: string; side: "yes" | "no" }>).map((l) => ({
       ticker: l.ticker,
       hit: isV2 ? gradeLegV2(l, { ...ctx, h1, a1 }) : gradeLeg(l, ctx),

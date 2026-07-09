@@ -60,6 +60,11 @@ export function ParlaySlipCard({ slip }: { slip: ParlaySlipView }) {
           v1 engine — pre-combo, not purchasable as one ticket
         </p>
       )}
+      {slip.engineVersion === "v2-combo" && (
+        <p className="mt-1 text-micro uppercase tracking-widest text-[var(--ink-faint)]">
+          pre category-rule — legs not combinable as one ticket
+        </p>
+      )}
 
       {slip.status === "no-slip" ? (
         <p className="mt-3 text-caption text-[var(--ink-muted)]">

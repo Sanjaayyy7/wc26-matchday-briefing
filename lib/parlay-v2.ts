@@ -6,6 +6,10 @@
 import { REDUNDANCY_CAP, pct1, signed, type KalshiMarket } from "./parlay";
 
 export const ENGINE_VERSION_V2 = "v2-combo";
+export const ENGINE_VERSION_V2_1 = "v2.1-combo";
+// Kalshi combo rule: every modeled WC event has size_max=1 in the combo
+// collection (collections API, verified 2026-07-09) — one leg per series.
+export const MAX_LEGS_PER_SERIES = 1;
 export const Q_FIRST_HALF = 0.45;
 export const V2_FLOORS = { leg: 0.75, joint: 0.6, maxLegs: 4 } as const;
 export type V2Floors = { leg: number; joint: number; maxLegs: number };
@@ -179,7 +183,11 @@ export function selectSlipV2(
   let pool = eligible.slice(1);
 
   while (slip.length < floors.maxLegs && pool.length > 0) {
+    // Kalshi combo rule (per-event size_max=1): at most MAX_LEGS_PER_SERIES
+    // legs per series — checked before the redundancy cap.
+    const usedSeries = new Set(slip.map((l) => seriesOf(l.market.ticker)));
     const scored = pool
+      .filter((c) => !usedSeries.has(seriesOf(c.leg.market.ticker)))
       .map((c) => {
         const j = jointProbV2([...slip, c.leg], lattice, etWinProbHome);
         return { ...c, j, conditional: j / joint };

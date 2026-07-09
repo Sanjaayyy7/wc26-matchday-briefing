@@ -1,0 +1,50 @@
+{
+ "fetchedAt": "2026-07-09T21:13:15.341Z",
+ "markets": [
+  {
+   "ticker": "KXWCSPREAD-26JUL11ARGSUI-SUI2",
+   "title": "Switzerland wins by more than 1.5 goals?",
+   "yesMid": 0.045
+  },
+  {
+   "ticker": "KXWCSPREAD-26JUL11ARGSUI-SUI3",
+   "title": "Switzerland wins by more than 2.5 goals?",
+   "yesMid": 0.015
+  },
+  {
+   "ticker": "KXWCSPREAD-26JUL11ARGSUI-ARG2",
+   "title": "Argentina wins by more than 1.5 goals?",
+   "yesMid": 0.295
+  },
+  {
+   "ticker": "KXWCSPREAD-26JUL11ARGSUI-ARG3",
+   "title": "Argentina wins by more than 2.5 goals?",
+   "yesMid": 0.125
+  },
+  {
+   "ticker": "KXWCBTTS-26JUL11ARGSUI-BTTS",
+   "title": "Will both teams score?",
+   "yesMid": 0.46499999999999997
+  },
+  {
+   "ticker": "KXWC1HTOTAL-26JUL11ARGSUI-4",
+   "title": "Over 3.5 1H goals scored?",
+   "yesMid": 0.02
+  },
+  {
+   "ticker": "KXWC1HTOTAL-26JUL11ARGSUI-2",
+   "title": "Over 1.5 1H goals scored?",
+   "yesMid": 0.26
+  },
+  {
+   "ticker": "KXWC1HTOTAL-26JUL11ARGSUI-1",
+   "title": "Over 0.5 1H goals scored?",
+   "yesMid": 0.635
+  },
+  {
+   "ticker": "KXWC1HTOTAL-26JUL11ARGSUI-3",
+   "title": "Over 2.5 1H goals scored?",
+   "yesMid": 0.08499999999999999
+  }
+ ]
+}

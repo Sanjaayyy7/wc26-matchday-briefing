@@ -269,3 +269,93 @@ trails within the same day.
   NO O3.5 ≈ 0.85+).
 - **Relock optics** — two slips per QF in the ledger. Mitigation: version
   badge + methodology note; v1 stays graded; nothing deleted.
+
+## Amendment 2026-07-09 — per-series uniqueness (v2.1-combo)
+
+### (a) Discovery
+
+All four locked v2-combo slips violate Kalshi's one-leg-per-category combo
+rule. User reported the constraint from the Kalshi app at ~19:45Z on
+2026-07-09; confirmed by live collections API probe at ~19:50Z:
+
+| Match | Violations |
+| --- | --- |
+| FRA-MAR | 2× KXWCSPREAD + 2× KXWCTOTAL |
+| NOR-ENG | 2× KXWCTOTAL |
+| ESP-BEL | 3× KXWCTOTAL |
+| ARG-SUI | 2× KXWC1HSPREAD |
+
+The slip's legs exceed Kalshi's per-series limit within a single combo ticket.
+
+### (b) Empirical ground truth — Collections API findings
+
+Within combo collection KXMVESPORTSMULTIGAMEEXTENDED-R, Kalshi enforces:
+- `size_max = 1` per modeled WC event (each series can carry ≤1 leg per
+  combo)
+- `1H` markets (e.g., `KXWC1HTOTAL`) treated as separate events from their
+  full-match counterparts (e.g., `KXWCTOTAL`)
+- `size_min = 2` for the overall combo (minimum legs per ticket)
+- `yes_only` on 3-way moneylines (`KXWCGAME`, `KXWC1H`) and goalscorers (`KXWCGOAL`, unmodeled)
+
+### (c) The rule — max 1 leg per series per slip
+
+v2.1-combo enforces `maxLegsPerSeries: 1` in the selection stage
+(`selectSlipV2`). The value is stored on all v2.1 slip records:
+
+```json
+{
+  "engineVersion": "v2.1-combo",
+  "maxLegsPerSeries": 1,
+  "floors": { "leg": 0.75, "joint": 0.60, "maxLegs": 4 },
+  ...
+}
+```
+
+Inspector gate 11 validates each v2.1 slip against its own stored
+`maxLegsPerSeries`, confirming ≤1 leg per series. Backward-compatible:
+v1 and v2-combo slips are unaffected (they have no stored constraint).
+
+### (d) Version bump — v2.1-combo
+
+New version constant: `ENGINE_VERSION_V2_1 = "v2.1-combo"`.
+
+Snapshot file naming: `<slug>-v2.1.json` for candidate-book snapshots.
+
+v2-combo records (the 4 QF slips) are **preserved, graded, and badged
+legacy** — they are never deleted, never rewritten. All versions coexist in
+the ledger:
+- v1 slips: graded (4 existing QF entries)
+- v2-combo slips: graded, badge "v2-combo engine" (4 locked entries)
+- v2.1-combo slips: to be locked pre-kickoff for the 3 remaining QFs,
+  graded on settlement (see item (e))
+
+Same treatment as v1: legacy, not hidden. Accountability reports both
+versions split.
+
+### (e) FRA-MAR timing — no v2.1 lock
+
+France-Morocco constraint was discovered at 2026-07-09 ~19:45Z; kickoff
+2026-07-09 20:00Z. The v2-combo slip cannot be relocked as v2.1 in time
+(FRA-MAR has no v2.1 entry). The v2-combo record stands as-is.
+
+Three remaining QF matches are relocked pre-kickoff:
+- **ESP-BEL** (2026-07-10 19:00Z) — relock as v2.1-combo, ≤1 leg per series
+- **NOR-ENG** (2026-07-11 21:00Z) — relock as v2.1-combo, ≤1 leg per series
+- **ARG-SUI** (2026-07-12 01:00Z) — relock as v2.1-combo, ≤1 leg per series
+
+### (f) ML clarification — KXWCGAME gates and leg floor
+
+`KXWCGAME` legs (3-way moneylines) are always in-universe for v2 and v2.1
+(YES-only side, per Kalshi's combo builder). They are gated by the same
+`V2_FLOORS.leg = 0.75` as all legs.
+
+For FRA-MAR (the match in progress at amendment time), no team's win
+probability at 90′ reaches 0.75 under the Dixon-Coles model. Modeled
+margins:
+- **ARG 60%** (best)
+- **ESP 57%**
+- **FRA 53%**
+- **ENG 47%**
+
+No KXWCGAME leg clears the floor in this window. The leg remains available
+for selection; it simply does not appear in our locked slips.

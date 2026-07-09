@@ -103,4 +103,19 @@ describe("engine version mapping", () => {
     expect(views[1].engineVersion).toBe("v2-combo");
     expect(views[1].comboImpliedProb).toBe(0.41);
   });
+
+  it("maps v2.1-combo unchanged, v2-combo unchanged, and anything else to v1", () => {
+    const vRows: ParlaySlipRow[] = [
+      { slug: "france-vs-morocco", lockedAt: "2026-07-08T18:00:00.000Z", engineVersion: "v2.1-combo", legs: [leg("A"), leg("B")], jointProb: 0.7 },
+      { slug: "france-vs-morocco", lockedAt: "2026-07-08T19:00:00.000Z", engineVersion: "v2-combo", legs: [leg("C"), leg("D")], jointProb: 0.66 },
+      { slug: "france-vs-morocco", lockedAt: "2026-07-08T20:00:00.000Z", legs: [leg("E"), leg("F")], jointProb: 0.6 },
+      { slug: "france-vs-morocco", lockedAt: "2026-07-08T21:00:00.000Z", engineVersion: "bogus", legs: [leg("G"), leg("H")], jointProb: 0.5 },
+    ];
+    const views = buildParlayViews(vRows, fixtures, clubName);
+    expect(views).toHaveLength(4);
+    expect(views[0].engineVersion).toBe("v2.1-combo");
+    expect(views[1].engineVersion).toBe("v2-combo");
+    expect(views[2].engineVersion).toBe("v1");
+    expect(views[3].engineVersion).toBe("v1");
+  });
 });

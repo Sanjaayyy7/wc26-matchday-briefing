@@ -21,8 +21,8 @@ import {
   type KalshiMarket,
 } from "../lib/parlay";
 import {
-  COMBO_SERIES, ENGINE_VERSION_V2, YES_ONLY_SERIES, halfLattice, jointProbV2, legProbV2,
-  legReasoningV2, parseMarketV2, seriesOf, comboImpliedProb as comboImplied, type CandidateLegV2,
+  COMBO_SERIES, ENGINE_VERSION_V2, ENGINE_VERSION_V2_1, YES_ONLY_SERIES, halfLattice, jointProbV2,
+  legProbV2, legReasoningV2, parseMarketV2, seriesOf, comboImpliedProb as comboImplied, type CandidateLegV2,
 } from "../lib/parlay-v2";
 
 const TOL = 1e-9;
@@ -62,9 +62,10 @@ export type SlipRecordV2 = SlipRecord & {
   qFirstHalf?: number;
   floors?: { leg: number; joint: number; maxLegs: number };
   comboImpliedProb?: number | null;
+  maxLegsPerSeries?: number;
 };
 
-const SLIP_KEYS_V2 = new Set([...SLIP_KEYS, "engineVersion", "qFirstHalf", "floors", "comboImpliedProb"]);
+const SLIP_KEYS_V2 = new Set([...SLIP_KEYS, "engineVersion", "qFirstHalf", "floors", "comboImpliedProb", "maxLegsPerSeries"]);
 const COMBO_SET = new Set<string>(COMBO_SERIES);
 
 export function inspectSlip(
@@ -190,8 +191,8 @@ export function inspectSlipV2(
 ): string[] {
   const fails: string[] = [];
 
-  if (slip.engineVersion !== ENGINE_VERSION_V2) {
-    fails.push(`gate8: engineVersion "${slip.engineVersion}" is not "${ENGINE_VERSION_V2}"`);
+  if (slip.engineVersion !== ENGINE_VERSION_V2 && slip.engineVersion !== ENGINE_VERSION_V2_1) {
+    fails.push(`gate8: engineVersion "${slip.engineVersion}" is not "${ENGINE_VERSION_V2}" or "${ENGINE_VERSION_V2_1}"`);
   }
   if (!slip.lockedAt || new Date(slip.lockedAt).getTime() > Date.now()) {
     fails.push(`gate6: lockedAt missing or in the future (${slip.lockedAt})`);
@@ -249,6 +250,12 @@ export function inspectSlipV2(
     fails.push("gate9: slip missing stored model inputs (lambdas/rho/etWinProbHome/eloDiff/jointProb/qFirstHalf/floors)");
     return fails;
   }
+  // v2.1 records must carry their own combo-rule constant (validated by gate 11);
+  // legacy v2-combo records predate the rule and are validated without it.
+  if (slip.engineVersion === ENGINE_VERSION_V2_1 && slip.maxLegsPerSeries === undefined) {
+    fails.push("gate9: v2.1 slip missing stored maxLegsPerSeries");
+    return fails;
+  }
   const lattice = halfLattice(scoreGrid(slip.lambdas.home, slip.lambdas.away, slip.rho), slip.qFirstHalf);
   const et = slip.etWinProbHome;
   const floors = slip.floors;
@@ -283,6 +290,21 @@ export function inspectSlipV2(
       fails.push(`gate4: conditional ${conditional.toFixed(6)} above REDUNDANCY_CAP (${legs[i].ticker})`);
     }
     running = j;
+  }
+
+  // gate 11: series uniqueness against the slip's OWN stored rule
+  // (Kalshi combo rule: per-event size_max=1; stored as maxLegsPerSeries)
+  if (slip.maxLegsPerSeries !== undefined) {
+    const perSeries = new Map<string, number>();
+    for (const leg of legs) {
+      const series = seriesOf(leg.ticker);
+      perSeries.set(series, (perSeries.get(series) ?? 0) + 1);
+    }
+    for (const [series, n] of perSeries) {
+      if (n > slip.maxLegsPerSeries) {
+        fails.push(`gate11: series "${series}" has ${n} legs (max ${slip.maxLegsPerSeries})`);
+      }
+    }
   }
 
   // gate 5: grammar + byte reproduction (v2 generator)
@@ -326,10 +348,11 @@ function main(): void {
       failed += 1;
       continue;
     }
-    const isV2 = slip.engineVersion === ENGINE_VERSION_V2;
+    const isV2 = slip.engineVersion === ENGINE_VERSION_V2 || slip.engineVersion === ENGINE_VERSION_V2_1;
     let snapshot: { markets: KalshiMarket[] } = { markets: [] };
     if (slip.verdict !== "no-slip") {
-      const snapPath = path.join(SNAP_DIR, `${slip.slug}${isV2 ? "-v2" : ""}.json`);
+      const suffix = slip.engineVersion === ENGINE_VERSION_V2_1 ? "-v2.1" : isV2 ? "-v2" : "";
+      const snapPath = path.join(SNAP_DIR, `${slip.slug}${suffix}.json`);
       if (!existsSync(snapPath)) {
         console.error(`FAIL ${slip.slug}: gate1: snapshot file missing`);
         failed += 1;
@@ -343,7 +366,8 @@ function main(): void {
     };
     const fails = isV2 ? inspectSlipV2(slip, snapshot, ctxAbbrs) : inspectSlip(slip, snapshot, ctxAbbrs);
     if (fails.length === 0) {
-      console.log(`ok   ${slip.slug}${isV2 ? " (v2)" : ""}${slip.verdict === "no-slip" ? " (no-slip)" : ""}`);
+      const label = slip.engineVersion === ENGINE_VERSION_V2_1 ? " (v2.1)" : isV2 ? " (v2)" : "";
+      console.log(`ok   ${slip.slug}${label}${slip.verdict === "no-slip" ? " (no-slip)" : ""}`);
     } else {
       failed += 1;
       for (const msg of fails) console.error(`FAIL ${slip.slug}: ${msg}`);
