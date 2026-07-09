@@ -1,6 +1,6 @@
 // tests/settle-parlays.test.ts
 import { describe, expect, it } from "vitest";
-import { gradeLeg } from "../scripts/settle-parlays.mts";
+import { gradeLeg, gradeLegV2 } from "../scripts/settle-parlays.mts";
 
 const ctx90 = { h90: 0, a90: 0, advancedHome: true, homeAbbr: "SUI", awayAbbr: "COL" };
 
@@ -19,5 +19,34 @@ describe("gradeLeg", () => {
 
   it("NO side is the negation", () => {
     expect(gradeLeg({ ticker: "KXWCGAME-26JUL07SUICOL-TIE", side: "no" }, ctx90)).toBe(false);
+  });
+});
+
+describe("gradeLegV2", () => {
+  const base = { h90: 2, a90: 1, h1: 1, a1: 0, advancedHome: true, homeAbbr: "FRA", awayAbbr: "MAR" };
+
+  it("1H legs grade on the half-time score", () => {
+    expect(gradeLegV2({ ticker: "KXWC1HTOTAL-26JUL09FRAMAR-1", side: "yes" }, base)).toBe(true); // 1 1H goal ≥ 1
+    expect(gradeLegV2({ ticker: "KXWC1HTOTAL-26JUL09FRAMAR-2", side: "no" }, base)).toBe(true); // under 1.5 1H
+    expect(gradeLegV2({ ticker: "KXWC1H-26JUL09FRAMAR-FRA", side: "yes" }, base)).toBe(true);
+    expect(gradeLegV2({ ticker: "KXWC1HBTTS-26JUL09FRAMAR-BTTS", side: "no" }, base)).toBe(true);
+    expect(gradeLegV2({ ticker: "KXWC1HSPREAD-26JUL09FRAMAR-FRA2", side: "yes" }, base)).toBe(false);
+  });
+
+  it("missing HT makes 1H legs ungradable but not 90-minute legs", () => {
+    const noHt = { ...base, h1: null, a1: null };
+    expect(gradeLegV2({ ticker: "KXWC1HTOTAL-26JUL09FRAMAR-1", side: "yes" }, noHt)).toBeNull();
+    expect(gradeLegV2({ ticker: "KXWCTOTAL-26JUL09FRAMAR-3", side: "yes" }, noHt)).toBe(true); // 3 FT goals ≥ 3
+  });
+
+  it("90-minute + advance legs grade exactly like v1 (pens-draw case)", () => {
+    const pens = { h90: 1, a90: 1, h1: 0, a1: 1, advancedHome: false, homeAbbr: "ARG", awayAbbr: "SUI" };
+    expect(gradeLegV2({ ticker: "KXWCGAME-26JUL12ARGSUI-TIE", side: "yes" }, pens)).toBe(true);
+    expect(gradeLegV2({ ticker: "KXWCADVANCE-26JUL12ARGSUI-ARG", side: "yes" }, pens)).toBe(false);
+    expect(gradeLegV2({ ticker: "KXWCADVANCE-26JUL12ARGSUI-ARG", side: "no" }, pens)).toBe(true);
+  });
+
+  it("combo-ineligible ticker is ungradable", () => {
+    expect(gradeLegV2({ ticker: "KXWCSCORE-26JUL09FRAMAR-FRA2MAR0", side: "no" }, base)).toBeNull();
   });
 });

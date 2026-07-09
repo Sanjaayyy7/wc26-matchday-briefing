@@ -55,6 +55,11 @@ export function ParlaySlipCard({ slip }: { slip: ParlaySlipView }) {
         </div>
         <StatusChip slip={slip} />
       </div>
+      {slip.engineVersion === "v1" && (
+        <p className="mt-1 text-micro uppercase tracking-widest text-[var(--ink-faint)]">
+          v1 engine — pre-combo, not purchasable as one ticket
+        </p>
+      )}
 
       {slip.status === "no-slip" ? (
         <p className="mt-3 text-caption text-[var(--ink-muted)]">
@@ -75,6 +80,13 @@ export function ParlaySlipCard({ slip }: { slip: ParlaySlipView }) {
               <span className="text-title tabular text-[var(--ink)]">{pct(slip.jointProb)}</span>
             )}
           </div>
+          {slip.comboImpliedProb !== null && slip.jointProb !== undefined && (
+            <p className="mt-1 text-caption tabular text-[var(--ink-muted)]">
+              Kalshi combo ≈{pct(slip.comboImpliedProb)} · edge{" "}
+              {slip.jointProb - slip.comboImpliedProb >= 0 ? "+" : ""}
+              {((slip.jointProb - slip.comboImpliedProb) * 100).toFixed(1)} pts · display only
+            </p>
+          )}
           <details className="mt-2">
             <summary className="cursor-pointer text-label text-[var(--ink-muted)]">
               Per-leg reasoning

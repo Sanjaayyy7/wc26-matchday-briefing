@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-08T17:13:39.543Z",
+  "generatedAt": "2026-07-09T05:26:23.009Z",
   "official": {
     "rows": [
       {
@@ -1621,16 +1621,32 @@
     "Informational matches (played before lock window) have no model grades. Assigning grades retroactively would be in-sample and dishonest. The honest out-of-sample model assessment is in the Phase C backtest.",
     "All scoreline metrics (scorelineHit, top3ScorelineHit) come from the settlement script and are computed against the Poisson model's top predicted scoreline, not a separate forecast."
   ],
-  "parlays": {
-    "slips": 4,
-    "noSlips": 0,
-    "graded": 0,
-    "slipHits": 0,
-    "slipHitRate": null,
-    "legHits": 0,
-    "legs": 0,
-    "legHitRate": null,
-    "meanLockedJoint": null,
-    "realizedSlipHitRate": null
-  }
+  "parlays": [
+    {
+      "version": "v1",
+      "slips": 4,
+      "noSlips": 0,
+      "graded": 0,
+      "slipHits": 0,
+      "slipHitRate": null,
+      "legHits": 0,
+      "legs": 0,
+      "legHitRate": null,
+      "meanLockedJoint": null,
+      "realizedSlipHitRate": null
+    },
+    {
+      "version": "v2-combo",
+      "slips": 4,
+      "noSlips": 0,
+      "graded": 0,
+      "slipHits": 0,
+      "slipHitRate": null,
+      "legHits": 0,
+      "legs": 0,
+      "legHitRate": null,
+      "meanLockedJoint": null,
+      "realizedSlipHitRate": null
+    }
+  ]
 }

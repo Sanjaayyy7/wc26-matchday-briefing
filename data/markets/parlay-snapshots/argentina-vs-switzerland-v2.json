@@ -1,0 +1,45 @@
+{
+ "fetchedAt": "2026-07-09T05:24:38.045Z",
+ "markets": [
+  {
+   "ticker": "KXWCGAME-26JUL11ARGSUI-TIE",
+   "title": "Argentina vs Switzerland Winner?",
+   "yesMid": 0.265
+  },
+  {
+   "ticker": "KXWCGAME-26JUL11ARGSUI-ARG",
+   "title": "Argentina vs Switzerland Winner?",
+   "yesMid": 0.575
+  },
+  {
+   "ticker": "KXWCGAME-26JUL11ARGSUI-SUI",
+   "title": "Argentina vs Switzerland Winner?",
+   "yesMid": 0.165
+  },
+  {
+   "ticker": "KXWCBTTS-26JUL11ARGSUI-BTTS",
+   "title": "Will both teams score?",
+   "yesMid": 0.46499999999999997
+  },
+  {
+   "ticker": "KXWC1HSPREAD-26JUL11ARGSUI-ARG2",
+   "title": "Argentina wins by more than 1.5 goals in the 1st Half?",
+   "yesMid": 0.11499999999999999
+  },
+  {
+   "ticker": "KXWC1HSPREAD-26JUL11ARGSUI-SUI2",
+   "title": "Switzerland wins by more than 1.5 goals in the 1st Half?",
+   "yesMid": 0.02
+  },
+  {
+   "ticker": "KXWCADVANCE-26JUL11ARGSUI-ARG",
+   "title": "Argentina vs Switzerland: To Advance",
+   "yesMid": 0.735
+  },
+  {
+   "ticker": "KXWCADVANCE-26JUL11ARGSUI-SUI",
+   "title": "Argentina vs Switzerland: To Advance",
+   "yesMid": 0.275
+  }
+ ]
+}

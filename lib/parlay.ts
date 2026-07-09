@@ -157,8 +157,8 @@ export function selectSlip(candidates: CandidateLeg[], grid: number[][], etWinPr
   return { verdict: "slip", legs: slip, jointProb: joint };
 }
 
-const pct1 = (x: number): string => `${(x * 100).toFixed(1)}%`;
-const signed = (x: number): string => `${x >= 0 ? "+" : ""}${x}`;
+export const pct1 = (x: number): string => `${(x * 100).toFixed(1)}%`;
+export const signed = (x: number): string => `${x >= 0 ? "+" : ""}${x}`;
 
 export const REASONING_GRAMMAR =
   /^.+ — (YES|NO): model \d{1,3}\.\d%; top scorelines [A-Z]+ \d-\d \d{1,3}\.\d% \/ [A-Z]+ \d-\d \d{1,3}\.\d% \/ [A-Z]+ \d-\d \d{1,3}\.\d%; Elo [+-]\d+; (Kalshi \d{1,3}\.\d% \(edge [+-]\d{1,3}\.\d\)|Kalshi n\/a)\.$/;

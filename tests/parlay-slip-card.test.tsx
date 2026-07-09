@@ -10,6 +10,8 @@ const base = {
   stage: "quarter-final",
   kickoffISO: "2026-07-10T19:00:00Z",
   lockedAt: "2026-07-08T17:00:00Z",
+  engineVersion: "v1" as const,
+  comboImpliedProb: null,
 };
 
 const gradedMiss: ParlaySlipView = {
@@ -49,5 +51,20 @@ describe("ParlaySlipCard", () => {
     const html = renderToStaticMarkup(<ParlaySlipCard slip={noSlip} />);
     expect(html).toContain("No slip");
     expect(html).toContain("no 2-leg combo ≥ floors");
+  });
+});
+
+describe("engine version rendering", () => {
+  it("badges v1 slips and shows the combo-implied line on v2 slips", () => {
+    const v1Html = renderToStaticMarkup(<ParlaySlipCard slip={{ ...gradedMiss, engineVersion: "v1", comboImpliedProb: null }} />);
+    expect(v1Html).toContain("v1 engine — pre-combo, not purchasable as one ticket");
+    expect(v1Html).not.toContain("Kalshi combo ≈");
+
+    const v2Html = renderToStaticMarkup(
+      <ParlaySlipCard slip={{ ...gradedMiss, engineVersion: "v2-combo", comboImpliedProb: 0.415, jointProb: 0.66 }} />,
+    );
+    expect(v2Html).not.toContain("pre-combo");
+    expect(v2Html).toContain("Kalshi combo ≈41.5%");
+    expect(v2Html).toContain("edge +24.5 pts");
   });
 });

@@ -121,6 +121,7 @@ function renderInformationalTable(rows: InformationalRow[]): string {
 
 type ParlaySlipRow = {
   verdict?: "no-slip";
+  engineVersion?: string;
   jointProb?: number;
   legs?: Array<{ ticker: string }>;
   result?: { legs: Array<{ ticker: string; hit: boolean }>; slipHit: boolean };
@@ -139,12 +140,7 @@ type ParlaySummary = {
   realizedSlipHitRate: number | null;
 };
 
-/** Slip/leg hit rates + locked-joint calibration from data/parlays.json (null if absent/empty). */
-function parlaySummary(): ParlaySummary | null {
-  const parlaysPath = path.join(appDir, "data", "parlays.json");
-  if (!existsSync(parlaysPath)) return null;
-  const rows = readJson<ParlaySlipRow[]>(parlaysPath);
-  if (!Array.isArray(rows) || rows.length === 0) return null;
+function summarizeParlayRows(rows: ParlaySlipRow[]): ParlaySummary {
   const locked = rows.filter((r) => r.verdict !== "no-slip");
   const noSlips = rows.length - locked.length;
   const graded = locked.filter((r) => r.result);
@@ -167,21 +163,44 @@ function parlaySummary(): ParlaySummary | null {
   };
 }
 
-function renderParlays(p: ParlaySummary): string {
+/** Per-engine-version slip/leg hit rates + locked-joint calibration from data/parlays.json. */
+function parlaySummaries(): Array<ParlaySummary & { version: string }> {
+  const parlaysPath = path.join(appDir, "data", "parlays.json");
+  if (!existsSync(parlaysPath)) return [];
+  const rows = readJson<ParlaySlipRow[]>(parlaysPath);
+  if (!Array.isArray(rows) || rows.length === 0) return [];
+  const groups = new Map<string, ParlaySlipRow[]>();
+  for (const r of rows) {
+    const v = r.engineVersion ?? "v1";
+    groups.set(v, [...(groups.get(v) ?? []), r]);
+  }
+  return [...groups.entries()]
+    .sort(([a], [b]) => a.localeCompare(b))
+    .map(([version, group]) => ({ version, ...summarizeParlayRows(group) }));
+}
+
+function renderParlays(summaries: Array<ParlaySummary & { version: string }>): string {
+  const sections = summaries.map((p) =>
+    [
+      `### Engine ${p.version}`,
+      "",
+      "| Metric | Value |",
+      "|--------|-------|",
+      `| Locked slips | ${p.slips} |`,
+      `| No-slip days | ${p.noSlips} |`,
+      `| Graded | ${p.graded} |`,
+      `| Slip hit rate | ${pct(p.slipHitRate)} (${p.slipHits}/${p.graded}) |`,
+      `| Leg hit rate | ${pct(p.legHitRate)} (${p.legHits}/${p.legs}) |`,
+      `| Locked joint avg (graded) | ${pct(p.meanLockedJoint)} |`,
+      `| Realized slip hit rate | ${pct(p.realizedSlipHitRate)} |`,
+    ].join("\n"),
+  );
   return [
     "## Parlays",
     "",
-    "Model-optimized Kalshi parlay slips (pre-registered floors, locked pre-kickoff, graded on the same 90-minute semantics as predictions).",
+    "Model-optimized Kalshi parlay slips (pre-registered floors per engine version, locked pre-kickoff, graded on the same 90-minute semantics as predictions; v2 slips restricted to combo-eligible markets).",
     "",
-    "| Metric | Value |",
-    "|--------|-------|",
-    `| Locked slips | ${p.slips} |`,
-    `| No-slip days | ${p.noSlips} |`,
-    `| Graded | ${p.graded} |`,
-    `| Slip hit rate | ${pct(p.slipHitRate)} (${p.slipHits}/${p.graded}) |`,
-    `| Leg hit rate | ${pct(p.legHitRate)} (${p.legHits}/${p.legs}) |`,
-    `| Locked joint avg (graded) | ${pct(p.meanLockedJoint)} |`,
-    `| Realized slip hit rate | ${pct(p.realizedSlipHitRate)} |`,
+    ...sections,
     "",
     "---",
     "",
@@ -191,7 +210,7 @@ function renderParlays(p: ParlaySummary): string {
 function renderMarkdown(
   output: ReturnType<typeof buildAccountability>,
   generatedDate: string,
-  parlays: ParlaySummary | null,
+  parlays: Array<ParlaySummary & { version: string }>,
 ): string {
   const sections: string[] = [
     "# WC26 Accountability Report",
@@ -235,7 +254,7 @@ function renderMarkdown(
     "",
     "---",
     "",
-    ...(parlays ? [renderParlays(parlays)] : []),
+    ...(parlays.length > 0 ? [renderParlays(parlays)] : []),
     "## Caveats",
     "",
     ...output.caveats.map((c) => `- ${c}`),
@@ -276,13 +295,13 @@ async function main() {
 
   console.log("[accountability] Building accountability output...");
   const output = buildAccountability(ledger, matchFacts, kalshiRaw, polymarketEntries);
-  const parlays = parlaySummary();
+  const parlays = parlaySummaries();
 
   // Write JSON
   const backtestDir = path.join(appDir, "data", "backtest");
   mkdirSync(backtestDir, { recursive: true });
   const jsonPath = path.join(backtestDir, "wc26-accountability.json");
-  writeFileSync(jsonPath, JSON.stringify(parlays ? { ...output, parlays } : output, null, 2) + "\n");
+  writeFileSync(jsonPath, JSON.stringify(parlays.length > 0 ? { ...output, parlays } : output, null, 2) + "\n");
   console.log(`[accountability] Wrote ${jsonPath}`);
 
   // Write markdown
@@ -302,11 +321,11 @@ async function main() {
   console.log(`  Mean RPS: ${aggregates.meanRps !== null ? aggregates.meanRps.toFixed(4) : "—"}`);
   console.log(`  vsKalshi n=${aggregates.vsKalshi.n}, edge=${aggregates.vsKalshi.edge !== null ? aggregates.vsKalshi.edge.toFixed(4) : "—"}`);
   console.log(`  Informational rows: ${output.informational.rows.length}`);
-  if (parlays) {
+  for (const p of parlays) {
     console.log(
-      `  Parlays: ${parlays.graded} graded, slip hit rate ${parlays.slipHitRate !== null ? (parlays.slipHitRate * 100).toFixed(1) + "%" : "—"}, ` +
-        `leg hit rate ${parlays.legHitRate !== null ? (parlays.legHitRate * 100).toFixed(1) + "%" : "—"}, ` +
-        `locked joint avg ${parlays.meanLockedJoint !== null ? (parlays.meanLockedJoint * 100).toFixed(1) + "%" : "—"} vs realized ${parlays.realizedSlipHitRate !== null ? (parlays.realizedSlipHitRate * 100).toFixed(1) + "%" : "—"}`,
+      `  Parlays [${p.version}]: ${p.graded} graded, slip hit rate ${p.slipHitRate !== null ? (p.slipHitRate * 100).toFixed(1) + "%" : "—"}, ` +
+        `leg hit rate ${p.legHitRate !== null ? (p.legHitRate * 100).toFixed(1) + "%" : "—"}, ` +
+        `locked joint avg ${p.meanLockedJoint !== null ? (p.meanLockedJoint * 100).toFixed(1) + "%" : "—"} vs realized ${p.realizedSlipHitRate !== null ? (p.realizedSlipHitRate * 100).toFixed(1) + "%" : "—"}`,
     );
   }
 }
