@@ -1,7 +1,8 @@
 // tests/lock-parlays.test.ts
 import { describe, expect, it } from "vitest";
-import { marketMid, PARLAY_SERIES } from "../scripts/lock-parlays.mts";
+import { marketMid, PARLAY_SERIES_V2, haveV2Slugs, snapshotFileV2 } from "../scripts/lock-parlays.mts";
 import { kalshiEventCode, kalshiEventTicker } from "../scripts/shared.mts";
+import { COMBO_SERIES } from "../lib/parlay-v2";
 
 describe("marketMid", () => {
   it("uses bid/ask mid when both present", () => {
@@ -21,8 +22,23 @@ describe("kalshiEventCode", () => {
   });
 });
 
-describe("PARLAY_SERIES", () => {
-  it("is exactly the 7 priceable series", () => {
-    expect(PARLAY_SERIES).toEqual(["KXWCGAME","KXWCADVANCE","KXWCSPREAD","KXWCTOTAL","KXWCTEAMTOTAL","KXWCBTTS","KXWCSCORE"]);
+describe("v2 lock plumbing", () => {
+  it("locks exactly the combo-eligible series", () => {
+    expect(PARLAY_SERIES_V2).toEqual(COMBO_SERIES);
+  });
+
+  it("haveV2Slugs keys idempotence on (slug, v2) — v1 entries never block a v2 relock", () => {
+    const have = haveV2Slugs([
+      { slug: "france-vs-morocco" },
+      { slug: "spain-vs-belgium", engineVersion: "v2-combo" },
+      { slug: "norway-vs-england", engineVersion: "v1" },
+    ]);
+    expect(have.has("france-vs-morocco")).toBe(false);
+    expect(have.has("spain-vs-belgium")).toBe(true);
+    expect(have.has("norway-vs-england")).toBe(false);
+  });
+
+  it("v2 snapshots live beside v1 with a -v2 suffix", () => {
+    expect(snapshotFileV2("france-vs-morocco")).toBe("france-vs-morocco-v2.json");
   });
 });
