@@ -9,7 +9,10 @@ const pct = (x: number | null): string => (x === null ? "—" : `${(x * 100).toF
 
 export default function ParlayPage() {
   const views = parlayViews();
-  const record = parlayRecord(parlayLedger());
+  const rows = parlayLedger();
+  const record = parlayRecord(rows);
+  const recordV2 = parlayRecord(rows.filter((r) => r.engineVersion === "v2-combo"));
+  const recordV1 = parlayRecord(rows.filter((r) => r.engineVersion !== "v2-combo"));
 
   const open = views.filter((v) => v.status === "open");
   const settled = views
@@ -46,7 +49,7 @@ export default function ParlayPage() {
             ) : (
               <div className="grid gap-4 lg:grid-cols-2">
                 {open.map((slip) => (
-                  <ParlaySlipCard key={slip.slug} slip={slip} />
+                  <ParlaySlipCard key={`${slip.slug}-${slip.engineVersion}`} slip={slip} />
                 ))}
               </div>
             )}
@@ -56,8 +59,12 @@ export default function ParlayPage() {
         <CanvasSection eyebrow="Record" title="Every slip, graded in public.">
           <DataPlane>
             <p className="text-caption tabular text-[var(--ink-muted)]">
-              Slip hit rate {pct(record.slipHitRate)} · leg hit rate {pct(record.legHitRate)} · locked joint
-              average {pct(record.meanLockedJoint)} across graded slips. No-slip days recorded: {record.noSlips}.
+              v2 combo engine: slip hit rate {pct(recordV2.slipHitRate)} · leg hit rate {pct(recordV2.legHitRate)} ·
+              locked joint average {pct(recordV2.meanLockedJoint)} across graded slips · no-slip days {recordV2.noSlips}.
+            </p>
+            <p className="mt-1 text-caption tabular text-[var(--ink-muted)]">
+              v1 engine: slip hit rate {pct(recordV1.slipHitRate)} · leg hit rate {pct(recordV1.legHitRate)} ·
+              locked joint average {pct(recordV1.meanLockedJoint)} across graded slips · no-slip days {recordV1.noSlips}.
             </p>
             {settled.length === 0 ? (
               <p className="mt-3 text-caption text-[var(--ink-muted)]">
@@ -66,7 +73,7 @@ export default function ParlayPage() {
             ) : (
               <div className="mt-4 grid gap-4 lg:grid-cols-2">
                 {settled.map((slip) => (
-                  <ParlaySlipCard key={slip.slug} slip={slip} />
+                  <ParlaySlipCard key={`${slip.slug}-${slip.engineVersion}`} slip={slip} />
                 ))}
               </div>
             )}
@@ -76,11 +83,16 @@ export default function ParlayPage() {
         <CanvasSection eyebrow="Protocol" title="Pre-registered, immutable, inspected.">
           <DataPlane>
             <p className="text-caption tabular text-[var(--ink-muted)]">
-              One slip per match, locked pre-kickoff into an append-only ledger. Legs come only from
-              Kalshi-listed markets the model can price on its score grid; selection maximizes exact joint
-              probability under pre-registered floors (every leg ≥ 60%, joint ≥ 35%, 2–5 legs, redundancy
-              cap 97%). Regulation legs grade on the 90-minute score, advancement legs on the actual
-              winner. A dedicated inspector recomputes every number from stored inputs on every run.
+              One slip per match, locked pre-kickoff into an append-only ledger. v2 slips draw only from
+              markets the Kalshi combo builder can combine into one ticket — regulation and first-half
+              moneylines, spreads, totals, both-teams-to-score, and advancement — priced on the model
+              score grid with a pre-registered first-half split (q = 0.45). Selection maximizes exact joint
+              probability under pre-registered v2 floors (every leg ≥ 75%, joint ≥ 60%, 2–4 legs, redundancy
+              cap 97%). Earlier v1 slips (leg ≥ 60%, joint ≥ 35%, 2–5 legs) remain in the ledger and grade
+              under their own floors. Regulation legs grade on the 90-minute score, first-half legs on the
+              half-time score, advancement legs on the actual winner. Goalscorer and corner markets are
+              combo-eligible but unmodeled, so they are never selected. A dedicated inspector recomputes
+              every number from stored inputs on every run.
             </p>
           </DataPlane>
         </CanvasSection>

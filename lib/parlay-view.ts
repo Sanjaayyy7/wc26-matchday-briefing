@@ -20,6 +20,8 @@ export type ParlaySlipRow = {
   verdict?: "no-slip";
   reason?: string;
   modelDataThrough?: string;
+  engineVersion?: string;
+  comboImpliedProb?: number | null;
   legs?: ParlayLegRow[];
   jointProb?: number;
   result?: { legs: Array<{ ticker: string; hit: boolean }>; slipHit: boolean; gradedAt: string };
@@ -35,6 +37,8 @@ export type ParlaySlipView = {
   lockedAt: string;
   status: "open" | "hit" | "miss" | "no-slip";
   reason?: string;
+  engineVersion: "v1" | "v2-combo";
+  comboImpliedProb: number | null;
   legs: ParlayLegView[];
   jointProb?: number;
 };
@@ -71,6 +75,8 @@ export function buildParlayViews(
       kickoffISO: f.kickoffISO,
       lockedAt: row.lockedAt,
       status,
+      engineVersion: row.engineVersion === "v2-combo" ? "v2-combo" : "v1",
+      comboImpliedProb: row.comboImpliedProb ?? null,
       ...(row.reason !== undefined ? { reason: row.reason } : {}),
       legs: (row.legs ?? []).map((leg) => ({ ...leg, hit: hitBy.get(leg.ticker) ?? null })),
       ...(row.jointProb !== undefined ? { jointProb: row.jointProb } : {}),

@@ -89,3 +89,18 @@ describe("parlayRecord", () => {
     expect(r.meanLockedJoint).toBeNull();
   });
 });
+
+describe("engine version mapping", () => {
+  it("maps engineVersion and comboImpliedProb onto views (absent → v1 / null)", () => {
+    const vRows: ParlaySlipRow[] = [
+      { slug: "france-vs-morocco", lockedAt: "2026-07-08T18:00:00.000Z", legs: [leg("A"), leg("B")], jointProb: 0.7 },
+      { slug: "france-vs-morocco", lockedAt: "2026-07-08T19:00:00.000Z", engineVersion: "v2-combo", comboImpliedProb: 0.41, legs: [leg("A2"), leg("B2")], jointProb: 0.66 },
+    ];
+    const views = buildParlayViews(vRows, fixtures, clubName);
+    expect(views).toHaveLength(2);
+    expect(views[0].engineVersion).toBe("v1");
+    expect(views[0].comboImpliedProb).toBeNull();
+    expect(views[1].engineVersion).toBe("v2-combo");
+    expect(views[1].comboImpliedProb).toBe(0.41);
+  });
+});
