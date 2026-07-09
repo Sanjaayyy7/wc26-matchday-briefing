@@ -20,6 +20,10 @@ import {
   type CandidateLeg,
   type KalshiMarket,
 } from "../lib/parlay";
+import {
+  COMBO_SERIES, ENGINE_VERSION_V2, YES_ONLY_SERIES, halfLattice, jointProbV2, legProbV2,
+  legReasoningV2, parseMarketV2, seriesOf, comboImpliedProb as comboImplied, type CandidateLegV2,
+} from "../lib/parlay-v2";
 
 const TOL = 1e-9;
 
@@ -52,6 +56,16 @@ const SLIP_KEYS = new Set([
   "etWinProbHome", "legs", "jointProb", "result",
 ]);
 const RESULT_KEYS = new Set(["legs", "slipHit", "gradedAt"]);
+
+export type SlipRecordV2 = SlipRecord & {
+  engineVersion?: string;
+  qFirstHalf?: number;
+  floors?: { leg: number; joint: number; maxLegs: number };
+  comboImpliedProb?: number | null;
+};
+
+const SLIP_KEYS_V2 = new Set([...SLIP_KEYS, "engineVersion", "qFirstHalf", "floors", "comboImpliedProb"]);
+const COMBO_SET = new Set<string>(COMBO_SERIES);
 
 export function inspectSlip(
   slip: SlipRecord,
@@ -169,6 +183,131 @@ export function inspectSlip(
   return fails;
 }
 
+export function inspectSlipV2(
+  slip: SlipRecordV2,
+  snapshot: { markets: KalshiMarket[] },
+  ctx: { homeAbbr: string; awayAbbr: string },
+): string[] {
+  const fails: string[] = [];
+
+  if (slip.engineVersion !== ENGINE_VERSION_V2) {
+    fails.push(`gate8: engineVersion "${slip.engineVersion}" is not "${ENGINE_VERSION_V2}"`);
+  }
+  if (!slip.lockedAt || new Date(slip.lockedAt).getTime() > Date.now()) {
+    fails.push(`gate6: lockedAt missing or in the future (${slip.lockedAt})`);
+  }
+
+  if (slip.verdict === "no-slip") {
+    if (typeof slip.reason !== "string" || slip.reason.length === 0) {
+      fails.push("gate7: no-slip record missing reason string");
+    }
+    return fails;
+  }
+
+  for (const k of Object.keys(slip)) {
+    if (!SLIP_KEYS_V2.has(k)) fails.push(`gate6: unexpected slip key "${k}"`);
+  }
+  if (slip.result) {
+    for (const k of Object.keys(slip.result)) {
+      if (!RESULT_KEYS.has(k)) fails.push(`gate6: unexpected result key "${k}"`);
+    }
+  }
+
+  const legs = slip.legs ?? [];
+  const bySnapTicker = new Map(snapshot.markets.map((m) => [m.ticker, m]));
+
+  // gate 1 (snapshot membership) + gate 8 (combo eligibility, YES-only MLs)
+  for (const leg of legs) {
+    if (!bySnapTicker.has(leg.ticker)) fails.push(`gate1: leg ticker not in snapshot (${leg.ticker})`);
+    const series = seriesOf(leg.ticker);
+    if (!COMBO_SET.has(series)) fails.push(`gate8: series not combo-eligible (${leg.ticker})`);
+    if (YES_ONLY_SERIES.has(series) && leg.side !== "yes") fails.push(`gate8: NO side on YES-only series (${leg.ticker})`);
+  }
+
+  // gate 2: parseable under the v2 registry
+  const candidates: Array<CandidateLegV2 | null> = legs.map((leg) => {
+    const snap = bySnapTicker.get(leg.ticker);
+    const parsed = parseMarketV2(
+      snap ?? { ticker: leg.ticker, title: leg.title, yesMid: leg.kalshiMid },
+      ctx.homeAbbr,
+      ctx.awayAbbr,
+    );
+    if (!parsed) {
+      fails.push(`gate2: leg not parseable (${leg.ticker})`);
+      return null;
+    }
+    return { market: parsed, side: leg.side };
+  });
+  if (candidates.some((c) => c === null)) return fails;
+  const legCandidates = candidates as CandidateLegV2[];
+
+  if (
+    slip.lambdas === undefined || slip.rho === undefined || slip.etWinProbHome === undefined ||
+    slip.jointProb === undefined || slip.eloDiff === undefined ||
+    slip.qFirstHalf === undefined || slip.floors === undefined
+  ) {
+    fails.push("gate9: slip missing stored model inputs (lambdas/rho/etWinProbHome/eloDiff/jointProb/qFirstHalf/floors)");
+    return fails;
+  }
+  const lattice = halfLattice(scoreGrid(slip.lambdas.home, slip.lambdas.away, slip.rho), slip.qFirstHalf);
+  const et = slip.etWinProbHome;
+  const floors = slip.floors;
+
+  // gate 9 (v2 form of gate 3): lattice reproduction ±1e-9
+  legs.forEach((leg, i) => {
+    const p = legProbV2(legCandidates[i], lattice, et);
+    if (Math.abs(p - leg.modelProb) > TOL) {
+      fails.push(`gate9: leg modelProb drift (${leg.ticker}: stored ${leg.modelProb}, recomputed ${p})`);
+    }
+  });
+  const joint = jointProbV2(legCandidates, lattice, et);
+  if (Math.abs(joint - slip.jointProb) > TOL) {
+    fails.push(`gate9: jointProb drift (stored ${slip.jointProb}, recomputed ${joint})`);
+  }
+
+  // gate 4: the slip's OWN stored floors
+  if (legs.length < 2 || legs.length > floors.maxLegs) {
+    fails.push(`gate4: leg count ${legs.length} outside [2, ${floors.maxLegs}]`);
+  }
+  legs.forEach((leg, i) => {
+    if (legProbV2(legCandidates[i], lattice, et) < floors.leg - TOL) {
+      fails.push(`gate4: leg below stored floor (${leg.ticker})`);
+    }
+  });
+  if (joint < floors.joint - TOL) fails.push(`gate4: joint ${joint} below stored floor ${floors.joint}`);
+  let running = legCandidates.length > 0 ? legProbV2(legCandidates[0], lattice, et) : 0;
+  for (let i = 1; i < legCandidates.length; i++) {
+    const j = jointProbV2(legCandidates.slice(0, i + 1), lattice, et);
+    const conditional = j / running;
+    if (conditional > REDUNDANCY_CAP + TOL) {
+      fails.push(`gate4: conditional ${conditional.toFixed(6)} above REDUNDANCY_CAP (${legs[i].ticker})`);
+    }
+    running = j;
+  }
+
+  // gate 5: grammar + byte reproduction (v2 generator)
+  legs.forEach((leg, i) => {
+    if (!REASONING_GRAMMAR.test(leg.reasoning)) {
+      fails.push(`gate5: reasoning fails grammar (${leg.ticker})`);
+      return;
+    }
+    const regenerated = legReasoningV2(legCandidates[i], lattice, et, {
+      eloDiff: slip.eloDiff as number,
+      homeAbbr: ctx.homeAbbr,
+      awayAbbr: ctx.awayAbbr,
+    });
+    if (regenerated !== leg.reasoning) fails.push(`gate5: reasoning not reproducible (${leg.ticker})`);
+  });
+
+  // gate 10: combo-implied product re-derives from stored mids
+  const expected = comboImplied(legs.map((l) => l.kalshiMid));
+  const stored = slip.comboImpliedProb ?? null;
+  const match = expected === null ? stored === null : stored !== null && Math.abs(stored - expected) <= TOL;
+  if (!match) fails.push(`gate10: comboImpliedProb drift (stored ${stored}, recomputed ${expected})`);
+
+  return fails;
+}
+
 const PARLAYS_PATH = path.join(appDir, "data", "parlays.json");
 const SNAP_DIR = path.join(appDir, "data", "markets", "parlay-snapshots");
 
@@ -177,7 +316,7 @@ function main(): void {
     console.log("no parlays.json yet — nothing to inspect");
     return;
   }
-  const slips = JSON.parse(readFileSync(PARLAYS_PATH, "utf8")) as SlipRecord[];
+  const slips = JSON.parse(readFileSync(PARLAYS_PATH, "utf8")) as SlipRecordV2[];
   const fx = new Map(fixtures().map((f) => [f.slug, f]));
   let failed = 0;
   for (const slip of slips) {
@@ -187,9 +326,10 @@ function main(): void {
       failed += 1;
       continue;
     }
+    const isV2 = slip.engineVersion === ENGINE_VERSION_V2;
     let snapshot: { markets: KalshiMarket[] } = { markets: [] };
     if (slip.verdict !== "no-slip") {
-      const snapPath = path.join(SNAP_DIR, `${slip.slug}.json`);
+      const snapPath = path.join(SNAP_DIR, `${slip.slug}${isV2 ? "-v2" : ""}.json`);
       if (!existsSync(snapPath)) {
         console.error(`FAIL ${slip.slug}: gate1: snapshot file missing`);
         failed += 1;
@@ -197,12 +337,13 @@ function main(): void {
       }
       snapshot = JSON.parse(readFileSync(snapPath, "utf8"));
     }
-    const fails = inspectSlip(slip, snapshot, {
+    const ctxAbbrs = {
       homeAbbr: f.homeId.toUpperCase(),
       awayAbbr: f.awayId.toUpperCase(),
-    });
+    };
+    const fails = isV2 ? inspectSlipV2(slip, snapshot, ctxAbbrs) : inspectSlip(slip, snapshot, ctxAbbrs);
     if (fails.length === 0) {
-      console.log(`ok   ${slip.slug}${slip.verdict === "no-slip" ? " (no-slip)" : ""}`);
+      console.log(`ok   ${slip.slug}${isV2 ? " (v2)" : ""}${slip.verdict === "no-slip" ? " (no-slip)" : ""}`);
     } else {
       failed += 1;
       for (const msg of fails) console.error(`FAIL ${slip.slug}: ${msg}`);
