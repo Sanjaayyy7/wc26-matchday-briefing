@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import {
-  COMBO_SERIES, ENGINE_VERSION_V2, Q_FIRST_HALF, V2_FLOORS, YES_ONLY_SERIES,
+  COMBO_SERIES, ENGINE_VERSION_V2, ENGINE_VERSION_V2_1, MAX_LEGS_PER_SERIES,
+  Q_FIRST_HALF, V2_FLOORS, YES_ONLY_SERIES,
   binomRow, candidateLegsV2, comboImpliedProb, halfLattice, jointProbV2, legProbV2,
   legReasoningV2, parseMarketV2, selectSlipV2, seriesOf,
   type CandidateLegV2,
@@ -228,15 +229,71 @@ describe("selectSlipV2", () => {
   });
 
   it("redundancy cap rejects an implied leg", () => {
-    // Synthetic deep-tail totals: NO 'over 7.5' (-8) is near-certain given the
-    // seed NO 'over 8.5' (-9) — conditional P(total≤7 | total≤8) ≈ 0.999 > 0.97.
-    // (Kalshi lists totals only up to -6, but the parser accepts any digit; this
-    // is a pure-engine test.)
+    // Synthetic deep-tail CROSS-series pair (same-series pairs are excluded by
+    // the v2.1 uniqueness rule before the cap is consulted): NO 'FT over 8.5'
+    // (-9) is near-certain given the seed NO '1H over 7.5' (-8) — conditional
+    // P(total≤8 | 1H total≤7) ≈ 0.9998 > 0.97. (Kalshi lists totals only up to
+    // -6, but the parser accepts any digit; this is a pure-engine test.)
     const tight = candidateLegsV2(
-      ["KXWCTOTAL-26JUL09FRAMAR-8", "KXWCTOTAL-26JUL09FRAMAR-9"].map((t) => mk(t)), "FRA", "MAR");
+      ["KXWC1HTOTAL-26JUL09FRAMAR-8", "KXWCTOTAL-26JUL09FRAMAR-9"].map((t) => mk(t)), "FRA", "MAR");
     const sel = selectSlipV2(tight, lattice, ET, { leg: 0.5, joint: 0.3, maxLegs: 4 });
     // both NO legs clear the leg floor, but the second is implied → single leg → no-slip
     expect(sel.verdict).toBe("no-slip");
+  });
+});
+
+describe("series uniqueness (v2.1)", () => {
+  const floors = { leg: 0.75, joint: 0.6, maxLegs: 4 };
+
+  it("pre-registered v2.1 constants", () => {
+    expect(ENGINE_VERSION_V2_1).toBe("v2.1-combo");
+    expect(MAX_LEGS_PER_SERIES).toBe(1);
+  });
+
+  it("never selects two legs from the same series", () => {
+    // Kalshi combo rule: per-event size_max=1 (collections API, 2026-07-09).
+    const pool = candidateLegsV2(
+      ["KXWCGAME-26JUL09FRAMAR-FRA", "KXWCGAME-26JUL09FRAMAR-TIE",
+       "KXWCTOTAL-26JUL09FRAMAR-4", "KXWCTOTAL-26JUL09FRAMAR-5", "KXWCTOTAL-26JUL09FRAMAR-6",
+       "KXWCSPREAD-26JUL09FRAMAR-MAR2", "KXWC1HTOTAL-26JUL09FRAMAR-3", "KXWC1HSPREAD-26JUL09FRAMAR-MAR2",
+       "KXWC1H-26JUL09FRAMAR-FRA", "KXWCADVANCE-26JUL09FRAMAR-FRA"].map((t) => mk(t)),
+      "FRA", "MAR");
+    const sel = selectSlipV2(pool, lattice, ET, floors);
+    expect(sel.verdict).toBe("slip");
+    if (sel.verdict !== "slip") return;
+    const series = sel.legs.map((l) => seriesOf(l.market.ticker));
+    expect(new Set(series).size).toBe(series.length);
+  });
+
+  it("picks the next-best cross-series leg over a higher-conditional same-series leg", () => {
+    const pool = candidateLegsV2(
+      ["KXWCTOTAL-26JUL09FRAMAR-5", "KXWCTOTAL-26JUL09FRAMAR-6",
+       "KXWCSPREAD-26JUL09FRAMAR-MAR2"].map((t) => mk(t)), "FRA", "MAR");
+    const sel = selectSlipV2(pool, lattice, ET, floors);
+    expect(sel.verdict).toBe("slip");
+    if (sel.verdict !== "slip") return;
+    const series = sel.legs.map((l) => seriesOf(l.market.ticker));
+    expect(series.filter((s) => s === "KXWCTOTAL").length).toBe(1);
+    expect(series).toContain("KXWCSPREAD");
+  });
+
+  it("allows FT total and 1H total together — separate series per Kalshi", () => {
+    const pool = candidateLegsV2(
+      ["KXWCTOTAL-26JUL09FRAMAR-5", "KXWC1HTOTAL-26JUL09FRAMAR-3"].map((t) => mk(t)), "FRA", "MAR");
+    const sel = selectSlipV2(pool, lattice, ET, floors);
+    expect(sel.verdict).toBe("slip");
+    if (sel.verdict !== "slip") return;
+    expect(sel.legs.map((l) => seriesOf(l.market.ticker)).sort())
+      .toEqual(["KXWC1HTOTAL", "KXWCTOTAL"]);
+  });
+
+  it("no-slip when only one series clears the leg floor", () => {
+    // Two totals both clear 0.75 and would satisfy the old cap (conditional
+    // ≈ 0.94 < 0.97) — uniqueness leaves a single leg → no slip.
+    const pool = candidateLegsV2(
+      ["KXWCTOTAL-26JUL09FRAMAR-5", "KXWCTOTAL-26JUL09FRAMAR-6"].map((t) => mk(t)), "FRA", "MAR");
+    const sel = selectSlipV2(pool, lattice, ET, floors);
+    expect(sel).toEqual({ verdict: "no-slip", reason: "no 2-leg combo ≥ v2 floors" });
   });
 });
 
