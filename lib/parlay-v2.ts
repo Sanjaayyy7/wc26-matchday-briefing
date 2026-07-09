@@ -3,7 +3,7 @@
 // combo-builder constraints, 2026-07-08). Pre-registered: Q_FIRST_HALF=0.45,
 // LEG floor 0.75, JOINT floor 0.60, 2-4 legs, REDUNDANCY_CAP shared with v1.
 // 3-way moneylines are YES-only (the combo builder offers one price per outcome).
-import type { KalshiMarket } from "./parlay";
+import { REDUNDANCY_CAP, type KalshiMarket } from "./parlay";
 
 export const ENGINE_VERSION_V2 = "v2-combo";
 export const Q_FIRST_HALF = 0.45;
@@ -150,3 +150,53 @@ export function jointProbV2(legs: CandidateLegV2[], lattice: LatticeCell[], etWi
 
 export const legProbV2 = (leg: CandidateLegV2, lattice: LatticeCell[], etWinProbHome: number): number =>
   jointProbV2([leg], lattice, etWinProbHome);
+
+export type SelectionV2 =
+  | { verdict: "slip"; legs: CandidateLegV2[]; jointProb: number }
+  | { verdict: "no-slip"; reason: string };
+
+const NO_SLIP_V2 = { verdict: "no-slip", reason: "no 2-leg combo ≥ v2 floors" } as const;
+
+const legOrderV2 = (
+  a: { leg: CandidateLegV2; p: number }, b: { leg: CandidateLegV2; p: number },
+): number =>
+  b.p - a.p ||
+  a.leg.market.ticker.localeCompare(b.leg.market.ticker) ||
+  a.leg.side.localeCompare(b.leg.side);
+
+/** Confidence-tiered hit-max under caller-registered floors. Deterministic. */
+export function selectSlipV2(
+  candidates: CandidateLegV2[], lattice: LatticeCell[], etWinProbHome: number, floors: V2Floors,
+): SelectionV2 {
+  const eligible = candidates
+    .map((leg) => ({ leg, p: legProbV2(leg, lattice, etWinProbHome) }))
+    .filter((c) => c.p >= floors.leg)
+    .sort(legOrderV2);
+  if (eligible.length < 2) return NO_SLIP_V2;
+
+  const slip: CandidateLegV2[] = [eligible[0].leg];
+  let joint = eligible[0].p;
+  let pool = eligible.slice(1);
+
+  while (slip.length < floors.maxLegs && pool.length > 0) {
+    const scored = pool
+      .map((c) => {
+        const j = jointProbV2([...slip, c.leg], lattice, etWinProbHome);
+        return { ...c, j, conditional: j / joint };
+      })
+      .filter((c) => c.conditional <= REDUNDANCY_CAP && c.j >= floors.joint)
+      .sort(
+        (a, b) =>
+          b.conditional - a.conditional ||
+          a.leg.market.ticker.localeCompare(b.leg.market.ticker) ||
+          a.leg.side.localeCompare(b.leg.side),
+      );
+    if (scored.length === 0) break;
+    slip.push(scored[0].leg);
+    joint = scored[0].j;
+    pool = pool.filter((c) => c.leg !== scored[0].leg);
+  }
+
+  if (slip.length < 2) return NO_SLIP_V2;
+  return { verdict: "slip", legs: slip, jointProb: joint };
+}

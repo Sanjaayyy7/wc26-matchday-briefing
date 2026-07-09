@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import {
   COMBO_SERIES, ENGINE_VERSION_V2, Q_FIRST_HALF, V2_FLOORS, YES_ONLY_SERIES,
-  binomRow, candidateLegsV2, halfLattice, jointProbV2, legProbV2, parseMarketV2, seriesOf,
+  binomRow, candidateLegsV2, halfLattice, jointProbV2, legProbV2, parseMarketV2, selectSlipV2, seriesOf,
   type CandidateLegV2,
 } from "../lib/parlay-v2";
 import { jointProb, legProb, parseMarket, type CandidateLeg, type KalshiMarket } from "../lib/parlay";
@@ -181,5 +181,57 @@ describe("jointProbV2", () => {
     const joint = jointProbV2([a, b], lattice, ET);
     const prod = legProbV2(a, lattice, ET) * legProbV2(b, lattice, ET);
     expect(Math.abs(joint - prod)).toBeGreaterThan(1e-4);
+  });
+});
+
+describe("selectSlipV2", () => {
+  const floors = { leg: 0.75, joint: 0.6, maxLegs: 4 };
+  const pool = candidateLegsV2(
+    ["KXWCGAME-26JUL09FRAMAR-FRA", "KXWCGAME-26JUL09FRAMAR-TIE",
+     "KXWCTOTAL-26JUL09FRAMAR-4", "KXWCTOTAL-26JUL09FRAMAR-5", "KXWCTOTAL-26JUL09FRAMAR-6",
+     "KXWCSPREAD-26JUL09FRAMAR-MAR2", "KXWC1HTOTAL-26JUL09FRAMAR-3", "KXWC1HSPREAD-26JUL09FRAMAR-MAR2",
+     "KXWC1H-26JUL09FRAMAR-FRA", "KXWCADVANCE-26JUL09FRAMAR-FRA"].map((t) => mk(t)),
+    "FRA", "MAR");
+
+  it("emits a deterministic 2-4 leg slip meeting every floor", () => {
+    const sel = selectSlipV2(pool, lattice, ET, floors);
+    expect(sel.verdict).toBe("slip");
+    if (sel.verdict !== "slip") return;
+    expect(sel.legs.length).toBeGreaterThanOrEqual(2);
+    expect(sel.legs.length).toBeLessThanOrEqual(4);
+    expect(sel.jointProb).toBeGreaterThanOrEqual(0.6);
+    for (const leg of sel.legs) expect(legProbV2(leg, lattice, ET)).toBeGreaterThanOrEqual(0.75);
+    const again = selectSlipV2(pool, lattice, ET, floors);
+    expect(again).toEqual(sel); // determinism
+  });
+
+  it("respects maxLegs from floors", () => {
+    const sel = selectSlipV2(pool, lattice, ET, { ...floors, maxLegs: 2 });
+    if (sel.verdict === "slip") expect(sel.legs.length).toBe(2);
+  });
+
+  it("no-slip when floors unreachable, with the registered v2 reason", () => {
+    const sel = selectSlipV2(pool, lattice, ET, { leg: 0.999, joint: 0.99, maxLegs: 4 });
+    expect(sel).toEqual({ verdict: "no-slip", reason: "no 2-leg combo ≥ v2 floors" });
+  });
+
+  it("never selects a NO side of a YES-only series (enforced upstream)", () => {
+    const sel = selectSlipV2(pool, lattice, ET, floors);
+    if (sel.verdict !== "slip") return;
+    for (const leg of sel.legs) {
+      if (YES_ONLY_SERIES.has(seriesOf(leg.market.ticker))) expect(leg.side).toBe("yes");
+    }
+  });
+
+  it("redundancy cap rejects an implied leg", () => {
+    // Synthetic deep-tail totals: NO 'over 7.5' (-8) is near-certain given the
+    // seed NO 'over 8.5' (-9) — conditional P(total≤7 | total≤8) ≈ 0.999 > 0.97.
+    // (Kalshi lists totals only up to -6, but the parser accepts any digit; this
+    // is a pure-engine test.)
+    const tight = candidateLegsV2(
+      ["KXWCTOTAL-26JUL09FRAMAR-8", "KXWCTOTAL-26JUL09FRAMAR-9"].map((t) => mk(t)), "FRA", "MAR");
+    const sel = selectSlipV2(tight, lattice, ET, { leg: 0.5, joint: 0.3, maxLegs: 4 });
+    // both NO legs clear the leg floor, but the second is implied → single leg → no-slip
+    expect(sel.verdict).toBe("no-slip");
   });
 });
