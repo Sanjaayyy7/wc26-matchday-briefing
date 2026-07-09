@@ -1,10 +1,14 @@
 import { describe, expect, it } from "vitest";
 import {
   COMBO_SERIES, ENGINE_VERSION_V2, Q_FIRST_HALF, V2_FLOORS, YES_ONLY_SERIES,
-  binomRow, candidateLegsV2, halfLattice, jointProbV2, legProbV2, parseMarketV2, selectSlipV2, seriesOf,
+  binomRow, candidateLegsV2, comboImpliedProb, halfLattice, jointProbV2, legProbV2,
+  legReasoningV2, parseMarketV2, selectSlipV2, seriesOf,
   type CandidateLegV2,
 } from "../lib/parlay-v2";
-import { jointProb, legProb, parseMarket, type CandidateLeg, type KalshiMarket } from "../lib/parlay";
+import {
+  REASONING_GRAMMAR, jointProb, legProb, legReasoning, parseMarket,
+  type CandidateLeg, type KalshiMarket,
+} from "../lib/parlay";
 import { scoreGrid } from "../lib/poisson-model";
 
 const mk = (ticker: string, title = "t"): KalshiMarket => ({ ticker, title, yesMid: 0.5 });
@@ -233,5 +237,34 @@ describe("selectSlipV2", () => {
     const sel = selectSlipV2(tight, lattice, ET, { leg: 0.5, joint: 0.3, maxLegs: 4 });
     // both NO legs clear the leg floor, but the second is implied → single leg → no-slip
     expect(sel.verdict).toBe("no-slip");
+  });
+});
+
+describe("legReasoningV2", () => {
+  const ctx = { eloDiff: 187, homeAbbr: "FRA", awayAbbr: "MAR" };
+
+  it("matches the v1 grammar for 1H, FT and ADVANCE legs", () => {
+    for (const leg of [no2("KXWC1HTOTAL-26JUL09FRAMAR-3"), yes2("KXWCGAME-26JUL09FRAMAR-FRA"), yes2("KXWCADVANCE-26JUL09FRAMAR-FRA")]) {
+      expect(legReasoningV2(leg, lattice, ET, ctx)).toMatch(REASONING_GRAMMAR);
+    }
+  });
+
+  it("byte-identical to v1 reasoning for a pure 90-minute leg", () => {
+    const t = "KXWCTOTAL-26JUL09FRAMAR-5";
+    const v1 = legReasoning({ market: parseMarket(mk(t), "FRA", "MAR")!, side: "no" }, grid, ET, ctx);
+    expect(legReasoningV2(no2(t), lattice, ET, ctx)).toBe(v1);
+  });
+
+  it("null mid renders 'Kalshi n/a'", () => {
+    const m: KalshiMarket = { ticker: "KXWC1HBTTS-26JUL09FRAMAR-BTTS", title: "t", yesMid: null };
+    const leg: CandidateLegV2 = { market: parseMarketV2(m, "FRA", "MAR")!, side: "no" };
+    expect(legReasoningV2(leg, lattice, ET, ctx)).toContain("Kalshi n/a.");
+  });
+});
+
+describe("comboImpliedProb", () => {
+  it("product of mids; null-propagating", () => {
+    expect(comboImpliedProb([0.5, 0.8])).toBeCloseTo(0.4, 12);
+    expect(comboImpliedProb([0.5, null, 0.8])).toBeNull();
   });
 });

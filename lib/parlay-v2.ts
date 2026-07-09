@@ -3,7 +3,7 @@
 // combo-builder constraints, 2026-07-08). Pre-registered: Q_FIRST_HALF=0.45,
 // LEG floor 0.75, JOINT floor 0.60, 2-4 legs, REDUNDANCY_CAP shared with v1.
 // 3-way moneylines are YES-only (the combo builder offers one price per outcome).
-import { REDUNDANCY_CAP, type KalshiMarket } from "./parlay";
+import { REDUNDANCY_CAP, pct1, signed, type KalshiMarket } from "./parlay";
 
 export const ENGINE_VERSION_V2 = "v2-combo";
 export const Q_FIRST_HALF = 0.45;
@@ -199,4 +199,57 @@ export function selectSlipV2(
 
   if (slip.length < 2) return NO_SLIP_V2;
   return { verdict: "slip", legs: slip, jointProb: joint };
+}
+
+/** Display-only Kalshi combo estimate: product of side-adjusted leg mids.
+ *  Approximate by construction (Kalshi adds vig/fees) — never a selection input. */
+export function comboImpliedProb(mids: Array<number | null>): number | null {
+  let p = 1;
+  for (const m of mids) {
+    if (m === null) return null;
+    p *= m;
+  }
+  return p;
+}
+
+/** Fixed-grammar reasoning, v1 grammar reused. Top scorelines are FULL-TIME
+ *  scorelines: a leg's passing lattice mass is aggregated by (h, a), which for
+ *  90-minute legs reproduces the v1 string byte-for-byte. */
+export function legReasoningV2(
+  leg: CandidateLegV2,
+  lattice: LatticeCell[],
+  etWinProbHome: number,
+  ctx: { eloDiff: number; homeAbbr: string; awayAbbr: string },
+): string {
+  const cellSatisfies = (c: LatticeCell): boolean => {
+    if (leg.market.kind === "reg") return leg.market.pred(c) === (leg.side === "yes");
+    const wantsHome = (leg.market.advanceSide === "home") === (leg.side === "yes");
+    if (c.h > c.a) return wantsHome;
+    if (c.h < c.a) return !wantsHome;
+    return (wantsHome ? etWinProbHome : 1 - etWinProbHome) > 0;
+  };
+
+  const p = legProbV2(leg, lattice, etWinProbHome);
+  const byScoreline = new Map<string, { h: number; a: number; mass: number }>();
+  for (const c of lattice) {
+    if (!cellSatisfies(c)) continue;
+    const key = `${c.h}-${c.a}`;
+    const cur = byScoreline.get(key) ?? { h: c.h, a: c.a, mass: 0 };
+    cur.mass += c.mass;
+    byScoreline.set(key, cur);
+  }
+  const cells = [...byScoreline.values()].filter((c) => c.mass > 0);
+  cells.sort((x, y) => y.mass - x.mass || x.h - y.h || x.a - y.a);
+  const top = cells
+    .slice(0, 3)
+    .map((c) => `${c.h >= c.a ? ctx.homeAbbr : ctx.awayAbbr} ${Math.max(c.h, c.a)}-${Math.min(c.h, c.a)} ${pct1(c.mass)}`)
+    .join(" / ");
+  const mid = leg.market.yesMid;
+  const sideMid = mid === null ? null : leg.side === "yes" ? mid : 1 - mid;
+  const edgePts = sideMid === null ? null : (p - sideMid) * 100;
+  const kalshi =
+    sideMid === null || edgePts === null
+      ? "Kalshi n/a"
+      : `Kalshi ${pct1(sideMid)} (edge ${edgePts >= 0 ? "+" : ""}${edgePts.toFixed(1)})`;
+  return `${leg.market.title} — ${leg.side.toUpperCase()}: model ${pct1(p)}; top scorelines ${top}; Elo ${signed(Math.round(ctx.eloDiff))}; ${kalshi}.`;
 }
