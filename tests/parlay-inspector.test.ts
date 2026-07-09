@@ -60,8 +60,8 @@ describe("inspectSlip", () => {
 // ---- v2 ----
 import { inspectSlipV2, type SlipRecordV2 } from "../scripts/parlay-inspector.mts";
 import {
-  ENGINE_VERSION_V2, Q_FIRST_HALF, V2_FLOORS,
-  candidateLegsV2, comboImpliedProb, halfLattice, legProbV2, legReasoningV2, selectSlipV2,
+  ENGINE_VERSION_V2, ENGINE_VERSION_V2_1, MAX_LEGS_PER_SERIES, Q_FIRST_HALF, V2_FLOORS,
+  candidateLegsV2, comboImpliedProb, halfLattice, jointProbV2, legProbV2, legReasoningV2, selectSlipV2,
 } from "../lib/parlay-v2";
 
 const mkV2 = (ticker: string, yesMid: number | null = 0.5): KalshiMarket => ({ ticker, title: `T ${ticker}`, yesMid });
@@ -143,5 +143,58 @@ describe("inspectSlipV2", () => {
     expect(inspectSlipV2(ok, { markets: [] }, { homeAbbr: "ESP", awayAbbr: "BEL" })).toEqual([]);
     const bad = { ...ok, reason: "" };
     expect(inspectSlipV2(bad, { markets: [] }, { homeAbbr: "ESP", awayAbbr: "BEL" }).length).toBeGreaterThan(0);
+  });
+
+  // ---- v2.1: gate 11 (series uniqueness vs the record's OWN stored rule) ----
+
+  /** Hand-built, internally consistent slip with two SAME-series legs
+   *  (TOTAL-5 no, TOTAL-4 no): clears leg/joint floors and the redundancy cap
+   *  (conditional ≈ 0.87), so gate 11 is the only gate at stake. */
+  function duplicateSeriesSlip(engineVersion: string, maxLegsPerSeries?: number): SlipRecordV2 {
+    const g = scoreGrid(lambdasV2.home, lambdasV2.away, rhoV2);
+    const lat = halfLattice(g, Q_FIRST_HALF);
+    const cands = candidateLegsV2(snapshotV2.markets, ctxV2.homeAbbr, ctxV2.awayAbbr);
+    const picks = ["KXWCTOTAL-26JUL09FRAMAR-5", "KXWCTOTAL-26JUL09FRAMAR-4"].map(
+      (t) => cands.find((c) => c.market.ticker === t && c.side === "no")!,
+    );
+    const legs = picks.map((leg) => ({
+      ticker: leg.market.ticker,
+      side: leg.side,
+      title: leg.market.title,
+      modelProb: legProbV2(leg, lat, etV2),
+      kalshiMid: leg.market.yesMid === null ? null : leg.side === "yes" ? leg.market.yesMid : 1 - leg.market.yesMid,
+      reasoning: legReasoningV2(leg, lat, etV2, { eloDiff: 187, homeAbbr: ctxV2.homeAbbr, awayAbbr: ctxV2.awayAbbr }),
+    }));
+    return {
+      slug: "france-vs-morocco", engineVersion, lockedAt: "2026-07-09T18:00:00.000Z",
+      modelDataThrough: "2026-07-08", eloDiff: 187, lambdas: lambdasV2, rho: rhoV2, etWinProbHome: etV2,
+      qFirstHalf: Q_FIRST_HALF, floors: { ...V2_FLOORS },
+      ...(maxLegsPerSeries === undefined ? {} : { maxLegsPerSeries }),
+      legs, jointProb: jointProbV2(picks, lat, etV2),
+      comboImpliedProb: comboImpliedProb(legs.map((l) => l.kalshiMid)),
+    };
+  }
+
+  it("gate8 accepts v2.1-combo and a v2.1 golden slip passes every gate", () => {
+    const s = { ...goldenSlip(), engineVersion: ENGINE_VERSION_V2_1, maxLegsPerSeries: MAX_LEGS_PER_SERIES };
+    expect(inspectSlipV2(s, snapshotV2, ctxV2)).toEqual([]);
+    const bad = { ...goldenSlip(), engineVersion: "v3-x" };
+    expect(inspectSlipV2(bad, snapshotV2, ctxV2).some((f) => f.startsWith("gate8:"))).toBe(true);
+  });
+
+  it("gate11 fires on duplicate series when the record stores maxLegsPerSeries", () => {
+    const fails = inspectSlipV2(duplicateSeriesSlip(ENGINE_VERSION_V2_1, 1), snapshotV2, ctxV2);
+    expect(fails).toContain('gate11: series "KXWCTOTAL" has 2 legs (max 1)');
+    expect(fails.filter((f) => !f.startsWith("gate11:"))).toEqual([]);
+  });
+
+  it("gate11 skipped for legacy v2-combo records without the stored rule", () => {
+    const fails = inspectSlipV2(duplicateSeriesSlip(ENGINE_VERSION_V2), snapshotV2, ctxV2);
+    expect(fails).toEqual([]);
+  });
+
+  it("v2.1 record missing maxLegsPerSeries fails the stored-inputs gate", () => {
+    const s = { ...goldenSlip(), engineVersion: ENGINE_VERSION_V2_1 };
+    expect(inspectSlipV2(s, snapshotV2, ctxV2).some((f) => f.startsWith("gate9:"))).toBe(true);
   });
 });
