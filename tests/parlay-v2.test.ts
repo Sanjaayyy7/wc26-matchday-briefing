@@ -1,12 +1,20 @@
 import { describe, expect, it } from "vitest";
 import {
   COMBO_SERIES, ENGINE_VERSION_V2, Q_FIRST_HALF, V2_FLOORS, YES_ONLY_SERIES,
-  candidateLegsV2, parseMarketV2, seriesOf, type CandidateLegV2,
+  binomRow, candidateLegsV2, halfLattice, jointProbV2, legProbV2, parseMarketV2, seriesOf,
+  type CandidateLegV2,
 } from "../lib/parlay-v2";
-import type { KalshiMarket } from "../lib/parlay";
+import { jointProb, legProb, parseMarket, type CandidateLeg, type KalshiMarket } from "../lib/parlay";
+import { scoreGrid } from "../lib/poisson-model";
 
 const mk = (ticker: string, title = "t"): KalshiMarket => ({ ticker, title, yesMid: 0.5 });
 const P = (t: string) => parseMarketV2(mk(t), "FRA", "MAR");
+
+const grid = scoreGrid(1.4, 0.9, -0.05);
+const lattice = halfLattice(grid, 0.45);
+const ET = 0.62;
+const yes2 = (t: string): CandidateLegV2 => ({ market: parseMarketV2(mk(t), "FRA", "MAR")!, side: "yes" });
+const no2 = (t: string): CandidateLegV2 => ({ market: parseMarketV2(mk(t), "FRA", "MAR")!, side: "no" });
 
 describe("v2 registry", () => {
   it("pre-registered constants", () => {
@@ -92,5 +100,86 @@ describe("candidateLegsV2", () => {
     expect(bySide("KXWCTOTAL-26JUL09FRAMAR-4").sort()).toEqual(["no", "yes"]);
     expect(legs).toHaveLength(4);
     expect(seriesOf("KXWC1HTOTAL-26JUL09FRAMAR-2")).toBe("KXWC1HTOTAL");
+  });
+});
+
+describe("halfLattice", () => {
+  it("binomRow: Pascal weights, q edge cases exact", () => {
+    expect(binomRow(2, 0.5)).toEqual([0.25, 0.5, 0.25]);
+    expect(binomRow(3, 0)).toEqual([1, 0, 0, 0]);
+    expect(binomRow(3, 1)).toEqual([0, 0, 0, 1]);
+  });
+
+  it("total lattice mass equals total grid mass", () => {
+    const latticeMass = lattice.reduce((s, c) => s + c.mass, 0);
+    const gridMass = grid.flat().reduce((s, m) => s + m, 0);
+    expect(Math.abs(latticeMass - gridMass)).toBeLessThan(1e-12);
+  });
+
+  it("marginal over (h1, a1) reproduces each grid cell", () => {
+    const marg = new Map<string, number>();
+    for (const c of lattice) marg.set(`${c.h}-${c.a}`, (marg.get(`${c.h}-${c.a}`) ?? 0) + c.mass);
+    for (let h = 0; h < grid.length; h++)
+      for (let a = 0; a < grid.length; a++)
+        if (grid[h][a] > 0) expect(Math.abs((marg.get(`${h}-${a}`) ?? 0) - grid[h][a])).toBeLessThan(1e-12);
+  });
+
+  it("q=0 puts all 1H mass on 0-0; q=1 makes 1H ≡ FT", () => {
+    for (const c of halfLattice(grid, 0)) if (c.mass > 0) { expect(c.h1).toBe(0); expect(c.a1).toBe(0); }
+    for (const c of halfLattice(grid, 1)) if (c.mass > 0) { expect(c.h1).toBe(c.h); expect(c.a1).toBe(c.a); }
+  });
+});
+
+describe("jointProbV2", () => {
+  it("90-minute legs price identically to the v1 engine", () => {
+    const tickers = ["KXWCGAME-26JUL09FRAMAR-FRA", "KXWCTOTAL-26JUL09FRAMAR-4", "KXWCSPREAD-26JUL09FRAMAR-FRA2", "KXWCBTTS-26JUL09FRAMAR-BTTS"];
+    for (const t of tickers) {
+      const v1: CandidateLeg = { market: parseMarket(mk(t), "FRA", "MAR")!, side: "no" };
+      expect(Math.abs(legProbV2(no2(t), lattice, ET) - legProb(v1, grid, ET))).toBeLessThan(1e-12);
+    }
+    const v1Joint = jointProb(
+      [{ market: parseMarket(mk(tickers[0]), "FRA", "MAR")!, side: "yes" },
+       { market: parseMarket(mk(tickers[1]), "FRA", "MAR")!, side: "no" }],
+      grid, ET);
+    expect(Math.abs(jointProbV2([yes2(tickers[0]), no2(tickers[1])], lattice, ET) - v1Joint)).toBeLessThan(1e-12);
+  });
+
+  it("matches brute-force enumeration over the lattice (mixed 1H + FT + ADVANCE)", () => {
+    const legs = [yes2("KXWCADVANCE-26JUL09FRAMAR-FRA"), no2("KXWC1HTOTAL-26JUL09FRAMAR-3"), no2("KXWCTOTAL-26JUL09FRAMAR-5")];
+    let p = 0;
+    for (const c of lattice) {
+      let cell = c.mass;
+      let advFactor: number | null = null;
+      for (const leg of legs) {
+        if (leg.market.kind === "reg") {
+          if (leg.market.pred(c) !== (leg.side === "yes")) { cell = 0; break; }
+        } else {
+          const wantsHome = (leg.market.advanceSide === "home") === (leg.side === "yes");
+          if (c.h > c.a) { if (!wantsHome) { cell = 0; break; } }
+          else if (c.h < c.a) { if (wantsHome) { cell = 0; break; } }
+          else { advFactor = wantsHome ? ET : 1 - ET; }
+        }
+      }
+      p += cell * (advFactor !== null && cell > 0 ? advFactor : cell > 0 ? 1 : 0);
+    }
+    expect(Math.abs(jointProbV2(legs, lattice, ET) - p)).toBeLessThan(1e-12);
+  });
+
+  it("hand case: 1H-TIE ∧ FT France on a two-cell grid", () => {
+    // grid: P(1,0)=0.6, P(2,0)=0.4 with q=0.5:
+    // (1,0): 1H tie needs h1=0 → 0.5; FT France always true → 0.6·0.5 = 0.30
+    // (2,0): 1H tie needs h1=0 → 0.25;                       → 0.4·0.25 = 0.10
+    const tiny: number[][] = [[0, 0, 0], [0.6, 0, 0], [0.4, 0, 0]];
+    const lat = halfLattice(tiny, 0.5);
+    const p = jointProbV2([yes2("KXWC1H-26JUL09FRAMAR-TIE"), yes2("KXWCGAME-26JUL09FRAMAR-FRA")], lat, 0.5);
+    expect(Math.abs(p - 0.4)).toBeLessThan(1e-12);
+  });
+
+  it("cross-half correlation is real: joint ≠ product of marginals", () => {
+    const a = yes2("KXWC1HTOTAL-26JUL09FRAMAR-1"); // over 0.5 1H goals
+    const b = no2("KXWCTOTAL-26JUL09FRAMAR-3");    // under 2.5 FT goals
+    const joint = jointProbV2([a, b], lattice, ET);
+    const prod = legProbV2(a, lattice, ET) * legProbV2(b, lattice, ET);
+    expect(Math.abs(joint - prod)).toBeGreaterThan(1e-4);
   });
 });

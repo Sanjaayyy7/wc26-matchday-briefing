@@ -93,3 +93,60 @@ export function candidateLegsV2(markets: KalshiMarket[], homeAbbr: string, awayA
   }
   return out;
 }
+
+export type LatticeCell = { h1: number; a1: number; h: number; a: number; mass: number };
+
+/** C(n,k)·q^k·(1−q)^(n−k) for k = 0..n, Pascal recurrence; exact at q = 0 and 1. */
+export function binomRow(n: number, q: number): number[] {
+  if (q <= 0) return Array.from({ length: n + 1 }, (_, k) => (k === 0 ? 1 : 0));
+  if (q >= 1) return Array.from({ length: n + 1 }, (_, k) => (k === n ? 1 : 0));
+  const row: number[] = [(1 - q) ** n];
+  for (let k = 1; k <= n; k++) row.push(row[k - 1] * ((n - k + 1) / k) * (q / (1 - q)));
+  return row;
+}
+
+/** 4-dim half-split lattice: DC grid stays ground truth; each goal lands in the
+ *  first half independently with probability q (spec §3, Q_FIRST_HALF pre-registered). */
+export function halfLattice(grid: number[][], q: number): LatticeCell[] {
+  const cells: LatticeCell[] = [];
+  for (let h = 0; h < grid.length; h++) {
+    const bh = binomRow(h, q);
+    for (let a = 0; a < grid.length; a++) {
+      const mass = grid[h][a];
+      if (mass === 0) continue;
+      const ba = binomRow(a, q);
+      for (let h1 = 0; h1 <= h; h1++)
+        for (let a1 = 0; a1 <= a; a1++) cells.push({ h1, a1, h, a, mass: mass * bh[h1] * ba[a1] });
+    }
+  }
+  return cells;
+}
+
+/** Exact joint over the lattice. Advance legs: win/loss cells by FT sign, draw
+ *  cells by the shared ET Bernoulli — same convention as the v1 engine. */
+export function jointProbV2(legs: CandidateLegV2[], lattice: LatticeCell[], etWinProbHome: number): number {
+  let p = 0;
+  for (const c of lattice) {
+    let pass = true;
+    let advFactor: number | null = null;
+    for (const leg of legs) {
+      if (leg.market.kind === "reg") {
+        if (leg.market.pred(c) !== (leg.side === "yes")) { pass = false; break; }
+      } else {
+        const wantsHome = (leg.market.advanceSide === "home") === (leg.side === "yes");
+        if (c.h > c.a && !wantsHome) { pass = false; break; }
+        if (c.h < c.a && wantsHome) { pass = false; break; }
+        if (c.h === c.a) {
+          const f = wantsHome ? etWinProbHome : 1 - etWinProbHome;
+          if (advFactor === null) advFactor = f;
+          else if (advFactor !== f) { pass = false; break; }
+        }
+      }
+    }
+    if (pass) p += c.mass * (advFactor ?? 1);
+  }
+  return p;
+}
+
+export const legProbV2 = (leg: CandidateLegV2, lattice: LatticeCell[], etWinProbHome: number): number =>
+  jointProbV2([leg], lattice, etWinProbHome);
