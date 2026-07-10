@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-10T02:44:41.793Z",
+  "generatedAt": "2026-07-10T03:05:47.080Z",
   "official": {
     "rows": [
       {
@@ -1673,6 +1673,19 @@
     },
     {
       "version": "v2.1-combo",
+      "slips": 3,
+      "noSlips": 0,
+      "graded": 0,
+      "slipHits": 0,
+      "slipHitRate": null,
+      "legHits": 0,
+      "legs": 0,
+      "legHitRate": null,
+      "meanLockedJoint": null,
+      "realizedSlipHitRate": null
+    },
+    {
+      "version": "v3-value",
       "slips": 3,
       "noSlips": 0,
       "graded": 0,

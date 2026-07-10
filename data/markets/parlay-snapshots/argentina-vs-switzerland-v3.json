@@ -1,0 +1,235 @@
+{
+ "fetchedAt": "2026-07-10T03:03:03.045Z",
+ "markets": [
+  {
+   "ticker": "KXWCGAME-26JUL11ARGSUI-TIE",
+   "title": "Argentina vs Switzerland Winner?",
+   "yesMid": 0.265
+  },
+  {
+   "ticker": "KXWCGAME-26JUL11ARGSUI-SUI",
+   "title": "Argentina vs Switzerland Winner?",
+   "yesMid": 0.155
+  },
+  {
+   "ticker": "KXWCGAME-26JUL11ARGSUI-ARG",
+   "title": "Argentina vs Switzerland Winner?",
+   "yesMid": 0.575
+  },
+  {
+   "ticker": "KXWCSPREAD-26JUL11ARGSUI-SUI3",
+   "title": "Switzerland wins by more than 2.5 goals?",
+   "yesMid": 0.015
+  },
+  {
+   "ticker": "KXWCSPREAD-26JUL11ARGSUI-ARG3",
+   "title": "Argentina wins by more than 2.5 goals?",
+   "yesMid": 0.125
+  },
+  {
+   "ticker": "KXWCSPREAD-26JUL11ARGSUI-SUI2",
+   "title": "Switzerland wins by more than 1.5 goals?",
+   "yesMid": 0.045
+  },
+  {
+   "ticker": "KXWCSPREAD-26JUL11ARGSUI-ARG2",
+   "title": "Argentina wins by more than 1.5 goals?",
+   "yesMid": 0.295
+  },
+  {
+   "ticker": "KXWCTOTAL-26JUL11ARGSUI-6",
+   "title": "Will over 5.5 goals be scored?",
+   "yesMid": 0.035
+  },
+  {
+   "ticker": "KXWCTOTAL-26JUL11ARGSUI-1",
+   "title": "Will over 0.5 goals be scored?",
+   "yesMid": 0.905
+  },
+  {
+   "ticker": "KXWCTOTAL-26JUL11ARGSUI-4",
+   "title": "Will over 3.5 goals be scored?",
+   "yesMid": 0.215
+  },
+  {
+   "ticker": "KXWCTOTAL-26JUL11ARGSUI-2",
+   "title": "Will over 1.5 goals be scored?",
+   "yesMid": 0.695
+  },
+  {
+   "ticker": "KXWCTOTAL-26JUL11ARGSUI-5",
+   "title": "Will over 4.5 goals be scored?",
+   "yesMid": 0.095
+  },
+  {
+   "ticker": "KXWCTOTAL-26JUL11ARGSUI-3",
+   "title": "Will over 2.5 goals be scored?",
+   "yesMid": 0.415
+  },
+  {
+   "ticker": "KXWCBTTS-26JUL11ARGSUI-BTTS",
+   "title": "Will both teams score?",
+   "yesMid": 0.46499999999999997
+  },
+  {
+   "ticker": "KXWC1H-26JUL11ARGSUI-ARG",
+   "title": "Will Argentina win the 1st Half?",
+   "yesMid": 0.385
+  },
+  {
+   "ticker": "KXWC1H-26JUL11ARGSUI-TIE",
+   "title": "Will Tie be the result of the 1st Half?",
+   "yesMid": 0.455
+  },
+  {
+   "ticker": "KXWC1H-26JUL11ARGSUI-SUI",
+   "title": "Will Switzerland win the 1st Half?",
+   "yesMid": 0.155
+  },
+  {
+   "ticker": "KXWC1HSPREAD-26JUL11ARGSUI-SUI2",
+   "title": "Switzerland wins by more than 1.5 goals in the 1st Half?",
+   "yesMid": 0.02
+  },
+  {
+   "ticker": "KXWC1HSPREAD-26JUL11ARGSUI-ARG2",
+   "title": "Argentina wins by more than 1.5 goals in the 1st Half?",
+   "yesMid": 0.11499999999999999
+  },
+  {
+   "ticker": "KXWC1HTOTAL-26JUL11ARGSUI-2",
+   "title": "Over 1.5 1H goals scored?",
+   "yesMid": 0.275
+  },
+  {
+   "ticker": "KXWC1HTOTAL-26JUL11ARGSUI-3",
+   "title": "Over 2.5 1H goals scored?",
+   "yesMid": 0.08499999999999999
+  },
+  {
+   "ticker": "KXWC1HTOTAL-26JUL11ARGSUI-1",
+   "title": "Over 0.5 1H goals scored?",
+   "yesMid": 0.635
+  },
+  {
+   "ticker": "KXWC1HTOTAL-26JUL11ARGSUI-4",
+   "title": "Over 3.5 1H goals scored?",
+   "yesMid": 0.02
+  },
+  {
+   "ticker": "KXWC1HBTTS-26JUL11ARGSUI-BTTS",
+   "title": "Will both teams score in the 1st Half?",
+   "yesMid": 0.15000000000000002
+  },
+  {
+   "ticker": "KXWCADVANCE-26JUL11ARGSUI-SUI",
+   "title": "Argentina vs Switzerland: To Advance",
+   "yesMid": 0.275
+  },
+  {
+   "ticker": "KXWCADVANCE-26JUL11ARGSUI-ARG",
+   "title": "Argentina vs Switzerland: To Advance",
+   "yesMid": 0.735
+  },
+  {
+   "ticker": "KXWCGOAL-26JUL11ARGSUI-ARGLMARTI10-3",
+   "title": "Lautaro Martinez: 3+ goals",
+   "yesMid": 0.01
+  },
+  {
+   "ticker": "KXWCGOAL-26JUL11ARGSUI-SUIGXHAKA34-1",
+   "title": "Granit Xhaka: 1+ goals",
+   "yesMid": 0.060000000000000005
+  },
+  {
+   "ticker": "KXWCGOAL-26JUL11ARGSUI-ARGJALVAR19-2",
+   "title": "Julian Alvarez: 2+ goals",
+   "yesMid": 0.060000000000000005
+  },
+  {
+   "ticker": "KXWCGOAL-26JUL11ARGSUI-SUIMAKANJ25-1",
+   "title": "Manuel Akanji: 1+ goals",
+   "yesMid": 0.025
+  },
+  {
+   "ticker": "KXWCGOAL-26JUL11ARGSUI-SUIRVARGA11-2",
+   "title": "Ruben Vargas: 2+ goals",
+   "yesMid": 0.015
+  },
+  {
+   "ticker": "KXWCGOAL-26JUL11ARGSUI-ARGAMACA10-2",
+   "title": "Alexis Mac Allister: 2+ goals",
+   "yesMid": 0.03
+  },
+  {
+   "ticker": "KXWCGOAL-26JUL11ARGSUI-ARGEFERNA8-2",
+   "title": "Enzo Fernandez: 2+ goals",
+   "yesMid": 0.02
+  },
+  {
+   "ticker": "KXWCGOAL-26JUL11ARGSUI-SUIBEMBOL7-2",
+   "title": "Breel Embolo: 2+ goals",
+   "yesMid": 0.02
+  },
+  {
+   "ticker": "KXWCGOAL-26JUL11ARGSUI-SUIRFREUL8-1",
+   "title": "Remo Freuler: 1+ goals",
+   "yesMid": 0.04
+  },
+  {
+   "ticker": "KXWCGOAL-26JUL11ARGSUI-ARGLMESSI10-3",
+   "title": "Lionel Messi: 3+ goals",
+   "yesMid": 0.035
+  },
+  {
+   "ticker": "KXWCGOAL-26JUL11ARGSUI-ARGLMARTI10-2",
+   "title": "Lautaro Martinez: 2+ goals",
+   "yesMid": 0.060000000000000005
+  },
+  {
+   "ticker": "KXWCGOAL-26JUL11ARGSUI-SUIRVARGA11-1",
+   "title": "Ruben Vargas: 1+ goals",
+   "yesMid": 0.1
+  },
+  {
+   "ticker": "KXWCGOAL-26JUL11ARGSUI-ARGEFERNA8-1",
+   "title": "Enzo Fernandez: 1+ goals",
+   "yesMid": 0.125
+  },
+  {
+   "ticker": "KXWCGOAL-26JUL11ARGSUI-ARGLMARTI10-1",
+   "title": "Lautaro Martinez: 1+ goals",
+   "yesMid": 0.28500000000000003
+  },
+  {
+   "ticker": "KXWCGOAL-26JUL11ARGSUI-SUIBEMBOL7-1",
+   "title": "Breel Embolo: 1+ goals",
+   "yesMid": 0.175
+  },
+  {
+   "ticker": "KXWCGOAL-26JUL11ARGSUI-ARGLMESSI10-1",
+   "title": "Lionel Messi: 1+ goals",
+   "yesMid": 0.505
+  },
+  {
+   "ticker": "KXWCGOAL-26JUL11ARGSUI-ARGAMACA10-1",
+   "title": "Alexis Mac Allister: 1+ goals",
+   "yesMid": 0.1
+  },
+  {
+   "ticker": "KXWCGOAL-26JUL11ARGSUI-ARGJALVAR19-1",
+   "title": "Julian Alvarez: 1+ goals",
+   "yesMid": 0.27
+  },
+  {
+   "ticker": "KXWCGOAL-26JUL11ARGSUI-ARGLMESSI10-2",
+   "title": "Lionel Messi: 2+ goals",
+   "yesMid": 0.155
+  },
+  {
+   "ticker": "KXWCGOAL-26JUL11ARGSUI-ARGJALVAR19-3",
+   "title": "Julian Alvarez: 3+ goals",
+   "yesMid": 0.03
+  }
+ ]
+}
