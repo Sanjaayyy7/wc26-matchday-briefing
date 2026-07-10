@@ -79,5 +79,15 @@ describe("engine version rendering", () => {
     );
     expect(v21Html).not.toContain("pre category-rule");
     expect(v21Html).not.toContain("v1 engine");
+    expect(v21Html).toContain("superseded by the v3 value engine");
+  });
+
+  it("v3 slips carry no engine note and show app build steps", () => {
+    const v3Html = renderToStaticMarkup(
+      <ParlaySlipCard slip={{ ...gradedMiss, engineVersion: "v3-value", comboImpliedProb: 0.32, jointProb: 0.45 }} />,
+    );
+    expect(v3Html).not.toContain("superseded");
+    expect(v3Html).not.toContain("pre category-rule");
+    expect(v3Html).toContain("Build it in the Kalshi app");
   });
 });

@@ -118,4 +118,12 @@ describe("engine version mapping", () => {
     expect(views[2].engineVersion).toBe("v1");
     expect(views[3].engineVersion).toBe("v1");
   });
+
+  it("maps v3-value unchanged", () => {
+    const vRows: ParlaySlipRow[] = [
+      { slug: "france-vs-morocco", lockedAt: "2026-07-09T22:00:00.000Z", engineVersion: "v3-value", legs: [leg("A"), leg("B")], jointProb: 0.45 },
+    ];
+    const views = buildParlayViews(vRows, fixtures, clubName);
+    expect(views[0].engineVersion).toBe("v3-value");
+  });
 });

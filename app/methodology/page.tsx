@@ -75,10 +75,16 @@ export default function MethodologyPage() {
               produce honest no-slip days. Combos allow at most one leg per market category;
               verified against the Kalshi collections API on 2026-07-09 — the engine was bumped to
               v2.1-combo that day to enforce the rule, and earlier v2-combo slips are marked legacy
-              since they are not purchasable as one ticket under it. Legs grade on the 90-minute
-              score, half-time score, or actual winner per market window. The extra-time share
-              behind advancement pricing stays the simulator Elo logistic — consistency over false
-              precision. Kalshi mids never influence selection.
+              since they are not purchasable as one ticket under it. Later that day the v3 value
+              engine replaced the hit-first profile: goalscorer markets joined the universe (priced
+              as a Binomial share of team goals from World Cup goals + xG and the predicted lineup),
+              regulation moneyline and to-advance were registered as mutually exclusive in one
+              ticket, and selection now maximizes edge over the product of lock-time Kalshi mids
+              under pre-registered bands (legs 50–90%, joint 30–60%, edge ≥ 3 pts) — a registered
+              principle change: mids benchmark v3 selection while model probabilities stay pure
+              model. Legs grade on the 90-minute score, half-time score, recorded scorers, or actual
+              winner per market window. The extra-time share behind advancement pricing stays the
+              simulator Elo logistic — consistency over false precision.
             </Principle>
           </div>
         </CanvasSection>

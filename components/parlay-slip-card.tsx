@@ -5,6 +5,7 @@ import { StageChip } from "@/components/stage-chip";
 import { VerdictChip } from "@/components/verdict-chip";
 import { verdictVar } from "@/lib/kit-color";
 import type { ParlayLegView, ParlaySlipView } from "@/lib/parlay-view";
+import { buildStep } from "@/lib/parlay-build-steps";
 
 const pct = (x: number): string => `${(x * 100).toFixed(1)}%`;
 
@@ -65,6 +66,11 @@ export function ParlaySlipCard({ slip }: { slip: ParlaySlipView }) {
           pre category-rule — legs not combinable as one ticket
         </p>
       )}
+      {slip.engineVersion === "v2.1-combo" && (
+        <p className="mt-1 text-micro uppercase tracking-widest text-[var(--ink-faint)]">
+          hit-first profile — superseded by the v3 value engine
+        </p>
+      )}
 
       {slip.status === "no-slip" ? (
         <p className="mt-3 text-caption text-[var(--ink-muted)]">
@@ -100,6 +106,18 @@ export function ParlaySlipCard({ slip }: { slip: ParlaySlipView }) {
               {slip.legs.map((leg) => (
                 <li key={leg.ticker} className="text-caption tabular text-[var(--ink-muted)]">
                   {leg.reasoning}
+                </li>
+              ))}
+            </ul>
+          </details>
+          <details className="mt-1">
+            <summary className="cursor-pointer text-label text-[var(--ink-muted)]">
+              Build it in the Kalshi app
+            </summary>
+            <ul className="mt-2 space-y-1">
+              {slip.legs.map((leg) => (
+                <li key={leg.ticker} className="text-caption tabular text-[var(--ink-muted)]">
+                  {buildStep(leg)}
                 </li>
               ))}
             </ul>
