@@ -1,13 +1,16 @@
 // Grades locked parlay slips post-FT. Reg-time legs grade on the 90' score
 // (same knockout semantics as prediction grading); ADVANCE legs on winnerId;
-// v2 first-half legs on the half-time score (ht in knockout-results.json) —
-// missing HT leaves the slip pending, never guessed from the FT score.
+// v2+ first-half legs on the half-time score (ht in knockout-results.json);
+// v3 goalscorer legs on the row's goals list (full-match scorers incl. ET) —
+// missing HT/goals data leaves the slip pending, never guessed.
 // Appends `result` only — locked fields are immutable. Idempotent.
 import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { appDir, fixtures } from "./shared.mts";
 import { parseMarket } from "../lib/parlay";
-import { ENGINE_VERSION_V2, ENGINE_VERSION_V2_1, parseMarketV2 } from "../lib/parlay-v2";
+import { ENGINE_VERSION_V2, ENGINE_VERSION_V2_1, parseMarketV2, seriesOf } from "../lib/parlay-v2";
+import { ENGINE_VERSION_V3 } from "../lib/parlay-v3";
+import { normalizeName, scorerNameFromTitle } from "./player-model.mts";
 
 export function gradeLeg(
   leg: { ticker: string; side: "yes" | "no" },
@@ -40,6 +43,25 @@ export function gradeLegV2(
   return leg.side === "yes" ? yesOutcome : !yesOutcome;
 }
 
+export type ScorerGoals = Array<{ side: "home" | "away"; player: string; count: number }>;
+
+/** GOAL legs grade from the knockout row's goals list: a present list is the
+ *  complete scorer record (unlisted starters scored 0); an absent list leaves
+ *  the leg pending. Strike k comes from the ticker, the player from the title. */
+export function gradeScorerLeg(
+  leg: { ticker: string; side: "yes" | "no"; title?: string },
+  goals: ScorerGoals | undefined,
+): boolean | null {
+  if (goals === undefined) return null;
+  const parts = leg.ticker.split("-");
+  const k = Number(parts[3]);
+  if (parts.length !== 4 || !Number.isInteger(k) || k < 1 || !leg.title) return null;
+  const who = normalizeName(scorerNameFromTitle(leg.title));
+  const entry = goals.find((g) => normalizeName(g.player) === who);
+  const yesOutcome = (entry?.count ?? 0) >= k;
+  return leg.side === "yes" ? yesOutcome : !yesOutcome;
+}
+
 const PARLAYS_PATH = path.join(appDir, "data", "parlays.json");
 
 function main(): void {
@@ -58,6 +80,7 @@ function main(): void {
     winnerId: string;
     after: string;
     ht?: { home: number; away: number };
+    goals?: Array<{ side: "home" | "away"; player: string; count: number }>;
   }>;
   let graded = 0;
   for (const slip of slips) {
@@ -72,10 +95,12 @@ function main(): void {
     const a1 = row?.ht ? row.ht.away : null;
     const ctx = { h90, a90, advancedHome, homeAbbr: f.homeId.toUpperCase(), awayAbbr: f.awayId.toUpperCase() };
     const v = (slip as { engineVersion?: string }).engineVersion;
-    const isV2 = v === ENGINE_VERSION_V2 || v === ENGINE_VERSION_V2_1;
-    const legs = (slip.legs as Array<{ ticker: string; side: "yes" | "no" }>).map((l) => ({
+    const isV2 = v === ENGINE_VERSION_V2 || v === ENGINE_VERSION_V2_1 || v === ENGINE_VERSION_V3;
+    const legs = (slip.legs as Array<{ ticker: string; side: "yes" | "no"; title?: string }>).map((l) => ({
       ticker: l.ticker,
-      hit: isV2 ? gradeLegV2(l, { ...ctx, h1, a1 }) : gradeLeg(l, ctx),
+      hit: v === ENGINE_VERSION_V3 && seriesOf(l.ticker) === "KXWCGOAL"
+        ? gradeScorerLeg(l, row?.goals)
+        : isV2 ? gradeLegV2(l, { ...ctx, h1, a1 }) : gradeLeg(l, ctx),
     }));
     if (legs.some((l) => l.hit === null)) {
       console.error(

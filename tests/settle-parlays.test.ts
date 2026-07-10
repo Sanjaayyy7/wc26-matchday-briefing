@@ -1,6 +1,6 @@
 // tests/settle-parlays.test.ts
 import { describe, expect, it } from "vitest";
-import { gradeLeg, gradeLegV2 } from "../scripts/settle-parlays.mts";
+import { gradeLeg, gradeLegV2, gradeScorerLeg } from "../scripts/settle-parlays.mts";
 import { ENGINE_VERSION_V2, ENGINE_VERSION_V2_1 } from "../lib/parlay-v2";
 
 const ctx90 = { h90: 0, a90: 0, advancedHome: true, homeAbbr: "SUI", awayAbbr: "COL" };
@@ -68,5 +68,27 @@ describe("v2.1 grading (same path as v2-combo)", () => {
     const base = { h90: 2, a90: 1, h1: 1, a1: 0, advancedHome: true, homeAbbr: "FRA", awayAbbr: "MAR" };
     expect(gradeLegV2({ ticker: "KXWC1HTOTAL-26JUL09FRAMAR-1", side: "yes" }, base)).toBe(true); // 1 1H goal ≥ 1
     expect(gradeLegV2({ ticker: "KXWC1H-26JUL09FRAMAR-FRA", side: "yes" }, base)).toBe(true);
+  });
+});
+
+describe("gradeScorerLeg (v3)", () => {
+  const goals = [
+    { side: "home" as const, player: "Kylian Mbappé", count: 1 },
+    { side: "home" as const, player: "Ousmane Dembélé", count: 1 },
+  ];
+  const leg = (ticker: string, title: string) => ({ ticker, side: "yes" as const, title });
+
+  it("grades strikes against the row's scorer counts (diacritics-insensitive)", () => {
+    expect(gradeScorerLeg(leg("KXWCGOAL-26JUL09FRAMAR-FRAKMBAP10-1", "Kylian Mbappe: 1+ goals"), goals)).toBe(true);
+    expect(gradeScorerLeg(leg("KXWCGOAL-26JUL09FRAMAR-FRAKMBAP10-2", "Kylian Mbappe: 2+ goals"), goals)).toBe(false);
+  });
+
+  it("a listed match with no entry for the player grades as 0 goals", () => {
+    expect(gradeScorerLeg(leg("KXWCGOAL-26JUL09FRAMAR-FRAAGRIE7-1", "Antoine Griezmann: 1+ goals"), goals)).toBe(false);
+  });
+
+  it("missing goals data leaves the leg pending; malformed legs are ungradable", () => {
+    expect(gradeScorerLeg(leg("KXWCGOAL-26JUL09FRAMAR-FRAKMBAP10-1", "Kylian Mbappe: 1+ goals"), undefined)).toBeNull();
+    expect(gradeScorerLeg({ ticker: "KXWCGOAL-26JUL09FRAMAR-BAD", side: "yes" }, goals)).toBeNull();
   });
 });

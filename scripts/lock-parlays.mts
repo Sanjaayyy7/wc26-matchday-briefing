@@ -1,23 +1,29 @@
 // Locks one model-optimized parlay slip per upcoming fixture into
 // data/parlays.json (immutable, append-only) + full market snapshot per slug.
-// Selection is pure model (hit-max); Kalshi mids are display/benchmark only.
 // Refuses past kickoffs. Idempotent per (slug, engineVersion).
-// v2.1: lock emits engineVersion "v2.1-combo" — one leg per series, per
-// Kalshi's combo rule (per-event size_max=1, collections API 2026-07-09).
-// v1 and v2-combo entries are history.
+// v3: lock emits engineVersion "v3-value" — value profile (edge-max under the
+// registered constraints, spec 2026-07-09). REGISTERED PRINCIPLE CHANGE: v3
+// selection uses lock-time Kalshi mids as the value benchmark; model
+// probabilities remain pure model. Goalscorers priced from SportsAPI Pro
+// predicted XI shares (SPORTSAPIPRO_API_KEY; degrades to 9 series without it).
+// v1, v2-combo, and v2.1-combo entries are history.
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { appDir, fixtures, teams, kalshiEventCode } from "./shared.mts";
 import { lambdasFromElo, scoreGrid, advancementProb, summarizeGrid, type ModelParams } from "../lib/poisson-model";
 import type { KalshiMarket } from "../lib/parlay";
+import { COMBO_SERIES, Q_FIRST_HALF, halfLattice } from "../lib/parlay-v2";
 import {
-  COMBO_SERIES, ENGINE_VERSION_V2_1, MAX_LEGS_PER_SERIES, Q_FIRST_HALF, V2_FLOORS,
-  candidateLegsV2, comboImpliedProb, halfLattice, legProbV2, legReasoningV2, selectSlipV2,
-} from "../lib/parlay-v2";
+  COMBO_SERIES_V3, ENGINE_VERSION_V3, V3_CONSTRAINTS,
+  candidateLegsV3, legProbV3, legReasoningV3, selectSlipV3,
+  type PlayerModel, type PlayerShare,
+} from "../lib/parlay-v3";
+import { buildPlayerModel, resolveSapMatchId } from "./player-model.mts";
 
 const API = "https://api.elections.kalshi.com/trade-api/v2";
 const HOSTS = ["United States", "Canada", "Mexico"];
 export const PARLAY_SERIES_V2 = COMBO_SERIES;
+export const PARLAY_SERIES_V3 = COMBO_SERIES_V3;
 
 export function lockedSlugs(existing: Array<{ slug: string; engineVersion?: string }>, version: string): Set<string> {
   return new Set(existing.filter((e) => e.engineVersion === version).map((e) => e.slug));
@@ -26,6 +32,7 @@ export function lockedSlugs(existing: Array<{ slug: string; engineVersion?: stri
 /** @deprecated legacy v2-combo snapshot filename — inspector-compat only. */
 export const snapshotFileV2 = (slug: string): string => `${slug}-v2.json`;
 export const snapshotFileV21 = (slug: string): string => `${slug}-v2.1.json`;
+export const snapshotFileV3 = (slug: string): string => `${slug}-v3.json`;
 
 export function marketMid(m: { yes_bid_dollars?: string; yes_ask_dollars?: string; last_price_dollars?: string }): number | null {
   const bid = Number(m.yes_bid_dollars ?? "0");
@@ -63,25 +70,29 @@ async function main(): Promise<void> {
   const existing: Array<{ slug: string; engineVersion?: string }> = existsSync(PARLAYS_PATH)
     ? JSON.parse(readFileSync(PARLAYS_PATH, "utf8"))
     : [];
-  const have = lockedSlugs(existing, ENGINE_VERSION_V2_1);
+  const have = lockedSlugs(existing, ENGINE_VERSION_V3);
   const now = Date.now();
   const upcoming = fixtures().filter(
     (f) => !have.has(f.slug) && new Date(f.kickoffISO).getTime() > now && f.stage !== "group",
   );
+  const sapKey = process.env.SPORTSAPIPRO_API_KEY ?? "";
+  if (!sapKey) {
+    console.error("[lock-parlays] SPORTSAPIPRO_API_KEY missing — goalscorer legs disabled this run");
+  }
 
   const out: unknown[] = [...existing];
   let added = 0;
   for (const f of upcoming) {
     const code = kalshiEventCode(f);
     const all: KalshiMarket[] = [];
-    for (const s of PARLAY_SERIES_V2) all.push(...(await fetchSeries(s, code)));
+    for (const s of PARLAY_SERIES_V3) all.push(...(await fetchSeries(s, code)));
     if (all.length === 0) {
       console.error(`[lock-parlays] ${f.slug}: Kalshi returned no markets — skipping (retry later)`);
       continue;
     }
     mkdirSync(SNAP_DIR, { recursive: true });
     writeFileSync(
-      path.join(SNAP_DIR, snapshotFileV21(f.slug)),
+      path.join(SNAP_DIR, snapshotFileV3(f.slug)),
       `${JSON.stringify({ fetchedAt: new Date().toISOString(), markets: all }, null, 1)}\n`,
     );
 
@@ -103,26 +114,42 @@ async function main(): Promise<void> {
     const homeAbbr = f.homeId.toUpperCase();
     const awayAbbr = f.awayId.toUpperCase();
     const latticeCells = halfLattice(grid, Q_FIRST_HALF);
-    const candidates = candidateLegsV2(all, homeAbbr, awayAbbr);
 
-    const sel = selectSlipV2(candidates, latticeCells, etWinProbHome, V2_FLOORS);
+    let playerModel: PlayerModel | null = null;
+    if (sapKey) {
+      try {
+        const sapId = await resolveSapMatchId(homeName, nameOf.get(f.awayId) ?? "", sapKey);
+        if (sapId !== null) {
+          playerModel = await buildPlayerModel(sapId, all, homeAbbr, sapKey);
+        } else {
+          console.error(`[lock-parlays] ${f.slug}: no SportsAPI Pro match id — goalscorers skipped`);
+        }
+      } catch (e) {
+        console.error(`[lock-parlays] ${f.slug}: player model failed (${(e as Error).message}) — goalscorers skipped`);
+      }
+    }
+    const players: PlayerShare[] = playerModel?.players ?? [];
+    const candidates = candidateLegsV3(all, homeAbbr, awayAbbr, playerModel);
+
+    const sel = selectSlipV3(candidates, latticeCells, etWinProbHome, players, V3_CONSTRAINTS);
     const lockedAt = new Date().toISOString();
     if (sel.verdict === "no-slip") {
-      out.push({ slug: f.slug, engineVersion: ENGINE_VERSION_V2_1, lockedAt, verdict: "no-slip", reason: sel.reason });
-      console.log(`[lock-parlays] ${f.slug}: v2.1 no-slip (${sel.reason})`);
+      out.push({ slug: f.slug, engineVersion: ENGINE_VERSION_V3, lockedAt, verdict: "no-slip", reason: sel.reason });
+      console.log(`[lock-parlays] ${f.slug}: v3 no-slip (${sel.reason})`);
     } else {
       const ctx = { eloDiff, homeAbbr, awayAbbr };
       const legs = sel.legs.map((leg) => ({
         ticker: leg.market.ticker,
         side: leg.side,
         title: leg.market.title,
-        modelProb: legProbV2(leg, latticeCells, etWinProbHome),
+        modelProb: legProbV3(leg, latticeCells, etWinProbHome, players),
         kalshiMid: leg.market.yesMid === null ? null : leg.side === "yes" ? leg.market.yesMid : 1 - leg.market.yesMid,
-        reasoning: legReasoningV2(leg, latticeCells, etWinProbHome, ctx),
+        reasoning: legReasoningV3(leg, latticeCells, etWinProbHome, players, ctx),
       }));
+      const usesScorer = sel.legs.some((l) => l.market.kind === "scorer");
       out.push({
         slug: f.slug,
-        engineVersion: ENGINE_VERSION_V2_1,
+        engineVersion: ENGINE_VERSION_V3,
         lockedAt,
         modelDataThrough: model.dataThrough,
         eloDiff,
@@ -130,13 +157,22 @@ async function main(): Promise<void> {
         rho: model.params.rho,
         etWinProbHome,
         qFirstHalf: Q_FIRST_HALF,
-        floors: { leg: V2_FLOORS.leg, joint: V2_FLOORS.joint, maxLegs: V2_FLOORS.maxLegs },
-        maxLegsPerSeries: MAX_LEGS_PER_SERIES,
+        constraints: {
+          ...V3_CONSTRAINTS,
+          exclusiveSeries: V3_CONSTRAINTS.exclusiveSeries.map((g) => [...g]),
+        },
+        ...(usesScorer && playerModel
+          ? { playerModel: { ...playerModel, players: playerModel.players } }
+          : {}),
         legs,
         jointProb: sel.jointProb,
-        comboImpliedProb: comboImpliedProb(legs.map((l) => l.kalshiMid)),
+        comboImpliedProb: sel.comboImpliedProb,
+        edge: sel.edge,
       });
-      console.log(`[lock-parlays] ${f.slug}: v2.1 ${sel.legs.length}-leg slip, joint ${(sel.jointProb * 100).toFixed(1)}%`);
+      console.log(
+        `[lock-parlays] ${f.slug}: v3 ${sel.legs.length}-leg slip, joint ${(sel.jointProb * 100).toFixed(1)}%` +
+        ` vs combo ≈${(sel.comboImpliedProb * 100).toFixed(1)}% (edge +${(sel.edge * 100).toFixed(1)} pts)`,
+      );
     }
     added += 1;
   }
