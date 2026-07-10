@@ -24,6 +24,8 @@ import {
   COMBO_SERIES, ENGINE_VERSION_V2, ENGINE_VERSION_V2_1, YES_ONLY_SERIES, halfLattice, jointProbV2,
   legProbV2, legReasoningV2, parseMarketV2, seriesOf, comboImpliedProb as comboImplied, type CandidateLegV2,
 } from "../lib/parlay-v2";
+import { ENGINE_VERSION_V3 } from "../lib/parlay-v3";
+import { inspectSlipV3 } from "./parlay-inspector-v3.mts";
 
 const TOL = 1e-9;
 
@@ -348,10 +350,11 @@ function main(): void {
       failed += 1;
       continue;
     }
+    const isV3 = slip.engineVersion === ENGINE_VERSION_V3;
     const isV2 = slip.engineVersion === ENGINE_VERSION_V2 || slip.engineVersion === ENGINE_VERSION_V2_1;
     let snapshot: { markets: KalshiMarket[] } = { markets: [] };
     if (slip.verdict !== "no-slip") {
-      const suffix = slip.engineVersion === ENGINE_VERSION_V2_1 ? "-v2.1" : isV2 ? "-v2" : "";
+      const suffix = isV3 ? "-v3" : slip.engineVersion === ENGINE_VERSION_V2_1 ? "-v2.1" : isV2 ? "-v2" : "";
       const snapPath = path.join(SNAP_DIR, `${slip.slug}${suffix}.json`);
       if (!existsSync(snapPath)) {
         console.error(`FAIL ${slip.slug}: gate1: snapshot file missing`);
@@ -364,9 +367,11 @@ function main(): void {
       homeAbbr: f.homeId.toUpperCase(),
       awayAbbr: f.awayId.toUpperCase(),
     };
-    const fails = isV2 ? inspectSlipV2(slip, snapshot, ctxAbbrs) : inspectSlip(slip, snapshot, ctxAbbrs);
+    const fails = isV3
+      ? inspectSlipV3(slip, snapshot, ctxAbbrs)
+      : isV2 ? inspectSlipV2(slip, snapshot, ctxAbbrs) : inspectSlip(slip, snapshot, ctxAbbrs);
     if (fails.length === 0) {
-      const label = slip.engineVersion === ENGINE_VERSION_V2_1 ? " (v2.1)" : isV2 ? " (v2)" : "";
+      const label = isV3 ? " (v3)" : slip.engineVersion === ENGINE_VERSION_V2_1 ? " (v2.1)" : isV2 ? " (v2)" : "";
       console.log(`ok   ${slip.slug}${label}${slip.verdict === "no-slip" ? " (no-slip)" : ""}`);
     } else {
       failed += 1;

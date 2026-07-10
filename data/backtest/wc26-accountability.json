@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-09T21:13:52.588Z",
+  "generatedAt": "2026-07-10T03:05:47.080Z",
   "official": {
     "rows": [
       {
@@ -1496,21 +1496,44 @@
           "bttsDerivedPostHoc": true
         },
         "verdict": "close"
+      },
+      {
+        "slug": "france-vs-morocco",
+        "locked": {
+          "home": 53,
+          "draw": 27,
+          "away": 20
+        },
+        "actual": "2-0",
+        "grades": {
+          "modelBrier": 0.3338,
+          "modelRps": 0.13044999999999998,
+          "scorelineHit": false,
+          "top3ScorelineHit": true,
+          "correctPick": true,
+          "bttsBrier": 0.21468646260411162,
+          "bttsDerivedPostHoc": true
+        },
+        "verdict": "hit",
+        "kalshi": {
+          "brier": 0.2308358703992475,
+          "rps": 0.08570332417514412
+        }
       }
     ],
     "aggregates": {
-      "n": 77,
-      "accuracy": 0.6103896103896104,
-      "meanBrier": 0.5383532467532469,
-      "meanRps": 0.1696577922077922,
-      "bttsAccuracy": 0.4675324675324675,
-      "scorelineHitRate": 0.12987012987012986,
-      "top3Rate": 0.3116883116883117,
+      "n": 78,
+      "accuracy": 0.6153846153846154,
+      "meanBrier": 0.5357307692307695,
+      "meanRps": 0.16915512820512818,
+      "bttsAccuracy": 0.47435897435897434,
+      "scorelineHitRate": 0.1282051282051282,
+      "top3Rate": 0.32051282051282054,
       "vsKalshi": {
-        "n": 8,
-        "modelBrier": 0.49287500000000006,
-        "marketBrier": 0.4285654865389316,
-        "edge": -0.06430951346106847
+        "n": 9,
+        "modelBrier": 0.47520000000000007,
+        "marketBrier": 0.40659552919007785,
+        "edge": -0.06860447080992225
       },
       "vsPolymarket": {
         "n": 0,
@@ -1534,9 +1557,9 @@
       },
       {
         "midpoint": 0.25,
-        "predicted": 0.25499999999999984,
-        "observed": 0.2222222222222222,
-        "n": 72
+        "predicted": 0.2544594594594593,
+        "observed": 0.21621621621621623,
+        "n": 74
       },
       {
         "midpoint": 0.35,
@@ -1552,9 +1575,9 @@
       },
       {
         "midpoint": 0.55,
-        "predicted": 0.5330769230769231,
-        "observed": 0.7692307692307693,
-        "n": 13
+        "predicted": 0.5328571428571429,
+        "observed": 0.7857142857142857,
+        "n": 14
       },
       {
         "midpoint": 0.65,
@@ -1614,7 +1637,7 @@
     ]
   },
   "caveats": [
-    "Official graded record contains n=77 match(es). This is a very small sample — do not over-read the aggregate numbers.",
+    "Official graded record contains n=78 match(es). This is a very small sample — do not over-read the aggregate numbers.",
     "BTTS and over/under probabilities are derived post-hoc from the same model that generated the 1X2 split; they are NOT separately validated predictions.",
     "No pre-kickoff Polymarket books exist for played matches — vsPolymarket comparisons are deferred to the Phase C backtest.",
     "Kalshi market Brier shown is computed from the pre-kickoff locked book; market edge from a single match is noise.",
@@ -1626,18 +1649,31 @@
       "version": "v1",
       "slips": 4,
       "noSlips": 0,
-      "graded": 0,
-      "slipHits": 0,
-      "slipHitRate": null,
-      "legHits": 0,
-      "legs": 0,
-      "legHitRate": null,
-      "meanLockedJoint": null,
-      "realizedSlipHitRate": null
+      "graded": 1,
+      "slipHits": 1,
+      "slipHitRate": 1,
+      "legHits": 5,
+      "legs": 5,
+      "legHitRate": 1,
+      "meanLockedJoint": 0.8622264439356441,
+      "realizedSlipHitRate": 1
     },
     {
       "version": "v2-combo",
       "slips": 4,
+      "noSlips": 0,
+      "graded": 1,
+      "slipHits": 1,
+      "slipHitRate": 1,
+      "legHits": 4,
+      "legs": 4,
+      "legHitRate": 1,
+      "meanLockedJoint": 0.8413865642575663,
+      "realizedSlipHitRate": 1
+    },
+    {
+      "version": "v2.1-combo",
+      "slips": 3,
       "noSlips": 0,
       "graded": 0,
       "slipHits": 0,
@@ -1649,7 +1685,7 @@
       "realizedSlipHitRate": null
     },
     {
-      "version": "v2.1-combo",
+      "version": "v3-value",
       "slips": 3,
       "noSlips": 0,
       "graded": 0,

@@ -11,9 +11,10 @@ export default function ParlayPage() {
   const views = parlayViews();
   const rows = parlayLedger();
   const record = parlayRecord(rows);
+  const recordV3 = parlayRecord(rows.filter((r) => r.engineVersion === "v3-value"));
   const recordV21 = parlayRecord(rows.filter((r) => r.engineVersion === "v2.1-combo"));
   const recordV2 = parlayRecord(rows.filter((r) => r.engineVersion === "v2-combo"));
-  const recordV1 = parlayRecord(rows.filter((r) => r.engineVersion !== "v2.1-combo" && r.engineVersion !== "v2-combo"));
+  const recordV1 = parlayRecord(rows.filter((r) => r.engineVersion !== "v3-value" && r.engineVersion !== "v2.1-combo" && r.engineVersion !== "v2-combo"));
 
   const open = views.filter((v) => v.status === "open");
   const settled = views
@@ -60,7 +61,11 @@ export default function ParlayPage() {
         <CanvasSection eyebrow="Record" title="Every slip, graded in public.">
           <DataPlane>
             <p className="text-caption tabular text-[var(--ink-muted)]">
-              v2.1 combo engine: slip hit rate {pct(recordV21.slipHitRate)} · leg hit rate {pct(recordV21.legHitRate)} ·
+              v3 value engine: slip hit rate {pct(recordV3.slipHitRate)} · leg hit rate {pct(recordV3.legHitRate)} ·
+              locked joint average {pct(recordV3.meanLockedJoint)} across graded slips · no-slip days {recordV3.noSlips}.
+            </p>
+            <p className="mt-1 text-caption tabular text-[var(--ink-muted)]">
+              v2.1 combo engine (hit-first, superseded): slip hit rate {pct(recordV21.slipHitRate)} · leg hit rate {pct(recordV21.legHitRate)} ·
               locked joint average {pct(recordV21.meanLockedJoint)} across graded slips · no-slip days {recordV21.noSlips}.
             </p>
             <p className="mt-1 text-caption tabular text-[var(--ink-muted)]">
@@ -90,15 +95,19 @@ export default function ParlayPage() {
             <p className="text-caption tabular text-[var(--ink-muted)]">
               One slip per match, locked pre-kickoff into an append-only ledger. v2 slips draw only from
               markets the Kalshi combo builder can combine into one ticket — regulation and first-half
-              moneylines, spreads, totals, both-teams-to-score, and advancement — priced on the model
-              score grid with a pre-registered first-half split (q = 0.45). Selection maximizes exact joint
-              probability under pre-registered v2 floors (every leg ≥ 75%, joint ≥ 60%, 2–4 legs, redundancy
-              cap 97%). Combos allow at most one leg per market category; verified against the Kalshi
-              collections API on 2026-07-09. Earlier v1 slips (leg ≥ 60%, joint ≥ 35%, 2–5 legs) remain in
-              the ledger and grade under their own floors. Regulation legs grade on the 90-minute score,
-              first-half legs on the half-time score, advancement legs on the actual winner. Goalscorer and
-              corner markets are combo-eligible but unmodeled, so they are never selected. A dedicated
-              inspector recomputes every number from stored inputs on every run.
+              moneylines, spreads, totals, both-teams-to-score, advancement, and goalscorers — priced on
+              the model score grid with a pre-registered first-half split (q = 0.45) and, for scorers, a
+              Binomial share of team goals built from World Cup goals + xG and the predicted lineup. The v3
+              value engine maximizes edge — model joint minus the product of lock-time Kalshi mids — under
+              pre-registered constraints (each leg 50–90%, joint 30–60%, 2–4 legs, one leg per category,
+              regulation moneyline and to-advance never together, edge ≥ 3 pts). Lock-time mids enter v3
+              selection as the value benchmark — a registered change from v1/v2; model probabilities stay
+              pure model. Combos allow at most one leg per market category; verified against the Kalshi
+              collections API on 2026-07-09. Earlier v1, v2, and v2.1 slips remain in the ledger and grade
+              under their own stored rules. Regulation legs grade on the 90-minute score, first-half legs on
+              the half-time score, advancement legs on the actual winner, goalscorer legs on the recorded
+              scorers. Corner markets stay unmodeled, so they are never selected. A dedicated inspector
+              recomputes every number from stored inputs on every run.
             </p>
           </DataPlane>
         </CanvasSection>

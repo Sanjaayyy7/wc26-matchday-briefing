@@ -1,0 +1,215 @@
+{
+ "fetchedAt": "2026-07-10T03:02:26.439Z",
+ "markets": [
+  {
+   "ticker": "KXWCGAME-26JUL11NORENG-TIE",
+   "title": "Norway vs England Winner?",
+   "yesMid": 0.265
+  },
+  {
+   "ticker": "KXWCGAME-26JUL11NORENG-NOR",
+   "title": "Norway vs England Winner?",
+   "yesMid": 0.225
+  },
+  {
+   "ticker": "KXWCGAME-26JUL11NORENG-ENG",
+   "title": "Norway vs England Winner?",
+   "yesMid": 0.515
+  },
+  {
+   "ticker": "KXWCSPREAD-26JUL11NORENG-NOR3",
+   "title": "Norway wins by more than 2.5 goals?",
+   "yesMid": 0.03
+  },
+  {
+   "ticker": "KXWCSPREAD-26JUL11NORENG-ENG2",
+   "title": "England wins by more than 1.5 goals?",
+   "yesMid": 0.275
+  },
+  {
+   "ticker": "KXWCSPREAD-26JUL11NORENG-NOR2",
+   "title": "Norway wins by more than 1.5 goals?",
+   "yesMid": 0.08499999999999999
+  },
+  {
+   "ticker": "KXWCSPREAD-26JUL11NORENG-ENG3",
+   "title": "England wins by more than 2.5 goals?",
+   "yesMid": 0.125
+  },
+  {
+   "ticker": "KXWCTOTAL-26JUL11NORENG-1",
+   "title": "Will over 0.5 goals be scored?",
+   "yesMid": 0.935
+  },
+  {
+   "ticker": "KXWCTOTAL-26JUL11NORENG-5",
+   "title": "Will over 4.5 goals be scored?",
+   "yesMid": 0.165
+  },
+  {
+   "ticker": "KXWCTOTAL-26JUL11NORENG-4",
+   "title": "Will over 3.5 goals be scored?",
+   "yesMid": 0.335
+  },
+  {
+   "ticker": "KXWCTOTAL-26JUL11NORENG-2",
+   "title": "Will over 1.5 goals be scored?",
+   "yesMid": 0.795
+  },
+  {
+   "ticker": "KXWCTOTAL-26JUL11NORENG-6",
+   "title": "Will over 5.5 goals be scored?",
+   "yesMid": 0.07500000000000001
+  },
+  {
+   "ticker": "KXWCTOTAL-26JUL11NORENG-3",
+   "title": "Will over 2.5 goals be scored?",
+   "yesMid": 0.555
+  },
+  {
+   "ticker": "KXWCBTTS-26JUL11NORENG-BTTS",
+   "title": "Will both teams score?",
+   "yesMid": 0.605
+  },
+  {
+   "ticker": "KXWC1H-26JUL11NORENG-NOR",
+   "title": "Will Norway win the 1st Half?",
+   "yesMid": 0.215
+  },
+  {
+   "ticker": "KXWC1H-26JUL11NORENG-ENG",
+   "title": "Will England win the 1st Half?",
+   "yesMid": 0.365
+  },
+  {
+   "ticker": "KXWC1H-26JUL11NORENG-TIE",
+   "title": "Will Tie be the result of the 1st Half?",
+   "yesMid": 0.425
+  },
+  {
+   "ticker": "KXWC1HSPREAD-26JUL11NORENG-ENG2",
+   "title": "England wins by more than 1.5 goals in the 1st Half?",
+   "yesMid": 0.11499999999999999
+  },
+  {
+   "ticker": "KXWC1HSPREAD-26JUL11NORENG-NOR2",
+   "title": "Norway wins by more than 1.5 goals in the 1st Half?",
+   "yesMid": 0.045
+  },
+  {
+   "ticker": "KXWC1HTOTAL-26JUL11NORENG-1",
+   "title": "Over 0.5 1H goals scored?",
+   "yesMid": 0.695
+  },
+  {
+   "ticker": "KXWC1HTOTAL-26JUL11NORENG-4",
+   "title": "Over 3.5 1H goals scored?",
+   "yesMid": 0.035
+  },
+  {
+   "ticker": "KXWC1HTOTAL-26JUL11NORENG-3",
+   "title": "Over 2.5 1H goals scored?",
+   "yesMid": 0.125
+  },
+  {
+   "ticker": "KXWC1HTOTAL-26JUL11NORENG-2",
+   "title": "Over 1.5 1H goals scored?",
+   "yesMid": 0.33999999999999997
+  },
+  {
+   "ticker": "KXWC1HBTTS-26JUL11NORENG-BTTS",
+   "title": "Will both teams score in the 1st Half?",
+   "yesMid": 0.225
+  },
+  {
+   "ticker": "KXWCADVANCE-26JUL11NORENG-ENG",
+   "title": "Norway vs England: To Advance",
+   "yesMid": 0.645
+  },
+  {
+   "ticker": "KXWCADVANCE-26JUL11NORENG-NOR",
+   "title": "Norway vs England: To Advance",
+   "yesMid": 0.355
+  },
+  {
+   "ticker": "KXWCGOAL-26JUL11NORENG-NORANUSA7-1",
+   "title": "Antonio Nusa: 1+ goals",
+   "yesMid": 0.13
+  },
+  {
+   "ticker": "KXWCGOAL-26JUL11NORENG-ENGEANDER8-1",
+   "title": "Elliot Anderson: 1+ goals",
+   "yesMid": 0.07
+  },
+  {
+   "ticker": "KXWCGOAL-26JUL11NORENG-NORFAURSN8-1",
+   "title": "Fredrik Aursnes: 1+ goals",
+   "yesMid": 0.060000000000000005
+  },
+  {
+   "ticker": "KXWCGOAL-26JUL11NORENG-NORANUSA7-2",
+   "title": "Antonio Nusa: 2+ goals",
+   "yesMid": 0.02
+  },
+  {
+   "ticker": "KXWCGOAL-26JUL11NORENG-NORMODEGA8-2",
+   "title": "Martin Odegaard: 2+ goals",
+   "yesMid": 0.02
+  },
+  {
+   "ticker": "KXWCGOAL-26JUL11NORENG-ENGJBELLI5-2",
+   "title": "Jude Bellingham: 2+ goals",
+   "yesMid": 0.035
+  },
+  {
+   "ticker": "KXWCGOAL-26JUL11NORENG-ENGHKANE9-2",
+   "title": "Harry Kane: 2+ goals",
+   "yesMid": 0.14500000000000002
+  },
+  {
+   "ticker": "KXWCGOAL-26JUL11NORENG-NORSBERGE16-1",
+   "title": "Sander Berge: 1+ goals",
+   "yesMid": 0.04
+  },
+  {
+   "ticker": "KXWCGOAL-26JUL11NORENG-ENGHKANE9-3",
+   "title": "Harry Kane: 3+ goals",
+   "yesMid": 0.025
+  },
+  {
+   "ticker": "KXWCGOAL-26JUL11NORENG-NOREHAALA9-3",
+   "title": "Erling Haaland: 3+ goals",
+   "yesMid": 0.025
+  },
+  {
+   "ticker": "KXWCGOAL-26JUL11NORENG-ENGDRICE41-1",
+   "title": "Declan Rice: 1+ goals",
+   "yesMid": 0.09
+  },
+  {
+   "ticker": "KXWCGOAL-26JUL11NORENG-ENGHKANE9-1",
+   "title": "Harry Kane: 1+ goals",
+   "yesMid": 0.495
+  },
+  {
+   "ticker": "KXWCGOAL-26JUL11NORENG-ENGJBELLI5-1",
+   "title": "Jude Bellingham: 1+ goals",
+   "yesMid": 0.27
+  },
+  {
+   "ticker": "KXWCGOAL-26JUL11NORENG-NOREHAALA9-2",
+   "title": "Erling Haaland: 2+ goals",
+   "yesMid": 0.125
+  },
+  {
+   "ticker": "KXWCGOAL-26JUL11NORENG-NORMODEGA8-1",
+   "title": "Martin Odegaard: 1+ goals",
+   "yesMid": 0.11499999999999999
+  },
+  {
+   "ticker": "KXWCGOAL-26JUL11NORENG-NOREHAALA9-1",
+   "title": "Erling Haaland: 1+ goals",
+   "yesMid": 0.46499999999999997
+  }
+ ]
+}

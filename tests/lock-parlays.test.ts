@@ -1,8 +1,9 @@
 // tests/lock-parlays.test.ts
 import { describe, expect, it } from "vitest";
-import { marketMid, PARLAY_SERIES_V2, lockedSlugs, snapshotFileV2, snapshotFileV21 } from "../scripts/lock-parlays.mts";
+import { marketMid, PARLAY_SERIES_V2, PARLAY_SERIES_V3, lockedSlugs, snapshotFileV2, snapshotFileV21, snapshotFileV3 } from "../scripts/lock-parlays.mts";
 import { kalshiEventCode, kalshiEventTicker } from "../scripts/shared.mts";
 import { COMBO_SERIES, ENGINE_VERSION_V2, ENGINE_VERSION_V2_1 } from "../lib/parlay-v2";
+import { COMBO_SERIES_V3, ENGINE_VERSION_V3 } from "../lib/parlay-v3";
 
 describe("marketMid", () => {
   it("uses bid/ask mid when both present", () => {
@@ -55,5 +56,22 @@ describe("v2 lock plumbing", () => {
 
   it("v2.1 snapshots use a -v2.1 suffix", () => {
     expect(snapshotFileV21("france-vs-morocco")).toBe("france-vs-morocco-v2.1.json");
+  });
+});
+
+describe("v3 lock plumbing", () => {
+  it("locks the 10-series value universe (goalscorers included)", () => {
+    expect(PARLAY_SERIES_V3).toEqual(COMBO_SERIES_V3);
+    expect(PARLAY_SERIES_V3).toContain("KXWCGOAL");
+    expect(PARLAY_SERIES_V3).toHaveLength(10);
+  });
+
+  it("v2.1 entries do NOT block a v3 relock; v3 snapshots use a -v3 suffix", () => {
+    const have = lockedSlugs(
+      [{ slug: "spain-vs-belgium", engineVersion: ENGINE_VERSION_V2_1 }],
+      ENGINE_VERSION_V3,
+    );
+    expect(have.has("spain-vs-belgium")).toBe(false);
+    expect(snapshotFileV3("spain-vs-belgium")).toBe("spain-vs-belgium-v3.json");
   });
 });

@@ -3510,7 +3510,49 @@
     "draw": 0.2437810945273632,
     "away": 0.14427860696517417
    },
-   "marketTicker": "KXWCGAME-26JUL09FRAMAR"
+   "marketTicker": "KXWCGAME-26JUL09FRAMAR",
+   "result": "2-0",
+   "realized": "home",
+   "correctPick": true,
+   "modelBrier": 0.3338,
+   "modelRps": 0.13044999999999998,
+   "logLoss": 0.6348782724359695,
+   "scorelineHit": false,
+   "marketBrier": 0.2308358703992475,
+   "marketRps": 0.08570332417514412,
+   "markets": {
+    "kalshi": {
+     "probs": {
+      "home": 0.6119402985074628,
+      "draw": 0.2437810945273632,
+      "away": 0.14427860696517417
+     },
+     "brier": 0.2308358703992475,
+     "rps": 0.08570332417514412
+    },
+    "polymarket": {
+     "probs": {
+      "home": 0.6078431372549019,
+      "draw": 0.24509803921568626,
+      "away": 0.14705882352941177
+     },
+     "brier": 0.23548635140330645,
+     "rps": 0.08770665128796619
+    }
+   },
+   "top3ScorelineHit": true,
+   "btts": {
+    "prob": 0.46334270535329636,
+    "actual": false,
+    "brier": 0.21468646260411162,
+    "derivedPostHoc": true
+   },
+   "ou25": {
+    "prob": 0.4454023873605511,
+    "actual": false,
+    "brier": 0.19838328666647842,
+    "derivedPostHoc": true
+   }
   },
   {
    "slug": "norway-vs-england",

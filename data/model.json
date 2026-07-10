@@ -1,16 +1,16 @@
 {
  "source": "martj42/international_results (GitHub mirror)",
- "dataThrough": "2026-07-07",
- "matches": 49501,
+ "dataThrough": "2026-07-09",
+ "matches": 49502,
  "params": {
-  "baseLogGoals": 0.15578848021812763,
-  "eloSlope": 0.8490292175031156,
+  "baseLogGoals": 0.1557799989235968,
+  "eloSlope": 0.849034990341956,
   "rho": -0.05
  },
  "regimeParams": {
   "tournament": {
-   "baseLogGoals": 0.14647136707126426,
-   "eloSlope": 0.7912491877986164,
+   "baseLogGoals": 0.14632214052487358,
+   "eloSlope": 0.7915807715224381,
    "rho": -0.04
   }
  },
@@ -19,17 +19,17 @@
   "status": "candidate"
  },
  "calibration": {
-  "a": 0.894229122293333,
-  "b": -0.06473134127837532
+  "a": 0.8942274158204653,
+  "b": -0.06473234748918327
  },
  "backtest": {
   "from": "2024-01-01",
-  "n": 2640,
+  "n": 2641,
   "brier": 0.5084,
   "uniformBrier": 0.6667,
   "rps": 0.1666,
   "uniformRps": 0.2383,
-  "logLoss": 0.8654,
+  "logLoss": 0.8653,
   "ece": 0.0083,
   "calibrationBins": [
    {
@@ -46,9 +46,9 @@
    },
    {
     "range": "0.2–0.3",
-    "count": 2504,
-    "predicted": 0.264,
-    "realized": 0.274
+    "count": 2506,
+    "predicted": 0.263,
+    "realized": 0.273
    },
    {
     "range": "0.3–0.4",
@@ -64,9 +64,9 @@
    },
    {
     "range": "0.5–0.6",
-    "count": 485,
+    "count": 486,
     "predicted": 0.549,
-    "realized": 0.557
+    "realized": 0.558
    },
    {
     "range": "0.6–0.7",
@@ -107,7 +107,7 @@
   "Hungary": 1764,
   "Czechoslovakia": 1802,
   "Belgium": 2040,
-  "France": 2205,
+  "France": 2232,
   "Switzerland": 2015,
   "Guernsey": 1746,
   "Alderney": 1077,
@@ -249,7 +249,7 @@
   "Tunisia": 1666,
   "Libya": 1529,
   "Malawi": 1437,
-  "Morocco": 2054,
+  "Morocco": 2027,
   "Benin": 1541,
   "Cape Verde": 1694,
   "Ivory Coast": 1838,
@@ -506,10 +506,10 @@
    "lastDate": "2026-07-06"
   },
   "France": {
-   "results": "WWWWWWLWWW",
-   "gf": 26,
-   "ga": 8,
-   "lastDate": "2026-07-04"
+   "results": "WWWWWWWLWW",
+   "gf": 25,
+   "ga": 7,
+   "lastDate": "2026-07-09"
   },
   "Switzerland": {
    "results": "DWWWDDWDLD",
@@ -1358,10 +1358,10 @@
    "lastDate": "2026-06-09"
   },
   "Morocco": {
-   "results": "WDWWDDWWWD",
-   "gf": 23,
-   "ga": 7,
-   "lastDate": "2026-07-04"
+   "results": "LWDWWDDWWW",
+   "gf": 22,
+   "ga": 8,
+   "lastDate": "2026-07-09"
   },
   "Benin": {
    "results": "LDWWLLWLLL",

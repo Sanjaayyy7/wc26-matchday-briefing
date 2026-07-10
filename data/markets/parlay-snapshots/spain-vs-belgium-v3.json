@@ -1,0 +1,255 @@
+{
+ "fetchedAt": "2026-07-10T03:02:45.309Z",
+ "markets": [
+  {
+   "ticker": "KXWCGAME-26JUL10ESPBEL-ESP",
+   "title": "Spain vs Belgium Winner?",
+   "yesMid": 0.595
+  },
+  {
+   "ticker": "KXWCGAME-26JUL10ESPBEL-BEL",
+   "title": "Spain vs Belgium Winner?",
+   "yesMid": 0.165
+  },
+  {
+   "ticker": "KXWCGAME-26JUL10ESPBEL-TIE",
+   "title": "Spain vs Belgium Winner?",
+   "yesMid": 0.245
+  },
+  {
+   "ticker": "KXWCSPREAD-26JUL10ESPBEL-ESP3",
+   "title": "Spain wins by more than 2.5 goals?",
+   "yesMid": 0.165
+  },
+  {
+   "ticker": "KXWCSPREAD-26JUL10ESPBEL-BEL2",
+   "title": "Belgium wins by more than 1.5 goals?",
+   "yesMid": 0.055
+  },
+  {
+   "ticker": "KXWCSPREAD-26JUL10ESPBEL-BEL3",
+   "title": "Belgium wins by more than 2.5 goals?",
+   "yesMid": 0.015
+  },
+  {
+   "ticker": "KXWCSPREAD-26JUL10ESPBEL-ESP2",
+   "title": "Spain wins by more than 1.5 goals?",
+   "yesMid": 0.335
+  },
+  {
+   "ticker": "KXWCTOTAL-26JUL10ESPBEL-6",
+   "title": "Will over 5.5 goals be scored?",
+   "yesMid": 0.065
+  },
+  {
+   "ticker": "KXWCTOTAL-26JUL10ESPBEL-5",
+   "title": "Will over 4.5 goals be scored?",
+   "yesMid": 0.155
+  },
+  {
+   "ticker": "KXWCTOTAL-26JUL10ESPBEL-3",
+   "title": "Will over 2.5 goals be scored?",
+   "yesMid": 0.535
+  },
+  {
+   "ticker": "KXWCTOTAL-26JUL10ESPBEL-4",
+   "title": "Will over 3.5 goals be scored?",
+   "yesMid": 0.305
+  },
+  {
+   "ticker": "KXWCTOTAL-26JUL10ESPBEL-2",
+   "title": "Will over 1.5 goals be scored?",
+   "yesMid": 0.785
+  },
+  {
+   "ticker": "KXWCTOTAL-26JUL10ESPBEL-1",
+   "title": "Will over 0.5 goals be scored?",
+   "yesMid": 0.935
+  },
+  {
+   "ticker": "KXWCBTTS-26JUL10ESPBEL-BTTS",
+   "title": "Will both teams score?",
+   "yesMid": 0.545
+  },
+  {
+   "ticker": "KXWC1H-26JUL10ESPBEL-BEL",
+   "title": "Will Belgium win the 1st Half?",
+   "yesMid": 0.165
+  },
+  {
+   "ticker": "KXWC1H-26JUL10ESPBEL-ESP",
+   "title": "Will Spain win the 1st Half?",
+   "yesMid": 0.425
+  },
+  {
+   "ticker": "KXWC1H-26JUL10ESPBEL-TIE",
+   "title": "Will Tie be the result of the 1st Half?",
+   "yesMid": 0.415
+  },
+  {
+   "ticker": "KXWC1HSPREAD-26JUL10ESPBEL-BEL2",
+   "title": "Belgium wins by more than 1.5 goals in the 1st Half?",
+   "yesMid": 0.025
+  },
+  {
+   "ticker": "KXWC1HSPREAD-26JUL10ESPBEL-ESP2",
+   "title": "Spain wins by more than 1.5 goals in the 1st Half?",
+   "yesMid": 0.14
+  },
+  {
+   "ticker": "KXWC1HTOTAL-26JUL10ESPBEL-4",
+   "title": "Over 3.5 1H goals scored?",
+   "yesMid": 0.035
+  },
+  {
+   "ticker": "KXWC1HTOTAL-26JUL10ESPBEL-1",
+   "title": "Over 0.5 1H goals scored?",
+   "yesMid": 0.695
+  },
+  {
+   "ticker": "KXWC1HTOTAL-26JUL10ESPBEL-2",
+   "title": "Over 1.5 1H goals scored?",
+   "yesMid": 0.325
+  },
+  {
+   "ticker": "KXWC1HTOTAL-26JUL10ESPBEL-3",
+   "title": "Over 2.5 1H goals scored?",
+   "yesMid": 0.12
+  },
+  {
+   "ticker": "KXWC1HBTTS-26JUL10ESPBEL-BTTS",
+   "title": "Will both teams score in the 1st Half?",
+   "yesMid": 0.185
+  },
+  {
+   "ticker": "KXWCADVANCE-26JUL10ESPBEL-ESP",
+   "title": "Spain vs Belgium: To Advance",
+   "yesMid": 0.735
+  },
+  {
+   "ticker": "KXWCADVANCE-26JUL10ESPBEL-BEL",
+   "title": "Spain vs Belgium: To Advance",
+   "yesMid": 0.265
+  },
+  {
+   "ticker": "KXWCGOAL-26JUL10ESPBEL-ESPLYAMAL10-2",
+   "title": "Lamine Yamal: 2+ goals",
+   "yesMid": 0.065
+  },
+  {
+   "ticker": "KXWCGOAL-26JUL10ESPBEL-ESPRODR16-1",
+   "title": "Rodri: 1+ goals",
+   "yesMid": 0.07
+  },
+  {
+   "ticker": "KXWCGOAL-26JUL10ESPBEL-ESPLYAMAL10-3",
+   "title": "Lamine Yamal: 3+ goals",
+   "yesMid": 0.015
+  },
+  {
+   "ticker": "KXWCGOAL-26JUL10ESPBEL-BELJDOKU11-2",
+   "title": "Jeremy Doku: 2+ goals",
+   "yesMid": 0.015
+  },
+  {
+   "ticker": "KXWCGOAL-26JUL10ESPBEL-BELCDEKE17-2",
+   "title": "Charles De Ketelaere: 2+ goals",
+   "yesMid": 0.015
+  },
+  {
+   "ticker": "KXWCGOAL-26JUL10ESPBEL-ESPMOYARZ10-3",
+   "title": "Mikel Oyarzabal: 3+ goals",
+   "yesMid": 0.025
+  },
+  {
+   "ticker": "KXWCGOAL-26JUL10ESPBEL-ESPRODR16-2",
+   "title": "Rodri: 2+ goals",
+   "yesMid": 0.01
+  },
+  {
+   "ticker": "KXWCGOAL-26JUL10ESPBEL-BELRLUKAK9-2",
+   "title": "Romelu Lukaku: 2+ goals",
+   "yesMid": 0.035
+  },
+  {
+   "ticker": "KXWCGOAL-26JUL10ESPBEL-BELKDEBR11-2",
+   "title": "Kevin De Bruyne: 2+ goals",
+   "yesMid": 0.015
+  },
+  {
+   "ticker": "KXWCGOAL-26JUL10ESPBEL-BELYTIELE8-2",
+   "title": "Youri Tielemans: 2+ goals",
+   "yesMid": 0.01
+  },
+  {
+   "ticker": "KXWCGOAL-26JUL10ESPBEL-BELLTROSS19-2",
+   "title": "Leandro Trossard: 2+ goals",
+   "yesMid": 0.015
+  },
+  {
+   "ticker": "KXWCGOAL-26JUL10ESPBEL-ESPDOLMO20-2",
+   "title": "Dani Olmo: 2+ goals",
+   "yesMid": 0.02
+  },
+  {
+   "ticker": "KXWCGOAL-26JUL10ESPBEL-ESPMOYARZ10-2",
+   "title": "Mikel Oyarzabal: 2+ goals",
+   "yesMid": 0.10500000000000001
+  },
+  {
+   "ticker": "KXWCGOAL-26JUL10ESPBEL-BELJDOKU11-1",
+   "title": "Jeremy Doku: 1+ goals",
+   "yesMid": 0.1
+  },
+  {
+   "ticker": "KXWCGOAL-26JUL10ESPBEL-BELKDEBR11-1",
+   "title": "Kevin De Bruyne: 1+ goals",
+   "yesMid": 0.135
+  },
+  {
+   "ticker": "KXWCGOAL-26JUL10ESPBEL-BELLTROSS19-1",
+   "title": "Leandro Trossard: 1+ goals",
+   "yesMid": 0.125
+  },
+  {
+   "ticker": "KXWCGOAL-26JUL10ESPBEL-BELRLUKAK9-1",
+   "title": "Romelu Lukaku: 1+ goals",
+   "yesMid": 0.22
+  },
+  {
+   "ticker": "KXWCGOAL-26JUL10ESPBEL-BELYTIELE8-1",
+   "title": "Youri Tielemans: 1+ goals",
+   "yesMid": 0.07
+  },
+  {
+   "ticker": "KXWCGOAL-26JUL10ESPBEL-ESPDOLMO20-1",
+   "title": "Dani Olmo: 1+ goals",
+   "yesMid": 0.20500000000000002
+  },
+  {
+   "ticker": "KXWCGOAL-26JUL10ESPBEL-ESPLYAMAL10-1",
+   "title": "Lamine Yamal: 1+ goals",
+   "yesMid": 0.335
+  },
+  {
+   "ticker": "KXWCGOAL-26JUL10ESPBEL-ESPMCUCUR3-1",
+   "title": "Marc Cucurella: 1+ goals",
+   "yesMid": 0.05
+  },
+  {
+   "ticker": "KXWCGOAL-26JUL10ESPBEL-ESPMOYARZ10-1",
+   "title": "Mikel Oyarzabal: 1+ goals",
+   "yesMid": 0.405
+  },
+  {
+   "ticker": "KXWCGOAL-26JUL10ESPBEL-ESPPEDR8-1",
+   "title": "Pedri: 1+ goals",
+   "yesMid": 0.08499999999999999
+  },
+  {
+   "ticker": "KXWCGOAL-26JUL10ESPBEL-BELCDEKE17-1",
+   "title": "Charles De Ketelaere: 1+ goals",
+   "yesMid": 0.165
+  }
+ ]
+}

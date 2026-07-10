@@ -52,7 +52,33 @@
     "reasoning": "Will the final score be Draw 2-2? — NO: model 96.0%; top scorelines FRA 1-0 13.2% / FRA 1-1 12.3% / FRA 2-0 11.1%; Elo +151; Kalshi 95.5% (edge +0.5)."
    }
   ],
-  "jointProb": 0.8622264439356441
+  "jointProb": 0.8622264439356441,
+  "result": {
+   "legs": [
+    {
+     "ticker": "KXWCSCORE-26JUL09FRAMAR-FRA6MAR1",
+     "hit": true
+    },
+    {
+     "ticker": "KXWCSCORE-26JUL09FRAMAR-FRA0MAR2",
+     "hit": true
+    },
+    {
+     "ticker": "KXWCSPREAD-26JUL09FRAMAR-MAR2",
+     "hit": true
+    },
+    {
+     "ticker": "KXWCTOTAL-26JUL09FRAMAR-6",
+     "hit": true
+    },
+    {
+     "ticker": "KXWCSCORE-26JUL09FRAMAR-FRA2MAR2",
+     "hit": true
+    }
+   ],
+   "slipHit": true,
+   "gradedAt": "2026-07-10T02:43:50.482Z"
+  }
  },
  {
   "slug": "norway-vs-england",
@@ -272,7 +298,29 @@
    }
   ],
   "jointProb": 0.8413865642575663,
-  "comboImpliedProb": 0.7650280574999999
+  "comboImpliedProb": 0.7650280574999999,
+  "result": {
+   "legs": [
+    {
+     "ticker": "KXWCSPREAD-26JUL09FRAMAR-MAR3",
+     "hit": true
+    },
+    {
+     "ticker": "KXWCTOTAL-26JUL09FRAMAR-6",
+     "hit": true
+    },
+    {
+     "ticker": "KXWCSPREAD-26JUL09FRAMAR-MAR2",
+     "hit": true
+    },
+    {
+     "ticker": "KXWCTOTAL-26JUL09FRAMAR-5",
+     "hit": true
+    }
+   ],
+   "slipHit": true,
+   "gradedAt": "2026-07-10T02:43:50.483Z"
+  }
  },
  {
   "slug": "norway-vs-england",
@@ -574,5 +622,239 @@
   ],
   "jointProb": 0.8817273247910407,
   "comboImpliedProb": 0.901275
+ },
+ {
+  "slug": "norway-vs-england",
+  "engineVersion": "v3-value",
+  "lockedAt": "2026-07-10T03:02:44.091Z",
+  "modelDataThrough": "2026-07-09",
+  "eloDiff": -106,
+  "lambdas": {
+   "home": 0.9331267143123806,
+   "away": 1.4634172329482915
+  },
+  "rho": -0.05,
+  "etWinProbHome": 0.42431304762357047,
+  "qFirstHalf": 0.45,
+  "constraints": {
+   "legMin": 0.5,
+   "legMax": 0.9,
+   "jointMin": 0.3,
+   "jointMax": 0.6,
+   "maxLegs": 4,
+   "minEdge": 0.03,
+   "maxLegsPerSeries": 1,
+   "exclusiveSeries": [
+    [
+     "KXWCGAME",
+     "KXWCADVANCE"
+    ]
+   ]
+  },
+  "legs": [
+   {
+    "ticker": "KXWC1HTOTAL-26JUL11NORENG-2",
+    "side": "no",
+    "title": "Over 1.5 1H goals scored?",
+    "modelProb": 0.7056865514828888,
+    "kalshiMid": 0.66,
+    "reasoning": "Over 1.5 1H goals scored? — NO: model 70.6%; top scorelines ENG 1-0 12.7% / NOR 1-1 10.4% / NOR 0-0 9.7%; Elo -106; Kalshi 66.0% (edge +4.6)."
+   },
+   {
+    "ticker": "KXWCBTTS-26JUL11NORENG-BTTS",
+    "side": "no",
+    "title": "Will both teams score?",
+    "modelProb": 0.5275217948696702,
+    "kalshiMid": 0.395,
+    "reasoning": "Will both teams score? — NO: model 52.8%; top scorelines ENG 1-0 12.7% / ENG 2-0 9.7% / NOR 0-0 9.7%; Elo -106; Kalshi 39.5% (edge +13.3)."
+   },
+   {
+    "ticker": "KXWCTOTAL-26JUL11NORENG-3",
+    "side": "no",
+    "title": "Will over 2.5 goals be scored?",
+    "modelProb": 0.5706254175584088,
+    "kalshiMid": 0.44499999999999995,
+    "reasoning": "Will over 2.5 goals be scored? — NO: model 57.1%; top scorelines NOR 1-1 13.1% / ENG 1-0 12.7% / ENG 2-0 9.7%; Elo -106; Kalshi 44.5% (edge +12.6)."
+   }
+  ],
+  "jointProb": 0.4123326254322821,
+  "comboImpliedProb": 0.1160115,
+  "edge": 0.2963211254322821
+ },
+ {
+  "slug": "spain-vs-belgium",
+  "engineVersion": "v3-value",
+  "lockedAt": "2026-07-10T03:03:01.937Z",
+  "modelDataThrough": "2026-07-09",
+  "eloDiff": 188,
+  "lambdas": {
+   "home": 1.741638687367443,
+   "away": 0.7840625751792665
+  },
+  "rho": -0.05,
+  "etWinProbHome": 0.6320700121000735,
+  "qFirstHalf": 0.45,
+  "constraints": {
+   "legMin": 0.5,
+   "legMax": 0.9,
+   "jointMin": 0.3,
+   "jointMax": 0.6,
+   "maxLegs": 4,
+   "minEdge": 0.03,
+   "maxLegsPerSeries": 1,
+   "exclusiveSeries": [
+    [
+     "KXWCGAME",
+     "KXWCADVANCE"
+    ]
+   ]
+  },
+  "legs": [
+   {
+    "ticker": "KXWC1HTOTAL-26JUL10ESPBEL-2",
+    "side": "no",
+    "title": "Over 1.5 1H goals scored?",
+    "modelProb": 0.6846156760418085,
+    "kalshiMid": 0.675,
+    "reasoning": "Over 1.5 1H goals scored? — NO: model 68.5%; top scorelines ESP 1-0 13.4% / ESP 2-0 9.7% / ESP 1-1 9.1%; Elo +188; Kalshi 67.5% (edge +1.0)."
+   },
+   {
+    "ticker": "KXWCBTTS-26JUL10ESPBEL-BTTS",
+    "side": "no",
+    "title": "Will both teams score?",
+    "modelProb": 0.5463237059789025,
+    "kalshiMid": 0.45499999999999996,
+    "reasoning": "Will both teams score? — NO: model 54.6%; top scorelines ESP 1-0 13.4% / ESP 2-0 12.1% / ESP 0-0 8.5%; Elo +188; Kalshi 45.5% (edge +9.1)."
+   },
+   {
+    "ticker": "KXWCTOTAL-26JUL10ESPBEL-3",
+    "side": "no",
+    "title": "Will over 2.5 goals be scored?",
+    "modelProb": 0.5372837161715737,
+    "kalshiMid": 0.46499999999999997,
+    "reasoning": "Will over 2.5 goals be scored? — NO: model 53.7%; top scorelines ESP 1-0 13.4% / ESP 2-0 12.1% / ESP 1-1 11.5%; Elo +188; Kalshi 46.5% (edge +7.2)."
+   }
+  ],
+  "jointProb": 0.39301155890142037,
+  "comboImpliedProb": 0.14281312499999999,
+  "edge": 0.2501984339014204
+ },
+ {
+  "slug": "argentina-vs-switzerland",
+  "engineVersion": "v3-value",
+  "lockedAt": "2026-07-10T03:03:37.078Z",
+  "modelDataThrough": "2026-07-09",
+  "eloDiff": 209,
+  "lambdas": {
+   "home": 1.8210272799348388,
+   "away": 0.749880976136732
+  },
+  "rho": -0.05,
+  "etWinProbHome": 0.6460109229912709,
+  "qFirstHalf": 0.45,
+  "constraints": {
+   "legMin": 0.5,
+   "legMax": 0.9,
+   "jointMin": 0.3,
+   "jointMax": 0.6,
+   "maxLegs": 4,
+   "minEdge": 0.03,
+   "maxLegsPerSeries": 1,
+   "exclusiveSeries": [
+    [
+     "KXWCGAME",
+     "KXWCADVANCE"
+    ]
+   ]
+  },
+  "playerModel": {
+   "source": "sportsapipro predicted-lineups + WC26 player statistics (tournament 16, season 58210)",
+   "lineupConfirmed": false,
+   "players": [
+    {
+     "code": "ARGLMARTI10",
+     "name": "Lautaro Martínez",
+     "teamSide": "home",
+     "share": 0.14034006055872963
+    },
+    {
+     "code": "SUIGXHAKA34",
+     "name": "Granit Xhaka",
+     "teamSide": "away",
+     "share": 0.13797444943948103
+    },
+    {
+     "code": "SUIMAKANJ25",
+     "name": "Manuel Akanji",
+     "teamSide": "away",
+     "share": 0.01893529846924259
+    },
+    {
+     "code": "SUIRVARGA11",
+     "name": "Rubén Vargas",
+     "teamSide": "away",
+     "share": 0.2123356854265066
+    },
+    {
+     "code": "ARGAMACA10",
+     "name": "Alexis Mac Allister",
+     "teamSide": "home",
+     "share": 0.03126127483889825
+    },
+    {
+     "code": "ARGEFERNA8",
+     "name": "Enzo Fernández",
+     "teamSide": "home",
+     "share": 0.07695891049090935
+    },
+    {
+     "code": "SUIBEMBOL7",
+     "name": "Breel Embolo",
+     "teamSide": "away",
+     "share": 0.3527428441358903
+    },
+    {
+     "code": "SUIRFREUL8",
+     "name": "Remo Freuler",
+     "teamSide": "away",
+     "share": 0.007113184999715473
+    },
+    {
+     "code": "ARGLMESSI10",
+     "name": "Lionel Messi",
+     "teamSide": "home",
+     "share": 0.593703901608049
+    }
+   ]
+  },
+  "legs": [
+   {
+    "ticker": "KXWC1HTOTAL-26JUL11ARGSUI-1",
+    "side": "yes",
+    "title": "Over 0.5 1H goals scored?",
+    "modelProb": 0.6844485940761976,
+    "kalshiMid": 0.635,
+    "reasoning": "Over 0.5 1H goals scored? — YES: model 68.4%; top scorelines ARG 2-0 8.8% / ARG 2-1 7.9% / ARG 1-1 7.6%; Elo +209; Kalshi 63.5% (edge +4.9)."
+   },
+   {
+    "ticker": "KXWCGOAL-26JUL11ARGSUI-ARGLMESSI10-1",
+    "side": "yes",
+    "title": "Lionel Messi: 1+ goals",
+    "modelProb": 0.6607545841995636,
+    "kalshiMid": 0.505,
+    "reasoning": "model 66.1% — Lionel Messi carries 59.4% of ARG goals (WC26 goals + xG share); 1+ via Binomial thinning of the ARG goal count."
+   },
+   {
+    "ticker": "KXWCTOTAL-26JUL11ARGSUI-2",
+    "side": "yes",
+    "title": "Will over 1.5 goals be scored?",
+    "modelProb": 0.7321355662488973,
+    "kalshiMid": 0.695,
+    "reasoning": "Will over 1.5 goals be scored? — YES: model 73.2%; top scorelines ARG 2-0 12.7% / ARG 1-1 11.0% / ARG 2-1 9.5%; Elo +209; Kalshi 69.5% (edge +3.7)."
+   }
+  ],
+  "jointProb": 0.48474326702466586,
+  "comboImpliedProb": 0.22286912499999997,
+  "edge": 0.26187414202466586
  }
 ]

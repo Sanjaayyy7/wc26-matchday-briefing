@@ -210,5 +210,21 @@
    "after": "pens",
    "note": "pens 4–3"
   }
+ ],
+ "quarterFinals": [
+  {
+   "match": 97,
+   "homeId": "fra",
+   "awayId": "mar",
+   "homeScore": 2,
+   "awayScore": 0,
+   "winnerId": "fra",
+   "after": "90",
+   "ht": {
+    "home": 0,
+    "away": 0
+   },
+   "note": "Mbappé 60', Dembélé 66'"
+  }
  ]
 }
