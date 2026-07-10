@@ -1526,7 +1526,9 @@
     "stage": "quarter-final",
     "tzOffsetMinutes": -240,
     "tzLabel": "EDT",
-    "neutral": true
+    "neutral": true,
+    "homeScore": 2,
+    "awayScore": 0
   },
   {
     "id": "nor-eng-qf",

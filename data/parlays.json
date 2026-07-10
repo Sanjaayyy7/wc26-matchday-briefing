@@ -52,7 +52,33 @@
     "reasoning": "Will the final score be Draw 2-2? — NO: model 96.0%; top scorelines FRA 1-0 13.2% / FRA 1-1 12.3% / FRA 2-0 11.1%; Elo +151; Kalshi 95.5% (edge +0.5)."
    }
   ],
-  "jointProb": 0.8622264439356441
+  "jointProb": 0.8622264439356441,
+  "result": {
+   "legs": [
+    {
+     "ticker": "KXWCSCORE-26JUL09FRAMAR-FRA6MAR1",
+     "hit": true
+    },
+    {
+     "ticker": "KXWCSCORE-26JUL09FRAMAR-FRA0MAR2",
+     "hit": true
+    },
+    {
+     "ticker": "KXWCSPREAD-26JUL09FRAMAR-MAR2",
+     "hit": true
+    },
+    {
+     "ticker": "KXWCTOTAL-26JUL09FRAMAR-6",
+     "hit": true
+    },
+    {
+     "ticker": "KXWCSCORE-26JUL09FRAMAR-FRA2MAR2",
+     "hit": true
+    }
+   ],
+   "slipHit": true,
+   "gradedAt": "2026-07-10T02:43:50.482Z"
+  }
  },
  {
   "slug": "norway-vs-england",
@@ -272,7 +298,29 @@
    }
   ],
   "jointProb": 0.8413865642575663,
-  "comboImpliedProb": 0.7650280574999999
+  "comboImpliedProb": 0.7650280574999999,
+  "result": {
+   "legs": [
+    {
+     "ticker": "KXWCSPREAD-26JUL09FRAMAR-MAR3",
+     "hit": true
+    },
+    {
+     "ticker": "KXWCTOTAL-26JUL09FRAMAR-6",
+     "hit": true
+    },
+    {
+     "ticker": "KXWCSPREAD-26JUL09FRAMAR-MAR2",
+     "hit": true
+    },
+    {
+     "ticker": "KXWCTOTAL-26JUL09FRAMAR-5",
+     "hit": true
+    }
+   ],
+   "slipHit": true,
+   "gradedAt": "2026-07-10T02:43:50.483Z"
+  }
  },
  {
   "slug": "norway-vs-england",
