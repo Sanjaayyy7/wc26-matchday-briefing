@@ -188,7 +188,33 @@
     "reasoning": "Spain vs Belgium Winner? — NO: model 75.6%; top scorelines ESP 1-0 13.4% / ESP 2-0 12.1% / ESP 2-1 9.5%; Elo +188; Kalshi 76.5% (edge -0.9)."
    }
   ],
-  "jointProb": 0.5519392701965108
+  "jointProb": 0.5519392701965108,
+  "result": {
+   "legs": [
+    {
+     "ticker": "KXWCTOTAL-26JUL10ESPBEL-6",
+     "hit": true
+    },
+    {
+     "ticker": "KXWCTOTAL-26JUL10ESPBEL-5",
+     "hit": true
+    },
+    {
+     "ticker": "KXWCTOTAL-26JUL10ESPBEL-1",
+     "hit": true
+    },
+    {
+     "ticker": "KXWCTOTAL-26JUL10ESPBEL-4",
+     "hit": true
+    },
+    {
+     "ticker": "KXWCGAME-26JUL10ESPBEL-TIE",
+     "hit": true
+    }
+   ],
+   "slipHit": true,
+   "gradedAt": "2026-07-11T18:16:15.780Z"
+  }
  },
  {
   "slug": "argentina-vs-switzerland",
@@ -430,7 +456,29 @@
    }
   ],
   "jointProb": 0.6927171984533435,
-  "comboImpliedProb": 0.587282499375
+  "comboImpliedProb": 0.587282499375,
+  "result": {
+   "legs": [
+    {
+     "ticker": "KXWCTOTAL-26JUL10ESPBEL-6",
+     "hit": true
+    },
+    {
+     "ticker": "KXWCTOTAL-26JUL10ESPBEL-5",
+     "hit": true
+    },
+    {
+     "ticker": "KXWCTOTAL-26JUL10ESPBEL-1",
+     "hit": true
+    },
+    {
+     "ticker": "KXWC1HBTTS-26JUL10ESPBEL-BTTS",
+     "hit": false
+    }
+   ],
+   "slipHit": false,
+   "gradedAt": "2026-07-11T18:16:15.782Z"
+  }
  },
  {
   "slug": "argentina-vs-switzerland",
@@ -581,7 +629,25 @@
    }
   ],
   "jointProb": 0.8222588031941629,
-  "comboImpliedProb": 0.7966433749999999
+  "comboImpliedProb": 0.7966433749999999,
+  "result": {
+   "legs": [
+    {
+     "ticker": "KXWCSPREAD-26JUL10ESPBEL-BEL3",
+     "hit": true
+    },
+    {
+     "ticker": "KXWCTOTAL-26JUL10ESPBEL-6",
+     "hit": true
+    },
+    {
+     "ticker": "KXWC1HSPREAD-26JUL10ESPBEL-ESP2",
+     "hit": true
+    }
+   ],
+   "slipHit": true,
+   "gradedAt": "2026-07-11T18:16:15.782Z"
+  }
  },
  {
   "slug": "argentina-vs-switzerland",
@@ -737,7 +803,25 @@
   ],
   "jointProb": 0.39301155890142037,
   "comboImpliedProb": 0.14281312499999999,
-  "edge": 0.2501984339014204
+  "edge": 0.2501984339014204,
+  "result": {
+   "legs": [
+    {
+     "ticker": "KXWC1HTOTAL-26JUL10ESPBEL-2",
+     "hit": false
+    },
+    {
+     "ticker": "KXWCBTTS-26JUL10ESPBEL-BTTS",
+     "hit": false
+    },
+    {
+     "ticker": "KXWCTOTAL-26JUL10ESPBEL-3",
+     "hit": false
+    }
+   ],
+   "slipHit": false,
+   "gradedAt": "2026-07-11T18:16:15.782Z"
+  }
  },
  {
   "slug": "argentina-vs-switzerland",

@@ -3590,7 +3590,49 @@
     "draw": 0.23618090452261306,
     "away": 0.1658291457286432
    },
-   "marketTicker": "KXWCGAME-26JUL10ESPBEL"
+   "marketTicker": "KXWCGAME-26JUL10ESPBEL",
+   "result": "2-1",
+   "realized": "home",
+   "correctPick": true,
+   "modelBrier": 0.27980000000000005,
+   "modelRps": 0.10865000000000002,
+   "logLoss": 0.5621189181535413,
+   "scorelineHit": false,
+   "marketBrier": 0.2448928057372289,
+   "marketRps": 0.09455569303805464,
+   "markets": {
+    "kalshi": {
+     "probs": {
+      "home": 0.5979899497487436,
+      "draw": 0.23618090452261306,
+      "away": 0.1658291457286432
+     },
+     "brier": 0.2448928057372289,
+     "rps": 0.09455569303805464
+    },
+    "polymarket": {
+     "probs": {
+      "home": 0.5980392156862745,
+      "draw": 0.23529411764705882,
+      "away": 0.16666666666666669
+     },
+     "brier": 0.24471357170319108,
+     "rps": 0.09467512495194158
+    }
+   },
+   "top3ScorelineHit": false,
+   "btts": {
+    "prob": 0.45367629402109755,
+    "actual": true,
+    "brier": 0.29846959171452225,
+    "derivedPostHoc": true
+   },
+   "ou25": {
+    "prob": 0.46271628382842656,
+    "actual": true,
+    "brier": 0.2886737916631359,
+    "derivedPostHoc": true
+   }
   },
   {
    "slug": "argentina-vs-switzerland",

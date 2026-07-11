@@ -2,9 +2,9 @@
  "runMeta": {
   "runs": 10000,
   "seed": 20260612,
-  "dataThrough": "2026-07-09",
-  "generatedAt": "2026-07-10T02:44:45.904Z",
-  "playedLocked": 81,
+  "dataThrough": "2026-07-10",
+  "generatedAt": "2026-07-11T18:17:11.433Z",
+  "playedLocked": 82,
   "knockoutVenueNote": "Knockout matches simulated as neutral-venue; host venue edges not modeled."
  },
  "teams": {
@@ -68,9 +68,9 @@
    "advanceGroup": 1,
    "reachR16": 1,
    "reachQF": 1,
-   "reachSF": 0.2257,
-   "reachFinal": 0.081,
-   "champion": 0.0202
+   "reachSF": 0.2207,
+   "reachFinal": 0.0793,
+   "champion": 0.0165
   },
   "Brazil": {
    "advanceGroup": 1,
@@ -204,9 +204,9 @@
    "advanceGroup": 1,
    "reachR16": 1,
    "reachQF": 1,
-   "reachSF": 0.2466,
-   "reachFinal": 0.059,
-   "champion": 0.0198
+   "reachSF": 0,
+   "reachFinal": 0,
+   "champion": 0
   },
   "Egypt": {
    "advanceGroup": 1,
@@ -236,9 +236,9 @@
    "advanceGroup": 1,
    "reachR16": 1,
    "reachQF": 1,
-   "reachSF": 0.7534,
-   "reachFinal": 0.3746,
-   "champion": 0.2212
+   "reachSF": 1,
+   "reachFinal": 0.5146,
+   "champion": 0.319
   },
   "Cape Verde": {
    "advanceGroup": 1,
@@ -269,8 +269,8 @@
    "reachR16": 1,
    "reachQF": 1,
    "reachSF": 1,
-   "reachFinal": 0.5664,
-   "champion": 0.3369
+   "reachFinal": 0.4854,
+   "champion": 0.2876
   },
   "Senegal": {
    "advanceGroup": 1,
@@ -292,17 +292,17 @@
    "advanceGroup": 1,
    "reachR16": 1,
    "reachQF": 1,
-   "reachSF": 0.3577,
-   "reachFinal": 0.1137,
-   "champion": 0.0295
+   "reachSF": 0.3484,
+   "reachFinal": 0.1091,
+   "champion": 0.0264
   },
   "Argentina": {
    "advanceGroup": 1,
    "reachR16": 1,
    "reachQF": 1,
-   "reachSF": 0.7743,
-   "reachFinal": 0.51,
-   "champion": 0.2568
+   "reachSF": 0.7793,
+   "reachFinal": 0.5153,
+   "champion": 0.2456
   },
   "Algeria": {
    "advanceGroup": 1,
@@ -364,9 +364,9 @@
    "advanceGroup": 1,
    "reachR16": 1,
    "reachQF": 1,
-   "reachSF": 0.6423,
-   "reachFinal": 0.2953,
-   "champion": 0.1156
+   "reachSF": 0.6516,
+   "reachFinal": 0.2963,
+   "champion": 0.1049
   },
   "Croatia": {
    "advanceGroup": 1,

@@ -225,6 +225,37 @@
     "away": 0
    },
    "note": "Mbappé 60', Dembélé 66'"
+  },
+  {
+   "match": 98,
+   "homeId": "esp",
+   "awayId": "bel",
+   "homeScore": 2,
+   "awayScore": 1,
+   "winnerId": "esp",
+   "after": "90",
+   "ht": {
+    "home": 1,
+    "away": 1
+   },
+   "goals": [
+    {
+     "side": "home",
+     "player": "Fabián Ruiz",
+     "count": 1
+    },
+    {
+     "side": "away",
+     "player": "Charles De Ketelaere",
+     "count": 1
+    },
+    {
+     "side": "home",
+     "player": "Mikel Merino",
+     "count": 1
+    }
+   ],
+   "note": "Fabián Ruiz 30', De Ketelaere 41', Merino 88'"
   }
  ]
 }
