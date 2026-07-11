@@ -1560,7 +1560,9 @@
     "stage": "quarter-final",
     "tzOffsetMinutes": -420,
     "tzLabel": "PDT",
-    "neutral": true
+    "neutral": true,
+    "homeScore": 2,
+    "awayScore": 1
   },
   {
     "id": "arg-sui-qf",

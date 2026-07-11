@@ -1,16 +1,16 @@
 {
  "source": "martj42/international_results (GitHub mirror)",
- "dataThrough": "2026-07-09",
- "matches": 49502,
+ "dataThrough": "2026-07-10",
+ "matches": 49503,
  "params": {
-  "baseLogGoals": 0.1557799989235968,
-  "eloSlope": 0.849034990341956,
+  "baseLogGoals": 0.15578382302705382,
+  "eloSlope": 0.8490335717595688,
   "rho": -0.05
  },
  "regimeParams": {
   "tournament": {
-   "baseLogGoals": 0.14632214052487358,
-   "eloSlope": 0.7915807715224381,
+   "baseLogGoals": 0.14640917394382677,
+   "eloSlope": 0.7915283428736316,
    "rho": -0.04
   }
  },
@@ -19,17 +19,17 @@
   "status": "candidate"
  },
  "calibration": {
-  "a": 0.8942274158204653,
-  "b": -0.06473234748918327
+  "a": 0.894226685636879,
+  "b": -0.06473280489192346
  },
  "backtest": {
   "from": "2024-01-01",
-  "n": 2641,
-  "brier": 0.5084,
+  "n": 2642,
+  "brier": 0.5083,
   "uniformBrier": 0.6667,
   "rps": 0.1666,
   "uniformRps": 0.2383,
-  "logLoss": 0.8653,
+  "logLoss": 0.8652,
   "ece": 0.0083,
   "calibrationBins": [
    {
@@ -40,13 +40,13 @@
    },
    {
     "range": "0.1–0.2",
-    "count": 1311,
+    "count": 1312,
     "predicted": 0.153,
     "realized": 0.149
    },
    {
     "range": "0.2–0.3",
-    "count": 2506,
+    "count": 2507,
     "predicted": 0.263,
     "realized": 0.273
    },
@@ -64,9 +64,9 @@
    },
    {
     "range": "0.5–0.6",
-    "count": 486,
+    "count": 487,
     "predicted": 0.549,
-    "realized": 0.558
+    "realized": 0.559
    },
    {
     "range": "0.6–0.7",
@@ -106,7 +106,7 @@
   "Austria": 1883,
   "Hungary": 1764,
   "Czechoslovakia": 1802,
-  "Belgium": 2040,
+  "Belgium": 2025,
   "France": 2232,
   "Switzerland": 2015,
   "Guernsey": 1746,
@@ -135,7 +135,7 @@
   "Romania": 1694,
   "Greece": 1801,
   "Yugoslavia": 1873,
-  "Spain": 2228,
+  "Spain": 2243,
   "Egypt": 1849,
   "Estonia": 1421,
   "Suriname": 1593,
@@ -500,10 +500,10 @@
    "lastDate": "1993-11-17"
   },
   "Belgium": {
-   "results": "WWWDDWWDWW",
-   "gf": 33,
-   "ga": 8,
-   "lastDate": "2026-07-06"
+   "results": "LWWWDDWWDW",
+   "gf": 27,
+   "ga": 10,
+   "lastDate": "2026-07-10"
   },
   "France": {
    "results": "WWWWWWWLWW",
@@ -674,10 +674,10 @@
    "lastDate": "1992-03-25"
   },
   "Spain": {
-   "results": "WWWWDWDDWD",
+   "results": "WWWWWDWDDW",
    "gf": 18,
-   "ga": 4,
-   "lastDate": "2026-07-06"
+   "ga": 3,
+   "lastDate": "2026-07-10"
   },
   "Egypt": {
    "results": "LDDWDLWDWD",

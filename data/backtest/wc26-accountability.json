@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-10T03:05:47.080Z",
+  "generatedAt": "2026-07-11T18:16:25.725Z",
   "official": {
     "rows": [
       {
@@ -1519,21 +1519,44 @@
           "brier": 0.2308358703992475,
           "rps": 0.08570332417514412
         }
+      },
+      {
+        "slug": "spain-vs-belgium",
+        "locked": {
+          "home": 57,
+          "draw": 25,
+          "away": 18
+        },
+        "actual": "2-1",
+        "grades": {
+          "modelBrier": 0.27980000000000005,
+          "modelRps": 0.10865000000000002,
+          "scorelineHit": false,
+          "top3ScorelineHit": false,
+          "correctPick": true,
+          "bttsBrier": 0.29846959171452225,
+          "bttsDerivedPostHoc": true
+        },
+        "verdict": "hit",
+        "kalshi": {
+          "brier": 0.2448928057372289,
+          "rps": 0.09455569303805464
+        }
       }
     ],
     "aggregates": {
-      "n": 78,
-      "accuracy": 0.6153846153846154,
-      "meanBrier": 0.5357307692307695,
-      "meanRps": 0.16915512820512818,
-      "bttsAccuracy": 0.47435897435897434,
-      "scorelineHitRate": 0.1282051282051282,
-      "top3Rate": 0.32051282051282054,
+      "n": 79,
+      "accuracy": 0.620253164556962,
+      "meanBrier": 0.5324911392405065,
+      "meanRps": 0.1683892405063291,
+      "bttsAccuracy": 0.46835443037974683,
+      "scorelineHitRate": 0.12658227848101267,
+      "top3Rate": 0.31645569620253167,
       "vsKalshi": {
-        "n": 9,
-        "modelBrier": 0.47520000000000007,
-        "marketBrier": 0.40659552919007785,
-        "edge": -0.06860447080992225
+        "n": 10,
+        "modelBrier": 0.45566000000000006,
+        "marketBrier": 0.39042525684479296,
+        "edge": -0.06523474315520714
       },
       "vsPolymarket": {
         "n": 0,
@@ -1551,15 +1574,15 @@
       },
       {
         "midpoint": 0.15,
-        "predicted": 0.1433333333333334,
-        "observed": 0.19047619047619047,
-        "n": 42
+        "predicted": 0.14418604651162795,
+        "observed": 0.18604651162790697,
+        "n": 43
       },
       {
         "midpoint": 0.25,
-        "predicted": 0.2544594594594593,
-        "observed": 0.21621621621621623,
-        "n": 74
+        "predicted": 0.25439999999999985,
+        "observed": 0.21333333333333335,
+        "n": 75
       },
       {
         "midpoint": 0.35,
@@ -1575,9 +1598,9 @@
       },
       {
         "midpoint": 0.55,
-        "predicted": 0.5328571428571429,
-        "observed": 0.7857142857142857,
-        "n": 14
+        "predicted": 0.5353333333333334,
+        "observed": 0.8,
+        "n": 15
       },
       {
         "midpoint": 0.65,
@@ -1637,7 +1660,7 @@
     ]
   },
   "caveats": [
-    "Official graded record contains n=78 match(es). This is a very small sample — do not over-read the aggregate numbers.",
+    "Official graded record contains n=79 match(es). This is a very small sample — do not over-read the aggregate numbers.",
     "BTTS and over/under probabilities are derived post-hoc from the same model that generated the 1X2 split; they are NOT separately validated predictions.",
     "No pre-kickoff Polymarket books exist for played matches — vsPolymarket comparisons are deferred to the Phase C backtest.",
     "Kalshi market Brier shown is computed from the pre-kickoff locked book; market edge from a single match is noise.",
@@ -1649,53 +1672,53 @@
       "version": "v1",
       "slips": 4,
       "noSlips": 0,
-      "graded": 1,
-      "slipHits": 1,
+      "graded": 2,
+      "slipHits": 2,
       "slipHitRate": 1,
-      "legHits": 5,
-      "legs": 5,
+      "legHits": 10,
+      "legs": 10,
       "legHitRate": 1,
-      "meanLockedJoint": 0.8622264439356441,
+      "meanLockedJoint": 0.7070828570660774,
       "realizedSlipHitRate": 1
     },
     {
       "version": "v2-combo",
       "slips": 4,
       "noSlips": 0,
-      "graded": 1,
+      "graded": 2,
       "slipHits": 1,
-      "slipHitRate": 1,
-      "legHits": 4,
-      "legs": 4,
-      "legHitRate": 1,
-      "meanLockedJoint": 0.8413865642575663,
-      "realizedSlipHitRate": 1
+      "slipHitRate": 0.5,
+      "legHits": 7,
+      "legs": 8,
+      "legHitRate": 0.875,
+      "meanLockedJoint": 0.7670518813554549,
+      "realizedSlipHitRate": 0.5
     },
     {
       "version": "v2.1-combo",
       "slips": 3,
       "noSlips": 0,
-      "graded": 0,
-      "slipHits": 0,
-      "slipHitRate": null,
-      "legHits": 0,
-      "legs": 0,
-      "legHitRate": null,
-      "meanLockedJoint": null,
-      "realizedSlipHitRate": null
+      "graded": 1,
+      "slipHits": 1,
+      "slipHitRate": 1,
+      "legHits": 3,
+      "legs": 3,
+      "legHitRate": 1,
+      "meanLockedJoint": 0.8222588031941629,
+      "realizedSlipHitRate": 1
     },
     {
       "version": "v3-value",
       "slips": 3,
       "noSlips": 0,
-      "graded": 0,
+      "graded": 1,
       "slipHits": 0,
-      "slipHitRate": null,
+      "slipHitRate": 0,
       "legHits": 0,
-      "legs": 0,
-      "legHitRate": null,
-      "meanLockedJoint": null,
-      "realizedSlipHitRate": null
+      "legs": 3,
+      "legHitRate": 0,
+      "meanLockedJoint": 0.39301155890142037,
+      "realizedSlipHitRate": 0
     }
   ]
 }
